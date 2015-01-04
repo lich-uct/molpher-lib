@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icons" >
+        <file>molpher.png</file>
+    </qresource>
+    <qresource prefix="/images" >
+        <file>legend.png</file>
+    </qresource>
+</RCC>
