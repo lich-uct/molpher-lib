@@ -17,7 +17,7 @@
 
 #include <GraphMol/SmilesParse/SmilesParse.h>
 #include <GraphMol/Depictor/RDDepictor.h>
-#include <Demos/RDKit/Draw/MolDrawing.h>
+#include <GraphMol/MolDrawing/MolDrawing.h>
 
 #include <QtGui/QPen>
 #include <QtCore/QLine>
