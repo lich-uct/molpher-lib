@@ -5,7 +5,7 @@
 # Dependency links
 TBB_LINK=http://www.threadingbuildingblocks.org/sites/default/files/software_releases/linux/tbb42_20130725oss_lin.tgz
 BOOST_LINK=http://sourceforge.net/projects/boost/files/boost/1.49.0/boost_1_49_0.tar.gz/download
-RDKIT_LINK=http://sourceforge.net/projects/rdkit/files/rdkit/Q4_2011/RDKit_2011_12_1.tgz/download
+RDKIT_LINK=http://sourceforge.net/projects/rdkit/files/rdkit/Q1_2014/RDKit_2014_03_1.tgz/download
 
 # version 1.2.7 is not aviable anymore
 ZLIB_LINK=http://zlib.net/zlib-1.2.7.tar.gz

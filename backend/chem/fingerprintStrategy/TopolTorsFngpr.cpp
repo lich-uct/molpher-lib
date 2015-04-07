@@ -32,5 +32,5 @@ TopolTorsFngpr::~TopolTorsFngpr()
 Fingerprint *TopolTorsFngpr::GetFingerprint(RDKit::ROMol *mol)
 {
     return RDKit::AtomPairs::getHashedTopologicalTorsionFingerprintAsBitVect(
-        *mol, mNBits, mTargetSize, mFromAtoms, mIgnoreAtoms, mNBitsPerEntry);
+        *mol, mNBits, mTargetSize, mFromAtoms, mIgnoreAtoms, 0, mNBitsPerEntry);
 }

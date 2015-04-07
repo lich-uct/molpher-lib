@@ -12,15 +12,13 @@ AtomPairsFngpr::AtomPairsFngpr(
     unsigned int minLength,
     unsigned int maxLength,
     const std::vector<boost::uint32_t> *fromAtoms,
-    const std::vector<boost::uint32_t> *ignoreAtoms,
-    unsigned int nBitsPerEntry
+    const std::vector<boost::uint32_t> *ignoreAtoms
     ) :
     mNBits(nBits),
     mMinLength(minLength),
     mMaxLength(maxLength),
     mFromAtoms(fromAtoms),
-    mIgnoreAtoms(ignoreAtoms),
-    mNBitsPerEntry(nBitsPerEntry)
+    mIgnoreAtoms(ignoreAtoms)
 {
      // no-op
 }
@@ -34,6 +32,5 @@ AtomPairsFngpr::~AtomPairsFngpr()
 Fingerprint *AtomPairsFngpr::GetFingerprint(RDKit::ROMol *mol)
 {
     return RDKit::AtomPairs::getHashedAtomPairFingerprintAsBitVect(*mol,
-        mNBits, mMinLength, mMaxLength, mFromAtoms, mIgnoreAtoms,
-        mNBitsPerEntry);
+        mNBits, mMinLength, mMaxLength, mFromAtoms, mIgnoreAtoms);
 }

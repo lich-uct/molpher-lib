@@ -34,15 +34,13 @@ public:
             specified atoms will be included in the fingerprint
         @param ignoreAtoms [in] if provided, any atom pairs that include the
             specified atoms will not be included in the fingerprint
-        @param nBitsPerEntry [in] number of bits to use in simulating counts
      */
     AtomPairsFngpr(
         unsigned int nBits = 2048,
         unsigned int minLength = 1,
         unsigned int maxLength = RDKit::AtomPairs::maxPathLen - 1,
         const std::vector<boost::uint32_t> *fromAtoms = 0,
-        const std::vector<boost::uint32_t> *ignoreAtoms = 0,
-        unsigned int nBitsPerEntry = 4
+        const std::vector<boost::uint32_t> *ignoreAtoms = 0
         );
 
     ~AtomPairsFngpr();
@@ -55,5 +53,4 @@ private:
     unsigned int mMaxLength;
     const std::vector<boost::uint32_t> *mFromAtoms;
     const std::vector<boost::uint32_t> *mIgnoreAtoms;
-    unsigned int mNBitsPerEntry;
 };
