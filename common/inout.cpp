@@ -77,7 +77,7 @@ std::string GenerateDirname(std::string &base, JobId jobId) {
 void WriteMolpherPath(const std::string &file, const std::string &targetSmile,
         const IterationSnapshot::CandidateMap &candidates) {
     std::vector<std::string> smiles;
-    std::vector<ChemOperSelector> opers;
+        std::vector<ChemOperSelector> opers;
 
     IterationSnapshot::CandidateMap::const_iterator it;
     it = candidates.find(targetSmile);
@@ -201,7 +201,7 @@ void WriteMolphMolsToSDF(const std::string &file,
 }
 
 /**
- * Read molecules from txt file where each line contains just one smile 
+ * Read molecules from txt file where each line contains just one smile
  * without white spaces.
  * @param file
  * @param mols
@@ -210,15 +210,24 @@ void ReadRWMolFromTxtFile(const std::string &file,
         std::vector<RDKit::RWMol *> &mols) {
     std::ifstream stream;
     stream.open(file.c_str());
-    
+
     if (stream.is_open()) {
 		while (stream.good())  {
             std::string line;
 			std::getline(stream, line);
-			// parse smiles .. 
-            RDKit::RWMol* mol = RDKit::SmilesToMol(line);
-            // add to result
-            mols.push_back(mol);
+            if (line.empty()) {
+                // skip empty line
+                continue;
+            }
+			// parse smiles ..
+            try {
+                RDKit::RWMol* mol = RDKit::SmilesToMol(line);
+                // add to result
+                mols.push_back(mol);
+            } catch (std::exception e) {
+                // failed to load the moll
+                SynchCout("Failed to load mol from smile: " + line);
+            }
 		}
 		stream.close();
 	} else {
@@ -229,13 +238,13 @@ void ReadRWMolFromTxtFile(const std::string &file,
 void ReadMolphMolsFromFile(const std::string &file,
         std::vector<MolpherMolecule> &mols) {
     std::vector<RDKit::RWMol *> rdkMols;
-    
+
     std::string fileLowerCase = file;
     std::transform(fileLowerCase.begin(), fileLowerCase.end(), fileLowerCase.begin(), tolower);
     if (fileLowerCase.find(".sdf") != std::string::npos ||
         fileLowerCase.find(".mol") != std::string::npos) {
-        // sdf, mol file .. 
-    ReadRWMolsFromSDF(file, rdkMols);
+        // sdf, mol file ..
+        ReadRWMolsFromSDF(file, rdkMols);
     } else if (fileLowerCase.find(".txt") != std::string::npos) {
         // txt file with smiles
         ReadRWMolFromTxtFile(file, rdkMols);

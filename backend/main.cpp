@@ -58,6 +58,7 @@ void Run(int argc, char *argv[])
         ("job-list,L", boost::program_options::value<std::string>(), "Path to the job list file")
         ("interactive,I", boost::program_options::value<bool>(), "Enable/disable interactive mode")
         ("threads,T", boost::program_options::value<int>(), "Limit number of worker threads")
+        ("job-file,J", boost::program_options::value<std::string>(), "Path to the job file.")
             ;
 
     boost::program_options::variables_map varMap;
@@ -107,6 +108,7 @@ void Run(int argc, char *argv[])
     // Default parameter values.
     std::string storagePath("Results");
     std::string jobListFile;
+    std::string jobFile;
     bool interactiveSession = true;
     int threadCnt = 0;
 
@@ -127,6 +129,10 @@ void Run(int argc, char *argv[])
         jobListFile = varMap["job-list"].as<std::string>();
     }
 
+    if (varMap.count("job-file")) {
+        jobFile = varMap["job-file"].as<std::string>();
+    }
+
     std::cout << "Initializing..." << std::endl;
 
     if (interactiveSession) {
@@ -135,6 +141,10 @@ void Run(int argc, char *argv[])
 
         JobManager jobManager(
             &pathFinderTbbCtx, storagePath, jobListFile, interactiveSession);
+        // Add job.
+        if (!jobFile.empty()) {
+            jobManager.AddJobFromFile(jobFile);
+        }
         NeighborhoodTaskQueue taskQueue(&neighborhoodGeneratorTbbCtx);
 
         PathFinder pathFinder(

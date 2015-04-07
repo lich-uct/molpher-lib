@@ -48,6 +48,7 @@ public:
     JobManager(tbb::task_group_context *pathFinderStopper,
         std::string &storagePath, std::string &jobListFile, bool interactive);
     ~JobManager();
+    void AddJobFromFile(const std::string &jobFile);
     void SetCommunicator(BackendCommunicator *comm);
     void Halt();
 

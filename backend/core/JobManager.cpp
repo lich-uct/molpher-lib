@@ -80,6 +80,16 @@ JobManager::JobManager(tbb::task_group_context *pathFinderStopper,
     SynchCout(std::string("JobManager initialized."));
 }
 
+void JobManager::AddJobFromFile(const std::string &jobFile) {
+    IterationSnapshot snp;
+    if (ReadSnapshotFromFile(jobFile, snp)) {
+        std::string emptyPassword;
+        CreateJob(snp, emptyPassword);
+    } else {
+        SynchCout(std::string("Cannot open job: ").append(jobFile));
+    }
+}
+
 void JobManager::SetCommunicator(BackendCommunicator *comm)
 {
     mCommunicator = comm;
