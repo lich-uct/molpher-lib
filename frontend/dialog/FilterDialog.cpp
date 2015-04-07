@@ -120,7 +120,7 @@ Fingerprint *FilterDialog::GetFingerprint(FingerprintSelector &fingerprintSel, R
         result = RDKit::LayeredFingerprintMol(mol);
         break;
     case FP_TOPOLOGICAL_LAYERED_2:
-        result = RDKit::LayeredFingerprintMol2(mol);
+        result = RDKit::PatternFingerprintMol(mol);
         break;
     case FP_ATOM_PAIRS:
         result = RDKit::AtomPairs::getHashedAtomPairFingerprintAsBitVect(mol);
