@@ -43,6 +43,7 @@
           <itemPath>chem/fingerprintStrategy/TopolLayeredFngpr2.hpp</itemPath>
           <itemPath>chem/fingerprintStrategy/TopolSingleFngpr.hpp</itemPath>
           <itemPath>chem/fingerprintStrategy/TopolTorsFngpr.hpp</itemPath>
+          <itemPath>chem/fingerprintStrategy/VectorFpFngpr.hpp</itemPath>
         </logicalFolder>
         <logicalFolder name="morphing" displayName="morphing" projectFiles="true">
           <itemPath>chem/morphing/CalculateDistances.hpp</itemPath>
@@ -127,6 +128,7 @@
           <itemPath>chem/fingerprintStrategy/TopolLayeredFngpr2.cpp</itemPath>
           <itemPath>chem/fingerprintStrategy/TopolSingleFngpr.cpp</itemPath>
           <itemPath>chem/fingerprintStrategy/TopolTorsFngpr.cpp</itemPath>
+          <itemPath>chem/fingerprintStrategy/VectorFpFngpr.cpp</itemPath>
         </logicalFolder>
         <logicalFolder name="morphing" displayName="morphing" projectFiles="true">
           <itemPath>chem/morphing/Morphing.cpp</itemPath>
@@ -416,6 +418,16 @@
             flavor2="0">
       </item>
       <item path="chem/fingerprintStrategy/TopolTorsFngpr.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="chem/fingerprintStrategy/VectorFpFngpr.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="chem/fingerprintStrategy/VectorFpFngpr.hpp"
             ex="false"
             tool="3"
             flavor2="0">
@@ -934,6 +946,16 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="chem/fingerprintStrategy/VectorFpFngpr.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="chem/fingerprintStrategy/VectorFpFngpr.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="chem/morphing/CalculateDistances.hpp"
             ex="false"
             tool="3"
@@ -1425,6 +1447,16 @@
             flavor2="0">
       </item>
       <item path="chem/fingerprintStrategy/TopolTorsFngpr.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="chem/fingerprintStrategy/VectorFpFngpr.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="chem/fingerprintStrategy/VectorFpFngpr.hpp"
             ex="false"
             tool="3"
             flavor2="0">

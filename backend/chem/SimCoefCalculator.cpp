@@ -43,6 +43,7 @@
 #include "chem/simCoefStrategy/SokalSimCoef.hpp"
 #include "chem/simCoefStrategy/TanimotoSimCoef.hpp"
 #include "chem/simCoefStrategy/TverskySimCoef.hpp"
+#include "fingerprintStrategy/VectorFpFngpr.hpp"
 
 // TODO: Remove use factory insted
 SimCoefCalculator::SimCoefCalculator(
@@ -118,7 +119,6 @@ SimCoefCalculator::SimCoefCalculator(
         mScStrategy = new TanimotoSimCoef();
         break;
     }
-
     switch (fp) {
     case FP_TOPOLOGICAL:
         mFpStrategy = new TopolSingleFngpr();
@@ -137,6 +137,9 @@ SimCoefCalculator::SimCoefCalculator(
         break;
     case FP_MORGAN:
         mFpStrategy = new MorganFngpr();
+        break;
+    case FP_VECTORFP:
+        mFpStrategy = new VectorFp();
         break;
     default:
         mFpStrategy = new MorganFngpr();

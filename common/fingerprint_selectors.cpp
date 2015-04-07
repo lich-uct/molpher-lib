@@ -26,6 +26,7 @@ static const char *shortDesc[] = {
     "TOP",
     "TL1",
     "TL2",
+    "VectorFp",
     "TPT",
     "EATP",
     "EMRG",
@@ -42,6 +43,7 @@ static const char *longDesc[] = {
     "Topological Layered 1",
     "Topological Layered 2",
     "Topological Torsion",
+    "VectorFp",
     "Atom Pairs (ext)",
     "Morgan (ext)",
     "Topological (ext)",
@@ -97,6 +99,8 @@ FingerprintSelector FingerprintParse(const std::string& name) {
         return FP_EXT_TOPOLOGICAL_LAYERED_2;
     } if (boost::iequals(name, "FP_EXT_TOPOLOGICAL_TORSION")) {
         return FP_EXT_TOPOLOGICAL_TORSION;
+    } if (boost::iequals(name, "FP_VECTORFP")) {
+        return FP_VECTORFP;
     } else {
         throw std::runtime_error("Unknown fingerprint name.");
     }    
