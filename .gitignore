@@ -1,0 +1,53 @@
+## Project
+dependencies/
+build/
+tmp_ui/
+tmp_moc/
+tmp_rcc/
+
+.dep.inc
+revision.h
+
+## C++
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# QT and GUI
+frontend/object_script.molpher-gui
+frontend/nbproject/*.pro
+
+# Generated project make files
+backend/nbproject/private
+backend/nbproject/*.mk
+backend/nbproject/*.bash
+
+frontend/nbproject/private
+frontend/nbproject/*.mk
+frontend/nbproject/*.bash
