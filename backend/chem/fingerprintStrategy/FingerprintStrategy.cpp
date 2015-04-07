@@ -24,6 +24,7 @@
 #include "TopolLayeredFngpr2.hpp"
 #include "TopolSingleFngpr.hpp"
 #include "TopolTorsFngpr.hpp"
+#include "VectorFpFngpr.hpp"
 
 Fingerprint *GetFingerprint(RDKit::ROMol *mol, FingerprintSelector fp)
 {
@@ -48,6 +49,9 @@ Fingerprint *GetFingerprint(RDKit::ROMol *mol, FingerprintSelector fp)
         break;
     case FP_MORGAN:
         strategy = new MorganFngpr();
+        break;
+    case FP_VECTORFP:
+        strategy = new VectorFp();
         break;
     default:
         strategy = new MorganFngpr();

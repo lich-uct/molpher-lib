@@ -244,6 +244,7 @@ void FillComboWithFingerprints(QComboBox *comboBox, bool extended)
         listFingerprints.append(FingerprintLongDesc(FP_EXT_TOPOLOGICAL_LAYERED_2));
         listFingerprints.append(FingerprintLongDesc(FP_EXT_TOPOLOGICAL_TORSION));
     }
+    listFingerprints.append(FingerprintLongDesc(FP_VECTORFP));
     comboBox->addItems(listFingerprints);
     comboBox->setCurrentIndex(DEFAULT_FP);
 }
