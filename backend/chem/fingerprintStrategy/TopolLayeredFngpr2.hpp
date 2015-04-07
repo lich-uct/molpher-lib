@@ -29,8 +29,6 @@ public:
 
         @param layerFlags [in] the layers to be included [not used in this
             release] (see below)
-        @param minPath [in] the minimum path length (in bonds) to be included
-        @param maxPath [in] the minimum path length (in bonds) to be included
         @param fpSize [in] the size of the fingerprint
         @param atomCounts [in] if provided, this will be used to provide the
             count of the number of paths that set bits each atom is involved in.
@@ -40,8 +38,6 @@ public:
             vector will be set in the result. This is essentially the same as
             doing: (*res) &= (*setOnlyBits); but also has an impact on the
             atomCounts (if being used)
-        @param branchedPaths [in] toggles generation of branched subgraphs, not
-            just linear paths
 
         <b>Layer definitions:</b>
             - 0x01: pure topology
@@ -53,12 +49,9 @@ public:
      */
     TopolLayeredFngpr2(
         unsigned int layerFlags = 0xFFFFFFFF,
-        unsigned int minPath = 1,
-        unsigned int maxPath = 7,
         unsigned int fpSize = 2048,
         std::vector<unsigned int> *atomCounts = 0,
-        ExplicitBitVect *setOnlyBits = 0,
-        bool branchedPaths = true
+        ExplicitBitVect *setOnlyBits = 0
         );
 
     ~TopolLayeredFngpr2();
@@ -67,10 +60,7 @@ public:
 
 private:
     unsigned int mLayerFlags;
-    unsigned int mMinPath;
-    unsigned int mMaxPath;
     unsigned int mFpSize;
     std::vector<unsigned int> *mAtomCounts;
     ExplicitBitVect *mSetOnlyBits;
-    bool mBranchedPaths;
 };

@@ -9,20 +9,14 @@
 
 TopolLayeredFngpr2::TopolLayeredFngpr2(
     unsigned int layerFlags,
-    unsigned int minPath,
-    unsigned int maxPath,
     unsigned int fpSize,
     std::vector<unsigned int> *atomCounts,
-    ExplicitBitVect *setOnlyBits,
-    bool branchedPaths
+    ExplicitBitVect *setOnlyBits
     ) :
     mLayerFlags(layerFlags),
-    mMinPath(minPath),
-    mMaxPath(maxPath),
     mFpSize(fpSize),
     mAtomCounts(atomCounts),
-    mSetOnlyBits(setOnlyBits),
-    mBranchedPaths(branchedPaths)
+    mSetOnlyBits(setOnlyBits)
 {
      // no-op
 }
@@ -35,6 +29,5 @@ TopolLayeredFngpr2::~TopolLayeredFngpr2()
 
 Fingerprint *TopolLayeredFngpr2::GetFingerprint(RDKit::ROMol *mol)
 {
-    return RDKit::LayeredFingerprintMol2(*mol, mLayerFlags, mMinPath, mMaxPath,
-        mFpSize, mAtomCounts, mSetOnlyBits, mBranchedPaths);
+    return RDKit::PatternFingerprintMol(*mol, mFpSize, mAtomCounts, mSetOnlyBits);
 }

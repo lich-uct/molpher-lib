@@ -32,20 +32,6 @@ public:
         @param minPath [in] the minimum path length (in bonds) to be included
         @param maxPath [in] the minimum path length (in bonds) to be included
         @param fpSize [in] the size of the fingerprint
-        @param tgtDensity [in] if the generated fingerprint is below this
-            density, it will be folded until the density is reached.
-        @param minSize [in] the minimum size to which the fingerprint will be
-            folded
-        @param atomCounts [in] if provided, this will be used to provide the
-            count of the number of paths that set bits each atom is involved in.
-            The vector should have at least as many entries as the molecule has
-            atoms and is not zeroed out here.
-        @param setOnlyBits [in] if provided, only bits that are set in this bit
-            vector will be set in the result. This is essentially the same as
-            doing: (*res) &= (*setOnlyBits); but also has an impact on the
-            atomCounts (if being used)
-        @param branchedPaths [in] toggles generation of branched subgraphs, not
-            just linear paths
 
         <b>Layer definitions:</b>
             - 0x01: pure topology
@@ -59,12 +45,7 @@ public:
         unsigned int layerFlags = 0xFFFFFFFF,
         unsigned int minPath = 1,
         unsigned int maxPath = 7,
-        unsigned int fpSize = 2048,
-        double tgtDensity = 0.0,
-        unsigned int minSize = 128,
-        std::vector<unsigned int> *atomCounts = 0,
-        ExplicitBitVect *setOnlyBits = 0,
-        bool branchedPaths = true
+        unsigned int fpSize = 2048
         );
 
     ~TopolLayeredFngpr1();
@@ -76,9 +57,4 @@ private:
     unsigned int mMinPath;
     unsigned int mMaxPath;
     unsigned int mFpSize;
-    double mTgtDensity;
-    unsigned int mMinSize;
-    std::vector<unsigned int> *mAtomCounts;
-    ExplicitBitVect *mSetOnlyBits;
-    bool mBranchedPaths;
 };
