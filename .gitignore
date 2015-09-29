@@ -51,3 +51,4 @@ backend/nbproject/*.bash
 frontend/nbproject/private
 frontend/nbproject/*.mk
 frontend/nbproject/*.bash
+/backend/dist/
