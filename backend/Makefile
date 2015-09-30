@@ -48,12 +48,14 @@
 MKDIR=mkdir
 CP=cp
 CCADMIN=CCadmin
+OUTDIR=$(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/
 
 
 # build
 build: .build-post
 
 .build-pre:
+	rm -rf ${OUTDIR}/libs
 	echo "" > revision.h
 	echo "#define MOLPH_DATE __DATE__" >> revision.h
 	echo "#define MOLPH_TIME __TIME__" >> revision.h
@@ -63,6 +65,17 @@ build: .build-post
 
 .build-post: .build-impl
 # Add your post 'build' code here...
+	mkdir ${OUTDIR}/libs
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbb.so.2 ${OUTDIR}/libs/libtbb.so.2
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc.so.2 ${OUTDIR}/libs/libtbbmalloc.so.2
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy.so.2 ${OUTDIR}/libs/libtbbmalloc_proxy.so.2
+	cp SAScore.dat ${OUTDIR}
+	echo 'export LD_LIBRARY_PATH=$${LD_LIBRARY_PATH}:`pwd`/libs/' > ${OUTDIR}/set_environ.sh
+ifeq ($(CONF),"Linux64_Release")
+	echo '. set_environ.sh' > ${OUTDIR}/run.sh
+	echo './molpher-srv "$$@"' >> ${OUTDIR}/run.sh
+	chmod +x ${OUTDIR}/run.sh
+endif
 
 # clean
 clean: .clean-post
@@ -72,6 +85,7 @@ clean: .clean-post
 
 .clean-post: .clean-impl
 # Add your post 'clean' code here...
+	rm -rf ${OUTDIR}/*
 
 # clobber
 clobber: .clobber-post
