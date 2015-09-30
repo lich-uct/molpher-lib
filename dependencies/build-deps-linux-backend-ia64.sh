@@ -5,7 +5,7 @@
 # Dependency links
 TBB_LINK=http://www.threadingbuildingblocks.org/sites/default/files/software_releases/linux/tbb42_20130725oss_lin.tgz
 BOOST_LINK=http://sourceforge.net/projects/boost/files/boost/1.49.0/boost_1_49_0.tar.gz/download
-RDKIT_LINK=http://sourceforge.net/projects/rdkit/files/rdkit/Q1_2014/RDKit_2014_03_1.tgz/download
+RDKIT_LINK=http://sourceforge.net/projects/rdkit/files/rdkit/Q4_2011/RDKit_2011_12_1.tgz/download
 
 # version 1.2.7 is not aviable anymore
 ZLIB_LINK=http://zlib.net/zlib-1.2.7.tar.gz
@@ -450,7 +450,7 @@ build_zlib()
     
     # script to build zlib
     cmd=cmd 
-	echo "./configure --prefix=. --shared" > $cmd
+	echo "CFLAGS='-mstackrealign -fPIC -O3' ./configure --prefix=. --shared" > $cmd
 	echo "make test" >> $cmd
 	echo "make install" >> $cmd
 	
@@ -494,8 +494,12 @@ build_rcf()
     mv RCF-1.3* rcf
     cd rcf
     
+    pwd
+    
     # RCF Makefile
-    echo 'CMAKE_MINIMUM_REQUIRED( VERSION 2.6 )' > CMakeLists.txt
+    echo 'SET(CMAKE_C_COMPILER gcc-4.6)' > CMakeLists.txt
+    echo 'SET(CMAKE_CXX_COMPILER g++-4.6)' >> CMakeLists.txt
+    echo 'CMAKE_MINIMUM_REQUIRED( VERSION 2.6 )' >> CMakeLists.txt
     echo 'PROJECT( RCF )' >> CMakeLists.txt
     echo 'ADD_DEFINITIONS( -DBOOST_ALL_NO_LIB -DBOOST_THREAD_USE_LIB -DRCF_MULTI_THREADED -DRCF_USE_BOOST_THREADS -DRCF_USE_BOOST_ASIO -DRCF_USE_ZLIB -DRCF_USE_BOOST_SERIALIZATION -DRCF_NO_AUTO_INIT_DEINIT -Wno-deprecated -Wno-attributes -Wno-write-strings -O2 )' >> CMakeLists.txt
     echo 'INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/../boost ${CMAKE_SOURCE_DIR}/../zlib ${CMAKE_SOURCE_DIR}/include )' >> CMakeLists.txt
@@ -503,6 +507,8 @@ build_rcf()
     echo 'SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin )' >> CMakeLists.txt
     echo 'SET(CMAKE_BUILD_TYPE Release)' >> CMakeLists.txt
     echo 'SET(Boost_USE_STATIC_LIBS ON)' >> CMakeLists.txt
+    echo 'SET(CMAKE_VERBOSE_MAKEFILE ON)' >> CMakeLists.txt
+    echo 'SET(CMAKE_CXX_FLAGS "-fPIC")' >> CMakeLists.txt
     echo 'LINK_DIRECTORIES( ${CMAKE_SOURCE_DIR}/bin )' >> CMakeLists.txt
     echo 'ADD_LIBRARY( RcfLib STATIC ${CMAKE_SOURCE_DIR}/src/RCF/RCF.cpp )' >> CMakeLists.txt
     
