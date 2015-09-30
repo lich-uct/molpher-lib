@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
+        <itemPath>include/path_finders/BasicPathFinder.hpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="testing" projectFiles="true">
+        <itemPath>include/testing/testing.hpp</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
+        <itemPath>src/path_finders/BasicPathFinder.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="testing" projectFiles="true">
+        <itemPath>src/testing/testing.cpp</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Linux64_Debug" type="2">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <architecture>2</architecture>
+          <standard>8</standard>
+          <incDir>
+            <pElem>./include</pElem>
+            <pElem>../common</pElem>
+            <pElem>../backend/</pElem>
+            <pElem>../dependencies/boost</pElem>
+            <pElem>../dependencies/rcf/include</pElem>
+            <pElem>../dependencies/zlib</pElem>
+            <pElem>../dependencies/rdkit/Code</pElem>
+            <pElem>../dependencies/tbb/include</pElem>
+          </incDir>
+          <commandLine>-DNOT_NETBEANS -Wno-deprecated -Wno-write-strings -Wno-attributes -Wno-strict-aliasing -fpermissive</commandLine>
+          <preprocessorList>
+            <Elem>BOOST_ALL_NO_LIB</Elem>
+            <Elem>BOOST_THREAD_USE_LIB</Elem>
+            <Elem>NETBEANS_HACK</Elem>
+            <Elem>RCF_MULTI_THREADED</Elem>
+            <Elem>RCF_NO_AUTO_INIT_DEINIT</Elem>
+            <Elem>RCF_USE_BOOST_ASIO</Elem>
+            <Elem>RCF_USE_BOOST_SERIALIZATION</Elem>
+            <Elem>RCF_USE_BOOST_THREADS</Elem>
+            <Elem>RCF_USE_ZLIB</Elem>
+            <Elem>TBB_USE_DEBUG=0</Elem>
+          </preprocessorList>
+        </ccTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}</output>
+          <linkerAddLib>
+            <pElem>../backend/dist/Linux64_Release_library/GNU_4_6-Linux-x86</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibFileItem>../backend/dist/Linux64_Debug_library/GNU_4_6-Linux-x86/libbackend.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libDistGeomHelpers_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libMolAlign_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libAlignment_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libFragCatalog_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libMolCatalog_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libCatalogs_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libChemReactions_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libDepictor_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libDescriptors_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libDistGeometry_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libFileParsers_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libFingerprints_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libSubgraphs_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libForceFieldHelpers_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libChemTransforms_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libMolChemicalFeatures_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libSubstructMatch_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libSmilesParse_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libPartialCharges_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libShapeHelpers_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libMolTransforms_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libSLNParse_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libGraphMol_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libForceField_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libRDGeometryLib_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libDataStructs_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libOptimizer_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libEigenSolvers_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libChemicalFeatures_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libSimDivPickers_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libRDGeneral_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rdkit/lib/libhc_static.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/rcf/bin/libRcfLib.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/boost/stage/lib/libboost_date_time.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/boost/stage/lib/libboost_filesystem.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/boost/stage/lib/libboost_program_options.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/boost/stage/lib/libboost_regex.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/boost/stage/lib/libboost_wserialization.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/boost/stage/lib/libboost_serialization.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/boost/stage/lib/libboost_signals.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/boost/stage/lib/libboost_thread.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/boost/stage/lib/libboost_system.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/zlib/libz.a</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/tbb/lib/intel64/gcc4.4/libtbb.so.2</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy.so.2</linkerLibFileItem>
+            <linkerLibFileItem>../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc.so.2</linkerLibFileItem>
+          </linkerLibItems>
+          <commandLine>-lpthread</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="include/path_finders/BasicPathFinder.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/testing/testing.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/path_finders/BasicPathFinder.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/testing/testing.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
