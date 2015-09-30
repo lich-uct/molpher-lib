@@ -23,6 +23,10 @@
                     <name>Linux64_Release</name>
                     <type>1</type>
                 </confElem>
+                <confElem>
+                    <name>Linux64_Debug_library</name>
+                    <type>3</type>
+                </confElem>
             </confList>
             <formatting>
                 <project-formatting-style>false</project-formatting-style>
