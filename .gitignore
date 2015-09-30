@@ -1,6 +1,8 @@
 ## Project
 dependencies/
 build/
+dist/
+lib/
 tmp_ui/
 tmp_moc/
 tmp_rcc/
@@ -44,11 +46,9 @@ frontend/object_script.molpher-gui
 frontend/nbproject/*.pro
 
 # Generated project make files
-backend/nbproject/private
-backend/nbproject/*.mk
-backend/nbproject/*.bash
+/*/nbproject/private
+/*/nbproject/*.mk
+/*/nbproject/*.bash
 
-frontend/nbproject/private
-frontend/nbproject/*.mk
-frontend/nbproject/*.bash
-/backend/dist/
+# Molpher results
+Results/
