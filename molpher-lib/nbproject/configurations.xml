@@ -24,6 +24,8 @@
       <logicalFolder name="f1" displayName="testing" projectFiles="true">
         <itemPath>src/testing/testing.cpp</itemPath>
       </logicalFolder>
+      <itemPath>src/python/molpher.i</itemPath>
+      <itemPath>src/python/molpher_wrap.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -58,8 +60,9 @@
             <pElem>../dependencies/zlib</pElem>
             <pElem>../dependencies/rdkit/Code</pElem>
             <pElem>../dependencies/tbb/include</pElem>
+            <pElem>/usr/include/python3.4/</pElem>
           </incDir>
-          <commandLine>-DNOT_NETBEANS -Wno-deprecated -Wno-write-strings -Wno-attributes -Wno-strict-aliasing -fpermissive</commandLine>
+          <commandLine>-DNOT_NETBEANS -Wno-deprecated -Wno-write-strings -Wno-attributes -Wno-strict-aliasing -fpermissive -fPIC</commandLine>
           <preprocessorList>
             <Elem>BOOST_ALL_NO_LIB</Elem>
             <Elem>BOOST_THREAD_USE_LIB</Elem>
@@ -77,6 +80,7 @@
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}</output>
           <linkerAddLib>
             <pElem>../backend/dist/Linux64_Release_library/GNU_4_6-Linux-x86</pElem>
+            <pElem>/usr/lib/python3.4/config-3.4m-x86_64-linux-gnu</pElem>
           </linkerAddLib>
           <linkerLibItems>
             <linkerLibFileItem>../backend/dist/Linux64_Debug_library/GNU_4_6-Linux-x86/libbackend.a</linkerLibFileItem>
@@ -141,6 +145,10 @@
             ex="false"
             tool="1"
             flavor2="0">
+      </item>
+      <item path="src/python/molpher.i" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="src/python/molpher_wrap.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/testing/testing.cpp" ex="false" tool="1" flavor2="0">
       </item>

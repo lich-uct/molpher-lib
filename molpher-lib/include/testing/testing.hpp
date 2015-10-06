@@ -11,8 +11,8 @@
 #include <string>
 
 void run_path_finder(
-    std::string &storagePath
-    , std::string &jobFile
+    const std::string &storagePath
+    , const std::string &jobFile
     , int threadCnt
 );
 

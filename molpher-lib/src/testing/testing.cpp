@@ -16,8 +16,8 @@
 #include "testing/testing.hpp"
 
 void run_path_finder(
-    std::string &storagePath
-    , std::string &jobFile
+    const std::string &storagePath
+    , const std::string &jobFile
     , int threadCnt
 ) {
     
@@ -25,8 +25,10 @@ void run_path_finder(
     
     tbb::task_group_context pathFinderTbbCtx;
     std::string dummy;
-    JobManager jobManager(&pathFinderTbbCtx, storagePath, dummy, false);
-    jobManager.AddJobFromFile(jobFile);
+    std::string storagePathnonconst(storagePath);
+    JobManager jobManager(&pathFinderTbbCtx, storagePathnonconst, dummy, false);
+    std::string jobfilenonconst(jobFile);
+    jobManager.AddJobFromFile(jobfilenonconst);
     BasicPathFinder pathFinder(&pathFinderTbbCtx, &jobManager, threadCnt);
     std::thread pathFinderThread(std::tr1::ref(pathFinder));
     SynchCout(std::string("Backend initialized.\nWorking..."));

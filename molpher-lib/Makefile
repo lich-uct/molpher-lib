@@ -54,6 +54,7 @@ CCADMIN=CCadmin
 
 # Misc directories
 LIB_DIR=$(CND_BASEDIR)/lib/
+SRC_DIR=$(CND_BASEDIR)/src/
 
 # build
 build: .build-post
@@ -61,12 +62,21 @@ build: .build-post
 .build-pre:
 # Add your pre 'build' code here...
 	mkdir $(LIB_DIR)
+	mkdir $(LIB_DIR)/shared/
+	mkdir $(LIB_DIR)/python/
+	swig -python -c++ -outdir $(LIB_DIR)/python -o $(SRC_DIR)/python/molpher_wrap.cpp $(SRC_DIR)/python/molpher.i
 	
 .build-post: .build-impl
 # Add your post 'build' code here...
-	cp $(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/* $(LIB_DIR)
+	cp $(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/libmolpher-lib.so $(LIB_DIR)
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbb.so.2 $(LIB_DIR)/shared/libtbb.so.2
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc.so.2 $(LIB_DIR)/shared/libtbbmalloc.so.2
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy.so.2 $(LIB_DIR)/shared/libtbbmalloc_proxy.so.2
 	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/libmolpher-lib.so.$(MAJOR_VERSION)
 	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/libmolpher-lib.so.$(VERSION)
+	echo 'export LD_LIBRARY_PATH=$${LD_LIBRARY_PATH}:`pwd`/shared/' > $(LIB_DIR)/set_environ.sh
+	echo 'export PYTHONPATH=$${PYTHONPATH}:`pwd`/python/' >> $(LIB_DIR)/set_environ.sh
+	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/python/_molpher.so
 
 # clean
 clean: .clean-post
