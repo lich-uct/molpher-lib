@@ -7,6 +7,7 @@
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>include/path_finders/BasicPathFinder.hpp</itemPath>
       </logicalFolder>
+      <itemPath>include/MorphingManager.hpp</itemPath>
       <itemPath>include/morphing_functions.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -23,6 +24,7 @@
         <itemPath>src/python/molpher.i</itemPath>
         <itemPath>src/python/molpher_wrap.cpp</itemPath>
       </logicalFolder>
+      <itemPath>src/MorphingManager.cpp</itemPath>
       <itemPath>src/morphing_functions.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -30,8 +32,8 @@
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
       <logicalFolder name="f1" displayName="tests" projectFiles="true" kind="TEST">
-        <itemPath>tests/MiscTests.cpp</itemPath>
-        <itemPath>tests/MiscTests.hpp</itemPath>
+        <itemPath>tests/MorphingManagerTests.cpp</itemPath>
+        <itemPath>tests/MorphingManagerTests.hpp</itemPath>
         <itemPath>tests/misc_tests_testrunner.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
@@ -159,12 +161,16 @@
           <commandLine>-pthread</commandLine>
         </linkerTool>
       </folder>
+      <item path="include/MorphingManager.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/morphing_functions.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/path_finders/BasicPathFinder.hpp"
             ex="false"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="src/MorphingManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/morphing_functions.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -177,9 +183,9 @@
       </item>
       <item path="src/python/molpher_wrap.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="tests/MiscTests.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/MorphingManagerTests.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="tests/MiscTests.hpp" ex="false" tool="3" flavor2="0">
+      <item path="tests/MorphingManagerTests.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/misc_tests_testrunner.cpp" ex="false" tool="1" flavor2="0">
       </item>

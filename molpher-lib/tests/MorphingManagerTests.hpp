@@ -10,23 +10,21 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
-class MiscTests : public CPPUNIT_NS::TestFixture {
-    CPPUNIT_TEST_SUITE(MiscTests);
+class MorphingManagerTests : public CPPUNIT_NS::TestFixture {
+    CPPUNIT_TEST_SUITE(MorphingManagerTests);
 
-    CPPUNIT_TEST(testMethod);
-    CPPUNIT_TEST(testFailedMethod);
+    CPPUNIT_TEST(testConstructors);
 
     CPPUNIT_TEST_SUITE_END();
 
 public:
-    MiscTests();
-    virtual ~MiscTests();
+    MorphingManagerTests();
+    virtual ~MorphingManagerTests();
     void setUp();
     void tearDown();
 
 private:
-    void testMethod();
-    void testFailedMethod();
+    void testConstructors();
 };
 
 #endif	/* MISCTESTS_HPP */
