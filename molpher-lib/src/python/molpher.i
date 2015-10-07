@@ -3,7 +3,7 @@
 
 %{
 #define SWIG_FILE_WITH_INIT
-#include "../../include/testing/testing.hpp"
+#include "../../include/morphing_functions.hpp"
 %}
 
 void run_path_finder(

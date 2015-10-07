@@ -7,9 +7,7 @@
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>include/path_finders/BasicPathFinder.hpp</itemPath>
       </logicalFolder>
-      <logicalFolder name="f1" displayName="testing" projectFiles="true">
-        <itemPath>include/testing/testing.hpp</itemPath>
-      </logicalFolder>
+      <itemPath>include/morphing_functions.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -21,16 +19,21 @@
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>src/path_finders/BasicPathFinder.cpp</itemPath>
       </logicalFolder>
-      <logicalFolder name="f1" displayName="testing" projectFiles="true">
-        <itemPath>src/testing/testing.cpp</itemPath>
+      <logicalFolder name="f3" displayName="python" projectFiles="true">
+        <itemPath>src/python/molpher.i</itemPath>
+        <itemPath>src/python/molpher_wrap.cpp</itemPath>
       </logicalFolder>
-      <itemPath>src/python/molpher.i</itemPath>
-      <itemPath>src/python/molpher_wrap.cpp</itemPath>
+      <itemPath>src/morphing_functions.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f1" displayName="tests" projectFiles="true" kind="TEST">
+        <itemPath>tests/MiscTests.cpp</itemPath>
+        <itemPath>tests/MiscTests.hpp</itemPath>
+        <itemPath>tests/misc_tests_testrunner.cpp</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -134,12 +137,36 @@
           <commandLine>-lpthread</commandLine>
         </linkerTool>
       </compileType>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerAddLib>
+            <pElem>/usr/lib/python3.4/config-3.4m-x86_64-linux-gnu</pElem>
+          </linkerAddLib>
+          <linkerDynSerch>
+            <pElem>../dependencies/tbb/lib/intel64/gcc4.4</pElem>
+          </linkerDynSerch>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+            <linkerLibFileItem>/usr/lib/python3.4/config-3.4m-x86_64-linux-gnu/libpython3.4.so</linkerLibFileItem>
+          </linkerLibItems>
+          <commandLine>-pthread</commandLine>
+        </linkerTool>
+      </folder>
+      <item path="include/morphing_functions.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/path_finders/BasicPathFinder.hpp"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="include/testing/testing.hpp" ex="false" tool="3" flavor2="0">
+      <item path="src/morphing_functions.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/path_finders/BasicPathFinder.cpp"
             ex="false"
@@ -150,7 +177,11 @@
       </item>
       <item path="src/python/molpher_wrap.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/testing/testing.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/MiscTests.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/MiscTests.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/misc_tests_testrunner.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

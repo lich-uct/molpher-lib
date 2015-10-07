@@ -61,9 +61,9 @@ build: .build-post
 
 .build-pre:
 # Add your pre 'build' code here...
-	mkdir $(LIB_DIR)
-	mkdir $(LIB_DIR)/shared/
-	mkdir $(LIB_DIR)/python/
+	mkdir -p $(LIB_DIR)
+	mkdir -p $(LIB_DIR)/shared/
+	mkdir -p $(LIB_DIR)/python/
 	swig -python -c++ -outdir $(LIB_DIR)/python -o $(SRC_DIR)/python/molpher_wrap.cpp $(SRC_DIR)/python/molpher.i
 	
 .build-post: .build-impl
