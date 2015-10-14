@@ -4,15 +4,14 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <logicalFolder name="f1" displayName="molpher_API" projectFiles="true">
-        <itemPath>molpher_API/ExplorationParameters.hpp</itemPath>
-        <itemPath>molpher_API/ExplorationTreeSnapshot.hpp</itemPath>
-        <itemPath>molpher_API/MolpherMol.hpp</itemPath>
+      <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
+        <itemPath>include/molpher_API/ExplorationParameters.hpp</itemPath>
+        <itemPath>include/molpher_API/ExplorationTreeSnapshot.hpp</itemPath>
+        <itemPath>include/molpher_API/MolpherMol.hpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>include/path_finders/BasicPathFinder.hpp</itemPath>
       </logicalFolder>
-      <itemPath>include/MorphingManager.hpp</itemPath>
       <itemPath>include/morphing_functions.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -22,10 +21,10 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <logicalFolder name="f1" displayName="molpher_API" projectFiles="true">
-        <itemPath>molpher_API/ExplorationParameters.cpp</itemPath>
-        <itemPath>molpher_API/ExplorationTreeSnapshot.cpp</itemPath>
-        <itemPath>molpher_API/MolpherMol.cpp</itemPath>
+      <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
+        <itemPath>src/molpher_API/ExplorationParameters.cpp</itemPath>
+        <itemPath>src/molpher_API/ExplorationTreeSnapshot.cpp</itemPath>
+        <itemPath>src/molpher_API/MolpherMol.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>src/path_finders/BasicPathFinder.cpp</itemPath>
@@ -34,7 +33,6 @@
         <itemPath>src/python/molpher.i</itemPath>
         <itemPath>src/python/molpher_wrap.cpp</itemPath>
       </logicalFolder>
-      <itemPath>src/MorphingManager.cpp</itemPath>
       <itemPath>src/morphing_functions.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -171,7 +169,17 @@
           <commandLine>-pthread</commandLine>
         </linkerTool>
       </folder>
-      <item path="include/MorphingManager.hpp" ex="false" tool="3" flavor2="0">
+      <item path="include/molpher_API/ExplorationParameters.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/molpher_API/ExplorationTreeSnapshot.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/molpher_API/MolpherMol.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/morphing_functions.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -180,31 +188,17 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="molpher_API/ExplorationParameters.cpp"
+      <item path="src/molpher_API/ExplorationParameters.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="molpher_API/ExplorationParameters.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="molpher_API/ExplorationTreeSnapshot.cpp"
+      <item path="src/molpher_API/ExplorationTreeSnapshot.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="molpher_API/ExplorationTreeSnapshot.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="molpher_API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="molpher_API/MolpherMol.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/MorphingManager.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/molpher_API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/morphing_functions.cpp" ex="false" tool="1" flavor2="0">
       </item>

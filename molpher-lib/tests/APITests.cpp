@@ -7,10 +7,9 @@
 
 #include "APITests.hpp"
 
-#include "../include/MorphingManager.hpp"
-#include "../molpher_API/ExplorationParameters.hpp"
-#include "../molpher_API/MolpherMol.hpp"
-#include "../molpher_API/ExplorationTreeSnapshot.hpp"
+#include "../include/molpher_API/ExplorationParameters.hpp"
+#include "../include/molpher_API/MolpherMol.hpp"
+#include "../include/molpher_API/ExplorationTreeSnapshot.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(APITests);
 
@@ -39,11 +38,6 @@ void APITests::testExplorationParametersClass() {
     CPPUNIT_ASSERT_EQUAL(decltype(snp.iterIdx)(0), snp.iterIdx);
     CPPUNIT_ASSERT_EQUAL(decltype(snp.elapsedSeconds)(0), snp.elapsedSeconds);
     CPPUNIT_ASSERT(!snp.chemOperSelectors.empty());
-}
-
-void APITests::testConstructors() {
-    CPPUNIT_ASSERT_THROW(MoprhingManager mng("wrong"), std::runtime_error);
-    CPPUNIT_ASSERT_NO_THROW(MoprhingManager mng("../templates/test-template.xml"));
 }
 
 void APITests::testExplorationTreeSnapshot() {

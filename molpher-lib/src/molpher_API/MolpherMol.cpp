@@ -1,5 +1,5 @@
 
-#include "MolpherMol.hpp"
+#include "molpher_API/MolpherMol.hpp"
 
 
 MolpherMol::MolpherMol(const std::string& smile) {

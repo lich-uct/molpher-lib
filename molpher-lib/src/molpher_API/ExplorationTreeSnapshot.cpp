@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <iostream>
 
-#include "ExplorationTreeSnapshot.hpp"
+#include "molpher_API/ExplorationTreeSnapshot.hpp"
 #include "inout.h"
 
 ExplorationTreeSnapshot::ExplorationTreeSnapshot(IterationSnapshot iterSnapshot) {
