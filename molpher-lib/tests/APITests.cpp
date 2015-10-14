@@ -9,6 +9,7 @@
 
 #include "../include/MorphingManager.hpp"
 #include "../molpher_API/ExplorationParameters.hpp"
+#include "../molpher_API/MolpherMol.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(APITests);
 
@@ -22,6 +23,12 @@ void APITests::setUp() {
 }
 
 void APITests::tearDown() {
+}
+
+void APITests::testMolpherMolClass() {
+    MolpherMol mol("CCO");
+    CPPUNIT_ASSERT_EQUAL(decltype(mol.getMol().itersWithoutDistImprovement)(0), mol.getMol().itersWithoutDistImprovement);
+    CPPUNIT_ASSERT_EQUAL(decltype(mol.getMol().smile)("CCO"), mol.getMol().smile);
 }
 
 void APITests::testExplorationParametersClass() {

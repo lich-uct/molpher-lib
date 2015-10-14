@@ -6,6 +6,7 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="molpher_API" projectFiles="true">
         <itemPath>molpher_API/ExplorationParameters.hpp</itemPath>
+        <itemPath>molpher_API/MolpherMol.hpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>include/path_finders/BasicPathFinder.hpp</itemPath>
@@ -22,6 +23,7 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="molpher_API" projectFiles="true">
         <itemPath>molpher_API/ExplorationParameters.cpp</itemPath>
+        <itemPath>molpher_API/MolpherMol.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>src/path_finders/BasicPathFinder.cpp</itemPath>
@@ -185,6 +187,10 @@
             ex="false"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="molpher_API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="molpher_API/MolpherMol.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/MorphingManager.cpp" ex="false" tool="1" flavor2="0">
       </item>

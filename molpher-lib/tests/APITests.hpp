@@ -15,6 +15,7 @@ class APITests : public CPPUNIT_NS::TestFixture {
 
     CPPUNIT_TEST(testConstructors);
     CPPUNIT_TEST(testExplorationParametersClass);
+    CPPUNIT_TEST(testMolpherMolClass);
 
     CPPUNIT_TEST_SUITE_END();
 
@@ -25,6 +26,7 @@ public:
     void tearDown();
 
 private:
+    void testMolpherMolClass();
     void testExplorationParametersClass();
     void testConstructors();
 };
