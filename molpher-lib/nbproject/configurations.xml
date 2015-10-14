@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="molpher_API" projectFiles="true">
+        <itemPath>molpher_API/ExplorationParameters.hpp</itemPath>
+      </logicalFolder>
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>include/path_finders/BasicPathFinder.hpp</itemPath>
       </logicalFolder>
@@ -17,6 +20,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="molpher_API" projectFiles="true">
+        <itemPath>molpher_API/ExplorationParameters.cpp</itemPath>
+      </logicalFolder>
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>src/path_finders/BasicPathFinder.cpp</itemPath>
       </logicalFolder>
@@ -32,9 +38,9 @@
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
       <logicalFolder name="f1" displayName="tests" projectFiles="true" kind="TEST">
-        <itemPath>tests/MorphingManagerTests.cpp</itemPath>
-        <itemPath>tests/MorphingManagerTests.hpp</itemPath>
-        <itemPath>tests/misc_tests_testrunner.cpp</itemPath>
+        <itemPath>tests/APITests.cpp</itemPath>
+        <itemPath>tests/APITests.hpp</itemPath>
+        <itemPath>tests/testrunner.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -170,6 +176,16 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="molpher_API/ExplorationParameters.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="molpher_API/ExplorationParameters.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/MorphingManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/morphing_functions.cpp" ex="false" tool="1" flavor2="0">
@@ -183,11 +199,11 @@
       </item>
       <item path="src/python/molpher_wrap.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="tests/MorphingManagerTests.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/APITests.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="tests/MorphingManagerTests.hpp" ex="false" tool="3" flavor2="0">
+      <item path="tests/APITests.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/misc_tests_testrunner.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/testrunner.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>
