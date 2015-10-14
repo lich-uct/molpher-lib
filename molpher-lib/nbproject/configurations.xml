@@ -6,6 +6,7 @@
                    projectFiles="true">
       <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
         <itemPath>include/molpher_API/ExplorationParameters.hpp</itemPath>
+        <itemPath>include/molpher_API/ExplorationTree.hpp</itemPath>
         <itemPath>include/molpher_API/ExplorationTreeSnapshot.hpp</itemPath>
         <itemPath>include/molpher_API/MolpherMol.hpp</itemPath>
       </logicalFolder>
@@ -23,6 +24,7 @@
                    projectFiles="true">
       <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
         <itemPath>src/molpher_API/ExplorationParameters.cpp</itemPath>
+        <itemPath>src/molpher_API/ExplorationTree.cpp</itemPath>
         <itemPath>src/molpher_API/ExplorationTreeSnapshot.cpp</itemPath>
         <itemPath>src/molpher_API/MolpherMol.cpp</itemPath>
       </logicalFolder>
@@ -174,6 +176,11 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="include/molpher_API/ExplorationTree.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="include/molpher_API/ExplorationTreeSnapshot.hpp"
             ex="false"
             tool="3"
@@ -189,6 +196,11 @@
             flavor2="0">
       </item>
       <item path="src/molpher_API/ExplorationParameters.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/molpher_API/ExplorationTree.cpp"
             ex="false"
             tool="1"
             flavor2="0">
