@@ -10,6 +10,7 @@
 #include "../include/MorphingManager.hpp"
 #include "../molpher_API/ExplorationParameters.hpp"
 #include "../molpher_API/MolpherMol.hpp"
+#include "../molpher_API/ExplorationTreeSnapshot.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(APITests);
 
@@ -41,7 +42,13 @@ void APITests::testExplorationParametersClass() {
 }
 
 void APITests::testConstructors() {
-    CPPUNIT_ASSERT_THROW(MoprhingManager mng("wrong");, std::runtime_error);
+    CPPUNIT_ASSERT_THROW(MoprhingManager mng("wrong"), std::runtime_error);
     CPPUNIT_ASSERT_NO_THROW(MoprhingManager mng("../templates/test-template.xml"));
+}
+
+void APITests::testExplorationTreeSnapshot() {
+    IterationSnapshot snp;
+    CPPUNIT_ASSERT_THROW(ExplorationTreeSnapshot esnp(snp), std::runtime_error);
+    ExplorationTreeSnapshot etreeSnap = ExplorationTreeSnapshot::load("../templates/test-template.xml");
 }
 
