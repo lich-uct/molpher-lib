@@ -25,6 +25,7 @@ public:
     
 private:
     PathFinderContext context;
+    int threadCount;
     MoleculeVector putativeLeaves;
     BoolVector putativeLeavesMask;
     ExplorationTree(IterationSnapshot snp);
@@ -40,6 +41,9 @@ public:
 //    MolpherMol fetchMol(const std::string& canonSMILES);
 //    void putativeExtend();
 //    void extend();
+    
+    void setThreadCount(int threadCnt);
+    int getThreadCount();
 
 };
 

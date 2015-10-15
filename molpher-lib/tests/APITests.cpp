@@ -52,6 +52,7 @@ void APITests::testExplorationTreeClass() {
     snap.save(test_files_path + "snappy_snap.snp");
     snap = snap.load(test_files_path + "snappy_snap.snp");
     ExplorationTree file_tree = ExplorationTree::createFromSnapshot(snap);
+    file_tree.setThreadCount(2);
     std::vector<MolpherMol> ret = file_tree.fetchLeaves();
     CPPUNIT_ASSERT(!ret.empty());
 }

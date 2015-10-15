@@ -4,17 +4,17 @@
 #include "molpher_API/ExplorationTree.hpp"
 #include "molpher_API/operations/FindLeavesOper.hpp"
 
-ExplorationTree::ExplorationTree(IterationSnapshot snp) {
+ExplorationTree::ExplorationTree(IterationSnapshot snp) : threadCount(0) {
     PathFinderContext::SnapshotToContext(snp, context);
 }
 
-ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES) {
+ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES) : threadCount(0) {
     ExplorationParameters params;
     params.setSourceMol(sourceMolAsSMILES);
     setParams(params);
 }
 
-ExplorationTree::ExplorationTree(const ExplorationParameters& params) {
+ExplorationTree::ExplorationTree(const ExplorationParameters& params) : threadCount(0) {
     setParams(params);
 }
 
@@ -48,4 +48,12 @@ std::vector<MolpherMol> ExplorationTree::fetchLeaves() {
         ret.push_back(MolpherMol(*it));
     }
     return ret;
+}
+
+void ExplorationTree::setThreadCount(int threadCnt) {
+    threadCount = threadCnt;
+}
+
+int ExplorationTree::getThreadCount() {
+    return threadCount;
 }

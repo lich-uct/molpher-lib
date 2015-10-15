@@ -15,6 +15,7 @@ class TreeOperation {
 
 protected:
     ExplorationTree& tree;
+    const int threadCnt;
     PathFinderContext& fetchTreeContext();
     
 public:

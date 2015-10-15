@@ -32,8 +32,10 @@ void FindLeavesOper::operator()() {
     tbb::task_group_context tbbCtx;
     
     tbb::task_scheduler_init scheduler;
-    scheduler.terminate();
-    scheduler.initialize(2); // TODO expose as parameter
+    if (threadCnt > 0) {
+        scheduler.terminate();
+        scheduler.initialize(threadCnt);
+    }
     
     FindLeaves findLeaves(leaves);
     tbb::parallel_for(
