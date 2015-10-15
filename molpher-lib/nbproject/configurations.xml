@@ -5,6 +5,10 @@
                    displayName="Header Files"
                    projectFiles="true">
       <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
+        <logicalFolder name="operations" displayName="operations" projectFiles="true">
+          <itemPath>include/molpher_API/operations/FindLeavesOper.hpp</itemPath>
+          <itemPath>include/molpher_API/operations/TreeOperation.hpp</itemPath>
+        </logicalFolder>
         <itemPath>include/molpher_API/ExplorationParameters.hpp</itemPath>
         <itemPath>include/molpher_API/ExplorationTree.hpp</itemPath>
         <itemPath>include/molpher_API/ExplorationTreeSnapshot.hpp</itemPath>
@@ -23,6 +27,10 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
+        <logicalFolder name="operations" displayName="operations" projectFiles="true">
+          <itemPath>include/molpher_API/operations/FindLeavesOper.cpp</itemPath>
+          <itemPath>src/molpher_API/operations/TreeOperation.cpp</itemPath>
+        </logicalFolder>
         <itemPath>src/molpher_API/ExplorationParameters.cpp</itemPath>
         <itemPath>src/molpher_API/ExplorationTree.cpp</itemPath>
         <itemPath>src/molpher_API/ExplorationTreeSnapshot.cpp</itemPath>
@@ -54,6 +62,10 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>include/molpher_API/operations</Elem>
+    <Elem>src/molpher_API/operations</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Linux64_Debug" type="2">
@@ -188,6 +200,21 @@
       </item>
       <item path="include/molpher_API/MolpherMol.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/molpher_API/operations/FindLeavesOper.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="include/molpher_API/operations/FindLeavesOper.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/molpher_API/operations/TreeOperation.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="include/morphing_functions.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/path_finders/BasicPathFinder.hpp"
@@ -211,6 +238,11 @@
             flavor2="0">
       </item>
       <item path="src/molpher_API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/molpher_API/operations/TreeOperation.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
       <item path="src/morphing_functions.cpp" ex="false" tool="1" flavor2="0">
       </item>

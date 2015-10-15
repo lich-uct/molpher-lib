@@ -15,6 +15,8 @@
 
 class ExplorationTree {
     
+    friend class TreeOperation;
+    
 public:
     typedef tbb::concurrent_vector<MolpherMolecule> MoleculeVector;
     typedef std::vector<bool> BoolVector;
@@ -34,7 +36,7 @@ public:
     void setParams(const ExplorationParameters& params);
     ExplorationTreeSnapshot createSnapshot() const;
     
-//    std::vector<MolpherMol> fetchLeaves();
+    std::vector<MolpherMol> fetchLeaves(); // TODO add another method that returns MolpherMolecules directly
 //    MolpherMol fetchMol(const std::string& canonSMILES);
 //    void putativeExtend();
 //    void extend();

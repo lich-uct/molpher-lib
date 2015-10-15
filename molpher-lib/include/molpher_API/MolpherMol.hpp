@@ -18,6 +18,7 @@ private:
     
 public:
     MolpherMol(const std::string &smile);
+    MolpherMol(const MolpherMolecule& mol);
     MolpherMolecule& getMol();
     
     // TODO create more getters for the members of mol

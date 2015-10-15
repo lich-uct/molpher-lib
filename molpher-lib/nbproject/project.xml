@@ -9,7 +9,10 @@
             <header-extensions>hpp</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>include/molpher_API/operations</sourceRootElem>
+                <sourceRootElem>src/molpher_API/operations</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>Linux64_Debug</name>
