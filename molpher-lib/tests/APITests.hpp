@@ -15,7 +15,8 @@ class APITests : public CPPUNIT_NS::TestFixture {
 
     CPPUNIT_TEST(testExplorationParametersClass);
     CPPUNIT_TEST(testMolpherMolClass);
-    CPPUNIT_TEST(testExplorationTreeSnapshot);
+    CPPUNIT_TEST(testExplorationTreeSnapshotClass);
+    CPPUNIT_TEST(testExplorationTreeClass);
 
     CPPUNIT_TEST_SUITE_END();
 
@@ -26,9 +27,12 @@ public:
     void tearDown();
 
 private:
+    std::string test_files_path;
+    
     void testMolpherMolClass();
     void testExplorationParametersClass();
-    void testExplorationTreeSnapshot();
+    void testExplorationTreeSnapshotClass();
+    void testExplorationTreeClass();
 };
 
 #endif	/* MISCTESTS_HPP */

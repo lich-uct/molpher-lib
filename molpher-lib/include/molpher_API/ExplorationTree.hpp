@@ -25,18 +25,19 @@ private:
     PathFinderContext context;
     MoleculeVector putativeLeaves;
     BoolVector putativeLeavesMask;
+    ExplorationTree(IterationSnapshot snp);
     
 public:
     static ExplorationTree createFromSnapshot(ExplorationTreeSnapshot snapshot);
     ExplorationTree(const std::string& sourceMolAsSMILES);
-    ExplorationTree(const std::string& sourceMolAsSMILES, const ExplorationParameters& params);
-    void setParams(ExplorationParameters params);
-    ExplorationTreeSnapshot createSnapshot();
+    ExplorationTree(const ExplorationParameters& params);
+    void setParams(const ExplorationParameters& params);
+    ExplorationTreeSnapshot createSnapshot() const;
     
-    std::vector<MolpherMol> fetchLeaves();
-    MolpherMol fetchMol(const std::string& canonSMILES);
-    void putativeExtend();
-    void extend();
+//    std::vector<MolpherMol> fetchLeaves();
+//    MolpherMol fetchMol(const std::string& canonSMILES);
+//    void putativeExtend();
+//    void extend();
 
 };
 

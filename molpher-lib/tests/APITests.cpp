@@ -10,10 +10,11 @@
 #include "../include/molpher_API/ExplorationParameters.hpp"
 #include "../include/molpher_API/MolpherMol.hpp"
 #include "../include/molpher_API/ExplorationTreeSnapshot.hpp"
+#include "../include/molpher_API/ExplorationTree.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(APITests);
 
-APITests::APITests() {
+APITests::APITests() : test_files_path("tests/test_files/") {
 }
 
 APITests::~APITests() {
@@ -33,16 +34,23 @@ void APITests::testMolpherMolClass() {
 
 void APITests::testExplorationParametersClass() {
     ExplorationParameters params;
-    auto snp = params.createIterationSnapshot();
-    CPPUNIT_ASSERT_EQUAL(decltype(snp.jobId)(0), snp.jobId);
-    CPPUNIT_ASSERT_EQUAL(decltype(snp.iterIdx)(0), snp.iterIdx);
-    CPPUNIT_ASSERT_EQUAL(decltype(snp.elapsedSeconds)(0), snp.elapsedSeconds);
-    CPPUNIT_ASSERT(!snp.chemOperSelectors.empty());
+    params.setSourceMol("CCO");
+    CPPUNIT_ASSERT(params.valid());
 }
 
-void APITests::testExplorationTreeSnapshot() {
-    IterationSnapshot snp;
-    CPPUNIT_ASSERT_THROW(ExplorationTreeSnapshot esnp(snp), std::runtime_error);
-    ExplorationTreeSnapshot etreeSnap = ExplorationTreeSnapshot::load("../templates/test-template.xml");
+void APITests::testExplorationTreeSnapshotClass() {
+    ExplorationTreeSnapshot etreeSnap = ExplorationTreeSnapshot::load(test_files_path + "test-template.xml");
+    etreeSnap.save(test_files_path + "snappitty_snap.snp");
+}
+
+void APITests::testExplorationTreeClass() {
+    ExplorationParameters params;
+    params.setSourceMol("CCO");
+    ExplorationTree param_tree(params);
+    ExplorationTree smile_tree("OCCO");
+    ExplorationTreeSnapshot snap = smile_tree.createSnapshot();
+    snap.save(test_files_path + "snappy_snap.snp");
+    snap = snap.load(test_files_path + "snappy_snap.snp");
+    ExplorationTree file_tree = ExplorationTree::createFromSnapshot(snap);
 }
 

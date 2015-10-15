@@ -20,7 +20,7 @@ public:
     MolpherMol(const std::string &smile);
     MolpherMolecule& getMol();
     
-    // TODO create getters for the members of mol
+    // TODO create more getters for the members of mol
 };
 
 #endif	/* MOLPHERMOL_HPP */

@@ -9,16 +9,23 @@
 #define	EXPLORATIONPARAMETERS_HPP
 
 #include "IterationSnapshot.h"
+#include "MolpherMol.hpp"
 
 class ExplorationParameters {
+    
+    friend class ExplorationTree;
+    
 private:
     IterationSnapshot iterSnapshot;
     
 public:
     ExplorationParameters();
-    IterationSnapshot createIterationSnapshot();
+//    IterationSnapshot createIterationSnapshot() const;
+    bool valid() const;
     
-    // TODO getters and setters for the parameters
+    void setSourceMol(const std::string& mol);
+    MolpherMol getSourceMol() const;
+    // TODO more getters and setters for the parameters
     
 };
 
