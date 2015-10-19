@@ -9,3 +9,7 @@ TreeOperation::TreeOperation(ExplorationTree& expTree) : tree(expTree), threadCn
 PathFinderContext& TreeOperation::fetchTreeContext() {
     return tree.context;
 }
+
+ExplorationTree::MoleculeVector& TreeOperation::fetchPutativeLeaves() {
+    return tree.putativeLeaves;
+}

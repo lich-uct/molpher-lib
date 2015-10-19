@@ -21,7 +21,7 @@ private:
 public:
     ExplorationParameters();
 //    IterationSnapshot createIterationSnapshot() const;
-    bool valid() const;
+    bool valid();
     
     void setSourceMol(const std::string& mol);
     MolpherMol getSourceMol() const;

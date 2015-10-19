@@ -20,27 +20,29 @@ class ExplorationTree {
 public:
     typedef tbb::concurrent_vector<MolpherMolecule> MoleculeVector;
     typedef std::vector<bool> BoolVector;
+    typedef tbb::concurrent_hash_map<std::string, bool /*dummy*/> SmileSet;
 //    typedef tbb::concurrent_vector<std::string> SmileVector;
-//    typedef tbb::concurrent_hash_map<std::string, bool /*dummy*/> SmileSet;
     
 private:
     PathFinderContext context;
     int threadCount;
     MoleculeVector putativeLeaves;
     BoolVector putativeLeavesMask;
-    ExplorationTree(IterationSnapshot snp);
+    ExplorationTree(IterationSnapshot& snp);
+    void initCandidates(IterationSnapshot& snp);
     
 public:
-    static ExplorationTree createFromSnapshot(ExplorationTreeSnapshot snapshot);
+    static ExplorationTree createFromSnapshot(ExplorationTreeSnapshot& snapshot);
     ExplorationTree(const std::string& sourceMolAsSMILES);
-    ExplorationTree(const ExplorationParameters& params);
-    void setParams(const ExplorationParameters& params);
+    ExplorationTree(ExplorationParameters& params);
+    void setParams(ExplorationParameters& params);
     ExplorationTreeSnapshot createSnapshot() const;
     
-    std::vector<MolpherMol> fetchLeaves(); // TODO add another method that returns MolpherMolecules directly
-//    MolpherMol fetchMol(const std::string& canonSMILES);
-//    void putativeExtend();
+    std::vector<MolpherMol> fetchLeaves();
+    ExplorationTree::MoleculeVector fetchLeavesAsTBBVector();
+    void putativeExtend();
 //    void extend();
+//    MolpherMol fetchMol(const std::string& canonSMILES);
     
     void setThreadCount(int threadCnt);
     int getThreadCount();

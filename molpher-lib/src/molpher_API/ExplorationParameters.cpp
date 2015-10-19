@@ -2,15 +2,23 @@
 #include "molpher_API/ExplorationParameters.hpp"
 
 ExplorationParameters::ExplorationParameters() {
-    iterSnapshot.target.smile = "TARGET NOT SET";
+    // no action
 }
 
 //IterationSnapshot ExplorationParameters::createIterationSnapshot() const {
 //    return iterSnapshot;
 //}
 
-bool ExplorationParameters::valid() const {
-    return iterSnapshot.IsValid();
+bool ExplorationParameters::valid() {
+    bool validity = false;
+    if (iterSnapshot.target.smile.empty()) {
+        iterSnapshot.target.smile = "TARGET NOT SET";
+        validity = iterSnapshot.IsValid();
+        iterSnapshot.target.smile = "";
+    } else {
+        validity = iterSnapshot.IsValid();
+    }
+    return validity;
 }
 
 void ExplorationParameters::setSourceMol(const std::string& mol) {
