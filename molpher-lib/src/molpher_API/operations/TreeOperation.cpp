@@ -11,7 +11,7 @@ PathFinderContext& TreeOperation::fetchTreeContext() {
 }
 
 ExplorationTree::MoleculeVector& TreeOperation::fetchPutativeLeaves() {
-    return tree.putativeLeaves;
+    return tree.candidateMoprhs;
 }
 
 void TreeOperation::fetchLeaves(ExplorationTree::MoleculeVector& leaves) {

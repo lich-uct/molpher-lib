@@ -26,10 +26,10 @@ public:
 private:
     PathFinderContext context;
     int threadCount;
-    MoleculeVector putativeLeaves;
-    BoolVector putativeLeavesMask;
+    MoleculeVector candidateMoprhs;
+    BoolVector candidateMorphsMask;
     ExplorationTree(IterationSnapshot& snp);
-    void initCandidates(IterationSnapshot& snp);
+    void treeInit(IterationSnapshot& snp);
     void fetchLeaves(ExplorationTree::MoleculeVector&);
     
 public:
@@ -40,13 +40,14 @@ public:
     ExplorationTreeSnapshot createSnapshot() const;
     
     void fetchLeaves(std::vector<MolpherMol>&);
-    ExplorationTree::MoleculeVector fetchLeavesAsTBBVector();
     void putativeExtend();
 //    void extend();
 //    MolpherMol fetchMol(const std::string& canonSMILES);
     
     void setThreadCount(int threadCnt);
     int getThreadCount();
+    
+    std::vector<MolpherMol> getCandidateMorphs();
 
 };
 

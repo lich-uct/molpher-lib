@@ -61,6 +61,11 @@ void APITests::testExploration() {
     std::vector<MolpherMol> ret;
     file_tree.fetchLeaves(ret);
     CPPUNIT_ASSERT(1 == ret.size());
-    file_tree.putativeExtend(); // TODO: test this properly (check the state of generated morphs)
+    file_tree.putativeExtend();
+    std::vector<MolpherMol> morphs = file_tree.getCandidateMorphs();
+    CPPUNIT_ASSERT(1 == ret.size());
+    for (auto morph : morphs) {
+        CPPUNIT_ASSERT(morph.getMol().IsValid());
+    }
 }
 

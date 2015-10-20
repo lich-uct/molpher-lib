@@ -8,7 +8,7 @@
 
 ExplorationTree::ExplorationTree(IterationSnapshot& snp) : threadCount(0) {
     PathFinderContext::SnapshotToContext(snp, context);
-    initCandidates(snp);
+    treeInit(snp);
 }
 
 ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES) : threadCount(0) {
@@ -21,7 +21,7 @@ ExplorationTree::ExplorationTree(ExplorationParameters& params) : threadCount(0)
     setParams(params);
 }
 
-void ExplorationTree::initCandidates(IterationSnapshot& snp) {
+void ExplorationTree::treeInit(IterationSnapshot& snp) {
     if (snp.target.smile.empty()) {
         snp.target.smile = "C";
         std::cout << "WARNING: No target specified. Inserting default: 'C'" << std::endl;
@@ -35,7 +35,7 @@ void ExplorationTree::initCandidates(IterationSnapshot& snp) {
 void ExplorationTree::setParams(ExplorationParameters& params) {
     if (params.valid()) {
         IterationSnapshot snp = params.iterSnapshot;
-        initCandidates(snp);
+        treeInit(snp);
     } else {
         throw std::runtime_error("Exploration parameters are invalid.");
     }
@@ -77,4 +77,12 @@ void ExplorationTree::setThreadCount(int threadCnt) {
 
 int ExplorationTree::getThreadCount() {
     return threadCount;
+}
+
+std::vector<MolpherMol> ExplorationTree::getCandidateMorphs() {
+    std::vector<MolpherMol> ret;
+    for (auto mol : candidateMoprhs) {
+        ret.push_back(MolpherMol(mol));
+    }
+    return ret;
 }
