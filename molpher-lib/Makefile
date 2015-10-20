@@ -64,7 +64,7 @@ build: .build-post
 	mkdir -p $(LIB_DIR)
 	mkdir -p $(LIB_DIR)/shared/
 	mkdir -p $(LIB_DIR)/python/
-	swig -python -c++ -outdir $(LIB_DIR)/python -o $(SRC_DIR)/python/molpher_wrap.cpp $(SRC_DIR)/python/molpher.i
+	swig -python -Wall -c++ -outdir $(LIB_DIR)/python -o $(SRC_DIR)/python/molpher_wrap.cpp $(SRC_DIR)/python/molpher.i
 	
 .build-post: .build-impl
 # Add your post 'build' code here...
@@ -74,8 +74,8 @@ build: .build-post
 	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy.so.2 $(LIB_DIR)/shared/libtbbmalloc_proxy.so.2
 	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/libmolpher-lib.so.$(MAJOR_VERSION)
 	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/libmolpher-lib.so.$(VERSION)
-	echo 'export LD_LIBRARY_PATH=$${LD_LIBRARY_PATH}:`pwd`/shared/' > $(LIB_DIR)/set_environ.sh
-	echo 'export PYTHONPATH=$${PYTHONPATH}:`pwd`/python/' >> $(LIB_DIR)/set_environ.sh
+	echo "export LD_LIBRARY_PATH=$(LIB_DIR)/shared/":'$${LD_LIBRARY_PATH}' > $(LIB_DIR)/set_environ.sh
+	echo "export PYTHONPATH=$(LIB_DIR)/python/":'$${PYTHONPATH}' >> $(LIB_DIR)/set_environ.sh
 	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/python/_molpher.so
 
 # clean
@@ -126,7 +126,7 @@ test: .test-post
 # Add your pre 'test' code here...
 
 .test-post: .test-impl
-# Add your post 'test' code here...
+	bash tests/run_python_tests.sh
 
 
 # help
