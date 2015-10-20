@@ -13,3 +13,7 @@ PathFinderContext& TreeOperation::fetchTreeContext() {
 ExplorationTree::MoleculeVector& TreeOperation::fetchPutativeLeaves() {
     return tree.putativeLeaves;
 }
+
+void TreeOperation::fetchLeaves(ExplorationTree::MoleculeVector& leaves) {
+    tree.fetchLeaves(leaves);
+}

@@ -51,19 +51,20 @@ ExplorationTree ExplorationTree::createFromSnapshot(ExplorationTreeSnapshot& sna
     return ExplorationTree(snapshot.iterSnapshot);
 }
 
-std::vector<MolpherMol> ExplorationTree::fetchLeaves() {
-    ExplorationTree::MoleculeVector leaves = fetchLeavesAsTBBVector();
-    std::vector<MolpherMol> ret;
+void ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret) {
+    ExplorationTree::MoleculeVector leaves;
+    fetchLeaves(leaves);
     for (MoleculeVector::iterator it = leaves.begin(); it != leaves.end(); it++) {
         ret.push_back(MolpherMol(*it));
     }
-    return ret;
 }
 
-ExplorationTree::MoleculeVector ExplorationTree::fetchLeavesAsTBBVector() {
+void ExplorationTree::fetchLeaves(ExplorationTree::MoleculeVector& leaves) {
     FindLeavesOper op(*this);
     op();
-    return op.leaves;
+    for (auto leaf : op.leaves) {
+        leaves.push_back(leaf);
+    }
 }
 
 void ExplorationTree::putativeExtend() {

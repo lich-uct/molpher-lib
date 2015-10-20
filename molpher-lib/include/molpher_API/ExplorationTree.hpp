@@ -30,6 +30,7 @@ private:
     BoolVector putativeLeavesMask;
     ExplorationTree(IterationSnapshot& snp);
     void initCandidates(IterationSnapshot& snp);
+    void fetchLeaves(ExplorationTree::MoleculeVector&);
     
 public:
     static ExplorationTree createFromSnapshot(ExplorationTreeSnapshot& snapshot);
@@ -38,7 +39,7 @@ public:
     void setParams(ExplorationParameters& params);
     ExplorationTreeSnapshot createSnapshot() const;
     
-    std::vector<MolpherMol> fetchLeaves();
+    void fetchLeaves(std::vector<MolpherMol>&);
     ExplorationTree::MoleculeVector fetchLeavesAsTBBVector();
     void putativeExtend();
 //    void extend();

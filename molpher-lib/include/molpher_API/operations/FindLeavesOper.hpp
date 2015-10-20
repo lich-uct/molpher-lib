@@ -14,18 +14,18 @@ class FindLeavesOper : public TreeOperation {
     
     friend class ExplorationTree;
     
-    class FindLeaves
-    {
-    public:
-        FindLeaves(ExplorationTree::MoleculeVector &leaves);
-        void operator()(
-            const PathFinderContext::CandidateMap::range_type &candidates) const;
+        class FindLeaves
+        {
+        public:
+            FindLeaves(ExplorationTree::MoleculeVector &leaves);
+            void operator()(
+                const PathFinderContext::CandidateMap::range_type &candidates) const;
 
-    private:
-        ExplorationTree::MoleculeVector &mLeaves;
-    };
+        private:
+            ExplorationTree::MoleculeVector &mLeaves;
+        };
     
-    ExplorationTree::MoleculeVector leaves;
+        ExplorationTree::MoleculeVector leaves;
 
     public:
         FindLeavesOper(ExplorationTree& expTree);

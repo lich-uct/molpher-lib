@@ -51,12 +51,15 @@ void APITests::testExplorationTreeClass() {
     ExplorationTreeSnapshot snap = smile_tree.createSnapshot();
     snap.save(test_files_path + "snappy_snap.snp");
     snap = snap.load(test_files_path + "snappy_snap.snp");
-    
+}
+
+void APITests::testExploration() {
     // test morphing methods
     ExplorationTreeSnapshot etreeSnap = ExplorationTreeSnapshot::load(test_files_path + "test-template.xml");
     ExplorationTree file_tree = ExplorationTree::createFromSnapshot(etreeSnap);
     file_tree.setThreadCount(2);
-    std::vector<MolpherMol> ret = file_tree.fetchLeaves();
+    std::vector<MolpherMol> ret;
+    file_tree.fetchLeaves(ret);
     CPPUNIT_ASSERT(1 == ret.size());
     file_tree.putativeExtend(); // TODO: test this properly (check the state of generated morphs)
 }

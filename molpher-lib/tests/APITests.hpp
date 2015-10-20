@@ -17,6 +17,7 @@ class APITests : public CPPUNIT_NS::TestFixture {
     CPPUNIT_TEST(testMolpherMolClass);
     CPPUNIT_TEST(testExplorationTreeSnapshotClass);
     CPPUNIT_TEST(testExplorationTreeClass);
+    CPPUNIT_TEST(testExploration);
 
     CPPUNIT_TEST_SUITE_END();
 
@@ -33,6 +34,7 @@ private:
     void testExplorationParametersClass();
     void testExplorationTreeSnapshotClass();
     void testExplorationTreeClass();
+    void testExploration();
 };
 
 #endif	/* MISCTESTS_HPP */

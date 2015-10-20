@@ -18,6 +18,7 @@ protected:
     const int threadCnt;
     PathFinderContext& fetchTreeContext();
     ExplorationTree::MoleculeVector& fetchPutativeLeaves();
+    void fetchLeaves(ExplorationTree::MoleculeVector&);
     
 public:
     TreeOperation(ExplorationTree& expTree);

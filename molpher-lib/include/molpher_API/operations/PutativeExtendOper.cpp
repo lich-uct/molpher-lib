@@ -46,7 +46,8 @@ void PutativeExtendOper::operator()() {
         scheduler.initialize(threadCnt);
     }
     
-    ExplorationTree::MoleculeVector leaves = tree.fetchLeavesAsTBBVector();
+    ExplorationTree::MoleculeVector leaves;
+    fetchLeaves(leaves);
     PathFinderContext& context = fetchTreeContext();
     ExplorationTree::MoleculeVector& morphs = fetchPutativeLeaves();
     morphs.clear();
