@@ -21,6 +21,7 @@ public:
     MolpherMol(const MolpherMolecule& mol);
     MolpherMolecule& getMol();
     
+    std::string getSMILES();
     // TODO create more getters for the members of mol
 };
 

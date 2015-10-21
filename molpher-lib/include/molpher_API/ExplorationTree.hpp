@@ -42,7 +42,7 @@ public:
     void fetchLeaves(std::vector<MolpherMol>&);
     void putativeExtend();
 //    void extend();
-//    MolpherMol fetchMol(const std::string& canonSMILES);
+    MolpherMol fetchMol(const std::string& canonSMILES);
     
     void setThreadCount(int threadCnt);
     int getThreadCount();

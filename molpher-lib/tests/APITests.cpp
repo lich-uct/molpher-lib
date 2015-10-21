@@ -34,6 +34,7 @@ void APITests::testMolpherMolClass() {
 
 void APITests::testExplorationParametersClass() {
     ExplorationParameters params;
+    CPPUNIT_ASSERT(!params.valid());
     params.setSourceMol("CCO");
     CPPUNIT_ASSERT(params.valid());
 }
@@ -47,10 +48,16 @@ void APITests::testExplorationTreeClass() {
     ExplorationParameters params;
     params.setSourceMol("CCO");
     ExplorationTree param_tree(params);
-    ExplorationTree smile_tree("OCCO");
-    ExplorationTreeSnapshot snap = smile_tree.createSnapshot();
+    ExplorationTreeSnapshot snap = param_tree.createSnapshot();
+    
+    std::string smiles("OCCO");
+    ExplorationTree smile_tree(smiles);
+    snap = smile_tree.createSnapshot();
     snap.save(test_files_path + "snappy_snap.snp");
     snap = snap.load(test_files_path + "snappy_snap.snp");
+    ExplorationTree etree = ExplorationTree::createFromSnapshot(snap);
+    MolpherMol mol = etree.fetchMol(smiles);
+    CPPUNIT_ASSERT_EQUAL(smiles, mol.getSMILES());
 }
 
 void APITests::testExploration() {

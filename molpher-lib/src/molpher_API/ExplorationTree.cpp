@@ -24,7 +24,7 @@ ExplorationTree::ExplorationTree(ExplorationParameters& params) : threadCount(0)
 void ExplorationTree::treeInit(IterationSnapshot& snp) {
     if (snp.target.smile.empty()) {
         snp.target.smile = "C";
-        std::cout << "WARNING: No target specified. Inserting default: 'C'" << std::endl;
+        std::cerr << "WARNING: No target specified. Inserting default: 'C'" << std::endl;
     }
     PathFinderContext::SnapshotToContext(snp, context);
     PathFinderContext::CandidateMap::accessor ac;
@@ -69,6 +69,12 @@ void ExplorationTree::fetchLeaves(ExplorationTree::MoleculeVector& leaves) {
 
 void ExplorationTree::putativeExtend() {
     PutativeExtendOper(*this)();
+}
+
+MolpherMol ExplorationTree::fetchMol(const std::string& canonSMILES) {
+    PathFinderContext::CandidateMap::accessor ac;
+    context.candidates.find(ac, canonSMILES);
+    return MolpherMol(ac->second);
 }
 
 void ExplorationTree::setThreadCount(int threadCnt) {

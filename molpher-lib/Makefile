@@ -126,6 +126,7 @@ test: .test-post
 # Add your pre 'test' code here...
 
 .test-post: .test-impl
+	echo "Running python tests..."
 	bash tests/run_python_tests.sh
 
 

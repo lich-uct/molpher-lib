@@ -14,3 +14,7 @@ MolpherMol::MolpherMol(const MolpherMolecule& mol) {
 MolpherMolecule& MolpherMol::getMol() {
     return mol;
 }
+
+std::string MolpherMol::getSMILES() {
+    return mol.smile;
+}
