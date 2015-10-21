@@ -59,6 +59,12 @@ void ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret) {
     }
 }
 
+std::vector<MolpherMol> ExplorationTree::fetchLeaves() {
+    std::vector<MolpherMol> ret;
+    fetchLeaves(ret);
+    return ret;
+}
+
 void ExplorationTree::fetchLeaves(ExplorationTree::MoleculeVector& leaves) {
     FindLeavesOper op(*this);
     op();

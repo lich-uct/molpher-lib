@@ -40,6 +40,7 @@ public:
     ExplorationTreeSnapshot createSnapshot() const;
     
     void fetchLeaves(std::vector<MolpherMol>&);
+    std::vector<MolpherMol> fetchLeaves();
     void putativeExtend();
 //    void extend();
     MolpherMol fetchMol(const std::string& canonSMILES);

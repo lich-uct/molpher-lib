@@ -1,6 +1,10 @@
 
 #include "molpher_API/MolpherMol.hpp"
 
+MolpherMol::MolpherMol() {
+    // no action
+}
+
 
 MolpherMol::MolpherMol(const std::string& smile) {
     std::string temp(smile);

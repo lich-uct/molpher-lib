@@ -17,6 +17,7 @@ private:
     MolpherMolecule mol;
     
 public:
+    MolpherMol();
     MolpherMol(const std::string &smile);
     MolpherMol(const MolpherMolecule& mol);
     MolpherMolecule& getMol();

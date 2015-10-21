@@ -63,16 +63,18 @@ void APITests::testExplorationTreeClass() {
 void APITests::testExploration() {
     // test morphing methods
     ExplorationTreeSnapshot etreeSnap = ExplorationTreeSnapshot::load(test_files_path + "test-template.xml");
-    ExplorationTree file_tree = ExplorationTree::createFromSnapshot(etreeSnap);
-    file_tree.setThreadCount(2);
-    std::vector<MolpherMol> ret;
-    file_tree.fetchLeaves(ret);
-    CPPUNIT_ASSERT(1 == ret.size());
-    file_tree.putativeExtend();
-    std::vector<MolpherMol> morphs = file_tree.getCandidateMorphs();
-    CPPUNIT_ASSERT(1 == ret.size());
+    ExplorationTree tree = ExplorationTree::createFromSnapshot(etreeSnap);
+    tree.setThreadCount(2);
+    std::vector<MolpherMol> leaves;
+    tree.fetchLeaves(leaves);
+    CPPUNIT_ASSERT(1 == leaves.size());
+    tree.putativeExtend();
+    std::vector<MolpherMol> morphs = tree.getCandidateMorphs();
+    CPPUNIT_ASSERT(1 == leaves.size());
+    CPPUNIT_ASSERT(!morphs.empty());
     for (auto morph : morphs) {
         CPPUNIT_ASSERT(morph.getMol().IsValid());
     }
+    
 }
 

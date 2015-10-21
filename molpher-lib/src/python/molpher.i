@@ -10,12 +10,15 @@
     #include "../../include/molpher_API/ExplorationTree.hpp"
 %}
 
+
+
 // complete morphing function
 %include "../../include/morphing_functions.hpp"
 
 // MoplherMolecule wrapper
 %ignore MolpherMol::MolpherMol(const MolpherMolecule& mol);
 %ignore MolpherMol::getMol();
+%ignore MolpherMol::MolpherMol();
 %include "../../include/molpher_API/MolpherMol.hpp"
 
 // ExplorationParameters wrapper
@@ -25,4 +28,6 @@
 %include "../../include/molpher_API/ExplorationTreeSnapshot.hpp"
         
 // ExplorationTree wrapper
+%template(MolpherMolVector) std::vector<MolpherMol>;
+%ignore ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret);
 %include "../../include/molpher_API/ExplorationTree.hpp"

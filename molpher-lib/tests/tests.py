@@ -40,7 +40,16 @@ class TestMolpherAPI(unittest.TestCase):
         self.assertEqual(mol.getSMILES(), smiles)
         
     def testExploration(self):
-        pass # TODO implement
+        etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
+        tree = ExplorationTree.createFromSnapshot(etreeSnap)
+        tree.setThreadCount(2)
+        leaves = tree.fetchLeaves()
+        self.assertEqual(len(leaves),1)
+        tree.putativeExtend()
+        morphs = tree.getCandidateMorphs()
+        self.assertEqual(len(leaves),1)
+        for morph in morphs:
+            self.assertTrue(morph.getSMILES())
 
 if __name__ == '__main__':
     unittest.main()
