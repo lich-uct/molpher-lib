@@ -22,3 +22,7 @@ MolpherMolecule& MolpherMol::getMol() {
 std::string MolpherMol::getSMILES() {
     return mol.smile;
 }
+
+double MolpherMol::getDistToTarget() {
+    return mol.distToTarget;
+}

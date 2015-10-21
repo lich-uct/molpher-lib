@@ -43,13 +43,23 @@ class TestMolpherAPI(unittest.TestCase):
         etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
         tree = ExplorationTree.createFromSnapshot(etreeSnap)
         tree.setThreadCount(2)
+        
         leaves = tree.fetchLeaves()
         self.assertEqual(len(leaves),1)
+        
         tree.generateMorphs()
         morphs = tree.getCandidateMorphs()
         self.assertEqual(len(leaves),1)
         for morph in morphs:
             self.assertTrue(morph.getSMILES())
+            
+        tree.sortMorphs()
+        morphs = tree.getCandidateMorphs()
+        previous = None
+        for morph in morphs:
+            if previous:
+                self.assertTrue(morph.getDistToTarget() >= previous.getDistToTarget())
+            previous = morph
 
 if __name__ == '__main__':
     unittest.main()

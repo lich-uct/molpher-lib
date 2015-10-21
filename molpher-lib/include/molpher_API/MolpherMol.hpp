@@ -23,6 +23,7 @@ public:
     MolpherMolecule& getMol();
     
     std::string getSMILES();
+    double getDistToTarget();
     // TODO create more getters for the members of mol
 };
 

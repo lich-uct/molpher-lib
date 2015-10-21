@@ -44,11 +44,12 @@ public:
     void fetchLeaves(std::vector<MolpherMol>&);
     std::vector<MolpherMol> fetchLeaves();
     void generateMorphs();
-//    void extend();
-    MolpherMol fetchMol(const std::string& canonSMILES);
+    void sortMorphs();
+    void extend();
     
     void setThreadCount(int threadCnt);
     int getThreadCount();
+    MolpherMol fetchMol(const std::string& canonSMILES);
     std::vector<MolpherMol> getCandidateMorphs();
 
 };

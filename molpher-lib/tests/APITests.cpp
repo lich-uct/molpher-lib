@@ -65,9 +65,11 @@ void APITests::testExploration() {
     ExplorationTreeSnapshot etreeSnap = ExplorationTreeSnapshot::load(test_files_path + "test-template.xml");
     ExplorationTree tree = ExplorationTree::createFromSnapshot(etreeSnap);
     tree.setThreadCount(2);
+    
     std::vector<MolpherMol> leaves;
     tree.fetchLeaves(leaves);
     CPPUNIT_ASSERT(1 == leaves.size());
+    
     tree.generateMorphs();
     std::vector<MolpherMol> morphs = tree.getCandidateMorphs();
     CPPUNIT_ASSERT(1 == leaves.size());
@@ -76,5 +78,17 @@ void APITests::testExploration() {
         CPPUNIT_ASSERT(morph.getMol().IsValid());
     }
     
+    tree.sortMorphs();
+    morphs = tree.getCandidateMorphs();
+    MolpherMolecule* previous = nullptr;
+    for (auto morph : morphs) {
+        MolpherMolecule& molpher_molecule = morph.getMol();
+        CPPUNIT_ASSERT(molpher_molecule.IsValid());
+        if (previous) {
+            CPPUNIT_ASSERT(molpher_molecule.distToTarget >= previous->distToTarget);
+        }
+        
+        previous = &molpher_molecule;
+    }
 }
 

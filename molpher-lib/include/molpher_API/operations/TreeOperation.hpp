@@ -16,11 +16,18 @@ class TreeOperation {
 protected:
     ExplorationTree& tree;
     const int threadCnt;
+    
     PathFinderContext& fetchTreeContext();
-    ExplorationTree::MoleculeVector& fetchPutativeLeaves();
+    ExplorationTree::MoleculeVector& fetchGeneratedMorphs();
     void fetchLeaves(ExplorationTree::MoleculeVector&);
     
 public:
+    enum MorphFilter {
+        PROBABILITY,
+        WEIGHT,
+        SYNTHESIS
+    };
+    
     TreeOperation(ExplorationTree& expTree);
     virtual void operator()() = 0;
 };

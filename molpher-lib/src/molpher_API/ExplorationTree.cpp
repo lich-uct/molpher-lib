@@ -5,6 +5,7 @@
 #include "molpher_API/ExplorationTree.hpp"
 #include "molpher_API/operations/FindLeavesOper.hpp"
 #include "molpher_API/operations/GenerateMorphsOper.hpp"
+#include "molpher_API/operations/SortMorphsOper.hpp"
 
 ExplorationTree::ExplorationTree(IterationSnapshot& snp) : threadCount(0) {
     PathFinderContext::SnapshotToContext(snp, context);
@@ -76,6 +77,17 @@ void ExplorationTree::fetchLeaves(ExplorationTree::MoleculeVector& leaves) {
 void ExplorationTree::generateMorphs() {
     GenerateMoprhsOper(*this)();
 }
+
+void ExplorationTree::sortMorphs() {
+    SortMoprhsOper(*this)();
+}
+
+
+void ExplorationTree::extend() {
+    generateMorphs();
+    // TODO implement the rest
+}
+
 
 MolpherMol ExplorationTree::fetchMol(const std::string& canonSMILES) {
     PathFinderContext::CandidateMap::accessor ac;

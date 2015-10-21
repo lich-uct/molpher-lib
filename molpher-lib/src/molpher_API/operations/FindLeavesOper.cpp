@@ -3,7 +3,7 @@
 #include <tbb/partitioner.h>
 #include <tbb/parallel_for.h>
 
-#include "FindLeavesOper.hpp"
+#include "molpher_API/operations/FindLeavesOper.hpp"
 
 FindLeavesOper::FindLeaves::FindLeaves(ExplorationTree::MoleculeVector &leaves) :
 mLeaves(leaves) {

@@ -10,7 +10,7 @@ PathFinderContext& TreeOperation::fetchTreeContext() {
     return tree.context;
 }
 
-ExplorationTree::MoleculeVector& TreeOperation::fetchPutativeLeaves() {
+ExplorationTree::MoleculeVector& TreeOperation::fetchGeneratedMorphs() {
     return tree.candidateMoprhs;
 }
 

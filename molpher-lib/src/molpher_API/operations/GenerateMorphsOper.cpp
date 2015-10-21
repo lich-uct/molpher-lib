@@ -5,7 +5,7 @@
 
 #include "chem/morphing/Morphing.hpp"
 
-#include "GenerateMorphsOper.hpp"
+#include "molpher_API/operations/GenerateMorphsOper.hpp"
 
 GenerateMoprhsOper::GenerateMoprhsOper(ExplorationTree& expTree) : TreeOperation(expTree) {
     // no action
@@ -49,7 +49,7 @@ void GenerateMoprhsOper::operator()() {
     ExplorationTree::MoleculeVector leaves;
     fetchLeaves(leaves);
     PathFinderContext& context = fetchTreeContext();
-    ExplorationTree::MoleculeVector& morphs = fetchPutativeLeaves();
+    ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
     morphs.clear();
     CollectMorphs collectMorphs(morphs);
     for (auto it = leaves.begin(); it != leaves.end(); it++) {
