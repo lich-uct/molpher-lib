@@ -7,7 +7,7 @@
       <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
         <logicalFolder name="operations" displayName="operations" projectFiles="true">
           <itemPath>include/molpher_API/operations/FindLeavesOper.hpp</itemPath>
-          <itemPath>include/molpher_API/operations/PutativeExtendOper.hpp</itemPath>
+          <itemPath>include/molpher_API/operations/GenerateMorphsOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/TreeOperation.hpp</itemPath>
         </logicalFolder>
         <itemPath>include/molpher_API/ExplorationParameters.hpp</itemPath>
@@ -30,7 +30,7 @@
       <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
         <logicalFolder name="operations" displayName="operations" projectFiles="true">
           <itemPath>include/molpher_API/operations/FindLeavesOper.cpp</itemPath>
-          <itemPath>include/molpher_API/operations/PutativeExtendOper.cpp</itemPath>
+          <itemPath>include/molpher_API/operations/GenerateMorphsOper.cpp</itemPath>
           <itemPath>src/molpher_API/operations/TreeOperation.cpp</itemPath>
         </logicalFolder>
         <itemPath>src/molpher_API/ExplorationParameters.cpp</itemPath>
@@ -214,12 +214,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="include/molpher_API/operations/PutativeExtendOper.cpp"
+      <item path="include/molpher_API/operations/GenerateMorphsOper.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="include/molpher_API/operations/PutativeExtendOper.hpp"
+      <item path="include/molpher_API/operations/GenerateMorphsOper.hpp"
             ex="false"
             tool="3"
             flavor2="0">

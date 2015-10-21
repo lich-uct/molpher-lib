@@ -34,20 +34,21 @@ private:
     
 public:
     static ExplorationTree createFromSnapshot(ExplorationTreeSnapshot& snapshot);
+    
     ExplorationTree(const std::string& sourceMolAsSMILES);
     ExplorationTree(ExplorationParameters& params);
+    
     void setParams(ExplorationParameters& params);
     ExplorationTreeSnapshot createSnapshot() const;
     
     void fetchLeaves(std::vector<MolpherMol>&);
     std::vector<MolpherMol> fetchLeaves();
-    void putativeExtend();
+    void generateMorphs();
 //    void extend();
     MolpherMol fetchMol(const std::string& canonSMILES);
     
     void setThreadCount(int threadCnt);
     int getThreadCount();
-    
     std::vector<MolpherMol> getCandidateMorphs();
 
 };

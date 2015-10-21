@@ -8204,20 +8204,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_ExplorationTree_putativeExtend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_ExplorationTree_generateMorphs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = (ExplorationTree *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_putativeExtend",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_generateMorphs",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_putativeExtend" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_generateMorphs" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  (arg1)->putativeExtend();
+  (arg1)->generateMorphs();
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8439,7 +8439,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExplorationTree_setParams", _wrap_ExplorationTree_setParams, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_createSnapshot", _wrap_ExplorationTree_createSnapshot, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_fetchLeaves", _wrap_ExplorationTree_fetchLeaves, METH_VARARGS, NULL},
-	 { (char *)"ExplorationTree_putativeExtend", _wrap_ExplorationTree_putativeExtend, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_generateMorphs", _wrap_ExplorationTree_generateMorphs, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_fetchMol", _wrap_ExplorationTree_fetchMol, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_setThreadCount", _wrap_ExplorationTree_setThreadCount, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getThreadCount", _wrap_ExplorationTree_getThreadCount, METH_VARARGS, NULL},

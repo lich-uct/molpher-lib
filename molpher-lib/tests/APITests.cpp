@@ -68,7 +68,7 @@ void APITests::testExploration() {
     std::vector<MolpherMol> leaves;
     tree.fetchLeaves(leaves);
     CPPUNIT_ASSERT(1 == leaves.size());
-    tree.putativeExtend();
+    tree.generateMorphs();
     std::vector<MolpherMol> morphs = tree.getCandidateMorphs();
     CPPUNIT_ASSERT(1 == leaves.size());
     CPPUNIT_ASSERT(!morphs.empty());

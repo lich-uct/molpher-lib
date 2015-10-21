@@ -5,24 +5,24 @@
 
 #include "chem/morphing/Morphing.hpp"
 
-#include "PutativeExtendOper.hpp"
+#include "GenerateMorphsOper.hpp"
 
-PutativeExtendOper::PutativeExtendOper(ExplorationTree& expTree) : TreeOperation(expTree) {
+GenerateMoprhsOper::GenerateMoprhsOper(ExplorationTree& expTree) : TreeOperation(expTree) {
     // no action
 }
 
-void PutativeExtendOper::CollectMorphs::MorphCollector(MolpherMolecule *morph, void *functor) {
-    PutativeExtendOper::CollectMorphs *collect =
-            (PutativeExtendOper::CollectMorphs *) functor;
+void GenerateMoprhsOper::CollectMorphs::MorphCollector(MolpherMolecule *morph, void *functor) {
+    GenerateMoprhsOper::CollectMorphs *collect =
+            (GenerateMoprhsOper::CollectMorphs *) functor;
     (*collect)(*morph);
 }
 
-PutativeExtendOper::CollectMorphs::CollectMorphs(ExplorationTree::MoleculeVector &morphs) :
+GenerateMoprhsOper::CollectMorphs::CollectMorphs(ExplorationTree::MoleculeVector &morphs) :
 mMorphs(morphs) {
     mCollectAttemptCount = 0;
 }
 
-void PutativeExtendOper::CollectMorphs::operator()(const MolpherMolecule &morph) {
+void GenerateMoprhsOper::CollectMorphs::operator()(const MolpherMolecule &morph) {
     ++mCollectAttemptCount; // atomic
     ExplorationTree::SmileSet::const_accessor dummy;
     if (mDuplicateChecker.insert(dummy, morph.smile)) {
@@ -32,13 +32,13 @@ void PutativeExtendOper::CollectMorphs::operator()(const MolpherMolecule &morph)
     }
 }
 
-unsigned int PutativeExtendOper::CollectMorphs::WithdrawCollectAttemptCount() {
+unsigned int GenerateMoprhsOper::CollectMorphs::WithdrawCollectAttemptCount() {
     unsigned int ret = mCollectAttemptCount;
     mCollectAttemptCount = 0;
     return ret;
 }
 
-void PutativeExtendOper::operator()() {
+void GenerateMoprhsOper::operator()() {
     tbb::task_group_context tbbCtx;
     tbb::task_scheduler_init scheduler;
     if (threadCnt > 0) {
@@ -71,7 +71,7 @@ void PutativeExtendOper::operator()() {
                 context.decoys,
                 tbbCtx,
                 &collectMorphs,
-                PutativeExtendOper::CollectMorphs::MorphCollector);
+                GenerateMoprhsOper::CollectMorphs::MorphCollector);
         PathFinderContext::MorphDerivationMap::accessor ac;
 
         if (context.morphDerivations.find(ac, candidate.smile)) {

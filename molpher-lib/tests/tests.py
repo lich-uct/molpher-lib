@@ -1,6 +1,6 @@
 
 import unittest
-from molpher import *
+from molpher import MolpherMol, ExplorationParameters, ExplorationTreeSnapshot, ExplorationTree
 
 class TestMolpherAPI(unittest.TestCase):
     
@@ -45,7 +45,7 @@ class TestMolpherAPI(unittest.TestCase):
         tree.setThreadCount(2)
         leaves = tree.fetchLeaves()
         self.assertEqual(len(leaves),1)
-        tree.putativeExtend()
+        tree.generateMorphs()
         morphs = tree.getCandidateMorphs()
         self.assertEqual(len(leaves),1)
         for morph in morphs:
