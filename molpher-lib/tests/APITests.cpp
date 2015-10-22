@@ -13,6 +13,7 @@
 #include "../include/molpher_API/MolpherMol.hpp"
 #include "../include/molpher_API/ExplorationTreeSnapshot.hpp"
 #include "../include/molpher_API/ExplorationTree.hpp"
+#include "molpher_API/operations/FilterMorphsOper.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(APITests);
 
@@ -95,7 +96,7 @@ void APITests::testExploration() {
         previous = &molpher_molecule;
     }
     
-    tree.filterMorphs();
+    tree.filterMorphs(FilterMoprhsOper::MorphFilters::COUNT | FilterMoprhsOper::MorphFilters::PROBABILITY | FilterMoprhsOper::MorphFilters::WEIGHT);
     std::vector<bool> mask = tree.getCandidateMorphsMask();
     CPPUNIT_ASSERT_EQUAL(mask.size(), morphs.size());
 }

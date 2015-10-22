@@ -11,15 +11,13 @@
 #include "TreeOperation.hpp"
 
 class FilterMoprhsOper : public TreeOperation {
-
 private:
     int filters;
-    
-    class FilterMorphs
-    {
+
+    class FilterMorphs {
     public:
         FilterMorphs(PathFinderContext &ctx, size_t globalMorphCount,
-            ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors, int filters);
+                ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors, int filters);
         void operator()(const tbb::blocked_range<size_t> &r) const;
 
     private:
@@ -29,17 +27,15 @@ private:
         std::vector<bool> &mSurvivors;
         int mFilters;
     };
-    
+
 public:
 
-    struct MorphFilters {
-        enum : int {
-            PROBABILITY = 1 << 0,
-            WEIGHT = 1 << 1,
-            SYNTHESIS = 1 << 2,
-            COUNT = 1 << 3,
-            ALL = PROBABILITY | WEIGHT | SYNTHESIS | COUNT
-        };
+    enum MorphFilters : int {
+        PROBABILITY = 1 << 0,
+        WEIGHT = 1 << 1,
+        SYNTHESIS = 1 << 2,
+        COUNT = 1 << 3,
+        ALL = PROBABILITY | WEIGHT | SYNTHESIS | COUNT
     };
 
     FilterMoprhsOper(ExplorationTree& expTree);

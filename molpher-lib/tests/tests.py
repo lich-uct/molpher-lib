@@ -1,6 +1,6 @@
 
 import unittest
-from molpher import MolpherMol, ExplorationParameters, ExplorationTreeSnapshot, ExplorationTree
+from molpher import *
 
 class TestMolpherAPI(unittest.TestCase):
     
@@ -61,8 +61,13 @@ class TestMolpherAPI(unittest.TestCase):
                 self.assertTrue(morph.getDistToTarget() >= previous.getDistToTarget())
             previous = morph
             
-        tree.filterMorphs();
-        mask = tree.getCandidateMorphsMask();
+        tree.filterMorphs(FilterMoprhsOper.COUNT | FilterMoprhsOper.WEIGHT | FilterMoprhsOper.PROBABILITY)
+        mask = tree.getCandidateMorphsMask()
+        print(mask)
+        print("accepted: " + str(sum(mask)))
+        tree.filterMorphs(FilterMoprhsOper.ALL)
+        mask = tree.getCandidateMorphsMask()
+        print("accepted: " + str(sum(mask)))
         self.assertEqual(len(mask), len(morphs))
 
 if __name__ == '__main__':
