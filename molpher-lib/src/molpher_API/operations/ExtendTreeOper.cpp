@@ -246,7 +246,7 @@ void ExtendTreeOper::operator()() {
 
     PathFinderContext& context = fetchTreeContext();
     ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
-    ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
+    ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask(); // TODO: can be empty if no filters were run -> fill automatically with true
     
     
     ExplorationTree::SmileSet modifiedParents;
