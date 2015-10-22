@@ -7,6 +7,7 @@
 #include "molpher_API/operations/GenerateMorphsOper.hpp"
 #include "molpher_API/operations/SortMorphsOper.hpp"
 #include "molpher_API/operations/FilterMorphsOper.hpp"
+#include "molpher_API/operations/ExtendTreeOper.hpp"
 
 ExplorationTree::ExplorationTree(IterationSnapshot& snp) : threadCount(0) {
     PathFinderContext::SnapshotToContext(snp, context);
@@ -92,8 +93,7 @@ void ExplorationTree::filterMorphs(int filters) {
 }
 
 void ExplorationTree::extend() {
-    generateMorphs();
-    // TODO implement the rest
+    ExtendTreeOper(*this)();
 }
 
 

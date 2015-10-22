@@ -14,6 +14,7 @@
 #include "../../include/molpher_API/operations/GenerateMorphsOper.hpp"
 #include "../../include/molpher_API/operations/SortMorphsOper.hpp"
 #include "../../include/molpher_API/operations/FilterMorphsOper.hpp"
+#include "../../include/molpher_API/operations/ExtendTreeOper.hpp"
 %}
 
 %init %{
@@ -29,6 +30,7 @@
 %include "../../include/molpher_API/operations/GenerateMorphsOper.hpp"
 %include "../../include/molpher_API/operations/SortMorphsOper.hpp"
 %include "../../include/molpher_API/operations/FilterMorphsOper.hpp"
+%include "../../include/molpher_API/operations/ExtendTreeOper.hpp"
 
 // MoplherMolecule wrapper
 %ignore MolpherMol::MolpherMol(const MolpherMolecule& mol);

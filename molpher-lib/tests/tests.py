@@ -69,6 +69,8 @@ class TestMolpherAPI(unittest.TestCase):
         mask = tree.getCandidateMorphsMask()
         print("accepted: " + str(sum(mask)))
         self.assertEqual(len(mask), len(morphs))
+        
+        tree.extend()
 
 if __name__ == '__main__':
     unittest.main()

@@ -99,5 +99,7 @@ void APITests::testExploration() {
     tree.filterMorphs(FilterMoprhsOper::MorphFilters::COUNT | FilterMoprhsOper::MorphFilters::PROBABILITY | FilterMoprhsOper::MorphFilters::WEIGHT);
     std::vector<bool> mask = tree.getCandidateMorphsMask();
     CPPUNIT_ASSERT_EQUAL(mask.size(), morphs.size());
+    
+    tree.extend(); // TODO: test in python and validate that the morphs have really been added to the tree successfully
 }
 
