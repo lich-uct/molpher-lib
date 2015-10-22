@@ -14,6 +14,11 @@ ExplorationTree::MoleculeVector& TreeOperation::fetchGeneratedMorphs() {
     return tree.candidateMoprhs;
 }
 
+ExplorationTree::BoolVector& TreeOperation::fetchGeneratedMorphsMask() {
+    return tree.candidateMorphsMask;
+}
+
+
 void TreeOperation::fetchLeaves(ExplorationTree::MoleculeVector& leaves) {
     tree.fetchLeaves(leaves);
 }

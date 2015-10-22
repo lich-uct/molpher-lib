@@ -7,6 +7,8 @@
 
 #include "APITests.hpp"
 
+#include "extensions/SAScore.h"
+
 #include "../include/molpher_API/ExplorationParameters.hpp"
 #include "../include/molpher_API/MolpherMol.hpp"
 #include "../include/molpher_API/ExplorationTreeSnapshot.hpp"
@@ -61,6 +63,8 @@ void APITests::testExplorationTreeClass() {
 }
 
 void APITests::testExploration() {
+    SAScore::loadData();
+    
     // test morphing methods
     ExplorationTreeSnapshot etreeSnap = ExplorationTreeSnapshot::load(test_files_path + "test-template.xml");
     ExplorationTree tree = ExplorationTree::createFromSnapshot(etreeSnap);
@@ -90,5 +94,9 @@ void APITests::testExploration() {
         
         previous = &molpher_molecule;
     }
+    
+    tree.filterMorphs();
+    std::vector<bool> mask = tree.getCandidateMorphsMask();
+    CPPUNIT_ASSERT_EQUAL(mask.size(), morphs.size());
 }
 

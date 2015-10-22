@@ -19,15 +19,10 @@ protected:
     
     PathFinderContext& fetchTreeContext();
     ExplorationTree::MoleculeVector& fetchGeneratedMorphs();
+    ExplorationTree::BoolVector& fetchGeneratedMorphsMask();
     void fetchLeaves(ExplorationTree::MoleculeVector&);
     
 public:
-    enum MorphFilter {
-        PROBABILITY,
-        WEIGHT,
-        SYNTHESIS
-    };
-    
     TreeOperation(ExplorationTree& expTree);
     virtual void operator()() = 0;
 };

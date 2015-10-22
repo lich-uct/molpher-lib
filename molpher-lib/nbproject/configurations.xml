@@ -6,6 +6,7 @@
                    projectFiles="true">
       <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
         <logicalFolder name="operations" displayName="operations" projectFiles="true">
+          <itemPath>include/molpher_API/operations/FilterMorphsOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/FindLeavesOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/GenerateMorphsOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/SortMorphsOper.hpp</itemPath>
@@ -30,6 +31,7 @@
                    projectFiles="true">
       <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
         <logicalFolder name="operations" displayName="operations" projectFiles="true">
+          <itemPath>src/molpher_API/operations/FilterMorphsOper.cpp</itemPath>
           <itemPath>src/molpher_API/operations/FindLeavesOper.cpp</itemPath>
           <itemPath>src/molpher_API/operations/GenerateMorphsOper.cpp</itemPath>
           <itemPath>src/molpher_API/operations/SortMorphsOper.cpp</itemPath>
@@ -206,6 +208,11 @@
       </item>
       <item path="include/molpher_API/MolpherMol.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/molpher_API/operations/FilterMorphsOper.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="include/molpher_API/operations/FindLeavesOper.hpp"
             ex="false"
             tool="3"
@@ -249,6 +256,11 @@
             flavor2="0">
       </item>
       <item path="src/molpher_API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/molpher_API/operations/FilterMorphsOper.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
       </item>
       <item path="src/molpher_API/operations/FindLeavesOper.cpp"
             ex="false"

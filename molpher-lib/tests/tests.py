@@ -60,6 +60,10 @@ class TestMolpherAPI(unittest.TestCase):
             if previous:
                 self.assertTrue(morph.getDistToTarget() >= previous.getDistToTarget())
             previous = morph
+            
+        tree.filterMorphs();
+        mask = tree.getCandidateMorphsMask();
+        self.assertEqual(len(mask), len(morphs))
 
 if __name__ == '__main__':
     unittest.main()

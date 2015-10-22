@@ -7,10 +7,13 @@
 #include "../../include/molpher_API/MolpherMol.hpp"
 #include "../../include/molpher_API/ExplorationParameters.hpp"
 #include "../../include/molpher_API/ExplorationTreeSnapshot.hpp"
-    #include "../../include/molpher_API/ExplorationTree.hpp"
+#include "../../include/molpher_API/ExplorationTree.hpp"
+#include "extensions/SAScore.h"
 %}
 
-
+%init %{
+    SAScore::loadData();
+%}
 
 // complete morphing function
 %include "../../include/morphing_functions.hpp"
@@ -29,5 +32,6 @@
         
 // ExplorationTree wrapper
 %template(MolpherMolVector) std::vector<MolpherMol>;
+%template(BoolVector) std::vector<bool>;
 %ignore ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret);
 %include "../../include/molpher_API/ExplorationTree.hpp"

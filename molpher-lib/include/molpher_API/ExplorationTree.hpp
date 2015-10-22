@@ -45,12 +45,15 @@ public:
     std::vector<MolpherMol> fetchLeaves();
     void generateMorphs();
     void sortMorphs();
+    void filterMorphs();
+    void filterMorphs(int filters);
     void extend();
     
     void setThreadCount(int threadCnt);
     int getThreadCount();
     MolpherMol fetchMol(const std::string& canonSMILES);
     std::vector<MolpherMol> getCandidateMorphs();
+    std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version
 
 };
 

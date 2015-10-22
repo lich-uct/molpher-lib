@@ -6,6 +6,7 @@
 #include "molpher_API/operations/FindLeavesOper.hpp"
 #include "molpher_API/operations/GenerateMorphsOper.hpp"
 #include "molpher_API/operations/SortMorphsOper.hpp"
+#include "molpher_API/operations/FilterMorphsOper.hpp"
 
 ExplorationTree::ExplorationTree(IterationSnapshot& snp) : threadCount(0) {
     PathFinderContext::SnapshotToContext(snp, context);
@@ -82,6 +83,13 @@ void ExplorationTree::sortMorphs() {
     SortMoprhsOper(*this)();
 }
 
+void ExplorationTree::filterMorphs() {
+    FilterMoprhsOper(*this)();
+}
+
+void ExplorationTree::filterMorphs(int filters) {
+    FilterMoprhsOper(*this, filters)();
+}
 
 void ExplorationTree::extend() {
     generateMorphs();
@@ -110,3 +118,12 @@ std::vector<MolpherMol> ExplorationTree::getCandidateMorphs() {
     }
     return ret;
 }
+
+std::vector<bool> ExplorationTree::getCandidateMorphsMask() {
+    std::vector<bool> ret;
+    for (auto status : candidateMorphsMask) {
+        ret.push_back(status);
+    }
+    return ret;
+}
+
