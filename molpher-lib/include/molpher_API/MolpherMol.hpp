@@ -24,6 +24,7 @@ public:
     
     std::string getSMILES();
     double getDistToTarget();
+    std::string getParentSMILES();
     // TODO create more getters for the members of mol
 };
 

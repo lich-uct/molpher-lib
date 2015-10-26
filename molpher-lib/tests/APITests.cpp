@@ -100,6 +100,6 @@ void APITests::testExploration() {
     std::vector<bool> mask = tree.getCandidateMorphsMask();
     CPPUNIT_ASSERT_EQUAL(mask.size(), morphs.size());
     
-    tree.extend(); // TODO: test in python and validate that the morphs have really been added to the tree successfully
+    tree.extend(); // TODO: validate that the morphs have really been added to the tree successfully
 }
 

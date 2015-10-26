@@ -127,3 +127,13 @@ std::vector<bool> ExplorationTree::getCandidateMorphsMask() {
     return ret;
 }
 
+void ExplorationTree::setCandidateMorphsMask(std::vector<bool> new_mask) {
+    if (new_mask.size() != candidateMorphsMask.size()) {
+        throw std::runtime_error("The new mask is not the same length as the old one.");
+    }
+    for (decltype(candidateMorphsMask.size()) idx = 0; idx != candidateMorphsMask.size(); idx++) {
+        candidateMorphsMask[idx] = new_mask[idx];
+    }
+}
+
+

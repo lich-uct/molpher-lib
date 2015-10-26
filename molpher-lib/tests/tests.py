@@ -44,15 +44,24 @@ class TestMolpherAPI(unittest.TestCase):
         tree = ExplorationTree.createFromSnapshot(etreeSnap)
         tree.setThreadCount(2)
         
+        # find leaves
         leaves = tree.fetchLeaves()
         self.assertEqual(len(leaves),1)
+        self.assertEqual('', leaves[0].getParentSMILES())
         
+        # generate morphs
         tree.generateMorphs()
         morphs = tree.getCandidateMorphs()
         self.assertEqual(len(leaves),1)
         for morph in morphs:
             self.assertTrue(morph.getSMILES())
+        mask = tree.getCandidateMorphsMask()
+        tree.setCandidateMorphsMask(mask)
+        self.assertRaises(RuntimeError, lambda: tree.setCandidateMorphsMask([False]))
+        self.assertEqual(len(mask), len(morphs))
+        print("morphs generated: " + str(len(morphs)))
             
+        # sort morphs
         tree.sortMorphs()
         morphs = tree.getCandidateMorphs()
         previous = None
@@ -61,16 +70,24 @@ class TestMolpherAPI(unittest.TestCase):
                 self.assertTrue(morph.getDistToTarget() >= previous.getDistToTarget())
             previous = morph
             
+        # filter morphs
         tree.filterMorphs(FilterMoprhsOper.COUNT | FilterMoprhsOper.WEIGHT | FilterMoprhsOper.PROBABILITY)
         mask = tree.getCandidateMorphsMask()
+        print("count - weight - probability filter survivors: " + str(sum(mask)))
         print(mask)
-        print("accepted: " + str(sum(mask)))
         tree.filterMorphs(FilterMoprhsOper.ALL)
         mask = tree.getCandidateMorphsMask()
-        print("accepted: " + str(sum(mask)))
+        print("all filter survivors: " + str(sum(mask)))
+        print(mask)
         self.assertEqual(len(mask), len(morphs))
         
+        # extend the tree with the accepted morphs (true in the survivors mask)
         tree.extend()
+        new_leaves = tree.fetchLeaves()
+        self.assertEqual(sum(mask), len(new_leaves))
+        for leaf in new_leaves:
+            parent_smi = leaf.getParentSMILES()
+            self.assertEqual(parent_smi, leaves[0].getSMILES())
 
 if __name__ == '__main__':
     unittest.main()

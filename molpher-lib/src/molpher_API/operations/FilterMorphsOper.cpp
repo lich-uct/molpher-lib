@@ -129,6 +129,7 @@ void FilterMoprhsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                     alreadyTriedByParent || tooManyProducedMorphs);
             mSurvivors[idx] = !isDead;
         } else {
+            mSurvivors[idx] = false;
             std::stringstream ss;
                         ss << "probability filtered: " << mMorphs[idx].smile;
                         SynchCout(ss.str());
@@ -147,7 +148,7 @@ void FilterMoprhsOper::operator()() {
     ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
     PathFinderContext& context = fetchTreeContext();
     ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
-    survivors.resize(morphs.size(), false);
+    assert(morphs.size() == survivors.size());
     FilterMorphs filterMorphs(context, morphs.size(), morphs, survivors, filters);
     tbb::parallel_for(
             tbb::blocked_range<size_t>(0, morphs.size()),

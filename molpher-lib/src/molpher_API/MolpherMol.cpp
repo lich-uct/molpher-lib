@@ -26,3 +26,8 @@ std::string MolpherMol::getSMILES() {
 double MolpherMol::getDistToTarget() {
     return mol.distToTarget;
 }
+
+std::string MolpherMol::getParentSMILES() {
+    return mol.parentSmile;
+}
+

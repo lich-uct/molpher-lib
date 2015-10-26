@@ -82,4 +82,6 @@ void GenerateMoprhsOper::operator()() {
         }
     }
     morphs.shrink_to_fit();
+    ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
+    survivors.resize(morphs.size(), true);
 }

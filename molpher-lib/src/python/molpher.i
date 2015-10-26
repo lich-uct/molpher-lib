@@ -47,5 +47,6 @@
 // ExplorationTree wrapper
 %template(MolpherMolVector) std::vector<MolpherMol>;
 %template(BoolVector) std::vector<bool>;
+%catches(std::runtime_error) ExplorationTree::setCandidateMorphsMask(std::vector<bool>);
 %ignore ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret);
-%include "../../include/molpher_API/ExplorationTree.hpp"
+%include "../../include/molpher_API/ExplorationTree.hpp";
