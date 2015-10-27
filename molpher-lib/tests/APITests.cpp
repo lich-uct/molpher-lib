@@ -43,23 +43,23 @@ void APITests::testExplorationParametersClass() {
 }
 
 void APITests::testExplorationTreeSnapshotClass() {
-    ExplorationTreeSnapshot etreeSnap = ExplorationTreeSnapshot::load(test_files_path + "test-template.xml");
-    etreeSnap.save(test_files_path + "snappitty_snap.snp");
+    ExplorationTreeSnapshot* etreeSnap = ExplorationTreeSnapshot::load(test_files_path + "test-template.xml");
+    etreeSnap->save(test_files_path + "snappitty_snap.snp");
 }
 
 void APITests::testExplorationTreeClass() {
     ExplorationParameters params;
     params.setSourceMol("CCO");
     ExplorationTree param_tree(params);
-    ExplorationTreeSnapshot snap = param_tree.createSnapshot();
+    ExplorationTreeSnapshot* snap = param_tree.createSnapshot();
     
     std::string smiles("OCCO");
     ExplorationTree smile_tree(smiles);
     snap = smile_tree.createSnapshot();
-    snap.save(test_files_path + "snappy_snap.snp");
-    snap = snap.load(test_files_path + "snappy_snap.snp");
-    ExplorationTree etree = ExplorationTree::createFromSnapshot(snap);
-    MolpherMol mol = etree.fetchMol(smiles);
+    snap->save(test_files_path + "snappy_snap.snp");
+    snap = snap->load(test_files_path + "snappy_snap.snp");
+    ExplorationTree* etree = ExplorationTree::createFromSnapshot(*snap);
+    MolpherMol mol = etree->fetchMol(smiles);
     CPPUNIT_ASSERT_EQUAL(smiles, mol.getSMILES());
 }
 
@@ -67,8 +67,9 @@ void APITests::testExploration() {
     SAScore::loadData();
     
     // test morphing methods
-    ExplorationTreeSnapshot etreeSnap = ExplorationTreeSnapshot::load(test_files_path + "test-template.xml");
-    ExplorationTree tree = ExplorationTree::createFromSnapshot(etreeSnap);
+    ExplorationTreeSnapshot* etreeSnap = ExplorationTreeSnapshot::load(test_files_path + "test-template.xml");
+    ExplorationTree* treept = ExplorationTree::createFromSnapshot(*etreeSnap);
+    ExplorationTree& tree = *treept;
     tree.setThreadCount(2);
     
     std::vector<MolpherMol> leaves;

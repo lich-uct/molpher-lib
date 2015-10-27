@@ -35,19 +35,19 @@ private:
     void fetchLeaves(ExplorationTree::MoleculeVector&);
     
 public:
-    static ExplorationTree createFromSnapshot(ExplorationTreeSnapshot& snapshot);
+    static ExplorationTree* createFromSnapshot(ExplorationTreeSnapshot& snapshot);
     
     ExplorationTree(const std::string& sourceMolAsSMILES);
     ExplorationTree(ExplorationParameters& params);
     
     void setParams(ExplorationParameters& params);
-    ExplorationTreeSnapshot createSnapshot() const;
+    ExplorationTreeSnapshot* createSnapshot() const;
     
     void runOperation(TreeOperation& operation);
     
     void fetchLeaves(std::vector<MolpherMol>&);
-    std::vector<MolpherMol> fetchLeaves();
-    MolpherMol fetchMol(const std::string& canonSMILES);
+    std::vector<MolpherMol>* fetchLeaves();
+    MolpherMol fetchMol(const std::string& canonSMILES); // TODO: return a pointer
     void generateMorphs();
     void sortMorphs();
     void filterMorphs();
@@ -56,9 +56,9 @@ public:
     
     void setThreadCount(int threadCnt);
     int getThreadCount();
-    std::vector<MolpherMol> getCandidateMorphs();
-    std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version
-    void setCandidateMorphsMask(std::vector<bool>); // TODO add a bitset version
+    std::vector<MolpherMol> getCandidateMorphs(); // TODO: return a pointer
+    std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version, return a pointer 
+    void setCandidateMorphsMask(std::vector<bool>); // TODO add a bitset version, take a reference
 
 };
 

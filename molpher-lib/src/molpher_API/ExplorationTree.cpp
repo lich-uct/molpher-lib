@@ -44,10 +44,10 @@ void ExplorationTree::setParams(ExplorationParameters& params) {
     }
 }
 
-ExplorationTreeSnapshot ExplorationTree::createSnapshot() const {
+ExplorationTreeSnapshot* ExplorationTree::createSnapshot() const {
     IterationSnapshot snp;
     PathFinderContext::ContextToSnapshot(context, snp);
-    return ExplorationTreeSnapshot(snp);
+    return new ExplorationTreeSnapshot(snp);
 }
 
 void ExplorationTree::runOperation(TreeOperation& operation) {
@@ -55,8 +55,8 @@ void ExplorationTree::runOperation(TreeOperation& operation) {
     operation();
 }
 
-ExplorationTree ExplorationTree::createFromSnapshot(ExplorationTreeSnapshot& snapshot) {
-    return ExplorationTree(snapshot.iterSnapshot);
+ExplorationTree* ExplorationTree::createFromSnapshot(ExplorationTreeSnapshot& snapshot) {
+    return new ExplorationTree(snapshot.iterSnapshot);
 }
 
 void ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret) {
@@ -67,9 +67,9 @@ void ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret) {
     }
 }
 
-std::vector<MolpherMol> ExplorationTree::fetchLeaves() {
-    std::vector<MolpherMol> ret;
-    fetchLeaves(ret);
+std::vector<MolpherMol>* ExplorationTree::fetchLeaves() {
+    std::vector<MolpherMol>* ret = new std::vector<MolpherMol>();
+    fetchLeaves(*ret);
     return ret;
 }
 

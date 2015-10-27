@@ -24,7 +24,7 @@ public:
     bool valid();
     
     void setSourceMol(const std::string& mol);
-    MolpherMol getSourceMol() const;
+    MolpherMol getSourceMol() const; // TODO return a pointer
     // TODO more getters and setters for the parameters
     
 };

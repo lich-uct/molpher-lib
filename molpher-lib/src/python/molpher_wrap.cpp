@@ -3938,7 +3938,6 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include "../../include/molpher_API/ExplorationTree.hpp"
 #include "extensions/SAScore.h"
 #include "../../include/molpher_API/operations/TreeOperation.hpp"
-//#include "../../include/molpher_API/operations/BaseTreeOperation.hpp"
 #include "../../include/molpher_API/operations/FindLeavesOper.hpp"
 #include "../../include/molpher_API/operations/GenerateMorphsOper.hpp"
 #include "../../include/molpher_API/operations/SortMorphsOper.hpp"
@@ -7385,7 +7384,7 @@ SWIGINTERN PyObject *_wrap_ExplorationTreeSnapshot_load(PyObject *SWIGUNUSEDPARM
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
-  SwigValueWrapper< ExplorationTreeSnapshot > result;
+  ExplorationTreeSnapshot *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTreeSnapshot_load",&obj0)) SWIG_fail;
   {
@@ -7399,8 +7398,8 @@ SWIGINTERN PyObject *_wrap_ExplorationTreeSnapshot_load(PyObject *SWIGUNUSEDPARM
     }
     arg1 = ptr;
   }
-  result = ExplorationTreeSnapshot::load((std::string const &)*arg1);
-  resultobj = SWIG_NewPointerObj((new ExplorationTreeSnapshot(static_cast< const ExplorationTreeSnapshot& >(result))), SWIGTYPE_p_ExplorationTreeSnapshot, SWIG_POINTER_OWN |  0 );
+  result = (ExplorationTreeSnapshot *)ExplorationTreeSnapshot::load((std::string const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTreeSnapshot, SWIG_POINTER_OWN |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
@@ -11292,7 +11291,7 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_createFromSnapshot(PyObject *SWIGUNUS
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  SwigValueWrapper< ExplorationTree > result;
+  ExplorationTree *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_createFromSnapshot",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_ExplorationTreeSnapshot,  0 );
@@ -11303,8 +11302,8 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_createFromSnapshot(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_createFromSnapshot" "', argument " "1"" of type '" "ExplorationTreeSnapshot &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTreeSnapshot * >(argp1);
-  result = ExplorationTree::createFromSnapshot(*arg1);
-  resultobj = SWIG_NewPointerObj((new ExplorationTree(static_cast< const ExplorationTree& >(result))), SWIGTYPE_p_ExplorationTree, SWIG_POINTER_OWN |  0 );
+  result = (ExplorationTree *)ExplorationTree::createFromSnapshot(*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTree, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -11443,7 +11442,7 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_createSnapshot(PyObject *SWIGUNUSEDPA
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  SwigValueWrapper< ExplorationTreeSnapshot > result;
+  ExplorationTreeSnapshot *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_createSnapshot",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
@@ -11451,8 +11450,8 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_createSnapshot(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_createSnapshot" "', argument " "1"" of type '" "ExplorationTree const *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = ((ExplorationTree const *)arg1)->createSnapshot();
-  resultobj = SWIG_NewPointerObj((new ExplorationTreeSnapshot(static_cast< const ExplorationTreeSnapshot& >(result))), SWIGTYPE_p_ExplorationTreeSnapshot, SWIG_POINTER_OWN |  0 );
+  result = (ExplorationTreeSnapshot *)((ExplorationTree const *)arg1)->createSnapshot();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTreeSnapshot, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -11498,7 +11497,7 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_fetchLeaves(PyObject *SWIGUNUSEDPARM(
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::vector< MolpherMol,std::allocator< MolpherMol > > result;
+  std::vector< MolpherMol,std::allocator< MolpherMol > > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_fetchLeaves",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
@@ -11506,8 +11505,8 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_fetchLeaves(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_fetchLeaves" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (arg1)->fetchLeaves();
-  resultobj = swig::from(static_cast< std::vector<MolpherMol,std::allocator< MolpherMol > > >(result));
+  result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *)(arg1)->fetchLeaves();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;

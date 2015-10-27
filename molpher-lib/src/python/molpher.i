@@ -43,11 +43,15 @@
 %include "../../include/molpher_API/ExplorationParameters.hpp"
         
 // ExplorationTreeSnapshot wrapper
+%newobject ExplorationTreeSnapshot::load(const std::string& filename);
 %include "../../include/molpher_API/ExplorationTreeSnapshot.hpp"
         
 // ExplorationTree wrapper
 %template(MolpherMolVector) std::vector<MolpherMol>;
 %template(BoolVector) std::vector<bool>;
+%newobject ExplorationTree::createSnapshot();
+%newobject ExplorationTree::createFromSnapshot(ExplorationTreeSnapshot& snapshot);
+%newobject ExplorationTree::fetchLeaves();
 %catches(std::runtime_error) ExplorationTree::setCandidateMorphsMask(std::vector<bool>);
 %ignore ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret);
 %include "../../include/molpher_API/ExplorationTree.hpp";

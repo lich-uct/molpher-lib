@@ -16,10 +16,10 @@ class ExplorationTreeSnapshot {
 
 private:
     IterationSnapshot iterSnapshot;
-    ExplorationTreeSnapshot(IterationSnapshot iterSnapshot);
+    ExplorationTreeSnapshot(IterationSnapshot& iterSnapshot);
     
 public:
-    static ExplorationTreeSnapshot load(const std::string& filename);
+    static ExplorationTreeSnapshot* load(const std::string& filename);
     void save(const std::string& filename);
 };
 
