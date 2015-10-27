@@ -11,11 +11,13 @@
 #include "molpher_API/ExplorationTree.hpp"
 #include <string>
 
+class ExplorationTree;
+
 class TreeOperation {
 
 protected:
-    ExplorationTree& tree;
-    const int threadCnt;
+    ExplorationTree* tree;
+    int threadCnt;
     
     PathFinderContext& fetchTreeContext();
     ExplorationTree::MoleculeVector& fetchGeneratedMorphs();
@@ -24,7 +26,12 @@ protected:
     
 public:
     TreeOperation(ExplorationTree& expTree);
+    TreeOperation();
+    virtual ~TreeOperation();
     virtual void operator()() = 0;
+    
+    ExplorationTree* getTree();
+    void setTree(ExplorationTree&);
 };
 
 #endif	/* TREEOPERATION_HPP */

@@ -9,6 +9,7 @@
  * ----------------------------------------------------------------------------- */
 
 #define SWIGPYTHON
+#define SWIG_DIRECTORS
 #define SWIG_PYTHON_DIRECTOR_NO_VTABLE
 
 
@@ -2967,6 +2968,450 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 
   #define SWIG_exception(code, msg) do { SWIG_Error(code, msg); SWIG_fail;; } while(0) 
 
+/* -----------------------------------------------------------------------------
+ * director_common.swg
+ *
+ * This file contains support for director classes which is common between
+ * languages.
+ * ----------------------------------------------------------------------------- */
+
+/*
+  Use -DSWIG_DIRECTOR_STATIC if you prefer to avoid the use of the
+  'Swig' namespace. This could be useful for multi-modules projects.
+*/
+#ifdef SWIG_DIRECTOR_STATIC
+/* Force anonymous (static) namespace */
+#define Swig
+#endif
+/* -----------------------------------------------------------------------------
+ * director.swg
+ *
+ * This file contains support for director classes so that Python proxy
+ * methods can be called from C++.
+ * ----------------------------------------------------------------------------- */
+
+#ifndef SWIG_DIRECTOR_PYTHON_HEADER_
+#define SWIG_DIRECTOR_PYTHON_HEADER_
+
+#include <string>
+#include <iostream>
+#include <exception>
+#include <vector>
+#include <map>
+
+
+/*
+  Use -DSWIG_PYTHON_DIRECTOR_NO_VTABLE if you don't want to generate a 'virtual
+  table', and avoid multiple GetAttr calls to retrieve the python
+  methods.
+*/
+
+#ifndef SWIG_PYTHON_DIRECTOR_NO_VTABLE
+#ifndef SWIG_PYTHON_DIRECTOR_VTABLE
+#define SWIG_PYTHON_DIRECTOR_VTABLE
+#endif
+#endif
+
+
+
+/*
+  Use -DSWIG_DIRECTOR_NO_UEH if you prefer to avoid the use of the
+  Undefined Exception Handler provided by swig.
+*/
+#ifndef SWIG_DIRECTOR_NO_UEH
+#ifndef SWIG_DIRECTOR_UEH
+#define SWIG_DIRECTOR_UEH
+#endif
+#endif
+
+
+/*
+  Use -DSWIG_DIRECTOR_NORTTI if you prefer to avoid the use of the
+  native C++ RTTI and dynamic_cast<>. But be aware that directors
+  could stop working when using this option.
+*/
+#ifdef SWIG_DIRECTOR_NORTTI
+/*
+   When we don't use the native C++ RTTI, we implement a minimal one
+   only for Directors.
+*/
+# ifndef SWIG_DIRECTOR_RTDIR
+# define SWIG_DIRECTOR_RTDIR
+
+namespace Swig {
+  class Director;
+  SWIGINTERN std::map<void *, Director *>& get_rtdir_map() {
+    static std::map<void *, Director *> rtdir_map;
+    return rtdir_map;
+  }
+
+  SWIGINTERNINLINE void set_rtdir(void *vptr, Director *rtdir) {
+    get_rtdir_map()[vptr] = rtdir;
+  }
+
+  SWIGINTERNINLINE Director *get_rtdir(void *vptr) {
+    std::map<void *, Director *>::const_iterator pos = get_rtdir_map().find(vptr);
+    Director *rtdir = (pos != get_rtdir_map().end()) ? pos->second : 0;
+    return rtdir;
+  }
+}
+# endif /* SWIG_DIRECTOR_RTDIR */
+
+# define SWIG_DIRECTOR_CAST(ARG) Swig::get_rtdir(static_cast<void *>(ARG))
+# define SWIG_DIRECTOR_RGTR(ARG1, ARG2) Swig::set_rtdir(static_cast<void *>(ARG1), ARG2)
+
+#else
+
+# define SWIG_DIRECTOR_CAST(ARG) dynamic_cast<Swig::Director *>(ARG)
+# define SWIG_DIRECTOR_RGTR(ARG1, ARG2)
+
+#endif /* SWIG_DIRECTOR_NORTTI */
+
+extern "C" {
+  struct swig_type_info;
+}
+
+namespace Swig {
+
+  /* memory handler */
+  struct GCItem {
+    virtual ~GCItem() {}
+
+    virtual int get_own() const {
+      return 0;
+    }
+  };
+
+  struct GCItem_var {
+    GCItem_var(GCItem *item = 0) : _item(item) {
+    }
+
+    GCItem_var& operator=(GCItem *item) {
+      GCItem *tmp = _item;
+      _item = item;
+      delete tmp;
+      return *this;
+    }
+
+    ~GCItem_var() {
+      delete _item;
+    }
+
+    GCItem * operator->() const {
+      return _item;
+    }
+
+  private:
+    GCItem *_item;
+  };
+
+  struct GCItem_Object : GCItem {
+    GCItem_Object(int own) : _own(own) {
+    }
+
+    virtual ~GCItem_Object() {
+    }
+
+    int get_own() const {
+      return _own;
+    }
+
+  private:
+    int _own;
+  };
+
+  template <typename Type>
+  struct GCItem_T : GCItem {
+    GCItem_T(Type *ptr) : _ptr(ptr) {
+    }
+
+    virtual ~GCItem_T() {
+      delete _ptr;
+    }
+
+  private:
+    Type *_ptr;
+  };
+
+  template <typename Type>
+  struct GCArray_T : GCItem {
+    GCArray_T(Type *ptr) : _ptr(ptr) {
+    }
+
+    virtual ~GCArray_T() {
+      delete[] _ptr;
+    }
+
+  private:
+    Type *_ptr;
+  };
+
+  /* base class for director exceptions */
+  class DirectorException : public std::exception {
+  protected:
+    std::string swig_msg;
+  public:
+    DirectorException(PyObject *error, const char *hdr ="", const char *msg ="") : swig_msg(hdr) {
+      SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+      if (msg[0]) {
+        swig_msg += " ";
+        swig_msg += msg;
+      }
+      if (!PyErr_Occurred()) {
+        PyErr_SetString(error, what());
+      }
+      SWIG_PYTHON_THREAD_END_BLOCK;
+    }
+
+    virtual ~DirectorException() throw() {
+    }
+
+    /* Deprecated, use what() instead */
+    const char *getMessage() const {
+      return what();
+    }
+
+    const char *what() const throw() {
+      return swig_msg.c_str();
+    }
+
+    static void raise(PyObject *error, const char *msg) {
+      throw DirectorException(error, msg);
+    }
+
+    static void raise(const char *msg) {
+      raise(PyExc_RuntimeError, msg);
+    }
+  };
+
+  /* unknown exception handler  */
+  class UnknownExceptionHandler {
+#ifdef SWIG_DIRECTOR_UEH
+    static void handler() {
+      try {
+        throw;
+      } catch (DirectorException& e) {
+        std::cerr << "SWIG Director exception caught:" << std::endl
+                  << e.what() << std::endl;
+      } catch (std::exception& e) {
+        std::cerr << "std::exception caught: "<< e.what() << std::endl;
+      } catch (...) {
+        std::cerr << "Unknown exception caught." << std::endl;
+      }
+
+      std::cerr << std::endl
+                << "Python interpreter traceback:" << std::endl;
+      PyErr_Print();
+      std::cerr << std::endl;
+
+      std::cerr << "This exception was caught by the SWIG unexpected exception handler." << std::endl
+                << "Try using %feature(\"director:except\") to avoid reaching this point." << std::endl
+                << std::endl
+                << "Exception is being re-thrown, program will likely abort/terminate." << std::endl;
+      throw;
+    }
+
+  public:
+
+    std::unexpected_handler old;
+    UnknownExceptionHandler(std::unexpected_handler nh = handler) {
+      old = std::set_unexpected(nh);
+    }
+
+    ~UnknownExceptionHandler() {
+      std::set_unexpected(old);
+    }
+#endif
+  };
+
+  /* type mismatch in the return value from a python method call */
+  class DirectorTypeMismatchException : public DirectorException {
+  public:
+    DirectorTypeMismatchException(PyObject *error, const char *msg="")
+      : DirectorException(error, "SWIG director type mismatch", msg) {
+    }
+
+    DirectorTypeMismatchException(const char *msg="")
+      : DirectorException(PyExc_TypeError, "SWIG director type mismatch", msg) {
+    }
+
+    static void raise(PyObject *error, const char *msg) {
+      throw DirectorTypeMismatchException(error, msg);
+    }
+
+    static void raise(const char *msg) {
+      throw DirectorTypeMismatchException(msg);
+    }
+  };
+
+  /* any python exception that occurs during a director method call */
+  class DirectorMethodException : public DirectorException {
+  public:
+    DirectorMethodException(const char *msg = "")
+      : DirectorException(PyExc_RuntimeError, "SWIG director method error.", msg) {
+    }
+
+    static void raise(const char *msg) {
+      throw DirectorMethodException(msg);
+    }
+  };
+
+  /* attempt to call a pure virtual method via a director method */
+  class DirectorPureVirtualException : public DirectorException {
+  public:
+    DirectorPureVirtualException(const char *msg = "")
+      : DirectorException(PyExc_RuntimeError, "SWIG director pure virtual method called", msg) {
+    }
+
+    static void raise(const char *msg) {
+      throw DirectorPureVirtualException(msg);
+    }
+  };
+
+
+#if defined(SWIG_PYTHON_THREADS)
+/*  __THREAD__ is the old macro to activate some thread support */
+# if !defined(__THREAD__)
+#   define __THREAD__ 1
+# endif
+#endif
+
+#ifdef __THREAD__
+# include "pythread.h"
+  class Guard {
+    PyThread_type_lock &mutex_;
+
+  public:
+    Guard(PyThread_type_lock & mutex) : mutex_(mutex) {
+      PyThread_acquire_lock(mutex_, WAIT_LOCK);
+    }
+
+    ~Guard() {
+      PyThread_release_lock(mutex_);
+    }
+  };
+# define SWIG_GUARD(mutex) Guard _guard(mutex)
+#else
+# define SWIG_GUARD(mutex)
+#endif
+
+  /* director base class */
+  class Director {
+  private:
+    /* pointer to the wrapped python object */
+    PyObject *swig_self;
+    /* flag indicating whether the object is owned by python or c++ */
+    mutable bool swig_disown_flag;
+
+    /* decrement the reference count of the wrapped python object */
+    void swig_decref() const {
+      if (swig_disown_flag) {
+        SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+        Py_DECREF(swig_self);
+        SWIG_PYTHON_THREAD_END_BLOCK;
+      }
+    }
+
+  public:
+    /* wrap a python object. */
+    Director(PyObject *self) : swig_self(self), swig_disown_flag(false) {
+    }
+
+    /* discard our reference at destruction */
+    virtual ~Director() {
+      swig_decref();
+    }
+
+    /* return a pointer to the wrapped python object */
+    PyObject *swig_get_self() const {
+      return swig_self;
+    }
+
+    /* acquire ownership of the wrapped python object (the sense of "disown" is from python) */
+    void swig_disown() const {
+      if (!swig_disown_flag) {
+        swig_disown_flag=true;
+        swig_incref();
+      }
+    }
+
+    /* increase the reference count of the wrapped python object */
+    void swig_incref() const {
+      if (swig_disown_flag) {
+        Py_INCREF(swig_self);
+      }
+    }
+
+    /* methods to implement pseudo protected director members */
+    virtual bool swig_get_inner(const char * /* swig_protected_method_name */) const {
+      return true;
+    }
+
+    virtual void swig_set_inner(const char * /* swig_protected_method_name */, bool /* swig_val */) const {
+    }
+
+  /* ownership management */
+  private:
+    typedef std::map<void *, GCItem_var> swig_ownership_map;
+    mutable swig_ownership_map swig_owner;
+#ifdef __THREAD__
+    static PyThread_type_lock swig_mutex_own;
+#endif
+
+  public:
+    template <typename Type>
+    void swig_acquire_ownership_array(Type *vptr) const {
+      if (vptr) {
+        SWIG_GUARD(swig_mutex_own);
+        swig_owner[vptr] = new GCArray_T<Type>(vptr);
+      }
+    }
+
+    template <typename Type>
+    void swig_acquire_ownership(Type *vptr) const {
+      if (vptr) {
+        SWIG_GUARD(swig_mutex_own);
+        swig_owner[vptr] = new GCItem_T<Type>(vptr);
+      }
+    }
+
+    void swig_acquire_ownership_obj(void *vptr, int own) const {
+      if (vptr && own) {
+        SWIG_GUARD(swig_mutex_own);
+        swig_owner[vptr] = new GCItem_Object(own);
+      }
+    }
+
+    int swig_release_ownership(void *vptr) const {
+      int own = 0;
+      if (vptr) {
+        SWIG_GUARD(swig_mutex_own);
+        swig_ownership_map::iterator iter = swig_owner.find(vptr);
+        if (iter != swig_owner.end()) {
+          own = iter->second->get_own();
+          swig_owner.erase(iter);
+        }
+      }
+      return own;
+    }
+
+    template <typename Type>
+    static PyObject *swig_pyobj_disown(PyObject *pyobj, PyObject *SWIGUNUSEDPARM(args)) {
+      SwigPyObject *sobj = (SwigPyObject *)pyobj;
+      sobj->own = 0;
+      Director *d = SWIG_DIRECTOR_CAST(reinterpret_cast<Type *>(sobj->ptr));
+      if (d)
+        d->swig_disown();
+      return PyWeakref_NewProxy(pyobj, NULL);
+    }
+  };
+
+#ifdef __THREAD__
+  PyThread_type_lock Director::swig_mutex_own = PyThread_allocate_lock();
+#endif
+}
+
+#endif
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
@@ -3493,6 +3938,7 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include "../../include/molpher_API/ExplorationTree.hpp"
 #include "extensions/SAScore.h"
 #include "../../include/molpher_API/operations/TreeOperation.hpp"
+//#include "../../include/molpher_API/operations/BaseTreeOperation.hpp"
 #include "../../include/molpher_API/operations/FindLeavesOper.hpp"
 #include "../../include/molpher_API/operations/GenerateMorphsOper.hpp"
 #include "../../include/molpher_API/operations/SortMorphsOper.hpp"
@@ -5047,6 +5493,52 @@ SWIGINTERN std::vector< bool >::iterator std_vector_Sl_bool_Sg__erase__SWIG_0(st
 SWIGINTERN std::vector< bool >::iterator std_vector_Sl_bool_Sg__erase__SWIG_1(std::vector< bool > *self,std::vector< bool >::iterator first,std::vector< bool >::iterator last){ return self->erase(first, last); }
 SWIGINTERN std::vector< bool >::iterator std_vector_Sl_bool_Sg__insert__SWIG_0(std::vector< bool > *self,std::vector< bool >::iterator pos,std::vector< bool >::value_type x){ return self->insert(pos, x); }
 SWIGINTERN void std_vector_Sl_bool_Sg__insert__SWIG_1(std::vector< bool > *self,std::vector< bool >::iterator pos,std::vector< bool >::size_type n,std::vector< bool >::value_type x){ self->insert(pos, n, x); }
+
+
+/* ---------------------------------------------------
+ * C++ director class methods
+ * --------------------------------------------------- */
+
+#include "molpher_wrap.h"
+
+SwigDirector_TreeOperation::SwigDirector_TreeOperation(PyObject *self, ExplorationTree &expTree): TreeOperation(expTree), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((TreeOperation *)this, this); 
+}
+
+
+
+
+SwigDirector_TreeOperation::SwigDirector_TreeOperation(PyObject *self): TreeOperation(), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((TreeOperation *)this, this); 
+}
+
+
+
+
+SwigDirector_TreeOperation::~SwigDirector_TreeOperation() {
+}
+
+void SwigDirector_TreeOperation::operator ()() {
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call TreeOperation.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 0;
+  const char * const swig_method_name = "__call__";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunction(method, NULL, NULL);
+#else
+  swig::SwigVar_PyObject result = PyObject_CallMethod(swig_get_self(), (char *) "__call__", NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    if (error) {
+      Swig::DirectorMethodException::raise("Error detected when calling 'TreeOperation.__call__'");
+    }
+  }
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -5953,24 +6445,102 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_TreeOperation___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_TreeOperation__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  TreeOperation *arg1 = (TreeOperation *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
+  PyObject *arg1 = (PyObject *) 0 ;
+  ExplorationTree *arg2 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
   PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  TreeOperation *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:TreeOperation___call__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TreeOperation, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TreeOperation___call__" "', argument " "1"" of type '" "TreeOperation *""'"); 
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_TreeOperation",&obj0,&obj1)) SWIG_fail;
+  arg1 = obj0;
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_ExplorationTree,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_TreeOperation" "', argument " "2"" of type '" "ExplorationTree &""'"); 
   }
-  arg1 = reinterpret_cast< TreeOperation * >(argp1);
-  (arg1)->operator ()();
-  resultobj = SWIG_Py_Void();
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TreeOperation" "', argument " "2"" of type '" "ExplorationTree &""'"); 
+  }
+  arg2 = reinterpret_cast< ExplorationTree * >(argp2);
+  if ( arg1 != Py_None ) {
+    /* subclassed */
+    result = (TreeOperation *)new SwigDirector_TreeOperation(arg1,*arg2); 
+  } else {
+    SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+    SWIG_fail;
+  }
+  
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TreeOperation, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TreeOperation__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  PyObject * obj0 = 0 ;
+  TreeOperation *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_TreeOperation",&obj0)) SWIG_fail;
+  arg1 = obj0;
+  if ( arg1 != Py_None ) {
+    /* subclassed */
+    result = (TreeOperation *)new SwigDirector_TreeOperation(arg1); 
+  } else {
+    SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+    SWIG_fail;
+  }
+  
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TreeOperation, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TreeOperation(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    _v = (argv[0] != 0);
+    if (_v) {
+      return _wrap_new_TreeOperation__SWIG_1(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    _v = (argv[0] != 0);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_ExplorationTree, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_new_TreeOperation__SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_TreeOperation'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    TreeOperation::TreeOperation(ExplorationTree &)\n"
+    "    TreeOperation::TreeOperation(PyObject *)\n");
+  return 0;
 }
 
 
@@ -5988,6 +6558,119 @@ SWIGINTERN PyObject *_wrap_delete_TreeOperation(PyObject *SWIGUNUSEDPARM(self), 
   }
   arg1 = reinterpret_cast< TreeOperation * >(argp1);
   delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TreeOperation___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TreeOperation *arg1 = (TreeOperation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TreeOperation___call__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TreeOperation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TreeOperation___call__" "', argument " "1"" of type '" "TreeOperation *""'"); 
+  }
+  arg1 = reinterpret_cast< TreeOperation * >(argp1);
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==obj0));
+  try {
+    if (upcall) {
+      Swig::DirectorPureVirtualException::raise("TreeOperation::operator ()");
+    } else {
+      (arg1)->operator ()();
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TreeOperation_getTree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TreeOperation *arg1 = (TreeOperation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  ExplorationTree *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TreeOperation_getTree",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TreeOperation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TreeOperation_getTree" "', argument " "1"" of type '" "TreeOperation *""'"); 
+  }
+  arg1 = reinterpret_cast< TreeOperation * >(argp1);
+  result = (ExplorationTree *)(arg1)->getTree();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTree, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TreeOperation_setTree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TreeOperation *arg1 = (TreeOperation *) 0 ;
+  ExplorationTree *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:TreeOperation_setTree",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TreeOperation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TreeOperation_setTree" "', argument " "1"" of type '" "TreeOperation *""'"); 
+  }
+  arg1 = reinterpret_cast< TreeOperation * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_ExplorationTree,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TreeOperation_setTree" "', argument " "2"" of type '" "ExplorationTree &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TreeOperation_setTree" "', argument " "2"" of type '" "ExplorationTree &""'"); 
+  }
+  arg2 = reinterpret_cast< ExplorationTree * >(argp2);
+  (arg1)->setTree(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_disown_TreeOperation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TreeOperation *arg1 = (TreeOperation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:disown_TreeOperation",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TreeOperation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "disown_TreeOperation" "', argument " "1"" of type '" "TreeOperation *""'"); 
+  }
+  arg1 = reinterpret_cast< TreeOperation * >(argp1);
+  {
+    Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
+    if (director) director->swig_disown();
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -10776,6 +11459,39 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ExplorationTree_runOperation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  TreeOperation *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationTree_runOperation",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_runOperation" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_TreeOperation,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExplorationTree_runOperation" "', argument " "2"" of type '" "TreeOperation &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_runOperation" "', argument " "2"" of type '" "TreeOperation &""'"); 
+  }
+  arg2 = reinterpret_cast< TreeOperation * >(argp2);
+  (arg1)->runOperation(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ExplorationTree_fetchLeaves(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = (ExplorationTree *) 0 ;
@@ -11179,8 +11895,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"run_path_finder", _wrap_run_path_finder, METH_VARARGS, NULL},
-	 { (char *)"TreeOperation___call__", _wrap_TreeOperation___call__, METH_VARARGS, NULL},
+	 { (char *)"new_TreeOperation", _wrap_new_TreeOperation, METH_VARARGS, NULL},
 	 { (char *)"delete_TreeOperation", _wrap_delete_TreeOperation, METH_VARARGS, NULL},
+	 { (char *)"TreeOperation___call__", _wrap_TreeOperation___call__, METH_VARARGS, NULL},
+	 { (char *)"TreeOperation_getTree", _wrap_TreeOperation_getTree, METH_VARARGS, NULL},
+	 { (char *)"TreeOperation_setTree", _wrap_TreeOperation_setTree, METH_VARARGS, NULL},
+	 { (char *)"disown_TreeOperation", _wrap_disown_TreeOperation, METH_VARARGS, NULL},
 	 { (char *)"TreeOperation_swigregister", TreeOperation_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_FindLeavesOper", _wrap_new_FindLeavesOper, METH_VARARGS, NULL},
 	 { (char *)"FindLeavesOper___call__", _wrap_FindLeavesOper___call__, METH_VARARGS, NULL},
@@ -11290,6 +12010,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_ExplorationTree", _wrap_new_ExplorationTree, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_setParams", _wrap_ExplorationTree_setParams, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_createSnapshot", _wrap_ExplorationTree_createSnapshot, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_runOperation", _wrap_ExplorationTree_runOperation, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_fetchLeaves", _wrap_ExplorationTree_fetchLeaves, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_fetchMol", _wrap_ExplorationTree_fetchMol, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_generateMorphs", _wrap_ExplorationTree_generateMorphs, METH_VARARGS, NULL},

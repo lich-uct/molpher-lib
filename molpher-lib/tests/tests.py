@@ -88,6 +88,28 @@ class TestMolpherAPI(unittest.TestCase):
         for leaf in new_leaves:
             parent_smi = leaf.getParentSMILES()
             self.assertEqual(parent_smi, leaves[0].getSMILES())
+            
+    def testTreeOperCallback(self):
+        class MyTreeOper(TreeOperation):
+            
+            def __init__(self):
+                super(MyTreeOper, self).__init__()
+                self.new_morphs = None
+            
+            def __call__(self):
+                tree = self.getTree()
+                tree.generateMorphs()
+                self.new_morphs = [ x.getSMILES() for x in tree.getCandidateMorphs()]
+                
+        tree = ExplorationTree("CCO")
+        oper = MyTreeOper()
+        self.assertEqual(oper.new_morphs, None)
+        tree.runOperation(oper)
+        new_morphs = oper.new_morphs
+        tree_morphs = [ x.getSMILES() for x in tree.getCandidateMorphs()]
+        print(new_morphs)
+        print(tree_morphs)
+        self.assertEqual(tree_morphs, new_morphs)
 
 if __name__ == '__main__':
     unittest.main()

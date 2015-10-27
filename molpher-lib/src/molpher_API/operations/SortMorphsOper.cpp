@@ -62,9 +62,9 @@ bool SortMoprhsOper::CompareMorphs::operator()(
 
 void SortMoprhsOper::operator()() {
     tbb::task_scheduler_init scheduler;
-    if (tree.getThreadCount() > 0) {
+    if (threadCnt > 0) {
         scheduler.terminate();
-        scheduler.initialize(tree.getThreadCount());
+        scheduler.initialize(threadCnt);
     }
     
     ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();

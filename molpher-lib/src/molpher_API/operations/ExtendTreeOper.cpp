@@ -239,9 +239,9 @@ void ExtendTreeOper::acceptMorphs(ExplorationTree::MoleculeVector &morphs,
 void ExtendTreeOper::operator()() {
     tbb::task_group_context tbbCtx;
     tbb::task_scheduler_init scheduler;
-    if (tree.getThreadCount() > 0) {
+    if (threadCnt > 0) {
         scheduler.terminate();
-        scheduler.initialize(tree.getThreadCount());
+        scheduler.initialize(threadCnt);
     }
 
     PathFinderContext& context = fetchTreeContext();

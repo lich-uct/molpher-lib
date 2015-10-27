@@ -13,6 +13,8 @@
 #include "ExplorationParameters.hpp"
 #include "MolpherMol.hpp"
 
+class TreeOperation; // forward declaration to resolve circular dependency
+
 class ExplorationTree {
     
     friend class TreeOperation;
@@ -40,6 +42,8 @@ public:
     
     void setParams(ExplorationParameters& params);
     ExplorationTreeSnapshot createSnapshot() const;
+    
+    void runOperation(TreeOperation& operation);
     
     void fetchLeaves(std::vector<MolpherMol>&);
     std::vector<MolpherMol> fetchLeaves();

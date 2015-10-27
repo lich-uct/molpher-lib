@@ -1,4 +1,5 @@
-%module molpher
+%module(directors="1") molpher
+%feature("director") TreeOperation;
 %include "stl.i"
 
 %{

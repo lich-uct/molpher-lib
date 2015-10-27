@@ -140,9 +140,9 @@ void FilterMoprhsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
 void FilterMoprhsOper::operator()() {
     tbb::task_group_context tbbCtx;
     tbb::task_scheduler_init scheduler;
-    if (tree.getThreadCount() > 0) {
+    if (threadCnt > 0) {
         scheduler.terminate();
-        scheduler.initialize(tree.getThreadCount());
+        scheduler.initialize(threadCnt);
     }
 
     ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();

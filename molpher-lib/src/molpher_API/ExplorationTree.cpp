@@ -50,6 +50,11 @@ ExplorationTreeSnapshot ExplorationTree::createSnapshot() const {
     return ExplorationTreeSnapshot(snp);
 }
 
+void ExplorationTree::runOperation(TreeOperation& operation) {
+    operation.setTree(*this);
+    operation();
+}
+
 ExplorationTree ExplorationTree::createFromSnapshot(ExplorationTreeSnapshot& snapshot) {
     return ExplorationTree(snapshot.iterSnapshot);
 }
