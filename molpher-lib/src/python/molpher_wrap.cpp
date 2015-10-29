@@ -7292,7 +7292,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_ExplorationParameters_setSourceMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_ExplorationParameters_setSourceMol__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationParameters *arg1 = (ExplorationParameters *) 0 ;
   std::string *arg2 = 0 ;
@@ -7329,13 +7329,95 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ExplorationParameters_setSourceMol__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationParameters *arg1 = (ExplorationParameters *) 0 ;
+  MolpherMol *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationParameters_setSourceMol",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationParameters, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_setSourceMol" "', argument " "1"" of type '" "ExplorationParameters *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_MolpherMol,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExplorationParameters_setSourceMol" "', argument " "2"" of type '" "MolpherMol &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationParameters_setSourceMol" "', argument " "2"" of type '" "MolpherMol &""'"); 
+  }
+  arg2 = reinterpret_cast< MolpherMol * >(argp2);
+  (arg1)->setSourceMol(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationParameters_setSourceMol(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationParameters, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_MolpherMol, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_ExplorationParameters_setSourceMol__SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationParameters, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_ExplorationParameters_setSourceMol__SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'ExplorationParameters_setSourceMol'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    ExplorationParameters::setSourceMol(std::string const &)\n"
+    "    ExplorationParameters::setSourceMol(MolpherMol &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_ExplorationParameters_getSourceMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationParameters *arg1 = (ExplorationParameters *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  MolpherMol result;
+  MolpherMol *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ExplorationParameters_getSourceMol",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationParameters, 0 |  0 );
@@ -7343,8 +7425,8 @@ SWIGINTERN PyObject *_wrap_ExplorationParameters_getSourceMol(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_getSourceMol" "', argument " "1"" of type '" "ExplorationParameters const *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
-  result = ((ExplorationParameters const *)arg1)->getSourceMol();
-  resultobj = SWIG_NewPointerObj((new MolpherMol(static_cast< const MolpherMol& >(result))), SWIGTYPE_p_MolpherMol, SWIG_POINTER_OWN |  0 );
+  result = (MolpherMol *)((ExplorationParameters const *)arg1)->getSourceMol();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7398,7 +7480,13 @@ SWIGINTERN PyObject *_wrap_ExplorationTreeSnapshot_load(PyObject *SWIGUNUSEDPARM
     }
     arg1 = ptr;
   }
-  result = (ExplorationTreeSnapshot *)ExplorationTreeSnapshot::load((std::string const &)*arg1);
+  try {
+    result = (ExplorationTreeSnapshot *)ExplorationTreeSnapshot::load((std::string const &)*arg1);
+  }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTreeSnapshot, SWIG_POINTER_OWN |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -11522,7 +11610,7 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_fetchMol(PyObject *SWIGUNUSEDPARM(sel
   int res2 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  MolpherMol result;
+  MolpherMol *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationTree_fetchMol",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
@@ -11541,8 +11629,8 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_fetchMol(PyObject *SWIGUNUSEDPARM(sel
     }
     arg2 = ptr;
   }
-  result = (arg1)->fetchMol((std::string const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new MolpherMol(static_cast< const MolpherMol& >(result))), SWIGTYPE_p_MolpherMol, SWIG_POINTER_OWN |  0 );
+  result = (MolpherMol *)(arg1)->fetchMol((std::string const &)*arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, SWIG_POINTER_OWN |  0 );
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
@@ -11769,7 +11857,7 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getCandidateMorphs(PyObject *SWIGUNUS
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::vector< MolpherMol,std::allocator< MolpherMol > > result;
+  std::vector< MolpherMol,std::allocator< MolpherMol > > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_getCandidateMorphs",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
@@ -11777,8 +11865,8 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getCandidateMorphs(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_getCandidateMorphs" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (arg1)->getCandidateMorphs();
-  resultobj = swig::from(static_cast< std::vector<MolpherMol,std::allocator< MolpherMol > > >(result));
+  result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *)(arg1)->getCandidateMorphs();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;

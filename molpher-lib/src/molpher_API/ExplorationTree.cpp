@@ -102,10 +102,10 @@ void ExplorationTree::extend() {
 }
 
 
-MolpherMol ExplorationTree::fetchMol(const std::string& canonSMILES) {
+MolpherMol* ExplorationTree::fetchMol(const std::string& canonSMILES) {
     PathFinderContext::CandidateMap::accessor ac;
     context.candidates.find(ac, canonSMILES);
-    return MolpherMol(ac->second);
+    return new MolpherMol(ac->second);
 }
 
 void ExplorationTree::setThreadCount(int threadCnt) {
@@ -116,10 +116,10 @@ int ExplorationTree::getThreadCount() {
     return threadCount;
 }
 
-std::vector<MolpherMol> ExplorationTree::getCandidateMorphs() {
-    std::vector<MolpherMol> ret;
+std::vector<MolpherMol>* ExplorationTree::getCandidateMorphs() {
+    std::vector<MolpherMol>* ret = new std::vector<MolpherMol>();
     for (auto mol : candidateMoprhs) {
-        ret.push_back(MolpherMol(mol));
+        ret->push_back(MolpherMol(mol));
     }
     return ret;
 }

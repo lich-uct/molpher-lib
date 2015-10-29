@@ -9,7 +9,7 @@ ExplorationTreeSnapshot::ExplorationTreeSnapshot(IterationSnapshot& iterSnapshot
     if (iterSnapshot.IsValid()) {
         this->iterSnapshot = iterSnapshot;
     } else {
-        throw std::runtime_error("Supplied IterationSnapshot is invalid."); // TODO wrap this in SWIG
+        throw std::runtime_error("Supplied IterationSnapshot is invalid.");
     }
 }
 
@@ -18,7 +18,7 @@ ExplorationTreeSnapshot* ExplorationTreeSnapshot::load(const std::string& filena
     if (ReadSnapshotFromFile(filename, iterSnap) && iterSnap.IsValid()) {
         std::cout << "Snapshot successfully created from: " << filename << std::endl;
     } else {
-        throw std::runtime_error(std::string("Supplied IterationSnapshot is invalid. Tree snapshot cannot be opened:").append(filename)); // TODO wrap this in SWIG
+        throw std::runtime_error(std::string("Supplied IterationSnapshot is invalid. Tree snapshot cannot be opened:").append(filename));
     }
     return new ExplorationTreeSnapshot(iterSnap);
 }

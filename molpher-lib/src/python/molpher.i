@@ -44,6 +44,7 @@
         
 // ExplorationTreeSnapshot wrapper
 %newobject ExplorationTreeSnapshot::load(const std::string& filename);
+%catches(std::runtime_error) ExplorationTreeSnapshot::load(const std::string& filename);
 %include "../../include/molpher_API/ExplorationTreeSnapshot.hpp"
         
 // ExplorationTree wrapper
@@ -52,6 +53,8 @@
 %newobject ExplorationTree::createSnapshot();
 %newobject ExplorationTree::createFromSnapshot(ExplorationTreeSnapshot& snapshot);
 %newobject ExplorationTree::fetchLeaves();
+%newobject ExplorationTree::fetchMol(const std::string& canonSMILES);
+%newobject ExplorationTree::getCandidateMorphs();
 %catches(std::runtime_error) ExplorationTree::setCandidateMorphsMask(std::vector<bool>);
 %ignore ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret);
 %include "../../include/molpher_API/ExplorationTree.hpp";

@@ -47,7 +47,7 @@ public:
     
     void fetchLeaves(std::vector<MolpherMol>&);
     std::vector<MolpherMol>* fetchLeaves();
-    MolpherMol fetchMol(const std::string& canonSMILES); // TODO: return a pointer
+    MolpherMol* fetchMol(const std::string& canonSMILES);
     void generateMorphs();
     void sortMorphs();
     void filterMorphs();
@@ -56,7 +56,7 @@ public:
     
     void setThreadCount(int threadCnt);
     int getThreadCount();
-    std::vector<MolpherMol> getCandidateMorphs(); // TODO: return a pointer
+    std::vector<MolpherMol>* getCandidateMorphs();
     std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version, return a pointer 
     void setCandidateMorphsMask(std::vector<bool>); // TODO add a bitset version, take a reference
 

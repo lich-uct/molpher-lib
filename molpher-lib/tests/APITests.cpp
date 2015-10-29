@@ -59,8 +59,8 @@ void APITests::testExplorationTreeClass() {
     snap->save(test_files_path + "snappy_snap.snp");
     snap = snap->load(test_files_path + "snappy_snap.snp");
     ExplorationTree* etree = ExplorationTree::createFromSnapshot(*snap);
-    MolpherMol mol = etree->fetchMol(smiles);
-    CPPUNIT_ASSERT_EQUAL(smiles, mol.getSMILES());
+    MolpherMol* mol = etree->fetchMol(smiles);
+    CPPUNIT_ASSERT_EQUAL(smiles, mol->getSMILES());
 }
 
 void APITests::testExploration() {
@@ -77,7 +77,8 @@ void APITests::testExploration() {
     CPPUNIT_ASSERT(1 == leaves.size());
     
     tree.generateMorphs();
-    std::vector<MolpherMol> morphs = tree.getCandidateMorphs();
+    std::vector<MolpherMol>* morphsptr = tree.getCandidateMorphs();
+    std::vector<MolpherMol>& morphs = *morphsptr;
     CPPUNIT_ASSERT(1 == leaves.size());
     CPPUNIT_ASSERT(!morphs.empty());
     for (auto morph : morphs) {
@@ -85,7 +86,9 @@ void APITests::testExploration() {
     }
     
     tree.sortMorphs();
-    morphs = tree.getCandidateMorphs();
+    delete morphsptr;
+    morphsptr = tree.getCandidateMorphs();
+    morphs = *morphsptr;
     MolpherMolecule* previous = nullptr;
     for (auto morph : morphs) {
         MolpherMolecule& molpher_molecule = morph.getMol();
@@ -101,6 +104,6 @@ void APITests::testExploration() {
     std::vector<bool> mask = tree.getCandidateMorphsMask();
     CPPUNIT_ASSERT_EQUAL(mask.size(), morphs.size());
     
-    tree.extend(); // TODO: validate that the morphs have really been added to the tree successfully
+    tree.extend(); // TODO: validate that the morphs have really been added to the tree successfully (tested from Python for the time being)
 }
 

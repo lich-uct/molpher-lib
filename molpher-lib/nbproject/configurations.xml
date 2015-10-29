@@ -50,6 +50,7 @@
       <logicalFolder name="f3" displayName="python" projectFiles="true">
         <itemPath>src/python/molpher.i</itemPath>
         <itemPath>src/python/molpher_wrap.cpp</itemPath>
+        <itemPath>src/python/molpher_wrap.h</itemPath>
       </logicalFolder>
       <itemPath>src/morphing_functions.cpp</itemPath>
     </logicalFolder>
@@ -304,6 +305,8 @@
       <item path="src/python/molpher.i" ex="true" tool="3" flavor2="0">
       </item>
       <item path="src/python/molpher_wrap.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/python/molpher_wrap.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/APITests.cpp" ex="false" tool="1" flavor2="0">
       </item>
