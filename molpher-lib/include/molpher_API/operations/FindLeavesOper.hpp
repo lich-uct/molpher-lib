@@ -17,15 +17,15 @@ class FindLeavesOper : public TreeOperation {
         class FindLeaves
         {
         public:
-            FindLeaves(ExplorationTree::MoleculeVector &leaves);
+            FindLeaves(ExplorationTree::MoleculePointerVector &leaves);
             void operator()(
                 const PathFinderContext::CandidateMap::range_type &candidates) const;
 
         private:
-            ExplorationTree::MoleculeVector &mLeaves;
+            ExplorationTree::MoleculePointerVector &mLeaves;
         };
     
-        ExplorationTree::MoleculeVector leaves;
+        ExplorationTree::MoleculePointerVector leaves;
 
     public:
         FindLeavesOper(ExplorationTree& expTree);

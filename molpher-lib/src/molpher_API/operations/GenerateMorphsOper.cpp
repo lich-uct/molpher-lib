@@ -46,13 +46,13 @@ void GenerateMoprhsOper::operator()() {
         scheduler.initialize(threadCnt);
     }
     
-    ExplorationTree::MoleculeVector leaves;
+    ExplorationTree::MoleculePointerVector leaves;
     fetchLeaves(leaves);
     PathFinderContext& context = fetchTreeContext();
     ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
     morphs.clear();
     CollectMorphs collectMorphs(morphs);
-    for (auto it = leaves.begin(); it != leaves.end(); it++) {
+    for (auto it : leaves) {
         MolpherMolecule &candidate = (*it);
         unsigned int morphAttempts = context.params.cntMorphs;
         if (candidate.distToTarget < context.params.distToTargetDepthSwitch) {

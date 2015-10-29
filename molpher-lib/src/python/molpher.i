@@ -16,6 +16,7 @@
 #include "../../include/molpher_API/operations/SortMorphsOper.hpp"
 #include "../../include/molpher_API/operations/FilterMorphsOper.hpp"
 #include "../../include/molpher_API/operations/ExtendTreeOper.hpp"
+#include "../../include/molpher_API/operations/PruneTreeOper.hpp"
 %}
 
 %init %{
@@ -32,6 +33,7 @@
 %include "../../include/molpher_API/operations/SortMorphsOper.hpp"
 %include "../../include/molpher_API/operations/FilterMorphsOper.hpp"
 %include "../../include/molpher_API/operations/ExtendTreeOper.hpp"
+%include "../../include/molpher_API/operations/PruneTreeOper.hpp"
 
 // MoplherMolecule wrapper
 %ignore MolpherMol::MolpherMol(const MolpherMolecule& mol);
@@ -52,9 +54,10 @@
 %template(BoolVector) std::vector<bool>;
 %newobject ExplorationTree::createSnapshot();
 %newobject ExplorationTree::createFromSnapshot(ExplorationTreeSnapshot& snapshot);
-%newobject ExplorationTree::fetchLeaves();
+//%newobject ExplorationTree::fetchLeaves();
 %newobject ExplorationTree::fetchMol(const std::string& canonSMILES);
-%newobject ExplorationTree::getCandidateMorphs();
+//%newobject ExplorationTree::getCandidateMorphs();
 %catches(std::runtime_error) ExplorationTree::setCandidateMorphsMask(std::vector<bool>);
+%catches(std::runtime_error) ExplorationTree::fetchMol(const std::string& canonSMILES);
 %ignore ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret);
 %include "../../include/molpher_API/ExplorationTree.hpp";

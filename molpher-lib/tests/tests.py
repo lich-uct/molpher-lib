@@ -45,11 +45,15 @@ class TestMolpherAPI(unittest.TestCase):
         tree.setThreadCount(2)
         
         # find leaves
+        print("Searching for leaves...")
         leaves = tree.fetchLeaves()
         self.assertEqual(len(leaves),1)
         self.assertEqual('', leaves[0].getParentSMILES())
+        print(leaves)
+        print(leaves[0].getSMILES())
         
         # generate morphs
+        print("Generating morphs...")
         tree.generateMorphs()
         morphs = tree.getCandidateMorphs()
         self.assertEqual(len(leaves),1)
@@ -62,6 +66,7 @@ class TestMolpherAPI(unittest.TestCase):
         print("morphs generated: " + str(len(morphs)))
             
         # sort morphs
+        print("Sorting morphs...")
         tree.sortMorphs()
         morphs = tree.getCandidateMorphs()
         previous = None
@@ -71,6 +76,7 @@ class TestMolpherAPI(unittest.TestCase):
             previous = morph
             
         # filter morphs
+        print("Filtering morphs...")
         tree.filterMorphs(FilterMoprhsOper.COUNT | FilterMoprhsOper.WEIGHT | FilterMoprhsOper.PROBABILITY)
         mask = tree.getCandidateMorphsMask()
         print("count - weight - probability filter survivors: " + str(sum(mask)))
@@ -82,12 +88,19 @@ class TestMolpherAPI(unittest.TestCase):
         self.assertEqual(len(mask), len(morphs))
         
         # extend the tree with the accepted morphs (true in the survivors mask)
+        print("Extending tree...")
         tree.extend()
         new_leaves = tree.fetchLeaves()
         self.assertEqual(sum(mask), len(new_leaves))
         for leaf in new_leaves:
             parent_smi = leaf.getParentSMILES()
             self.assertEqual(parent_smi, leaves[0].getSMILES())
+            
+        self.assertEqual(len(tree.getCandidateMorphsMask()), 0)
+        self.assertEqual(len(tree.getCandidateMorphs()), 0)
+        
+        print("Pruning tree...")
+        tree.prune() # TODO: figure out how to test
             
     def testTreeOperCallback(self):
         class MyTreeOper(TreeOperation):

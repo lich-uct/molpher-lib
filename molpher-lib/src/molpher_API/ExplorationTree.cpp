@@ -8,6 +8,7 @@
 #include "molpher_API/operations/SortMorphsOper.hpp"
 #include "molpher_API/operations/FilterMorphsOper.hpp"
 #include "molpher_API/operations/ExtendTreeOper.hpp"
+#include "molpher_API/operations/PruneTreeOper.hpp"
 
 ExplorationTree::ExplorationTree(IterationSnapshot& snp) : threadCount(0) {
     PathFinderContext::SnapshotToContext(snp, context);
@@ -60,20 +61,20 @@ ExplorationTree* ExplorationTree::createFromSnapshot(ExplorationTreeSnapshot& sn
 }
 
 void ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret) {
-    ExplorationTree::MoleculeVector leaves;
+    ExplorationTree::MoleculePointerVector leaves;
     fetchLeaves(leaves);
-    for (MoleculeVector::iterator it = leaves.begin(); it != leaves.end(); it++) {
+    for (auto it: leaves) {
         ret.push_back(MolpherMol(*it));
     }
 }
 
-std::vector<MolpherMol>* ExplorationTree::fetchLeaves() {
-    std::vector<MolpherMol>* ret = new std::vector<MolpherMol>();
-    fetchLeaves(*ret);
+std::vector<MolpherMol> ExplorationTree::fetchLeaves() { // TODO: return a pointer
+    std::vector<MolpherMol> ret;
+    fetchLeaves(ret);
     return ret;
 }
 
-void ExplorationTree::fetchLeaves(ExplorationTree::MoleculeVector& leaves) {
+void ExplorationTree::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves) {
     FindLeavesOper op(*this);
     op();
     for (auto leaf : op.leaves) {
@@ -101,11 +102,25 @@ void ExplorationTree::extend() {
     ExtendTreeOper(*this)();
 }
 
+void ExplorationTree::prune() {
+    PruneTreeOper(*this)();
+}
+
 
 MolpherMol* ExplorationTree::fetchMol(const std::string& canonSMILES) {
+    if (hasMol(canonSMILES)) {
+        PathFinderContext::CandidateMap::accessor ac;
+        context.candidates.find(ac, canonSMILES);
+        return new MolpherMol(ac->second);
+    } else {
+        throw std::runtime_error("Molecule (" + canonSMILES + ") is not present in the tree.");
+    }
+}
+
+bool ExplorationTree::hasMol(const std::string& canonSMILES) {
     PathFinderContext::CandidateMap::accessor ac;
     context.candidates.find(ac, canonSMILES);
-    return new MolpherMol(ac->second);
+    return !ac.empty();
 }
 
 void ExplorationTree::setThreadCount(int threadCnt) {
@@ -116,10 +131,10 @@ int ExplorationTree::getThreadCount() {
     return threadCount;
 }
 
-std::vector<MolpherMol>* ExplorationTree::getCandidateMorphs() {
-    std::vector<MolpherMol>* ret = new std::vector<MolpherMol>();
-    for (auto mol : candidateMoprhs) {
-        ret->push_back(MolpherMol(mol));
+std::vector<MolpherMol> ExplorationTree::getCandidateMorphs() { // TODO: return a pointer
+    std::vector<MolpherMol> ret;
+    for (auto& mol : candidateMoprhs) {
+        ret.push_back(MolpherMol(mol));
     }
     return ret;
 }

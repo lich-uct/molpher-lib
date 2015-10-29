@@ -77,8 +77,7 @@ void APITests::testExploration() {
     CPPUNIT_ASSERT(1 == leaves.size());
     
     tree.generateMorphs();
-    std::vector<MolpherMol>* morphsptr = tree.getCandidateMorphs();
-    std::vector<MolpherMol>& morphs = *morphsptr;
+    std::vector<MolpherMol> morphs = tree.getCandidateMorphs();
     CPPUNIT_ASSERT(1 == leaves.size());
     CPPUNIT_ASSERT(!morphs.empty());
     for (auto morph : morphs) {
@@ -86,9 +85,7 @@ void APITests::testExploration() {
     }
     
     tree.sortMorphs();
-    delete morphsptr;
-    morphsptr = tree.getCandidateMorphs();
-    morphs = *morphsptr;
+    morphs = tree.getCandidateMorphs();
     MolpherMolecule* previous = nullptr;
     for (auto morph : morphs) {
         MolpherMolecule& molpher_molecule = morph.getMol();
@@ -105,5 +102,7 @@ void APITests::testExploration() {
     CPPUNIT_ASSERT_EQUAL(mask.size(), morphs.size());
     
     tree.extend(); // TODO: validate that the morphs have really been added to the tree successfully (tested from Python for the time being)
+    
+    tree.prune(); // TODO: figure out how to test
 }
 

@@ -10,9 +10,9 @@ TreeOperation::TreeOperation() : tree(nullptr), threadCnt(0) {
     // no action
 }
 
-void TreeOperation::operator()() {
-    // no action
-}
+//void TreeOperation::operator()() { // TODO: remove this
+//    // no action
+//}
 
 TreeOperation::~TreeOperation() {
     // no action
@@ -31,7 +31,7 @@ ExplorationTree::BoolVector& TreeOperation::fetchGeneratedMorphsMask() {
 }
 
 
-void TreeOperation::fetchLeaves(ExplorationTree::MoleculeVector& leaves) {
+void TreeOperation::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves) {
     tree->fetchLeaves(leaves);
 }
 

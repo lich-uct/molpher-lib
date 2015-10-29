@@ -5,12 +5,18 @@
                    displayName="Header Files"
                    projectFiles="true">
       <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
+        <logicalFolder name="callbacks" displayName="callbacks" projectFiles="true">
+          <itemPath>include/molpher_API/callbacks/EraseSubtreeCallback.hpp</itemPath>
+          <itemPath>include/molpher_API/callbacks/TraverseCallback.hpp</itemPath>
+        </logicalFolder>
         <logicalFolder name="operations" displayName="operations" projectFiles="true">
           <itemPath>include/molpher_API/operations/ExtendTreeOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/FilterMorphsOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/FindLeavesOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/GenerateMorphsOper.hpp</itemPath>
+          <itemPath>include/molpher_API/operations/PruneTreeOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/SortMorphsOper.hpp</itemPath>
+          <itemPath>include/molpher_API/operations/TraverseOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/TreeOperation.hpp</itemPath>
         </logicalFolder>
         <itemPath>include/molpher_API/ExplorationParameters.hpp</itemPath>
@@ -31,12 +37,18 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="molpher_API" displayName="molpher_API" projectFiles="true">
+        <logicalFolder name="callbacks" displayName="callbacks" projectFiles="true">
+          <itemPath>src/molpher_API/callbacks/EraseSubtreeCallback.cpp</itemPath>
+          <itemPath>src/molpher_API/callbacks/TraverseCallback.cpp</itemPath>
+        </logicalFolder>
         <logicalFolder name="operations" displayName="operations" projectFiles="true">
           <itemPath>src/molpher_API/operations/ExtendTreeOper.cpp</itemPath>
           <itemPath>src/molpher_API/operations/FilterMorphsOper.cpp</itemPath>
           <itemPath>src/molpher_API/operations/FindLeavesOper.cpp</itemPath>
           <itemPath>src/molpher_API/operations/GenerateMorphsOper.cpp</itemPath>
+          <itemPath>src/molpher_API/operations/PruneTreeOper.cpp</itemPath>
           <itemPath>src/molpher_API/operations/SortMorphsOper.cpp</itemPath>
+          <itemPath>src/molpher_API/operations/TraverseOper.cpp</itemPath>
           <itemPath>src/molpher_API/operations/TreeOperation.cpp</itemPath>
         </logicalFolder>
         <itemPath>src/molpher_API/ExplorationParameters.cpp</itemPath>
@@ -76,6 +88,8 @@
   <sourceRootList>
     <Elem>include/molpher_API/operations</Elem>
     <Elem>src/molpher_API/operations</Elem>
+    <Elem>include/molpher_API/callbacks</Elem>
+    <Elem>src/molpher_API/callbacks</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -211,6 +225,16 @@
       </item>
       <item path="include/molpher_API/MolpherMol.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/molpher_API/callbacks/EraseSubtreeCallback.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/molpher_API/callbacks/TraverseCallback.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="include/molpher_API/operations/ExtendTreeOper.hpp"
             ex="false"
             tool="3"
@@ -231,7 +255,17 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="include/molpher_API/operations/PruneTreeOper.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="include/molpher_API/operations/SortMorphsOper.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/molpher_API/operations/TraverseOper.hpp"
             ex="false"
             tool="3"
             flavor2="0">
@@ -265,6 +299,16 @@
       </item>
       <item path="src/molpher_API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/molpher_API/callbacks/EraseSubtreeCallback.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/molpher_API/callbacks/TraverseCallback.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
       <item path="src/molpher_API/operations/ExtendTreeOper.cpp"
             ex="false"
             tool="1"
@@ -285,7 +329,17 @@
             tool="1"
             flavor2="0">
       </item>
+      <item path="src/molpher_API/operations/PruneTreeOper.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
       <item path="src/molpher_API/operations/SortMorphsOper.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/molpher_API/operations/TraverseOper.cpp"
             ex="false"
             tool="1"
             flavor2="0">

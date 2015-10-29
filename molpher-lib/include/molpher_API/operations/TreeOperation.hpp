@@ -22,7 +22,7 @@ protected:
     PathFinderContext& fetchTreeContext();
     ExplorationTree::MoleculeVector& fetchGeneratedMorphs();
     ExplorationTree::BoolVector& fetchGeneratedMorphsMask();
-    void fetchLeaves(ExplorationTree::MoleculeVector&);
+    void fetchLeaves(ExplorationTree::MoleculePointerVector&);
     
 public:
     TreeOperation(ExplorationTree& expTree);

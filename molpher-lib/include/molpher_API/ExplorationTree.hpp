@@ -21,9 +21,10 @@ class ExplorationTree {
     
 public:
     typedef tbb::concurrent_vector<MolpherMolecule> MoleculeVector;
+    typedef tbb::concurrent_vector<MolpherMolecule*> MoleculePointerVector;
     typedef std::vector<bool> BoolVector;
     typedef tbb::concurrent_hash_map<std::string, bool /*dummy*/> SmileSet;
-//    typedef tbb::concurrent_vector<std::string> SmileVector;
+    typedef tbb::concurrent_vector<std::string> SmileVector;
     
 private:
     PathFinderContext context;
@@ -32,7 +33,7 @@ private:
     BoolVector candidateMorphsMask;
     ExplorationTree(IterationSnapshot& snp);
     void treeInit(IterationSnapshot& snp);
-    void fetchLeaves(ExplorationTree::MoleculeVector&);
+    void fetchLeaves(ExplorationTree::MoleculePointerVector&);
     
 public:
     static ExplorationTree* createFromSnapshot(ExplorationTreeSnapshot& snapshot);
@@ -46,17 +47,19 @@ public:
     void runOperation(TreeOperation& operation);
     
     void fetchLeaves(std::vector<MolpherMol>&);
-    std::vector<MolpherMol>* fetchLeaves();
+    std::vector<MolpherMol> fetchLeaves();
     MolpherMol* fetchMol(const std::string& canonSMILES);
+    bool hasMol(const std::string& canonSMILES);
     void generateMorphs();
     void sortMorphs();
     void filterMorphs();
     void filterMorphs(int filters);
     void extend();
+    void prune();
     
     void setThreadCount(int threadCnt);
     int getThreadCount();
-    std::vector<MolpherMol>* getCandidateMorphs();
+    std::vector<MolpherMol> getCandidateMorphs();
     std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version, return a pointer 
     void setCandidateMorphsMask(std::vector<bool>); // TODO add a bitset version, take a reference
 

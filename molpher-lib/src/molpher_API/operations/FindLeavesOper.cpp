@@ -5,7 +5,7 @@
 
 #include "molpher_API/operations/FindLeavesOper.hpp"
 
-FindLeavesOper::FindLeaves::FindLeaves(ExplorationTree::MoleculeVector &leaves) :
+FindLeavesOper::FindLeaves::FindLeaves(ExplorationTree::MoleculePointerVector &leaves) :
 mLeaves(leaves) {
 }
 
@@ -18,7 +18,7 @@ void FindLeavesOper::FindLeaves::operator()(
         }
         bool isLeaf = it->second.descendants.empty();
         if (isLeaf) {
-            mLeaves.push_back(it->second);
+            mLeaves.push_back(&(it->second));
         }
     }
 }
