@@ -47,7 +47,7 @@ public:
     void runOperation(TreeOperation& operation);
     
     void fetchLeaves(std::vector<MolpherMol>&);
-    std::vector<MolpherMol> fetchLeaves();
+    const std::vector<MolpherMol>& fetchLeaves();
     MolpherMol* fetchMol(const std::string& canonSMILES);
     bool hasMol(const std::string& canonSMILES);
     void generateMorphs();

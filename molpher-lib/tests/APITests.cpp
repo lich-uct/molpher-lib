@@ -87,13 +87,13 @@ void APITests::testExploration() {
     tree.sortMorphs();
     morphs = tree.getCandidateMorphs();
     MolpherMolecule* previous = nullptr;
-    for (auto morph : morphs) {
+    for (auto& morph : morphs) {
         MolpherMolecule& molpher_molecule = morph.getMol();
         CPPUNIT_ASSERT(molpher_molecule.IsValid());
         if (previous) {
             CPPUNIT_ASSERT(molpher_molecule.distToTarget >= previous->distToTarget);
         }
-        
+        std::cout << morph.getSMILES() << std::endl;
         previous = &molpher_molecule;
     }
     

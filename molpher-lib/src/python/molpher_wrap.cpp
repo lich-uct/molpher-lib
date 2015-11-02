@@ -11728,7 +11728,7 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_fetchLeaves(PyObject *SWIGUNUSEDPARM(
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::vector< MolpherMol,std::allocator< MolpherMol > > result;
+  std::vector< MolpherMol,std::allocator< MolpherMol > > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_fetchLeaves",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
@@ -11736,8 +11736,8 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_fetchLeaves(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_fetchLeaves" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (arg1)->fetchLeaves();
-  resultobj = swig::from(static_cast< std::vector<MolpherMol,std::allocator< MolpherMol > > >(result));
+  result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *) &(arg1)->fetchLeaves();
+  resultobj = swig::from(static_cast< std::vector<MolpherMol,std::allocator< MolpherMol > > >(*result));
   return resultobj;
 fail:
   return NULL;

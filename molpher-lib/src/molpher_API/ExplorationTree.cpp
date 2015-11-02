@@ -68,10 +68,10 @@ void ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret) {
     }
 }
 
-std::vector<MolpherMol> ExplorationTree::fetchLeaves() { // TODO: return a pointer
-    std::vector<MolpherMol> ret;
-    fetchLeaves(ret);
-    return ret;
+const std::vector<MolpherMol>& ExplorationTree::fetchLeaves() {
+    std::vector<MolpherMol>* ret = new std::vector<MolpherMol>();
+    fetchLeaves(*ret);
+    return *ret;
 }
 
 void ExplorationTree::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves) {
@@ -131,7 +131,7 @@ int ExplorationTree::getThreadCount() {
     return threadCount;
 }
 
-const std::vector<MolpherMol>& ExplorationTree::getCandidateMorphs() { // TODO: return a pointer
+const std::vector<MolpherMol>& ExplorationTree::getCandidateMorphs() {
     std::vector<MolpherMol>* ret = new std::vector<MolpherMol>();
     for (auto& mol : candidateMoprhs) {
         ret->push_back(MolpherMol(mol));

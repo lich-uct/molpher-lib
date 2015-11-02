@@ -10,10 +10,6 @@ TreeOperation::TreeOperation() : tree(nullptr), threadCnt(0) {
     // no action
 }
 
-//void TreeOperation::operator()() { // TODO: remove this
-//    // no action
-//}
-
 TreeOperation::~TreeOperation() {
     // no action
 }
