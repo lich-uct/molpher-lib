@@ -108,6 +108,6 @@ void APITests::testExploration() {
     TraverseOper traverse(tree, callback);
     traverse();
     
-    tree.prune(); // TODO: figure out how to test
+    tree.prune();
 }
 

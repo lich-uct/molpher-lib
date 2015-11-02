@@ -66,5 +66,6 @@
 %newobject ExplorationTree::getCandidateMorphsMask();
 %catches(std::runtime_error) ExplorationTree::setCandidateMorphsMask(const std::vector<bool>&);
 %catches(std::runtime_error) ExplorationTree::fetchMol(const std::string& canonSMILES);
+%catches(std::runtime_error) ExplorationTree::deleteSubtree(const std::string& canonSMILES);
 %ignore ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret);
 %include "../../include/molpher_API/ExplorationTree.hpp";

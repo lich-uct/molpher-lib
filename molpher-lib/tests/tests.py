@@ -100,8 +100,14 @@ class TestMolpherAPI(unittest.TestCase):
         self.assertEqual(len(tree.getCandidateMorphsMask()), 0)
         self.assertEqual(len(tree.getCandidateMorphs()), 0)
         
+        # remove subtree from tree
+        print("Removing subtree...")
+        tree.deleteSubtree(new_leaves[0].getSMILES())
+        self.assertEqual(len(new_leaves) - 1, len(tree.fetchLeaves()))
+        
+        # pruning
         print("Pruning tree...")
-        tree.prune() # TODO: figure out how to test
+        tree.prune()
         
     def testTreeOperCallback(self):
         class MyTreeOper(TreeOperation):

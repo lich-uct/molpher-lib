@@ -12174,6 +12174,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ExplorationTree_deleteSubtree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationTree_deleteSubtree",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_deleteSubtree" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExplorationTree_deleteSubtree" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_deleteSubtree" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  try {
+    (arg1)->deleteSubtree((std::string const &)*arg2);
+  }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ExplorationTree_generateMorphs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = (ExplorationTree *) 0 ;
@@ -12675,6 +12718,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExplorationTree_fetchLeaves", _wrap_ExplorationTree_fetchLeaves, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_fetchMol", _wrap_ExplorationTree_fetchMol, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_hasMol", _wrap_ExplorationTree_hasMol, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_deleteSubtree", _wrap_ExplorationTree_deleteSubtree, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_generateMorphs", _wrap_ExplorationTree_generateMorphs, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_sortMorphs", _wrap_ExplorationTree_sortMorphs, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_filterMorphs", _wrap_ExplorationTree_filterMorphs, METH_VARARGS, NULL},

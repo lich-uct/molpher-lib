@@ -9,6 +9,7 @@
 #include "molpher_API/operations/FilterMorphsOper.hpp"
 #include "molpher_API/operations/ExtendTreeOper.hpp"
 #include "molpher_API/operations/PruneTreeOper.hpp"
+#include "molpher_API/callbacks/EraseSubtreeCallback.hpp"
 
 ExplorationTree::ExplorationTree(IterationSnapshot& snp) : threadCount(0) {
     PathFinderContext::SnapshotToContext(snp, context);
@@ -121,6 +122,29 @@ bool ExplorationTree::hasMol(const std::string& canonSMILES) {
     PathFinderContext::CandidateMap::accessor ac;
     context.candidates.find(ac, canonSMILES);
     return !ac.empty();
+}
+
+void ExplorationTree::deleteSubtree(const std::string& canonSMILES) {
+    if (hasMol(canonSMILES)) {
+        PathFinderContext::CandidateMap::accessor ac;
+        context.candidates.find(ac, canonSMILES);
+        if (ac->second.parentSmile.empty()) {
+            throw std::runtime_error("Deleting root of the tree (" + canonSMILES + ") is not permitted.");
+        }
+        MolpherMol root(ac->second);
+        
+        PathFinderContext::CandidateMap::accessor acParent;
+        context.candidates.find(acParent, ac->second.parentSmile);
+        assert(!acParent.empty());
+        acParent->second.descendants.erase(root.getSMILES());
+        acParent.release();
+        ac.release();
+        
+        EraseSubtreeCallback cb(context);
+        cb.processMorph(root);
+    } else {
+        throw std::runtime_error("Molecule (" + canonSMILES + ") is not present in the tree.");
+    }
 }
 
 void ExplorationTree::setThreadCount(int threadCnt) {

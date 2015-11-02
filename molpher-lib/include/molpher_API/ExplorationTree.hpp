@@ -50,6 +50,7 @@ public:
     const std::vector<MolpherMol>& fetchLeaves();
     MolpherMol* fetchMol(const std::string& canonSMILES);
     bool hasMol(const std::string& canonSMILES);
+    void deleteSubtree(const std::string& canonSMILES);
     void generateMorphs();
     void sortMorphs();
     void filterMorphs();
