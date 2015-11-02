@@ -18,8 +18,7 @@ void PruneTreeOper::PruneTree::operator()(const std::string& smile, tbb::paralle
     mCtx.candidates.find(ac, smile);
     assert(!ac.empty());
 
-//    bool prune = (ac->second.itersWithoutDistImprovement > mCtx.params.itThreshold);
-    bool prune = true; // FIXME: remove this, only for temporary testing!!!!
+    bool prune = (ac->second.itersWithoutDistImprovement > mCtx.params.itThreshold);
     if (prune) {
 
         bool tooManyDerivations = false;
