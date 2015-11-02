@@ -12,15 +12,16 @@
 #include <string>
 
 class MolpherMol {
-    // TODO: memory management
     
 private:
     MolpherMolecule* mol;
+    bool selfAllocated;
     
 public:
     MolpherMol();
     MolpherMol(MolpherMolecule& mol);
     MolpherMol(const std::string &smile);
+    ~MolpherMol();
     MolpherMolecule& getMol(); // TODO: get rid of this
     
     std::string getSMILES();

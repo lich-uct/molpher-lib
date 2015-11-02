@@ -7306,6 +7306,27 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_delete_MolpherMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_MolpherMol",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MolpherMol" "', argument " "1"" of type '" "MolpherMol *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MolpherMol_getSMILES(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *arg1 = (MolpherMol *) 0 ;
@@ -7366,27 +7387,6 @@ SWIGINTERN PyObject *_wrap_MolpherMol_getParentSMILES(PyObject *SWIGUNUSEDPARM(s
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
   result = (arg1)->getParentSMILES();
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_MolpherMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  MolpherMol *arg1 = (MolpherMol *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_MolpherMol",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MolpherMol" "', argument " "1"" of type '" "MolpherMol *""'"); 
-  }
-  arg1 = reinterpret_cast< MolpherMol * >(argp1);
-  delete arg1;
-  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -12222,10 +12222,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_PruneTreeOper", _wrap_delete_PruneTreeOper, METH_VARARGS, NULL},
 	 { (char *)"PruneTreeOper_swigregister", PruneTreeOper_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_MolpherMol", _wrap_new_MolpherMol, METH_VARARGS, NULL},
+	 { (char *)"delete_MolpherMol", _wrap_delete_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getSMILES", _wrap_MolpherMol_getSMILES, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getDistToTarget", _wrap_MolpherMol_getDistToTarget, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getParentSMILES", _wrap_MolpherMol_getParentSMILES, METH_VARARGS, NULL},
-	 { (char *)"delete_MolpherMol", _wrap_delete_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_swigregister", MolpherMol_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ExplorationParameters", _wrap_new_ExplorationParameters, METH_VARARGS, NULL},
 	 { (char *)"ExplorationParameters_valid", _wrap_ExplorationParameters_valid, METH_VARARGS, NULL},

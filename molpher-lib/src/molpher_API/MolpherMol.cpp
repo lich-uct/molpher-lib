@@ -1,18 +1,22 @@
 
 #include "molpher_API/MolpherMol.hpp"
 
-MolpherMol::MolpherMol() : mol(new MolpherMolecule()) {
+MolpherMol::MolpherMol() : mol(new MolpherMolecule()), selfAllocated(true) {
     // no action
 }
 
 
-MolpherMol::MolpherMol(const std::string& smile) {
+MolpherMol::MolpherMol(const std::string& smile) : selfAllocated(true) {
     std::string temp(smile);
     mol = new MolpherMolecule(temp);
 }
 
-MolpherMol::MolpherMol(MolpherMolecule& mol) {
+MolpherMol::MolpherMol(MolpherMolecule& mol) : selfAllocated(false) {
     this->mol = &mol;
+}
+
+MolpherMol::~MolpherMol() {
+    if (selfAllocated) delete mol;
 }
 
 MolpherMolecule& MolpherMol::getMol() {
