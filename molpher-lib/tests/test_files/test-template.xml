@@ -27,5 +27,6 @@
     <param>
         <syntetizedFeasibility>true</syntetizedFeasibility>
         <substructureRestriction>false</substructureRestriction>
+        <iterMax>5</iterMax>
     </param>
 </iteration>

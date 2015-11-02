@@ -145,6 +145,23 @@ class TestMolpherAPI(unittest.TestCase):
         callback = MyCallback()
         traverse = TraverseOper(tree, callback);
         traverse();
+        
+    def testContinuousExploration(self):
+        print()
+        print("INITIALIZING CONTINUOUS EXPLORATION...")
+        etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
+        tree = ExplorationTree.createFromSnapshot(etreeSnap)
+        tree.setThreadCount(2)
+        
+        for i in range(5):
+            tree.generateMorphs()
+            tree.sortMorphs()
+            tree.filterMorphs(FilterMoprhsOper.ALL)
+            tree.extend()
+            tree.prune()
+            print("Iteration {0}".format(i+1))
+            
+        run_path_finder("./Results", self.test_files_path + "test-template.xml", 2)
 
 if __name__ == '__main__':
     unittest.main()
