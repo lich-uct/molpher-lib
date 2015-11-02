@@ -14,6 +14,7 @@
 #include "../include/molpher_API/ExplorationTreeSnapshot.hpp"
 #include "../include/molpher_API/ExplorationTree.hpp"
 #include "molpher_API/operations/FilterMorphsOper.hpp"
+#include "molpher_API/operations/TraverseOper.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(APITests);
 
@@ -101,7 +102,11 @@ void APITests::testExploration() {
     std::vector<bool> mask = tree.getCandidateMorphsMask();
     CPPUNIT_ASSERT_EQUAL(mask.size(), morphs.size());
     
-    tree.extend(); // TODO: validate that the morphs have really been added to the tree successfully (tested from Python for the time being)
+    tree.extend();
+    
+    PrintMolCallback callback;
+    TraverseOper traverse(tree, callback);
+    traverse();
     
     tree.prune(); // TODO: figure out how to test
 }

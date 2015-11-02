@@ -3431,23 +3431,25 @@ namespace Swig {
 #define SWIGTYPE_p_SmileSet swig_types[13]
 #define SWIGTYPE_p_SmileVector swig_types[14]
 #define SWIGTYPE_p_SortMoprhsOper swig_types[15]
-#define SWIGTYPE_p_TreeOperation swig_types[16]
-#define SWIGTYPE_p_allocator_type swig_types[17]
-#define SWIGTYPE_p_char swig_types[18]
-#define SWIGTYPE_p_const_reference swig_types[19]
-#define SWIGTYPE_p_difference_type swig_types[20]
-#define SWIGTYPE_p_p_PyObject swig_types[21]
-#define SWIGTYPE_p_reference swig_types[22]
-#define SWIGTYPE_p_size_type swig_types[23]
-#define SWIGTYPE_p_std__allocatorT_MolpherMol_t swig_types[24]
-#define SWIGTYPE_p_std__allocatorT_bool_t swig_types[25]
-#define SWIGTYPE_p_std__invalid_argument swig_types[26]
-#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[27]
-#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[28]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[29]
-#define SWIGTYPE_p_value_type swig_types[30]
-static swig_type_info *swig_types[32];
-static swig_module_info swig_module = {swig_types, 31, 0, 0, 0, 0};
+#define SWIGTYPE_p_TraverseCallback swig_types[16]
+#define SWIGTYPE_p_TraverseOper swig_types[17]
+#define SWIGTYPE_p_TreeOperation swig_types[18]
+#define SWIGTYPE_p_allocator_type swig_types[19]
+#define SWIGTYPE_p_char swig_types[20]
+#define SWIGTYPE_p_const_reference swig_types[21]
+#define SWIGTYPE_p_difference_type swig_types[22]
+#define SWIGTYPE_p_p_PyObject swig_types[23]
+#define SWIGTYPE_p_reference swig_types[24]
+#define SWIGTYPE_p_size_type swig_types[25]
+#define SWIGTYPE_p_std__allocatorT_MolpherMol_t swig_types[26]
+#define SWIGTYPE_p_std__allocatorT_bool_t swig_types[27]
+#define SWIGTYPE_p_std__invalid_argument swig_types[28]
+#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[29]
+#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[30]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[31]
+#define SWIGTYPE_p_value_type swig_types[32]
+static swig_type_info *swig_types[34];
+static swig_module_info swig_module = {swig_types, 33, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3948,6 +3950,8 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include "../../include/molpher_API/operations/FilterMorphsOper.hpp"
 #include "../../include/molpher_API/operations/ExtendTreeOper.hpp"
 #include "../../include/molpher_API/operations/PruneTreeOper.hpp"
+#include "../../include/molpher_API/operations/TraverseOper.hpp"
+#include "../../include/molpher_API/callbacks/TraverseCallback.hpp"
 
 
 SWIGINTERN swig_type_info*
@@ -5538,6 +5542,39 @@ void SwigDirector_TreeOperation::operator ()() {
     PyObject *error = PyErr_Occurred();
     if (error) {
       Swig::DirectorMethodException::raise("Error detected when calling 'TreeOperation.__call__'");
+    }
+  }
+}
+
+
+SwigDirector_TraverseCallback::SwigDirector_TraverseCallback(PyObject *self): TraverseCallback(), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((TraverseCallback *)this, this); 
+}
+
+
+
+
+SwigDirector_TraverseCallback::~SwigDirector_TraverseCallback() {
+}
+
+void SwigDirector_TraverseCallback::processMorph(MolpherMol &morph) {
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&morph), SWIGTYPE_p_MolpherMol,  0 );
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call TraverseCallback.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 0;
+  const char * const swig_method_name = "processMorph";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunction(method, (char *)"(O)" ,(PyObject *)obj0);
+#else
+  swig::SwigVar_PyObject result = PyObject_CallMethod(swig_get_self(), (char *)"processMorph", (char *)"(O)" ,(PyObject *)obj0);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    if (error) {
+      Swig::DirectorMethodException::raise("Error detected when calling 'TraverseCallback.processMorph'");
     }
   }
 }
@@ -7210,6 +7247,317 @@ SWIGINTERN PyObject *PruneTreeOper_swigregister(PyObject *SWIGUNUSEDPARM(self), 
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
   SWIG_TypeNewClientData(SWIGTYPE_p_PruneTreeOper, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_TraverseOper__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = 0 ;
+  TraverseCallback *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  TraverseOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_TraverseOper",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_ExplorationTree,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_TraverseOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TraverseOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_TraverseCallback,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_TraverseOper" "', argument " "2"" of type '" "TraverseCallback &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TraverseOper" "', argument " "2"" of type '" "TraverseCallback &""'"); 
+  }
+  arg2 = reinterpret_cast< TraverseCallback * >(argp2);
+  result = (TraverseOper *)new TraverseOper(*arg1,*arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TraverseOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TraverseOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = 0 ;
+  TraverseCallback *arg2 = 0 ;
+  MolpherMol *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  TraverseOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:new_TraverseOper",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_ExplorationTree,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_TraverseOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TraverseOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_TraverseCallback,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_TraverseOper" "', argument " "2"" of type '" "TraverseCallback &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TraverseOper" "', argument " "2"" of type '" "TraverseCallback &""'"); 
+  }
+  arg2 = reinterpret_cast< TraverseCallback * >(argp2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_MolpherMol,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_TraverseOper" "', argument " "3"" of type '" "MolpherMol &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TraverseOper" "', argument " "3"" of type '" "MolpherMol &""'"); 
+  }
+  arg3 = reinterpret_cast< MolpherMol * >(argp3);
+  result = (TraverseOper *)new TraverseOper(*arg1,*arg2,*arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TraverseOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TraverseOper(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_TraverseCallback, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_new_TraverseOper__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_TraverseCallback, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        void *vptr = 0;
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_MolpherMol, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_new_TraverseOper__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_TraverseOper'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    TraverseOper::TraverseOper(ExplorationTree &,TraverseCallback &)\n"
+    "    TraverseOper::TraverseOper(ExplorationTree &,TraverseCallback &,MolpherMol &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_TraverseOper___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TraverseOper *arg1 = (TraverseOper *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TraverseOper___call__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TraverseOper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TraverseOper___call__" "', argument " "1"" of type '" "TraverseOper *""'"); 
+  }
+  arg1 = reinterpret_cast< TraverseOper * >(argp1);
+  (arg1)->operator ()();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_TraverseOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TraverseOper *arg1 = (TraverseOper *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_TraverseOper",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TraverseOper, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TraverseOper" "', argument " "1"" of type '" "TraverseOper *""'"); 
+  }
+  arg1 = reinterpret_cast< TraverseOper * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *TraverseOper_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_TraverseOper, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_TraverseCallback(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  PyObject * obj0 = 0 ;
+  TraverseCallback *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_TraverseCallback",&obj0)) SWIG_fail;
+  arg1 = obj0;
+  if ( arg1 != Py_None ) {
+    /* subclassed */
+    result = (TraverseCallback *)new SwigDirector_TraverseCallback(arg1); 
+  } else {
+    SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+    SWIG_fail;
+  }
+  
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TraverseCallback, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_TraverseCallback(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TraverseCallback *arg1 = (TraverseCallback *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_TraverseCallback",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TraverseCallback, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TraverseCallback" "', argument " "1"" of type '" "TraverseCallback *""'"); 
+  }
+  arg1 = reinterpret_cast< TraverseCallback * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TraverseCallback_processMorph(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TraverseCallback *arg1 = (TraverseCallback *) 0 ;
+  MolpherMol *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:TraverseCallback_processMorph",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TraverseCallback, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TraverseCallback_processMorph" "', argument " "1"" of type '" "TraverseCallback *""'"); 
+  }
+  arg1 = reinterpret_cast< TraverseCallback * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_MolpherMol,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TraverseCallback_processMorph" "', argument " "2"" of type '" "MolpherMol &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TraverseCallback_processMorph" "', argument " "2"" of type '" "MolpherMol &""'"); 
+  }
+  arg2 = reinterpret_cast< MolpherMol * >(argp2);
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==obj0));
+  try {
+    if (upcall) {
+      Swig::DirectorPureVirtualException::raise("TraverseCallback::processMorph");
+    } else {
+      (arg1)->processMorph(*arg2);
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_disown_TraverseCallback(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  TraverseCallback *arg1 = (TraverseCallback *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:disown_TraverseCallback",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_TraverseCallback, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "disown_TraverseCallback" "', argument " "1"" of type '" "TraverseCallback *""'"); 
+  }
+  arg1 = reinterpret_cast< TraverseCallback * >(argp1);
+  {
+    Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
+    if (director) director->swig_disown();
+  }
+  
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *TraverseCallback_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_TraverseCallback, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -12226,6 +12574,15 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"PruneTreeOper___call__", _wrap_PruneTreeOper___call__, METH_VARARGS, NULL},
 	 { (char *)"delete_PruneTreeOper", _wrap_delete_PruneTreeOper, METH_VARARGS, NULL},
 	 { (char *)"PruneTreeOper_swigregister", PruneTreeOper_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_TraverseOper", _wrap_new_TraverseOper, METH_VARARGS, NULL},
+	 { (char *)"TraverseOper___call__", _wrap_TraverseOper___call__, METH_VARARGS, NULL},
+	 { (char *)"delete_TraverseOper", _wrap_delete_TraverseOper, METH_VARARGS, NULL},
+	 { (char *)"TraverseOper_swigregister", TraverseOper_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_TraverseCallback", _wrap_new_TraverseCallback, METH_VARARGS, NULL},
+	 { (char *)"delete_TraverseCallback", _wrap_delete_TraverseCallback, METH_VARARGS, NULL},
+	 { (char *)"TraverseCallback_processMorph", _wrap_TraverseCallback_processMorph, METH_VARARGS, NULL},
+	 { (char *)"disown_TraverseCallback", _wrap_disown_TraverseCallback, METH_VARARGS, NULL},
+	 { (char *)"TraverseCallback_swigregister", TraverseCallback_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_MolpherMol", _wrap_new_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"delete_MolpherMol", _wrap_delete_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getSMILES", _wrap_MolpherMol_getSMILES, METH_VARARGS, NULL},
@@ -12354,6 +12711,9 @@ static void *_p_ExtendTreeOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(ne
 static void *_p_PruneTreeOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((TreeOperation *)  ((PruneTreeOper *) x));
 }
+static void *_p_TraverseOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((TreeOperation *)  ((TraverseOper *) x));
+}
 static swig_type_info _swigt__p_BoolVector = {"_p_BoolVector", "BoolVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ExplorationParameters = {"_p_ExplorationParameters", "ExplorationParameters *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ExplorationTree = {"_p_ExplorationTree", "ExplorationTree *", 0, 0, (void*)0, 0};
@@ -12370,6 +12730,8 @@ static swig_type_info _swigt__p_PruneTreeOper = {"_p_PruneTreeOper", "PruneTreeO
 static swig_type_info _swigt__p_SmileSet = {"_p_SmileSet", "SmileSet *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SmileVector = {"_p_SmileVector", "SmileVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SortMoprhsOper = {"_p_SortMoprhsOper", "SortMoprhsOper *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_TraverseCallback = {"_p_TraverseCallback", "TraverseCallback *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_TraverseOper = {"_p_TraverseOper", "TraverseOper *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_TreeOperation = {"_p_TreeOperation", "TreeOperation *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
@@ -12403,6 +12765,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_SmileSet,
   &_swigt__p_SmileVector,
   &_swigt__p_SortMoprhsOper,
+  &_swigt__p_TraverseCallback,
+  &_swigt__p_TraverseOper,
   &_swigt__p_TreeOperation,
   &_swigt__p_allocator_type,
   &_swigt__p_char,
@@ -12436,7 +12800,9 @@ static swig_cast_info _swigc__p_PruneTreeOper[] = {  {&_swigt__p_PruneTreeOper, 
 static swig_cast_info _swigc__p_SmileSet[] = {  {&_swigt__p_SmileSet, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SmileVector[] = {  {&_swigt__p_SmileVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SortMoprhsOper[] = {  {&_swigt__p_SortMoprhsOper, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_TreeOperation[] = {  {&_swigt__p_TreeOperation, 0, 0, 0},  {&_swigt__p_GenerateMoprhsOper, _p_GenerateMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_SortMoprhsOper, _p_SortMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FilterMoprhsOper, _p_FilterMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FindLeavesOper, _p_FindLeavesOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_ExtendTreeOper, _p_ExtendTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_PruneTreeOper, _p_PruneTreeOperTo_p_TreeOperation, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_TraverseCallback[] = {  {&_swigt__p_TraverseCallback, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_TraverseOper[] = {  {&_swigt__p_TraverseOper, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_TreeOperation[] = {  {&_swigt__p_TreeOperation, 0, 0, 0},  {&_swigt__p_GenerateMoprhsOper, _p_GenerateMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_SortMoprhsOper, _p_SortMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FilterMoprhsOper, _p_FilterMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FindLeavesOper, _p_FindLeavesOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_ExtendTreeOper, _p_ExtendTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_PruneTreeOper, _p_PruneTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_TraverseOper, _p_TraverseOperTo_p_TreeOperation, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_const_reference[] = {  {&_swigt__p_const_reference, 0, 0, 0},{0, 0, 0, 0}};
@@ -12469,6 +12835,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_SmileSet,
   _swigc__p_SmileVector,
   _swigc__p_SortMoprhsOper,
+  _swigc__p_TraverseCallback,
+  _swigc__p_TraverseOper,
   _swigc__p_TreeOperation,
   _swigc__p_allocator_type,
   _swigc__p_char,

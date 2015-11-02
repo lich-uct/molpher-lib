@@ -1,5 +1,6 @@
 %module(directors="1") molpher
 %feature("director") TreeOperation;
+%feature("director") TraverseCallback;
 %include "stl.i"
 
 %{
@@ -17,6 +18,8 @@
 #include "../../include/molpher_API/operations/FilterMorphsOper.hpp"
 #include "../../include/molpher_API/operations/ExtendTreeOper.hpp"
 #include "../../include/molpher_API/operations/PruneTreeOper.hpp"
+#include "../../include/molpher_API/operations/TraverseOper.hpp"
+#include "../../include/molpher_API/callbacks/TraverseCallback.hpp"
 %}
 
 %init %{
@@ -34,6 +37,9 @@
 %include "../../include/molpher_API/operations/FilterMorphsOper.hpp"
 %include "../../include/molpher_API/operations/ExtendTreeOper.hpp"
 %include "../../include/molpher_API/operations/PruneTreeOper.hpp"
+%ignore TraverseCallback::TraverseCallback(PathFinderContext& context);
+%include "../../include/molpher_API/operations/TraverseOper.hpp"
+%include "../../include/molpher_API/callbacks/TraverseCallback.hpp"
 
 // MoplherMolecule wrapper
 %ignore MolpherMol::MolpherMol(const MolpherMolecule& mol);

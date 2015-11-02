@@ -10,6 +10,21 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
+#include "molpher_API/callbacks/TraverseCallback.hpp"
+
+class PrintMolCallback : public TraverseCallback {
+    
+    public:
+        PrintMolCallback() : TraverseCallback() {
+            // no action
+        }
+
+        virtual void processMorph(MolpherMol& morph) {
+            std::cout << morph.getSMILES() + " -- parent: " + morph.getMol().parentSmile << std::endl;
+        }
+
+};
+
 class APITests : public CPPUNIT_NS::TestFixture {
     CPPUNIT_TEST_SUITE(APITests);
 

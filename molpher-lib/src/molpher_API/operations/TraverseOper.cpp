@@ -1,7 +1,7 @@
 
 #include "molpher_API/operations/TraverseOper.hpp"
 
-TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback) : TraverseOper(expTree, callback, fetchTreeContext().source) {
+TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback) : TreeOperation(expTree), callback(callback), root(fetchTreeContext().source) {
     // no action
 }
 

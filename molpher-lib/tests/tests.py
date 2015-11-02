@@ -124,6 +124,21 @@ class TestMolpherAPI(unittest.TestCase):
         print(new_morphs)
         print(tree_morphs)
         self.assertEqual(tree_morphs, new_morphs)
+        
+    def testTreeTraversalCallback(self):
+        class MyCallback(TraverseCallback):
+            
+            def processMorph(self, morph):
+                print(morph.getSMILES())
+                
+        tree = ExplorationTree("CCO")
+        tree.setThreadCount(2)
+        tree.generateMorphs()
+        tree.filterMorphs(FilterMoprhsOper.WEIGHT)
+        tree.extend()
+        callback = MyCallback()
+        traverse = TraverseOper(tree, callback);
+        traverse();
 
 if __name__ == '__main__':
     unittest.main()
