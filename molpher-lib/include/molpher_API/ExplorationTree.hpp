@@ -59,9 +59,9 @@ public:
     
     void setThreadCount(int threadCnt);
     int getThreadCount();
-    std::vector<MolpherMol> getCandidateMorphs();
-    std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version, return a pointer 
-    void setCandidateMorphsMask(std::vector<bool>); // TODO add a bitset version, take a reference
+    const std::vector<MolpherMol>& getCandidateMorphs();
+    const std::vector<bool>& getCandidateMorphsMask(); // TODO add a bitset version 
+    void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
 
 };
 

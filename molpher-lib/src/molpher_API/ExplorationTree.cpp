@@ -131,23 +131,23 @@ int ExplorationTree::getThreadCount() {
     return threadCount;
 }
 
-std::vector<MolpherMol> ExplorationTree::getCandidateMorphs() { // TODO: return a pointer
-    std::vector<MolpherMol> ret;
+const std::vector<MolpherMol>& ExplorationTree::getCandidateMorphs() { // TODO: return a pointer
+    std::vector<MolpherMol>* ret = new std::vector<MolpherMol>();
     for (auto& mol : candidateMoprhs) {
-        ret.push_back(MolpherMol(mol));
+        ret->push_back(MolpherMol(mol));
     }
-    return ret;
+    return *ret;
 }
 
-std::vector<bool> ExplorationTree::getCandidateMorphsMask() {
-    std::vector<bool> ret;
+const std::vector<bool>& ExplorationTree::getCandidateMorphsMask() {
+    std::vector<bool>* ret = new std::vector<bool>();
     for (auto status : candidateMorphsMask) {
-        ret.push_back(status);
+        ret->push_back(status);
     }
-    return ret;
+    return *ret;
 }
 
-void ExplorationTree::setCandidateMorphsMask(std::vector<bool> new_mask) {
+void ExplorationTree::setCandidateMorphsMask(const std::vector<bool>& new_mask) {
     if (new_mask.size() != candidateMorphsMask.size()) {
         throw std::runtime_error("The new mask is not the same length as the old one.");
     }

@@ -69,6 +69,7 @@ class TestMolpherAPI(unittest.TestCase):
         print("Sorting morphs...")
         tree.sortMorphs()
         morphs = tree.getCandidateMorphs()
+        print(morphs)
         previous = None
         for morph in morphs:
             if previous:
@@ -101,7 +102,7 @@ class TestMolpherAPI(unittest.TestCase):
         
         print("Pruning tree...")
         tree.prune() # TODO: figure out how to test
-            
+        
     def testTreeOperCallback(self):
         class MyTreeOper(TreeOperation):
             

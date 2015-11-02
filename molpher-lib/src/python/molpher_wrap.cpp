@@ -12065,7 +12065,7 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getCandidateMorphs(PyObject *SWIGUNUS
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::vector< MolpherMol,std::allocator< MolpherMol > > result;
+  std::vector< MolpherMol,std::allocator< MolpherMol > > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_getCandidateMorphs",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
@@ -12073,8 +12073,8 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getCandidateMorphs(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_getCandidateMorphs" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (arg1)->getCandidateMorphs();
-  resultobj = swig::from(static_cast< std::vector<MolpherMol,std::allocator< MolpherMol > > >(result));
+  result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *) &(arg1)->getCandidateMorphs();
+  resultobj = swig::from(static_cast< std::vector<MolpherMol,std::allocator< MolpherMol > > >(*result));
   return resultobj;
 fail:
   return NULL;
@@ -12087,7 +12087,7 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getCandidateMorphsMask(PyObject *SWIG
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::vector< bool,std::allocator< bool > > result;
+  std::vector< bool,std::allocator< bool > > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_getCandidateMorphsMask",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
@@ -12095,8 +12095,8 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getCandidateMorphsMask(PyObject *SWIG
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_getCandidateMorphsMask" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (arg1)->getCandidateMorphsMask();
-  resultobj = swig::from(static_cast< std::vector<bool,std::allocator< bool > > >(result));
+  result = (std::vector< bool,std::allocator< bool > > *) &(arg1)->getCandidateMorphsMask();
+  resultobj = swig::from(static_cast< std::vector<bool,std::allocator< bool > > >(*result));
   return resultobj;
 fail:
   return NULL;
@@ -12106,9 +12106,10 @@ fail:
 SWIGINTERN PyObject *_wrap_ExplorationTree_setCandidateMorphsMask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = (ExplorationTree *) 0 ;
-  std::vector< bool,std::allocator< bool > > arg2 ;
+  std::vector< bool,std::allocator< bool > > *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -12120,23 +12121,27 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_setCandidateMorphsMask(PyObject *SWIG
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
   {
     std::vector<bool,std::allocator< bool > > *ptr = (std::vector<bool,std::allocator< bool > > *)0;
-    int res = swig::asptr(obj1, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "ExplorationTree_setCandidateMorphsMask" "', argument " "2"" of type '" "std::vector< bool,std::allocator< bool > >""'"); 
+    res2 = swig::asptr(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExplorationTree_setCandidateMorphsMask" "', argument " "2"" of type '" "std::vector< bool,std::allocator< bool > > const &""'"); 
     }
-    arg2 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_setCandidateMorphsMask" "', argument " "2"" of type '" "std::vector< bool,std::allocator< bool > > const &""'"); 
+    }
+    arg2 = ptr;
   }
   try {
-    (arg1)->setCandidateMorphsMask(arg2);
+    (arg1)->setCandidateMorphsMask((std::vector< bool,std::allocator< bool > > const &)*arg2);
   }
   catch(std::runtime_error &_e) {
     SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
   }
   
   resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
 
