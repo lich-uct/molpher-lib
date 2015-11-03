@@ -63,11 +63,11 @@ void FilterMoprhsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                             mCtx.params.minAcceptableMolecularWeight) ||
                             (mMorphs[idx].molecularWeight >
                             mCtx.params.maxAcceptableMolecularWeight);
-//                    if (badWeight) {
-//                        std::stringstream ss;
-//                        ss << "bad weight: " << mMorphs[idx].smile << " : " << mMorphs[idx].molecularWeight;
-//                        SynchCout(ss.str());
-//                    }
+                    if (badWeight) {
+                        std::stringstream ss;
+                        ss << "bad weight: " << mMorphs[idx].smile << " : " << mMorphs[idx].molecularWeight;
+                        SynchCout(ss.str());
+                    }
                 }
             }
 
@@ -77,11 +77,11 @@ void FilterMoprhsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                 if (!isDead) {
                     badSascore = mMorphs[idx].sascore > 6.0; // questionable, it is recommended value from Ertl
                     // in case of badSascore print message
-//                    if (badSascore) {
-//                        std::stringstream ss;
-//                        ss << "bad SAScore: " << mMorphs[idx].smile << " : " << mMorphs[idx].sascore;
-//                        SynchCout(ss.str());
-//                    }
+                    if (badSascore) {
+                        std::stringstream ss;
+                        ss << "bad SAScore: " << mMorphs[idx].smile << " : " << mMorphs[idx].sascore;
+                        SynchCout(ss.str());
+                    }
                 }
             }
 
@@ -117,11 +117,11 @@ void FilterMoprhsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                         tooManyProducedMorphs =
                                 (ac->second > mCtx.params.cntMaxMorphs);
                     }
-//                    if (tooManyProducedMorphs) {
-//                        std::stringstream ss;
-//                        ss << "too many morphs: " << mMorphs[idx].smile << " : " << ac->second;
-//                        SynchCout(ss.str());
-//                    }
+                    if (tooManyProducedMorphs) {
+                        std::stringstream ss;
+                        ss << "too many morphs: " << mMorphs[idx].smile << " : " << ac->second;
+                        SynchCout(ss.str());
+                    }
                 }
             }
 
@@ -130,9 +130,9 @@ void FilterMoprhsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
             mSurvivors[idx] = !isDead;
         } else {
             mSurvivors[idx] = false;
-//            std::stringstream ss;
-//                        ss << "probability filtered: " << mMorphs[idx].smile;
-//                        SynchCout(ss.str());
+            std::stringstream ss;
+                        ss << "probability filtered: " << mMorphs[idx].smile;
+                        SynchCout(ss.str());
         }
     }
 }
