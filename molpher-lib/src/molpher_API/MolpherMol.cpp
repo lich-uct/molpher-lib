@@ -6,20 +6,32 @@ MolpherMol::MolpherMol() : mol(new MolpherMolecule()), selfAllocated(true) {
 }
 
 
-MolpherMol::MolpherMol(const std::string& smile) : selfAllocated(true) {
-    std::string temp(smile);
-    mol = new MolpherMolecule(temp);
-}
+//MolpherMol::MolpherMol(const std::string& smile) : selfAllocated(true) {
+//    std::string temp(smile);
+//    mol = new MolpherMolecule(temp);
+//}
 
-MolpherMol::MolpherMol(MolpherMolecule& mol) : selfAllocated(false) {
-    this->mol = &mol;
+MolpherMol::MolpherMol(MolpherMolecule& mol) : mol(&mol), selfAllocated(false) {
+    // no action
 }
 
 MolpherMol::~MolpherMol() {
     if (selfAllocated) delete mol;
 }
 
-MolpherMolecule& MolpherMol::getMol() {
+MolpherMol& MolpherMol::operator=(const MolpherMol& other) {
+    MolpherMolecule* new_mol = new MolpherMolecule();
+    *new_mol = *(other.mol);
+    if (selfAllocated) {
+        delete this->mol;
+        this->mol = nullptr;
+    }
+    this->mol = new_mol;
+    this->selfAllocated = true;
+    return *this;
+}
+
+MolpherMolecule& MolpherMol::getMol() const {
     return *mol;
 }
 

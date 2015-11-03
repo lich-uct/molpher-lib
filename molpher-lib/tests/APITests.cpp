@@ -31,9 +31,13 @@ void APITests::tearDown() {
 }
 
 void APITests::testMolpherMolClass() {
-    MolpherMol mol("CCO");
+    MolpherMol mol;
     CPPUNIT_ASSERT_EQUAL(decltype(mol.getMol().itersWithoutDistImprovement)(0), mol.getMol().itersWithoutDistImprovement);
-    CPPUNIT_ASSERT_EQUAL(decltype(mol.getMol().smile)("CCO"), mol.getMol().smile);
+    CPPUNIT_ASSERT_EQUAL(decltype(mol.getMol().smile)(""), mol.getMol().smile);
+    MolpherMol mol2;
+    mol2.getMol().smile = "CC";
+    mol = mol2;
+    CPPUNIT_ASSERT_EQUAL(mol.getMol().smile, mol2.getMol().smile);
 }
 
 void APITests::testExplorationParametersClass() {
@@ -98,7 +102,7 @@ void APITests::testExploration() {
         previous = &molpher_molecule;
     }
     
-    tree.filterMorphs(FilterMoprhsOper::MorphFilters::COUNT | FilterMoprhsOper::MorphFilters::PROBABILITY | FilterMoprhsOper::MorphFilters::WEIGHT);
+    tree.filterMorphs(FilterMoprhsOper::MorphFilters::ALL);
     std::vector<bool> mask = tree.getCandidateMorphsMask();
     CPPUNIT_ASSERT_EQUAL(mask.size(), morphs.size());
     

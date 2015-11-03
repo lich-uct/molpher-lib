@@ -10,9 +10,9 @@ class TestMolpherAPI(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testMolpherMolClass(self):
-        mol = MolpherMol("CCO")
-        self.assertEqual(mol.getSMILES(), "CCO")
+#    def testMolpherMolClass(self):
+#        mol = MolpherMol("CCO")
+#        self.assertEqual(mol.getSMILES(), "CCO")
         
     def testExplorationParametersClass(self):
         params = ExplorationParameters()
@@ -69,7 +69,6 @@ class TestMolpherAPI(unittest.TestCase):
         print("Sorting morphs...")
         tree.sortMorphs()
         morphs = tree.getCandidateMorphs()
-        print(morphs)
         previous = None
         for morph in morphs:
             if previous:
@@ -146,22 +145,20 @@ class TestMolpherAPI(unittest.TestCase):
         traverse = TraverseOper(tree, callback);
         traverse();
         
-    def testContinuousExploration(self):
-        print()
-        print("INITIALIZING CONTINUOUS EXPLORATION...")
-        etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
-        tree = ExplorationTree.createFromSnapshot(etreeSnap)
-        tree.setThreadCount(2)
-        
-        for i in range(5):
-            tree.generateMorphs()
-            tree.sortMorphs()
-            tree.filterMorphs(FilterMoprhsOper.ALL)
-            tree.extend()
-            tree.prune()
-            print("Iteration {0}".format(i+1))
-            
-        run_path_finder("./Results", self.test_files_path + "test-template.xml", 2)
+#    def testContinuousExploration(self):
+#        etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
+#        tree = ExplorationTree.createFromSnapshot(etreeSnap)
+#        tree.setThreadCount(2)
+#        
+#        for i in range(5):
+#            tree.generateMorphs()
+#            tree.sortMorphs()
+#            tree.filterMorphs(FilterMoprhsOper.ALL)
+#            tree.extend()
+#            tree.prune()
+#            print("Iteration {0}".format(i+1))
+#            
+#        run_path_finder("./Results", self.test_files_path + "test-template.xml", 2)
 
 if __name__ == '__main__':
     unittest.main()

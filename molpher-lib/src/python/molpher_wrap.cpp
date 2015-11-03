@@ -7561,99 +7561,6 @@ SWIGINTERN PyObject *TraverseCallback_swigregister(PyObject *SWIGUNUSEDPARM(self
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_MolpherMol__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  MolpherMolecule *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  MolpherMol *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:new_MolpherMol",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_MolpherMolecule,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MolpherMol" "', argument " "1"" of type '" "MolpherMolecule &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MolpherMol" "', argument " "1"" of type '" "MolpherMolecule &""'"); 
-  }
-  arg1 = reinterpret_cast< MolpherMolecule * >(argp1);
-  result = (MolpherMol *)new MolpherMol(*arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_MolpherMol__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  PyObject * obj0 = 0 ;
-  MolpherMol *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:new_MolpherMol",&obj0)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MolpherMol" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MolpherMol" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  result = (MolpherMol *)new MolpherMol((std::string const &)*arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, SWIG_POINTER_NEW |  0 );
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_MolpherMol(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[2] = {
-    0
-  };
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = args ? (int)PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_MolpherMolecule, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_new_MolpherMol__SWIG_0(self, args);
-    }
-  }
-  if (argc == 1) {
-    int _v;
-    int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_new_MolpherMol__SWIG_1(self, args);
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_MolpherMol'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    MolpherMol::MolpherMol(MolpherMolecule &)\n"
-    "    MolpherMol::MolpherMol(std::string const &)\n");
-  return 0;
-}
-
-
 SWIGINTERN PyObject *_wrap_delete_MolpherMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *arg1 = (MolpherMol *) 0 ;
@@ -7669,6 +7576,28 @@ SWIGINTERN PyObject *_wrap_delete_MolpherMol(PyObject *SWIGUNUSEDPARM(self), PyO
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_getMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  MolpherMolecule *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_getMol",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getMol" "', argument " "1"" of type '" "MolpherMol const *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  result = (MolpherMolecule *) &((MolpherMol const *)arg1)->getMol();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMolecule, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7913,10 +7842,10 @@ SWIGINTERN PyObject *_wrap_ExplorationParameters_getSourceMol(PyObject *SWIGUNUS
   if (!PyArg_ParseTuple(args,(char *)"O:ExplorationParameters_getSourceMol",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationParameters, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_getSourceMol" "', argument " "1"" of type '" "ExplorationParameters const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_getSourceMol" "', argument " "1"" of type '" "ExplorationParameters *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
-  result = (MolpherMol *)((ExplorationParameters const *)arg1)->getSourceMol();
+  result = (MolpherMol *)(arg1)->getSourceMol();
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, 0 |  0 );
   return resultobj;
 fail:
@@ -12626,8 +12555,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TraverseCallback_processMorph", _wrap_TraverseCallback_processMorph, METH_VARARGS, NULL},
 	 { (char *)"disown_TraverseCallback", _wrap_disown_TraverseCallback, METH_VARARGS, NULL},
 	 { (char *)"TraverseCallback_swigregister", TraverseCallback_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_MolpherMol", _wrap_new_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"delete_MolpherMol", _wrap_delete_MolpherMol, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_getMol", _wrap_MolpherMol_getMol, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getSMILES", _wrap_MolpherMol_getSMILES, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getDistToTarget", _wrap_MolpherMol_getDistToTarget, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getParentSMILES", _wrap_MolpherMol_getParentSMILES, METH_VARARGS, NULL},

@@ -25,7 +25,7 @@ public:
     
     void setSourceMol(const std::string& mol);
     void setSourceMol(MolpherMol& mol);
-    MolpherMol* getSourceMol() const;
+    MolpherMol* getSourceMol();
     // TODO more getters and setters for the parameters
     
 };

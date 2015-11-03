@@ -42,9 +42,10 @@
 %include "../../include/molpher_API/callbacks/TraverseCallback.hpp"
 
 // MoplherMolecule wrapper
-%ignore MolpherMol::MolpherMol(const MolpherMolecule& mol);
+%ignore MolpherMol::MolpherMol(MolpherMolecule& mol);
 %ignore MolpherMol::getMol();
 %ignore MolpherMol::MolpherMol();
+%ignore MolpherMol::operator=(const MolpherMol&);
 %include "../../include/molpher_API/MolpherMol.hpp"
 
 // ExplorationParameters wrapper

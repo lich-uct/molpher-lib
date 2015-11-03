@@ -30,6 +30,6 @@ void ExplorationParameters::setSourceMol(MolpherMol& mol) {
     iterSnapshot.source = mol.getMol();
 }
 
-MolpherMol* ExplorationParameters::getSourceMol() const {
-    return new MolpherMol(iterSnapshot.source.smile);
+MolpherMol* ExplorationParameters::getSourceMol() {
+    return new MolpherMol(iterSnapshot.source);
 }

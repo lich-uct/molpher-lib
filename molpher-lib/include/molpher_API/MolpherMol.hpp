@@ -20,9 +20,11 @@ private:
 public:
     MolpherMol();
     MolpherMol(MolpherMolecule& mol);
-    MolpherMol(const std::string &smile);
+//    MolpherMol(const std::string &smile);
     ~MolpherMol();
-    MolpherMolecule& getMol(); // TODO: get rid of this
+    MolpherMolecule& getMol() const; // TODO: maybe get rid of this
+    
+    MolpherMol& operator=(const MolpherMol&);
     
     std::string getSMILES();
     double getDistToTarget();
