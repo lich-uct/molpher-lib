@@ -3937,21 +3937,8 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 
 
 #define SWIG_FILE_WITH_INIT
-#include "../../include/morphing_functions.hpp"
-#include "../../include/molpher_API/MolpherMol.hpp"
-#include "../../include/molpher_API/ExplorationParameters.hpp"
-#include "../../include/molpher_API/ExplorationTreeSnapshot.hpp"
-#include "../../include/molpher_API/ExplorationTree.hpp"
+#include "morphing_functions.hpp"
 #include "extensions/SAScore.h"
-#include "../../include/molpher_API/operations/TreeOperation.hpp"
-#include "../../include/molpher_API/operations/FindLeavesOper.hpp"
-#include "../../include/molpher_API/operations/GenerateMorphsOper.hpp"
-#include "../../include/molpher_API/operations/SortMorphsOper.hpp"
-#include "../../include/molpher_API/operations/FilterMorphsOper.hpp"
-#include "../../include/molpher_API/operations/ExtendTreeOper.hpp"
-#include "../../include/molpher_API/operations/PruneTreeOper.hpp"
-#include "../../include/molpher_API/operations/TraverseOper.hpp"
-#include "../../include/molpher_API/callbacks/TraverseCallback.hpp"
 
 
 SWIGINTERN swig_type_info*
@@ -4100,11 +4087,31 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+#include "molpher_API/MolpherMol.hpp"
+#include "molpher_API/ExplorationParameters.hpp"
+#include "molpher_API/ExplorationTreeSnapshot.hpp"
+#include "molpher_API/ExplorationTree.hpp"
+
+
+#include "molpher_API/operations/TreeOperation.hpp"
+#include "molpher_API/operations/FindLeavesOper.hpp"
+#include "molpher_API/operations/GenerateMorphsOper.hpp"
+#include "molpher_API/operations/SortMorphsOper.hpp"
+#include "molpher_API/operations/FilterMorphsOper.hpp"
+#include "molpher_API/operations/ExtendTreeOper.hpp"
+#include "molpher_API/operations/PruneTreeOper.hpp"
+#include "molpher_API/operations/TraverseOper.hpp"
+#include "molpher_API/callbacks/TraverseCallback.hpp"
+
+
 SWIGINTERNINLINE PyObject*
   SWIG_From_int  (int value)
 {
   return PyInt_FromLong((long) value);
 }
+
+
+#include "molpher_API/callbacks/TraverseCallback.hpp"
 
 
 SWIGINTERNINLINE PyObject *

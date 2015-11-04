@@ -8,6 +8,7 @@
         <logicalFolder name="callbacks" displayName="callbacks" projectFiles="true">
           <itemPath>include/molpher_API/callbacks/EraseSubtreeCallback.hpp</itemPath>
           <itemPath>include/molpher_API/callbacks/TraverseCallback.hpp</itemPath>
+          <itemPath>include/molpher_API/callbacks/callbacks.i</itemPath>
         </logicalFolder>
         <logicalFolder name="operations" displayName="operations" projectFiles="true">
           <itemPath>include/molpher_API/operations/ExtendTreeOper.hpp</itemPath>
@@ -18,11 +19,13 @@
           <itemPath>include/molpher_API/operations/SortMorphsOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/TraverseOper.hpp</itemPath>
           <itemPath>include/molpher_API/operations/TreeOperation.hpp</itemPath>
+          <itemPath>include/molpher_API/operations/operations.i</itemPath>
         </logicalFolder>
         <itemPath>include/molpher_API/ExplorationParameters.hpp</itemPath>
         <itemPath>include/molpher_API/ExplorationTree.hpp</itemPath>
         <itemPath>include/molpher_API/ExplorationTreeSnapshot.hpp</itemPath>
         <itemPath>include/molpher_API/MolpherMol.hpp</itemPath>
+        <itemPath>include/molpher_API/molpher_API.i</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>include/path_finders/BasicPathFinder.hpp</itemPath>
@@ -59,10 +62,10 @@
       <logicalFolder name="f2" displayName="path_finders" projectFiles="true">
         <itemPath>src/path_finders/BasicPathFinder.cpp</itemPath>
       </logicalFolder>
-      <logicalFolder name="f3" displayName="python" projectFiles="true">
-        <itemPath>src/python/molpher.i</itemPath>
-        <itemPath>src/python/molpher_wrap.cpp</itemPath>
-        <itemPath>src/python/molpher_wrap.h</itemPath>
+      <logicalFolder name="python" displayName="python" projectFiles="true">
+        <itemPath>python/molpher.i</itemPath>
+        <itemPath>python/molpher_wrap.cpp</itemPath>
+        <itemPath>python/molpher_wrap.h</itemPath>
       </logicalFolder>
       <itemPath>src/morphing_functions.cpp</itemPath>
     </logicalFolder>
@@ -90,6 +93,7 @@
     <Elem>src/molpher_API/operations</Elem>
     <Elem>include/molpher_API/callbacks</Elem>
     <Elem>src/molpher_API/callbacks</Elem>
+    <Elem>python</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -282,6 +286,10 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="python/molpher_wrap.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="python/molpher_wrap.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/molpher_API/ExplorationParameters.cpp"
             ex="false"
             tool="1"
@@ -355,12 +363,6 @@
             ex="false"
             tool="1"
             flavor2="0">
-      </item>
-      <item path="src/python/molpher.i" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="src/python/molpher_wrap.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/python/molpher_wrap.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/APITests.cpp" ex="false" tool="1" flavor2="0">
       </item>
