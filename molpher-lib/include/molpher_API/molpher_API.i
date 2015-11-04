@@ -12,9 +12,10 @@
 // callbacks
 %include "callbacks/callbacks.i"
 
-// the MoplherMolecule wrapper class
+// MoplherMol wrapper
+%newobject MolpherMol::copy();
 %ignore MolpherMol::MolpherMol(MolpherMolecule& mol);
-%ignore MolpherMol::getMol();
+%ignore MolpherMol::fetchMolpherMolecule();
 %ignore MolpherMol::MolpherMol();
 %ignore MolpherMol::operator=(const MolpherMol&);
 %include "MolpherMol.hpp"

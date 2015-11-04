@@ -32,12 +32,21 @@ void APITests::tearDown() {
 
 void APITests::testMolpherMolClass() {
     MolpherMol mol;
-    CPPUNIT_ASSERT_EQUAL(decltype(mol.getMol().itersWithoutDistImprovement)(0), mol.getMol().itersWithoutDistImprovement);
-    CPPUNIT_ASSERT_EQUAL(decltype(mol.getMol().smile)(""), mol.getMol().smile);
+    CPPUNIT_ASSERT_EQUAL(decltype(mol.fetchMolpherMolecule().itersWithoutDistImprovement)(0), mol.fetchMolpherMolecule().itersWithoutDistImprovement);
+    CPPUNIT_ASSERT_EQUAL(decltype(mol.fetchMolpherMolecule().smile)(""), mol.fetchMolpherMolecule().smile);
     MolpherMol mol2;
-    mol2.getMol().smile = "CC";
+    mol2.fetchMolpherMolecule().smile = "CC";
     mol = mol2;
-    CPPUNIT_ASSERT_EQUAL(mol.getMol().smile, mol2.getMol().smile);
+    CPPUNIT_ASSERT_EQUAL(mol.getSMILES(), mol2.getSMILES());
+    
+    MolpherMol mol3(mol2);
+    CPPUNIT_ASSERT_EQUAL(mol2.getSMILES(), mol3.getSMILES());
+    
+    CPPUNIT_ASSERT((mol.isBound() && mol2.isBound() && mol3.isBound()) == false);
+    
+    MolpherMol* mol4 = mol.copy();
+    CPPUNIT_ASSERT_EQUAL(mol.getSMILES(), mol4->getSMILES());
+    CPPUNIT_ASSERT(&mol != mol4);
 }
 
 void APITests::testExplorationParametersClass() {
@@ -86,14 +95,14 @@ void APITests::testExploration() {
     CPPUNIT_ASSERT(1 == leaves.size());
     CPPUNIT_ASSERT(!morphs.empty());
     for (auto morph : morphs) {
-        CPPUNIT_ASSERT(morph.getMol().IsValid());
+        CPPUNIT_ASSERT(morph.fetchMolpherMolecule().IsValid());
     }
     
     tree.sortMorphs();
     morphs = tree.getCandidateMorphs();
     MolpherMolecule* previous = nullptr;
     for (auto& morph : morphs) {
-        MolpherMolecule& molpher_molecule = morph.getMol();
+        MolpherMolecule& molpher_molecule = morph.fetchMolpherMolecule();
         CPPUNIT_ASSERT(molpher_molecule.IsValid());
         if (previous) {
             CPPUNIT_ASSERT(molpher_molecule.distToTarget >= previous->distToTarget);

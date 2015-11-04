@@ -27,7 +27,7 @@ void ExplorationParameters::setSourceMol(const std::string& mol) {
 }
 
 void ExplorationParameters::setSourceMol(MolpherMol& mol) {
-    iterSnapshot.source = mol.getMol();
+    iterSnapshot.source = mol.fetchMolpherMolecule();
 }
 
 MolpherMol* ExplorationParameters::getSourceMol() {

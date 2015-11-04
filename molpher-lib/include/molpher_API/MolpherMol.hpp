@@ -20,11 +20,14 @@ private:
 public:
     MolpherMol();
     MolpherMol(MolpherMolecule& mol);
-//    MolpherMol(const std::string &smile);
+    MolpherMol(const MolpherMol& other);
     ~MolpherMol();
-    MolpherMolecule& getMol() const; // TODO: maybe get rid of this
     
     MolpherMol& operator=(const MolpherMol&);
+    
+    MolpherMolecule& fetchMolpherMolecule() const; // TODO: maybe get rid of this
+    bool isBound() const;
+    MolpherMol* copy() const;
     
     std::string getSMILES();
     double getDistToTarget();

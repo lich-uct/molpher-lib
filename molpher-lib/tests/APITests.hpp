@@ -20,7 +20,7 @@ class PrintMolCallback : public TraverseCallback {
         }
 
         virtual void processMorph(MolpherMol& morph) {
-            std::cout << morph.getSMILES() + " -- parent: " + morph.getMol().parentSmile << std::endl;
+            std::cout << morph.getSMILES() + " -- parent: " + morph.fetchMolpherMolecule().parentSmile << std::endl;
         }
 
 };

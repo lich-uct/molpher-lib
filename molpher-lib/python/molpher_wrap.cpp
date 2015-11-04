@@ -7568,6 +7568,31 @@ SWIGINTERN PyObject *TraverseCallback_swigregister(PyObject *SWIGUNUSEDPARM(self
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_MolpherMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  MolpherMol *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_MolpherMol",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_MolpherMol,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MolpherMol" "', argument " "1"" of type '" "MolpherMol const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MolpherMol" "', argument " "1"" of type '" "MolpherMol const &""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  result = (MolpherMol *)new MolpherMol((MolpherMol const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_MolpherMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *arg1 = (MolpherMol *) 0 ;
@@ -7589,7 +7614,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MolpherMol_getMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MolpherMol_fetchMolpherMolecule(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *arg1 = (MolpherMol *) 0 ;
   void *argp1 = 0 ;
@@ -7597,14 +7622,58 @@ SWIGINTERN PyObject *_wrap_MolpherMol_getMol(PyObject *SWIGUNUSEDPARM(self), PyO
   PyObject * obj0 = 0 ;
   MolpherMolecule *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_getMol",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_fetchMolpherMolecule",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getMol" "', argument " "1"" of type '" "MolpherMol const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_fetchMolpherMolecule" "', argument " "1"" of type '" "MolpherMol const *""'"); 
   }
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
-  result = (MolpherMolecule *) &((MolpherMol const *)arg1)->getMol();
+  result = (MolpherMolecule *) &((MolpherMol const *)arg1)->fetchMolpherMolecule();
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMolecule, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_isBound(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_isBound",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_isBound" "', argument " "1"" of type '" "MolpherMol const *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  result = (bool)((MolpherMol const *)arg1)->isBound();
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_copy(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  MolpherMol *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_copy",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_copy" "', argument " "1"" of type '" "MolpherMol const *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  result = (MolpherMol *)((MolpherMol const *)arg1)->copy();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -12562,8 +12631,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TraverseCallback_processMorph", _wrap_TraverseCallback_processMorph, METH_VARARGS, NULL},
 	 { (char *)"disown_TraverseCallback", _wrap_disown_TraverseCallback, METH_VARARGS, NULL},
 	 { (char *)"TraverseCallback_swigregister", TraverseCallback_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_MolpherMol", _wrap_new_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"delete_MolpherMol", _wrap_delete_MolpherMol, METH_VARARGS, NULL},
-	 { (char *)"MolpherMol_getMol", _wrap_MolpherMol_getMol, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_fetchMolpherMolecule", _wrap_MolpherMol_fetchMolpherMolecule, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_isBound", _wrap_MolpherMol_isBound, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_copy", _wrap_MolpherMol_copy, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getSMILES", _wrap_MolpherMol_getSMILES, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getDistToTarget", _wrap_MolpherMol_getDistToTarget, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getParentSMILES", _wrap_MolpherMol_getParentSMILES, METH_VARARGS, NULL},

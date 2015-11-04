@@ -9,7 +9,7 @@ TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback,
     // no action
 }
 
-TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback, MolpherMol& root) : TraverseOper(expTree, callback, root.getMol())  {
+TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback, MolpherMol& root) : TraverseOper(expTree, callback, root.fetchMolpherMolecule())  {
     // no action
 }
 
