@@ -19,8 +19,6 @@
  * Runs the original morphing algorithm 
  * using the BasicPathFinder implementation.
  * 
- * Note: Don't forget to call SAScore::loadData() before the call!
- * 
  * @param storagePath name of the folder where the results are saved
  * @param jobFile path to a job file or XML template
  * @param thredCnt max. number of threads to create
@@ -30,6 +28,9 @@ void run_path_finder(
     , const std::string &jobFile
     , int threadCnt
 ) {
+    
+    SAScore::loadData();
+    
     tbb::task_group_context pathFinderTbbCtx;
     std::string dummy;
     std::string storagePathnonconst(storagePath);
