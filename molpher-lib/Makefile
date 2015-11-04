@@ -55,6 +55,7 @@ CCADMIN=CCadmin
 # Misc directories
 LIB_DIR=$(CND_BASEDIR)/lib/
 SRC_DIR=$(CND_BASEDIR)/src/
+BUILD_PYTHON=$(findstring Python,$(CONF))
 
 # build
 build: .build-post
@@ -63,8 +64,10 @@ build: .build-post
 # Add your pre 'build' code here...
 	mkdir -p $(LIB_DIR)
 	mkdir -p $(LIB_DIR)/shared/
+ifneq (,$(BUILD_PYTHON))
 	mkdir -p $(LIB_DIR)/python/
 	swig -python -Wall -c++ -outdir $(LIB_DIR)/python -o $(CND_BASEDIR)/python/molpher_wrap.cpp $(CND_BASEDIR)/python/molpher.i
+endif
 	
 .build-post: .build-impl
 # Add your post 'build' code here...
@@ -75,8 +78,10 @@ build: .build-post
 	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/libmolpher-lib.so.$(MAJOR_VERSION)
 	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/libmolpher-lib.so.$(VERSION)
 	echo "export LD_LIBRARY_PATH=$(LIB_DIR)/shared/":'$${LD_LIBRARY_PATH}' > $(LIB_DIR)/set_environ.sh
+ifneq (,$(BUILD_PYTHON))
 	echo "export PYTHONPATH=$(LIB_DIR)/python/":'$${PYTHONPATH}' >> $(LIB_DIR)/set_environ.sh
 	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/python/_molpher.so
+endif
 
 # clean
 clean: .clean-post

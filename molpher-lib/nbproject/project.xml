@@ -18,6 +18,10 @@
             </sourceRootList>
             <confList>
                 <confElem>
+                    <name>Linux64_Debug_Python</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
                     <name>Linux64_Debug</name>
                     <type>2</type>
                 </confElem>
