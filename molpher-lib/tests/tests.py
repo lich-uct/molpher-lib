@@ -137,7 +137,7 @@ class TestMolpherAPI(unittest.TestCase):
                 print(morph.getSMILES())
                 
         tree = ExplorationTree("CCO")
-        tree.setThreadCount(2)
+        tree.setThreadCount(1) # callbacks are not thread safe at the moment
         tree.generateMorphs()
         tree.filterMorphs(FilterMoprhsOper.WEIGHT)
         tree.extend()
