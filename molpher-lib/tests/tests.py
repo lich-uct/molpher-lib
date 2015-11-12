@@ -1,6 +1,6 @@
 
 import unittest
-from molpher import *
+from molpher.core import *
 
 class TestMolpherAPI(unittest.TestCase):
     

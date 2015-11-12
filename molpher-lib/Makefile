@@ -44,8 +44,8 @@
 # NOCDDL
 
 # Version Info
-VERSION=1.0
-MAJOR_VERSION=1
+VERSION=0.1
+MAJOR_VERSION=0
 
 # Environment 
 MKDIR=mkdir
@@ -55,6 +55,12 @@ CCADMIN=CCadmin
 # Misc directories
 LIB_DIR=$(CND_BASEDIR)/lib/
 SRC_DIR=$(CND_BASEDIR)/src/
+PYTHON_PACKAGE_DIR=$(CND_BASEDIR)/python/molpher/
+
+# filenames
+LIBNAME="libmolpher.so"
+
+# bundle python extensions into the build?
 BUILD_PYTHON=$(findstring Python,$(CONF))
 
 # build
@@ -63,29 +69,34 @@ build: .build-post
 .build-pre:
 # Add your pre 'build' code here...
 	mkdir -p $(LIB_DIR)
-	mkdir -p $(LIB_DIR)/shared/
 ifneq (,$(BUILD_PYTHON))
-	mkdir -p $(LIB_DIR)/python/
-	swig -python -Wall -c++ -outdir $(LIB_DIR)/python -o $(CND_BASEDIR)/python/molpher_wrap.cpp $(CND_BASEDIR)/python/molpher.i
+	mkdir -p $(PYTHON_PACKAGE_DIR)
+	touch $(PYTHON_PACKAGE_DIR)/__init__.py
+	swig -python -Wall -c++ -outdir $(PYTHON_PACKAGE_DIR) -o $(SRC_DIR)/python/molpher_wrap.cpp $(CND_BASEDIR)/src/python/molpher.i
 endif
 	
 .build-post: .build-impl
 # Add your post 'build' code here...
-	cp $(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/libmolpher-lib.so $(LIB_DIR)
-	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbb.so.2 $(LIB_DIR)/shared/libtbb.so.2
-	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc.so.2 $(LIB_DIR)/shared/libtbbmalloc.so.2
-	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy.so.2 $(LIB_DIR)/shared/libtbbmalloc_proxy.so.2
-	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/libmolpher-lib.so.$(MAJOR_VERSION)
-	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/libmolpher-lib.so.$(VERSION)
-	echo "export LD_LIBRARY_PATH=$(LIB_DIR)/shared/":'$${LD_LIBRARY_PATH}' > $(LIB_DIR)/set_environ.sh
+	cp $(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/*.so $(LIB_DIR)/$(LIBNAME)
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbb.so.2 $(LIB_DIR)/libtbb.so.2
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc.so.2 $(LIB_DIR)/libtbbmalloc.so.2
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy.so.2 $(LIB_DIR)/libtbbmalloc_proxy.so.2
+	ln -sf $(LIB_DIR)/$(LIBNAME) $(LIB_DIR)/$(LIBNAME).$(MAJOR_VERSION)
+	ln -sf $(LIB_DIR)/$(LIBNAME) $(LIB_DIR)/$(LIBNAME).$(VERSION)
+	ln -sf $(CND_BASEDIR)/../backend/SAScore.dat $(CND_BASEDIR)/SAScore.dat
+	echo "export LD_LIBRARY_PATH=$(LIB_DIR)":'$${LD_LIBRARY_PATH}' > $(CND_BASEDIR)/set_env.sh
 ifneq (,$(BUILD_PYTHON))
-	echo "export PYTHONPATH=$(LIB_DIR)/python/":'$${PYTHONPATH}' >> $(LIB_DIR)/set_environ.sh
-	ln -sf $(LIB_DIR)/libmolpher-lib.so $(LIB_DIR)/python/_molpher.so
+	echo "export PYTHONPATH=$(CND_BASEDIR)/python/":'$${PYTHONPATH}' >> $(CND_BASEDIR)/set_env.sh
+	ln -sf $(LIB_DIR)/$(LIBNAME) $(PYTHON_PACKAGE_DIR)/_core.so
 endif
 
 # clean
 clean: .clean-post
+	rm -f $(CND_BASEDIR)/set_env.sh
 	rm -rf $(LIB_DIR)
+ifneq (,$(BUILD_PYTHON))
+	rm -rf $(PYTHON_PACKAGE_DIR)
+endif
 
 .clean-pre:
 # Add your pre 'clean' code here...

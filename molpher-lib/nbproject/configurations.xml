@@ -63,9 +63,9 @@
         <itemPath>src/path_finders/BasicPathFinder.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="python" displayName="python" projectFiles="true">
-        <itemPath>python/molpher.i</itemPath>
-        <itemPath>python/molpher_wrap.cpp</itemPath>
-        <itemPath>python/molpher_wrap.h</itemPath>
+        <itemPath>src/python/molpher.i</itemPath>
+        <itemPath>src/python/molpher_wrap.cpp</itemPath>
+        <itemPath>src/python/molpher_wrap.h</itemPath>
       </logicalFolder>
       <itemPath>src/morphing_functions.cpp</itemPath>
     </logicalFolder>
@@ -86,14 +86,13 @@
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
+      <itemPath>setup.py</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>include/molpher_API/operations</Elem>
-    <Elem>src/molpher_API/operations</Elem>
-    <Elem>include/molpher_API/callbacks</Elem>
-    <Elem>src/molpher_API/callbacks</Elem>
     <Elem>python</Elem>
+    <Elem>src</Elem>
+    <Elem>include</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -286,10 +285,6 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="python/molpher_wrap.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="python/molpher_wrap.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/molpher_API/ExplorationParameters.cpp"
             ex="false"
             tool="1"
@@ -363,6 +358,10 @@
             ex="false"
             tool="1"
             flavor2="0">
+      </item>
+      <item path="src/python/molpher_wrap.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/python/molpher_wrap.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/APITests.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -573,10 +572,6 @@
             ex="false"
             tool="3"
             flavor2="0">
-      </item>
-      <item path="python/molpher.i" ex="true" tool="1" flavor2="8">
-      </item>
-      <item path="python/molpher_wrap.cpp" ex="true" tool="1" flavor2="8">
       </item>
       <item path="src/molpher_API/ExplorationParameters.cpp"
             ex="false"

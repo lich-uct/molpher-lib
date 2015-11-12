@@ -1,4 +1,4 @@
-%module(directors="1") molpher
+%module(directors="1") core
 %feature("director") TreeOperation;
 %feature("director") TraverseCallback;
 %include "stl.i"

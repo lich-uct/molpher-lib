@@ -10,11 +10,9 @@
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>include/molpher_API/operations</sourceRootElem>
-                <sourceRootElem>src/molpher_API/operations</sourceRootElem>
-                <sourceRootElem>include/molpher_API/callbacks</sourceRootElem>
-                <sourceRootElem>src/molpher_API/callbacks</sourceRootElem>
                 <sourceRootElem>python</sourceRootElem>
+                <sourceRootElem>src</sourceRootElem>
+                <sourceRootElem>include</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

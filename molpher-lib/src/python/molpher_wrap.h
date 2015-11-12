@@ -8,8 +8,8 @@
  * interface file instead.
  * ----------------------------------------------------------------------------- */
 
-#ifndef SWIG_molpher_WRAP_H_
-#define SWIG_molpher_WRAP_H_
+#ifndef SWIG_core_WRAP_H_
+#define SWIG_core_WRAP_H_
 
 #include <map>
 #include <string>
