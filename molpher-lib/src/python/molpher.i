@@ -9,9 +9,10 @@
 #include "extensions/SAScore.h"
 %}
 
-%init %{
-    SAScore::loadData();
-%}
+//%init %{
+//    SAScore::loadData();
+//%}
+%include "../../../backend/extensions/SAScore.h"
 
 // complete morphing function
 %include "include/morphing_functions.hpp";

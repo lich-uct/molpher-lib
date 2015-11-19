@@ -24,12 +24,16 @@ SAScore * SAScore::instance = NULL;
  Static method for loading data into instance.
  */
 void SAScore::loadData() {
+    SAScore::loadData("SAScore.dat");
+}
+
+void SAScore::loadData(const std::string& path) {
     std::cout << "loading SAScore.dat ... ";
     
     SAScore* inst = getInstance();
     std::ifstream myfile;
     // This file must be in the same directory as exe file of server.
-    myfile.open("SAScore.dat");
+    myfile.open(path.c_str());
     if (!myfile.good()) {
         // problem when opening the file
         throw std::runtime_error("Can't load sascore file SAScore.dat");
@@ -53,6 +57,7 @@ void SAScore::loadData() {
     std::cout << "done" << std::endl;
     return;
 }
+
 
 /*
  This class is implemented as singleton.

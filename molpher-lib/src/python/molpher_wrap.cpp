@@ -3428,28 +3428,30 @@ namespace Swig {
 #define SWIGTYPE_p_MolpherMol swig_types[10]
 #define SWIGTYPE_p_MolpherMolecule swig_types[11]
 #define SWIGTYPE_p_PruneTreeOper swig_types[12]
-#define SWIGTYPE_p_SmileSet swig_types[13]
-#define SWIGTYPE_p_SmileVector swig_types[14]
-#define SWIGTYPE_p_SortMoprhsOper swig_types[15]
-#define SWIGTYPE_p_TraverseCallback swig_types[16]
-#define SWIGTYPE_p_TraverseOper swig_types[17]
-#define SWIGTYPE_p_TreeOperation swig_types[18]
-#define SWIGTYPE_p_allocator_type swig_types[19]
-#define SWIGTYPE_p_char swig_types[20]
-#define SWIGTYPE_p_const_reference swig_types[21]
-#define SWIGTYPE_p_difference_type swig_types[22]
-#define SWIGTYPE_p_p_PyObject swig_types[23]
-#define SWIGTYPE_p_reference swig_types[24]
-#define SWIGTYPE_p_size_type swig_types[25]
-#define SWIGTYPE_p_std__allocatorT_MolpherMol_t swig_types[26]
-#define SWIGTYPE_p_std__allocatorT_bool_t swig_types[27]
-#define SWIGTYPE_p_std__invalid_argument swig_types[28]
-#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[29]
-#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[30]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[31]
-#define SWIGTYPE_p_value_type swig_types[32]
-static swig_type_info *swig_types[34];
-static swig_module_info swig_module = {swig_types, 33, 0, 0, 0, 0};
+#define SWIGTYPE_p_RDKit__ROMol swig_types[13]
+#define SWIGTYPE_p_SAScore swig_types[14]
+#define SWIGTYPE_p_SmileSet swig_types[15]
+#define SWIGTYPE_p_SmileVector swig_types[16]
+#define SWIGTYPE_p_SortMoprhsOper swig_types[17]
+#define SWIGTYPE_p_TraverseCallback swig_types[18]
+#define SWIGTYPE_p_TraverseOper swig_types[19]
+#define SWIGTYPE_p_TreeOperation swig_types[20]
+#define SWIGTYPE_p_allocator_type swig_types[21]
+#define SWIGTYPE_p_char swig_types[22]
+#define SWIGTYPE_p_const_reference swig_types[23]
+#define SWIGTYPE_p_difference_type swig_types[24]
+#define SWIGTYPE_p_p_PyObject swig_types[25]
+#define SWIGTYPE_p_reference swig_types[26]
+#define SWIGTYPE_p_size_type swig_types[27]
+#define SWIGTYPE_p_std__allocatorT_MolpherMol_t swig_types[28]
+#define SWIGTYPE_p_std__allocatorT_bool_t swig_types[29]
+#define SWIGTYPE_p_std__invalid_argument swig_types[30]
+#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[31]
+#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[32]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[33]
+#define SWIGTYPE_p_value_type swig_types[34]
+static swig_type_info *swig_types[36];
+static swig_module_info swig_module = {swig_types, 35, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3941,6 +3943,9 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include "extensions/SAScore.h"
 
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
 {
@@ -4144,9 +4149,6 @@ SWIG_From_std_string  (const std::string& s)
 {
   return SWIG_FromCharPtrAndSize(s.data(), s.size());
 }
-
-
-  #define SWIG_From_double   PyFloat_FromDouble 
 
 
 namespace swig {  
@@ -6437,6 +6439,167 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
   SWIG_TypeNewClientData(SWIGTYPE_p_swig__SwigPyIterator, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_SAScore_getInstance(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SAScore *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":SAScore_getInstance")) SWIG_fail;
+  result = (SAScore *)SAScore::getInstance();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SAScore, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SAScore_destroyInstance(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SAScore *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":SAScore_destroyInstance")) SWIG_fail;
+  result = (SAScore *)SAScore::destroyInstance();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SAScore, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_SAScore(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SAScore *arg1 = (SAScore *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_SAScore",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SAScore, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SAScore" "', argument " "1"" of type '" "SAScore *""'"); 
+  }
+  arg1 = reinterpret_cast< SAScore * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SAScore_getScore(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SAScore *arg1 = (SAScore *) 0 ;
+  RDKit::ROMol *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:SAScore_getScore",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SAScore, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SAScore_getScore" "', argument " "1"" of type '" "SAScore *""'"); 
+  }
+  arg1 = reinterpret_cast< SAScore * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_RDKit__ROMol,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SAScore_getScore" "', argument " "2"" of type '" "RDKit::ROMol &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SAScore_getScore" "', argument " "2"" of type '" "RDKit::ROMol &""'"); 
+  }
+  arg2 = reinterpret_cast< RDKit::ROMol * >(argp2);
+  result = (double)(arg1)->getScore(*arg2);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SAScore_loadData__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  
+  if (!PyArg_ParseTuple(args,(char *)":SAScore_loadData")) SWIG_fail;
+  SAScore::loadData();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SAScore_loadData__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:SAScore_loadData",&obj0)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SAScore_loadData" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SAScore_loadData" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  SAScore::loadData((std::string const &)*arg1);
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SAScore_loadData(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_SAScore_loadData__SWIG_0(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_SAScore_loadData__SWIG_1(self, args);
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'SAScore_loadData'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    SAScore::loadData()\n"
+    "    SAScore::loadData(std::string const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *SAScore_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_SAScore, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -12590,6 +12753,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
+	 { (char *)"SAScore_getInstance", _wrap_SAScore_getInstance, METH_VARARGS, NULL},
+	 { (char *)"SAScore_destroyInstance", _wrap_SAScore_destroyInstance, METH_VARARGS, NULL},
+	 { (char *)"delete_SAScore", _wrap_delete_SAScore, METH_VARARGS, NULL},
+	 { (char *)"SAScore_getScore", _wrap_SAScore_getScore, METH_VARARGS, NULL},
+	 { (char *)"SAScore_loadData", _wrap_SAScore_loadData, METH_VARARGS, NULL},
+	 { (char *)"SAScore_swigregister", SAScore_swigregister, METH_VARARGS, NULL},
 	 { (char *)"run_path_finder", _wrap_run_path_finder, METH_VARARGS, NULL},
 	 { (char *)"new_TreeOperation", _wrap_new_TreeOperation, METH_VARARGS, NULL},
 	 { (char *)"delete_TreeOperation", _wrap_delete_TreeOperation, METH_VARARGS, NULL},
@@ -12779,6 +12948,8 @@ static swig_type_info _swigt__p_MoleculeVector = {"_p_MoleculeVector", "Molecule
 static swig_type_info _swigt__p_MolpherMol = {"_p_MolpherMol", "std::vector< MolpherMol >::value_type *|MolpherMol *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_MolpherMolecule = {"_p_MolpherMolecule", "MolpherMolecule *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PruneTreeOper = {"_p_PruneTreeOper", "PruneTreeOper *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_RDKit__ROMol = {"_p_RDKit__ROMol", "RDKit::ROMol *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_SAScore = {"_p_SAScore", "SAScore *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SmileSet = {"_p_SmileSet", "SmileSet *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SmileVector = {"_p_SmileVector", "SmileVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_SortMoprhsOper = {"_p_SortMoprhsOper", "SortMoprhsOper *", 0, 0, (void*)0, 0};
@@ -12814,6 +12985,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_MolpherMol,
   &_swigt__p_MolpherMolecule,
   &_swigt__p_PruneTreeOper,
+  &_swigt__p_RDKit__ROMol,
+  &_swigt__p_SAScore,
   &_swigt__p_SmileSet,
   &_swigt__p_SmileVector,
   &_swigt__p_SortMoprhsOper,
@@ -12849,6 +13022,8 @@ static swig_cast_info _swigc__p_MoleculeVector[] = {  {&_swigt__p_MoleculeVector
 static swig_cast_info _swigc__p_MolpherMol[] = {  {&_swigt__p_MolpherMol, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MolpherMolecule[] = {  {&_swigt__p_MolpherMolecule, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PruneTreeOper[] = {  {&_swigt__p_PruneTreeOper, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_RDKit__ROMol[] = {  {&_swigt__p_RDKit__ROMol, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_SAScore[] = {  {&_swigt__p_SAScore, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SmileSet[] = {  {&_swigt__p_SmileSet, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SmileVector[] = {  {&_swigt__p_SmileVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SortMoprhsOper[] = {  {&_swigt__p_SortMoprhsOper, 0, 0, 0},{0, 0, 0, 0}};
@@ -12884,6 +13059,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_MolpherMol,
   _swigc__p_MolpherMolecule,
   _swigc__p_PruneTreeOper,
+  _swigc__p_RDKit__ROMol,
+  _swigc__p_SAScore,
   _swigc__p_SmileSet,
   _swigc__p_SmileVector,
   _swigc__p_SortMoprhsOper,
@@ -13588,9 +13765,6 @@ SWIG_init(void) {
 #endif
   
   SWIG_InstallConstants(d,swig_const_table);
-  
-  
-  SAScore::loadData();
   
   SWIG_Python_SetConstant(d, "FilterMoprhsOper_PROBABILITY",SWIG_From_int(static_cast< int >(FilterMoprhsOper::PROBABILITY)));
   SWIG_Python_SetConstant(d, "FilterMoprhsOper_WEIGHT",SWIG_From_int(static_cast< int >(FilterMoprhsOper::WEIGHT)));

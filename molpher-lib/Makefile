@@ -55,7 +55,7 @@ CCADMIN=CCadmin
 # Misc directories
 LIB_DIR=$(CND_BASEDIR)/lib/
 SRC_DIR=$(CND_BASEDIR)/src/
-PYTHON_PACKAGE_DIR=$(CND_BASEDIR)/python/molpher/
+PYTHON_PACKAGE_DIR=$(CND_BASEDIR)/python/molpher/swig_wrappers
 
 # filenames
 LIBNAME="libmolpher.so"
@@ -69,34 +69,35 @@ build: .build-post
 .build-pre:
 # Add your pre 'build' code here...
 	mkdir -p $(LIB_DIR)
-ifneq (,$(BUILD_PYTHON))
-	mkdir -p $(PYTHON_PACKAGE_DIR)
-	touch $(PYTHON_PACKAGE_DIR)/__init__.py
+#	mkdir -p $(PYTHON_PACKAGE_DIR)/lib/
 	swig -python -Wall -c++ -outdir $(PYTHON_PACKAGE_DIR) -o $(SRC_DIR)/python/molpher_wrap.cpp $(CND_BASEDIR)/src/python/molpher.i
-endif
 	
 .build-post: .build-impl
 # Add your post 'build' code here...
-	cp $(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/*.so $(LIB_DIR)/$(LIBNAME)
-	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbb.so.2 $(LIB_DIR)/libtbb.so.2
-	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc.so.2 $(LIB_DIR)/libtbbmalloc.so.2
-	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy.so.2 $(LIB_DIR)/libtbbmalloc_proxy.so.2
-	ln -sf $(LIB_DIR)/$(LIBNAME) $(LIB_DIR)/$(LIBNAME).$(MAJOR_VERSION)
-	ln -sf $(LIB_DIR)/$(LIBNAME) $(LIB_DIR)/$(LIBNAME).$(VERSION)
-	ln -sf $(CND_BASEDIR)/../backend/SAScore.dat $(CND_BASEDIR)/SAScore.dat
+	cp $(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/*.so $(LIB_DIR)$(LIBNAME)
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbb.so.2 $(LIB_DIR)libtbb.so.2
+	ln -sf $(LIB_DIR)libtbb.so.2 $(LIB_DIR)libtbb.so
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc.so.2 $(LIB_DIR)libtbbmalloc.so.2
+	ln -sf $(LIB_DIR)libtbbmalloc.so.2 $(LIB_DIR)libtbbmalloc.so
+	cp ../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy.so.2 $(LIB_DIR)libtbbmalloc_proxy.so.2
+	ln -sf $(LIB_DIR)libtbbmalloc_proxy.so.2 $(LIB_DIR)libtbbmalloc_proxy.so
+	ln -sf $(LIB_DIR)$(LIBNAME) $(LIB_DIR)$(LIBNAME).$(MAJOR_VERSION)
+	ln -sf $(LIB_DIR)$(LIBNAME) $(LIB_DIR)$(LIBNAME).$(VERSION)
+#	cp $(LIB_DIR)$(LIBNAME) $(PYTHON_PACKAGE_DIR)/lib/
+#	cp $(LIB_DIR)/*.so.2 $(PYTHON_PACKAGE_DIR)/lib/
+	cp $(CND_BASEDIR)/../backend/SAScore.dat $(PYTHON_PACKAGE_DIR)/SAScore.dat
 	echo "export LD_LIBRARY_PATH=$(LIB_DIR)":'$${LD_LIBRARY_PATH}' > $(CND_BASEDIR)/set_env.sh
 ifneq (,$(BUILD_PYTHON))
 	echo "export PYTHONPATH=$(CND_BASEDIR)/python/":'$${PYTHONPATH}' >> $(CND_BASEDIR)/set_env.sh
-	ln -sf $(LIB_DIR)/$(LIBNAME) $(PYTHON_PACKAGE_DIR)/_core.so
+	ln -sf $(LIB_DIR)$(LIBNAME) $(PYTHON_PACKAGE_DIR)/_core.so
 endif
 
 # clean
 clean: .clean-post
 	rm -f $(CND_BASEDIR)/set_env.sh
 	rm -rf $(LIB_DIR)
-ifneq (,$(BUILD_PYTHON))
-	rm -rf $(PYTHON_PACKAGE_DIR)
-endif
+#	rm -f $(PYTHON_PACKAGE_DIR)/lib/*.so
+	rm -f $(PYTHON_PACKAGE_DIR)/*.dat
 
 .clean-pre:
 # Add your pre 'clean' code here...
