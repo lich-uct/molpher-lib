@@ -1,6 +1,6 @@
 
 import unittest
-from molpher.core import *
+from molpher.swig_wrappers.core import *
 
 class TestMolpherAPI(unittest.TestCase):
     

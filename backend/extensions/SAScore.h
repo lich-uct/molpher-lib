@@ -28,6 +28,7 @@ public:
     virtual ~SAScore();
     double getScore(RDKit::ROMol &mol);
     static void loadData();
+    static void loadData(const std::string& path);
 
 private:
 

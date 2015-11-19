@@ -161,6 +161,44 @@ class SwigPyIterator(_object):
 SwigPyIterator_swigregister = _core.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+class SAScore(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SAScore, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, SAScore, name)
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined")
+    __repr__ = _swig_repr
+    __swig_getmethods__["getInstance"] = lambda x: _core.SAScore_getInstance
+    if _newclass:
+        getInstance = staticmethod(_core.SAScore_getInstance)
+    __swig_getmethods__["destroyInstance"] = lambda x: _core.SAScore_destroyInstance
+    if _newclass:
+        destroyInstance = staticmethod(_core.SAScore_destroyInstance)
+    __swig_destroy__ = _core.delete_SAScore
+    __del__ = lambda self: None
+
+    def getScore(self, mol):
+        return _core.SAScore_getScore(self, mol)
+    __swig_getmethods__["loadData"] = lambda x: _core.SAScore_loadData
+    if _newclass:
+        loadData = staticmethod(_core.SAScore_loadData)
+SAScore_swigregister = _core.SAScore_swigregister
+SAScore_swigregister(SAScore)
+
+def SAScore_getInstance():
+    return _core.SAScore_getInstance()
+SAScore_getInstance = _core.SAScore_getInstance
+
+def SAScore_destroyInstance():
+    return _core.SAScore_destroyInstance()
+SAScore_destroyInstance = _core.SAScore_destroyInstance
+
+def SAScore_loadData(*args):
+    return _core.SAScore_loadData(*args)
+SAScore_loadData = _core.SAScore_loadData
+
 
 def run_path_finder(storagePath, jobFile, threadCnt):
     return _core.run_path_finder(storagePath, jobFile, threadCnt)

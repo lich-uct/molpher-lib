@@ -1,3 +1,3 @@
-. set_env.sh
+#. set_env.sh
 ulimit -c unlimited
-python3 -m unittest -v tests/tests.py
+python -m unittest -v tests/tests.py
