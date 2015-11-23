@@ -462,7 +462,7 @@
             <linkerLibFileItem>../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy.so.2</linkerLibFileItem>
             <linkerLibFileItem>../dependencies/tbb/lib/intel64/gcc4.4/libtbbmalloc.so.2</linkerLibFileItem>
           </linkerLibItems>
-          <commandLine>-lpthread</commandLine>
+          <commandLine>-lpthread -Wl,-rpath,'$$ORIGIN/'</commandLine>
         </linkerTool>
       </compileType>
       <folder path="TestFiles/f1">

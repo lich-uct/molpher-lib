@@ -86,9 +86,8 @@ build: .build-post
 #	cp $(LIB_DIR)$(LIBNAME) $(PYTHON_PACKAGE_DIR)/lib/
 #	cp $(LIB_DIR)/*.so.2 $(PYTHON_PACKAGE_DIR)/lib/
 	cp $(CND_BASEDIR)/../backend/SAScore.dat $(PYTHON_PACKAGE_DIR)/SAScore.dat
-	echo "export LD_LIBRARY_PATH=$(LIB_DIR)":'$${LD_LIBRARY_PATH}' > $(CND_BASEDIR)/set_env.sh
 ifneq (,$(BUILD_PYTHON))
-	echo "export PYTHONPATH=$(CND_BASEDIR)/python/":'$${PYTHONPATH}' >> $(CND_BASEDIR)/set_env.sh
+	echo "export PYTHONPATH=$(CND_BASEDIR)/python/":'$${PYTHONPATH}' > $(CND_BASEDIR)/set_env.sh
 	ln -sf $(LIB_DIR)$(LIBNAME) $(PYTHON_PACKAGE_DIR)/_core.so
 endif
 
@@ -96,8 +95,9 @@ endif
 clean: .clean-post
 	rm -f $(CND_BASEDIR)/set_env.sh
 	rm -rf $(LIB_DIR)
-#	rm -f $(PYTHON_PACKAGE_DIR)/lib/*.so
 	rm -f $(PYTHON_PACKAGE_DIR)/*.dat
+	rm -f dist/*.whl
+	rm -rf python/*.egg-info
 
 .clean-pre:
 # Add your pre 'clean' code here...

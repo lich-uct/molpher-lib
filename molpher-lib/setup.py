@@ -12,7 +12,7 @@ my_cpp_module = Extension('molpher.swig_wrappers._core',
                                 , os.path.abspath('../dependencies/tbb/include')
                                 ],
                            library_dirs=[os.path.join(os.getcwd(), 'lib/')],
-                           libraries=['molpher', 'tbb', 'tbbmalloc_proxy', 'tbbmalloc'],
+                           libraries=['molpher'],
                            runtime_library_dirs=[os.path.join(os.getcwd(), 'lib/')],
                            extra_compile_args=['-std=c++11'],
                            language='c++'
