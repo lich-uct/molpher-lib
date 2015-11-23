@@ -19,9 +19,9 @@ my_cpp_module = Extension('molpher.swig_wrappers._core',
                            )
 
 setup (name = 'molpher',
-       version = '0.1',
+       version = '0.1.a0.dev',
        author      = "Martin Sicho",
-       description = "Molpher Python wrappers.",
+       description = "Molpher-lib Python wrappers and library.",
        package_dir={'': 'python/'},
        packages=find_packages('python/'),
        ext_modules = [my_cpp_module,],
