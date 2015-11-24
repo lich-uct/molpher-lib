@@ -1,4 +1,6 @@
 
+#include "inout.h"
+
 #include "molpher_API/operations/PruneTreeOper.hpp"
 #include "molpher_API/callbacks/EraseSubtreeCallback.hpp"
 
@@ -37,9 +39,17 @@ void PruneTreeOper::PruneTree::operator()(const std::string& smile, tbb::paralle
             acParent->second.descendants.erase(smile);
             acParent.release();
             ac.release();
+            
+            std::stringstream ss;
+            ss << "Pruned: " << smile;
+            SynchCout(ss.str());
 
             eraseSubtree(smile);
         } else {
+            std::stringstream ss;
+            ss << "Pruned (descendants only): " << smile;
+            SynchCout(ss.str());
+            
             std::set<std::string>::const_iterator it;
             for (it = ac->second.descendants.begin();
                     it != ac->second.descendants.end(); it++) {

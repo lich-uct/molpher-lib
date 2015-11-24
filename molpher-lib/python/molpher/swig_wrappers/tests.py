@@ -2,6 +2,8 @@
 import unittest
 from pkg_resources import resource_filename
 from molpher.swig_wrappers.core import *
+import time
+import shutil
 
 class TestMolpherAPI(unittest.TestCase):
     
@@ -135,7 +137,9 @@ class TestMolpherAPI(unittest.TestCase):
         class MyCallback(TraverseCallback):
             
             def processMorph(self, morph):
-                print(morph.getSMILES())
+                time.sleep(0.020)
+                morph.getSMILES()
+                
                 
         tree = ExplorationTree("CCO")
         tree.setThreadCount(2)
@@ -145,24 +149,26 @@ class TestMolpherAPI(unittest.TestCase):
         callback = MyCallback()
         traverse = TraverseOper(tree, callback)
         count = 0
-        while count < 50:
+        while count < 30:
             traverse();
             count += 1
         
-#    def testContinuousExploration(self):
-#        etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
-#        tree = ExplorationTree.createFromSnapshot(etreeSnap)
-#        tree.setThreadCount(2)
-#        
-#        for i in range(5):
-#            tree.generateMorphs()
-#            tree.sortMorphs()
-#            tree.filterMorphs(FilterMoprhsOper.ALL)
-#            tree.extend()
-#            tree.prune()
-#            print("Iteration {0}".format(i+1))
-#            
-#        run_path_finder("./Results", self.test_files_path + "test-template.xml", 2)
+    def testContinuousExploration(self):
+        etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
+        tree = ExplorationTree.createFromSnapshot(etreeSnap)
+        tree.setThreadCount(2)
+        
+        for i in range(5):
+            tree.generateMorphs()
+            tree.sortMorphs()
+            tree.filterMorphs(FilterMoprhsOper.ALL)
+            tree.extend()
+            tree.prune()
+            print("Iteration {0}".format(i+1))
+            
+        results = 'testing_snapshots'
+        run_path_finder(results, self.test_files_path + "test-template.xml", 2)
+        shutil.rmtree(results)
 
 if __name__ == '__main__':
     unittest.main()
