@@ -86,6 +86,7 @@ build: .build-post
 #	cp $(LIB_DIR)$(LIBNAME) $(PYTHON_PACKAGE_DIR)/lib/
 #	cp $(LIB_DIR)/*.so.2 $(PYTHON_PACKAGE_DIR)/lib/
 	cp $(CND_BASEDIR)/../backend/SAScore.dat $(PYTHON_PACKAGE_DIR)/SAScore.dat
+	ln -sf $(CND_BASEDIR)/../backend/SAScore.dat SAScore.dat
 ifneq (,$(BUILD_PYTHON))
 	echo "export PYTHONPATH=$(CND_BASEDIR)/python/":'$${PYTHONPATH}' > $(CND_BASEDIR)/set_env.sh
 	ln -sf $(LIB_DIR)$(LIBNAME) $(PYTHON_PACKAGE_DIR)/_core.so
@@ -143,9 +144,6 @@ test: .test-post
 # Add your pre 'test' code here...
 
 .test-post: .test-impl
-	echo "Running python tests..."
-	bash tests/run_python_tests.sh
-
 
 # help
 help: .help-post

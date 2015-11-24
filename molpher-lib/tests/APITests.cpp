@@ -119,7 +119,11 @@ void APITests::testExploration() {
     
     PrintMolCallback callback;
     TraverseOper traverse(tree, callback);
-    traverse();
+    int counter = 0;
+    while (counter < 50) {
+        traverse();
+        counter++;
+    }
     
     tree.prune();
 }

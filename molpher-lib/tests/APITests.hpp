@@ -9,6 +9,8 @@
 #define	MISCTESTS_HPP
 
 #include <cppunit/extensions/HelperMacros.h>
+#include <chrono>
+#include <thread>
 
 #include "molpher_API/callbacks/TraverseCallback.hpp"
 
@@ -20,6 +22,7 @@ class PrintMolCallback : public TraverseCallback {
         }
 
         virtual void processMorph(MolpherMol& morph) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
             std::cout << morph.getSMILES() + " -- parent: " + morph.fetchMolpherMolecule().parentSmile << std::endl;
         }
 

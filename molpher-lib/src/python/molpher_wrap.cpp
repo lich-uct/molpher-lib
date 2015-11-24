@@ -10,6 +10,7 @@
 
 #define SWIGPYTHON
 #define SWIG_DIRECTORS
+#define SWIG_PYTHON_THREADS
 #define SWIG_PYTHON_DIRECTOR_NO_VTABLE
 
 
@@ -5536,23 +5537,27 @@ SwigDirector_TreeOperation::~SwigDirector_TreeOperation() {
 }
 
 void SwigDirector_TreeOperation::operator ()() {
-  if (!swig_get_self()) {
-    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call TreeOperation.__init__.");
-  }
+  SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+  {
+    if (!swig_get_self()) {
+      Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call TreeOperation.__init__.");
+    }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 0;
-  const char * const swig_method_name = "__call__";
-  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
-  swig::SwigVar_PyObject result = PyObject_CallFunction(method, NULL, NULL);
+    const size_t swig_method_index = 0;
+    const char * const swig_method_name = "__call__";
+    PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+    swig::SwigVar_PyObject result = PyObject_CallFunction(method, NULL, NULL);
 #else
-  swig::SwigVar_PyObject result = PyObject_CallMethod(swig_get_self(), (char *) "__call__", NULL);
+    swig::SwigVar_PyObject result = PyObject_CallMethod(swig_get_self(), (char *) "__call__", NULL);
 #endif
-  if (!result) {
-    PyObject *error = PyErr_Occurred();
-    if (error) {
-      Swig::DirectorMethodException::raise("Error detected when calling 'TreeOperation.__call__'");
+    if (!result) {
+      PyObject *error = PyErr_Occurred();
+      if (error) {
+        Swig::DirectorMethodException::raise("Error detected when calling 'TreeOperation.__call__'");
+      }
     }
   }
+  SWIG_PYTHON_THREAD_END_BLOCK;
 }
 
 
@@ -5567,25 +5572,29 @@ SwigDirector_TraverseCallback::~SwigDirector_TraverseCallback() {
 }
 
 void SwigDirector_TraverseCallback::processMorph(MolpherMol &morph) {
-  swig::SwigVar_PyObject obj0;
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&morph), SWIGTYPE_p_MolpherMol,  0 );
-  if (!swig_get_self()) {
-    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call TraverseCallback.__init__.");
-  }
+  SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+  {
+    swig::SwigVar_PyObject obj0;
+    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&morph), SWIGTYPE_p_MolpherMol,  0 );
+    if (!swig_get_self()) {
+      Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call TraverseCallback.__init__.");
+    }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 0;
-  const char * const swig_method_name = "processMorph";
-  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
-  swig::SwigVar_PyObject result = PyObject_CallFunction(method, (char *)"(O)" ,(PyObject *)obj0);
+    const size_t swig_method_index = 0;
+    const char * const swig_method_name = "processMorph";
+    PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+    swig::SwigVar_PyObject result = PyObject_CallFunction(method, (char *)"(O)" ,(PyObject *)obj0);
 #else
-  swig::SwigVar_PyObject result = PyObject_CallMethod(swig_get_self(), (char *)"processMorph", (char *)"(O)" ,(PyObject *)obj0);
+    swig::SwigVar_PyObject result = PyObject_CallMethod(swig_get_self(), (char *)"processMorph", (char *)"(O)" ,(PyObject *)obj0);
 #endif
-  if (!result) {
-    PyObject *error = PyErr_Occurred();
-    if (error) {
-      Swig::DirectorMethodException::raise("Error detected when calling 'TraverseCallback.processMorph'");
+    if (!result) {
+      PyObject *error = PyErr_Occurred();
+      if (error) {
+        Swig::DirectorMethodException::raise("Error detected when calling 'TraverseCallback.processMorph'");
+      }
     }
   }
+  SWIG_PYTHON_THREAD_END_BLOCK;
 }
 
 
@@ -5605,7 +5614,11 @@ SWIGINTERN PyObject *_wrap_delete_SwigPyIterator(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SwigPyIterator" "', argument " "1"" of type '" "swig::SwigPyIterator *""'"); 
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -5628,7 +5641,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_value(PyObject *SWIGUNUSEDPARM(self), 
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (PyObject *)((swig::SwigPyIterator const *)arg1)->value();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (PyObject *)((swig::SwigPyIterator const *)arg1)->value();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -5669,7 +5686,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_incr__SWIG_0(PyObject *SWIGUNUSEDPARM(
   } 
   arg2 = static_cast< size_t >(val2);
   try {
-    result = (swig::SwigPyIterator *)(arg1)->incr(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)(arg1)->incr(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -5701,7 +5722,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_incr__SWIG_1(PyObject *SWIGUNUSEDPARM(
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (swig::SwigPyIterator *)(arg1)->incr();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)(arg1)->incr();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -5788,7 +5813,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_decr__SWIG_0(PyObject *SWIGUNUSEDPARM(
   } 
   arg2 = static_cast< size_t >(val2);
   try {
-    result = (swig::SwigPyIterator *)(arg1)->decr(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)(arg1)->decr(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -5820,7 +5849,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_decr__SWIG_1(PyObject *SWIGUNUSEDPARM(
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (swig::SwigPyIterator *)(arg1)->decr();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)(arg1)->decr();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -5910,7 +5943,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_distance(PyObject *SWIGUNUSEDPARM(self
   }
   arg2 = reinterpret_cast< swig::SwigPyIterator * >(argp2);
   try {
-    result = ((swig::SwigPyIterator const *)arg1)->distance((swig::SwigPyIterator const &)*arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = ((swig::SwigPyIterator const *)arg1)->distance((swig::SwigPyIterator const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::invalid_argument &_e) {
     SWIG_Python_Raise(SWIG_NewPointerObj((new std::invalid_argument(static_cast< const std::invalid_argument& >(_e))),SWIGTYPE_p_std__invalid_argument,SWIG_POINTER_OWN), "std::invalid_argument", SWIGTYPE_p_std__invalid_argument); SWIG_fail;
@@ -5950,7 +5987,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_equal(PyObject *SWIGUNUSEDPARM(self), 
   }
   arg2 = reinterpret_cast< swig::SwigPyIterator * >(argp2);
   try {
-    result = (bool)((swig::SwigPyIterator const *)arg1)->equal((swig::SwigPyIterator const &)*arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (bool)((swig::SwigPyIterator const *)arg1)->equal((swig::SwigPyIterator const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::invalid_argument &_e) {
     SWIG_Python_Raise(SWIG_NewPointerObj((new std::invalid_argument(static_cast< const std::invalid_argument& >(_e))),SWIGTYPE_p_std__invalid_argument,SWIG_POINTER_OWN), "std::invalid_argument", SWIGTYPE_p_std__invalid_argument); SWIG_fail;
@@ -5977,7 +6018,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_copy(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SwigPyIterator_copy" "', argument " "1"" of type '" "swig::SwigPyIterator const *""'"); 
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
-  result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->copy();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->copy();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -6000,7 +6045,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_next(PyObject *SWIGUNUSEDPARM(self), P
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (PyObject *)(arg1)->next();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (PyObject *)(arg1)->next();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6032,7 +6081,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___next__(PyObject *SWIGUNUSEDPARM(self
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (PyObject *)(arg1)->__next__();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (PyObject *)(arg1)->__next__();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6064,7 +6117,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_previous(PyObject *SWIGUNUSEDPARM(self
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (PyObject *)(arg1)->previous();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (PyObject *)(arg1)->previous();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6105,7 +6162,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_advance(PyObject *SWIGUNUSEDPARM(self)
   } 
   arg2 = static_cast< ptrdiff_t >(val2);
   try {
-    result = (swig::SwigPyIterator *)(arg1)->advance(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)(arg1)->advance(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6148,7 +6209,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___eq__(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SwigPyIterator___eq__" "', argument " "2"" of type '" "swig::SwigPyIterator const &""'"); 
   }
   arg2 = reinterpret_cast< swig::SwigPyIterator * >(argp2);
-  result = (bool)((swig::SwigPyIterator const *)arg1)->operator ==((swig::SwigPyIterator const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((swig::SwigPyIterator const *)arg1)->operator ==((swig::SwigPyIterator const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -6182,7 +6247,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___ne__(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SwigPyIterator___ne__" "', argument " "2"" of type '" "swig::SwigPyIterator const &""'"); 
   }
   arg2 = reinterpret_cast< swig::SwigPyIterator * >(argp2);
-  result = (bool)((swig::SwigPyIterator const *)arg1)->operator !=((swig::SwigPyIterator const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((swig::SwigPyIterator const *)arg1)->operator !=((swig::SwigPyIterator const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -6214,7 +6283,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___iadd__(PyObject *SWIGUNUSEDPARM(self
   } 
   arg2 = static_cast< ptrdiff_t >(val2);
   try {
-    result = (swig::SwigPyIterator *) &(arg1)->operator +=(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *) &(arg1)->operator +=(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6255,7 +6328,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___isub__(PyObject *SWIGUNUSEDPARM(self
   } 
   arg2 = static_cast< ptrdiff_t >(val2);
   try {
-    result = (swig::SwigPyIterator *) &(arg1)->operator -=(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *) &(arg1)->operator -=(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6296,7 +6373,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___add__(PyObject *SWIGUNUSEDPARM(self)
   } 
   arg2 = static_cast< ptrdiff_t >(val2);
   try {
-    result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->operator +(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->operator +(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6337,7 +6418,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___sub____SWIG_0(PyObject *SWIGUNUSEDPA
   } 
   arg2 = static_cast< ptrdiff_t >(val2);
   try {
-    result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->operator -(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->operator -(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6380,7 +6465,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___sub____SWIG_1(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SwigPyIterator___sub__" "', argument " "2"" of type '" "swig::SwigPyIterator const &""'"); 
   }
   arg2 = reinterpret_cast< swig::SwigPyIterator * >(argp2);
-  result = ((swig::SwigPyIterator const *)arg1)->operator -((swig::SwigPyIterator const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((swig::SwigPyIterator const *)arg1)->operator -((swig::SwigPyIterator const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_ptrdiff_t(static_cast< ptrdiff_t >(result));
   return resultobj;
 fail:
@@ -6447,7 +6536,11 @@ SWIGINTERN PyObject *_wrap_SAScore_getInstance(PyObject *SWIGUNUSEDPARM(self), P
   SAScore *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":SAScore_getInstance")) SWIG_fail;
-  result = (SAScore *)SAScore::getInstance();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (SAScore *)SAScore::getInstance();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SAScore, 0 |  0 );
   return resultobj;
 fail:
@@ -6460,7 +6553,11 @@ SWIGINTERN PyObject *_wrap_SAScore_destroyInstance(PyObject *SWIGUNUSEDPARM(self
   SAScore *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":SAScore_destroyInstance")) SWIG_fail;
-  result = (SAScore *)SAScore::destroyInstance();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (SAScore *)SAScore::destroyInstance();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SAScore, 0 |  0 );
   return resultobj;
 fail:
@@ -6481,7 +6578,11 @@ SWIGINTERN PyObject *_wrap_delete_SAScore(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SAScore" "', argument " "1"" of type '" "SAScore *""'"); 
   }
   arg1 = reinterpret_cast< SAScore * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6515,7 +6616,11 @@ SWIGINTERN PyObject *_wrap_SAScore_getScore(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SAScore_getScore" "', argument " "2"" of type '" "RDKit::ROMol &""'"); 
   }
   arg2 = reinterpret_cast< RDKit::ROMol * >(argp2);
-  result = (double)(arg1)->getScore(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)(arg1)->getScore(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -6527,7 +6632,11 @@ SWIGINTERN PyObject *_wrap_SAScore_loadData__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
   PyObject *resultobj = 0;
   
   if (!PyArg_ParseTuple(args,(char *)":SAScore_loadData")) SWIG_fail;
-  SAScore::loadData();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    SAScore::loadData();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6553,7 +6662,11 @@ SWIGINTERN PyObject *_wrap_SAScore_loadData__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     }
     arg1 = ptr;
   }
-  SAScore::loadData((std::string const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    SAScore::loadData((std::string const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -6644,7 +6757,11 @@ SWIGINTERN PyObject *_wrap_run_path_finder(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "run_path_finder" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
-  run_path_finder((std::string const &)*arg1,(std::string const &)*arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    run_path_finder((std::string const &)*arg1,(std::string const &)*arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res1)) delete arg1;
   if (SWIG_IsNewObj(res2)) delete arg2;
@@ -6676,14 +6793,18 @@ SWIGINTERN PyObject *_wrap_new_TreeOperation__SWIG_0(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TreeOperation" "', argument " "2"" of type '" "ExplorationTree &""'"); 
   }
   arg2 = reinterpret_cast< ExplorationTree * >(argp2);
-  if ( arg1 != Py_None ) {
-    /* subclassed */
-    result = (TreeOperation *)new SwigDirector_TreeOperation(arg1,*arg2); 
-  } else {
-    SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
-    SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if ( arg1 != Py_None ) {
+      /* subclassed */
+      result = (TreeOperation *)new SwigDirector_TreeOperation(arg1,*arg2); 
+    } else {
+      SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+      SWIG_fail;
+    }
+    
+    SWIG_PYTHON_THREAD_END_ALLOW;
   }
-  
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TreeOperation, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -6699,14 +6820,18 @@ SWIGINTERN PyObject *_wrap_new_TreeOperation__SWIG_1(PyObject *SWIGUNUSEDPARM(se
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_TreeOperation",&obj0)) SWIG_fail;
   arg1 = obj0;
-  if ( arg1 != Py_None ) {
-    /* subclassed */
-    result = (TreeOperation *)new SwigDirector_TreeOperation(arg1); 
-  } else {
-    SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
-    SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if ( arg1 != Py_None ) {
+      /* subclassed */
+      result = (TreeOperation *)new SwigDirector_TreeOperation(arg1); 
+    } else {
+      SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+      SWIG_fail;
+    }
+    
+    SWIG_PYTHON_THREAD_END_ALLOW;
   }
-  
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TreeOperation, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -6768,7 +6893,11 @@ SWIGINTERN PyObject *_wrap_delete_TreeOperation(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TreeOperation" "', argument " "1"" of type '" "TreeOperation *""'"); 
   }
   arg1 = reinterpret_cast< TreeOperation * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6823,7 +6952,11 @@ SWIGINTERN PyObject *_wrap_TreeOperation_getTree(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TreeOperation_getTree" "', argument " "1"" of type '" "TreeOperation *""'"); 
   }
   arg1 = reinterpret_cast< TreeOperation * >(argp1);
-  result = (ExplorationTree *)(arg1)->getTree();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExplorationTree *)(arg1)->getTree();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTree, 0 |  0 );
   return resultobj;
 fail:
@@ -6856,7 +6989,11 @@ SWIGINTERN PyObject *_wrap_TreeOperation_setTree(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TreeOperation_setTree" "', argument " "2"" of type '" "ExplorationTree &""'"); 
   }
   arg2 = reinterpret_cast< ExplorationTree * >(argp2);
-  (arg1)->setTree(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setTree(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6878,10 +7015,14 @@ SWIGINTERN PyObject *_wrap_disown_TreeOperation(PyObject *SWIGUNUSEDPARM(self), 
   }
   arg1 = reinterpret_cast< TreeOperation * >(argp1);
   {
-    Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
-    if (director) director->swig_disown();
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    {
+      Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
+      if (director) director->swig_disown();
+    }
+    
+    SWIG_PYTHON_THREAD_END_ALLOW;
   }
-  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6913,7 +7054,11 @@ SWIGINTERN PyObject *_wrap_new_FindLeavesOper(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FindLeavesOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (FindLeavesOper *)new FindLeavesOper(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (FindLeavesOper *)new FindLeavesOper(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FindLeavesOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -6934,7 +7079,11 @@ SWIGINTERN PyObject *_wrap_FindLeavesOper___call__(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FindLeavesOper___call__" "', argument " "1"" of type '" "FindLeavesOper *""'"); 
   }
   arg1 = reinterpret_cast< FindLeavesOper * >(argp1);
-  (arg1)->operator ()();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->operator ()();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6955,7 +7104,11 @@ SWIGINTERN PyObject *_wrap_delete_FindLeavesOper(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_FindLeavesOper" "', argument " "1"" of type '" "FindLeavesOper *""'"); 
   }
   arg1 = reinterpret_cast< FindLeavesOper * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6987,7 +7140,11 @@ SWIGINTERN PyObject *_wrap_new_GenerateMoprhsOper(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GenerateMoprhsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (GenerateMoprhsOper *)new GenerateMoprhsOper(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (GenerateMoprhsOper *)new GenerateMoprhsOper(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_GenerateMoprhsOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7008,7 +7165,11 @@ SWIGINTERN PyObject *_wrap_GenerateMoprhsOper___call__(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GenerateMoprhsOper___call__" "', argument " "1"" of type '" "GenerateMoprhsOper *""'"); 
   }
   arg1 = reinterpret_cast< GenerateMoprhsOper * >(argp1);
-  (arg1)->operator ()();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->operator ()();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7029,7 +7190,11 @@ SWIGINTERN PyObject *_wrap_delete_GenerateMoprhsOper(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_GenerateMoprhsOper" "', argument " "1"" of type '" "GenerateMoprhsOper *""'"); 
   }
   arg1 = reinterpret_cast< GenerateMoprhsOper * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7061,7 +7226,11 @@ SWIGINTERN PyObject *_wrap_new_SortMoprhsOper(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SortMoprhsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (SortMoprhsOper *)new SortMoprhsOper(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (SortMoprhsOper *)new SortMoprhsOper(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SortMoprhsOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7082,7 +7251,11 @@ SWIGINTERN PyObject *_wrap_SortMoprhsOper___call__(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SortMoprhsOper___call__" "', argument " "1"" of type '" "SortMoprhsOper *""'"); 
   }
   arg1 = reinterpret_cast< SortMoprhsOper * >(argp1);
-  (arg1)->operator ()();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->operator ()();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7103,7 +7276,11 @@ SWIGINTERN PyObject *_wrap_delete_SortMoprhsOper(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SortMoprhsOper" "', argument " "1"" of type '" "SortMoprhsOper *""'"); 
   }
   arg1 = reinterpret_cast< SortMoprhsOper * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7135,7 +7312,11 @@ SWIGINTERN PyObject *_wrap_new_FilterMoprhsOper__SWIG_0(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FilterMoprhsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (FilterMoprhsOper *)new FilterMoprhsOper(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (FilterMoprhsOper *)new FilterMoprhsOper(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FilterMoprhsOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7169,7 +7350,11 @@ SWIGINTERN PyObject *_wrap_new_FilterMoprhsOper__SWIG_1(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_FilterMoprhsOper" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  result = (FilterMoprhsOper *)new FilterMoprhsOper(*arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (FilterMoprhsOper *)new FilterMoprhsOper(*arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FilterMoprhsOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7236,7 +7421,11 @@ SWIGINTERN PyObject *_wrap_FilterMoprhsOper___call__(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FilterMoprhsOper___call__" "', argument " "1"" of type '" "FilterMoprhsOper *""'"); 
   }
   arg1 = reinterpret_cast< FilterMoprhsOper * >(argp1);
-  (arg1)->operator ()();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->operator ()();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7257,7 +7446,11 @@ SWIGINTERN PyObject *_wrap_delete_FilterMoprhsOper(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_FilterMoprhsOper" "', argument " "1"" of type '" "FilterMoprhsOper *""'"); 
   }
   arg1 = reinterpret_cast< FilterMoprhsOper * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7289,7 +7482,11 @@ SWIGINTERN PyObject *_wrap_new_ExtendTreeOper(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ExtendTreeOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (ExtendTreeOper *)new ExtendTreeOper(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExtendTreeOper *)new ExtendTreeOper(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExtendTreeOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7310,7 +7507,11 @@ SWIGINTERN PyObject *_wrap_ExtendTreeOper___call__(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtendTreeOper___call__" "', argument " "1"" of type '" "ExtendTreeOper *""'"); 
   }
   arg1 = reinterpret_cast< ExtendTreeOper * >(argp1);
-  (arg1)->operator ()();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->operator ()();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7331,7 +7532,11 @@ SWIGINTERN PyObject *_wrap_delete_ExtendTreeOper(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExtendTreeOper" "', argument " "1"" of type '" "ExtendTreeOper *""'"); 
   }
   arg1 = reinterpret_cast< ExtendTreeOper * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7363,7 +7568,11 @@ SWIGINTERN PyObject *_wrap_new_PruneTreeOper(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_PruneTreeOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (PruneTreeOper *)new PruneTreeOper(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (PruneTreeOper *)new PruneTreeOper(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PruneTreeOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7384,7 +7593,11 @@ SWIGINTERN PyObject *_wrap_PruneTreeOper___call__(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PruneTreeOper___call__" "', argument " "1"" of type '" "PruneTreeOper *""'"); 
   }
   arg1 = reinterpret_cast< PruneTreeOper * >(argp1);
-  (arg1)->operator ()();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->operator ()();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7405,7 +7618,11 @@ SWIGINTERN PyObject *_wrap_delete_PruneTreeOper(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_PruneTreeOper" "', argument " "1"" of type '" "PruneTreeOper *""'"); 
   }
   arg1 = reinterpret_cast< PruneTreeOper * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7449,7 +7666,11 @@ SWIGINTERN PyObject *_wrap_new_TraverseOper__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TraverseOper" "', argument " "2"" of type '" "TraverseCallback &""'"); 
   }
   arg2 = reinterpret_cast< TraverseCallback * >(argp2);
-  result = (TraverseOper *)new TraverseOper(*arg1,*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (TraverseOper *)new TraverseOper(*arg1,*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TraverseOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7498,7 +7719,11 @@ SWIGINTERN PyObject *_wrap_new_TraverseOper__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TraverseOper" "', argument " "3"" of type '" "MolpherMol &""'"); 
   }
   arg3 = reinterpret_cast< MolpherMol * >(argp3);
-  result = (TraverseOper *)new TraverseOper(*arg1,*arg2,*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (TraverseOper *)new TraverseOper(*arg1,*arg2,*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TraverseOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7574,7 +7799,11 @@ SWIGINTERN PyObject *_wrap_TraverseOper___call__(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TraverseOper___call__" "', argument " "1"" of type '" "TraverseOper *""'"); 
   }
   arg1 = reinterpret_cast< TraverseOper * >(argp1);
-  (arg1)->operator ()();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->operator ()();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7595,7 +7824,11 @@ SWIGINTERN PyObject *_wrap_delete_TraverseOper(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TraverseOper" "', argument " "1"" of type '" "TraverseOper *""'"); 
   }
   arg1 = reinterpret_cast< TraverseOper * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7618,14 +7851,18 @@ SWIGINTERN PyObject *_wrap_new_TraverseCallback(PyObject *SWIGUNUSEDPARM(self), 
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_TraverseCallback",&obj0)) SWIG_fail;
   arg1 = obj0;
-  if ( arg1 != Py_None ) {
-    /* subclassed */
-    result = (TraverseCallback *)new SwigDirector_TraverseCallback(arg1); 
-  } else {
-    SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
-    SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if ( arg1 != Py_None ) {
+      /* subclassed */
+      result = (TraverseCallback *)new SwigDirector_TraverseCallback(arg1); 
+    } else {
+      SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+      SWIG_fail;
+    }
+    
+    SWIG_PYTHON_THREAD_END_ALLOW;
   }
-  
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TraverseCallback, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7646,7 +7883,11 @@ SWIGINTERN PyObject *_wrap_delete_TraverseCallback(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TraverseCallback" "', argument " "1"" of type '" "TraverseCallback *""'"); 
   }
   arg1 = reinterpret_cast< TraverseCallback * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7713,10 +7954,14 @@ SWIGINTERN PyObject *_wrap_disown_TraverseCallback(PyObject *SWIGUNUSEDPARM(self
   }
   arg1 = reinterpret_cast< TraverseCallback * >(argp1);
   {
-    Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
-    if (director) director->swig_disown();
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    {
+      Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
+      if (director) director->swig_disown();
+    }
+    
+    SWIG_PYTHON_THREAD_END_ALLOW;
   }
-  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7748,7 +7993,11 @@ SWIGINTERN PyObject *_wrap_new_MolpherMol(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MolpherMol" "', argument " "1"" of type '" "MolpherMol const &""'"); 
   }
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
-  result = (MolpherMol *)new MolpherMol((MolpherMol const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (MolpherMol *)new MolpherMol((MolpherMol const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7769,7 +8018,11 @@ SWIGINTERN PyObject *_wrap_delete_MolpherMol(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MolpherMol" "', argument " "1"" of type '" "MolpherMol *""'"); 
   }
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7791,7 +8044,11 @@ SWIGINTERN PyObject *_wrap_MolpherMol_fetchMolpherMolecule(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_fetchMolpherMolecule" "', argument " "1"" of type '" "MolpherMol const *""'"); 
   }
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
-  result = (MolpherMolecule *) &((MolpherMol const *)arg1)->fetchMolpherMolecule();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (MolpherMolecule *) &((MolpherMol const *)arg1)->fetchMolpherMolecule();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMolecule, 0 |  0 );
   return resultobj;
 fail:
@@ -7813,7 +8070,11 @@ SWIGINTERN PyObject *_wrap_MolpherMol_isBound(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_isBound" "', argument " "1"" of type '" "MolpherMol const *""'"); 
   }
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
-  result = (bool)((MolpherMol const *)arg1)->isBound();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((MolpherMol const *)arg1)->isBound();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -7835,7 +8096,11 @@ SWIGINTERN PyObject *_wrap_MolpherMol_copy(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_copy" "', argument " "1"" of type '" "MolpherMol const *""'"); 
   }
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
-  result = (MolpherMol *)((MolpherMol const *)arg1)->copy();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (MolpherMol *)((MolpherMol const *)arg1)->copy();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, 0 |  0 );
   return resultobj;
 fail:
@@ -7857,7 +8122,11 @@ SWIGINTERN PyObject *_wrap_MolpherMol_getSMILES(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getSMILES" "', argument " "1"" of type '" "MolpherMol *""'"); 
   }
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
-  result = (arg1)->getSMILES();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->getSMILES();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
@@ -7879,7 +8148,11 @@ SWIGINTERN PyObject *_wrap_MolpherMol_getDistToTarget(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getDistToTarget" "', argument " "1"" of type '" "MolpherMol *""'"); 
   }
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
-  result = (double)(arg1)->getDistToTarget();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)(arg1)->getDistToTarget();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -7901,7 +8174,11 @@ SWIGINTERN PyObject *_wrap_MolpherMol_getParentSMILES(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getParentSMILES" "', argument " "1"" of type '" "MolpherMol *""'"); 
   }
   arg1 = reinterpret_cast< MolpherMol * >(argp1);
-  result = (arg1)->getParentSMILES();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->getParentSMILES();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
@@ -7921,7 +8198,11 @@ SWIGINTERN PyObject *_wrap_new_ExplorationParameters(PyObject *SWIGUNUSEDPARM(se
   ExplorationParameters *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ExplorationParameters")) SWIG_fail;
-  result = (ExplorationParameters *)new ExplorationParameters();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExplorationParameters *)new ExplorationParameters();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationParameters, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7943,7 +8224,11 @@ SWIGINTERN PyObject *_wrap_ExplorationParameters_valid(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_valid" "', argument " "1"" of type '" "ExplorationParameters *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
-  result = (bool)(arg1)->valid();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)(arg1)->valid();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -7978,7 +8263,11 @@ SWIGINTERN PyObject *_wrap_ExplorationParameters_setSourceMol__SWIG_0(PyObject *
     }
     arg2 = ptr;
   }
-  (arg1)->setSourceMol((std::string const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setSourceMol((std::string const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -8013,7 +8302,11 @@ SWIGINTERN PyObject *_wrap_ExplorationParameters_setSourceMol__SWIG_1(PyObject *
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationParameters_setSourceMol" "', argument " "2"" of type '" "MolpherMol &""'"); 
   }
   arg2 = reinterpret_cast< MolpherMol * >(argp2);
-  (arg1)->setSourceMol(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setSourceMol(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8084,7 +8377,11 @@ SWIGINTERN PyObject *_wrap_ExplorationParameters_getSourceMol(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_getSourceMol" "', argument " "1"" of type '" "ExplorationParameters *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
-  result = (MolpherMol *)(arg1)->getSourceMol();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (MolpherMol *)(arg1)->getSourceMol();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, 0 |  0 );
   return resultobj;
 fail:
@@ -8105,7 +8402,11 @@ SWIGINTERN PyObject *_wrap_delete_ExplorationParameters(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExplorationParameters" "', argument " "1"" of type '" "ExplorationParameters *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8140,7 +8441,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTreeSnapshot_load(PyObject *SWIGUNUSEDPARM
     arg1 = ptr;
   }
   try {
-    result = (ExplorationTreeSnapshot *)ExplorationTreeSnapshot::load((std::string const &)*arg1);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (ExplorationTreeSnapshot *)ExplorationTreeSnapshot::load((std::string const &)*arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::runtime_error &_e) {
     SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
@@ -8182,7 +8487,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTreeSnapshot_save(PyObject *SWIGUNUSEDPARM
     }
     arg2 = ptr;
   }
-  (arg1)->save((std::string const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->save((std::string const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -8205,7 +8514,11 @@ SWIGINTERN PyObject *_wrap_delete_ExplorationTreeSnapshot(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExplorationTreeSnapshot" "', argument " "1"" of type '" "ExplorationTreeSnapshot *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTreeSnapshot * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8236,7 +8549,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_iterator(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_iterator" "', argument " "1"" of type '" "std::vector< MolpherMol > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = (swig::SwigPyIterator *)std_vector_Sl_MolpherMol_Sg__iterator(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_vector_Sl_MolpherMol_Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -8258,7 +8575,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___nonzero__(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector___nonzero__" "', argument " "1"" of type '" "std::vector< MolpherMol > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = (bool)std_vector_Sl_MolpherMol_Sg____nonzero__((std::vector< MolpherMol > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_MolpherMol_Sg____nonzero__((std::vector< MolpherMol > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -8280,7 +8601,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___bool__(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector___bool__" "', argument " "1"" of type '" "std::vector< MolpherMol > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = (bool)std_vector_Sl_MolpherMol_Sg____bool__((std::vector< MolpherMol > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_MolpherMol_Sg____bool__((std::vector< MolpherMol > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -8302,7 +8627,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___len__(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector___len__" "', argument " "1"" of type '" "std::vector< MolpherMol > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = std_vector_Sl_MolpherMol_Sg____len__((std::vector< MolpherMol > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_MolpherMol_Sg____len__((std::vector< MolpherMol > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -8325,7 +8654,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_pop(PyObject *SWIGUNUSEDPARM(self), 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
   try {
-    result = std_vector_Sl_MolpherMol_Sg__pop(arg1);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = std_vector_Sl_MolpherMol_Sg__pop(arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8371,7 +8704,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___getslice__(PyObject *SWIGUNUSEDPAR
   } 
   arg3 = static_cast< std::vector< MolpherMol >::difference_type >(val3);
   try {
-    result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *)std_vector_Sl_MolpherMol_Sg____getslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *)std_vector_Sl_MolpherMol_Sg____getslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8433,7 +8770,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___setslice____SWIG_0(PyObject *SWIGU
     arg4 = ptr;
   }
   try {
-    std_vector_Sl_MolpherMol_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< MolpherMol,std::allocator< MolpherMol > > const &)*arg4);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_MolpherMol_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< MolpherMol,std::allocator< MolpherMol > > const &)*arg4);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8483,7 +8824,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___setslice____SWIG_1(PyObject *SWIGU
   } 
   arg3 = static_cast< std::vector< MolpherMol >::difference_type >(val3);
   try {
-    std_vector_Sl_MolpherMol_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_MolpherMol_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8597,7 +8942,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___delslice__(PyObject *SWIGUNUSEDPAR
   } 
   arg3 = static_cast< std::vector< MolpherMol >::difference_type >(val3);
   try {
-    std_vector_Sl_MolpherMol_Sg____delslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_MolpherMol_Sg____delslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8636,7 +8985,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___delitem____SWIG_0(PyObject *SWIGUN
   } 
   arg2 = static_cast< std::vector< MolpherMol >::difference_type >(val2);
   try {
-    std_vector_Sl_MolpherMol_Sg____delitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_MolpherMol_Sg____delitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8672,7 +9025,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___getitem____SWIG_0(PyObject *SWIGUN
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *)std_vector_Sl_MolpherMol_Sg____getitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *)std_vector_Sl_MolpherMol_Sg____getitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8724,7 +9081,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___setitem____SWIG_0(PyObject *SWIGUN
     arg3 = ptr;
   }
   try {
-    std_vector_Sl_MolpherMol_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< MolpherMol,std::allocator< MolpherMol > > const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_MolpherMol_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< MolpherMol,std::allocator< MolpherMol > > const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8764,7 +9125,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___setitem____SWIG_1(PyObject *SWIGUN
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_MolpherMol_Sg____setitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_MolpherMol_Sg____setitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8802,7 +9167,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___delitem____SWIG_1(PyObject *SWIGUN
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_MolpherMol_Sg____delitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_MolpherMol_Sg____delitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8891,7 +9260,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___getitem____SWIG_1(PyObject *SWIGUN
   } 
   arg2 = static_cast< std::vector< MolpherMol >::difference_type >(val2);
   try {
-    result = (std::vector< MolpherMol >::value_type *) &std_vector_Sl_MolpherMol_Sg____getitem____SWIG_1((std::vector< MolpherMol > const *)arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< MolpherMol >::value_type *) &std_vector_Sl_MolpherMol_Sg____getitem____SWIG_1((std::vector< MolpherMol > const *)arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8988,7 +9361,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector___setitem____SWIG_2(PyObject *SWIGUN
   }
   arg3 = reinterpret_cast< std::vector< MolpherMol >::value_type * >(argp3);
   try {
-    std_vector_Sl_MolpherMol_Sg____setitem____SWIG_2(arg1,arg2,(MolpherMol const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_MolpherMol_Sg____setitem____SWIG_2(arg1,arg2,(MolpherMol const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -9097,7 +9474,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_append(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMolVector_append" "', argument " "2"" of type '" "std::vector< MolpherMol >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< MolpherMol >::value_type * >(argp2);
-  std_vector_Sl_MolpherMol_Sg__append(arg1,(MolpherMol const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_MolpherMol_Sg__append(arg1,(MolpherMol const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9110,7 +9491,11 @@ SWIGINTERN PyObject *_wrap_new_MolpherMolVector__SWIG_0(PyObject *SWIGUNUSEDPARM
   std::vector< MolpherMol > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_MolpherMolVector")) SWIG_fail;
-  result = (std::vector< MolpherMol > *)new std::vector< MolpherMol >();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< MolpherMol > *)new std::vector< MolpherMol >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -9137,7 +9522,11 @@ SWIGINTERN PyObject *_wrap_new_MolpherMolVector__SWIG_1(PyObject *SWIGUNUSEDPARM
     }
     arg1 = ptr;
   }
-  result = (std::vector< MolpherMol > *)new std::vector< MolpherMol >((std::vector< MolpherMol > const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< MolpherMol > *)new std::vector< MolpherMol >((std::vector< MolpherMol > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -9161,7 +9550,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_empty(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_empty" "', argument " "1"" of type '" "std::vector< MolpherMol > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = (bool)((std::vector< MolpherMol > const *)arg1)->empty();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::vector< MolpherMol > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -9183,7 +9576,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_size(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_size" "', argument " "1"" of type '" "std::vector< MolpherMol > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = ((std::vector< MolpherMol > const *)arg1)->size();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< MolpherMol > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -9204,7 +9601,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_clear(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_clear" "', argument " "1"" of type '" "std::vector< MolpherMol > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  (arg1)->clear();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9237,7 +9638,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_swap(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMolVector_swap" "', argument " "2"" of type '" "std::vector< MolpherMol > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< MolpherMol > * >(argp2);
-  (arg1)->swap(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9259,7 +9664,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_get_allocator(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_get_allocator" "', argument " "1"" of type '" "std::vector< MolpherMol > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = ((std::vector< MolpherMol > const *)arg1)->get_allocator();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< MolpherMol > const *)arg1)->get_allocator();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< MolpherMol >::allocator_type(static_cast< const std::vector< MolpherMol >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_MolpherMol_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -9281,7 +9690,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_begin(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_begin" "', argument " "1"" of type '" "std::vector< MolpherMol > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = (arg1)->begin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< MolpherMol >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9304,7 +9717,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_end(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_end" "', argument " "1"" of type '" "std::vector< MolpherMol > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = (arg1)->end();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< MolpherMol >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9327,7 +9744,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_rbegin(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_rbegin" "', argument " "1"" of type '" "std::vector< MolpherMol > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = (arg1)->rbegin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< MolpherMol >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9350,7 +9771,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_rend(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_rend" "', argument " "1"" of type '" "std::vector< MolpherMol > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = (arg1)->rend();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< MolpherMol >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9373,7 +9798,11 @@ SWIGINTERN PyObject *_wrap_new_MolpherMolVector__SWIG_2(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_MolpherMolVector" "', argument " "1"" of type '" "std::vector< MolpherMol >::size_type""'");
   } 
   arg1 = static_cast< std::vector< MolpherMol >::size_type >(val1);
-  result = (std::vector< MolpherMol > *)new std::vector< MolpherMol >(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< MolpherMol > *)new std::vector< MolpherMol >(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -9394,7 +9823,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_pop_back(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_pop_back" "', argument " "1"" of type '" "std::vector< MolpherMol > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  (arg1)->pop_back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->pop_back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9424,7 +9857,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_resize__SWIG_0(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MolpherMolVector_resize" "', argument " "2"" of type '" "std::vector< MolpherMol >::size_type""'");
   } 
   arg2 = static_cast< std::vector< MolpherMol >::size_type >(val2);
-  (arg1)->resize(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9461,7 +9898,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_erase__SWIG_0(PyObject *SWIGUNUSEDPA
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MolpherMolVector_erase" "', argument " "2"" of type '" "std::vector< MolpherMol >::iterator""'");
     }
   }
-  result = std_vector_Sl_MolpherMol_Sg__erase__SWIG_0(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_MolpherMol_Sg__erase__SWIG_0(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< MolpherMol >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9514,7 +9955,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_erase__SWIG_1(PyObject *SWIGUNUSEDPA
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MolpherMolVector_erase" "', argument " "3"" of type '" "std::vector< MolpherMol >::iterator""'");
     }
   }
-  result = std_vector_Sl_MolpherMol_Sg__erase__SWIG_1(arg1,arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_MolpherMol_Sg__erase__SWIG_1(arg1,arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< MolpherMol >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9602,7 +10047,11 @@ SWIGINTERN PyObject *_wrap_new_MolpherMolVector__SWIG_3(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MolpherMolVector" "', argument " "2"" of type '" "std::vector< MolpherMol >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< MolpherMol >::value_type * >(argp2);
-  result = (std::vector< MolpherMol > *)new std::vector< MolpherMol >(arg1,(std::vector< MolpherMol >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< MolpherMol > *)new std::vector< MolpherMol >(arg1,(std::vector< MolpherMol >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -9694,7 +10143,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_push_back(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMolVector_push_back" "', argument " "2"" of type '" "std::vector< MolpherMol >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< MolpherMol >::value_type * >(argp2);
-  (arg1)->push_back((std::vector< MolpherMol >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->push_back((std::vector< MolpherMol >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9716,7 +10169,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_front(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_front" "', argument " "1"" of type '" "std::vector< MolpherMol > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = (std::vector< MolpherMol >::value_type *) &((std::vector< MolpherMol > const *)arg1)->front();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< MolpherMol >::value_type *) &((std::vector< MolpherMol > const *)arg1)->front();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, 0 |  0 );
   return resultobj;
 fail:
@@ -9738,7 +10195,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_back(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_back" "', argument " "1"" of type '" "std::vector< MolpherMol > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = (std::vector< MolpherMol >::value_type *) &((std::vector< MolpherMol > const *)arg1)->back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< MolpherMol >::value_type *) &((std::vector< MolpherMol > const *)arg1)->back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, 0 |  0 );
   return resultobj;
 fail:
@@ -9780,7 +10241,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_assign(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMolVector_assign" "', argument " "3"" of type '" "std::vector< MolpherMol >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< MolpherMol >::value_type * >(argp3);
-  (arg1)->assign(arg2,(std::vector< MolpherMol >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->assign(arg2,(std::vector< MolpherMol >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9822,7 +10287,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_resize__SWIG_1(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMolVector_resize" "', argument " "3"" of type '" "std::vector< MolpherMol >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< MolpherMol >::value_type * >(argp3);
-  (arg1)->resize(arg2,(std::vector< MolpherMol >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2,(std::vector< MolpherMol >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9925,7 +10394,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_insert__SWIG_0(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMolVector_insert" "', argument " "3"" of type '" "std::vector< MolpherMol >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< MolpherMol >::value_type * >(argp3);
-  result = std_vector_Sl_MolpherMol_Sg__insert__SWIG_0(arg1,arg2,(MolpherMol const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_MolpherMol_Sg__insert__SWIG_0(arg1,arg2,(MolpherMol const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< MolpherMol >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9983,7 +10456,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_insert__SWIG_1(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMolVector_insert" "', argument " "4"" of type '" "std::vector< MolpherMol >::value_type const &""'"); 
   }
   arg4 = reinterpret_cast< std::vector< MolpherMol >::value_type * >(argp4);
-  std_vector_Sl_MolpherMol_Sg__insert__SWIG_1(arg1,arg2,arg3,(MolpherMol const &)*arg4);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_MolpherMol_Sg__insert__SWIG_1(arg1,arg2,arg3,(MolpherMol const &)*arg4);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -10075,7 +10552,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_reserve(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MolpherMolVector_reserve" "', argument " "2"" of type '" "std::vector< MolpherMol >::size_type""'");
   } 
   arg2 = static_cast< std::vector< MolpherMol >::size_type >(val2);
-  (arg1)->reserve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->reserve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -10097,7 +10578,11 @@ SWIGINTERN PyObject *_wrap_MolpherMolVector_capacity(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMolVector_capacity" "', argument " "1"" of type '" "std::vector< MolpherMol > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  result = ((std::vector< MolpherMol > const *)arg1)->capacity();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< MolpherMol > const *)arg1)->capacity();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -10118,7 +10603,11 @@ SWIGINTERN PyObject *_wrap_delete_MolpherMolVector(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MolpherMolVector" "', argument " "1"" of type '" "std::vector< MolpherMol > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< MolpherMol > * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -10149,7 +10638,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_iterator(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_iterator" "', argument " "1"" of type '" "std::vector< bool > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = (swig::SwigPyIterator *)std_vector_Sl_bool_Sg__iterator(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_vector_Sl_bool_Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -10171,7 +10664,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___nonzero__(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector___nonzero__" "', argument " "1"" of type '" "std::vector< bool > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = (bool)std_vector_Sl_bool_Sg____nonzero__((std::vector< bool > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_bool_Sg____nonzero__((std::vector< bool > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -10193,7 +10690,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___bool__(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector___bool__" "', argument " "1"" of type '" "std::vector< bool > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = (bool)std_vector_Sl_bool_Sg____bool__((std::vector< bool > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_bool_Sg____bool__((std::vector< bool > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -10215,7 +10716,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___len__(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector___len__" "', argument " "1"" of type '" "std::vector< bool > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = std_vector_Sl_bool_Sg____len__((std::vector< bool > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_bool_Sg____len__((std::vector< bool > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -10238,7 +10743,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_pop(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
   try {
-    result = (std::vector< bool >::value_type)std_vector_Sl_bool_Sg__pop(arg1);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< bool >::value_type)std_vector_Sl_bool_Sg__pop(arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10284,7 +10793,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___getslice__(PyObject *SWIGUNUSEDPARM(self
   } 
   arg3 = static_cast< std::vector< bool >::difference_type >(val3);
   try {
-    result = (std::vector< bool,std::allocator< bool > > *)std_vector_Sl_bool_Sg____getslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< bool,std::allocator< bool > > *)std_vector_Sl_bool_Sg____getslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10346,7 +10859,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___setslice____SWIG_0(PyObject *SWIGUNUSEDP
     arg4 = ptr;
   }
   try {
-    std_vector_Sl_bool_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< bool,std::allocator< bool > > const &)*arg4);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_bool_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< bool,std::allocator< bool > > const &)*arg4);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10396,7 +10913,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___setslice____SWIG_1(PyObject *SWIGUNUSEDP
   } 
   arg3 = static_cast< std::vector< bool >::difference_type >(val3);
   try {
-    std_vector_Sl_bool_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_bool_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10510,7 +11031,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___delslice__(PyObject *SWIGUNUSEDPARM(self
   } 
   arg3 = static_cast< std::vector< bool >::difference_type >(val3);
   try {
-    std_vector_Sl_bool_Sg____delslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_bool_Sg____delslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10549,7 +11074,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___delitem____SWIG_0(PyObject *SWIGUNUSEDPA
   } 
   arg2 = static_cast< std::vector< bool >::difference_type >(val2);
   try {
-    std_vector_Sl_bool_Sg____delitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_bool_Sg____delitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10585,7 +11114,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___getitem____SWIG_0(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::vector< bool,std::allocator< bool > > *)std_vector_Sl_bool_Sg____getitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< bool,std::allocator< bool > > *)std_vector_Sl_bool_Sg____getitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10637,7 +11170,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___setitem____SWIG_0(PyObject *SWIGUNUSEDPA
     arg3 = ptr;
   }
   try {
-    std_vector_Sl_bool_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< bool,std::allocator< bool > > const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_bool_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< bool,std::allocator< bool > > const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10677,7 +11214,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___setitem____SWIG_1(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_bool_Sg____setitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_bool_Sg____setitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10715,7 +11256,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___delitem____SWIG_1(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_bool_Sg____delitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_bool_Sg____delitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10804,7 +11349,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___getitem____SWIG_1(PyObject *SWIGUNUSEDPA
   } 
   arg2 = static_cast< std::vector< bool >::difference_type >(val2);
   try {
-    result = (std::vector< bool >::value_type)std_vector_Sl_bool_Sg____getitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< bool >::value_type)std_vector_Sl_bool_Sg____getitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10898,7 +11447,11 @@ SWIGINTERN PyObject *_wrap_BoolVector___setitem____SWIG_2(PyObject *SWIGUNUSEDPA
   } 
   arg3 = static_cast< std::vector< bool >::value_type >(val3);
   try {
-    std_vector_Sl_bool_Sg____setitem____SWIG_2(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_bool_Sg____setitem____SWIG_2(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -11006,7 +11559,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_append(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BoolVector_append" "', argument " "2"" of type '" "std::vector< bool >::value_type""'");
   } 
   arg2 = static_cast< std::vector< bool >::value_type >(val2);
-  std_vector_Sl_bool_Sg__append(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_bool_Sg__append(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11019,7 +11576,11 @@ SWIGINTERN PyObject *_wrap_new_BoolVector__SWIG_0(PyObject *SWIGUNUSEDPARM(self)
   std::vector< bool > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_BoolVector")) SWIG_fail;
-  result = (std::vector< bool > *)new std::vector< bool >();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< bool > *)new std::vector< bool >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -11046,7 +11607,11 @@ SWIGINTERN PyObject *_wrap_new_BoolVector__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
     }
     arg1 = ptr;
   }
-  result = (std::vector< bool > *)new std::vector< bool >((std::vector< bool > const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< bool > *)new std::vector< bool >((std::vector< bool > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -11070,7 +11635,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_empty(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_empty" "', argument " "1"" of type '" "std::vector< bool > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = (bool)((std::vector< bool > const *)arg1)->empty();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::vector< bool > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -11092,7 +11661,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_size(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_size" "', argument " "1"" of type '" "std::vector< bool > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = ((std::vector< bool > const *)arg1)->size();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< bool > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -11113,7 +11686,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_clear(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_clear" "', argument " "1"" of type '" "std::vector< bool > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  (arg1)->clear();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11146,7 +11723,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_swap(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BoolVector_swap" "', argument " "2"" of type '" "std::vector< bool > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< bool > * >(argp2);
-  (arg1)->swap(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11168,7 +11749,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_get_allocator(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_get_allocator" "', argument " "1"" of type '" "std::vector< bool > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = ((std::vector< bool > const *)arg1)->get_allocator();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< bool > const *)arg1)->get_allocator();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< bool >::allocator_type(static_cast< const std::vector< bool >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_bool_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -11190,7 +11775,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_begin(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_begin" "', argument " "1"" of type '" "std::vector< bool > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = (arg1)->begin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< bool >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11213,7 +11802,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_end(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_end" "', argument " "1"" of type '" "std::vector< bool > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = (arg1)->end();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< bool >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11236,7 +11829,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_rbegin(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_rbegin" "', argument " "1"" of type '" "std::vector< bool > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = (arg1)->rbegin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< bool >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11259,7 +11856,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_rend(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_rend" "', argument " "1"" of type '" "std::vector< bool > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = (arg1)->rend();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< bool >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11282,7 +11883,11 @@ SWIGINTERN PyObject *_wrap_new_BoolVector__SWIG_2(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BoolVector" "', argument " "1"" of type '" "std::vector< bool >::size_type""'");
   } 
   arg1 = static_cast< std::vector< bool >::size_type >(val1);
-  result = (std::vector< bool > *)new std::vector< bool >(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< bool > *)new std::vector< bool >(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -11303,7 +11908,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_pop_back(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_pop_back" "', argument " "1"" of type '" "std::vector< bool > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  (arg1)->pop_back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->pop_back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11333,7 +11942,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BoolVector_resize" "', argument " "2"" of type '" "std::vector< bool >::size_type""'");
   } 
   arg2 = static_cast< std::vector< bool >::size_type >(val2);
-  (arg1)->resize(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11370,7 +11983,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "BoolVector_erase" "', argument " "2"" of type '" "std::vector< bool >::iterator""'");
     }
   }
-  result = std_vector_Sl_bool_Sg__erase__SWIG_0(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_bool_Sg__erase__SWIG_0(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< bool >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11423,7 +12040,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "BoolVector_erase" "', argument " "3"" of type '" "std::vector< bool >::iterator""'");
     }
   }
-  result = std_vector_Sl_bool_Sg__erase__SWIG_1(arg1,arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_bool_Sg__erase__SWIG_1(arg1,arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< bool >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11508,7 +12129,11 @@ SWIGINTERN PyObject *_wrap_new_BoolVector__SWIG_3(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BoolVector" "', argument " "2"" of type '" "std::vector< bool >::value_type""'");
   } 
   arg2 = static_cast< std::vector< bool >::value_type >(val2);
-  result = (std::vector< bool > *)new std::vector< bool >(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< bool > *)new std::vector< bool >(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -11599,7 +12224,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_push_back(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BoolVector_push_back" "', argument " "2"" of type '" "std::vector< bool >::value_type""'");
   } 
   arg2 = static_cast< std::vector< bool >::value_type >(val2);
-  (arg1)->push_back(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->push_back(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11621,7 +12250,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_front(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_front" "', argument " "1"" of type '" "std::vector< bool > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = (std::vector< bool >::value_type)((std::vector< bool > const *)arg1)->front();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< bool >::value_type)((std::vector< bool > const *)arg1)->front();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -11643,7 +12276,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_back(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_back" "', argument " "1"" of type '" "std::vector< bool > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = (std::vector< bool >::value_type)((std::vector< bool > const *)arg1)->back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< bool >::value_type)((std::vector< bool > const *)arg1)->back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -11682,7 +12319,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_assign(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BoolVector_assign" "', argument " "3"" of type '" "std::vector< bool >::value_type""'");
   } 
   arg3 = static_cast< std::vector< bool >::value_type >(val3);
-  (arg1)->assign(arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->assign(arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11721,7 +12362,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BoolVector_resize" "', argument " "3"" of type '" "std::vector< bool >::value_type""'");
   } 
   arg3 = static_cast< std::vector< bool >::value_type >(val3);
-  (arg1)->resize(arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11823,7 +12468,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BoolVector_insert" "', argument " "3"" of type '" "std::vector< bool >::value_type""'");
   } 
   arg3 = static_cast< std::vector< bool >::value_type >(val3);
-  result = std_vector_Sl_bool_Sg__insert__SWIG_0(arg1,arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_bool_Sg__insert__SWIG_0(arg1,arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< bool >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11878,7 +12527,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BoolVector_insert" "', argument " "4"" of type '" "std::vector< bool >::value_type""'");
   } 
   arg4 = static_cast< std::vector< bool >::value_type >(val4);
-  std_vector_Sl_bool_Sg__insert__SWIG_1(arg1,arg2,arg3,arg4);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_bool_Sg__insert__SWIG_1(arg1,arg2,arg3,arg4);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11974,7 +12627,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_reserve(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BoolVector_reserve" "', argument " "2"" of type '" "std::vector< bool >::size_type""'");
   } 
   arg2 = static_cast< std::vector< bool >::size_type >(val2);
-  (arg1)->reserve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->reserve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11996,7 +12653,11 @@ SWIGINTERN PyObject *_wrap_BoolVector_capacity(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BoolVector_capacity" "', argument " "1"" of type '" "std::vector< bool > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  result = ((std::vector< bool > const *)arg1)->capacity();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< bool > const *)arg1)->capacity();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -12017,7 +12678,11 @@ SWIGINTERN PyObject *_wrap_delete_BoolVector(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BoolVector" "', argument " "1"" of type '" "std::vector< bool > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< bool > * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12049,7 +12714,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_createFromSnapshot(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_createFromSnapshot" "', argument " "1"" of type '" "ExplorationTreeSnapshot &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTreeSnapshot * >(argp1);
-  result = (ExplorationTree *)ExplorationTree::createFromSnapshot(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExplorationTree *)ExplorationTree::createFromSnapshot(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTree, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -12076,7 +12745,11 @@ SWIGINTERN PyObject *_wrap_new_ExplorationTree__SWIG_0(PyObject *SWIGUNUSEDPARM(
     }
     arg1 = ptr;
   }
-  result = (ExplorationTree *)new ExplorationTree((std::string const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExplorationTree *)new ExplorationTree((std::string const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTree, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -12103,7 +12776,11 @@ SWIGINTERN PyObject *_wrap_new_ExplorationTree__SWIG_1(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ExplorationTree" "', argument " "1"" of type '" "ExplorationParameters &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
-  result = (ExplorationTree *)new ExplorationTree(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExplorationTree *)new ExplorationTree(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTree, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -12175,7 +12852,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_setParams(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_setParams" "', argument " "2"" of type '" "ExplorationParameters &""'"); 
   }
   arg2 = reinterpret_cast< ExplorationParameters * >(argp2);
-  (arg1)->setParams(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setParams(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12197,7 +12878,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_createSnapshot(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_createSnapshot" "', argument " "1"" of type '" "ExplorationTree const *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (ExplorationTreeSnapshot *)((ExplorationTree const *)arg1)->createSnapshot();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExplorationTreeSnapshot *)((ExplorationTree const *)arg1)->createSnapshot();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTreeSnapshot, 0 |  0 );
   return resultobj;
 fail:
@@ -12230,7 +12915,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_runOperation(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_runOperation" "', argument " "2"" of type '" "TreeOperation &""'"); 
   }
   arg2 = reinterpret_cast< TreeOperation * >(argp2);
-  (arg1)->runOperation(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->runOperation(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12252,7 +12941,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_fetchLeaves(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_fetchLeaves" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *) &(arg1)->fetchLeaves();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *) &(arg1)->fetchLeaves();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = swig::from(static_cast< std::vector<MolpherMol,std::allocator< MolpherMol > > >(*result));
   return resultobj;
 fail:
@@ -12289,7 +12982,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_fetchMol(PyObject *SWIGUNUSEDPARM(sel
     arg2 = ptr;
   }
   try {
-    result = (MolpherMol *)(arg1)->fetchMol((std::string const &)*arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (MolpherMol *)(arg1)->fetchMol((std::string const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::runtime_error &_e) {
     SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
@@ -12332,7 +13029,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_hasMol(PyObject *SWIGUNUSEDPARM(self)
     }
     arg2 = ptr;
   }
-  result = (bool)(arg1)->hasMol((std::string const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)(arg1)->hasMol((std::string const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -12370,7 +13071,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_deleteSubtree(PyObject *SWIGUNUSEDPAR
     arg2 = ptr;
   }
   try {
-    (arg1)->deleteSubtree((std::string const &)*arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->deleteSubtree((std::string const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::runtime_error &_e) {
     SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
@@ -12398,7 +13103,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_generateMorphs(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_generateMorphs" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  (arg1)->generateMorphs();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->generateMorphs();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12419,7 +13128,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_sortMorphs(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_sortMorphs" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  (arg1)->sortMorphs();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->sortMorphs();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12440,7 +13153,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_filterMorphs__SWIG_0(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_filterMorphs" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  (arg1)->filterMorphs();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->filterMorphs();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12470,7 +13187,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_filterMorphs__SWIG_1(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExplorationTree_filterMorphs" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  (arg1)->filterMorphs(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->filterMorphs(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12537,7 +13258,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_extend(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_extend" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  (arg1)->extend();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->extend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12558,7 +13283,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_prune(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_prune" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  (arg1)->prune();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->prune();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12588,7 +13317,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_setThreadCount(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExplorationTree_setThreadCount" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  (arg1)->setThreadCount(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setThreadCount(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12610,7 +13343,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getThreadCount(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_getThreadCount" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (int)(arg1)->getThreadCount();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)(arg1)->getThreadCount();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -12632,7 +13369,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getCandidateMorphs(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_getCandidateMorphs" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *) &(arg1)->getCandidateMorphs();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< MolpherMol,std::allocator< MolpherMol > > *) &(arg1)->getCandidateMorphs();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = swig::from(static_cast< std::vector<MolpherMol,std::allocator< MolpherMol > > >(*result));
   return resultobj;
 fail:
@@ -12654,7 +13395,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getCandidateMorphsMask(PyObject *SWIG
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_getCandidateMorphsMask" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  result = (std::vector< bool,std::allocator< bool > > *) &(arg1)->getCandidateMorphsMask();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< bool,std::allocator< bool > > *) &(arg1)->getCandidateMorphsMask();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = swig::from(static_cast< std::vector<bool,std::allocator< bool > > >(*result));
   return resultobj;
 fail:
@@ -12690,7 +13435,11 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_setCandidateMorphsMask(PyObject *SWIG
     arg2 = ptr;
   }
   try {
-    (arg1)->setCandidateMorphsMask((std::vector< bool,std::allocator< bool > > const &)*arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->setCandidateMorphsMask((std::vector< bool,std::allocator< bool > > const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::runtime_error &_e) {
     SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
@@ -12718,7 +13467,11 @@ SWIGINTERN PyObject *_wrap_delete_ExplorationTree(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExplorationTree" "', argument " "1"" of type '" "ExplorationTree *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13771,6 +14524,9 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "FilterMoprhsOper_SYNTHESIS",SWIG_From_int(static_cast< int >(FilterMoprhsOper::SYNTHESIS)));
   SWIG_Python_SetConstant(d, "FilterMoprhsOper_COUNT",SWIG_From_int(static_cast< int >(FilterMoprhsOper::COUNT)));
   SWIG_Python_SetConstant(d, "FilterMoprhsOper_ALL",SWIG_From_int(static_cast< int >(FilterMoprhsOper::ALL)));
+  
+  /* Initialize threading */
+  SWIG_PYTHON_INITIALIZE_THREADS;
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

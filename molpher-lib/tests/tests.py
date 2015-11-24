@@ -137,13 +137,16 @@ class TestMolpherAPI(unittest.TestCase):
                 print(morph.getSMILES())
                 
         tree = ExplorationTree("CCO")
-        tree.setThreadCount(1) # callbacks are not thread safe at the moment
+        tree.setThreadCount(2)
         tree.generateMorphs()
         tree.filterMorphs(FilterMoprhsOper.WEIGHT)
         tree.extend()
         callback = MyCallback()
-        traverse = TraverseOper(tree, callback);
-        traverse();
+        traverse = TraverseOper(tree, callback)
+        count = 0
+        while count < 50:
+            traverse();
+            count += 1
         
 #    def testContinuousExploration(self):
 #        etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
