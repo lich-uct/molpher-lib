@@ -27,6 +27,7 @@ setup (name = 'molpher',
        ext_modules = [my_cpp_module,],
        package_data = {
             #'molpher.swig_wrappers': ['lib/*.so', 'lib/*.so.2', '*.dat'],
-            'molpher.swig_wrappers': ['*.dat'],
-        }
+            'molpher.swig_wrappers': ['*.dat', 'test_files/*'],
+        },
+       test_suite="tests"
        )

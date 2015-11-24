@@ -99,6 +99,7 @@ clean: .clean-post
 	rm -f $(PYTHON_PACKAGE_DIR)/*.dat
 	rm -f dist/*.whl
 	rm -rf python/*.egg-info
+	rm -f $(PYTHON_PACKAGE_DIR)/*.so
 
 .clean-pre:
 # Add your pre 'clean' code here...

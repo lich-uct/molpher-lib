@@ -1,11 +1,12 @@
 
 import unittest
+from pkg_resources import resource_filename
 from molpher.swig_wrappers.core import *
 
 class TestMolpherAPI(unittest.TestCase):
     
     def setUp(self):
-        self.test_files_path = "tests/test_files/"
+        self.test_files_path = resource_filename('molpher.swig_wrappers', 'test_files/')
 
     def tearDown(self):
         pass

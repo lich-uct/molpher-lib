@@ -1,4 +1,4 @@
-from pkg_resources import Requirement, resource_filename
+from pkg_resources import resource_filename
 
 import molpher.swig_wrappers.core as core
 
