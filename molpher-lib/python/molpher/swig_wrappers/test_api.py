@@ -3,7 +3,6 @@ import unittest
 from pkg_resources import resource_filename
 from molpher.swig_wrappers.core import *
 import time
-import shutil
 
 class TestMolpherAPI(unittest.TestCase):
     
@@ -12,10 +11,6 @@ class TestMolpherAPI(unittest.TestCase):
 
     def tearDown(self):
         pass
-
-#    def testMolpherMolClass(self):
-#        mol = MolpherMol("CCO")
-#        self.assertEqual(mol.getSMILES(), "CCO")
         
     def testExplorationParametersClass(self):
         params = ExplorationParameters()
@@ -25,7 +20,7 @@ class TestMolpherAPI(unittest.TestCase):
         
     def testExplorationTreeSnapshotClass(self):
         etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
-        etreeSnap.save(self.test_files_path + "snappitty_snap.snp");
+        etreeSnap.save(self.test_files_path + "snappitty_snap.snp")
         
     def testExplorationTreeClass(self):
         params = ExplorationParameters()
@@ -135,10 +130,33 @@ class TestMolpherAPI(unittest.TestCase):
         
     def testTreeTraversalCallback(self):
         class MyCallback(TraverseCallback):
+
+            def __init__(self, tree):
+                super(self.__class__, self).__init__()
+                self.tree = tree
+                params = self.tree.getParams()
+                self.source = params.getSourceMol()
+                self.target = params.getTargetMol()
+                self.already_printed_stuff = False
             
             def processMorph(self, morph):
                 time.sleep(0.020)
                 morph.getSMILES()
+                if morph.getHistoricDescendants() and not self.already_printed_stuff:
+                    print("Found root.")
+                    print("Historic descendants:")
+                    print(morph.getHistoricDescendants())
+                    descendants = morph.getDescendants()
+                    print("Descendants:")
+                    print(descendants)
+                    for desc_smile in descendants:
+                        desc_mol = self.tree.fetchMol(desc_smile)
+                        print("Descendant {0} from source {1} to target {2}:".format(desc_smile, self.source.getSMILES(), self.target.getSMILES()))
+                        print("Weight: {0}".format(desc_mol.getMolecularWeight()))
+                        print("SAScore: {0}".format(desc_mol.getSAScore()))
+                        print("Distance to target: {0}".format(desc_mol.getDistToTarget()))
+
+                    self.already_printed_stuff = True
                 
                 
         tree = ExplorationTree("CCO")
@@ -146,29 +164,12 @@ class TestMolpherAPI(unittest.TestCase):
         tree.generateMorphs()
         tree.filterMorphs(FilterMoprhsOper.WEIGHT)
         tree.extend()
-        callback = MyCallback()
+        callback = MyCallback(tree)
         traverse = TraverseOper(tree, callback)
         count = 0
         while count < 30:
-            traverse();
+            traverse()
             count += 1
-        
-    def testContinuousExploration(self):
-        etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
-        tree = ExplorationTree.createFromSnapshot(etreeSnap)
-        tree.setThreadCount(2)
-        
-        for i in range(5):
-            tree.generateMorphs()
-            tree.sortMorphs()
-            tree.filterMorphs(FilterMoprhsOper.ALL)
-            tree.extend()
-            tree.prune()
-            print("Iteration {0}".format(i+1))
-            
-        results = 'testing_snapshots'
-        run_path_finder(results, self.test_files_path + "test-template.xml", 2)
-        shutil.rmtree(results)
 
 if __name__ == '__main__':
     unittest.main()

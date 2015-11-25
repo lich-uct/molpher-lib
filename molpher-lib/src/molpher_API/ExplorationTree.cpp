@@ -180,4 +180,11 @@ void ExplorationTree::setCandidateMorphsMask(const std::vector<bool>& new_mask) 
     }
 }
 
+ExplorationParameters& ExplorationTree::getParams() {
+    ExplorationParameters* ret = new ExplorationParameters();
+    IterationSnapshot snp;
+    PathFinderContext::ContextToSnapshot(context, snp);
+    ret->iterSnapshot = snp;
+    return *ret;
+}
 

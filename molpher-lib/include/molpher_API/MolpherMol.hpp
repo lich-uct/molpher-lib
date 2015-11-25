@@ -20,6 +20,7 @@ private:
 public:
     MolpherMol();
     MolpherMol(MolpherMolecule& mol);
+    MolpherMol(MolpherMolecule& mol, bool copy);
     MolpherMol(const MolpherMol& other);
     ~MolpherMol();
     
@@ -32,7 +33,14 @@ public:
     std::string getSMILES();
     double getDistToTarget();
     std::string getParentSMILES();
-    // TODO create more getters for the members of mol
+    const std::set<std::string>& getDescendants();
+    const std::set<std::string>& getHistoricDescendants();
+    unsigned int getItersWithoutDistImprovement();
+    double getSAScore();
+    double getMolecularWeight();
+    
+    void setDistToTarget(double dist);
+    void setSAScore(double dist);
 };
 
 #endif	/* MOLPHERMOL_HPP */

@@ -31,5 +31,18 @@ void ExplorationParameters::setSourceMol(MolpherMol& mol) {
 }
 
 MolpherMol* ExplorationParameters::getSourceMol() {
-    return new MolpherMol(iterSnapshot.source);
+    return new MolpherMol(iterSnapshot.source, true);
+}
+
+MolpherMol* ExplorationParameters::getTargetMol() {
+    return new MolpherMol(iterSnapshot.target, true);
+}
+
+void ExplorationParameters::setTargetMol(const std::string& mol) {
+    std::string temp(mol);
+    iterSnapshot.target = MolpherMolecule(temp);
+}
+
+void ExplorationParameters::setTargetMol(MolpherMol& mol) {
+    iterSnapshot.target = mol.fetchMolpherMolecule();
 }

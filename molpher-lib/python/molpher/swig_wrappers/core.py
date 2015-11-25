@@ -447,6 +447,98 @@ class TraverseCallback(_object):
 TraverseCallback_swigregister = _core.TraverseCallback_swigregister
 TraverseCallback_swigregister(TraverseCallback)
 
+class StringSet(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, StringSet, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, StringSet, name)
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _core.StringSet_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _core.StringSet___nonzero__(self)
+
+    def __bool__(self):
+        return _core.StringSet___bool__(self)
+
+    def __len__(self):
+        return _core.StringSet___len__(self)
+
+    def append(self, x):
+        return _core.StringSet_append(self, x)
+
+    def __contains__(self, x):
+        return _core.StringSet___contains__(self, x)
+
+    def __getitem__(self, i):
+        return _core.StringSet___getitem__(self, i)
+
+    def add(self, x):
+        return _core.StringSet_add(self, x)
+
+    def discard(self, x):
+        return _core.StringSet_discard(self, x)
+
+    def __init__(self, *args):
+        this = _core.new_StringSet(*args)
+        try:
+            self.this.append(this)
+        except:
+            self.this = this
+
+    def empty(self):
+        return _core.StringSet_empty(self)
+
+    def size(self):
+        return _core.StringSet_size(self)
+
+    def clear(self):
+        return _core.StringSet_clear(self)
+
+    def swap(self, v):
+        return _core.StringSet_swap(self, v)
+
+    def count(self, x):
+        return _core.StringSet_count(self, x)
+
+    def begin(self):
+        return _core.StringSet_begin(self)
+
+    def end(self):
+        return _core.StringSet_end(self)
+
+    def rbegin(self):
+        return _core.StringSet_rbegin(self)
+
+    def rend(self):
+        return _core.StringSet_rend(self)
+
+    def erase(self, *args):
+        return _core.StringSet_erase(self, *args)
+
+    def find(self, x):
+        return _core.StringSet_find(self, x)
+
+    def lower_bound(self, x):
+        return _core.StringSet_lower_bound(self, x)
+
+    def upper_bound(self, x):
+        return _core.StringSet_upper_bound(self, x)
+
+    def equal_range(self, x):
+        return _core.StringSet_equal_range(self, x)
+
+    def insert(self, __x):
+        return _core.StringSet_insert(self, __x)
+    __swig_destroy__ = _core.delete_StringSet
+    __del__ = lambda self: None
+StringSet_swigregister = _core.StringSet_swigregister
+StringSet_swigregister(StringSet)
+
 class MolpherMol(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, MolpherMol, name, value)
@@ -454,8 +546,8 @@ class MolpherMol(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, MolpherMol, name)
     __repr__ = _swig_repr
 
-    def __init__(self, other):
-        this = _core.new_MolpherMol(other)
+    def __init__(self, *args):
+        this = _core.new_MolpherMol(*args)
         try:
             self.this.append(this)
         except:
@@ -480,6 +572,27 @@ class MolpherMol(_object):
 
     def getParentSMILES(self):
         return _core.MolpherMol_getParentSMILES(self)
+
+    def getDescendants(self):
+        return _core.MolpherMol_getDescendants(self)
+
+    def getHistoricDescendants(self):
+        return _core.MolpherMol_getHistoricDescendants(self)
+
+    def getItersWithoutDistImprovement(self):
+        return _core.MolpherMol_getItersWithoutDistImprovement(self)
+
+    def getSAScore(self):
+        return _core.MolpherMol_getSAScore(self)
+
+    def getMolecularWeight(self):
+        return _core.MolpherMol_getMolecularWeight(self)
+
+    def setDistToTarget(self, dist):
+        return _core.MolpherMol_setDistToTarget(self, dist)
+
+    def setSAScore(self, dist):
+        return _core.MolpherMol_setSAScore(self, dist)
 MolpherMol_swigregister = _core.MolpherMol_swigregister
 MolpherMol_swigregister(MolpherMol)
 
@@ -500,11 +613,17 @@ class ExplorationParameters(_object):
     def valid(self):
         return _core.ExplorationParameters_valid(self)
 
+    def getSourceMol(self):
+        return _core.ExplorationParameters_getSourceMol(self)
+
+    def getTargetMol(self):
+        return _core.ExplorationParameters_getTargetMol(self)
+
     def setSourceMol(self, *args):
         return _core.ExplorationParameters_setSourceMol(self, *args)
 
-    def getSourceMol(self):
-        return _core.ExplorationParameters_getSourceMol(self)
+    def setTargetMol(self, *args):
+        return _core.ExplorationParameters_setTargetMol(self, *args)
     __swig_destroy__ = _core.delete_ExplorationParameters
     __del__ = lambda self: None
 ExplorationParameters_swigregister = _core.ExplorationParameters_swigregister
@@ -777,9 +896,6 @@ class ExplorationTree(_object):
         except:
             self.this = this
 
-    def setParams(self, params):
-        return _core.ExplorationTree_setParams(self, params)
-
     def createSnapshot(self):
         return _core.ExplorationTree_createSnapshot(self)
 
@@ -813,17 +929,23 @@ class ExplorationTree(_object):
     def prune(self):
         return _core.ExplorationTree_prune(self)
 
-    def setThreadCount(self, threadCnt):
-        return _core.ExplorationTree_setThreadCount(self, threadCnt)
-
     def getThreadCount(self):
         return _core.ExplorationTree_getThreadCount(self)
+
+    def getParams(self):
+        return _core.ExplorationTree_getParams(self)
 
     def getCandidateMorphs(self):
         return _core.ExplorationTree_getCandidateMorphs(self)
 
     def getCandidateMorphsMask(self):
         return _core.ExplorationTree_getCandidateMorphsMask(self)
+
+    def setThreadCount(self, threadCnt):
+        return _core.ExplorationTree_setThreadCount(self, threadCnt)
+
+    def setParams(self, params):
+        return _core.ExplorationTree_setParams(self, params)
 
     def setCandidateMorphsMask(self, arg2):
         return _core.ExplorationTree_setCandidateMorphsMask(self, arg2)

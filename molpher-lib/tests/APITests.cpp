@@ -66,6 +66,12 @@ void APITests::testExplorationTreeClass() {
     params.setSourceMol("CCO");
     ExplorationTree param_tree(params);
     ExplorationTreeSnapshot* snap = param_tree.createSnapshot();
+    ExplorationParameters& generated_params = param_tree.getParams();
+    MolpherMol* source = generated_params.getSourceMol();
+    MolpherMol* target = generated_params.getTargetMol();
+    delete &generated_params;
+    std::string ssmiles = source->getSMILES();
+    std::string tsmiles = target->getSMILES();
     
     std::string smiles("OCCO");
     ExplorationTree smile_tree(smiles);
@@ -120,7 +126,7 @@ void APITests::testExploration() {
     PrintMolCallback callback;
     TraverseOper traverse(tree, callback);
     int counter = 0;
-    while (counter < 50) {
+    while (counter < 20) {
         traverse();
         counter++;
     }

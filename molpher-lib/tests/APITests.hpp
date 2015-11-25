@@ -22,7 +22,7 @@ class PrintMolCallback : public TraverseCallback {
         }
 
         virtual void processMorph(MolpherMol& morph) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            std::this_thread::sleep_for(std::chrono::milliseconds(20));
             std::cout << morph.getSMILES() + " -- parent: " + morph.fetchMolpherMolecule().parentSmile << std::endl;
         }
 

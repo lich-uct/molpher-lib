@@ -13,6 +13,8 @@
 %include "callbacks/callbacks.i"
 
 // MoplherMol wrapper
+%include "std_set.i"
+%template(StringSet) std::set<std::string>;
 %newobject MolpherMol::copy();
 %ignore MolpherMol::MolpherMol(MolpherMolecule& mol);
 %ignore MolpherMol::fetchMolpherMolecule();
@@ -21,6 +23,8 @@
 %include "MolpherMol.hpp"
 
 // ExplorationParameters wrapper
+%newobject ExplorationParameters::getSourceMol();
+%newobject ExplorationParameters::getTargetMol();
 %include "ExplorationParameters.hpp"
         
 // ExplorationTreeSnapshot wrapper
@@ -33,7 +37,8 @@
 %template(BoolVector) std::vector<bool>;
 %newobject ExplorationTree::createSnapshot();
 %newobject ExplorationTree::createFromSnapshot(ExplorationTreeSnapshot& snapshot);
-//%newobject ExplorationTree::fetchLeaves();
+%newobject ExplorationTree::fetchLeaves();
+%newobject ExplorationTree::getParams();
 %newobject ExplorationTree::fetchMol(const std::string& canonSMILES);
 %newobject ExplorationTree::getCandidateMorphs();
 %newobject ExplorationTree::getCandidateMorphsMask();

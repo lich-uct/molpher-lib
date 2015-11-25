@@ -23,9 +23,14 @@ public:
 //    IterationSnapshot createIterationSnapshot() const;
     bool valid();
     
+    MolpherMol* getSourceMol();
+    MolpherMol* getTargetMol();
+    
     void setSourceMol(const std::string& mol);
     void setSourceMol(MolpherMol& mol);
-    MolpherMol* getSourceMol();
+    void setTargetMol(const std::string& mol);
+    void setTargetMol(MolpherMol& mol);
+    
     // TODO more getters and setters for the parameters
     
 };

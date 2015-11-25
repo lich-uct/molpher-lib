@@ -3441,18 +3441,21 @@ namespace Swig {
 #define SWIGTYPE_p_char swig_types[22]
 #define SWIGTYPE_p_const_reference swig_types[23]
 #define SWIGTYPE_p_difference_type swig_types[24]
-#define SWIGTYPE_p_p_PyObject swig_types[25]
-#define SWIGTYPE_p_reference swig_types[26]
-#define SWIGTYPE_p_size_type swig_types[27]
-#define SWIGTYPE_p_std__allocatorT_MolpherMol_t swig_types[28]
-#define SWIGTYPE_p_std__allocatorT_bool_t swig_types[29]
-#define SWIGTYPE_p_std__invalid_argument swig_types[30]
-#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[31]
-#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[32]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[33]
-#define SWIGTYPE_p_value_type swig_types[34]
-static swig_type_info *swig_types[36];
-static swig_module_info swig_module = {swig_types, 35, 0, 0, 0, 0};
+#define SWIGTYPE_p_key_type swig_types[25]
+#define SWIGTYPE_p_p_PyObject swig_types[26]
+#define SWIGTYPE_p_reference swig_types[27]
+#define SWIGTYPE_p_size_type swig_types[28]
+#define SWIGTYPE_p_std__allocatorT_MolpherMol_t swig_types[29]
+#define SWIGTYPE_p_std__allocatorT_bool_t swig_types[30]
+#define SWIGTYPE_p_std__invalid_argument swig_types[31]
+#define SWIGTYPE_p_std__lessT_std__string_t swig_types[32]
+#define SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t swig_types[33]
+#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[34]
+#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[35]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[36]
+#define SWIGTYPE_p_value_type swig_types[37]
+static swig_type_info *swig_types[39];
+static swig_module_info swig_module = {swig_types, 38, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4120,36 +4123,7 @@ SWIGINTERNINLINE PyObject*
 #include "molpher_API/callbacks/TraverseCallback.hpp"
 
 
-SWIGINTERNINLINE PyObject *
-SWIG_FromCharPtrAndSize(const char* carray, size_t size)
-{
-  if (carray) {
-    if (size > INT_MAX) {
-      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-      return pchar_descriptor ? 
-	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
-    } else {
-#if PY_VERSION_HEX >= 0x03000000
-#if PY_VERSION_HEX >= 0x03010000
-      return PyUnicode_DecodeUTF8(carray, static_cast< int >(size), "surrogateescape");
-#else
-      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
-#endif
-#else
-      return PyString_FromStringAndSize(carray, static_cast< int >(size));
-#endif
-    }
-  } else {
-    return SWIG_Py_Void();
-  }
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_std_string  (const std::string& s)
-{
-  return SWIG_FromCharPtrAndSize(s.data(), s.size());
-}
+#include <set>
 
 
 namespace swig {  
@@ -5161,12 +5135,74 @@ namespace swig
 }
 
 
-  namespace swig {
-    template <>  struct traits<MolpherMol > {
-      typedef pointer_category category;
-      static const char* type_name() { return"MolpherMol"; }
-    };
+SWIGINTERN int
+SWIG_AsVal_std_string (PyObject * obj, std::string *val)
+{
+  std::string* v = (std::string *) 0;
+  int res = SWIG_AsPtr_std_string (obj, &v);
+  if (!SWIG_IsOK(res)) return res;
+  if (v) {
+    if (val) *val = *v;
+    if (SWIG_IsNewObj(res)) {
+      delete v;
+      res = SWIG_DelNewMask(res);
+    }
+    return res;
   }
+  return SWIG_ERROR;
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+#if PY_VERSION_HEX >= 0x03010000
+      return PyUnicode_DecodeUTF8(carray, static_cast< int >(size), "surrogateescape");
+#else
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
+namespace swig {
+  template <> struct traits<std::string > {
+    typedef value_category category;
+    static const char* type_name() { return"std::string"; }
+  };  
+  template <>  struct traits_asval<std::string > {   
+    typedef std::string value_type;
+    static int asval(PyObject *obj, value_type *val) { 
+      return SWIG_AsVal_std_string (obj, val);
+    }
+  };
+  template <>  struct traits_from<std::string > {
+    typedef std::string value_type;
+    static PyObject *from(const value_type& val) {
+      return SWIG_From_std_string  (val);
+    }
+  };
+}
 
 
 namespace swig {
@@ -5251,6 +5287,118 @@ namespace swig {
 
 
   namespace swig {
+    template <class SwigPySeq, class T> 
+    inline void 
+    assign(const SwigPySeq& swigpyseq, std::set<T>* seq) {
+      // seq->insert(swigpyseq.begin(), swigpyseq.end()); // not used as not always implemented
+      typedef typename SwigPySeq::value_type value_type;
+      typename SwigPySeq::const_iterator it = swigpyseq.begin();
+      for (;it != swigpyseq.end(); ++it) {
+	seq->insert(seq->end(),(value_type)(*it));
+      }
+    }
+
+    template <class T>
+    struct traits_asptr<std::set<T> >  {
+      static int asptr(PyObject *obj, std::set<T> **s) {
+	return traits_asptr_stdseq<std::set<T> >::asptr(obj, s);
+      }
+    };
+
+    template <class T>
+    struct traits_from<std::set<T> > {
+      static PyObject *from(const std::set<T>& vec) {
+	return traits_from_stdseq<std::set<T> >::from(vec);
+      }
+    };
+  }
+
+
+      namespace swig {
+	template <>  struct traits<std::set<std::string, std::less< std::string >, std::allocator< std::string > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::set<" "std::string" "," "std::less< std::string >" "," "std::allocator< std::string >" " >";
+	  }
+	};
+      }
+    
+SWIGINTERN swig::SwigPyIterator *std_set_Sl_std_string_Sg__iterator(std::set< std::string > *self,PyObject **PYTHON_SELF){
+      return swig::make_output_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
+    }
+SWIGINTERN bool std_set_Sl_std_string_Sg____nonzero__(std::set< std::string > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN bool std_set_Sl_std_string_Sg____bool__(std::set< std::string > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN std::set< std::string >::size_type std_set_Sl_std_string_Sg____len__(std::set< std::string > const *self){
+      return self->size();
+    }
+
+SWIGINTERNINLINE PyObject* 
+SWIG_From_unsigned_SS_long  (unsigned long value)
+{
+  return (value > LONG_MAX) ?
+    PyLong_FromUnsignedLong(value) : PyLong_FromLong(static_cast< long >(value)); 
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_size_t  (size_t value)
+{    
+  return SWIG_From_unsigned_SS_long  (static_cast< unsigned long >(value));
+}
+
+SWIGINTERN void std_set_Sl_std_string_Sg__append(std::set< std::string > *self,std::set< std::string >::value_type x){
+       self->insert(x);
+     }
+SWIGINTERN bool std_set_Sl_std_string_Sg____contains__(std::set< std::string > *self,std::set< std::string >::value_type x){
+       return self->find(x) != self->end();
+     }
+SWIGINTERN std::set< std::string >::value_type std_set_Sl_std_string_Sg____getitem__(std::set< std::string > const *self,std::set< std::string >::difference_type i){
+       return *(swig::cgetpos(self, i));
+     }
+SWIGINTERN void std_set_Sl_std_string_Sg__add(std::set< std::string > *self,std::set< std::string >::value_type x){
+       self->insert(x);
+     }
+SWIGINTERN void std_set_Sl_std_string_Sg__discard(std::set< std::string > *self,std::set< std::string >::value_type x){
+       self->erase(x);
+     }
+SWIGINTERN void std_set_Sl_std_string_Sg__erase__SWIG_1(std::set< std::string > *self,std::set< std::string >::iterator pos){ self->erase(pos); }
+SWIGINTERN void std_set_Sl_std_string_Sg__erase__SWIG_2(std::set< std::string > *self,std::set< std::string >::iterator first,std::set< std::string >::iterator last){ self->erase(first, last); }
+
+
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_unsigned_SS_int  (unsigned int value)
+{
+  return PyInt_FromSize_t((size_t) value);
+}
+
+
+  namespace swig {
+    template <>  struct traits<MolpherMol > {
+      typedef pointer_category category;
+      static const char* type_name() { return"MolpherMol"; }
+    };
+  }
+
+
+  namespace swig {
     template <class T>
     struct traits_asptr<std::vector<T> >  {
       static int asptr(PyObject *obj, std::vector<T> **vec) {
@@ -5288,21 +5436,6 @@ SWIGINTERN bool std_vector_Sl_MolpherMol_Sg____bool__(std::vector< MolpherMol > 
 SWIGINTERN std::vector< MolpherMol >::size_type std_vector_Sl_MolpherMol_Sg____len__(std::vector< MolpherMol > const *self){
       return self->size();
     }
-
-SWIGINTERNINLINE PyObject* 
-SWIG_From_unsigned_SS_long  (unsigned long value)
-{
-  return (value > LONG_MAX) ?
-    PyLong_FromUnsignedLong(value) : PyLong_FromLong(static_cast< long >(value)); 
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_size_t  (size_t value)
-{    
-  return SWIG_From_unsigned_SS_long  (static_cast< unsigned long >(value));
-}
-
 SWIGINTERN std::vector< MolpherMol >::value_type std_vector_Sl_MolpherMol_Sg__pop(std::vector< MolpherMol > *self){
       if (self->size() == 0)
 	throw std::out_of_range("pop from empty container");
@@ -5379,20 +5512,6 @@ SWIGINTERN std::vector< MolpherMol >::iterator std_vector_Sl_MolpherMol_Sg__eras
 SWIGINTERN std::vector< MolpherMol >::iterator std_vector_Sl_MolpherMol_Sg__erase__SWIG_1(std::vector< MolpherMol > *self,std::vector< MolpherMol >::iterator first,std::vector< MolpherMol >::iterator last){ return self->erase(first, last); }
 SWIGINTERN std::vector< MolpherMol >::iterator std_vector_Sl_MolpherMol_Sg__insert__SWIG_0(std::vector< MolpherMol > *self,std::vector< MolpherMol >::iterator pos,std::vector< MolpherMol >::value_type const &x){ return self->insert(pos, x); }
 SWIGINTERN void std_vector_Sl_MolpherMol_Sg__insert__SWIG_1(std::vector< MolpherMol > *self,std::vector< MolpherMol >::iterator pos,std::vector< MolpherMol >::size_type n,std::vector< MolpherMol >::value_type const &x){ self->insert(pos, n, x); }
-
-SWIGINTERN int
-SWIG_AsVal_bool (PyObject *obj, bool *val)
-{
-  int r;
-  if (!PyBool_Check(obj))
-    return SWIG_ERROR;
-  r = PyObject_IsTrue(obj);
-  if (r == -1)
-    return SWIG_ERROR;
-  if (val) *val = r ? true : false;
-  return SWIG_OK;
-}
-
 
 namespace swig {
   template <> struct traits<bool > {
@@ -7976,7 +8095,1177 @@ SWIGINTERN PyObject *TraverseCallback_swigregister(PyObject *SWIGUNUSEDPARM(self
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_MolpherMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_StringSet__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::less< std::string > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::set< std::string > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_StringSet",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_std__lessT_std__string_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_StringSet" "', argument " "1"" of type '" "std::less< std::string > const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_StringSet" "', argument " "1"" of type '" "std::less< std::string > const &""'"); 
+  }
+  arg1 = reinterpret_cast< std::less< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::set< std::string > *)new std::set< std::string >((std::less< std::string > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  PyObject **arg2 = (PyObject **) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  swig::SwigPyIterator *result = 0 ;
+  
+  arg2 = &obj0;
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet_iterator",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_iterator" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_set_Sl_std_string_Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet___nonzero__" "', argument " "1"" of type '" "std::set< std::string > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_set_Sl_std_string_Sg____nonzero__((std::set< std::string > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet___bool__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet___bool__" "', argument " "1"" of type '" "std::set< std::string > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_set_Sl_std_string_Sg____bool__((std::set< std::string > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::set< std::string >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet___len__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet___len__" "', argument " "1"" of type '" "std::set< std::string > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_set_Sl_std_string_Sg____len__((std::set< std::string > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::value_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_append",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_append" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "StringSet_append" "', argument " "2"" of type '" "std::set< std::string >::value_type""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_set_Sl_std_string_Sg__append(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet___contains__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::value_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet___contains__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet___contains__" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "StringSet___contains__" "', argument " "2"" of type '" "std::set< std::string >::value_type""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_set_Sl_std_string_Sg____contains__(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet___getitem__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::difference_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::set< std::string >::value_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet___getitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet___getitem__" "', argument " "1"" of type '" "std::set< std::string > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "StringSet___getitem__" "', argument " "2"" of type '" "std::set< std::string >::difference_type""'");
+  } 
+  arg2 = static_cast< std::set< std::string >::difference_type >(val2);
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = std_set_Sl_std_string_Sg____getitem__((std::set< std::string > const *)arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_add(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::value_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_add",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_add" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "StringSet_add" "', argument " "2"" of type '" "std::set< std::string >::value_type""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_set_Sl_std_string_Sg__add(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_discard(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::value_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_discard",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_discard" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "StringSet_discard" "', argument " "2"" of type '" "std::set< std::string >::value_type""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_set_Sl_std_string_Sg__discard(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_StringSet__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_StringSet")) SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::set< std::string > *)new std::set< std::string >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_StringSet__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  std::set< std::string > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_StringSet",&obj0)) SWIG_fail;
+  {
+    std::set<std::string,std::less< std::string >,std::allocator< std::string > > *ptr = (std::set<std::string,std::less< std::string >,std::allocator< std::string > > *)0;
+    res1 = swig::asptr(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_StringSet" "', argument " "1"" of type '" "std::set< std::string > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_StringSet" "', argument " "1"" of type '" "std::set< std::string > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::set< std::string > *)new std::set< std::string >((std::set< std::string > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_StringSet(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_StringSet__SWIG_1(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__lessT_std__string_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_StringSet__SWIG_0(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::set<std::string,std::less< std::string >,std::allocator< std::string > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_StringSet__SWIG_2(self, args);
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_StringSet'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::set< std::string >::set(std::less< std::string > const &)\n"
+    "    std::set< std::string >::set()\n"
+    "    std::set< std::string >::set(std::set< std::string > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet_empty",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_empty" "', argument " "1"" of type '" "std::set< std::string > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::set< std::string > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::set< std::string >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet_size",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_size" "', argument " "1"" of type '" "std::set< std::string > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::set< std::string > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet_clear",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_clear" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_swap",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_swap" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "StringSet_swap" "', argument " "2"" of type '" "std::set< std::string > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "StringSet_swap" "', argument " "2"" of type '" "std::set< std::string > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::set< std::string > * >(argp2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::set< std::string >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_erase",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_erase" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "StringSet_erase" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "StringSet_erase" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase((std::set< std::string >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_count(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::set< std::string >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_count",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_count" "', argument " "1"" of type '" "std::set< std::string > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "StringSet_count" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "StringSet_count" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::set< std::string > const *)arg1)->count((std::set< std::string >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::set< std::string >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet_begin",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_begin" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::set< std::string >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::set< std::string >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet_end",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_end" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::set< std::string >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::set< std::string >::reverse_iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet_rbegin",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_rbegin" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::set< std::string >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::set< std::string >::reverse_iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:StringSet_rend",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_rend" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::set< std::string >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::iterator arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_erase",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_erase" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "StringSet_erase" "', argument " "2"" of type '" "std::set< std::string >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::set< std::string >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::set< std::string >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "StringSet_erase" "', argument " "2"" of type '" "std::set< std::string >::iterator""'");
+    }
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_set_Sl_std_string_Sg__erase__SWIG_1(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_erase__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::iterator arg2 ;
+  std::set< std::string >::iterator arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  swig::SwigPyIterator *iter3 = 0 ;
+  int res3 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:StringSet_erase",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_erase" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "StringSet_erase" "', argument " "2"" of type '" "std::set< std::string >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::set< std::string >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::set< std::string >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "StringSet_erase" "', argument " "2"" of type '" "std::set< std::string >::iterator""'");
+    }
+  }
+  res3 = SWIG_ConvertPtr(obj2, SWIG_as_voidptrptr(&iter3), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res3) || !iter3) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "StringSet_erase" "', argument " "3"" of type '" "std::set< std::string >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::set< std::string >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::set< std::string >::iterator > *>(iter3);
+    if (iter_t) {
+      arg3 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "StringSet_erase" "', argument " "3"" of type '" "std::set< std::string >::iterator""'");
+    }
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_set_Sl_std_string_Sg__erase__SWIG_2(arg1,arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_erase(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::set<std::string,std::less< std::string >,std::allocator< std::string > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::set< std::string >::iterator > *>(iter) != 0));
+      if (_v) {
+        return _wrap_StringSet_erase__SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::set<std::string,std::less< std::string >,std::allocator< std::string > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_StringSet_erase__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::set<std::string,std::less< std::string >,std::allocator< std::string > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::set< std::string >::iterator > *>(iter) != 0));
+      if (_v) {
+        swig::SwigPyIterator *iter = 0;
+        int res = SWIG_ConvertPtr(argv[2], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+        _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::set< std::string >::iterator > *>(iter) != 0));
+        if (_v) {
+          return _wrap_StringSet_erase__SWIG_2(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'StringSet_erase'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::set< std::string >::erase(std::set< std::string >::key_type const &)\n"
+    "    std::set< std::string >::erase(std::set< std::string >::iterator)\n"
+    "    std::set< std::string >::erase(std::set< std::string >::iterator,std::set< std::string >::iterator)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_find(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::set< std::string >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_find",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_find" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "StringSet_find" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "StringSet_find" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->find((std::set< std::string >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::set< std::string >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_lower_bound(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::set< std::string >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_lower_bound",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_lower_bound" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "StringSet_lower_bound" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "StringSet_lower_bound" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->lower_bound((std::set< std::string >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::set< std::string >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_upper_bound(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::set< std::string >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_upper_bound",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_upper_bound" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "StringSet_upper_bound" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "StringSet_upper_bound" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->upper_bound((std::set< std::string >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::set< std::string >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_equal_range(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  SwigValueWrapper< std::pair< std::set< std::string >::iterator,std::set< std::string >::iterator > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_equal_range",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_equal_range" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "StringSet_equal_range" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "StringSet_equal_range" "', argument " "2"" of type '" "std::set< std::string >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->equal_range((std::set< std::string >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = PyTuple_New(2);
+  PyTuple_SetItem(resultobj,0,SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::pair< std::set< std::string >::iterator,std::set< std::string >::iterator > & >(result).first),
+      swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN));
+  PyTuple_SetItem(resultobj,1,SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::pair< std::set< std::string >::iterator,std::set< std::string >::iterator > & >(result).second),
+      swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_StringSet_insert(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  std::set< std::string >::value_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  SwigValueWrapper< std::pair< std::set< std::string >::iterator,bool > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:StringSet_insert",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "StringSet_insert" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "StringSet_insert" "', argument " "2"" of type '" "std::set< std::string >::value_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "StringSet_insert" "', argument " "2"" of type '" "std::set< std::string >::value_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->insert((std::set< std::string >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = PyTuple_New(2);
+  PyTuple_SetItem(resultobj,0,SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::pair< std::set< std::string >::iterator,bool > & >(result).first),
+      swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN));    
+  PyTuple_SetItem(resultobj,1,SWIG_From_bool  (static_cast< const std::pair< std::set< std::string >::iterator,bool > & >(result).second));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_StringSet(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::set< std::string > *arg1 = (std::set< std::string > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_StringSet",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_StringSet" "', argument " "1"" of type '" "std::set< std::string > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::set< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *StringSet_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_MolpherMol__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMolecule *arg1 = 0 ;
+  bool arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  MolpherMol *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_MolpherMol",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_MolpherMolecule,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MolpherMol" "', argument " "1"" of type '" "MolpherMolecule &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MolpherMol" "', argument " "1"" of type '" "MolpherMolecule &""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMolecule * >(argp1);
+  ecode2 = SWIG_AsVal_bool(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_MolpherMol" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (MolpherMol *)new MolpherMol(*arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MolpherMol__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -8002,6 +9291,51 @@ SWIGINTERN PyObject *_wrap_new_MolpherMol(PyObject *SWIGUNUSEDPARM(self), PyObje
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MolpherMol(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_MolpherMol, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_MolpherMol__SWIG_1(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_MolpherMolecule, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_bool(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_new_MolpherMol__SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_MolpherMol'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    MolpherMol::MolpherMol(MolpherMolecule &,bool)\n"
+    "    MolpherMol::MolpherMol(MolpherMol const &)\n");
+  return 0;
 }
 
 
@@ -8186,6 +9520,204 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MolpherMol_getDescendants(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::set< std::string,std::less< std::string >,std::allocator< std::string > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_getDescendants",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getDescendants" "', argument " "1"" of type '" "MolpherMol *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::set< std::string,std::less< std::string >,std::allocator< std::string > > *) &(arg1)->getDescendants();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = swig::from(static_cast< std::set<std::string,std::less< std::string >,std::allocator< std::string > > >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_getHistoricDescendants(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::set< std::string,std::less< std::string >,std::allocator< std::string > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_getHistoricDescendants",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getHistoricDescendants" "', argument " "1"" of type '" "MolpherMol *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::set< std::string,std::less< std::string >,std::allocator< std::string > > *) &(arg1)->getHistoricDescendants();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = swig::from(static_cast< std::set<std::string,std::less< std::string >,std::allocator< std::string > > >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_getItersWithoutDistImprovement(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  unsigned int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_getItersWithoutDistImprovement",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getItersWithoutDistImprovement" "', argument " "1"" of type '" "MolpherMol *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (unsigned int)(arg1)->getItersWithoutDistImprovement();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_getSAScore(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_getSAScore",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getSAScore" "', argument " "1"" of type '" "MolpherMol *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)(arg1)->getSAScore();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_getMolecularWeight(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_getMolecularWeight",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getMolecularWeight" "', argument " "1"" of type '" "MolpherMol *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)(arg1)->getMolecularWeight();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_setDistToTarget(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MolpherMol_setDistToTarget",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_setDistToTarget" "', argument " "1"" of type '" "MolpherMol *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MolpherMol_setDistToTarget" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setDistToTarget(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_setSAScore(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MolpherMol_setSAScore",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_MolpherMol, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_setSAScore" "', argument " "1"" of type '" "MolpherMol *""'"); 
+  }
+  arg1 = reinterpret_cast< MolpherMol * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MolpherMol_setSAScore" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setSAScore(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *MolpherMol_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
@@ -8230,6 +9762,58 @@ SWIGINTERN PyObject *_wrap_ExplorationParameters_valid(PyObject *SWIGUNUSEDPARM(
     SWIG_PYTHON_THREAD_END_ALLOW;
   }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationParameters_getSourceMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationParameters *arg1 = (ExplorationParameters *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  MolpherMol *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ExplorationParameters_getSourceMol",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationParameters, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_getSourceMol" "', argument " "1"" of type '" "ExplorationParameters *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (MolpherMol *)(arg1)->getSourceMol();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationParameters_getTargetMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationParameters *arg1 = (ExplorationParameters *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  MolpherMol *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ExplorationParameters_getTargetMol",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationParameters, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_getTargetMol" "', argument " "1"" of type '" "ExplorationParameters *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (MolpherMol *)(arg1)->getTargetMol();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -8363,29 +9947,130 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_ExplorationParameters_getSourceMol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_ExplorationParameters_setTargetMol__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationParameters *arg1 = (ExplorationParameters *) 0 ;
+  std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
-  MolpherMol *result = 0 ;
+  PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:ExplorationParameters_getSourceMol",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationParameters_setTargetMol",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationParameters, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_getSourceMol" "', argument " "1"" of type '" "ExplorationParameters *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_setTargetMol" "', argument " "1"" of type '" "ExplorationParameters *""'"); 
   }
   arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
   {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExplorationParameters_setTargetMol" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationParameters_setTargetMol" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
     SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    result = (MolpherMol *)(arg1)->getSourceMol();
+    (arg1)->setTargetMol((std::string const &)*arg2);
     SWIG_PYTHON_THREAD_END_ALLOW;
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_MolpherMol, 0 |  0 );
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationParameters_setTargetMol__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationParameters *arg1 = (ExplorationParameters *) 0 ;
+  MolpherMol *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationParameters_setTargetMol",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationParameters, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationParameters_setTargetMol" "', argument " "1"" of type '" "ExplorationParameters *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_MolpherMol,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExplorationParameters_setTargetMol" "', argument " "2"" of type '" "MolpherMol &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationParameters_setTargetMol" "', argument " "2"" of type '" "MolpherMol &""'"); 
+  }
+  arg2 = reinterpret_cast< MolpherMol * >(argp2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setTargetMol(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationParameters_setTargetMol(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationParameters, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_MolpherMol, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_ExplorationParameters_setTargetMol__SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationParameters, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_ExplorationParameters_setTargetMol__SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'ExplorationParameters_setTargetMol'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    ExplorationParameters::setTargetMol(std::string const &)\n"
+    "    ExplorationParameters::setTargetMol(MolpherMol &)\n");
+  return 0;
 }
 
 
@@ -12827,43 +14512,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_ExplorationTree_setParams(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
-  ExplorationParameters *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationTree_setParams",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_setParams" "', argument " "1"" of type '" "ExplorationTree *""'"); 
-  }
-  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_ExplorationParameters,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExplorationTree_setParams" "', argument " "2"" of type '" "ExplorationParameters &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_setParams" "', argument " "2"" of type '" "ExplorationParameters &""'"); 
-  }
-  arg2 = reinterpret_cast< ExplorationParameters * >(argp2);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->setParams(*arg2);
-    SWIG_PYTHON_THREAD_END_ALLOW;
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_ExplorationTree_createSnapshot(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = (ExplorationTree *) 0 ;
@@ -13295,40 +14943,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_ExplorationTree_setThreadCount(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationTree_setThreadCount",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_setThreadCount" "', argument " "1"" of type '" "ExplorationTree *""'"); 
-  }
-  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExplorationTree_setThreadCount" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->setThreadCount(arg2);
-    SWIG_PYTHON_THREAD_END_ALLOW;
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_ExplorationTree_getThreadCount(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = (ExplorationTree *) 0 ;
@@ -13349,6 +14963,32 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getThreadCount(PyObject *SWIGUNUSEDPA
     SWIG_PYTHON_THREAD_END_ALLOW;
   }
   resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationTree_getParams(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  ExplorationParameters *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_getParams",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_getParams" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExplorationParameters *) &(arg1)->getParams();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationParameters, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -13401,6 +15041,77 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getCandidateMorphsMask(PyObject *SWIG
     SWIG_PYTHON_THREAD_END_ALLOW;
   }
   resultobj = swig::from(static_cast< std::vector<bool,std::allocator< bool > > >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationTree_setThreadCount(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationTree_setThreadCount",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_setThreadCount" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExplorationTree_setThreadCount" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setThreadCount(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationTree_setParams(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  ExplorationParameters *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationTree_setParams",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_setParams" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_ExplorationParameters,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExplorationTree_setParams" "', argument " "2"" of type '" "ExplorationParameters &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_setParams" "', argument " "2"" of type '" "ExplorationParameters &""'"); 
+  }
+  arg2 = reinterpret_cast< ExplorationParameters * >(argp2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setParams(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -13553,6 +15264,33 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TraverseCallback_processMorph", _wrap_TraverseCallback_processMorph, METH_VARARGS, NULL},
 	 { (char *)"disown_TraverseCallback", _wrap_disown_TraverseCallback, METH_VARARGS, NULL},
 	 { (char *)"TraverseCallback_swigregister", TraverseCallback_swigregister, METH_VARARGS, NULL},
+	 { (char *)"StringSet_iterator", _wrap_StringSet_iterator, METH_VARARGS, NULL},
+	 { (char *)"StringSet___nonzero__", _wrap_StringSet___nonzero__, METH_VARARGS, NULL},
+	 { (char *)"StringSet___bool__", _wrap_StringSet___bool__, METH_VARARGS, NULL},
+	 { (char *)"StringSet___len__", _wrap_StringSet___len__, METH_VARARGS, NULL},
+	 { (char *)"StringSet_append", _wrap_StringSet_append, METH_VARARGS, NULL},
+	 { (char *)"StringSet___contains__", _wrap_StringSet___contains__, METH_VARARGS, NULL},
+	 { (char *)"StringSet___getitem__", _wrap_StringSet___getitem__, METH_VARARGS, NULL},
+	 { (char *)"StringSet_add", _wrap_StringSet_add, METH_VARARGS, NULL},
+	 { (char *)"StringSet_discard", _wrap_StringSet_discard, METH_VARARGS, NULL},
+	 { (char *)"new_StringSet", _wrap_new_StringSet, METH_VARARGS, NULL},
+	 { (char *)"StringSet_empty", _wrap_StringSet_empty, METH_VARARGS, NULL},
+	 { (char *)"StringSet_size", _wrap_StringSet_size, METH_VARARGS, NULL},
+	 { (char *)"StringSet_clear", _wrap_StringSet_clear, METH_VARARGS, NULL},
+	 { (char *)"StringSet_swap", _wrap_StringSet_swap, METH_VARARGS, NULL},
+	 { (char *)"StringSet_count", _wrap_StringSet_count, METH_VARARGS, NULL},
+	 { (char *)"StringSet_begin", _wrap_StringSet_begin, METH_VARARGS, NULL},
+	 { (char *)"StringSet_end", _wrap_StringSet_end, METH_VARARGS, NULL},
+	 { (char *)"StringSet_rbegin", _wrap_StringSet_rbegin, METH_VARARGS, NULL},
+	 { (char *)"StringSet_rend", _wrap_StringSet_rend, METH_VARARGS, NULL},
+	 { (char *)"StringSet_erase", _wrap_StringSet_erase, METH_VARARGS, NULL},
+	 { (char *)"StringSet_find", _wrap_StringSet_find, METH_VARARGS, NULL},
+	 { (char *)"StringSet_lower_bound", _wrap_StringSet_lower_bound, METH_VARARGS, NULL},
+	 { (char *)"StringSet_upper_bound", _wrap_StringSet_upper_bound, METH_VARARGS, NULL},
+	 { (char *)"StringSet_equal_range", _wrap_StringSet_equal_range, METH_VARARGS, NULL},
+	 { (char *)"StringSet_insert", _wrap_StringSet_insert, METH_VARARGS, NULL},
+	 { (char *)"delete_StringSet", _wrap_delete_StringSet, METH_VARARGS, NULL},
+	 { (char *)"StringSet_swigregister", StringSet_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_MolpherMol", _wrap_new_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"delete_MolpherMol", _wrap_delete_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_fetchMolpherMolecule", _wrap_MolpherMol_fetchMolpherMolecule, METH_VARARGS, NULL},
@@ -13561,11 +15299,20 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MolpherMol_getSMILES", _wrap_MolpherMol_getSMILES, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getDistToTarget", _wrap_MolpherMol_getDistToTarget, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getParentSMILES", _wrap_MolpherMol_getParentSMILES, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_getDescendants", _wrap_MolpherMol_getDescendants, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_getHistoricDescendants", _wrap_MolpherMol_getHistoricDescendants, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_getItersWithoutDistImprovement", _wrap_MolpherMol_getItersWithoutDistImprovement, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_getSAScore", _wrap_MolpherMol_getSAScore, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_getMolecularWeight", _wrap_MolpherMol_getMolecularWeight, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_setDistToTarget", _wrap_MolpherMol_setDistToTarget, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_setSAScore", _wrap_MolpherMol_setSAScore, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_swigregister", MolpherMol_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ExplorationParameters", _wrap_new_ExplorationParameters, METH_VARARGS, NULL},
 	 { (char *)"ExplorationParameters_valid", _wrap_ExplorationParameters_valid, METH_VARARGS, NULL},
-	 { (char *)"ExplorationParameters_setSourceMol", _wrap_ExplorationParameters_setSourceMol, METH_VARARGS, NULL},
 	 { (char *)"ExplorationParameters_getSourceMol", _wrap_ExplorationParameters_getSourceMol, METH_VARARGS, NULL},
+	 { (char *)"ExplorationParameters_getTargetMol", _wrap_ExplorationParameters_getTargetMol, METH_VARARGS, NULL},
+	 { (char *)"ExplorationParameters_setSourceMol", _wrap_ExplorationParameters_setSourceMol, METH_VARARGS, NULL},
+	 { (char *)"ExplorationParameters_setTargetMol", _wrap_ExplorationParameters_setTargetMol, METH_VARARGS, NULL},
 	 { (char *)"delete_ExplorationParameters", _wrap_delete_ExplorationParameters, METH_VARARGS, NULL},
 	 { (char *)"ExplorationParameters_swigregister", ExplorationParameters_swigregister, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTreeSnapshot_load", _wrap_ExplorationTreeSnapshot_load, METH_VARARGS, NULL},
@@ -13642,7 +15389,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"BoolVector_swigregister", BoolVector_swigregister, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_createFromSnapshot", _wrap_ExplorationTree_createFromSnapshot, METH_VARARGS, NULL},
 	 { (char *)"new_ExplorationTree", _wrap_new_ExplorationTree, METH_VARARGS, NULL},
-	 { (char *)"ExplorationTree_setParams", _wrap_ExplorationTree_setParams, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_createSnapshot", _wrap_ExplorationTree_createSnapshot, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_runOperation", _wrap_ExplorationTree_runOperation, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_fetchLeaves", _wrap_ExplorationTree_fetchLeaves, METH_VARARGS, NULL},
@@ -13654,10 +15400,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExplorationTree_filterMorphs", _wrap_ExplorationTree_filterMorphs, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_extend", _wrap_ExplorationTree_extend, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_prune", _wrap_ExplorationTree_prune, METH_VARARGS, NULL},
-	 { (char *)"ExplorationTree_setThreadCount", _wrap_ExplorationTree_setThreadCount, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getThreadCount", _wrap_ExplorationTree_getThreadCount, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_getParams", _wrap_ExplorationTree_getParams, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getCandidateMorphs", _wrap_ExplorationTree_getCandidateMorphs, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getCandidateMorphsMask", _wrap_ExplorationTree_getCandidateMorphsMask, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_setThreadCount", _wrap_ExplorationTree_setThreadCount, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_setParams", _wrap_ExplorationTree_setParams, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_setCandidateMorphsMask", _wrap_ExplorationTree_setCandidateMorphsMask, METH_VARARGS, NULL},
 	 { (char *)"delete_ExplorationTree", _wrap_delete_ExplorationTree, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_swigregister", ExplorationTree_swigregister, METH_VARARGS, NULL},
@@ -13713,12 +15461,15 @@ static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocato
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_const_reference = {"_p_const_reference", "const_reference *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_key_type = {"_p_key_type", "key_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_p_PyObject = {"_p_p_PyObject", "PyObject **", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_reference = {"_p_reference", "reference *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_MolpherMol_t = {"_p_std__allocatorT_MolpherMol_t", "std::vector< MolpherMol >::allocator_type *|std::allocator< MolpherMol > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_bool_t = {"_p_std__allocatorT_bool_t", "std::vector< bool >::allocator_type *|std::allocator< bool > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__lessT_std__string_t = {"_p_std__lessT_std__string_t", "std::less< std::string > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t = {"_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t", "std::set< std::string,std::less< std::string >,std::allocator< std::string > > *|std::set< std::string > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t = {"_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t", "std::vector< MolpherMol,std::allocator< MolpherMol > > *|std::vector< MolpherMol > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t = {"_p_std__vectorT_bool_std__allocatorT_bool_t_t", "std::vector< bool,std::allocator< bool > > *|std::vector< bool > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
@@ -13750,12 +15501,15 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char,
   &_swigt__p_const_reference,
   &_swigt__p_difference_type,
+  &_swigt__p_key_type,
   &_swigt__p_p_PyObject,
   &_swigt__p_reference,
   &_swigt__p_size_type,
   &_swigt__p_std__allocatorT_MolpherMol_t,
   &_swigt__p_std__allocatorT_bool_t,
   &_swigt__p_std__invalid_argument,
+  &_swigt__p_std__lessT_std__string_t,
+  &_swigt__p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t,
   &_swigt__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t,
   &_swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t,
   &_swigt__p_swig__SwigPyIterator,
@@ -13787,12 +15541,15 @@ static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_const_reference[] = {  {&_swigt__p_const_reference, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_key_type[] = {  {&_swigt__p_key_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_PyObject[] = {  {&_swigt__p_p_PyObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_reference[] = {  {&_swigt__p_reference, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_MolpherMol_t[] = {  {&_swigt__p_std__allocatorT_MolpherMol_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_bool_t[] = {  {&_swigt__p_std__allocatorT_bool_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__lessT_std__string_t[] = {  {&_swigt__p_std__lessT_std__string_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t[] = {  {&_swigt__p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t[] = {  {&_swigt__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_bool_std__allocatorT_bool_t_t[] = {  {&_swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
@@ -13824,12 +15581,15 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char,
   _swigc__p_const_reference,
   _swigc__p_difference_type,
+  _swigc__p_key_type,
   _swigc__p_p_PyObject,
   _swigc__p_reference,
   _swigc__p_size_type,
   _swigc__p_std__allocatorT_MolpherMol_t,
   _swigc__p_std__allocatorT_bool_t,
   _swigc__p_std__invalid_argument,
+  _swigc__p_std__lessT_std__string_t,
+  _swigc__p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t,
   _swigc__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t,
   _swigc__p_std__vectorT_bool_std__allocatorT_bool_t_t,
   _swigc__p_swig__SwigPyIterator,

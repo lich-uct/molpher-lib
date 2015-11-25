@@ -41,7 +41,6 @@ public:
     ExplorationTree(const std::string& sourceMolAsSMILES);
     ExplorationTree(ExplorationParameters& params);
     
-    void setParams(ExplorationParameters& params);
     ExplorationTreeSnapshot* createSnapshot() const;
     
     void runOperation(TreeOperation& operation);
@@ -58,10 +57,13 @@ public:
     void extend();
     void prune();
     
-    void setThreadCount(int threadCnt);
     int getThreadCount();
+    ExplorationParameters& getParams();
     const std::vector<MolpherMol>& getCandidateMorphs();
     const std::vector<bool>& getCandidateMorphsMask(); // TODO add a bitset version 
+    
+    void setThreadCount(int threadCnt);
+    void setParams(ExplorationParameters& params);
     void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
 
 };

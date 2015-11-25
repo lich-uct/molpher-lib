@@ -16,6 +16,18 @@ MolpherMol::MolpherMol(MolpherMolecule& mol) : mol(&mol), selfAllocated(false) {
     // no action
 }
 
+MolpherMol::MolpherMol(MolpherMolecule& mol, bool copy) : mol(nullptr), selfAllocated(false) {
+    if (copy) {
+        MolpherMolecule* new_mol = new MolpherMolecule();
+        *new_mol = mol;
+        this->mol = new_mol;
+        selfAllocated = true;
+    } else {
+        this->mol = &mol;
+        selfAllocated = false;
+    }
+}
+
 MolpherMol::~MolpherMol() {
     if (selfAllocated) delete mol;
 }
@@ -54,5 +66,33 @@ double MolpherMol::getDistToTarget() {
 
 std::string MolpherMol::getParentSMILES() {
     return mol->parentSmile;
+}
+
+const std::set<std::string>& MolpherMol::getDescendants() {
+    return mol->descendants;
+}
+
+const std::set<std::string>& MolpherMol::getHistoricDescendants() {
+    return mol->historicDescendants;
+}
+
+unsigned int MolpherMol::getItersWithoutDistImprovement() {
+    return (unsigned int) mol->itersWithoutDistImprovement;
+}
+
+double MolpherMol::getMolecularWeight() {
+    return mol->molecularWeight;
+}
+
+double MolpherMol::getSAScore() {
+    return mol->sascore;
+}
+
+void MolpherMol::setDistToTarget(double dist) {
+    mol->distToTarget = dist;
+}
+
+void MolpherMol::setSAScore(double dist) {
+    mol->sascore = dist;
 }
 
