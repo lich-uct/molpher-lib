@@ -25,8 +25,6 @@
     <fingerprint>FP_MORGAN</fingerprint>
     <similarity>SC_TANIMOTO</similarity>
     <param>
-        <syntetizedFeasibility>true</syntetizedFeasibility>
-        <substructureRestriction>false</substructureRestriction>
         <iterMax>5</iterMax>
     </param>
 </iteration>

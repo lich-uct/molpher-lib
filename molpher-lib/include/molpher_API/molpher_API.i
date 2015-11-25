@@ -23,8 +23,17 @@
 %include "MolpherMol.hpp"
 
 // ExplorationParameters wrapper
+%template(StringVector) std::vector<std::string>;
 %newobject ExplorationParameters::getSourceMol();
 %newobject ExplorationParameters::getTargetMol();
+%newobject ExplorationParameters::getChemOperators();
+%catches(std::runtime_error) ExplorationParameters::getTargetMol();
+%catches(std::runtime_error) ExplorationParameters::getChemOperators();
+%catches(std::runtime_error) ExplorationParameters::getFingerprint();
+%catches(std::runtime_error) ExplorationParameters::getSimilarityCoef();
+%catches(std::runtime_error) ExplorationParameters::setChemOperators(const std::vector<std::string>& choices);
+%catches(std::runtime_error) ExplorationParameters::setFingerprint(const std::string& fp);
+%catches(std::runtime_error) ExplorationParameters::setSimilarityCoef(const std::string& coef);
 %include "ExplorationParameters.hpp"
         
 // ExplorationTreeSnapshot wrapper

@@ -596,6 +596,119 @@ class MolpherMol(_object):
 MolpherMol_swigregister = _core.MolpherMol_swigregister
 MolpherMol_swigregister(MolpherMol)
 
+class StringVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, StringVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, StringVector, name)
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _core.StringVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _core.StringVector___nonzero__(self)
+
+    def __bool__(self):
+        return _core.StringVector___bool__(self)
+
+    def __len__(self):
+        return _core.StringVector___len__(self)
+
+    def pop(self):
+        return _core.StringVector_pop(self)
+
+    def __getslice__(self, i, j):
+        return _core.StringVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _core.StringVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _core.StringVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _core.StringVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _core.StringVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _core.StringVector___setitem__(self, *args)
+
+    def append(self, x):
+        return _core.StringVector_append(self, x)
+
+    def empty(self):
+        return _core.StringVector_empty(self)
+
+    def size(self):
+        return _core.StringVector_size(self)
+
+    def clear(self):
+        return _core.StringVector_clear(self)
+
+    def swap(self, v):
+        return _core.StringVector_swap(self, v)
+
+    def get_allocator(self):
+        return _core.StringVector_get_allocator(self)
+
+    def begin(self):
+        return _core.StringVector_begin(self)
+
+    def end(self):
+        return _core.StringVector_end(self)
+
+    def rbegin(self):
+        return _core.StringVector_rbegin(self)
+
+    def rend(self):
+        return _core.StringVector_rend(self)
+
+    def pop_back(self):
+        return _core.StringVector_pop_back(self)
+
+    def erase(self, *args):
+        return _core.StringVector_erase(self, *args)
+
+    def __init__(self, *args):
+        this = _core.new_StringVector(*args)
+        try:
+            self.this.append(this)
+        except:
+            self.this = this
+
+    def push_back(self, x):
+        return _core.StringVector_push_back(self, x)
+
+    def front(self):
+        return _core.StringVector_front(self)
+
+    def back(self):
+        return _core.StringVector_back(self)
+
+    def assign(self, n, x):
+        return _core.StringVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _core.StringVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _core.StringVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _core.StringVector_reserve(self, n)
+
+    def capacity(self):
+        return _core.StringVector_capacity(self)
+    __swig_destroy__ = _core.delete_StringVector
+    __del__ = lambda self: None
+StringVector_swigregister = _core.StringVector_swigregister
+StringVector_swigregister(StringVector)
+
 class ExplorationParameters(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, ExplorationParameters, name, value)
@@ -619,11 +732,83 @@ class ExplorationParameters(_object):
     def getTargetMol(self):
         return _core.ExplorationParameters_getTargetMol(self)
 
+    def getChemOperators(self):
+        return _core.ExplorationParameters_getChemOperators(self)
+
+    def getFingerprint(self):
+        return _core.ExplorationParameters_getFingerprint(self)
+
+    def getSimilarityCoef(self):
+        return _core.ExplorationParameters_getSimilarityCoef(self)
+
+    def getMinAcceptableMolecularWeight(self):
+        return _core.ExplorationParameters_getMinAcceptableMolecularWeight(self)
+
+    def getMaxAcceptableMolecularWeight(self):
+        return _core.ExplorationParameters_getMaxAcceptableMolecularWeight(self)
+
+    def getCntCandidatesToKeep(self):
+        return _core.ExplorationParameters_getCntCandidatesToKeep(self)
+
+    def getCntCandidatesToKeepMax(self):
+        return _core.ExplorationParameters_getCntCandidatesToKeepMax(self)
+
+    def getCntMorphs(self):
+        return _core.ExplorationParameters_getCntMorphs(self)
+
+    def getCntMorphsInDepth(self):
+        return _core.ExplorationParameters_getCntMorphsInDepth(self)
+
+    def getDistToTargetDepthSwitch(self):
+        return _core.ExplorationParameters_getDistToTargetDepthSwitch(self)
+
+    def getCntMaxMorphs(self):
+        return _core.ExplorationParameters_getCntMaxMorphs(self)
+
+    def getItThreshold(self):
+        return _core.ExplorationParameters_getItThreshold(self)
+
     def setSourceMol(self, *args):
         return _core.ExplorationParameters_setSourceMol(self, *args)
 
     def setTargetMol(self, *args):
         return _core.ExplorationParameters_setTargetMol(self, *args)
+
+    def setChemOperators(self, choices):
+        return _core.ExplorationParameters_setChemOperators(self, choices)
+
+    def setFingerprint(self, fp):
+        return _core.ExplorationParameters_setFingerprint(self, fp)
+
+    def setSimilarityCoef(self, coef):
+        return _core.ExplorationParameters_setSimilarityCoef(self, coef)
+
+    def setMinAcceptableMolecularWeight(self, weight):
+        return _core.ExplorationParameters_setMinAcceptableMolecularWeight(self, weight)
+
+    def setMaxAcceptableMolecularWeight(self, weight):
+        return _core.ExplorationParameters_setMaxAcceptableMolecularWeight(self, weight)
+
+    def setCntCandidatesToKeep(self, value):
+        return _core.ExplorationParameters_setCntCandidatesToKeep(self, value)
+
+    def setCntCandidatesToKeepMax(self, value):
+        return _core.ExplorationParameters_setCntCandidatesToKeepMax(self, value)
+
+    def setCntMorphs(self, value):
+        return _core.ExplorationParameters_setCntMorphs(self, value)
+
+    def setCntMorphsInDepth(self, value):
+        return _core.ExplorationParameters_setCntMorphsInDepth(self, value)
+
+    def setDistToTargetDepthSwitch(self, value):
+        return _core.ExplorationParameters_setDistToTargetDepthSwitch(self, value)
+
+    def setCntMaxMorphs(self, value):
+        return _core.ExplorationParameters_setCntMaxMorphs(self, value)
+
+    def setItThreshold(self, value):
+        return _core.ExplorationParameters_setItThreshold(self, value)
     __swig_destroy__ = _core.delete_ExplorationParameters
     __del__ = lambda self: None
 ExplorationParameters_swigregister = _core.ExplorationParameters_swigregister

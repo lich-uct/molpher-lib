@@ -17,6 +17,17 @@ class TestMolpherAPI(unittest.TestCase):
         self.assertFalse(params.valid())
         params.setSourceMol("CCO")
         self.assertTrue(params.valid())
+        new_opers = ('ADD_ATOM', 'ADD_BOND', 'BOND_CONTRACTION')
+        new_fp = 'EXT_MORGAN'
+        new_coef = 'MC_CONNAUGHEY'
+        params.setChemOperators(new_opers)
+        params.setFingerprint(new_fp)
+        params.setSimilarityCoef(new_coef)
+        self.assertEqual(params.getChemOperators(), new_opers)
+        self.assertEqual(params.getFingerprint(), new_fp)
+        self.assertEqual(params.getSimilarityCoef(), new_coef)
+        self.assertRaises(RuntimeError, lambda: params.setFingerprint('UNKNOWN'))
+        self.assertRaises(RuntimeError, lambda: params.setSimilarityCoef('UNKNOWN'))
         
     def testExplorationTreeSnapshotClass(self):
         etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
