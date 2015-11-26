@@ -52,6 +52,16 @@ class TestMolpherAPI(unittest.TestCase):
         etreeSnap = ExplorationTreeSnapshot.load(self.test_files_path + "test-template.xml")
         tree = ExplorationTree.createFromSnapshot(etreeSnap)
         tree.setThreadCount(2)
+
+        # set some parameters
+        params = tree.getParams()
+        new_opers = ('ADD_ATOM', 'ADD_BOND',)
+        new_fp = 'EXT_MORGAN'
+        new_coef = 'MC_CONNAUGHEY'
+        params.setChemOperators(new_opers)
+        params.setFingerprint(new_fp)
+        params.setSimilarityCoef(new_coef)
+        tree.setParams(params)
         
         # find leaves
         print("Searching for leaves...")

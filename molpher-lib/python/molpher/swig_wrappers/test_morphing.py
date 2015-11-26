@@ -18,6 +18,16 @@ class TestMorphing(unittest.TestCase):
         tree = ExplorationTree.createFromSnapshot(etreeSnap)
         tree.setThreadCount(2)
 
+        # set some parameters
+        params = tree.getParams()
+        new_opers = ('ADD_ATOM', 'ADD_BOND',)
+        new_fp = 'EXT_MORGAN'
+        new_coef = 'MC_CONNAUGHEY'
+        params.setChemOperators(new_opers)
+        params.setFingerprint(new_fp)
+        params.setSimilarityCoef(new_coef)
+        tree.setParams(params)
+
         for i in range(5):
             tree.generateMorphs()
             tree.sortMorphs()
