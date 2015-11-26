@@ -22,6 +22,7 @@ Table of Contents
 
 Indices and Search
 ==================
-* :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
+* :ref:`modindex`
+* :ref:`genindex`
+* :ref:`glossary`

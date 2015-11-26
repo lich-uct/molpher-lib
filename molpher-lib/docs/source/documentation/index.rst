@@ -10,4 +10,4 @@ Documentation
     Tutorial <tutorial>
     Python API Documentation <../python/modules>
     C++ API Documentation <../src/modules>
-    Glossary of terms <glossary>
+    glossary
