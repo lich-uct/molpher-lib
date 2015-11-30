@@ -3,7 +3,7 @@
 Glossary
 ========
 
-A glossary of some terms used in the documentation.
+The glossary of important terms used in the `documentation <index>`.
 
 .. glossary::
 

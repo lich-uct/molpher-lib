@@ -8,7 +8,7 @@ from pkg_resources import resource_filename
 class TestMorphing(unittest.TestCase):
 
     def setUp(self):
-        self.test_files_path = resource_filename('molpher.swig_wrappers', 'test_files/')
+        self.test_files_path = resource_filename('molpher.swig_wrappers.tests', 'test_files/')
 
     def tearDown(self):
         pass

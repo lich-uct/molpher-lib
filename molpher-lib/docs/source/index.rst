@@ -6,7 +6,35 @@
 Molpher-lib: Python and C++ API for Molpher
 ===========================================
 
-Welcome and stuff.
+Welcome and stuff. `documentation/installation`
+
+Link to a term in glossary: `exploration tree`.
+
+Some abbreviation: :abbr:`LIFO (last-in, first-out)`
+
+Command line: :command:`rm -rf xxx`
+
+Filesystem path: :file:`/usr/lib/python2.{x}/site-packages`
+
+A make variable: :makevar:`BUILD_DIR`
+
+Code example with a variable part: :samp:`print 1+{variable}`
+
+Simple code example: ``simple code``
+
+Complex code example:
+
+..  code-block:: python
+    :linenos:
+
+    class Klass:
+        pass
+
+Today is |today| and this is the documentation for Molpher-lib |version|.
+
+Some bibliography reference [1]_.
+
+.. [1] Book or article reference, URL or whatever.
 
 Table of Contents
 =================

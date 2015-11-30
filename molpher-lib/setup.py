@@ -1,5 +1,6 @@
 from setuptools import setup, Extension, find_packages
 import os
+from version import VERSION
 
 my_cpp_module = Extension('molpher.swig_wrappers._core',
                            sources=['src/python/molpher_wrap.cpp'],
@@ -19,7 +20,7 @@ my_cpp_module = Extension('molpher.swig_wrappers._core',
                            )
 
 setup (name = 'molpher',
-       version = '0.1a0.dev3',
+       version = VERSION,
        author      = "Martin Sicho",
        description = "Molpher-lib Python wrappers and library.",
        package_dir={'': 'python/'},
@@ -27,7 +28,8 @@ setup (name = 'molpher',
        ext_modules = [my_cpp_module,],
        package_data = {
             #'molpher.swig_wrappers': ['lib/*.so', 'lib/*.so.2', '*.dat'],
-            'molpher.swig_wrappers': ['*.dat', 'test_files/*'],
+            'molpher.swig_wrappers': ['*.dat'],
+            'molpher.swig_wrappers.tests' : ['test_files/*']
         },
        test_suite="tests"
        )
