@@ -21,7 +21,7 @@
  * 
  * @param storagePath name of the folder where the results are saved
  * @param jobFile path to a job file or XML template
- * @param thredCnt max. number of threads to create
+ * @param threadCnt max. number of threads to create
  */
 void run_path_finder(
     const std::string &storagePath
