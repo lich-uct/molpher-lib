@@ -15,14 +15,7 @@
 
 #include "morphing_functions.hpp"
 
-/** 
- * Runs the original morphing algorithm 
- * using the BasicPathFinder implementation.
- * 
- * @param storagePath name of the folder where the results are saved
- * @param jobFile path to a job file or XML template
- * @param threadCnt max. number of threads to create
- */
+
 void run_path_finder(
     const std::string &storagePath
     , const std::string &jobFile
