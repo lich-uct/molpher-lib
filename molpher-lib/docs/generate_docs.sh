@@ -8,5 +8,3 @@ doxygen config.cfg
 cd ..
 make clean
 make html
-touch source/index.rst
-make html
