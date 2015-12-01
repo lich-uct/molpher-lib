@@ -11,5 +11,5 @@ bla bla
 What is Molpher-lib?
 --------------------
 
-bla bla and see :doc:`documentation/tutorial`
+bla bla and see :doc:`usage/tutorial`
 

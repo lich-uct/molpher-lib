@@ -6,7 +6,7 @@
 Molpher-lib: Python and C++ API for Molpher
 ===========================================
 
-Welcome and stuff. `documentation/installation`
+Welcome and stuff. `usage/installation`
 
 Link to a term in glossary: `exploration tree`.
 
@@ -46,7 +46,8 @@ Table of Contents
 
     self
     Introduction <introduction>
-    Documentation <documentation/index>
+    usage/index
+    documentation/index
 
 Indices and Search
 ==================

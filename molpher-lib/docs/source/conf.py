@@ -20,7 +20,6 @@ import shlex
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('../../src'))
 sys.path.insert(0, os.path.abspath('../../python'))
 
 # -- General configuration ------------------------------------------------
@@ -38,6 +37,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
+    'breathe'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -61,6 +61,10 @@ master_doc = 'index'
 project = 'Molpher-lib'
 copyright = '2015, Martin Sicho'
 author = 'Martin Sicho'
+
+# tell breathe about the doxygen project
+breathe_projects = { project : "../doxygen/xml/" }
+breathe_default_project = project
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
