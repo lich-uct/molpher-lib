@@ -1,6 +1,18 @@
 import molpher
 import warnings
 
+from molpher.swig_wrappers.core import TraverseCallback, TraverseOper, MolpherMol
+
+
+class Callback(TraverseCallback):
+
+    def __init__(self, callback):
+        super(self.__class__, self).__init__()
+        self.callback = callback
+
+    def processMorph(self, morph):
+        self.callback(morph)
+
 class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
 
     def __init__(self, params=None, source=None, target=None):
@@ -25,6 +37,8 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
                                           )
         else:
             raise RuntimeError('You must specify either `params` or `source`.')
+
+        self.callback_class = Callback
 
     @property
     def params(self):
@@ -54,3 +68,36 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         else:
             _params = molpher.core.ExplorationParameters(**params)
             self.setParams(_params)
+
+    @property
+    def leaves(self):
+        return self.fetchLeaves()
+
+    @property
+    def candidates(self):
+        return self.getCandidateMorphs()
+
+    @property
+    def candidates_mask(self):
+        return self.getCandidateMorphsMask()
+
+    @candidates_mask.setter
+    def candidates_mask(self, mask):
+        self.setCandidateMorphsMask(mask)
+
+    @property
+    def thread_count(self):
+        return self.getThreadCount()
+
+    @thread_count.setter
+    def thread_count(self, val):
+        self.setThreadCount(val)
+
+    def traverse(self, callback, start_mol = None):
+        if start_mol and type(start_mol) == MolpherMol:
+            TraverseOper(self, self.callback_class(callback), start_mol)()
+        elif start_mol:
+            mol = self.fetchMol(start_mol)
+            TraverseOper(self, self.callback_class(callback), mol)()
+        else:
+            TraverseOper(self, self.callback_class(callback))()

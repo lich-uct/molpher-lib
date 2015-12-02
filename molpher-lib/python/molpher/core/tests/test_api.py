@@ -5,7 +5,7 @@ class TestPythonAPI(unittest.TestCase):
     
     def setUp(self):
         self.test_source = 'CCO'
-        self.test_target = '01C=CC=C1'
+        self.test_target = 'O1C=CC=C1'
 
     def tearDown(self):
         pass
@@ -45,3 +45,11 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(tree.params['target'], mol2)
         _params = ExplorationParameters()
         self.assertEqual(tree.params['operators'], _params.params['operators'])
+
+    def testTreeMethods(self):
+        tree = ExplorationTree(params={
+            'source' : self.test_source
+            , 'target' : self.test_target
+        })
+        tree.generateMorphs()
+        pass
