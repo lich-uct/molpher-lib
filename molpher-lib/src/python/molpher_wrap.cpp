@@ -18110,11 +18110,17 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_setParams(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_setParams" "', argument " "2"" of type '" "ExplorationParameters &""'"); 
   }
   arg2 = reinterpret_cast< ExplorationParameters * >(argp2);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->setParams(*arg2);
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->setParams(*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:

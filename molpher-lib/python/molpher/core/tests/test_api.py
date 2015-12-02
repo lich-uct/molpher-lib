@@ -30,6 +30,9 @@ class TestPythonAPI(unittest.TestCase):
         tree = ExplorationTree(source=mol1)
         self.assertEqual(tree.params['source'], mol1)
         self.assertEqual(tree.params['target'], 'C')
+        def func():
+            tree.params = {'source' : ''}
+        self.assertRaises(RuntimeError, func)
         tree.params = params
         self.assertEqual(tree.params['source'], mol2)
         self.assertEqual(tree.params['target'], mol1)
