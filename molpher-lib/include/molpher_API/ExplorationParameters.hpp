@@ -40,7 +40,7 @@ public:
     int getCntCandidatesToKeepMax(); // acceptMax
     int getCntMorphs(); // farProduce
     int getCntMorphsInDepth(); // closeProduce
-    double getDistToTargetDepthSwitch(); // farCloseThreashold (if below this threshold, generate closeProduce morphs)
+    double getDistToTargetDepthSwitch(); // farCloseThreshold (if below this threshold, generate closeProduce morphs)
     int getCntMaxMorphs(); // maxMorhpsTotal (prune this and all descendents if no distance improvement among children for this many iters)
     int getItThreshold(); // nonProducingSurvive (prune descendents if no distance improvement among children after this many iters)
     

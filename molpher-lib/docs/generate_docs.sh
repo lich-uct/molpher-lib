@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
-sphinx-apidoc -f -o source/documentation/python/ ../python/molpher/
+# Generate the doxygen XML files for the C++ code
 cd doxygen/
 rm -rf xml
 rm -f *.db
 doxygen config.cfg
 cd ..
+
+# build the Sphinx documentation
+sphinx-apidoc -f -o source/documentation/python/ ../python/molpher/
 make clean
 make html

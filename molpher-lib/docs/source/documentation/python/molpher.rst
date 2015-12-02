@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    molpher.core
     molpher.swig_wrappers
 
 Module contents
