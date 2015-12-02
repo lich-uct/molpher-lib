@@ -546,8 +546,8 @@ class MolpherMol(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, MolpherMol, name)
     __repr__ = _swig_repr
 
-    def __init__(self, *args):
-        this = _core.new_MolpherMol(*args)
+    def __init__(self, other):
+        this = _core.new_MolpherMol(other)
         try:
             self.this.append(this)
         except:

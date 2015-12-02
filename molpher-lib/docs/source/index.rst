@@ -36,6 +36,12 @@ Some bibliography reference [1]_.
 
 .. [1] Book or article reference, URL or whatever.
 
+
+TODO list
+---------
+
+.. todolist::
+
 Table of Contents
 =================
 

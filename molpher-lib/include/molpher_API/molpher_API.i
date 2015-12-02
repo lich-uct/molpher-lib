@@ -17,6 +17,7 @@
 %template(StringSet) std::set<std::string>;
 %newobject MolpherMol::copy();
 %ignore MolpherMol::MolpherMol(MolpherMolecule& mol);
+%ignore MolpherMol::MolpherMol(MolpherMolecule& mol, bool copy);
 %ignore MolpherMol::fetchMolpherMolecule();
 %ignore MolpherMol::MolpherMol();
 %ignore MolpherMol::operator=(const MolpherMol&);

@@ -1,29 +1,9 @@
 molpher.swig_wrappers package
 =============================
 
-Subpackages
------------
+Contains the :py:mod:`molpher.swig_wrappers.core` module with the SWIG wrapping code.
 
 .. toctree::
 
-    molpher.swig_wrappers.tests
+    molpher.swig_wrappers.core
 
-Submodules
-----------
-
-molpher.swig_wrappers.core module
----------------------------------
-
-.. automodule:: molpher.swig_wrappers.core
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: molpher.swig_wrappers
-    :members:
-    :undoc-members:
-    :show-inheritance:

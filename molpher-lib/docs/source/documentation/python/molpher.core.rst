@@ -1,16 +1,6 @@
 molpher.core package
 ====================
 
-Subpackages
------------
-
-.. toctree::
-
-    molpher.core.tests
-
-Submodules
-----------
-
 molpher.core.ExplorationParameters module
 -----------------------------------------
 

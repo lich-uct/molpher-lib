@@ -16,3 +16,7 @@ Module contents
     :members:
     :undoc-members:
     :show-inheritance:
+
+    .. py:data:: wrappers
+
+        A reference to the `molpher.swig_wrappers.core`.

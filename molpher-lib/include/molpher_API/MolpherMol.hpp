@@ -40,7 +40,7 @@ public:
     double getMolecularWeight();
     
     void setDistToTarget(double dist);
-    void setSAScore(double dist);
+    void setSAScore(double score);
 };
 
 #endif	/* MOLPHERMOL_HPP */

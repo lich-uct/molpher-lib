@@ -2,9 +2,9 @@ import molpher
 
 class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     """
-    Houses morphing parameters and can be used to initialize a `molpher.core.ExplorationTree` instance.
-
     :param kwargs: morphing parameters
+
+    Houses morphing parameters and can be used to initialize a `molpher.core.ExplorationTree` instance.
 
     The names, default values and descriptions of the morphing parameters are given in the following table:
 

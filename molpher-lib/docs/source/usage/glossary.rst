@@ -23,3 +23,12 @@ The glossary of important terms used in the `documentation <index>`.
     common headers
         Located in :file:`commons/` folder in the repository root, these header files are shared
         between `Molpher-backend project`, `Molpher-lib project` and the frontend.
+
+    SAScore.dat
+        The data file used for computation of the syntetic feasability scores.
+
+    similarity measure
+        A similarity measure measures similarity between two molecules using a `molecular fingerprint`.
+
+    molecular fingerprint
+        Molecular fingerprints are binary strings that encode certain structural features of a molecule.
