@@ -9,10 +9,10 @@ MolpherMol
     :type other: :py:class:`MolpherMol`
 
     Represents a molecule in the `exploration tree`. The underlying data representation
-    of molecules in the tree can be manipulated using instances of this class.
+    of molecules in the tree can be observed and manipulated using instances of this class.
 
     .. warning:: If the instance is bound to a tree (use `isBound` to find out),
-        do not save a reference to it directly. The instance will become invalid,
+        do not save a reference to it anywhere in your program. The instance will become invalid,
         if it is later deleted/pruned from the tree and may result in undefined behaviour.
         Use `copy` to make a hard copy of the instance,
         if you need to work with the data even after
@@ -69,6 +69,8 @@ MolpherMol
         Returns all direct descendants of this molecule in the respective `exploration tree`
         as canonical SMILES.
 
+        .. todo:: check if this description is correct
+
         :return:  an iterable of descendants
         :rtype: :py:class:`tuple` of :py:class:`str` objects
 
@@ -76,6 +78,8 @@ MolpherMol
 
         Returns the historic descendants (all morphs created from this molecule) of this molecule
         in the respective `exploration tree` as canonical SMILES.
+
+        .. todo:: check if this description is correct
 
         :return:  an iterable of descendants
         :rtype: :py:class:`tuple` of :py:class:`str` objects
