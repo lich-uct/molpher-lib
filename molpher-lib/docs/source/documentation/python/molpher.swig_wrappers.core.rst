@@ -9,4 +9,8 @@ Classes
 
 .. toctree::
 
-    MolpherMol
+    MolpherMol_doc
+    ExplorationTree_doc
+    ExplorationTreeSnapshot_doc
+    ExplorationParameters_doc
+    operations/classes

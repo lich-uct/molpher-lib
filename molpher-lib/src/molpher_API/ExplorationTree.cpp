@@ -92,11 +92,11 @@ void ExplorationTree::sortMorphs() {
 }
 
 void ExplorationTree::filterMorphs() {
-    FilterMoprhsOper(*this)();
+    FilterMorphsOper(*this)();
 }
 
 void ExplorationTree::filterMorphs(int filters) {
-    FilterMoprhsOper(*this, filters)();
+    FilterMorphsOper(*this, filters)();
 }
 
 void ExplorationTree::extend() {

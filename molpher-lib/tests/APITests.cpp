@@ -117,7 +117,7 @@ void APITests::testExploration() {
         previous = &molpher_molecule;
     }
     
-    tree.filterMorphs(FilterMoprhsOper::MorphFilters::ALL);
+    tree.filterMorphs(FilterMorphsOper::MorphFilters::ALL);
     std::vector<bool> mask = tree.getCandidateMorphsMask();
     CPPUNIT_ASSERT_EQUAL(mask.size(), morphs.size());
     

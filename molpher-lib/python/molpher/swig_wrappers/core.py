@@ -313,35 +313,35 @@ class SortMoprhsOper(TreeOperation):
 SortMoprhsOper_swigregister = _core.SortMoprhsOper_swigregister
 SortMoprhsOper_swigregister(SortMoprhsOper)
 
-class FilterMoprhsOper(TreeOperation):
+class FilterMorphsOper(TreeOperation):
     __swig_setmethods__ = {}
     for _s in [TreeOperation]:
         __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, FilterMoprhsOper, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, FilterMorphsOper, name, value)
     __swig_getmethods__ = {}
     for _s in [TreeOperation]:
         __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, FilterMoprhsOper, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, FilterMorphsOper, name)
     __repr__ = _swig_repr
-    PROBABILITY = _core.FilterMoprhsOper_PROBABILITY
-    WEIGHT = _core.FilterMoprhsOper_WEIGHT
-    SYNTHESIS = _core.FilterMoprhsOper_SYNTHESIS
-    COUNT = _core.FilterMoprhsOper_COUNT
-    ALL = _core.FilterMoprhsOper_ALL
+    PROBABILITY = _core.FilterMorphsOper_PROBABILITY
+    WEIGHT = _core.FilterMorphsOper_WEIGHT
+    SYNTHESIS = _core.FilterMorphsOper_SYNTHESIS
+    COUNT = _core.FilterMorphsOper_COUNT
+    ALL = _core.FilterMorphsOper_ALL
 
     def __init__(self, *args):
-        this = _core.new_FilterMoprhsOper(*args)
+        this = _core.new_FilterMorphsOper(*args)
         try:
             self.this.append(this)
         except:
             self.this = this
 
     def __call__(self):
-        return _core.FilterMoprhsOper___call__(self)
-    __swig_destroy__ = _core.delete_FilterMoprhsOper
+        return _core.FilterMorphsOper___call__(self)
+    __swig_destroy__ = _core.delete_FilterMorphsOper
     __del__ = lambda self: None
-FilterMoprhsOper_swigregister = _core.FilterMoprhsOper_swigregister
-FilterMoprhsOper_swigregister(FilterMoprhsOper)
+FilterMorphsOper_swigregister = _core.FilterMorphsOper_swigregister
+FilterMorphsOper_swigregister(FilterMorphsOper)
 
 class ExtendTreeOper(TreeOperation):
     __swig_setmethods__ = {}
@@ -591,8 +591,8 @@ class MolpherMol(_object):
     def setDistToTarget(self, dist):
         return _core.MolpherMol_setDistToTarget(self, dist)
 
-    def setSAScore(self, dist):
-        return _core.MolpherMol_setSAScore(self, dist)
+    def setSAScore(self, score):
+        return _core.MolpherMol_setSAScore(self, score)
 MolpherMol_swigregister = _core.MolpherMol_swigregister
 MolpherMol_swigregister(MolpherMol)
 

@@ -10,7 +10,7 @@
 
 #include "TreeOperation.hpp"
 
-class FilterMoprhsOper : public TreeOperation {
+class FilterMorphsOper : public TreeOperation {
 private:
     int filters;
 
@@ -38,8 +38,8 @@ public:
         ALL = PROBABILITY | WEIGHT | SYNTHESIS | COUNT
     };
 
-    FilterMoprhsOper(ExplorationTree& expTree);
-    FilterMoprhsOper(ExplorationTree& expTree, int filters);
+    FilterMorphsOper(ExplorationTree& expTree);
+    FilterMorphsOper(ExplorationTree& expTree, int filters);
     virtual void operator()();
 };
 

@@ -3421,7 +3421,7 @@ namespace Swig {
 #define SWIGTYPE_p_ExplorationTree swig_types[2]
 #define SWIGTYPE_p_ExplorationTreeSnapshot swig_types[3]
 #define SWIGTYPE_p_ExtendTreeOper swig_types[4]
-#define SWIGTYPE_p_FilterMoprhsOper swig_types[5]
+#define SWIGTYPE_p_FilterMorphsOper swig_types[5]
 #define SWIGTYPE_p_FindLeavesOper swig_types[6]
 #define SWIGTYPE_p_GenerateMoprhsOper swig_types[7]
 #define SWIGTYPE_p_MoleculePointerVector swig_types[8]
@@ -7514,36 +7514,36 @@ SWIGINTERN PyObject *SortMoprhsOper_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_FilterMoprhsOper__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_FilterMorphsOper__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  FilterMoprhsOper *result = 0 ;
+  FilterMorphsOper *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:new_FilterMoprhsOper",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:new_FilterMorphsOper",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_ExplorationTree,  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_FilterMoprhsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_FilterMorphsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FilterMoprhsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FilterMorphsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
   {
     SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    result = (FilterMoprhsOper *)new FilterMoprhsOper(*arg1);
+    result = (FilterMorphsOper *)new FilterMorphsOper(*arg1);
     SWIG_PYTHON_THREAD_END_ALLOW;
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FilterMoprhsOper, SWIG_POINTER_NEW |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FilterMorphsOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_FilterMoprhsOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_FilterMorphsOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = 0 ;
   int arg2 ;
@@ -7553,35 +7553,35 @@ SWIGINTERN PyObject *_wrap_new_FilterMoprhsOper__SWIG_1(PyObject *SWIGUNUSEDPARM
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  FilterMoprhsOper *result = 0 ;
+  FilterMorphsOper *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:new_FilterMoprhsOper",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_FilterMorphsOper",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_ExplorationTree,  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_FilterMoprhsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_FilterMorphsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FilterMoprhsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FilterMorphsOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_FilterMoprhsOper" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_FilterMorphsOper" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
   {
     SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    result = (FilterMoprhsOper *)new FilterMoprhsOper(*arg1,arg2);
+    result = (FilterMorphsOper *)new FilterMorphsOper(*arg1,arg2);
     SWIG_PYTHON_THREAD_END_ALLOW;
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FilterMoprhsOper, SWIG_POINTER_NEW |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FilterMorphsOper, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_FilterMoprhsOper(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_FilterMorphsOper(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[3] = {
     0
@@ -7599,7 +7599,7 @@ SWIGINTERN PyObject *_wrap_new_FilterMoprhsOper(PyObject *self, PyObject *args) 
     int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationTree, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      return _wrap_new_FilterMoprhsOper__SWIG_0(self, args);
+      return _wrap_new_FilterMorphsOper__SWIG_0(self, args);
     }
   }
   if (argc == 2) {
@@ -7613,33 +7613,33 @@ SWIGINTERN PyObject *_wrap_new_FilterMoprhsOper(PyObject *self, PyObject *args) 
         _v = SWIG_CheckState(res);
       }
       if (_v) {
-        return _wrap_new_FilterMoprhsOper__SWIG_1(self, args);
+        return _wrap_new_FilterMorphsOper__SWIG_1(self, args);
       }
     }
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_FilterMoprhsOper'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_FilterMorphsOper'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    FilterMoprhsOper::FilterMoprhsOper(ExplorationTree &)\n"
-    "    FilterMoprhsOper::FilterMoprhsOper(ExplorationTree &,int)\n");
+    "    FilterMorphsOper::FilterMorphsOper(ExplorationTree &)\n"
+    "    FilterMorphsOper::FilterMorphsOper(ExplorationTree &,int)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_FilterMoprhsOper___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_FilterMorphsOper___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  FilterMoprhsOper *arg1 = (FilterMoprhsOper *) 0 ;
+  FilterMorphsOper *arg1 = (FilterMorphsOper *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:FilterMoprhsOper___call__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_FilterMoprhsOper, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:FilterMorphsOper___call__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_FilterMorphsOper, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FilterMoprhsOper___call__" "', argument " "1"" of type '" "FilterMoprhsOper *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FilterMorphsOper___call__" "', argument " "1"" of type '" "FilterMorphsOper *""'"); 
   }
-  arg1 = reinterpret_cast< FilterMoprhsOper * >(argp1);
+  arg1 = reinterpret_cast< FilterMorphsOper * >(argp1);
   {
     SWIG_PYTHON_THREAD_BEGIN_ALLOW;
     (arg1)->operator ()();
@@ -7652,19 +7652,19 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_FilterMoprhsOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_FilterMorphsOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  FilterMoprhsOper *arg1 = (FilterMoprhsOper *) 0 ;
+  FilterMorphsOper *arg1 = (FilterMorphsOper *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_FilterMoprhsOper",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_FilterMoprhsOper, SWIG_POINTER_DISOWN |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_FilterMorphsOper",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_FilterMorphsOper, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_FilterMoprhsOper" "', argument " "1"" of type '" "FilterMoprhsOper *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_FilterMorphsOper" "', argument " "1"" of type '" "FilterMorphsOper *""'"); 
   }
-  arg1 = reinterpret_cast< FilterMoprhsOper * >(argp1);
+  arg1 = reinterpret_cast< FilterMorphsOper * >(argp1);
   {
     SWIG_PYTHON_THREAD_BEGIN_ALLOW;
     delete arg1;
@@ -7677,10 +7677,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *FilterMoprhsOper_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *FilterMorphsOper_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_FilterMoprhsOper, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_FilterMorphsOper, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -18170,10 +18170,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SortMoprhsOper___call__", _wrap_SortMoprhsOper___call__, METH_VARARGS, NULL},
 	 { (char *)"delete_SortMoprhsOper", _wrap_delete_SortMoprhsOper, METH_VARARGS, NULL},
 	 { (char *)"SortMoprhsOper_swigregister", SortMoprhsOper_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_FilterMoprhsOper", _wrap_new_FilterMoprhsOper, METH_VARARGS, NULL},
-	 { (char *)"FilterMoprhsOper___call__", _wrap_FilterMoprhsOper___call__, METH_VARARGS, NULL},
-	 { (char *)"delete_FilterMoprhsOper", _wrap_delete_FilterMoprhsOper, METH_VARARGS, NULL},
-	 { (char *)"FilterMoprhsOper_swigregister", FilterMoprhsOper_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_FilterMorphsOper", _wrap_new_FilterMorphsOper, METH_VARARGS, NULL},
+	 { (char *)"FilterMorphsOper___call__", _wrap_FilterMorphsOper___call__, METH_VARARGS, NULL},
+	 { (char *)"delete_FilterMorphsOper", _wrap_delete_FilterMorphsOper, METH_VARARGS, NULL},
+	 { (char *)"FilterMorphsOper_swigregister", FilterMorphsOper_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ExtendTreeOper", _wrap_new_ExtendTreeOper, METH_VARARGS, NULL},
 	 { (char *)"ExtendTreeOper___call__", _wrap_ExtendTreeOper___call__, METH_VARARGS, NULL},
 	 { (char *)"delete_ExtendTreeOper", _wrap_delete_ExtendTreeOper, METH_VARARGS, NULL},
@@ -18406,8 +18406,8 @@ static void *_p_GenerateMoprhsOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPAR
 static void *_p_SortMoprhsOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((TreeOperation *)  ((SortMoprhsOper *) x));
 }
-static void *_p_FilterMoprhsOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((TreeOperation *)  ((FilterMoprhsOper *) x));
+static void *_p_FilterMorphsOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((TreeOperation *)  ((FilterMorphsOper *) x));
 }
 static void *_p_FindLeavesOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((TreeOperation *)  ((FindLeavesOper *) x));
@@ -18426,7 +18426,7 @@ static swig_type_info _swigt__p_ExplorationParameters = {"_p_ExplorationParamete
 static swig_type_info _swigt__p_ExplorationTree = {"_p_ExplorationTree", "ExplorationTree *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ExplorationTreeSnapshot = {"_p_ExplorationTreeSnapshot", "ExplorationTreeSnapshot *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ExtendTreeOper = {"_p_ExtendTreeOper", "ExtendTreeOper *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_FilterMoprhsOper = {"_p_FilterMoprhsOper", "FilterMoprhsOper *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_FilterMorphsOper = {"_p_FilterMorphsOper", "FilterMorphsOper *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_FindLeavesOper = {"_p_FindLeavesOper", "FindLeavesOper *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GenerateMoprhsOper = {"_p_GenerateMoprhsOper", "GenerateMoprhsOper *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_MoleculePointerVector = {"_p_MoleculePointerVector", "MoleculePointerVector *", 0, 0, (void*)0, 0};
@@ -18468,7 +18468,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_ExplorationTree,
   &_swigt__p_ExplorationTreeSnapshot,
   &_swigt__p_ExtendTreeOper,
-  &_swigt__p_FilterMoprhsOper,
+  &_swigt__p_FilterMorphsOper,
   &_swigt__p_FindLeavesOper,
   &_swigt__p_GenerateMoprhsOper,
   &_swigt__p_MoleculePointerVector,
@@ -18510,7 +18510,7 @@ static swig_cast_info _swigc__p_ExplorationParameters[] = {  {&_swigt__p_Explora
 static swig_cast_info _swigc__p_ExplorationTree[] = {  {&_swigt__p_ExplorationTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ExplorationTreeSnapshot[] = {  {&_swigt__p_ExplorationTreeSnapshot, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ExtendTreeOper[] = {  {&_swigt__p_ExtendTreeOper, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_FilterMoprhsOper[] = {  {&_swigt__p_FilterMoprhsOper, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_FilterMorphsOper[] = {  {&_swigt__p_FilterMorphsOper, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_FindLeavesOper[] = {  {&_swigt__p_FindLeavesOper, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GenerateMoprhsOper[] = {  {&_swigt__p_GenerateMoprhsOper, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MoleculePointerVector[] = {  {&_swigt__p_MoleculePointerVector, 0, 0, 0},{0, 0, 0, 0}};
@@ -18525,7 +18525,7 @@ static swig_cast_info _swigc__p_SmileVector[] = {  {&_swigt__p_SmileVector, 0, 0
 static swig_cast_info _swigc__p_SortMoprhsOper[] = {  {&_swigt__p_SortMoprhsOper, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TraverseCallback[] = {  {&_swigt__p_TraverseCallback, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TraverseOper[] = {  {&_swigt__p_TraverseOper, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_TreeOperation[] = {  {&_swigt__p_TreeOperation, 0, 0, 0},  {&_swigt__p_GenerateMoprhsOper, _p_GenerateMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_SortMoprhsOper, _p_SortMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FilterMoprhsOper, _p_FilterMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FindLeavesOper, _p_FindLeavesOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_ExtendTreeOper, _p_ExtendTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_PruneTreeOper, _p_PruneTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_TraverseOper, _p_TraverseOperTo_p_TreeOperation, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_TreeOperation[] = {  {&_swigt__p_TreeOperation, 0, 0, 0},  {&_swigt__p_GenerateMoprhsOper, _p_GenerateMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_SortMoprhsOper, _p_SortMoprhsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FilterMorphsOper, _p_FilterMorphsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FindLeavesOper, _p_FindLeavesOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_ExtendTreeOper, _p_ExtendTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_PruneTreeOper, _p_PruneTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_TraverseOper, _p_TraverseOperTo_p_TreeOperation, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_const_reference[] = {  {&_swigt__p_const_reference, 0, 0, 0},{0, 0, 0, 0}};
@@ -18552,7 +18552,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_ExplorationTree,
   _swigc__p_ExplorationTreeSnapshot,
   _swigc__p_ExtendTreeOper,
-  _swigc__p_FilterMoprhsOper,
+  _swigc__p_FilterMorphsOper,
   _swigc__p_FindLeavesOper,
   _swigc__p_GenerateMoprhsOper,
   _swigc__p_MoleculePointerVector,
@@ -19272,11 +19272,11 @@ SWIG_init(void) {
   
   SWIG_InstallConstants(d,swig_const_table);
   
-  SWIG_Python_SetConstant(d, "FilterMoprhsOper_PROBABILITY",SWIG_From_int(static_cast< int >(FilterMoprhsOper::PROBABILITY)));
-  SWIG_Python_SetConstant(d, "FilterMoprhsOper_WEIGHT",SWIG_From_int(static_cast< int >(FilterMoprhsOper::WEIGHT)));
-  SWIG_Python_SetConstant(d, "FilterMoprhsOper_SYNTHESIS",SWIG_From_int(static_cast< int >(FilterMoprhsOper::SYNTHESIS)));
-  SWIG_Python_SetConstant(d, "FilterMoprhsOper_COUNT",SWIG_From_int(static_cast< int >(FilterMoprhsOper::COUNT)));
-  SWIG_Python_SetConstant(d, "FilterMoprhsOper_ALL",SWIG_From_int(static_cast< int >(FilterMoprhsOper::ALL)));
+  SWIG_Python_SetConstant(d, "FilterMorphsOper_PROBABILITY",SWIG_From_int(static_cast< int >(FilterMorphsOper::PROBABILITY)));
+  SWIG_Python_SetConstant(d, "FilterMorphsOper_WEIGHT",SWIG_From_int(static_cast< int >(FilterMorphsOper::WEIGHT)));
+  SWIG_Python_SetConstant(d, "FilterMorphsOper_SYNTHESIS",SWIG_From_int(static_cast< int >(FilterMorphsOper::SYNTHESIS)));
+  SWIG_Python_SetConstant(d, "FilterMorphsOper_COUNT",SWIG_From_int(static_cast< int >(FilterMorphsOper::COUNT)));
+  SWIG_Python_SetConstant(d, "FilterMorphsOper_ALL",SWIG_From_int(static_cast< int >(FilterMorphsOper::ALL)));
   
   /* Initialize threading */
   SWIG_PYTHON_INITIALIZE_THREADS;

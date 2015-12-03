@@ -8,15 +8,15 @@
 
 #include "molpher_API/operations/FilterMorphsOper.hpp"
 
-FilterMoprhsOper::FilterMoprhsOper(ExplorationTree& expTree) : TreeOperation(expTree), filters(MorphFilters::ALL) {
+FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree) : TreeOperation(expTree), filters(MorphFilters::ALL) {
     // no action
 }
 
-FilterMoprhsOper::FilterMoprhsOper(ExplorationTree& expTree, int filters) : TreeOperation(expTree), filters(filters) {
+FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree, int filters) : TreeOperation(expTree), filters(filters) {
     // no action
 }
 
-FilterMoprhsOper::FilterMorphs::FilterMorphs(PathFinderContext &ctx,
+FilterMorphsOper::FilterMorphs::FilterMorphs(PathFinderContext &ctx,
         size_t globalMorphCount, ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors, int filters
         ) :
 mCtx(ctx),
@@ -27,7 +27,7 @@ mFilters(filters){
     assert(mMorphs.size() == mSurvivors.size());
 }
 
-void FilterMoprhsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t> &r) const {
+void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t> &r) const {
 
     for (size_t idx = r.begin(); idx != r.end(); ++idx) {
 
@@ -137,7 +137,7 @@ void FilterMoprhsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
     }
 }
 
-void FilterMoprhsOper::operator()() {
+void FilterMorphsOper::operator()() {
     tbb::task_group_context tbbCtx;
     tbb::task_scheduler_init scheduler;
     if (threadCnt > 0) {
