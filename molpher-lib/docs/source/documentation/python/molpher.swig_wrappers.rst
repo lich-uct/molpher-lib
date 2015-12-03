@@ -6,4 +6,5 @@ Contains the :py:mod:`molpher.swig_wrappers.core` module with the SWIG wrapping 
 .. toctree::
 
     molpher.swig_wrappers.core
+    molpher.swig_wrappers.tests
 

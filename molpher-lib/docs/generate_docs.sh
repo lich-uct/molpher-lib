@@ -8,6 +8,6 @@ doxygen config.cfg
 cd ..
 
 # build the Sphinx documentation
-# sphinx-apidoc -o source/documentation/python/ ../python/molpher/
+sphinx-apidoc -o source/documentation/python/ ../python/molpher/
 make clean
 make html

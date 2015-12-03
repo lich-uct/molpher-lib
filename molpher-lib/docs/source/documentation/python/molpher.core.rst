@@ -17,6 +17,13 @@ molpher.core.ExplorationTree module
     :undoc-members:
     :show-inheritance:
 
+Subpackages
+-----------
+
+.. toctree::
+
+    molpher.core.tests
+
 
 Module contents
 ---------------
