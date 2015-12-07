@@ -2,11 +2,20 @@ import molpher
 
 class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     """
-    :param kwargs: morphing parameters
+    :param \*\*kwargs: morphing parameters
+    :type \*\*kwargs: `dict`
+    :param parameters: another instance to copy the parameters from
+    :type parameters: `molpher.swig_wrappers.core.ExplorationParameters` or `molpher.core.ExplorationParameters`
 
     Houses morphing parameters and can be used to initialize a `molpher.core.ExplorationTree` instance.
+    If both ``parameters`` and ``**kwargs`` are specified, the parameters are initilized from the instance
+    provided in ``parameters``, but with the parameters in ``**kwargs`` taking precedence.
 
-    The names, default values and descriptions of the morphing parameters are given in the following table:
+    It inherits from `molpher.swig_wrappers.core.ExplorationParameters` and exposes the parameters object attributes.
+    The parameters can be set either directly or using the attached getter and setter methods.
+    The table below gives an overview of all available parameters, their respective getters and setters,
+    default values and short descriptions. If you want to know more, refer to
+    the individual attribute descriptions below.
 
     ..  csv-table:: a title
         :header: "Identifier", "Setter", "Getter", "Default", "Brief Description"
@@ -16,20 +25,20 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     ..  todo::
         Finish the table.
 
-
-    :type kwargs: :py:class:`dict`
-
     """
 
     class UnknownParameterException(Exception):
         """
-        Indicates that a parameter in `ExplorationParameters.params` is unknown.
+        Indicates that an unknown parameter was supplied.
         """
 
         pass
 
-    def __init__(self, **kwargs):
-        super(ExplorationParameters, self).__init__()
+    def __init__(self, parameters=None, **kwargs):
+        if parameters:
+            super(ExplorationParameters, self).__init__(parameters)
+        else:
+            super(ExplorationParameters, self).__init__()
         self._SETTERS_MAP = {
             'source' : self.setSourceMol
             , 'target' : self.setTargetMol
@@ -46,6 +55,22 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
             , 'max_morphs_total' : self.setCntMaxMorphs
             , 'non_producing_survive' : self.setItThreshold
         }
+        self._GETTERS_MAP = {
+            'source' : self.getSourceMol
+            , 'target' : self.getTargetMol
+            , 'operators' : self.getChemOperators
+            , 'fingerprint' : self.getFingerprint
+            , 'similarity' : self.getSimilarityCoef
+            , 'weight_min' : self.getMinAcceptableMolecularWeight
+            , 'weight_max' : self.getMaxAcceptableMolecularWeight
+            , 'accept_min' : self.getCntCandidatesToKeep
+            , 'accept_max' : self.getCntCandidatesToKeepMax
+            , 'far_produce' : self.getCntMorphs
+            , 'close_produce' : self.getCntMorphsInDepth
+            , 'far_close_threshold' : self.getDistToTargetDepthSwitch
+            , 'max_morphs_total' : self.getCntMaxMorphs
+            , 'non_producing_survive' : self.getItThreshold
+        }
         if kwargs:
             self._update_instance(kwargs)
 
@@ -58,48 +83,299 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
 
 
     @property
-    def params(self):
+    def param_dict(self):
         """
         Holds a dictionary of current parameter values for this instance.
-        Also, a new dictionary of parameters can be assigned to change them.
+        Additionally, a new dictionary of parameters can be assigned to change them.
 
         :return: a dictionary of parameters
-        :rtype: :py:class:`dict`
+        :rtype: `dict`
         """
 
         return {
-            'source' : self.getSourceMol().getSMILES()
-            , 'target' : self.getTargetMol().getSMILES()
-            , 'operators' : self.getChemOperators()
-            , 'fingerprint' : self.getFingerprint()
-            , 'similarity' : self.getSimilarityCoef()
-            , 'weight_min' : self.getMinAcceptableMolecularWeight()
-            , 'weight_max' : self.getMaxAcceptableMolecularWeight()
-            , 'accept_min' : self.getCntCandidatesToKeep()
-            , 'accept_max' : self.getCntCandidatesToKeepMax()
-            , 'far_produce' : self.getCntMorphs()
-            , 'close_produce' : self.getCntMorphsInDepth()
-            , 'far_close_threshold' : self.getDistToTargetDepthSwitch()
-            , 'max_morphs_total' : self.getCntMaxMorphs()
-            , 'non_producing_survive' : self.getItThreshold()
+            'source' : self._GETTERS_MAP['source']().getSMILES()
+            , 'target' : self._GETTERS_MAP['target']().getSMILES()
+            , 'operators' : self._GETTERS_MAP['operators']()
+            , 'fingerprint' : self._GETTERS_MAP['fingerprint']()
+            , 'similarity' : self._GETTERS_MAP['similarity']()
+            , 'weight_min' : self._GETTERS_MAP['weight_min']()
+            , 'weight_max' : self._GETTERS_MAP['weight_max']()
+            , 'accept_min' : self._GETTERS_MAP['accept_min']()
+            , 'accept_max' : self._GETTERS_MAP['accept_max']()
+            , 'far_produce' : self._GETTERS_MAP['far_produce']()
+            , 'close_produce' : self._GETTERS_MAP['close_produce']()
+            , 'far_close_threshold' : self._GETTERS_MAP['far_close_threshold']()
+            , 'max_morphs_total' : self._GETTERS_MAP['max_morphs_total']()
+            , 'non_producing_survive' : self._GETTERS_MAP['non_producing_survive']()
         }
 
-    @params.setter
-    def params(self, options):
+    @param_dict.setter
+    def param_dict(self, options):
         self._update_instance(options)
 
     @property
     def is_valid(self):
         """
-        Checks if this instance represents valid parameters.
+        Shows if this instance represents valid parameters.
 
         ..  todo::
             Document what exactly is checked.
 
-        :return: validity as :py:class:`True` or :py:class:`False`
-        :rtype: :py:class:`bool`
+        :return: whether validity is `True` or `False`
+        :rtype: `bool`
         """
 
         return self.valid()
 
+    @property
+    def source(self):
+        """
+        The `source molecule`. All morphs in an `exploration tree` are derived from this molecule during morphing.
 
+        :return: `MolpherMol` instance representing the current `source molecule`
+        :rtype: `MolpherMol`
+        """
+
+        return self._GETTERS_MAP['source']()
+
+    @source.setter
+    def source(self, value):
+        self._SETTERS_MAP['source'](value)
+
+    @property
+    def target(self):
+        """
+        The `target molecule`. This is the molecule being searched for during morphing. The goal is to
+        maximize similarity (minimize distance) of the generated morphs and this molecule.
+
+        :return: `MolpherMol` instance representing the current `target molecule`
+        :rtype: `MolpherMol`
+        """
+
+        return self._GETTERS_MAP['target']()
+
+    @target.setter
+    def target(self, value):
+        self._SETTERS_MAP['target'](value)
+
+    @property
+    def operators(self):
+        """
+
+        A set of `chemical operators` to use. These define how the input molecule and its descendents
+        can be manipulated during morphing.
+
+        .. include:: oper_table.rst
+
+        :return: current chemical operators
+        :rtype: `tuple` of `str`
+        """
+
+        return self._GETTERS_MAP['operators']()
+
+    @operators.setter
+    def operators(self, value):
+        self._SETTERS_MAP['operators'](value)
+
+    @property
+    def fingerprint(self):
+        """
+        Returns an identifier of the currently set `molecular fingerprint`.
+
+        .. include:: fing_table.rst
+
+        :return: `molecular fingerprint` identifier
+        :rtype: `str`
+        """
+
+        return self._GETTERS_MAP['fingerprint']()
+
+    @fingerprint.setter
+    def fingerprint(self, value):
+        self._SETTERS_MAP['fingerprint'](value)
+
+    @property
+    def similarity(self):
+        """
+        Returns an identifier of the currently set `similarity measure`.
+
+        .. include:: sim_table.rst
+
+        :return: `similarity measure` identifier
+        :rtype: `str`
+        """
+
+        return self._GETTERS_MAP['similarity']()
+
+    @similarity.setter
+    def similarity(self, value):
+        self._SETTERS_MAP['similarity'](value)
+
+    @property
+    def weight_min(self):
+        """
+        If `FilterMorphsOper.WEIGHT` filter is used on an `exploration tree` with the current parameters set,
+        this will be the minimum weight
+        of the `candidate morphs` accepted during a filtering procedure.
+
+        .. seealso:: `ExplorationTree.filterMorphs()`
+
+        :return: minimum acceptable weight during filtering
+        :rtype: `float`
+        """
+
+        return self._GETTERS_MAP['weight_min']()
+
+    @weight_min.setter
+    def weight_min(self, value):
+        self._SETTERS_MAP['weight_min'](value)
+
+    @property
+    def weight_max(self):
+        """
+        If `FilterMorphsOper.WEIGHT` filter is used on an `exploration tree` with the current parameters set,
+        this will be the maximum weight
+        of the `candidate morphs` accepted during a filtering procedure.
+
+        .. seealso:: `ExplorationTree.filterMorphs()`
+
+        :return: maximum acceptable weight during filtering
+        :rtype: `float`
+        """
+
+        return self._GETTERS_MAP['weight_max']()
+
+    @weight_max.setter
+    def weight_max(self, value):
+        self._SETTERS_MAP['weight_max'](value)
+
+    @property
+    def accept_min(self):
+        """
+        If `FilterMorphsOper.PROBABILITY` is used during filtering, this is the number of morphs
+        accepted with 100% probability.
+
+        .. seealso:: `ExplorationTree.filterMorphs()`
+
+        :return: minimum number of candidates accepted in one iteration
+        :rtype: `int`
+        """
+
+        return self._GETTERS_MAP['accept_min']()
+
+    @accept_min.setter
+    def accept_min(self, value):
+        self._SETTERS_MAP['accept_min'](value)
+
+    @property
+    def accept_max(self):
+        """
+        This is the maximum number of morphs allowed to be connected to the tree.
+        If more than `accept_max` morphs with `True` on the appropriate position in `ExplorationTree.candidates_mask`
+        are present in `ExplorationTree.candidates` and
+        `ExplorationTree.extend()` is called, only first `accept_max` morphs from `ExplorationTree.candidates` will
+        be connected to the tree and the rest will be discarded.
+
+        .. seealso:: `ExplorationTree.extend()`
+
+        :return: maximum number of candidates accepted upon `ExplorationTree.extend()`
+        :rtype: `int`
+        """
+
+        return self._GETTERS_MAP['accept_max']()
+
+    @accept_max.setter
+    def accept_max(self, value):
+        self._SETTERS_MAP['accept_max'](value)
+
+    @property
+    def far_produce(self):
+        """
+        This is the maximum number of morphs generated from one leaf when the leaf of the tree currently being
+        processed with `ExplorationTree.generateMorphs()` lies more than `far_close_threshold` from
+        the `target molecule`.
+
+        :return: maximum number of morphs to produce with an `ExplorationTree.generateMorphs()` call.
+        :rtype: `int`
+        """
+
+        return self._GETTERS_MAP['far_produce']()
+
+    @far_produce.setter
+    def far_produce(self, value):
+        self._SETTERS_MAP['far_produce'](value)
+
+    @property
+    def close_produce(self):
+        """
+        This is the maximum number of morphs generated from one leaf when the leaf of the tree currently being
+        processed with `ExplorationTree.generateMorphs()` lies less than `far_close_threshold` from
+        the `target molecule`.
+
+        :return: maximum number of morphs to produce with an `ExplorationTree.generateMorphs()` call.
+        :rtype: `int`
+        """
+
+        return self._GETTERS_MAP['close_produce']()
+
+    @close_produce.setter
+    def close_produce(self, value):
+        self._SETTERS_MAP['close_produce'](value)
+
+    @property
+    def far_close_threshold(self):
+        """
+        This distance threshold controls the number of morphs generated
+        with `ExplorationTree.generateMorphs()` for molecules closer
+        or further from the `target molecule`.
+
+        .. seealso:: `far_produce` and `close_produce`
+
+        :return: distance threshold for `far_produce` and `close_produce`
+        :rtype: `float`
+        """
+
+        return self._GETTERS_MAP['far_close_threshold']()
+
+    @far_close_threshold.setter
+    def far_close_threshold(self, value):
+        self._SETTERS_MAP['far_close_threshold'](value)
+
+    @property
+    def max_morphs_total(self):
+        """
+        Maximum number of 'bad morphs' generated from one molecule. If a molecule has more than `max_morphs_total`
+        descendents and none of them are closer to the `target molecule` than the molecule in question, then
+        the molecule is permanently removed from the tree with all its descendents when `ExplorationTree.prune()`
+        is called.
+
+        :return: maximum number of 'bad morphs' before pruning
+        :rtype: `int`
+        """
+
+        return self._GETTERS_MAP['max_morphs_total']()
+
+    @max_morphs_total.setter
+    def max_morphs_total(self, value):
+        self._SETTERS_MAP['max_morphs_total'](value)
+
+    @property
+    def non_producing_survive(self):
+        """
+        A molecule that has not produced any morphs closer to the `target molecule` than itself
+        for `non_producing_survive` number of calls to `ExplorationTree.generateMorphs()`
+        will have its descendents removed during the next `ExplorationTree.prune()` call.
+
+        .. seealso:: `MolpherMol.getItersWithoutDistImprovement()`
+
+        :return: number of calls  to `ExplorationTree.generateMorphs()` before descendents of a
+            'non-producing molecule'
+            are removed from the tree
+        :rtype: `int`
+        """
+
+        return self._GETTERS_MAP['non_producing_survive']()
+
+    @non_producing_survive.setter
+    def non_producing_survive(self, value):
+        self._SETTERS_MAP['non_producing_survive'](value)

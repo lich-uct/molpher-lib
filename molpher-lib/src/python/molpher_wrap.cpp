@@ -11863,7 +11863,7 @@ SWIGINTERN PyObject *StringVector_swigregister(PyObject *SWIGUNUSEDPARM(self), P
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_ExplorationParameters(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_ExplorationParameters__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationParameters *result = 0 ;
   
@@ -11877,6 +11877,68 @@ SWIGINTERN PyObject *_wrap_new_ExplorationParameters(PyObject *SWIGUNUSEDPARM(se
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_ExplorationParameters__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationParameters *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  ExplorationParameters *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_ExplorationParameters",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_ExplorationParameters,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_ExplorationParameters" "', argument " "1"" of type '" "ExplorationParameters const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ExplorationParameters" "', argument " "1"" of type '" "ExplorationParameters const &""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationParameters * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExplorationParameters *)new ExplorationParameters((ExplorationParameters const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationParameters, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_ExplorationParameters(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_ExplorationParameters__SWIG_0(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_ExplorationParameters, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_ExplorationParameters__SWIG_1(self, args);
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_ExplorationParameters'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    ExplorationParameters::ExplorationParameters()\n"
+    "    ExplorationParameters::ExplorationParameters(ExplorationParameters const &)\n");
+  return 0;
 }
 
 

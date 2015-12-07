@@ -50,6 +50,10 @@ ExplorationParameters::ExplorationParameters() {
     // no action
 }
 
+ExplorationParameters::ExplorationParameters(const ExplorationParameters& other) {
+    iterSnapshot = other.iterSnapshot;
+}
+
 //IterationSnapshot ExplorationParameters::createIterationSnapshot() const {
 //    return iterSnapshot;
 //}

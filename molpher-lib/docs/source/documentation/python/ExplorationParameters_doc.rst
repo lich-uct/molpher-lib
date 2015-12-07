@@ -5,13 +5,22 @@ ExplorationParameters
 
 .. autoclass:: ExplorationParameters
 
+    :param \*args: either another instance of this class or empty
+
     Contains information about the `exploration parameters` and provides facilities to read them
-    and change them. The constructor does not take any arguments and automatically initilizes
-    the parameters with the default values (see `molpher.core.ExplorationParameters` for details).
+    and change them.
+
+    An instance of this class can be either initilized automatically (no arguments
+    provided to the constructor) or from another instance (passed as a single constructor parameter).
+    If the class is initilized automatically (no parameters passed to the constructor),
+    the `exploration parameters` are set to the default values (see the description of `molpher.core.ExplorationParameters`
+    for an overview of default parameters).
 
     .. automethod:: getSourceMol
 
         Returns the `source molecule`.
+
+        .. seealso:: `molpher.core.ExplorationParameters.ExplorationParameters.source`
 
         :return: `MolpherMol` instance representing the current `source molecule`
         :rtype: `MolpherMol`
@@ -19,6 +28,8 @@ ExplorationParameters
     .. automethod:: getTargetMol
 
         Returns the `target molecule`.
+
+        .. seealso:: `molpher.core.ExplorationParameters.ExplorationParameters.target`
 
         :return: `MolpherMol` instance representing the current `target molecule`
         :rtype: `MolpherMol`
@@ -31,6 +42,8 @@ ExplorationParameters
 
         .. include:: oper_table.rst
 
+        .. seealso:: `molpher.core.ExplorationParameters.ExplorationParameters.operators`
+
         :return: current chemical operators
         :rtype: `tuple` of `str`
 
@@ -38,7 +51,11 @@ ExplorationParameters
 
         Returns an identifier of the currently set `molecular fingerprint`.
 
-        .. todo:: add table
+        .. include:: fing_table.rst
+
+        .. todo:: finish table
+
+        .. seealso:: `molpher.core.ExplorationParameters.ExplorationParameters.fingerprint`
 
         :return: `molecular fingerprint` identifier
         :rtype: `str`
@@ -47,7 +64,11 @@ ExplorationParameters
 
         Returns an identifier of the currently set `similarity measure`.
 
-        .. todo:: add table
+        .. include:: sim_table.rst
+
+        .. todo:: finish table
+
+        .. seealso:: `molpher.core.ExplorationParameters.ExplorationParameters.similarity`
 
         :return: `similarity measure` identifier
         :rtype: `str`
@@ -58,9 +79,7 @@ ExplorationParameters
         this will be the minimum weight
         of the `candidate morphs` accepted during a filtering procedure.
 
-        .. seealso:: `ExplorationTree.filterMorphs()`
-
-        .. note:: equivalent to ``weight_min`` in `molpher.core.ExplorationParameters`
+        .. seealso:: `ExplorationTree.filterMorphs()` and `molpher.core.ExplorationParameters.ExplorationParameters.weight_min`
 
         :return: minimum acceptable weight during filtering
         :rtype: `float`
@@ -71,9 +90,7 @@ ExplorationParameters
         this will be the maximum weight
         of the `candidate morphs` accepted during a filtering procedure.
 
-        .. seealso:: `ExplorationTree.filterMorphs()`
-
-        .. note:: equivalent to ``weight_max`` in `molpher.core.ExplorationParameters`
+        .. seealso:: .. seealso:: `ExplorationTree.filterMorphs()` and `molpher.core.ExplorationParameters.ExplorationParameters.weight_max`
 
         :return: maximum acceptable weight during filtering
         :rtype: `float`
@@ -82,7 +99,7 @@ ExplorationParameters
 
         .. todo:: document
 
-        .. note:: equivalent to ``accept_min`` in `molpher.core.ExplorationParameters`
+        .. seealso:: `ExplorationTree.filterMorphs()` and `molpher.core.ExplorationParameters.ExplorationParameters.accept_min`
 
         :return: min number of candidates
         :rtype: `int`
@@ -91,7 +108,7 @@ ExplorationParameters
 
         .. todo:: document
 
-        .. note:: equivalent to ``accept_max`` in `molpher.core.ExplorationParameters`
+        .. seealso:: `ExplorationTree.filterMorphs()` and `molpher.core.ExplorationParameters.ExplorationParameters.accept_max`
 
         :return: max number of candidates
         :rtype: `int`
@@ -100,7 +117,7 @@ ExplorationParameters
 
         .. todo:: document
 
-        .. note:: equivalent to ``far_produce`` in `molpher.core.ExplorationParameters`
+        .. seealso:: `ExplorationTree.filterMorphs()` and `molpher.core.ExplorationParameters.ExplorationParameters.far_produce`
 
         :return:
         :rtype: `int`
@@ -109,7 +126,7 @@ ExplorationParameters
 
         .. todo:: document
 
-        .. note:: equivalent to ``close_produce`` in `molpher.core.ExplorationParameters`
+        .. seealso:: `ExplorationTree.filterMorphs()` and `molpher.core.ExplorationParameters.ExplorationParameters.close_produce`
 
         :return:
         :rtype: `int`
@@ -118,7 +135,7 @@ ExplorationParameters
 
         .. todo:: document
 
-        .. note:: equivalent to ``far_close_threshold`` in `molpher.core.ExplorationParameters`
+        .. seealso:: `ExplorationTree.filterMorphs()` and `molpher.core.ExplorationParameters.ExplorationParameters.far_close_threshold`
 
         :return:
         :rtype: `float`
@@ -127,7 +144,7 @@ ExplorationParameters
 
         .. todo:: document
 
-        .. note:: equivalent to ``max_morhps_total`` in `molpher.core.ExplorationParameters`
+        .. seealso:: `ExplorationTree.prune()` and `molpher.core.ExplorationParameters.ExplorationParameters.max_morphs_total`
 
         :return:
         :rtype: `int`
@@ -136,7 +153,7 @@ ExplorationParameters
 
         .. todo:: document
 
-        .. note:: equivalent to ``non_producing_survive`` in `molpher.core.ExplorationParameters`
+        .. seealso:: `ExplorationTree.prune()` and `molpher.core.ExplorationParameters.ExplorationParameters.non_producing_survive`
 
         :return:
         :rtype: `int`

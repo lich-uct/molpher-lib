@@ -26,6 +26,7 @@ private:
     
 public:
     ExplorationParameters();
+    ExplorationParameters(const ExplorationParameters& other);
 //    IterationSnapshot createIterationSnapshot() const;
     bool valid();
     

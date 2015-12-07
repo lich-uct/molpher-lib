@@ -87,9 +87,11 @@ MolpherMol
     .. automethod:: getItersWithoutDistImprovement
 
         Returns the number of morphing generations derived from this molecule
-        that didn't show any improvement in distance from target.
+        that didn't show any improvement in distance from the `target molecule`.
 
         .. todo:: specify more accurately
+
+        .. seealso:: `molpher.core.ExplorationParameters.ExplorationParameters.non_producing_survive`
 
         :return:  number of generations without distance improvement
         :rtype: :py:class:`int`

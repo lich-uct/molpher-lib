@@ -42,23 +42,8 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
 
     @property
     def params(self):
-        params = self.getParams()
-        return {
-            'source' : params.getSourceMol().getSMILES()
-            , 'target' : params.getTargetMol().getSMILES()
-            , 'operators' : params.getChemOperators()
-            , 'fingerprint' : params.getFingerprint()
-            , 'similarity' : params.getSimilarityCoef()
-            , 'weight_min' : params.getMinAcceptableMolecularWeight()
-            , 'weight_max' : params.getMaxAcceptableMolecularWeight()
-            , 'accept_min' : params.getCntCandidatesToKeep()
-            , 'accept_max' : params.getCntCandidatesToKeepMax()
-            , 'far_produce' : params.getCntMorphs()
-            , 'close_produce' : params.getCntMorphsInDepth()
-            , 'far_close_threshold' : params.getDistToTargetDepthSwitch()
-            , 'max_morphs_total' : params.getCntMaxMorphs()
-            , 'non_producing_survive' : params.getItThreshold()
-        }
+        params = molpher.core.ExplorationParameters(parameters=self.getParams())
+        return params.param_dict
 
     @params.setter
     def params(self, params):
@@ -66,8 +51,9 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
                 or params.__class__ == molpher.wrappers.ExplorationParameters:
             self.setParams(params)
         else:
-            _params = molpher.core.ExplorationParameters(**params)
-            self.setParams(_params)
+            new = molpher.core.ExplorationParameters(parameters=self.getParams())
+            new.param_dict = params
+            self.setParams(new)
 
     @property
     def leaves(self):

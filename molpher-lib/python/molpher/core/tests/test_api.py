@@ -11,7 +11,14 @@ class TestPythonAPI(unittest.TestCase):
         pass
 
     def testParams(self):
-        pass # TODO: test the ExplorationParameters class for completeness
+        params = ExplorationParameters(
+            source=self.test_source
+            , target=self.test_target
+        )
+        params2 = ExplorationParameters(parameters=params)
+        self.assertEqual(params.source.getSMILES(), params2.source.getSMILES())
+        self.assertEqual(params.target.getSMILES(), params2.target.getSMILES())
+        self.assertEqual(params.is_valid == True, params2.is_valid == True)
 
     def testTreeInit(self):
         mol1 = self.test_source
@@ -20,10 +27,10 @@ class TestPythonAPI(unittest.TestCase):
             source=mol1
             , target=mol2
         )
-        params.params = {
+        params.param_dict = {
             'source' : mol2
             , 'target' : mol1
-            , 'operators' : params.params['operators'][:3]
+            , 'operators' : params.param_dict['operators'][:3]
         }
         self.assertRaises(NotImplementedError, lambda : ExplorationTree(source=mol1, target=mol2))
         self.assertRaises(RuntimeError, lambda : ExplorationTree())
@@ -36,15 +43,14 @@ class TestPythonAPI(unittest.TestCase):
         tree.params = params
         self.assertEqual(tree.params['source'], mol2)
         self.assertEqual(tree.params['target'], mol1)
-        self.assertEqual(tree.params['operators'], params.params['operators'])
+        self.assertEqual(tree.params['operators'], params.param_dict['operators'])
         tree.params = {
             'source' : mol1
             , 'target' : mol2
         }
         self.assertEqual(tree.params['source'], mol1)
         self.assertEqual(tree.params['target'], mol2)
-        _params = ExplorationParameters()
-        self.assertEqual(tree.params['operators'], _params.params['operators'])
+        self.assertEqual(tree.params['operators'], params.param_dict['operators'])
 
     def testTreeMethods(self):
         tree = ExplorationTree(params={

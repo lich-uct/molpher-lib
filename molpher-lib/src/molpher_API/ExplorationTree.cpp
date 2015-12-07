@@ -76,6 +76,7 @@ const std::vector<MolpherMol>& ExplorationTree::fetchLeaves() {
 }
 
 void ExplorationTree::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves) {
+    // FIXME: this should not increment itersWithoutDistImprovement on molecules in the tree (add option to this method that will toggle that).
     FindLeavesOper op(*this);
     op();
     for (auto leaf : op.leaves) {

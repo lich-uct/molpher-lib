@@ -716,8 +716,8 @@ class ExplorationParameters(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, ExplorationParameters, name)
     __repr__ = _swig_repr
 
-    def __init__(self):
-        this = _core.new_ExplorationParameters()
+    def __init__(self, *args):
+        this = _core.new_ExplorationParameters(*args)
         try:
             self.this.append(this)
         except:

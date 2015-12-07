@@ -162,8 +162,8 @@ ExplorationTree
         ..  warning:: This may invalidate some data in the tree (such as the distances from the `target molecule` computed so far).
                 Use with caution.
 
-        :param params: an instance of `ExplorationParameters`, which represents the new `exploration parameters` for this instance
-        :type params: `int`
+        :param param: an instance of `ExplorationParameters`, which represents the new `exploration parameters` for this instance
+        :type param: `ExplorationParameters`
 
     .. automethod:: setCandidateMorphsMask(mask)
 
