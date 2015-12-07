@@ -1,8 +1,11 @@
 molpher.core package
 ====================
 
+Modules
+-------
+
 molpher.core.ExplorationParameters module
------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: molpher.core.ExplorationParameters
     :members:
@@ -10,7 +13,7 @@ molpher.core.ExplorationParameters module
     :show-inheritance:
 
 molpher.core.ExplorationTree module
------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: molpher.core.ExplorationTree
     :members:

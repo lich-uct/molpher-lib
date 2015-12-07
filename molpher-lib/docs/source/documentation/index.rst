@@ -7,4 +7,4 @@ Source Code Documentation
     :maxdepth: 2
 
     Python API Documentation <python/modules>
-    C++ API Documentation <cplusplus/modules>
+    C++ API Documentation <cplusplus/index>

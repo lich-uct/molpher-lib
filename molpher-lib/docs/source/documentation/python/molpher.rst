@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+    :maxdepth: 2
 
     molpher.core
     molpher.swig_wrappers

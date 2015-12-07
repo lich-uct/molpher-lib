@@ -13,5 +13,5 @@ are located in the :file:`include/` folder of the `Molpher-lib project`.
    :maxdepth: 2
 
    compile_run
-   molpher_API/modules
+   molpher_API/index
    morphing_functions

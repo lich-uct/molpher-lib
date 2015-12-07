@@ -9,11 +9,9 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     The names, default values and descriptions of the morphing parameters are given in the following table:
 
     ..  csv-table:: a title
-        :header: "Name", "Default", "Description"
-        :widths: 10, 10, 50
+        :header: "Identifier", "Setter", "Getter", "Default", "Brief Description"
 
-        "source", "''", "SMILES string of the source molecule."
-        "target", "''", "SMILES string of the target molecule."
+        "source", `setSourceMol`, `getSourceMol`, "''", "SMILES string of the source molecule."
 
     ..  todo::
         Finish the table.

@@ -5,7 +5,7 @@ from molpher import core
 
 def load_SAScore(path):
     """
-    Loads the data file used in computation of the syntetic feasability scores.
+    Loads the data file used in computation of the syntetic feasibility scores.
     This is performed automatically when the :py:mod:`molpher` package is imported.
     Use it only if you want to use a data file different from the dafault one.
 

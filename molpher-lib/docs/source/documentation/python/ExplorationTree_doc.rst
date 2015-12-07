@@ -70,7 +70,7 @@ ExplorationTree
         :param canonSMILES: a `str` representing SMILES of the molecule being searched for
         :type canonSMILES: `str`
         :return: `bool` value representing the presence of the searched molecule in this tree (`True` if it is present, `False` otherwise)
-        :rtype: `MolpherMol`
+        :rtype: `bool`
 
     .. automethod:: deleteSubtree
 
