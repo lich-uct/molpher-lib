@@ -2,28 +2,27 @@ import molpher
 
 class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     """
+    :param parameters: another instance to copy the parameters from
+    :type parameters: `molpher.swig_wrappers.core.ExplorationParameters` or its derived class
     :param \*\*kwargs: morphing parameters
     :type \*\*kwargs: `dict`
-    :param parameters: another instance to copy the parameters from
-    :type parameters: `molpher.swig_wrappers.core.ExplorationParameters` or `molpher.core.ExplorationParameters`
 
-    Houses morphing parameters and can be used to initialize a `molpher.core.ExplorationTree` instance.
-    If both ``parameters`` and ``**kwargs`` are specified, the parameters are initilized from the instance
-    provided in ``parameters``, but with the parameters in ``**kwargs`` taking precedence.
+    .. note:: If both ``parameters`` and ``**kwargs`` are specified while intilizing an instance of this class,
+        the parameters are initilized from the instance
+        provided in ``parameters``, but with the parameters in ``**kwargs`` taking precedence.
 
-    It inherits from `molpher.swig_wrappers.core.ExplorationParameters` and exposes the parameters object attributes.
-    The parameters can be set either directly or using the attached getter and setter methods.
-    The table below gives an overview of all available parameters, their respective getters and setters,
-    default values and short descriptions. If you want to know more, refer to
+    This class houses morphing parameters and can be used to initialize a `molpher.core.ExplorationTree` instance.
+
+    It inherits from `molpher.swig_wrappers.core.ExplorationParameters`. Therefore, it provides the same interface.
+    However, it also exposes the parameters as object attributes that use a slightly different name convention
+    (derived from the names of the parameters used in the `XML template` files) that should make the
+    parameter names more self-explanatory.
+
+    The table below gives an overview of all available parameters, their respective getters and setters
+    in the base class, default values and short descriptions. If you want to know more, refer to
     the individual attribute descriptions below.
 
-    ..  csv-table:: a title
-        :header: "Identifier", "Setter", "Getter", "Default", "Brief Description"
-
-        "source", `setSourceMol`, `getSourceMol`, "''", "SMILES string of the source molecule."
-
-    ..  todo::
-        Finish the table.
+    .. include:: param_table.rst
 
     """
 
@@ -86,7 +85,7 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     def param_dict(self):
         """
         Holds a dictionary of current parameter values for this instance.
-        Additionally, a new dictionary of parameters can be assigned to change them.
+        A new dictionary of parameters can be assigned to change the current parameters.
 
         :return: a dictionary of parameters
         :rtype: `dict`
@@ -117,9 +116,8 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     def is_valid(self):
         """
         Shows if this instance represents valid parameters.
-
-        ..  todo::
-            Document what exactly is checked.
+        The instance becomes invalid, if there are any bad or nonsensical parameter values
+        or some values are missing (such as undefined `chemical operators`).
 
         :return: whether validity is `True` or `False`
         :rtype: `bool`
@@ -130,7 +128,8 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     @property
     def source(self):
         """
-        The `source molecule`. All morphs in an `exploration tree` are derived from this molecule during morphing.
+        The `source molecule`. All morphs in an `exploration tree` are derived from this
+        molecule during morphing. This is the root of the tree.
 
         :return: `MolpherMol` instance representing the current `source molecule`
         :rtype: `MolpherMol`
@@ -257,7 +256,7 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
 
         .. seealso:: `ExplorationTree.filterMorphs()`
 
-        :return: minimum number of candidates accepted in one iteration
+        :return: minimum number of candidates accepted during probability filtering
         :rtype: `int`
         """
 
@@ -295,7 +294,7 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
         processed with `ExplorationTree.generateMorphs()` lies more than `far_close_threshold` from
         the `target molecule`.
 
-        :return: maximum number of morphs to produce with an `ExplorationTree.generateMorphs()` call.
+        :return: maximum number of morphs to produce with an `ExplorationTree.generateMorphs()` call
         :rtype: `int`
         """
 
@@ -312,7 +311,7 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
         processed with `ExplorationTree.generateMorphs()` lies less than `far_close_threshold` from
         the `target molecule`.
 
-        :return: maximum number of morphs to produce with an `ExplorationTree.generateMorphs()` call.
+        :return: maximum number of morphs to produce with an `ExplorationTree.generateMorphs()` call
         :rtype: `int`
         """
 
@@ -325,9 +324,11 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     @property
     def far_close_threshold(self):
         """
-        This distance threshold controls the number of morphs generated
+        This distance threshold controls the number of `morphs <morph>` generated
         with `ExplorationTree.generateMorphs()` for molecules closer
-        or further from the `target molecule`.
+        or further from the `target molecule`. `Morphs <morph>` that
+        have distance from the `target molecule` lower than `far_close_threshold`
+        are considered to be close.
 
         .. seealso:: `far_produce` and `close_produce`
 
@@ -346,8 +347,10 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
         """
         Maximum number of 'bad morphs' generated from one molecule. If a molecule has more than `max_morphs_total`
         descendents and none of them are closer to the `target molecule` than the molecule in question, then
-        the molecule is permanently removed from the tree with all its descendents when `ExplorationTree.prune()`
+        the molecule is permanently removed from the tree with all of its descendents when `ExplorationTree.prune()`
         is called.
+
+        .. seealso:: `ExplorationTree.prune()`
 
         :return: maximum number of 'bad morphs' before pruning
         :rtype: `int`

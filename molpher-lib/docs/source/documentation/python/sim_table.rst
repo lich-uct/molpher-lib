@@ -1,6 +1,19 @@
 
-..  csv-table:: The list of currently supported `similarity measures <similarity measure>`.
+..  csv-table:: Currently supported `similarity measures <similarity measure>`.
     :header: "Identifier", "Description"
 
-    "ATOM_PAIRS", "SMILES string of the source molecule."
-    "MORGAN", "SMILES string of the target molecule."
+    "ALL_BIT", "---"
+    "ASYMMETRIC", "---"
+    "BRAUN_BLANQUET", "---"
+    "COSINE", "---"
+    "DICE", "---"
+    "KULCZYNSKI", "---"
+    "MC_CONNAUGHEY", "---"
+    "ON_BIT", "---"
+    "RUSSEL", "---"
+    "SOKAL", "---"
+    "TANIMOTO", "---"
+    "TVERSKY_SUBSTRUCTURE", "---"
+    "TVERSKY_SUPERSTRUCTURE", "---"
+
+..  todo:: complete the descriptions of each measure

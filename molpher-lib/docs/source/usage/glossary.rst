@@ -57,3 +57,7 @@ The glossary of important terms used in the `documentation <index>`.
 
     chemical operators
         A set of predefined structural modifications that a molecule can undergo during a morphing procedure.
+
+    XML template
+        A file in XML format that can be used as a configuration file and is loaded the same way as a tree snapshot
+        (using the `ExplorationTreeSnapshot.load()` method).

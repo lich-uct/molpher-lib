@@ -9,7 +9,9 @@ ExplorationTree
         instance or a `str` (SMILES representing the `source molecule`)
     :type \*args: `str` or `molpher.swig_wrappers.core.ExplorationParameters`
 
-    Represents an `exploration tree` and facilitates the interaction with it.
+    Represents an `exploration tree` and facilitates the most basic interaction with it. It
+    is a tight wrapper around the C++ implementation. The `molpher.core.ExplorationTree` class
+    extends upon this implementation and provides a more user-friendly version of this class.
 
     .. automethod:: createFromSnapshot(snapshot)
 
