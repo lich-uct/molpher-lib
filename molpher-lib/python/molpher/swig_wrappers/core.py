@@ -249,8 +249,8 @@ class FindLeavesOper(TreeOperation):
     __getattr__ = lambda self, name: _swig_getattr(self, FindLeavesOper, name)
     __repr__ = _swig_repr
 
-    def __init__(self, expTree):
-        this = _core.new_FindLeavesOper(expTree)
+    def __init__(self, expTree, increment_iters_without_dist_improve):
+        this = _core.new_FindLeavesOper(expTree, increment_iters_without_dist_improve)
         try:
             self.this.append(this)
         except:
@@ -327,6 +327,8 @@ class FilterMorphsOper(TreeOperation):
     WEIGHT = _core.FilterMorphsOper_WEIGHT
     SYNTHESIS = _core.FilterMorphsOper_SYNTHESIS
     COUNT = _core.FilterMorphsOper_COUNT
+    DUPLICATES = _core.FilterMorphsOper_DUPLICATES
+    HISTORIC_DESCENDANTS = _core.FilterMorphsOper_HISTORIC_DESCENDANTS
     ALL = _core.FilterMorphsOper_ALL
 
     def __init__(self, *args):
@@ -1116,6 +1118,9 @@ class ExplorationTree(_object):
 
     def getThreadCount(self):
         return _core.ExplorationTree_getThreadCount(self)
+
+    def getGenerationCount(self):
+        return _core.ExplorationTree_getGenerationCount(self)
 
     def getParams(self):
         return _core.ExplorationTree_getParams(self)

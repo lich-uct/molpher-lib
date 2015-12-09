@@ -5,15 +5,17 @@
 
 #include "molpher_API/operations/FindLeavesOper.hpp"
 
-FindLeavesOper::FindLeaves::FindLeaves(ExplorationTree::MoleculePointerVector &leaves) :
-mLeaves(leaves) {
+FindLeavesOper::FindLeaves::FindLeaves(ExplorationTree::MoleculePointerVector &leaves, bool increment_iters_without_dist_improve) :
+mLeaves(leaves) 
+, mIncrementDistImproveCounter(increment_iters_without_dist_improve)
+{
 }
 
 void FindLeavesOper::FindLeaves::operator()(
         const PathFinderContext::CandidateMap::range_type &candidates) const {
     PathFinderContext::CandidateMap::iterator it;
     for (it = candidates.begin(); it != candidates.end(); it++) {
-        if (!it->second.parentSmile.empty()) {
+        if (!it->second.parentSmile.empty() && mIncrementDistImproveCounter) {
             it->second.itersWithoutDistImprovement++;
         }
         bool isLeaf = it->second.descendants.empty();
@@ -23,7 +25,10 @@ void FindLeavesOper::FindLeaves::operator()(
     }
 }
 
-FindLeavesOper::FindLeavesOper(ExplorationTree& expTree) : TreeOperation(expTree) {
+FindLeavesOper::FindLeavesOper(ExplorationTree& expTree, bool increment_iters_without_dist_improve) : 
+TreeOperation(expTree)
+, mIncrementDistImproveCounter(increment_iters_without_dist_improve) 
+{
     // no action
 }
 
@@ -37,7 +42,7 @@ void FindLeavesOper::operator()() {
         scheduler.initialize(threadCnt);
     }
     
-    FindLeaves findLeaves(leaves);
+    FindLeaves findLeaves(leaves, mIncrementDistImproveCounter);
     tbb::parallel_for(
                 PathFinderContext::CandidateMap::range_type(ctx.candidates),
                 findLeaves, tbb::auto_partitioner(), tbbCtx);

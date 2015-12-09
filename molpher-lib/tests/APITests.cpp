@@ -134,3 +134,12 @@ void APITests::testExploration() {
     tree.prune();
 }
 
+void APITests::testMisc() {
+    ExplorationParameters params;
+    params.setSourceMol("CCO");
+    params.setTargetMol("O1C=CC=C1");
+    ExplorationTree tree(params);
+    tree.generateMorphs();
+    tree.extend();
+}
+

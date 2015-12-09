@@ -35,7 +35,9 @@ public:
         WEIGHT = 1 << 1,
         SYNTHESIS = 1 << 2,
         COUNT = 1 << 3,
-        ALL = PROBABILITY | WEIGHT | SYNTHESIS | COUNT
+        DUPLICATES = 1 << 4,
+        HISTORIC_DESCENDANTS = 1 << 5,
+        ALL = PROBABILITY | WEIGHT | SYNTHESIS | COUNT | DUPLICATES | HISTORIC_DESCENDANTS
     };
 
     FilterMorphsOper(ExplorationTree& expTree);

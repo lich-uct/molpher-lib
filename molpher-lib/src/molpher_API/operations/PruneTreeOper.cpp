@@ -47,7 +47,7 @@ void PruneTreeOper::PruneTree::operator()(const std::string& smile, tbb::paralle
             eraseSubtree(smile);
         } else {
             std::stringstream ss;
-            ss << "Pruned (descendants only): " << smile;
+            ss << "Pruned (descendents only): " << smile;
             SynchCout(ss.str());
             
             std::set<std::string>::const_iterator it;

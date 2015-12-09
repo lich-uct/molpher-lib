@@ -17,18 +17,21 @@ class FindLeavesOper : public TreeOperation {
         class FindLeaves
         {
         public:
-            FindLeaves(ExplorationTree::MoleculePointerVector &leaves);
+            FindLeaves(ExplorationTree::MoleculePointerVector &leaves, bool increment_iters_without_dist_improve);
             void operator()(
                 const PathFinderContext::CandidateMap::range_type &candidates) const;
 
         private:
             ExplorationTree::MoleculePointerVector &mLeaves;
+            bool mIncrementDistImproveCounter;
         };
     
         ExplorationTree::MoleculePointerVector leaves;
+        bool mIncrementDistImproveCounter;
+        
 
     public:
-        FindLeavesOper(ExplorationTree& expTree);
+        FindLeavesOper(ExplorationTree& expTree, bool increment_iters_without_dist_improve);
         void operator()();
 
 };

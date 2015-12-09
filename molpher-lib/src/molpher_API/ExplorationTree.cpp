@@ -75,9 +75,8 @@ const std::vector<MolpherMol>& ExplorationTree::fetchLeaves() {
     return *ret;
 }
 
-void ExplorationTree::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves) {
-    // FIXME: this should not increment itersWithoutDistImprovement on molecules in the tree (add option to this method that will toggle that).
-    FindLeavesOper op(*this);
+void ExplorationTree::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves, bool increase_dist_improve_counter) {
+    FindLeavesOper op(*this, increase_dist_improve_counter);
     op();
     for (auto leaf : op.leaves) {
         leaves.push_back(leaf);
@@ -86,6 +85,7 @@ void ExplorationTree::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves
 
 void ExplorationTree::generateMorphs() {
     GenerateMoprhsOper(*this)();
+    filterMorphs(FilterMorphsOper::DUPLICATES);
 }
 
 void ExplorationTree::sortMorphs() {
@@ -102,6 +102,9 @@ void ExplorationTree::filterMorphs(int filters) {
 
 void ExplorationTree::extend() {
     ExtendTreeOper(*this)();
+    ExplorationTree::MoleculePointerVector dummy;
+    fetchLeaves(dummy, true);
+    ++context.iterIdx;
 }
 
 void ExplorationTree::prune() {
@@ -154,6 +157,10 @@ void ExplorationTree::setThreadCount(int threadCnt) {
 
 int ExplorationTree::getThreadCount() {
     return threadCount;
+}
+
+int ExplorationTree::getGenerationCount() {
+    return context.iterIdx;
 }
 
 const std::vector<MolpherMol>& ExplorationTree::getCandidateMorphs() {

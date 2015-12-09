@@ -1,5 +1,6 @@
 import unittest
 from molpher.core import *
+from molpher.swig_wrappers.core import TreeOperation
 
 class TestPythonAPI(unittest.TestCase):
     
@@ -52,10 +53,32 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(tree.params['target'], mol2)
         self.assertEqual(tree.params['operators'], params.param_dict['operators'])
 
-    def testTreeMethods(self):
+    def testMorphing(self):
+        def callback(morph):
+            if morph.getItersWithoutDistImprovement() > 3:
+                print(morph.getSMILES(), morph.getItersWithoutDistImprovement())
+
+        class RunIteration(TreeOperation):
+
+            def __init__(self, tree):
+                super(RunIteration, self).__init__()
+                self.tree = tree
+
+            def __call__(self):
+                print('Iteration: ', self.tree.getGenerationCount() + 1)
+                self.tree.generateMorphs()
+                self.tree.extend()
+                self.tree.traverse(callback)
+
         tree = ExplorationTree(params={
             'source' : self.test_source
             , 'target' : self.test_target
         })
-        tree.generateMorphs()
-        pass
+
+        iterate = RunIteration(tree)
+        counter = 0
+        while counter < 5:
+            iterate()
+            counter += 1
+
+

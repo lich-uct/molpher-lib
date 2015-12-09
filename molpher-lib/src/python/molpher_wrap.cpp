@@ -4115,6 +4115,20 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 #include "molpher_API/callbacks/TraverseCallback.hpp"
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 SWIGINTERNINLINE PyObject*
   SWIG_From_int  (int value)
 {
@@ -5598,20 +5612,6 @@ SWIGINTERN std::vector< MolpherMol >::iterator std_vector_Sl_MolpherMol_Sg__eras
 SWIGINTERN std::vector< MolpherMol >::iterator std_vector_Sl_MolpherMol_Sg__erase__SWIG_1(std::vector< MolpherMol > *self,std::vector< MolpherMol >::iterator first,std::vector< MolpherMol >::iterator last){ return self->erase(first, last); }
 SWIGINTERN std::vector< MolpherMol >::iterator std_vector_Sl_MolpherMol_Sg__insert__SWIG_0(std::vector< MolpherMol > *self,std::vector< MolpherMol >::iterator pos,std::vector< MolpherMol >::value_type const &x){ return self->insert(pos, x); }
 SWIGINTERN void std_vector_Sl_MolpherMol_Sg__insert__SWIG_1(std::vector< MolpherMol > *self,std::vector< MolpherMol >::iterator pos,std::vector< MolpherMol >::size_type n,std::vector< MolpherMol >::value_type const &x){ self->insert(pos, n, x); }
-
-SWIGINTERN int
-SWIG_AsVal_bool (PyObject *obj, bool *val)
-{
-  int r;
-  if (!PyBool_Check(obj))
-    return SWIG_ERROR;
-  r = PyObject_IsTrue(obj);
-  if (r == -1)
-    return SWIG_ERROR;
-  if (val) *val = r ? true : false;
-  return SWIG_OK;
-}
-
 
 namespace swig {
   template <> struct traits<bool > {
@@ -7259,12 +7259,16 @@ SWIGINTERN PyObject *TreeOperation_swigregister(PyObject *SWIGUNUSEDPARM(self), 
 SWIGINTERN PyObject *_wrap_new_FindLeavesOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = 0 ;
+  bool arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
   FindLeavesOper *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:new_FindLeavesOper",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_FindLeavesOper",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_ExplorationTree,  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_FindLeavesOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
@@ -7273,9 +7277,14 @@ SWIGINTERN PyObject *_wrap_new_FindLeavesOper(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FindLeavesOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
   }
   arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  ecode2 = SWIG_AsVal_bool(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_FindLeavesOper" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
   {
     SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    result = (FindLeavesOper *)new FindLeavesOper(*arg1);
+    result = (FindLeavesOper *)new FindLeavesOper(*arg1,arg2);
     SWIG_PYTHON_THREAD_END_ALLOW;
   }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FindLeavesOper, SWIG_POINTER_NEW |  0 );
@@ -17952,6 +17961,32 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ExplorationTree_getGenerationCount(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_getGenerationCount",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_getGenerationCount" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)(arg1)->getGenerationCount();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ExplorationTree_getParams(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = (ExplorationTree *) 0 ;
@@ -18448,6 +18483,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExplorationTree_extend", _wrap_ExplorationTree_extend, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_prune", _wrap_ExplorationTree_prune, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getThreadCount", _wrap_ExplorationTree_getThreadCount, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_getGenerationCount", _wrap_ExplorationTree_getGenerationCount, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getParams", _wrap_ExplorationTree_getParams, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getCandidateMorphs", _wrap_ExplorationTree_getCandidateMorphs, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getCandidateMorphsMask", _wrap_ExplorationTree_getCandidateMorphsMask, METH_VARARGS, NULL},
@@ -19338,6 +19374,8 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "FilterMorphsOper_WEIGHT",SWIG_From_int(static_cast< int >(FilterMorphsOper::WEIGHT)));
   SWIG_Python_SetConstant(d, "FilterMorphsOper_SYNTHESIS",SWIG_From_int(static_cast< int >(FilterMorphsOper::SYNTHESIS)));
   SWIG_Python_SetConstant(d, "FilterMorphsOper_COUNT",SWIG_From_int(static_cast< int >(FilterMorphsOper::COUNT)));
+  SWIG_Python_SetConstant(d, "FilterMorphsOper_DUPLICATES",SWIG_From_int(static_cast< int >(FilterMorphsOper::DUPLICATES)));
+  SWIG_Python_SetConstant(d, "FilterMorphsOper_HISTORIC_DESCENDANTS",SWIG_From_int(static_cast< int >(FilterMorphsOper::HISTORIC_DESCENDANTS)));
   SWIG_Python_SetConstant(d, "FilterMorphsOper_ALL",SWIG_From_int(static_cast< int >(FilterMorphsOper::ALL)));
   
   /* Initialize threading */

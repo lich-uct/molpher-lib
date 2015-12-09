@@ -96,11 +96,11 @@ class TestMolpherAPI(unittest.TestCase):
             
         # filter morphs
         print("Filtering morphs...")
-        tree.filterMorphs(FilterMoprhsOper.COUNT | FilterMoprhsOper.WEIGHT | FilterMoprhsOper.PROBABILITY)
+        tree.filterMorphs(FilterMorphsOper.COUNT | FilterMorphsOper.WEIGHT | FilterMorphsOper.PROBABILITY)
         mask = tree.getCandidateMorphsMask()
         print("count - weight - probability filter survivors: " + str(sum(mask)))
         print(mask)
-        tree.filterMorphs(FilterMoprhsOper.ALL)
+        tree.filterMorphs(FilterMorphsOper.ALL)
         mask = tree.getCandidateMorphsMask()
         print("all filter survivors: " + str(sum(mask)))
         print(mask)
@@ -183,7 +183,7 @@ class TestMolpherAPI(unittest.TestCase):
         tree = ExplorationTree("CCO")
         tree.setThreadCount(2)
         tree.generateMorphs()
-        tree.filterMorphs(FilterMoprhsOper.WEIGHT)
+        tree.filterMorphs(FilterMorphsOper.WEIGHT)
         tree.extend()
         callback = MyCallback(tree)
         traverse = TraverseOper(tree, callback)

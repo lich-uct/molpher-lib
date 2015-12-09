@@ -127,4 +127,5 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
             mol = self.fetchMol(start_mol)
             TraverseOper(self, self._callback_class(callback), mol)()
         else:
-            TraverseOper(self, self._callback_class(callback))()
+            cb = self._callback_class(callback)
+            TraverseOper(self, cb)()

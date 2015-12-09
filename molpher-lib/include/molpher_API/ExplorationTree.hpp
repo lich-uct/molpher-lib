@@ -33,7 +33,7 @@ private:
     BoolVector candidateMorphsMask;
     ExplorationTree(IterationSnapshot& snp);
     void treeInit(IterationSnapshot& snp);
-    void fetchLeaves(ExplorationTree::MoleculePointerVector&);
+    void fetchLeaves(ExplorationTree::MoleculePointerVector&, bool increase_dist_improve_counter = false);
     
 public:
     static ExplorationTree* createFromSnapshot(ExplorationTreeSnapshot& snapshot);
@@ -45,7 +45,7 @@ public:
     
     void runOperation(TreeOperation& operation);
     
-    void fetchLeaves(std::vector<MolpherMol>&);
+    void fetchLeaves(std::vector<MolpherMol>& leaves);
     const std::vector<MolpherMol>& fetchLeaves();
     MolpherMol* fetchMol(const std::string& canonSMILES);
     bool hasMol(const std::string& canonSMILES);
@@ -58,6 +58,7 @@ public:
     void prune();
     
     int getThreadCount();
+    int getGenerationCount();
     ExplorationParameters& getParams();
     const std::vector<MolpherMol>& getCandidateMorphs();
     const std::vector<bool>& getCandidateMorphsMask(); // TODO add a bitset version 

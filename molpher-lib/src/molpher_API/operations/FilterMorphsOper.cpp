@@ -12,7 +12,7 @@ FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree) : TreeOperation(exp
     // no action
 }
 
-FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree, int filters) : TreeOperation(expTree), filters(filters) {
+FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree, int filters) : TreeOperation(expTree), filters(filters | MorphFilters::DUPLICATES) {
     // no action
 }
 
@@ -71,40 +71,30 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                 }
             }
 
-            if (mFilters & MorphFilters::SYNTHESIS) {
+            if (mFilters & MorphFilters::DUPLICATES) {
                 isDead = (badWeight || badSascore || alreadyInTree ||
                         alreadyTriedByParent || tooManyProducedMorphs);
                 if (!isDead) {
-                    badSascore = mMorphs[idx].sascore > 6.0; // questionable, it is recommended value from Ertl
-                    // in case of badSascore print message
-                    if (badSascore) {
-                        std::stringstream ss;
-                        ss << "bad SAScore: " << mMorphs[idx].smile << " : " << mMorphs[idx].sascore;
-                        SynchCout(ss.str());
+                    PathFinderContext::CandidateMap::const_accessor ac;
+                    if (mCtx.candidates.find(ac, mMorphs[idx].smile)) {
+                        alreadyInTree = true;
                     }
                 }
             }
 
-            isDead = (badWeight || badSascore || alreadyInTree ||
-                    alreadyTriedByParent || tooManyProducedMorphs);
-            if (!isDead) {
-                PathFinderContext::CandidateMap::const_accessor ac;
-                if (mCtx.candidates.find(ac, mMorphs[idx].smile)) {
-                    alreadyInTree = true;
-                }
-            }
-
-            isDead = (badWeight || badSascore || alreadyInTree ||
-                    alreadyTriedByParent || tooManyProducedMorphs);
-            if (!isDead) {
-                PathFinderContext::CandidateMap::const_accessor ac;
-                if (mCtx.candidates.find(ac, mMorphs[idx].parentSmile)) {
-                    alreadyTriedByParent = (
-                            ac->second.historicDescendants.find(mMorphs[idx].smile)
-                            !=
-                            ac->second.historicDescendants.end());
-                } else {
-                    assert(false);
+            if (mFilters & MorphFilters::HISTORIC_DESCENDANTS) {
+                isDead = (badWeight || badSascore || alreadyInTree ||
+                        alreadyTriedByParent || tooManyProducedMorphs);
+                if (!isDead) {
+                    PathFinderContext::CandidateMap::const_accessor ac;
+                    if (mCtx.candidates.find(ac, mMorphs[idx].parentSmile)) {
+                        alreadyTriedByParent = (
+                                ac->second.historicDescendants.find(mMorphs[idx].smile)
+                                !=
+                                ac->second.historicDescendants.end());
+                    } else {
+                        assert(false);
+                    }
                 }
             }
 
@@ -120,6 +110,20 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                     if (tooManyProducedMorphs) {
                         std::stringstream ss;
                         ss << "too many morphs: " << mMorphs[idx].smile << " : " << ac->second;
+                        SynchCout(ss.str());
+                    }
+                }
+            }
+            
+            if (mFilters & MorphFilters::SYNTHESIS) {
+                isDead = (badWeight || badSascore || alreadyInTree ||
+                        alreadyTriedByParent || tooManyProducedMorphs);
+                if (!isDead) {
+                    badSascore = mMorphs[idx].sascore > 6.0; // questionable, it is recommended value from Ertl
+                    // in case of badSascore print message
+                    if (badSascore) {
+                        std::stringstream ss;
+                        ss << "bad SAScore: " << mMorphs[idx].smile << " : " << mMorphs[idx].sascore;
                         SynchCout(ss.str());
                     }
                 }

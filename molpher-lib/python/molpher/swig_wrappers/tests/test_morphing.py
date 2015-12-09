@@ -31,10 +31,10 @@ class TestMorphing(unittest.TestCase):
         for i in range(5):
             tree.generateMorphs()
             tree.sortMorphs()
-            tree.filterMorphs(FilterMoprhsOper.ALL)
+            tree.filterMorphs(FilterMorphsOper.ALL)
             tree.extend()
             tree.prune()
-            print("Iteration {0}".format(i+1))
+            print("End of iteration {0}...".format(i+1))
 
         results = 'testing_snapshots'
         run_path_finder(results, self.test_files_path + "test-template.xml", 2)
