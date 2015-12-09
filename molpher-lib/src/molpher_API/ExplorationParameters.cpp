@@ -138,7 +138,7 @@ int ExplorationParameters::getCntMorphsInDepth() {
 }
 
 double ExplorationParameters::getDistToTargetDepthSwitch() {
-    return iterSnapshot.params.cntMorphsInDepth;
+    return iterSnapshot.params.distToTargetDepthSwitch;
 }
 
 int ExplorationParameters::getItThreshold() {

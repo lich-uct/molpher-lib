@@ -8,7 +8,7 @@
     `accept_min`, `setCntCandidatesToKeep`, `getCntCandidatesToKeep`, 50, "Minimum number of candidates accepted durng probability filtering."
     `close_produce`, `setCntMorphsInDepth`, `getCntMorphsInDepth`, 150, "Maximum number of morphs to produce with an `ExplorationTree.generateMorphs()` call when close to the `target molecule`."
     `far_produce`, `setCntMorphs`, `getCntMorphs`, 80, "Maximum number of morphs to produce with an `ExplorationTree.generateMorphs()` call."
-    `far_close_threshold`, `setDistToTargetDepthSwitch`, `getDistToTargetDepthSwitch`, 150.0, "Molecular distance below which the `target molecule` and a `morph` are cosnidered to be close."
+    `far_close_threshold`, `setDistToTargetDepthSwitch`, `getDistToTargetDepthSwitch`, 0.15, "Molecular distance below which the `target molecule` and a `morph` are cosnidered to be close."
     `fingerprint`, `setFingerprint`, `getFingerprint`, "MORGAN", "Identification string of the current fingerprint strategy."
     `similarity`, `setSimilarityCoef`, `getSimilarityCoef`, "TANIMOTO", "Identification string of the current fingerprint strategy."
     `max_morphs_total`, `setCntMaxMorphs`, `getCntMaxMorphs`, 1500, "Number of non-producing descendents before a molecule is removed from the tree."
