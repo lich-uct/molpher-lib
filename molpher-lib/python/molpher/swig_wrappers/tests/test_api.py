@@ -96,9 +96,9 @@ class TestMolpherAPI(unittest.TestCase):
             
         # filter morphs
         print("Filtering morphs...")
-        tree.filterMorphs(FilterMorphsOper.COUNT | FilterMorphsOper.WEIGHT | FilterMorphsOper.PROBABILITY)
+        tree.filterMorphs(FilterMorphsOper.MAX_DERIVATIONS | FilterMorphsOper.WEIGHT | FilterMorphsOper.PROBABILITY)
         mask = tree.getCandidateMorphsMask()
-        print("count - weight - probability filter survivors: " + str(sum(mask)))
+        print("max derivations - weight - probability filter survivors: " + str(sum(mask)))
         print(mask)
         tree.filterMorphs(FilterMorphsOper.ALL)
         mask = tree.getCandidateMorphsMask()

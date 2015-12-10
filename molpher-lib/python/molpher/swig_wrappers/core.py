@@ -326,9 +326,9 @@ class FilterMorphsOper(TreeOperation):
     PROBABILITY = _core.FilterMorphsOper_PROBABILITY
     WEIGHT = _core.FilterMorphsOper_WEIGHT
     SYNTHESIS = _core.FilterMorphsOper_SYNTHESIS
-    COUNT = _core.FilterMorphsOper_COUNT
+    MAX_DERIVATIONS = _core.FilterMorphsOper_MAX_DERIVATIONS
     DUPLICATES = _core.FilterMorphsOper_DUPLICATES
-    HISTORIC_DESCENDANTS = _core.FilterMorphsOper_HISTORIC_DESCENDANTS
+    HISTORIC_DESCENDENTS = _core.FilterMorphsOper_HISTORIC_DESCENDENTS
     ALL = _core.FilterMorphsOper_ALL
 
     def __init__(self, *args):

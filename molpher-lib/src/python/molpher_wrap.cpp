@@ -19373,9 +19373,9 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "FilterMorphsOper_PROBABILITY",SWIG_From_int(static_cast< int >(FilterMorphsOper::PROBABILITY)));
   SWIG_Python_SetConstant(d, "FilterMorphsOper_WEIGHT",SWIG_From_int(static_cast< int >(FilterMorphsOper::WEIGHT)));
   SWIG_Python_SetConstant(d, "FilterMorphsOper_SYNTHESIS",SWIG_From_int(static_cast< int >(FilterMorphsOper::SYNTHESIS)));
-  SWIG_Python_SetConstant(d, "FilterMorphsOper_COUNT",SWIG_From_int(static_cast< int >(FilterMorphsOper::COUNT)));
+  SWIG_Python_SetConstant(d, "FilterMorphsOper_MAX_DERIVATIONS",SWIG_From_int(static_cast< int >(FilterMorphsOper::MAX_DERIVATIONS)));
   SWIG_Python_SetConstant(d, "FilterMorphsOper_DUPLICATES",SWIG_From_int(static_cast< int >(FilterMorphsOper::DUPLICATES)));
-  SWIG_Python_SetConstant(d, "FilterMorphsOper_HISTORIC_DESCENDANTS",SWIG_From_int(static_cast< int >(FilterMorphsOper::HISTORIC_DESCENDANTS)));
+  SWIG_Python_SetConstant(d, "FilterMorphsOper_HISTORIC_DESCENDENTS",SWIG_From_int(static_cast< int >(FilterMorphsOper::HISTORIC_DESCENDENTS)));
   SWIG_Python_SetConstant(d, "FilterMorphsOper_ALL",SWIG_From_int(static_cast< int >(FilterMorphsOper::ALL)));
   
   /* Initialize threading */

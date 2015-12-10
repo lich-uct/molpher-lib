@@ -5,31 +5,53 @@ FilterMorphsOper
 
 .. autoclass:: FilterMorphsOper
 
-    About the class
+    This operation can filter the `candidate morphs` in an `exploration tree`
+    according to a given set of filtering options that it implements. The current set of
+    available filters is in the table below. For more detailed information on each filter
+    see the member descriptions of this class.
 
-    ..  todo:: document properly
+    ..  seealso:: `ExplorationTree.filterMorphs()` and `molpher.core.ExplorationParameters`
 
-    ..  csv-table:: Filtering options and their descriptions
-        :header: "Option", "Description"
-        :widths: 10, 50
-
-        `PROBABILITY`, "probability filtering option"
-        `WEIGHT`, "weight filtering option"
-        `SYNTHESIS`, "syntetic feasibility filtering option"
-        `COUNT`, "max number of morphs accepted at one iteration"
-        `ALL`, "Use all of the above filters."
+    ..  include:: ../filters_table.rst
 
     .. autoattribute:: PROBABILITY
-        :annotation: probability filtering option
+
+        If the number of derived morphs for a molecule exceeds `ExplorationParameters.accept_min`,
+        then the probability of accepting every extra molecule is determined
+        according to the following formula:
+        :math:`\frac{0.25 - (idx - morphs_{min})}{4(morphs_{all} - morphs_{min})}`, where :math:`morphs_{min}`
+        is the `ExplorationParameters.accept_min` parameter, :math:`morphs_{all}` is the current
+        number of molecules in the `exploration tree` and :math:`idx` is the position of the given `morph`
+        in `ExplorationTree.candidates`.
 
     .. autoattribute:: WEIGHT
-        :annotation: weight filtering option
+
+        Uses the `ExplorationParameters.weight_min` and `ExplorationParameters.weight_max` options
+        to remove `candidate morphs` that do not satisfy the weight constraints.
 
     .. autoattribute:: SYNTHESIS
-        :annotation: syntetic feasibility filtering option
 
-    .. autoattribute:: COUNT
-        :annotation: max number of morphs accepted at one iteration
+        .. todo:: say something about the synthetic feasibility in more detail
+
+    .. autoattribute:: MAX_DERIVATIONS
+
+        Each `ExplorationTree` instance keeps track of the number of morphs generated from each
+        molecule in the tree. If there are `candidate morphs` in `ExplorationTree.candidates`
+        such that more than `ExplorationParameters.max_morphs_total` number of morphs would be derived from
+        the given molecule, then these `candidate morphs` will be filtered out.
+
+    .. autoattribute:: DUPLICATES
+
+        Remove all duplicate morphs (same canonical SMILES representation
+        as a molecule already present in the tree).
+
+        .. note:: This filter is always turned on and can't be disabled at the moment.
+
+    .. autoattribute:: HISTORIC_DESCENDENTS
+
+        The tree also keeps track of all molecules previously derived from any molecule in the tree.
+        This filter removes `candidate morphs` that have alredy been previously derived from their parent molecule.
 
     .. autoattribute:: ALL
-        :annotation: all of the above filters
+
+        Use all of the filters mentioned above.

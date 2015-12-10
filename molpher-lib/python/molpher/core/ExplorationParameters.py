@@ -345,12 +345,16 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     @property
     def max_morphs_total(self):
         """
-        Maximum number of 'bad morphs' generated from one molecule. If a molecule has more than `max_morphs_total`
+        This value is the maximum number of morphs allowed to be generated from one molecule.
+        If the number of generated morphs exceeds this number, all additional morphs can be filtered
+        out using the `FilterMorphsOper.MAX_DERIVATIONS` filter.
+
+        It is also the maximum number of 'bad morphs' generated from one molecule. If a molecule has more than `max_morphs_total`
         descendents and none of them are closer to the `target molecule` than the molecule in question, then
         the molecule is permanently removed from the tree with all of its descendents when `ExplorationTree.prune()`
         is called.
 
-        .. seealso:: `ExplorationTree.prune()`
+        .. seealso:: `ExplorationTree.filterMorphs()` and `ExplorationTree.prune()`
 
         :return: maximum number of 'bad morphs' before pruning
         :rtype: `int`

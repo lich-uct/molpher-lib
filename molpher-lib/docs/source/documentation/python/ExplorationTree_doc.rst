@@ -88,23 +88,30 @@ ExplorationTree
 
         The generated compounds can be retrieved using the `getCandidateMorphs` method.
 
+        ..  note:: All morphs already present in the tree are filtered out automatically.
+
     .. automethod:: sortMorphs
 
         Sorts the `candidate morphs` according to their distances from the `target molecule`.
 
-        ..  note:: When generated each `morph` is assigned a distance to current target.
+        ..  warning:: When generated the distance to current target is noted for each morph.
                 This distance *is not* updated if the target of the tree changes in the future.
 
     .. automethod:: filterMorphs
 
-        Filters the `candidate morphs` according to the supplied filtering option (see `FilterMorphsOper`
-        for a list of available filters). The options can be easily combined and passed
+        Filters the `candidate morphs` according to the supplied filtering options
+        (see the table below for a listing of the available filters).
+        The filtering options can be easily combined and passed
         to the method using the ``|`` operator. For example, the method can be called like this:
         ``tree.filterMorphs(FilterMorphsOper.SYNTHESIS | FilterMorphsOper.PROBABILITY)``. If no
         filter information is passed, all filters are used automatically
         (equal to passing `FilterMorphsOper.ALL`).
 
+        ..  include:: filters_table.rst
+
         The results of the filtering can be observered using the `getCandidateMorphsMask` method.
+
+        ..  seealso:: `FilterMorphsOper`
 
         :param \*args: one or more filtering options combined using the ``|`` operator
         :type \*args: `FilterMorphsOper` options

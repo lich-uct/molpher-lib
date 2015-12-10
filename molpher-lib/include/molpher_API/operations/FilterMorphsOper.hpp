@@ -34,10 +34,10 @@ public:
         PROBABILITY = 1 << 0,
         WEIGHT = 1 << 1,
         SYNTHESIS = 1 << 2,
-        COUNT = 1 << 3,
+        MAX_DERIVATIONS = 1 << 3,
         DUPLICATES = 1 << 4,
-        HISTORIC_DESCENDANTS = 1 << 5,
-        ALL = PROBABILITY | WEIGHT | SYNTHESIS | COUNT | DUPLICATES | HISTORIC_DESCENDANTS
+        HISTORIC_DESCENDENTS = 1 << 5,
+        ALL = PROBABILITY | WEIGHT | SYNTHESIS | MAX_DERIVATIONS | DUPLICATES | HISTORIC_DESCENDENTS
     };
 
     FilterMorphsOper(ExplorationTree& expTree);

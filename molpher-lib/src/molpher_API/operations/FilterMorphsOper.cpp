@@ -82,7 +82,7 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                 }
             }
 
-            if (mFilters & MorphFilters::HISTORIC_DESCENDANTS) {
+            if (mFilters & MorphFilters::HISTORIC_DESCENDENTS) {
                 isDead = (badWeight || badSascore || alreadyInTree ||
                         alreadyTriedByParent || tooManyProducedMorphs);
                 if (!isDead) {
@@ -98,7 +98,7 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                 }
             }
 
-            if (mFilters & MorphFilters::COUNT) {
+            if (mFilters & MorphFilters::MAX_DERIVATIONS) {
                 isDead = (badWeight || badSascore || alreadyInTree ||
                         alreadyTriedByParent || tooManyProducedMorphs);
                 if (!isDead) {
