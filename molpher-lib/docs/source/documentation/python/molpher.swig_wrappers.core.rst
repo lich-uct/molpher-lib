@@ -14,3 +14,4 @@ Classes
     ExplorationTreeSnapshot_doc
     ExplorationParameters_doc
     operations/classes
+    callbacks/classes

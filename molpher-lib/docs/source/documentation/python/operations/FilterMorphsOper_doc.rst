@@ -4,6 +4,7 @@ FilterMorphsOper
 .. py:currentmodule:: molpher.swig_wrappers.core
 
 .. autoclass:: FilterMorphsOper
+    :show-inheritance:
 
     This operation can filter the `candidate morphs` in an `exploration tree`
     according to a given set of filtering options that it implements. The current set of

@@ -12,6 +12,7 @@
 %}
 
 %include "TreeOperation.hpp"
+%newobject FindLeavesOper::fetchLeaves();        
 %include "FindLeavesOper.hpp"
 %include "GenerateMorphsOper.hpp"
 %include "SortMorphsOper.hpp"

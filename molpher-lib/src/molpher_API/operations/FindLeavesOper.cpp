@@ -48,3 +48,11 @@ void FindLeavesOper::operator()() {
                 findLeaves, tbb::auto_partitioner(), tbbCtx);
 //        stageStopwatch.ReportElapsedMiliseconds("FindLeaves", true);
 }
+
+const std::vector<MolpherMol>& FindLeavesOper::fetchLeaves() {
+    std::vector<MolpherMol>* ret = new std::vector<MolpherMol>();
+    for (auto leaf : leaves) {
+        ret->push_back(MolpherMol(*leaf));
+    }
+    return *ret;
+}

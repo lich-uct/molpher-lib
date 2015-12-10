@@ -5,11 +5,11 @@
 
 #include "molpher_API/operations/SortMorphsOper.hpp"
 
-SortMoprhsOper::SortMoprhsOper(ExplorationTree& expTree) : TreeOperation(expTree) {
+SortMorphsOper::SortMorphsOper(ExplorationTree& expTree) : TreeOperation(expTree) {
     // no action
 }
 
-bool SortMoprhsOper::CompareMorphs::operator()(
+bool SortMorphsOper::CompareMorphs::operator()(
         const MolpherMolecule &a, const MolpherMolecule &b) const {
     /* Morphs are rated according to their proximity to the connecting line
      between their closest decoy and the target (i.e. sum of both distances is
@@ -60,7 +60,7 @@ bool SortMoprhsOper::CompareMorphs::operator()(
     }*/
 }
 
-void SortMoprhsOper::operator()() {
+void SortMorphsOper::operator()() {
     tbb::task_scheduler_init scheduler;
     if (threadCnt > 0) {
         scheduler.terminate();

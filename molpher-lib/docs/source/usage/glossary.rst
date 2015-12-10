@@ -6,6 +6,7 @@ Glossary
 The glossary of important terms used in the `documentation <index>`.
 
 ..  glossary::
+    :sorted:
 
     exploration tree
         Definition of the exploration tree term.
@@ -61,3 +62,14 @@ The glossary of important terms used in the `documentation <index>`.
     XML template
         A file in XML format that can be used as a configuration file and is loaded the same way as a tree snapshot
         (using the `ExplorationTreeSnapshot.load()` method).
+
+    tree operation
+        Any operation that manipulates the `exploration tree` and or its elements. Can be defined using
+        the `TreeOperation` interface.
+
+    morphing iteration
+        Any sequence of operations that ends with attaching new generation of morphs to the tree.
+        For example, an iteration is commited when `ExplorationTree.extend` is called.
+
+    morph generation
+        The morphs attached to the tree upon commitment of a `morphing iteration`.

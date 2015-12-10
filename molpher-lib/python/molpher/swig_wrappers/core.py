@@ -229,8 +229,8 @@ class TreeOperation(_object):
     def getTree(self):
         return _core.TreeOperation_getTree(self)
 
-    def setTree(self, arg2):
-        return _core.TreeOperation_setTree(self, arg2)
+    def setTree(self, tree):
+        return _core.TreeOperation_setTree(self, tree)
     def __disown__(self):
         self.this.disown()
         _core.disown_TreeOperation(self)
@@ -258,60 +258,63 @@ class FindLeavesOper(TreeOperation):
 
     def __call__(self):
         return _core.FindLeavesOper___call__(self)
+
+    def fetchLeaves(self):
+        return _core.FindLeavesOper_fetchLeaves(self)
     __swig_destroy__ = _core.delete_FindLeavesOper
     __del__ = lambda self: None
 FindLeavesOper_swigregister = _core.FindLeavesOper_swigregister
 FindLeavesOper_swigregister(FindLeavesOper)
 
-class GenerateMoprhsOper(TreeOperation):
+class GenerateMorphsOper(TreeOperation):
     __swig_setmethods__ = {}
     for _s in [TreeOperation]:
         __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, GenerateMoprhsOper, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, GenerateMorphsOper, name, value)
     __swig_getmethods__ = {}
     for _s in [TreeOperation]:
         __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, GenerateMoprhsOper, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, GenerateMorphsOper, name)
     __repr__ = _swig_repr
 
     def __init__(self, expTree):
-        this = _core.new_GenerateMoprhsOper(expTree)
+        this = _core.new_GenerateMorphsOper(expTree)
         try:
             self.this.append(this)
         except:
             self.this = this
 
     def __call__(self):
-        return _core.GenerateMoprhsOper___call__(self)
-    __swig_destroy__ = _core.delete_GenerateMoprhsOper
+        return _core.GenerateMorphsOper___call__(self)
+    __swig_destroy__ = _core.delete_GenerateMorphsOper
     __del__ = lambda self: None
-GenerateMoprhsOper_swigregister = _core.GenerateMoprhsOper_swigregister
-GenerateMoprhsOper_swigregister(GenerateMoprhsOper)
+GenerateMorphsOper_swigregister = _core.GenerateMorphsOper_swigregister
+GenerateMorphsOper_swigregister(GenerateMorphsOper)
 
-class SortMoprhsOper(TreeOperation):
+class SortMorphsOper(TreeOperation):
     __swig_setmethods__ = {}
     for _s in [TreeOperation]:
         __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, SortMoprhsOper, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SortMorphsOper, name, value)
     __swig_getmethods__ = {}
     for _s in [TreeOperation]:
         __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, SortMoprhsOper, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, SortMorphsOper, name)
     __repr__ = _swig_repr
 
     def __init__(self, expTree):
-        this = _core.new_SortMoprhsOper(expTree)
+        this = _core.new_SortMorphsOper(expTree)
         try:
             self.this.append(this)
         except:
             self.this = this
 
     def __call__(self):
-        return _core.SortMoprhsOper___call__(self)
-    __swig_destroy__ = _core.delete_SortMoprhsOper
+        return _core.SortMorphsOper___call__(self)
+    __swig_destroy__ = _core.delete_SortMorphsOper
     __del__ = lambda self: None
-SortMoprhsOper_swigregister = _core.SortMoprhsOper_swigregister
-SortMoprhsOper_swigregister(SortMoprhsOper)
+SortMorphsOper_swigregister = _core.SortMorphsOper_swigregister
+SortMorphsOper_swigregister(SortMorphsOper)
 
 class FilterMorphsOper(TreeOperation):
     __swig_setmethods__ = {}

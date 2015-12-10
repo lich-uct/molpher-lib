@@ -35,8 +35,8 @@ ExplorationTree
 
     .. automethod:: runOperation
 
-        Takes a `TreeOperation` instance and attempts to run it by attaching this tree
-        instance to it and calling the `TreeOperation.__call__()` method.
+        Takes a `TreeOperation` instance and attempts to run it by attaching itself
+        to it and calling its :py:meth:`~TreeOperation.__call__()` method.
 
         .. seealso:: `operations/classes`
 
@@ -94,8 +94,8 @@ ExplorationTree
 
         Sorts the `candidate morphs` according to their distances from the `target molecule`.
 
-        ..  warning:: When generated the distance to current target is noted for each morph.
-                This distance *is not* updated if the target of the tree changes in the future.
+        ..  warning:: When morphs are generated the distance to the current target is saved for each morph.
+                This distance *is not* updated if the target of the tree changes afterwards.
 
     .. automethod:: filterMorphs
 
@@ -120,6 +120,8 @@ ExplorationTree
 
         Attach all `candidate morphs` that have not been filtered out to the tree.
         In other words, make them the new leaves.
+
+        ..  note:: By calling this method a `morphing iteration` is commited.
 
     .. automethod:: prune
 
@@ -155,6 +157,14 @@ ExplorationTree
 
         :return: `tuple` of `bool` instances which shows what `candidate morphs` were filtered out
         :rtype: `tuple`
+
+    .. automethod:: getGenerationCount
+
+        Returns the number of `morph generations <morph generation>` in the tree. Basically
+        the number of `morphing iterations <morphing iteration>` performed so far.
+
+        :return: number of `morphing iterations <morphing iteration>` performed so far
+        :rtype: `int`
 
     .. automethod:: setThreadCount
 

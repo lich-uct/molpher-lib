@@ -10,7 +10,7 @@
 
 #include "TreeOperation.hpp"
 
-class SortMoprhsOper : public TreeOperation {
+class SortMorphsOper : public TreeOperation {
 
 private:
     class CompareMorphs {
@@ -19,7 +19,7 @@ private:
     };
     
 public:
-    SortMoprhsOper(ExplorationTree& expTree);
+    SortMorphsOper(ExplorationTree& expTree);
     virtual void operator()();
 };
 

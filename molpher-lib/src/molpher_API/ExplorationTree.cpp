@@ -84,12 +84,12 @@ void ExplorationTree::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves
 }
 
 void ExplorationTree::generateMorphs() {
-    GenerateMoprhsOper(*this)();
+    GenerateMorphsOper(*this)();
     filterMorphs(FilterMorphsOper::DUPLICATES);
 }
 
 void ExplorationTree::sortMorphs() {
-    SortMoprhsOper(*this)();
+    SortMorphsOper(*this)();
 }
 
 void ExplorationTree::filterMorphs() {

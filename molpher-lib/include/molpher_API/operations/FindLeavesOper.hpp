@@ -33,6 +33,8 @@ class FindLeavesOper : public TreeOperation {
     public:
         FindLeavesOper(ExplorationTree& expTree, bool increment_iters_without_dist_improve);
         void operator()();
+        
+        const std::vector<MolpherMol>& fetchLeaves();
 
 };
 

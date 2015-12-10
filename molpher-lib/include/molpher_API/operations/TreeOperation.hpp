@@ -31,7 +31,7 @@ public:
     virtual void operator()() = 0;
     
     ExplorationTree* getTree();
-    void setTree(ExplorationTree&);
+    void setTree(ExplorationTree& tree);
 };
 
 #endif	/* TREEOPERATION_HPP */

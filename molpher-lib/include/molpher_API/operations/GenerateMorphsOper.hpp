@@ -10,7 +10,7 @@
 
 #include "TreeOperation.hpp"
 
-class GenerateMoprhsOper : public TreeOperation {
+class GenerateMorphsOper : public TreeOperation {
 
 private:
     
@@ -29,7 +29,7 @@ private:
     };
     
 public:
-    GenerateMoprhsOper(ExplorationTree& expTree);
+    GenerateMorphsOper(ExplorationTree& expTree);
     virtual void operator()();
 
 };

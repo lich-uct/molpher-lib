@@ -81,4 +81,8 @@ class TestPythonAPI(unittest.TestCase):
             iterate()
             counter += 1
 
+    def testOperations(self):
+        # TODO: implement
+        pass
+
 
