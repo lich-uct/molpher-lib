@@ -1,6 +1,8 @@
 molpher.swig_wrappers.tests package
 ===================================
 
+Test suite for the `molpher.swig_wrappers.core`. Currently undocumented.
+
 Submodules
 ----------
 

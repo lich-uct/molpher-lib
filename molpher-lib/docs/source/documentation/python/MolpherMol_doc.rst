@@ -11,19 +11,20 @@ MolpherMol
     Represents a molecule in the `exploration tree`. The underlying data representation
     of molecules in the tree can be observed and manipulated using instances of this class.
 
-    .. warning:: If the instance is bound to a tree (use `isBound` to find out),
+    .. warning:: If the instance is bound to a tree (use the `isBound()` method to find out),
         do not save a reference to it anywhere in your program. The instance will become invalid,
-        if it is later deleted/pruned from the tree and may result in undefined behaviour.
-        Use `copy` to make a hard copy of the instance,
+        if it is later deleted/pruned from the tree (or other data structure) and may result
+        in undefined behaviour (most probably a segmentation fault).
+        Use `copy()` to make a hard copy of the instance,
         if you need to work with the data even after
-        the molecule is deleted/pruned or the whole tree destroyed.
+        the molecule is deleted/pruned or the whole tree is destroyed.
 
     .. automethod:: isBound
 
         Returns :py:obj:`True`, if this instance is bound to a tree.
 
-        :return:  :py:obj:`True` or :py:obj:`False`
-        :rtype: :py:class:`bool`
+        :return:  `True` or `False`
+        :rtype: `bool`
 
     .. automethod:: copy
 

@@ -1,6 +1,8 @@
 molpher.core.tests package
 ==========================
 
+Test suite for the :doc:`molpher.core`. Currently undocumented.
+
 Submodules
 ----------
 

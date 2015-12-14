@@ -9,7 +9,8 @@ The glossary of important terms used in the `documentation <index>`.
     :sorted:
 
     exploration tree
-        Definition of the exploration tree term.
+        This is the data structure Molpher generates as it progresses through chemical space. It is
+        represented in the API as an instance of `molpher.core.ExplorationTree`.
 
     Molpher-backend project
         The original Molpher project (located in the :file:`backend/` folder in the repository root).

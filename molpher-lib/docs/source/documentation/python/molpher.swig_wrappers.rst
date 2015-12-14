@@ -1,7 +1,7 @@
 molpher.swig_wrappers package
 =============================
 
-Contains the :py:mod:`molpher.swig_wrappers.core` module with the SWIG wrapping code.
+Contains the `molpher.swig_wrappers.core` with the SWIG wrapping code.
 
 Modules
 -------
