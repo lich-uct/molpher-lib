@@ -55,20 +55,42 @@ class TestPythonAPI(unittest.TestCase):
 
     def testMorphing(self):
         def callback(morph):
+            callback.morphs_in_tree += 1
+            self.assertTrue(morph.isBound())
             if morph.getItersWithoutDistImprovement() > 3:
                 print(morph.getSMILES(), morph.getItersWithoutDistImprovement())
+            if not callback.closest_mol:
+                callback.closest_mol = morph.copy()
+            if callback.closest_mol.getDistToTarget() > morph.getDistToTarget():
+                callback.closest_mol = morph.copy()
+        callback.morphs_in_tree = 0
+        callback.closest_mol = None
 
         class RunIteration(TreeOperation):
 
             def __init__(self, tree):
                 super(RunIteration, self).__init__()
-                self.tree = tree
+                self._tree = tree
 
             def __call__(self):
-                print('Iteration: ', self.tree.getGenerationCount() + 1)
-                self.tree.generateMorphs()
-                self.tree.extend()
-                self.tree.traverse(callback)
+                print('Iteration: ', self._tree.getGenerationCount() + 1)
+                self._tree.generateMorphs()
+                self._tree.filterMorphs()
+                self._tree.extend()
+                self._tree.prune()
+                callback.morphs_in_tree = 0
+                self._tree.traverse(callback)
+                print('Number of morphs in the tree: ', callback.morphs_in_tree)
+                print('Closest molecule to target: {0} -- {1}'.format(
+                    callback.closest_mol.getSMILES()
+                    , callback.closest_mol.getDistToTarget()
+                ))
+
+            def getTree(self):
+                return self._tree
+
+            def setTree(self, tree):
+                self._tree = tree
 
         tree = ExplorationTree(params={
             'source' : self.test_source
@@ -82,6 +104,10 @@ class TestPythonAPI(unittest.TestCase):
             counter += 1
 
     def testOperations(self):
+        # TODO: implement
+        pass
+
+    def testSnapshots(self):
         # TODO: implement
         pass
 
