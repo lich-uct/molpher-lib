@@ -13,7 +13,7 @@ The glossary of important terms used in the `documentation <index>`.
         represented in the API as an instance of `molpher.core.ExplorationTree`.
 
     Molpher-backend project
-        The original Molpher project (located in the :file:`backend/` folder in the repository root).
+        The original Molpher project (located in the :file:`backend/` folder of the repository root).
         It contains the implementation of Molpher backend server.
         It needs to be compiled as a static library so that the `Molpher-lib project` can
         link against it during compilation.
