@@ -24,20 +24,6 @@ molpher.core.ExplorationTree module
     :undoc-members:
     :show-inheritance:
 
-molpher.core.MolpherMol module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A direct reference to `molpher.swig_wrappers.core.MolpherMol`.
-
-.. seealso:: `MolpherMol`
-
-molpher.core.ExplorationTreeSnapshot module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A direct reference to `molpher.swig_wrappers.core.ExplorationTreeSnapshot`.
-
-.. seealso:: `ExplorationTreeSnapshot`
-
 Subpackages
 -----------
 
@@ -48,6 +34,20 @@ Subpackages
 
 Module contents
 ---------------
+
+MolpherMol
+~~~~~~~~~~
+
+A direct reference to `molpher.swig_wrappers.core.MolpherMol`.
+
+.. seealso:: `MolpherMol`
+
+ExplorationTreeSnapshot
+~~~~~~~~~~~~~~~~~~~~~~~
+
+A direct reference to `molpher.swig_wrappers.core.ExplorationTreeSnapshot`.
+
+.. seealso:: `ExplorationTreeSnapshot`
 
 .. automodule:: molpher.core
     :members:
