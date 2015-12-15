@@ -17464,6 +17464,55 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_ExplorationTree__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  ExplorationTree *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_ExplorationTree",&obj0,&obj1)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_ExplorationTree" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ExplorationTree" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_ExplorationTree" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ExplorationTree" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExplorationTree *)new ExplorationTree((std::string const &)*arg1,(std::string const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExplorationTree, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_ExplorationTree__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
   ExplorationParameters *arg1 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -17493,14 +17542,14 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_ExplorationTree(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[2] = {
+  PyObject *argv[3] = {
     0
   };
   int ii;
   
   if (!PyTuple_Check(args)) SWIG_fail;
   argc = args ? (int)PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
     argv[ii] = PyTuple_GET_ITEM(args,ii);
   }
   if (argc == 1) {
@@ -17509,7 +17558,7 @@ SWIGINTERN PyObject *_wrap_new_ExplorationTree(PyObject *self, PyObject *args) {
     int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationParameters, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      return _wrap_new_ExplorationTree__SWIG_1(self, args);
+      return _wrap_new_ExplorationTree__SWIG_2(self, args);
     }
   }
   if (argc == 1) {
@@ -17520,11 +17569,24 @@ SWIGINTERN PyObject *_wrap_new_ExplorationTree(PyObject *self, PyObject *args) {
       return _wrap_new_ExplorationTree__SWIG_0(self, args);
     }
   }
+  if (argc == 2) {
+    int _v;
+    int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_new_ExplorationTree__SWIG_1(self, args);
+      }
+    }
+  }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_ExplorationTree'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    ExplorationTree::ExplorationTree(std::string const &)\n"
+    "    ExplorationTree::ExplorationTree(std::string const &,std::string const &)\n"
     "    ExplorationTree::ExplorationTree(ExplorationParameters &)\n");
   return 0;
 }

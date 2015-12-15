@@ -22,6 +22,13 @@ ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES) : threadC
     setParams(params);
 }
 
+ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) : threadCount(0) {
+    ExplorationParameters params;
+    params.setSourceMol(sourceMolAsSMILES);
+    params.setTargetMol(targetMolAsSMILES);
+    setParams(params);
+}
+
 ExplorationTree::ExplorationTree(ExplorationParameters& params) : threadCount(0) {
     setParams(params);
 }

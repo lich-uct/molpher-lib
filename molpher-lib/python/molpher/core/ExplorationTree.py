@@ -40,7 +40,7 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
 
     ..  note:: When ``params`` are specified, ``source`` and ``target`` are ignored.
 
-    ..  note:: If the target molecule is missing a single carbon atom is supplied instead.
+    ..  note:: If the target molecule is missing a single carbon atom is supplied instead as a placeholder.
 
     This specialized version of `molpher.swig_wrappers.core.ExplorationTree`
     implements some additional functionality for ease of use from Python.
@@ -63,10 +63,7 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
             if not target:
                 super(ExplorationTree, self).__init__(source)
             else:
-                raise NotImplementedError('ExplorationTree constructor does not '
-                                          'support explicit target initialization, yet. '
-                                          'Use an ExplorationParameters instance instead.'
-                                          )
+                super(ExplorationTree, self).__init__(source, target)
         else:
             raise RuntimeError('You must specify either `params` or `source`.')
 

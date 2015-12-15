@@ -33,11 +33,10 @@ class TestPythonAPI(unittest.TestCase):
             , 'target' : mol1
             , 'operators' : params.param_dict['operators'][:3]
         }
-        self.assertRaises(NotImplementedError, lambda : ExplorationTree(source=mol1, target=mol2))
         self.assertRaises(RuntimeError, lambda : ExplorationTree())
-        tree = ExplorationTree(source=mol1)
+        tree = ExplorationTree(source=mol1, target=mol2)
         self.assertEqual(tree.params['source'], mol1)
-        self.assertEqual(tree.params['target'], 'C')
+        self.assertEqual(tree.params['target'], mol2)
         def func():
             tree.params = {'source' : ''}
         self.assertRaises(RuntimeError, func)
