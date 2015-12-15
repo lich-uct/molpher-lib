@@ -1,5 +1,6 @@
 ..  csv-table:: Morphing parameters recognized by the current implementation.
     :header: "Attribute", "Setter", "Getter", "Default Value", "Brief Description"
+    :name: param-table
 
     `source`, `setSourceMol`, `getSourceMol`, "''", "SMILES of the `source molecule`."
     `target`, `setTargetMol`, `getTargetMol`, "''", "SMILES of the `target molecule`."

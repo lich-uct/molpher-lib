@@ -73,4 +73,14 @@ The glossary of important terms used in the `documentation <index>`.
         For example, an iteration is commited when `ExplorationTree.extend` is called.
 
     morph generation
-        The morphs attached to the tree upon commitment of a `morphing iteration`.
+        The morphs attached to the tree upon commiting a `morphing iteration`.
+
+    chemical space path
+        A consecutive sequence of `morphs <morph>` created by iteratively applying
+        a `chemical operator <chemical operators>` on the newest morph on the path.
+
+    chemical space
+        ..  todo:: document
+
+    morphing parameters
+        ..  todo:: document

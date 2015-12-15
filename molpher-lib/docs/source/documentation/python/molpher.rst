@@ -9,6 +9,7 @@ Subpackages
 
     molpher.core
     molpher.swig_wrappers
+    molpher.examples
 
 Module contents
 ---------------
