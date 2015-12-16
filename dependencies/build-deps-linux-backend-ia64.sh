@@ -5,7 +5,7 @@
 # Dependency links
 TBB_LINK=http://www.threadingbuildingblocks.org/sites/default/files/software_releases/linux/tbb42_20130725oss_lin.tgz
 BOOST_LINK=http://sourceforge.net/projects/boost/files/boost/1.49.0/boost_1_49_0.tar.gz/download
-RDKIT_LINK=https://github.com/rdkit/rdkit/archive/Release_2015_09_2.tar.gz
+RDKIT_LINK=https://github.com/rdkit/rdkit/archive/Release_2014_03_1.tar.gz
 
 # version 1.2.7 is not aviable anymore
 ZLIB_LINK=http://zlib.net/zlib-1.2.7.tar.gz
@@ -357,10 +357,10 @@ build_rdkit()
     fi
     
     # changing the name of the package
-    count=`ls -1 RDKit_201*.tgz 2>/dev/null | wc -l`
+    count=`ls -1 rdkit-*.* 2>/dev/null | wc -l`
     if [ $count -ge 1 ]
     then
-        mv RDKit_201*.tgz rdkit.tar.gz
+        mv rdkit-*.* rdkit.tar.gz
     fi
     
     # download if doesn't exist
@@ -371,7 +371,7 @@ build_rdkit()
     
     echo "Unpacking..."
     tar --extract --gzip --file=rdkit.tar.gz
-    mv RDKit_201* rdkit
+    mv rdkit-* rdkit
     cd rdkit
     cmd=cmd
     # prepare script to build RDKit
