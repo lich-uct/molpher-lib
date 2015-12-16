@@ -47,7 +47,7 @@ frontend/nbproject/*.pro
 
 # Generated project make files
 /*/nbproject/private
-/*/nbproject/*.mk
+#/*/nbproject/*.mk
 /*/nbproject/*.bash
 
 # Molpher results
