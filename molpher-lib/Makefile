@@ -60,9 +60,6 @@ PYTHON_PACKAGE_DIR=$(CND_BASEDIR)/python/molpher/swig_wrappers
 # filenames
 LIBNAME="libmolpher.so"
 
-# bundle python extensions into the build?
-BUILD_PYTHON=$(findstring Python,$(CONF))
-
 # build
 build: .build-post
 
@@ -87,10 +84,6 @@ build: .build-post
 #	cp $(LIB_DIR)/*.so.2 $(PYTHON_PACKAGE_DIR)/lib/
 	cp $(CND_BASEDIR)/../backend/SAScore.dat $(PYTHON_PACKAGE_DIR)/SAScore.dat
 	ln -sf $(CND_BASEDIR)/../backend/SAScore.dat SAScore.dat
-ifneq (,$(BUILD_PYTHON))
-	echo "export PYTHONPATH=$(CND_BASEDIR)/python/":'$${PYTHONPATH}' > $(CND_BASEDIR)/set_env.sh
-	ln -sf $(LIB_DIR)$(LIBNAME) $(PYTHON_PACKAGE_DIR)/_core.so
-endif
 
 # clean
 clean: .clean-post
