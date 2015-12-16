@@ -31,7 +31,7 @@ DEFAULTCONF=Linux64_Debug
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Linux64_Debug 
+ALLCONFS=Linux64_Debug Linux64_Debug_DEV 
 
 
 # build

@@ -60,6 +60,9 @@ PYTHON_PACKAGE_DIR=$(CND_BASEDIR)/python/molpher/swig_wrappers
 # filenames
 LIBNAME="libmolpher.so"
 
+# run swig
+RUN_SWIG=$(or $(SWIG),$(findstring DEV,$(CONF)))
+
 # build
 build: .build-post
 
@@ -67,7 +70,9 @@ build: .build-post
 # Add your pre 'build' code here...
 	mkdir -p $(LIB_DIR)
 #	mkdir -p $(PYTHON_PACKAGE_DIR)/lib/
+ifneq (,$(RUN_SWIG))
 	swig -python -Wall -c++ -outdir $(PYTHON_PACKAGE_DIR) -o $(SRC_DIR)/python/molpher_wrap.cpp $(CND_BASEDIR)/src/python/molpher.i
+endif
 	
 .build-post: .build-impl
 # Add your post 'build' code here...

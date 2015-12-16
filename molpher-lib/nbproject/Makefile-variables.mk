@@ -14,6 +14,14 @@ CND_ARTIFACT_PATH_Linux64_Debug=dist/Linux64_Debug/GNU-Linux-x86/libmolpher-lib.
 CND_PACKAGE_DIR_Linux64_Debug=dist/Linux64_Debug/GNU-Linux-x86/package
 CND_PACKAGE_NAME_Linux64_Debug=libmolpher-lib.so.tar
 CND_PACKAGE_PATH_Linux64_Debug=dist/Linux64_Debug/GNU-Linux-x86/package/libmolpher-lib.so.tar
+# Linux64_Debug_DEV configuration
+CND_PLATFORM_Linux64_Debug_DEV=GNU-Linux-x86
+CND_ARTIFACT_DIR_Linux64_Debug_DEV=dist/Linux64_Debug_DEV/GNU-Linux-x86
+CND_ARTIFACT_NAME_Linux64_Debug_DEV=libmolpher-lib.so
+CND_ARTIFACT_PATH_Linux64_Debug_DEV=dist/Linux64_Debug_DEV/GNU-Linux-x86/libmolpher-lib.so
+CND_PACKAGE_DIR_Linux64_Debug_DEV=dist/Linux64_Debug_DEV/GNU-Linux-x86/package
+CND_PACKAGE_NAME_Linux64_Debug_DEV=libmolpher-lib.so.tar
+CND_PACKAGE_PATH_Linux64_Debug_DEV=dist/Linux64_Debug_DEV/GNU-Linux-x86/package/libmolpher-lib.so.tar
 #
 # include compiler specific variables
 #

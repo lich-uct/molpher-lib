@@ -19,6 +19,10 @@
                     <name>Linux64_Debug</name>
                     <type>2</type>
                 </confElem>
+                <confElem>
+                    <name>Linux64_Debug_DEV</name>
+                    <type>2</type>
+                </confElem>
             </confList>
             <formatting>
                 <project-formatting-style>false</project-formatting-style>
