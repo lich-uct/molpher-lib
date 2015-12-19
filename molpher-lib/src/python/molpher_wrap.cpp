@@ -17771,6 +17771,32 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ExplorationTree_isPathFound(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_isPathFound",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ExplorationTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_isPathFound" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)(arg1)->isPathFound();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ExplorationTree_deleteSubtree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = (ExplorationTree *) 0 ;
@@ -18565,6 +18591,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExplorationTree_fetchLeaves", _wrap_ExplorationTree_fetchLeaves, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_fetchMol", _wrap_ExplorationTree_fetchMol, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_hasMol", _wrap_ExplorationTree_hasMol, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_isPathFound", _wrap_ExplorationTree_isPathFound, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_deleteSubtree", _wrap_ExplorationTree_deleteSubtree, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_generateMorphs", _wrap_ExplorationTree_generateMorphs, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_sortMorphs", _wrap_ExplorationTree_sortMorphs, METH_VARARGS, NULL},

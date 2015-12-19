@@ -1101,6 +1101,9 @@ class ExplorationTree(_object):
     def hasMol(self, canonSMILES):
         return _core.ExplorationTree_hasMol(self, canonSMILES)
 
+    def isPathFound(self):
+        return _core.ExplorationTree_isPathFound(self)
+
     def deleteSubtree(self, canonSMILES):
         return _core.ExplorationTree_deleteSubtree(self, canonSMILES)
 

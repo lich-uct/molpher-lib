@@ -99,9 +99,21 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         Number of `morph generations <morph generation>` connected to the tree so far.
 
         :return:
+        :rtype: `int`
         """
 
         return self.getGenerationCount()
+
+    @property
+    def path_found(self):
+        """
+        Shows if the `target molecule` is present in this tree.
+
+        :return:
+        :rtype: `bool`
+        """
+
+        return self.isPathFound()
 
     @property
     def leaves(self):

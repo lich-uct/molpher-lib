@@ -203,3 +203,9 @@ ExplorationParameters& ExplorationTree::getParams() {
     return *ret;
 }
 
+bool ExplorationTree::isPathFound() {
+    PathFinderContext::CandidateMap::const_accessor ac;
+    return context.candidates.find(ac, this->context.target.smile);
+}
+
+

@@ -50,3 +50,12 @@ mask[1] = True
 mask[2] = True
 tree.candidates_mask = mask
 print(tree.candidates_mask)
+
+print()
+
+print(sorted([x.getSMILES() for idx,x in enumerate(tree.candidates) if tree.candidates_mask[idx]]))
+tree.extend()
+print(sorted([x.getSMILES() for x in tree.leaves]))
+print(tree.generation_count)
+print(tree.path_found)
+tree.prune()
