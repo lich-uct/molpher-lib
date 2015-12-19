@@ -3,7 +3,7 @@ Tutorial
 
 ..  todo:: write some very short intro (what the tutorial is going to be about and stuff)
 
-Creating an Exploration Tree
+Building an Exploration Tree
 ----------------------------
 
 .. py:currentmodule:: molpher.core
@@ -224,6 +224,38 @@ but when we change an unbound instance the value stays the same.
 
 Filtering Morphs
 ~~~~~~~~~~~~~~~~
+
+When the list of candidates is populated, we need to choose the morphs that
+will form the next `generation <morph generation>`. The code below ilustrates
+how we can do it manually:
+
+..  literalinclude:: ../../../python/molpher/examples/basics.py
+    :language: python
+    :caption: Manually filtering morphs.
+    :lines: 45-52
+    :name: filtering-morphs
+    :linenos:
+
+Output:
+
+..  code-block:: none
+
+    (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
+    63
+    (True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+
+In the :numref:`filtering-morphs`, `candidates_mask` member can be easily changed by supplying
+a `list` or `tuple` of new values. Here we simply select the first three morphs as the new `morph generation`.
+
+..  note:: The new mask must be the same length as the `candidates` member. If this requirement
+        is not satisified, an instance of `RuntimeError` is raised.
+
+..  seealso:: The `ExplorationTree` class also implements a few built-in filters. You can use its
+        `filterMorphs()` method to invoke them. See the method's documentation for more information
+        on the available filtering options.
+
+Extending and Pruning
+~~~~~~~~~~~~~~~~~~~~~
 
 ..  todo:: write
 

@@ -39,3 +39,14 @@ print(candidate_copy.getDistToTarget())
 candidate_copy.setDistToTarget(0.7)
 print(candidate_copy.getDistToTarget())
 print(candidate.getDistToTarget())
+
+print()
+
+print(tree.candidates_mask)
+print(len(tree.candidates_mask))
+mask = [False for x in tree.candidates_mask]
+mask[0] = True
+mask[1] = True
+mask[2] = True
+tree.candidates_mask = mask
+print(tree.candidates_mask)
