@@ -60,7 +60,11 @@ bool MolpherMol::isBound() const {
 }
 
 MolpherMol* MolpherMol::copy() const {
-    return new MolpherMol(*this);
+    MolpherMolecule* new_mol = new MolpherMolecule();
+    *new_mol = *mol;
+    MolpherMol* ret = new MolpherMol(*new_mol);
+    ret->selfAllocated = true;
+    return ret;
 }
 
 std::string MolpherMol::getSMILES() {

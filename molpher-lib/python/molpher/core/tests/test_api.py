@@ -52,6 +52,18 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(tree.params['target'], mol2)
         self.assertEqual(tree.params['operators'], params.param_dict['operators'])
 
+        leaf = tree.leaves[0]
+        self.assertTrue(leaf.isBound())
+        leaf.setDistToTarget(0.5)
+        self.assertEqual(tree.leaves[0].getDistToTarget(), 0.5)
+
+        leaf_copy = leaf.copy()
+        self.assertFalse(leaf_copy.isBound())
+        self.assertEqual(leaf_copy.getDistToTarget(), 0.5)
+        leaf_copy.setDistToTarget(0.7)
+        self.assertEqual(leaf.getDistToTarget(), 0.5)
+        self.assertEqual(leaf_copy.getDistToTarget(), 0.7)
+
     def testMorphing(self):
         def callback(morph):
             callback.morphs_in_tree += 1

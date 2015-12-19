@@ -21,7 +21,21 @@ print(tree.leaves)
 print(tree.leaves[0].getSMILES())
 tree.generateMorphs()
 print(tree.candidates)
-print(tree.candidates_mask)
 print(len(tree.candidates))
-print(tree.leaves[0].isBound())
-print(len(tree.candidates_mask))
+
+print()
+
+candidate = tree.candidates[0]
+print(candidate.isBound())
+print(tree.candidates[0].getDistToTarget())
+candidate.setDistToTarget(0.5)
+print(tree.candidates[0].getDistToTarget())
+
+print()
+
+candidate_copy = candidate.copy()
+print(candidate_copy.isBound())
+print(candidate_copy.getDistToTarget())
+candidate_copy.setDistToTarget(0.7)
+print(candidate_copy.getDistToTarget())
+print(candidate.getDistToTarget())
