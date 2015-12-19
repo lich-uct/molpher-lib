@@ -1,4 +1,9 @@
-$PREFIX=~/Molpher/
+PREFIX=~/Molpher/
+
+# prepare directories
+mkdir -p $PREFIX
+PREFIX=$(realpath $PREFIX)
+cp -r . $PREFIX
 
 function build_deps()
 {
@@ -29,11 +34,5 @@ function build_molpher_lib()
     make CONF=Linux64_Debug
 }
 
-# prepare directories
-$PREFIX=$(realpath $PREFIX)
-mkdir -f $PREFIX
-cp -r . $PREFIX
-
-if build_deps() && build_molpher() && build_molpher_lib(); then
-    echo "Molpher-lib was built successfully!"
-fi
+build_deps && build_molpher && build_molpher_lib && echo "Molpher-lib was installed successfully in $PREFIX!" && exit
+echo "Molpher-lib installation failed!"
