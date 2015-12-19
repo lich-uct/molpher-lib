@@ -94,6 +94,16 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
             self.setParams(new)
 
     @property
+    def generation_count(self):
+        """
+        Number of `morph generations <morph generation>` connected to the tree so far.
+
+        :return:
+        """
+
+        return self.getGenerationCount()
+
+    @property
     def leaves(self):
         """
         The current leaves of the tree.
