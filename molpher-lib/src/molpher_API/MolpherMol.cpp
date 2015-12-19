@@ -7,9 +7,14 @@ MolpherMol::MolpherMol() : mol(new MolpherMolecule()), selfAllocated(true) {
 
 
 MolpherMol::MolpherMol(const MolpherMol& other) : mol(nullptr), selfAllocated(true) {
-    MolpherMolecule* new_mol = new MolpherMolecule();
-    *new_mol = *(other.mol);
-    this->mol = new_mol;
+    if (other.selfAllocated) {
+        MolpherMolecule* new_mol = new MolpherMolecule();
+        *new_mol = *(other.mol);
+        this->mol = new_mol;
+    } else {
+        selfAllocated = false;
+        this->mol = other.mol;
+    }
 }
 
 MolpherMol::MolpherMol(MolpherMolecule& mol) : mol(&mol), selfAllocated(false) {
@@ -33,14 +38,16 @@ MolpherMol::~MolpherMol() {
 }
 
 MolpherMol& MolpherMol::operator=(const MolpherMol& other) {
-    MolpherMolecule* new_mol = new MolpherMolecule();
-    *new_mol = *(other.mol);
     if (selfAllocated) {
+        MolpherMolecule* new_mol = new MolpherMolecule();
+        *new_mol = *(other.mol);
         delete this->mol;
         this->mol = nullptr;
+        this->mol = new_mol;
+        this->selfAllocated = true;
+    } else {
+        this->mol = other.mol;
     }
-    this->mol = new_mol;
-    this->selfAllocated = true;
     return *this;
 }
 

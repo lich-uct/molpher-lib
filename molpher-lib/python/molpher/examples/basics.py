@@ -15,3 +15,13 @@ tree.params = {
 }
 print(tree.params)
 
+print()
+
+print(tree.leaves)
+print(tree.leaves[0].getSMILES())
+tree.generateMorphs()
+print(tree.candidates)
+print(tree.candidates_mask)
+print(len(tree.candidates))
+print(tree.leaves[0].isBound())
+print(len(tree.candidates_mask))

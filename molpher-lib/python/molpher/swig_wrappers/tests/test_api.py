@@ -70,6 +70,12 @@ class TestMolpherAPI(unittest.TestCase):
         self.assertEqual('', leaves[0].getParentSMILES())
         print(leaves)
         print(leaves[0].getSMILES())
+        self.assertTrue(leaves[0].isBound())
+        leaves[0].setDistToTarget(17.0)
+        self.assertEquals(leaves[0].getDistToTarget(), 17.0)
+        self.assertEquals(leaves[0].getDistToTarget(), 17.0)
+        self.assertEquals(tree.fetchLeaves()[0].getDistToTarget(), 17.0)
+        self.assertTrue(tree.fetchLeaves()[0].isBound())
         
         # generate morphs
         print("Generating morphs...")

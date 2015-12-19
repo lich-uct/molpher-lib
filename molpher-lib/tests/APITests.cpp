@@ -139,7 +139,26 @@ void APITests::testMisc() {
     params.setSourceMol("CCO");
     params.setTargetMol("O1C=CC=C1");
     ExplorationTree tree(params);
+    
+    const std::vector<MolpherMol>& leaves = tree.fetchLeaves();
+    CPPUNIT_ASSERT(leaves.size() > 0);
+    for (auto& mol : leaves) {
+        CPPUNIT_ASSERT(mol.isBound());
+    }
+    
     tree.generateMorphs();
+    const std::vector<MolpherMol>& candidates = tree.getCandidateMorphs();
+    CPPUNIT_ASSERT(candidates.size() > 0);
+    for (auto& mol : candidates) {
+        CPPUNIT_ASSERT(mol.isBound());
+    }
     tree.extend();
+    
+    delete &leaves;
+    leaves = tree.fetchLeaves();
+    CPPUNIT_ASSERT(leaves.size() > 0);
+    for (auto& mol : leaves) {
+        CPPUNIT_ASSERT(mol.isBound());
+    }
 }
 
