@@ -70,7 +70,7 @@ The glossary of important terms used in the `documentation <index>`.
 
     morphing iteration
         Any sequence of operations that ends with attaching new generation of morphs to the tree.
-        For example, an iteration is commited when `ExplorationTree.extend` is called.
+        For example, an iteration is commited when `ExplorationTree.extend()` is called.
 
     morph generation
         The morphs attached to the tree upon commiting a `morphing iteration`.
@@ -83,4 +83,4 @@ The glossary of important terms used in the `documentation <index>`.
         ..  todo:: document
 
     morphing parameters
-        ..  todo:: document
+        A set of restrictions and rules the `exploration tree` follows when it performs its function.

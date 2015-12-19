@@ -244,8 +244,8 @@ Output:
     63
     (True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
 
-In the :numref:`filtering-morphs`, `candidates_mask` member can be easily changed by supplying
-a `list` or `tuple` of new values. Here we simply select the first three morphs as the new `morph generation`.
+In :numref:`filtering-morphs`, `candidates_mask` member can be easily changed by writing
+a `list` or `tuple` of new values into it. Here we simply select the first three morphs as the new `morph generation`.
 
 ..  note:: The new mask must be the same length as the `candidates` member. If this requirement
         is not satisified, an instance of `RuntimeError` is raised.
@@ -257,7 +257,43 @@ a `list` or `tuple` of new values. Here we simply select the first three morphs 
 Extending and Pruning
 ~~~~~~~~~~~~~~~~~~~~~
 
-..  todo:: write
+When we have the morphs we want to attach to the tree selected, we can call `extend()`
+to connect them to their respective parents and make them the new leaves:
+
+..  literalinclude:: ../../../python/molpher/examples/basics.py
+    :language: python
+    :caption: Extending the tree.
+    :lines: 56-61
+    :name: extending-tree
+    :linenos:
+
+Output:
+
+..  code-block:: none
+
+    ['COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 'COC(=O)C1C2CCC(CC1OOC(=O)C1=CC=CC=C1)N2C', 'COC(=O)C1C2CCC(NC1OC(=O)C1=CC=CC=C1)N2C']
+    ['COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 'COC(=O)C1C2CCC(CC1OOC(=O)C1=CC=CC=C1)N2C', 'COC(=O)C1C2CCC(NC1OC(=O)C1=CC=CC=C1)N2C']
+    1
+    False
+
+We can see that after extending the tree, our selected morphs have become the new leaves and that the
+`morph generation` counter `generation_count` was set to one. We could now repeat this process
+and have Molpher iteratively explore further in `chemical space`. We can also read the `path_found` member
+at every iteration to check for the presence of the `target molecule` in the tree and terminate the process,
+if a path is found.
+
+Because a tree generated in this way grows exponentially, a pruning strategy is needed in order
+to keep the number of explored putative paths to a minimum by discarding those that are not getting any
+closer to the `target molecule`.
+
+The number of generations to wait before removing a bad branch/path from the tree is given by the `non_producing_survive`
+parameter. The tree pruning can be requested anytime by calling the `prune()` method. Here, the method didn't prune
+any paths, because the `non_producing_survive` parameter is set to 2 generations in this particular instance.
+
+..  note:: We call the molecules that have not generated any morphs closer to the target than themselves *non-producing molecules*.
+
+..  seealso:: There is also the `max_morphs_total` parameter, which imposes a restriction on the maximum number of
+        descendents of one non-producing molecule.
 
 Tree Operations
 ---------------
