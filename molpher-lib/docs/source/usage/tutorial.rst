@@ -225,6 +225,8 @@ but when we change an unbound instance the value stays the same.
 Filtering Morphs
 ~~~~~~~~~~~~~~~~
 
+..  todo:: Add sorting example
+
 When the list of candidates is populated, we need to choose the morphs that
 will form the next `generation <morph generation>`. The code below ilustrates
 how we can do it manually:

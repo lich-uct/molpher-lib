@@ -97,3 +97,5 @@ for oper in iteration:
 
 print(tree.generation_count)
 print([(x.getSMILES(), x.getDistToTarget()) for x in tree.leaves])
+
+# TODO: make some of the stuff from this script part of the test suite
