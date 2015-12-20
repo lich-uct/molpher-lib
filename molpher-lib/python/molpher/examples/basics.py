@@ -1,4 +1,5 @@
 from molpher.core import ExplorationTree as ETree
+from molpher.core.operations import *
 
 procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
@@ -59,3 +60,40 @@ print(sorted([x.getSMILES() for x in tree.leaves]))
 print(tree.generation_count)
 print(tree.path_found)
 tree.prune()
+
+print()
+
+class MyFilterMorphs(TreeOperation):
+
+    def __init__(self):
+        super(MyFilterMorphs, self).__init__()
+
+    def __call__(self):
+        tree = self.getTree()
+        mask = [False for x in tree.candidates_mask]
+        mask[0] = True
+        mask[1] = True
+        mask[2] = True
+        tree.candidates_mask = mask
+
+    def getTree(self):
+        tree = super(MyFilterMorphs, self).getTree()
+        if tree:
+            tree.__class__ = ETree # 'cast' the wrapped class to the pretty Python proxy class
+        return tree
+
+tree = ETree(source=cocaine, target=procaine)
+
+iteration = [
+    GenerateMorphsOper()
+    , SortMorphsOper()
+    , MyFilterMorphs()
+    , ExtendTreeOper()
+    , PruneTreeOper()
+]
+
+for oper in iteration:
+    tree.runOperation(oper)
+
+print(tree.generation_count)
+print([(x.getSMILES(), x.getDistToTarget()) for x in tree.leaves])
