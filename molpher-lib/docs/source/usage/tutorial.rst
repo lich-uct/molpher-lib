@@ -286,14 +286,17 @@ Because a tree generated in this way grows exponentially, a pruning strategy is 
 to keep the number of explored putative paths to a minimum by discarding those that are not getting any
 closer to the `target molecule`.
 
-The number of generations to wait before removing a bad branch/path from the tree is given by the `non_producing_survive`
-parameter. The tree pruning can be requested anytime by calling the `prune()` method. Here, the method didn't prune
+We call the molecule that have not generated any morphs closer to the target than itself a *non-producing molecule*.
+The number of generations to wait before removing the descendents of a `non-producing molecule`
+from the tree is given by the `non_producing_survive` parameter.
+
+Tree pruning can be requested anytime by calling the `prune()` method. In our example, the method didn't prune
 any paths, because the `non_producing_survive` parameter is set to 2 generations in this particular instance.
 
-..  note:: We call the molecules that have not generated any morphs closer to the target than themselves *non-producing molecules*.
-
-..  seealso:: There is also the `max_morphs_total` parameter, which imposes a restriction on the maximum number of
-        descendents of one non-producing molecule.
+..  seealso:: In addition to the `non_producing_survive` parameter, there is the `max_morphs_total` parameter,
+        which imposes a restriction on the maximum number of
+        descendents of one `non-producing molecule`. If the number of descendents
+        reaches this threshold, the molecule is removed along with the descendents.
 
 Tree Operations
 ---------------

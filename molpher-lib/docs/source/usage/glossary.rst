@@ -83,4 +83,8 @@ The glossary of important terms used in the `documentation <index>`.
         ..  todo:: document
 
     morphing parameters
-        A set of restrictions and rules the `exploration tree` follows when it performs its function.
+        A set of restrictions and rules the `exploration tree` follows when certain actions are carried out on it.
+
+    non-producing molecule
+        A molecule that have not generated any morphs that would be closer to the trget than itself.
+

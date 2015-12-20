@@ -369,8 +369,8 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
     @property
     def non_producing_survive(self):
         """
-        A molecule that has not produced any morphs closer to the `target molecule` than itself
-        for `non_producing_survive` number of calls to `ExplorationTree.generateMorphs()`
+        A molecule that has not produced any morphs closer to the `target molecule` than itself (a `non-producing molecule`)
+        for `non_producing_survive` number of calls to `ExplorationTree.extend()`
         will have its descendents removed during the next `ExplorationTree.prune()` call.
 
         .. seealso:: `MolpherMol.getItersWithoutDistImprovement()`
