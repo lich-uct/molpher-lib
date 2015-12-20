@@ -32,6 +32,13 @@ TreeOperation(expTree)
     // no action
 }
 
+FindLeavesOper::FindLeavesOper() : 
+TreeOperation()
+, mIncrementDistImproveCounter(false) 
+{
+    // no action
+}
+
 void FindLeavesOper::operator()() {
     PathFinderContext& ctx = TreeOperation::fetchTreeContext();
     tbb::task_group_context tbbCtx;
@@ -50,9 +57,13 @@ void FindLeavesOper::operator()() {
 }
 
 const std::vector<MolpherMol>& FindLeavesOper::fetchLeaves() {
-    std::vector<MolpherMol>* ret = new std::vector<MolpherMol>();
-    for (auto leaf : leaves) {
-        ret->push_back(MolpherMol(*leaf));
+    if (this->tree) {
+        std::vector<MolpherMol>* ret = new std::vector<MolpherMol>();
+        for (auto leaf : leaves) {
+            ret->push_back(MolpherMol(*leaf));
+        }
+        return *ret;
+    } else {
+        throw std::runtime_error("Cannot find leaves. No tree associated with this instance.");
     }
-    return *ret;
 }

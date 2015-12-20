@@ -20,6 +20,7 @@ private:
     
 public:
     SortMorphsOper(ExplorationTree& expTree);
+    SortMorphsOper();
     virtual void operator()();
 };
 

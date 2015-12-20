@@ -27,9 +27,9 @@ ExplorationTree::BoolVector& TreeOperation::fetchGeneratedMorphsMask() {
 }
 
 
-void TreeOperation::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves) {
-    tree->fetchLeaves(leaves);
-}
+//void TreeOperation::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves) {
+//    tree->fetchLeaves(leaves);
+//}
 
 ExplorationTree* TreeOperation::getTree() {
     return tree;

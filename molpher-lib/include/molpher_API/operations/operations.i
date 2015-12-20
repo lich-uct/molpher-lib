@@ -12,11 +12,18 @@
 %}
 
 %include "TreeOperation.hpp"
-%newobject FindLeavesOper::fetchLeaves();        
+%newobject FindLeavesOper::fetchLeaves();
+%catches(std::runtime_error) FindLeavesOper::operator()();
 %include "FindLeavesOper.hpp"
+%catches(std::runtime_error) GenerateMorphsOper::operator()();
 %include "GenerateMorphsOper.hpp"
+%catches(std::runtime_error) SortMorphsOper::operator()();
 %include "SortMorphsOper.hpp"
+%catches(std::runtime_error) FilterMorphsOper::operator()();
 %include "FilterMorphsOper.hpp"
+%catches(std::runtime_error) ExtendTreeOper::operator()();
 %include "ExtendTreeOper.hpp"
+%catches(std::runtime_error) PruneTreeOper::operator()();
 %include "PruneTreeOper.hpp"
+%catches(std::runtime_error) TraverseOper::operator()();
 %include "TraverseOper.hpp"

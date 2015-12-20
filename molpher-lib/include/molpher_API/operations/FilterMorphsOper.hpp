@@ -41,7 +41,9 @@ public:
     };
 
     FilterMorphsOper(ExplorationTree& expTree);
+    FilterMorphsOper();
     FilterMorphsOper(ExplorationTree& expTree, int filters);
+    FilterMorphsOper(int filters);
     virtual void operator()();
 };
 

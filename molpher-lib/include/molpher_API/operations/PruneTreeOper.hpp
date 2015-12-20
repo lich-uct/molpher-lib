@@ -34,6 +34,7 @@ class PruneTreeOper : public TreeOperation {
     
     public:
         PruneTreeOper(ExplorationTree& expTree);
+        PruneTreeOper();
         virtual void operator()();
 };
 

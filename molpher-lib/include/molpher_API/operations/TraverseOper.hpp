@@ -39,6 +39,7 @@ class TraverseOper : public TreeOperation {
     
     public:
         TraverseOper(ExplorationTree& expTree, TraverseCallback& callback);
+        TraverseOper(TraverseCallback& callback);
         TraverseOper(ExplorationTree& expTree, TraverseCallback& callback, MolpherMol& root);
         virtual void operator()();
 };

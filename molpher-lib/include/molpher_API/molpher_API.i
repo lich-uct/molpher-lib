@@ -56,5 +56,6 @@
 %catches(std::runtime_error) ExplorationTree::fetchMol(const std::string& canonSMILES);
 %catches(std::runtime_error) ExplorationTree::deleteSubtree(const std::string& canonSMILES);
 %catches(std::runtime_error) ExplorationTree::setParams(ExplorationParameters& params);
+%ignore ExplorationTree::fetchLeaves(ExplorationTree::MoleculePointerVector&, bool increase_dist_improve_counter = false);
 %ignore ExplorationTree::fetchLeaves(std::vector<MolpherMol>& ret);
 %include "ExplorationTree.hpp";

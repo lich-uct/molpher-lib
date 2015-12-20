@@ -8,6 +8,10 @@ PruneTreeOper::PruneTreeOper(ExplorationTree& expTree) : TreeOperation(expTree) 
     // no action
 }
 
+PruneTreeOper::PruneTreeOper() : TreeOperation() {
+    // no action
+}
+
 PruneTreeOper::PruneTree::PruneTree(PathFinderContext& ctx, TraverseCallback& callback) :
 mCtx(ctx)
 , mCallback(callback)
@@ -78,16 +82,20 @@ void PruneTreeOper::PruneTree::eraseSubtree(const std::string& smile) const {
 
 
 void PruneTreeOper::operator()() {
-    tbb::task_group_context tbbCtx;
-    tbb::task_scheduler_init scheduler;
-    if (threadCnt > 0) {
-        scheduler.terminate();
-        scheduler.initialize(threadCnt);
+    if (this->tree) {
+        tbb::task_group_context tbbCtx;
+        tbb::task_scheduler_init scheduler;
+        if (threadCnt > 0) {
+            scheduler.terminate();
+            scheduler.initialize(threadCnt);
+        }
+        ExplorationTree::SmileVector queue;
+        queue.push_back(fetchTreeContext().source.smile);
+
+        EraseSubtreeCallback callback(fetchTreeContext());
+        PruneTree functor(fetchTreeContext(), callback);
+        tbb::parallel_do(queue.begin(), queue.end(), functor, tbbCtx);
+    } else {
+        throw std::runtime_error("Cannot prune. No tree attached to this instance.");
     }
-    ExplorationTree::SmileVector queue;
-    queue.push_back(fetchTreeContext().source.smile);
-    
-    EraseSubtreeCallback callback(fetchTreeContext());
-    PruneTree functor(fetchTreeContext(), callback);
-    tbb::parallel_do(queue.begin(), queue.end(), functor, tbbCtx);
 }

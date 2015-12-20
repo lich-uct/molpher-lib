@@ -33,7 +33,6 @@ private:
     BoolVector candidateMorphsMask;
     ExplorationTree(IterationSnapshot& snp);
     void treeInit(IterationSnapshot& snp);
-    void fetchLeaves(ExplorationTree::MoleculePointerVector&, bool increase_dist_improve_counter = false);
     
 public:
     static ExplorationTree* createFromSnapshot(ExplorationTreeSnapshot& snapshot);
@@ -47,6 +46,7 @@ public:
     void runOperation(TreeOperation& operation);
     
     void fetchLeaves(std::vector<MolpherMol>& leaves);
+    void fetchLeaves(ExplorationTree::MoleculePointerVector&, bool increase_dist_improve_counter = false);
     const std::vector<MolpherMol>& fetchLeaves();
     MolpherMol* fetchMol(const std::string& canonSMILES);
     bool hasMol(const std::string& canonSMILES);

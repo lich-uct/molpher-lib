@@ -30,6 +30,7 @@ private:
     
 public:
     GenerateMorphsOper(ExplorationTree& expTree);
+    GenerateMorphsOper();
     virtual void operator()();
 
 };

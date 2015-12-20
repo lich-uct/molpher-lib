@@ -249,8 +249,8 @@ class FindLeavesOper(TreeOperation):
     __getattr__ = lambda self, name: _swig_getattr(self, FindLeavesOper, name)
     __repr__ = _swig_repr
 
-    def __init__(self, expTree, increment_iters_without_dist_improve):
-        this = _core.new_FindLeavesOper(expTree, increment_iters_without_dist_improve)
+    def __init__(self, *args):
+        this = _core.new_FindLeavesOper(*args)
         try:
             self.this.append(this)
         except:
@@ -277,8 +277,8 @@ class GenerateMorphsOper(TreeOperation):
     __getattr__ = lambda self, name: _swig_getattr(self, GenerateMorphsOper, name)
     __repr__ = _swig_repr
 
-    def __init__(self, expTree):
-        this = _core.new_GenerateMorphsOper(expTree)
+    def __init__(self, *args):
+        this = _core.new_GenerateMorphsOper(*args)
         try:
             self.this.append(this)
         except:
@@ -302,8 +302,8 @@ class SortMorphsOper(TreeOperation):
     __getattr__ = lambda self, name: _swig_getattr(self, SortMorphsOper, name)
     __repr__ = _swig_repr
 
-    def __init__(self, expTree):
-        this = _core.new_SortMorphsOper(expTree)
+    def __init__(self, *args):
+        this = _core.new_SortMorphsOper(*args)
         try:
             self.this.append(this)
         except:
@@ -359,8 +359,8 @@ class ExtendTreeOper(TreeOperation):
     __getattr__ = lambda self, name: _swig_getattr(self, ExtendTreeOper, name)
     __repr__ = _swig_repr
 
-    def __init__(self, expTree):
-        this = _core.new_ExtendTreeOper(expTree)
+    def __init__(self, *args):
+        this = _core.new_ExtendTreeOper(*args)
         try:
             self.this.append(this)
         except:
@@ -384,8 +384,8 @@ class PruneTreeOper(TreeOperation):
     __getattr__ = lambda self, name: _swig_getattr(self, PruneTreeOper, name)
     __repr__ = _swig_repr
 
-    def __init__(self, expTree):
-        this = _core.new_PruneTreeOper(expTree)
+    def __init__(self, *args):
+        this = _core.new_PruneTreeOper(*args)
         try:
             self.this.append(this)
         except:

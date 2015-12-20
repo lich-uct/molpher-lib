@@ -9,6 +9,10 @@ SortMorphsOper::SortMorphsOper(ExplorationTree& expTree) : TreeOperation(expTree
     // no action
 }
 
+SortMorphsOper::SortMorphsOper() : TreeOperation() {
+    // no action
+}
+
 bool SortMorphsOper::CompareMorphs::operator()(
         const MolpherMolecule &a, const MolpherMolecule &b) const {
     /* Morphs are rated according to their proximity to the connecting line
@@ -61,14 +65,18 @@ bool SortMorphsOper::CompareMorphs::operator()(
 }
 
 void SortMorphsOper::operator()() {
-    tbb::task_scheduler_init scheduler;
-    if (threadCnt > 0) {
-        scheduler.terminate();
-        scheduler.initialize(threadCnt);
+    if (this->tree) {
+        tbb::task_scheduler_init scheduler;
+        if (threadCnt > 0) {
+            scheduler.terminate();
+            scheduler.initialize(threadCnt);
+        }
+
+        ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
+        CompareMorphs compareMorphs;
+        tbb::parallel_sort(morphs.begin(), morphs.end(), compareMorphs);
+    } else {
+        throw std::runtime_error("Cannot sort morphs. No tree attached to this instance.");
     }
-    
-    ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
-    CompareMorphs compareMorphs;
-    tbb::parallel_sort(morphs.begin(), morphs.end(), compareMorphs);
 }
 

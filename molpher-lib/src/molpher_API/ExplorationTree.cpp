@@ -109,9 +109,6 @@ void ExplorationTree::filterMorphs(int filters) {
 
 void ExplorationTree::extend() {
     ExtendTreeOper(*this)();
-    ExplorationTree::MoleculePointerVector dummy;
-    fetchLeaves(dummy, true);
-    ++context.iterIdx;
 }
 
 void ExplorationTree::prune() {

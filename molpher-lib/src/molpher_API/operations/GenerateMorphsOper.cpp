@@ -11,6 +11,10 @@ GenerateMorphsOper::GenerateMorphsOper(ExplorationTree& expTree) : TreeOperation
     // no action
 }
 
+GenerateMorphsOper::GenerateMorphsOper() : TreeOperation() {
+    // no action
+}
+
 void GenerateMorphsOper::CollectMorphs::MorphCollector(MolpherMolecule *morph, void *functor) {
     GenerateMorphsOper::CollectMorphs *collect =
             (GenerateMorphsOper::CollectMorphs *) functor;
@@ -39,49 +43,53 @@ unsigned int GenerateMorphsOper::CollectMorphs::WithdrawCollectAttemptCount() {
 }
 
 void GenerateMorphsOper::operator()() {
-    tbb::task_group_context tbbCtx;
-    tbb::task_scheduler_init scheduler;
-    if (threadCnt > 0) {
-        scheduler.terminate();
-        scheduler.initialize(threadCnt);
-    }
-    
-    ExplorationTree::MoleculePointerVector leaves;
-    fetchLeaves(leaves);
-    PathFinderContext& context = fetchTreeContext();
-    ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
-    morphs.clear();
-    CollectMorphs collectMorphs(morphs);
-    for (auto it : leaves) {
-        MolpherMolecule &candidate = (*it);
-        unsigned int morphAttempts = context.params.cntMorphs;
-        if (candidate.distToTarget < context.params.distToTargetDepthSwitch) {
-            morphAttempts = context.params.cntMorphsInDepth;
+    if (this->tree) {
+        tbb::task_group_context tbbCtx;
+        tbb::task_scheduler_init scheduler;
+        if (threadCnt > 0) {
+            scheduler.terminate();
+            scheduler.initialize(threadCnt);
         }
 
-        morphs.reserve(morphs.size() + morphAttempts);
+        ExplorationTree::MoleculePointerVector leaves;
+        this->tree->fetchLeaves(leaves);
+        PathFinderContext& context = fetchTreeContext();
+        ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
+        morphs.clear();
+        CollectMorphs collectMorphs(morphs);
+        for (auto it : leaves) {
+            MolpherMolecule &candidate = (*it);
+            unsigned int morphAttempts = context.params.cntMorphs;
+            if (candidate.distToTarget < context.params.distToTargetDepthSwitch) {
+                morphAttempts = context.params.cntMorphsInDepth;
+            }
 
-        GenerateMorphs(
-                candidate,
-                morphAttempts,
-                context.fingerprintSelector,
-                context.simCoeffSelector,
-                context.chemOperSelectors,
-                context.target,
-                context.decoys,
-                tbbCtx,
-                &collectMorphs,
-                GenerateMorphsOper::CollectMorphs::MorphCollector);
-        PathFinderContext::MorphDerivationMap::accessor ac;
+            morphs.reserve(morphs.size() + morphAttempts);
 
-        if (context.morphDerivations.find(ac, candidate.smile)) {
-            ac->second += collectMorphs.WithdrawCollectAttemptCount();
-        } else {
-            context.morphDerivations.insert(ac, candidate.smile);
-            ac->second = collectMorphs.WithdrawCollectAttemptCount();
+            GenerateMorphs(
+                    candidate,
+                    morphAttempts,
+                    context.fingerprintSelector,
+                    context.simCoeffSelector,
+                    context.chemOperSelectors,
+                    context.target,
+                    context.decoys,
+                    tbbCtx,
+                    &collectMorphs,
+                    GenerateMorphsOper::CollectMorphs::MorphCollector);
+            PathFinderContext::MorphDerivationMap::accessor ac;
+
+            if (context.morphDerivations.find(ac, candidate.smile)) {
+                ac->second += collectMorphs.WithdrawCollectAttemptCount();
+            } else {
+                context.morphDerivations.insert(ac, candidate.smile);
+                ac->second = collectMorphs.WithdrawCollectAttemptCount();
+            }
         }
+        morphs.shrink_to_fit();
+        ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
+        survivors.resize(morphs.size(), true);
+    } else {
+        throw std::runtime_error("Cannot generate morphs. No tree associated with this instance.");
     }
-    morphs.shrink_to_fit();
-    ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
-    survivors.resize(morphs.size(), true);
 }

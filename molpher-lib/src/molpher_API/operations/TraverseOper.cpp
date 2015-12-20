@@ -5,6 +5,10 @@ TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback)
     // no action
 }
 
+TraverseOper::TraverseOper(TraverseCallback& callback) : TreeOperation(), callback(callback), root(fetchTreeContext().source) {
+    // no action
+}
+
 TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback, MolpherMolecule& root) : TreeOperation(expTree), callback(callback), root(root)  {
     // no action
 }
@@ -40,17 +44,21 @@ void TraverseOper::TraversalFunctor::makeCallback(MolpherMolecule& morph) const 
 }
 
 void TraverseOper::operator()() {
-    tbb::task_group_context tbbCtx;
-    tbb::task_scheduler_init scheduler;
-    if (threadCnt > 0) {
-        scheduler.terminate();
-        scheduler.initialize(threadCnt);
+    if (this->tree) {
+        tbb::task_group_context tbbCtx;
+        tbb::task_scheduler_init scheduler;
+        if (threadCnt > 0) {
+            scheduler.terminate();
+            scheduler.initialize(threadCnt);
+        }
+        ExplorationTree::SmileVector queue;
+        queue.push_back(root.smile);
+
+        TraversalFunctor functor(fetchTreeContext(), callback);
+        tbb::parallel_do(queue.begin(), queue.end(), functor, tbbCtx);
+    } else {
+        throw std::runtime_error("Cannot traverse the tree. None associated with this instance.");
     }
-    ExplorationTree::SmileVector queue;
-    queue.push_back(root.smile);
-    
-    TraversalFunctor functor(fetchTreeContext(), callback);
-    tbb::parallel_do(queue.begin(), queue.end(), functor, tbbCtx);
 }
 
 

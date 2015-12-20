@@ -24,6 +24,14 @@ molpher.core.ExplorationTree module
     :undoc-members:
     :show-inheritance:
 
+molpher.core.operations module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: molpher.core.operations
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Subpackages
 -----------
 

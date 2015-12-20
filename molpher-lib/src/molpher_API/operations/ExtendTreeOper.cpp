@@ -9,6 +9,10 @@ ExtendTreeOper::ExtendTreeOper(ExplorationTree& expTree) : TreeOperation(expTree
     // no action
 }
 
+ExtendTreeOper::ExtendTreeOper() : TreeOperation() {
+    // no action
+}
+
 ExtendTreeOper::AcceptMorphs::AcceptMorphs(
         ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors,
         PathFinderContext &ctx, ExplorationTree::SmileSet &modifiedParents
@@ -237,27 +241,34 @@ void ExtendTreeOper::acceptMorphs(ExplorationTree::MoleculeVector &morphs,
 }
 
 void ExtendTreeOper::operator()() {
-    tbb::task_group_context tbbCtx;
-    tbb::task_scheduler_init scheduler;
-    if (threadCnt > 0) {
-        scheduler.terminate();
-        scheduler.initialize(threadCnt);
-    }
+    if (this->tree) {
+        tbb::task_group_context tbbCtx;
+        tbb::task_scheduler_init scheduler;
+        if (threadCnt > 0) {
+            scheduler.terminate();
+            scheduler.initialize(threadCnt);
+        }
 
-    PathFinderContext& context = fetchTreeContext();
-    ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
-    ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
-    
-    
-    ExplorationTree::SmileSet modifiedParents;
-    acceptMorphs(morphs, survivors, context, modifiedParents, context.decoys.size());
+        PathFinderContext& context = fetchTreeContext();
+        ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
+        ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
 
-    UpdateTree updateTree(context);
-    tbb::parallel_for(ExplorationTree::SmileSet::range_type(modifiedParents),
+
+        ExplorationTree::SmileSet modifiedParents;
+        acceptMorphs(morphs, survivors, context, modifiedParents, context.decoys.size());
+
+        UpdateTree updateTree(context);
+        tbb::parallel_for(ExplorationTree::SmileSet::range_type(modifiedParents),
                 updateTree, tbb::auto_partitioner(), tbbCtx);
-    
-    morphs.clear();
-    survivors.clear();
+
+        morphs.clear();
+        survivors.clear();
+        ExplorationTree::MoleculePointerVector dummy;
+        this->tree->fetchLeaves(dummy, true);
+        ++context.iterIdx;
+    } else {
+        throw std::runtime_error("Can't extend. No tree associated with this instance.");
+    }
 }
 
 

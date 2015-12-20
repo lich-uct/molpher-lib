@@ -7256,7 +7256,7 @@ SWIGINTERN PyObject *TreeOperation_swigregister(PyObject *SWIGUNUSEDPARM(self), 
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_FindLeavesOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_FindLeavesOper__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = 0 ;
   bool arg2 ;
@@ -7294,6 +7294,102 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_FindLeavesOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  FindLeavesOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_FindLeavesOper",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_ExplorationTree,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_FindLeavesOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FindLeavesOper" "', argument " "1"" of type '" "ExplorationTree &""'"); 
+  }
+  arg1 = reinterpret_cast< ExplorationTree * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (FindLeavesOper *)new FindLeavesOper(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FindLeavesOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FindLeavesOper__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  FindLeavesOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_FindLeavesOper")) SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (FindLeavesOper *)new FindLeavesOper();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FindLeavesOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FindLeavesOper(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_FindLeavesOper__SWIG_2(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_FindLeavesOper__SWIG_1(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_bool(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_new_FindLeavesOper__SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_FindLeavesOper'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    FindLeavesOper::FindLeavesOper(ExplorationTree &,bool)\n"
+    "    FindLeavesOper::FindLeavesOper(ExplorationTree &)\n"
+    "    FindLeavesOper::FindLeavesOper()\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_FindLeavesOper___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   FindLeavesOper *arg1 = (FindLeavesOper *) 0 ;
@@ -7307,11 +7403,17 @@ SWIGINTERN PyObject *_wrap_FindLeavesOper___call__(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FindLeavesOper___call__" "', argument " "1"" of type '" "FindLeavesOper *""'"); 
   }
   arg1 = reinterpret_cast< FindLeavesOper * >(argp1);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->operator ()();
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->operator ()();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7377,7 +7479,7 @@ SWIGINTERN PyObject *FindLeavesOper_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -7406,6 +7508,57 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GenerateMorphsOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_GenerateMorphsOper")) SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (GenerateMorphsOper *)new GenerateMorphsOper();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_GenerateMorphsOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_GenerateMorphsOper__SWIG_1(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_GenerateMorphsOper__SWIG_0(self, args);
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_GenerateMorphsOper'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GenerateMorphsOper::GenerateMorphsOper(ExplorationTree &)\n"
+    "    GenerateMorphsOper::GenerateMorphsOper()\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_GenerateMorphsOper___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GenerateMorphsOper *arg1 = (GenerateMorphsOper *) 0 ;
@@ -7419,11 +7572,17 @@ SWIGINTERN PyObject *_wrap_GenerateMorphsOper___call__(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GenerateMorphsOper___call__" "', argument " "1"" of type '" "GenerateMorphsOper *""'"); 
   }
   arg1 = reinterpret_cast< GenerateMorphsOper * >(argp1);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->operator ()();
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->operator ()();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7463,7 +7622,7 @@ SWIGINTERN PyObject *GenerateMorphsOper_swigregister(PyObject *SWIGUNUSEDPARM(se
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_SortMorphsOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_SortMorphsOper__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -7492,6 +7651,57 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_SortMorphsOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SortMorphsOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_SortMorphsOper")) SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (SortMorphsOper *)new SortMorphsOper();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_SortMorphsOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SortMorphsOper(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_SortMorphsOper__SWIG_1(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_SortMorphsOper__SWIG_0(self, args);
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_SortMorphsOper'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    SortMorphsOper::SortMorphsOper(ExplorationTree &)\n"
+    "    SortMorphsOper::SortMorphsOper()\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_SortMorphsOper___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   SortMorphsOper *arg1 = (SortMorphsOper *) 0 ;
@@ -7505,11 +7715,17 @@ SWIGINTERN PyObject *_wrap_SortMorphsOper___call__(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SortMorphsOper___call__" "', argument " "1"" of type '" "SortMorphsOper *""'"); 
   }
   arg1 = reinterpret_cast< SortMorphsOper * >(argp1);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->operator ()();
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->operator ()();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7580,6 +7796,23 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_FilterMorphsOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  FilterMorphsOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_FilterMorphsOper")) SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (FilterMorphsOper *)new FilterMorphsOper();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FilterMorphsOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FilterMorphsOper__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
   ExplorationTree *arg1 = 0 ;
   int arg2 ;
   void *argp1 = 0 ;
@@ -7616,6 +7849,32 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_FilterMorphsOper__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject * obj0 = 0 ;
+  FilterMorphsOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_FilterMorphsOper",&obj0)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_FilterMorphsOper" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (FilterMorphsOper *)new FilterMorphsOper(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_FilterMorphsOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_FilterMorphsOper(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[3] = {
@@ -7628,6 +7887,9 @@ SWIGINTERN PyObject *_wrap_new_FilterMorphsOper(PyObject *self, PyObject *args) 
   for (ii = 0; (ii < 2) && (ii < argc); ii++) {
     argv[ii] = PyTuple_GET_ITEM(args,ii);
   }
+  if (argc == 0) {
+    return _wrap_new_FilterMorphsOper__SWIG_1(self, args);
+  }
   if (argc == 1) {
     int _v;
     void *vptr = 0;
@@ -7635,6 +7897,16 @@ SWIGINTERN PyObject *_wrap_new_FilterMorphsOper(PyObject *self, PyObject *args) 
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_new_FilterMorphsOper__SWIG_0(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      int res = SWIG_AsVal_int(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
+    if (_v) {
+      return _wrap_new_FilterMorphsOper__SWIG_3(self, args);
     }
   }
   if (argc == 2) {
@@ -7648,7 +7920,7 @@ SWIGINTERN PyObject *_wrap_new_FilterMorphsOper(PyObject *self, PyObject *args) 
         _v = SWIG_CheckState(res);
       }
       if (_v) {
-        return _wrap_new_FilterMorphsOper__SWIG_1(self, args);
+        return _wrap_new_FilterMorphsOper__SWIG_2(self, args);
       }
     }
   }
@@ -7657,7 +7929,9 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_FilterMorphsOper'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    FilterMorphsOper::FilterMorphsOper(ExplorationTree &)\n"
-    "    FilterMorphsOper::FilterMorphsOper(ExplorationTree &,int)\n");
+    "    FilterMorphsOper::FilterMorphsOper()\n"
+    "    FilterMorphsOper::FilterMorphsOper(ExplorationTree &,int)\n"
+    "    FilterMorphsOper::FilterMorphsOper(int)\n");
   return 0;
 }
 
@@ -7675,11 +7949,17 @@ SWIGINTERN PyObject *_wrap_FilterMorphsOper___call__(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FilterMorphsOper___call__" "', argument " "1"" of type '" "FilterMorphsOper *""'"); 
   }
   arg1 = reinterpret_cast< FilterMorphsOper * >(argp1);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->operator ()();
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->operator ()();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7719,7 +7999,7 @@ SWIGINTERN PyObject *FilterMorphsOper_swigregister(PyObject *SWIGUNUSEDPARM(self
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_ExtendTreeOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_ExtendTreeOper__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -7748,6 +8028,57 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_ExtendTreeOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExtendTreeOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_ExtendTreeOper")) SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (ExtendTreeOper *)new ExtendTreeOper();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_ExtendTreeOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_ExtendTreeOper(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_ExtendTreeOper__SWIG_1(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_ExtendTreeOper__SWIG_0(self, args);
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_ExtendTreeOper'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    ExtendTreeOper::ExtendTreeOper(ExplorationTree &)\n"
+    "    ExtendTreeOper::ExtendTreeOper()\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_ExtendTreeOper___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExtendTreeOper *arg1 = (ExtendTreeOper *) 0 ;
@@ -7761,11 +8092,17 @@ SWIGINTERN PyObject *_wrap_ExtendTreeOper___call__(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtendTreeOper___call__" "', argument " "1"" of type '" "ExtendTreeOper *""'"); 
   }
   arg1 = reinterpret_cast< ExtendTreeOper * >(argp1);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->operator ()();
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->operator ()();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7805,7 +8142,7 @@ SWIGINTERN PyObject *ExtendTreeOper_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_PruneTreeOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_PruneTreeOper__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -7834,6 +8171,57 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_PruneTreeOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PruneTreeOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_PruneTreeOper")) SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (PruneTreeOper *)new PruneTreeOper();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PruneTreeOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_PruneTreeOper(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2] = {
+    0
+  };
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_PruneTreeOper__SWIG_1(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ExplorationTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_PruneTreeOper__SWIG_0(self, args);
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_PruneTreeOper'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    PruneTreeOper::PruneTreeOper(ExplorationTree &)\n"
+    "    PruneTreeOper::PruneTreeOper()\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_PruneTreeOper___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   PruneTreeOper *arg1 = (PruneTreeOper *) 0 ;
@@ -7847,11 +8235,17 @@ SWIGINTERN PyObject *_wrap_PruneTreeOper___call__(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PruneTreeOper___call__" "', argument " "1"" of type '" "PruneTreeOper *""'"); 
   }
   arg1 = reinterpret_cast< PruneTreeOper * >(argp1);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->operator ()();
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->operator ()();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7934,6 +8328,35 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_TraverseOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  TraverseCallback *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  TraverseOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_TraverseOper",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_TraverseCallback,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_TraverseOper" "', argument " "1"" of type '" "TraverseCallback &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TraverseOper" "', argument " "1"" of type '" "TraverseCallback &""'"); 
+  }
+  arg1 = reinterpret_cast< TraverseCallback * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (TraverseOper *)new TraverseOper(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_TraverseOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TraverseOper__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
   ExplorationTree *arg1 = 0 ;
   TraverseCallback *arg2 = 0 ;
   MolpherMol *arg3 = 0 ;
@@ -7997,6 +8420,15 @@ SWIGINTERN PyObject *_wrap_new_TraverseOper(PyObject *self, PyObject *args) {
   for (ii = 0; (ii < 3) && (ii < argc); ii++) {
     argv[ii] = PyTuple_GET_ITEM(args,ii);
   }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_TraverseCallback, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_TraverseOper__SWIG_1(self, args);
+    }
+  }
   if (argc == 2) {
     int _v;
     void *vptr = 0;
@@ -8025,7 +8457,7 @@ SWIGINTERN PyObject *_wrap_new_TraverseOper(PyObject *self, PyObject *args) {
         int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_MolpherMol, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
-          return _wrap_new_TraverseOper__SWIG_1(self, args);
+          return _wrap_new_TraverseOper__SWIG_2(self, args);
         }
       }
     }
@@ -8035,6 +8467,7 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_TraverseOper'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    TraverseOper::TraverseOper(ExplorationTree &,TraverseCallback &)\n"
+    "    TraverseOper::TraverseOper(TraverseCallback &)\n"
     "    TraverseOper::TraverseOper(ExplorationTree &,TraverseCallback &,MolpherMol &)\n");
   return 0;
 }
@@ -8053,11 +8486,17 @@ SWIGINTERN PyObject *_wrap_TraverseOper___call__(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TraverseOper___call__" "', argument " "1"" of type '" "TraverseOper *""'"); 
   }
   arg1 = reinterpret_cast< TraverseOper * >(argp1);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->operator ()();
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->operator ()();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:

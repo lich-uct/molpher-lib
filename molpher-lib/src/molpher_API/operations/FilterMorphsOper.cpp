@@ -16,6 +16,14 @@ FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree, int filters) : Tree
     // no action
 }
 
+FilterMorphsOper::FilterMorphsOper() : TreeOperation(), filters(MorphFilters::ALL) {
+    // no action
+}
+
+FilterMorphsOper::FilterMorphsOper(int filters) : TreeOperation(), filters(filters | MorphFilters::DUPLICATES) {
+    // no action
+}
+
 FilterMorphsOper::FilterMorphs::FilterMorphs(PathFinderContext &ctx,
         size_t globalMorphCount, ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors, int filters
         ) :
@@ -142,21 +150,25 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
 }
 
 void FilterMorphsOper::operator()() {
-    tbb::task_group_context tbbCtx;
-    tbb::task_scheduler_init scheduler;
-    if (threadCnt > 0) {
-        scheduler.terminate();
-        scheduler.initialize(threadCnt);
-    }
+    if (this->tree) {
+        tbb::task_group_context tbbCtx;
+        tbb::task_scheduler_init scheduler;
+        if (threadCnt > 0) {
+            scheduler.terminate();
+            scheduler.initialize(threadCnt);
+        }
 
-    ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
-    PathFinderContext& context = fetchTreeContext();
-    ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
-    assert(morphs.size() == survivors.size());
-    FilterMorphs filterMorphs(context, morphs.size(), morphs, survivors, filters);
-    tbb::parallel_for(
-            tbb::blocked_range<size_t>(0, morphs.size()),
-            filterMorphs, tbb::auto_partitioner(), tbbCtx);
+        ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
+        PathFinderContext& context = fetchTreeContext();
+        ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
+        assert(morphs.size() == survivors.size());
+        FilterMorphs filterMorphs(context, morphs.size(), morphs, survivors, filters);
+        tbb::parallel_for(
+                tbb::blocked_range<size_t>(0, morphs.size()),
+                filterMorphs, tbb::auto_partitioner(), tbbCtx);
+    } else {
+        throw std::runtime_error("Cannot filter morphs. No tree associated with this instance.");
+    }
 }
 
 

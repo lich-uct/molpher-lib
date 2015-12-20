@@ -59,6 +59,7 @@ private:
     
 public:
     ExtendTreeOper(ExplorationTree& expTree);
+    ExtendTreeOper();
     virtual void operator()();
 };
 
