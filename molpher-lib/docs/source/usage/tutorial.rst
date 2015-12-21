@@ -288,7 +288,7 @@ Output:
     1
     False
 
-We can see that after extending the tree, our selected morphs have become the new leaves and that the
+We can see that after extending the tree, our selected morphs (see :numref:`filtering-morphs`) have become the new leaves and that the
 `morph generation` counter `generation_count` was set to one. We could now repeat this process
 and have Molpher iteratively explore further in `chemical space`. We can also read the `path_found` member
 at every iteration to check for the presence of the `target molecule` in the tree and terminate the process,
