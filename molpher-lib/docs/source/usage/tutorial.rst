@@ -315,4 +315,81 @@ any paths, because the `non_producing_survive` parameter is set to 2 generations
 Tree Operations
 ---------------
 
-..  todo:: about tree operations
+We call every action that is performed on an `exploration tree` a *tree operation*.
+This concept is represented in the library as the `TreeOperation` abstract class.
+This class becomes useful, for example, when we run into a situation where we need to build
+several exploration trees at once. In such case we might want to apply the same set of operations
+to every tree in the set. Moreover, this abstraction allows us to implement our own tree operations
+and reuse code easily. We can run any operation on a given tree simply by supplying it to the
+`runOperation()` method of the `ExplorationTree` class. The example below shows how to implement
+the same exploration algorithm as demonstrated in the preceeding sections:
+
+..  literalinclude:: ../../../python/molpher/examples/basics.py
+    :language: python
+    :caption: Extending the tree.
+    :lines: 2-3,80-121
+    :emphasize-lines: 3,27
+    :name: operations-example
+    :linenos:
+
+Output:
+
+..  code-block:: none
+
+    1
+    False
+    [('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885), ('CN1C2CCC1C1C(=O)OCC2C1OC(=O)C1=CC=CC=C1', 0.7833333333333333)]
+
+..  note:: Because the morphing algorithm is not deterministic, the set of obtained morphs is slightly different from the
+        one in the above examples.
+
+In :numref:`operations-example` we see an example where we create a list of operations to perform on a tree. Most of
+them are built-in operations (discussed below), but we also chose to define our own operation for the filtering step
+(see the highlighted lines).
+In order to do that, we simply create a subclass of the `TreeOperation` abstract class and we override its
+:meth:`~molpher.swig_wrappers.core.TreeOperation.__call__()` method with the implementation we need --
+even though that our new filter is very likely to cause the exploration to get stuck in local optima.
+
+..  note:: In the above example we also redefine the `TreeOperation.getTree()` method so that it 'casts' the basic
+        `molpher.swig_wrappers.core.ExplorationTree` (returned by `TreeOperation.getTree()`)
+        to the 'more pythonic' `molpher.core.ExplorationTree`.
+        This override will probably be integrated in the library itself soon. Here, it just serves as another example
+        of how we can change the default behaviour.
+
+Each operation can have a tree associated with it, but it is not necessary.
+We can verify if a tree is associated with an operation by calling its :meth:`~molpher.swig_wrappers.core.TreeOperation.getTree()`
+method. If there is no tree associated with the instance, it returns `None`.
+
+..  note:: Most of the built-in operations will raise a `RuntimeError`, if invoked without a tree attached to them.
+
+Built-in Operations
+~~~~~~~~~~~~~~~~~~~
+
+A few operations are already defined in the library:
+
+    - `GenerateMorphsOper`
+    - `SortMorphsOper`
+    - `FilterMorphsOper`
+    - `FindLeavesOper`
+    - `ExtendTreeOper`
+    - `PruneTreeOper`
+    - `TraverseOper`
+
+They are all dervied from `TreeOperation` and contain the full set of operations performed on a tree in
+the original Molpher algorithm as published in [1]_. Therefore, the original algorithm can be easily
+implemented using those operations.
+
+In this tutorial, we will pay particular attention to the `TraverseOper` operation, because it differs
+from the others and introduces the concept of tree callback functions (see `tree-traversal`).
+For more details on each operation, see the particular pages in the documentation.
+
+.. [1] Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
+        `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/24655571>`_, `DOI <http://www.jcheminf.com/content/6/1/7>`_
+
+..  _tree-traversal:
+
+Traversing the Tree
+^^^^^^^^^^^^^^^^^^^
+
+..  todo:: write
+

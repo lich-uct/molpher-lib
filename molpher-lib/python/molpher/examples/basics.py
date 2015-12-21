@@ -93,7 +93,7 @@ class MyFilterMorphs(TreeOperation):
     def getTree(self):
         tree = super(MyFilterMorphs, self).getTree()
         if tree:
-            tree.__class__ = ETree # 'cast' the wrapped class to the pretty Python proxy class
+            tree.__class__ = ETree # 'cast' the wrapped class to the 'pretty' Python proxy class
         return tree
 
 tree = ETree(source=cocaine, target=procaine)
