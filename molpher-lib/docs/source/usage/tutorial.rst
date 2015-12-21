@@ -3,8 +3,8 @@ Tutorial
 
 ..  todo:: write some very short intro (what the tutorial is going to be about and stuff)
 
-Building an Exploration Tree
-----------------------------
+Creating an Exploration Tree and Setting Morphing Parameters
+------------------------------------------------------------
 
 .. py:currentmodule:: molpher.core
 
@@ -16,7 +16,7 @@ as a local anesthetic):
 
 ..  literalinclude:: ../../../python/molpher/examples/basics.py
     :language: python
-    :lines: 1-6
+    :lines: 1,4-7
     :caption: The most basic way to initilize an exploration tree.
     :name: tree-init
     :linenos:
@@ -28,7 +28,7 @@ We can manipulate this instance and read data from it in multiple ways, but let'
 
 ..  literalinclude:: ../../../python/molpher/examples/basics.py
     :language: python
-    :lines: 8-9
+    :lines: 9-10
     :caption: Printing out the source and target.
     :name: print-source-target
     :linenos:
@@ -137,11 +137,11 @@ given dictionary will be changed.
 ..  warning:: Note that changing some parameters during runtime may have some adverse effects on the exploration
     process so use it with caution.
 
-Extending the Exploration Tree
-------------------------------
+Building an Exploration Tree
+----------------------------
 
-Extending an exploration tree is a multi-step process. This part of the tutorial outlines all the steps
-involved and introduces the user to the most basic concepts of the library.
+Building an exploration tree is a multi-step iterative process. This part of the tutorial outlines all the steps
+involved and introduces the user to the most basic concepts of the library and molecular morphing.
 
 Generating and Manipulating Morphs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -154,7 +154,7 @@ Let's generate some `morphs <morph>` from the current leaves of the tree first:
 ..  literalinclude:: ../../../python/molpher/examples/basics.py
     :language: python
     :caption: Generating and exploring morphs.
-    :lines: 20-24
+    :lines: 21-25
     :name: generate-morphs
     :linenos:
 
@@ -200,7 +200,7 @@ if this instance is changed. The following code example ilustrates this behaviou
 ..  literalinclude:: ../../../python/molpher/examples/basics.py
     :language: python
     :caption: Copying morphs.
-    :lines: 28-41
+    :lines: 29-42
     :name: copying-morphs
     :linenos:
 
@@ -222,19 +222,23 @@ but when we change an unbound instance the value stays the same.
 
 ..  note:: For more information on the available methods see the `MolpherMol` documentation.
 
-Filtering Morphs
-~~~~~~~~~~~~~~~~
+Sorting and Filtering Morphs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-..  todo:: Add sorting example
+Sometimes the order of molecules in `candidates` might matter to us. As of yet, the only way to sort the
+generated morphs in `candidates` is by calling the `sortMorphs()` method or using the `SortMorphsOper` operation
+(see :ref:`operations` for more on operations). This sorts the molecules in the order of increasing distance
+from the target. Placing the closest molecules at the very top of the list. For example, this order has meaning
+for the built-in probability fileter (see `PROBABILITY` for details).
 
-When the list of candidates is populated, we need to choose the morphs that
+When the list of candidates is populated and sorted, we need to choose the morphs that
 will form the next `generation <morph generation>`. The code below ilustrates
-how we can do it manually:
+how we can sort the morphs and do the subsequent filtering manually:
 
 ..  literalinclude:: ../../../python/molpher/examples/basics.py
     :language: python
-    :caption: Manually filtering morphs.
-    :lines: 45-52
+    :caption: Sorting and manually filtering morphs.
+    :lines: 46-61
     :name: filtering-morphs
     :linenos:
 
@@ -242,17 +246,24 @@ Output:
 
 ..  code-block:: none
 
+    [('COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 0.5), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C', 0.7068965517241379), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143)]
     (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
     63
     (True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
 
 In :numref:`filtering-morphs`, `candidates_mask` member can be easily changed by writing
 a `list` or `tuple` of new values into it. Here we simply select the first three morphs as the new `morph generation`.
+Note that the list of selected morphs is sorted from the molecule closest to the target to the farthest,
+because we called the `sortMorphs()` method previously.
 
-..  note:: The new mask must be the same length as the `candidates` member. If this requirement
+..  warning:: The new mask must be the same length as the `candidates` member. If this requirement
         is not satisified, an instance of `RuntimeError` is raised.
 
-..  seealso:: The `ExplorationTree` class also implements a few built-in filters. You can use its
+..  warning:: The mask should only be set after the morphs are sorted. If the mask is set and
+        the order of morphs is changed, the mask will stay the same and will have to be updated
+        to follow the new order.
+
+..  seealso:: The library also implements a few built-in filters. You can use the
         `filterMorphs()` method to invoke them. See the method's documentation for more information
         on the available filtering options.
 
@@ -265,7 +276,7 @@ to connect them to their respective parents and make them the new leaves:
 ..  literalinclude:: ../../../python/molpher/examples/basics.py
     :language: python
     :caption: Extending the tree.
-    :lines: 56-61
+    :lines: 65-76
     :name: extending-tree
     :linenos:
 
@@ -273,8 +284,7 @@ Output:
 
 ..  code-block:: none
 
-    ['COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 'COC(=O)C1C2CCC(CC1OOC(=O)C1=CC=CC=C1)N2C', 'COC(=O)C1C2CCC(NC1OC(=O)C1=CC=CC=C1)N2C']
-    ['COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 'COC(=O)C1C2CCC(CC1OOC(=O)C1=CC=CC=C1)N2C', 'COC(=O)C1C2CCC(NC1OC(=O)C1=CC=CC=C1)N2C']
+    [('COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 0.5), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C', 0.7068965517241379), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143)]
     1
     False
 
@@ -299,6 +309,8 @@ any paths, because the `non_producing_survive` parameter is set to 2 generations
         which imposes a restriction on the maximum number of
         descendents of one `non-producing molecule`. If the number of descendents
         reaches this threshold, the molecule is removed along with the descendents.
+
+..  _operations:
 
 Tree Operations
 ---------------

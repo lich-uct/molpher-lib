@@ -16,7 +16,7 @@ tree.params = {
 }
 print(tree.params)
 
-print()
+print('#Generating and Manipulating Morphs')
 
 print(tree.leaves)
 print(tree.leaves[0].getSMILES())
@@ -41,8 +41,9 @@ candidate_copy.setDistToTarget(0.7)
 print(candidate_copy.getDistToTarget())
 print(candidate.getDistToTarget())
 
-print()
+print('#Sorting and Filtering Morphs')
 
+tree.sortMorphs()
 print(tree.candidates_mask)
 print(len(tree.candidates_mask))
 mask = [False for x in tree.candidates_mask]
@@ -51,17 +52,30 @@ mask[1] = True
 mask[2] = True
 tree.candidates_mask = mask
 print(tree.candidates_mask)
+print(
+    [
+        (x.getSMILES(), x.getDistToTarget())
+        for idx,x in enumerate(tree.candidates)
+        if tree.candidates_mask[idx]
+    ]
+)
 
-print()
+print('#Extending and Pruning')
 
-print(sorted([x.getSMILES() for idx,x in enumerate(tree.candidates) if tree.candidates_mask[idx]]))
 tree.extend()
-print(sorted([x.getSMILES() for x in tree.leaves]))
+print(
+    sorted(
+    [
+        (x.getSMILES(), x.getDistToTarget())
+        for x in tree.leaves
+    ], key=lambda x : x[1]
+    )
+)
 print(tree.generation_count)
 print(tree.path_found)
 tree.prune()
 
-print()
+print('#Operations')
 
 class MyFilterMorphs(TreeOperation):
 
@@ -96,6 +110,14 @@ for oper in iteration:
     tree.runOperation(oper)
 
 print(tree.generation_count)
-print([(x.getSMILES(), x.getDistToTarget()) for x in tree.leaves])
+print(tree.path_found)
+print(
+    sorted(
+    [
+        (x.getSMILES(), x.getDistToTarget())
+        for x in tree.leaves
+    ], key=lambda x : x[1]
+    )
+)
 
 # TODO: make some of the stuff from this script part of the test suite
