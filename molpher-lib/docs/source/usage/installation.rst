@@ -25,8 +25,8 @@ Building the most recent version from source
 
 If you are a developer and want to build the most recent version from source,
 you will need do everything from scratch. This section
-describes how to do that on the Linux platoform such as the one mentioned above
-and hints on some possible problems one might encounter. I you want to build the library on
+describes how to do that on the Linux platform such as the one mentioned above
+and hints on some possible problems one might encounter. If you want to build the library on
 a different platform, this section might provide useful hints as well.
 
 Prerequisites
