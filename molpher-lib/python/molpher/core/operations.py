@@ -13,4 +13,5 @@ from molpher.swig_wrappers.core import \
     , SortMorphsOper \
     , FindLeavesOper \
     , TraverseOper \
-    , TreeOperation
+    , TreeOperation \
+    , TraverseCallback

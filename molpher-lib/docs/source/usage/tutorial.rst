@@ -326,7 +326,7 @@ the same exploration algorithm as demonstrated in the preceeding sections:
 
 ..  literalinclude:: ../../../python/molpher/examples/basics.py
     :language: python
-    :caption: Extending the tree.
+    :caption: Using operations to implement simple chemical space exploration.
     :lines: 2-3,80-121
     :emphasize-lines: 3,27
     :name: operations-example
@@ -390,6 +390,86 @@ For more details on each operation, see the particular pages in the documentatio
 
 Traversing the Tree
 ^^^^^^^^^^^^^^^^^^^
+
+A special place among the operations belongs to the `TraverseOper` class. It does not directly implement a part
+of a morphing algorithm, but serves as a means of traversing molecules in a tree and reading/modifying them
+as needed. Let's ilustrate this with an example:
+
+..  literalinclude:: ../../../python/molpher/examples/basics.py
+    :language: python
+    :caption: Traversing the tree using a callback.
+    :lines: 125-138
+    :name: traverse-example
+    :linenos:
+
+Output:
+
+..  code-block:: none
+
+    # Root #
+    SMILES:  CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
+    Descendents:  ('CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C', 'CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 'COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C')
+    # Morph #
+    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
+    SMILES:  COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C
+    Descendents:  ()
+    # Morph #
+    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
+    SMILES:  CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    Descendents:  ()
+    # Morph #
+    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
+    SMILES:  CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C
+    Descendents:  ()
+
+In :numref:`traverse-example`, we derive from the `TraverseCallback` class, which is an abstract class with
+an abstract method called :py:meth:`~molpher.swig_wrappers.core.processMorph()`. This method takes one argument,
+which is a `MolpherMol` instance
+of a molecule in the tree. We need to override this method in our derived class in order to implement our own
+behaviour.
+
+The callback is then associated with a `TraverseOper` instance, which can be run on the tree as any other
+tree operation. When the operation is run it traverses the tree from root to leaves and injects
+every molecule it encounters into our :py:meth:`~molpher.swig_wrappers.core.processMorph()` method.
+
+..  note:: We can also pass a molecule to the `TraverseOper` constructor. In that case, a subtree will be traversed
+        using the specified molecule as the root of the subtree.
+
+There is also a much more convenient way to traverse the tree. The `ExplorationTree` class implements
+the `traverse()` method. It simply takes any python callable and tries to use it instad of the
+:py:meth:`~molpher.swig_wrappers.core.processMorph()` method.
+However, under the hood it does the same thing as we did in :numref:`traverse-example`.
+Therefore, the above code can be turned into:
+
+..  literalinclude:: ../../../python/molpher/examples/basics.py
+    :language: python
+    :caption: Traversing the tree using a callback -- the simple version.
+    :lines: 142-151
+    :name: short-traverse-example
+    :linenos:
+
+Output:
+
+..  code-block:: none
+
+    # Root #
+    SMILES:  CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
+    Descendents:  ('CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C', 'CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 'COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C')
+    # Morph #
+    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
+    SMILES:  COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C
+    Descendents:  ()
+    # Morph #
+    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
+    SMILES:  CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    Descendents:  ()
+    # Morph #
+    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
+    SMILES:  CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C
+    Descendents:  ()
+
+Summary
+-------
 
 ..  todo:: write
 

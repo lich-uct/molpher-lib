@@ -120,4 +120,34 @@ print(
     )
 )
 
+print('Traversing the Tree')
+
+class MyCallback(TraverseCallback):
+
+    def processMorph(self, morph):
+        if not morph.getParentSMILES():
+            print("# Root #")
+        else:
+            print('# Morph #')
+            print('Parent:', morph.getParentSMILES())
+        print('SMILES: ', morph.getSMILES())
+        print('Descendents: ', morph.getDescendants())
+
+callback = MyCallback()
+traverse = TraverseOper(callback)
+tree.runOperation(traverse)
+
+print()
+
+def process(morph):
+    if not morph.getParentSMILES():
+        print("# Root #")
+    else:
+        print('# Morph #')
+        print('Parent:', morph.getParentSMILES())
+    print('SMILES: ', morph.getSMILES())
+    print('Descendents: ', morph.getDescendants())
+
+tree.traverse(process)
+
 # TODO: make some of the stuff from this script part of the test suite
