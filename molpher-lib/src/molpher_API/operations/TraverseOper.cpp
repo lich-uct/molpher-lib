@@ -1,15 +1,15 @@
 
 #include "molpher_API/operations/TraverseOper.hpp"
 
-TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback) : TreeOperation(expTree), callback(callback), root(fetchTreeContext().source) {
+TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback) : TreeOperation(expTree), callback(callback), root(&(fetchTreeContext().source)) {
     // no action
 }
 
-TraverseOper::TraverseOper(TraverseCallback& callback) : TreeOperation(), callback(callback), root(fetchTreeContext().source) {
+TraverseOper::TraverseOper(TraverseCallback& callback) : TreeOperation(), callback(callback), root(nullptr) {
     // no action
 }
 
-TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback, MolpherMolecule& root) : TreeOperation(expTree), callback(callback), root(root)  {
+TraverseOper::TraverseOper(ExplorationTree& expTree, TraverseCallback& callback, MolpherMolecule& root) : TreeOperation(expTree), callback(callback), root(&root)  {
     // no action
 }
 
@@ -52,7 +52,10 @@ void TraverseOper::operator()() {
             scheduler.initialize(threadCnt);
         }
         ExplorationTree::SmileVector queue;
-        queue.push_back(root.smile);
+        if (!root) {
+            root = &(fetchTreeContext().source);
+        }
+        queue.push_back(root->smile);
 
         TraversalFunctor functor(fetchTreeContext(), callback);
         tbb::parallel_do(queue.begin(), queue.end(), functor, tbbCtx);

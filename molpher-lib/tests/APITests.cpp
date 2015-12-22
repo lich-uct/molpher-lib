@@ -124,7 +124,9 @@ void APITests::testExploration() {
     tree.extend();
     
     PrintMolCallback callback;
-    TraverseOper traverse(tree, callback);
+    TraverseOper traverse(callback);
+    tree.runOperation(traverse);
+    
     int counter = 0;
     while (counter < 20) {
         traverse();

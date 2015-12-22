@@ -32,7 +32,7 @@ class TraverseOper : public TreeOperation {
             TraverseCallback &mCallback;
         };
         
-        MolpherMolecule& root;
+        MolpherMolecule* root;
         TraverseCallback& callback;
         
         TraverseOper(ExplorationTree& expTree, TraverseCallback& callback, MolpherMolecule& root);
