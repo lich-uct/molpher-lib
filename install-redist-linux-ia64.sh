@@ -1,9 +1,13 @@
-PREFIX=~/Molpher/
+PREFIX=""
 
 # prepare directories
-mkdir -p $PREFIX
-PREFIX=$(realpath $PREFIX)
-cp -r . $PREFIX
+if [[ -z "$VAR" ]]; then
+    PREFIX=`pwd`
+else
+    mkdir -p $PREFIX
+    PREFIX=$(realpath $PREFIX)
+    cp -r . $PREFIX
+fi
 
 function build_deps()
 {
@@ -22,17 +26,17 @@ function build_deps()
 
 function build_molpher()
 {
-    echo "Molpher Install: Building Molpher..."
+    echo "Molpher Install: Building Molpher library file..."
     cd $PREFIX/backend/
     make CONF=Linux64_Debug_library
 }
 
-function build_molpher_lib()
-{
-    echo "Molpher Install: Building Molpher-lib..."
-    cd $PREFIX/molpher-lib/
-    make CONF=Linux64_Debug
-}
+#function build_molpher_lib()
+#{
+#    echo "Molpher Install: Building Molpher-lib..."
+#    cd $PREFIX/molpher-lib/
+#    make CONF=Linux64_Debug
+#}
 
-build_deps && build_molpher && build_molpher_lib && echo "Molpher-lib was installed successfully in $PREFIX!" && exit
-echo "Molpher-lib installation failed!"
+build_deps && build_molpher && echo "Molpher was installed successfully in $PREFIX!" && exit
+echo "Molpher installation failed!"

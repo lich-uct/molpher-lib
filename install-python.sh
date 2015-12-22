@@ -1,1 +1,1 @@
-cd molpher-lib/ && ./build_python.sh && pip install .
+cd molpher-lib/ && ./build_all.sh && pip install .
