@@ -96,6 +96,7 @@ of our tree instance with a new dictionary:
         'non_producing_survive' : 2
         'weight_max' : 500.0
     }
+    print(tree.params)
 
 Output:
 
@@ -471,6 +472,119 @@ Output:
     Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
     SMILES:  CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C
     Descendents:  ()
+
+Templates and Tree Snapshots
+----------------------------
+
+We don't always have to initialize `morphing parameters` by hand. We can use a `XML template` instead.
+Here is an example of a template file:
+
+..  literalinclude:: ../../../python/molpher/examples/cocaine-procaine-template.xml
+    :language: xml
+    :caption: A complete XML template file.
+    :name: template-file
+    :linenos:
+
+A `XML template` is similar to a configuration file and can be loaded like an ordinary snapshot (see :numref:`loading-snapshot`).
+The following example shows loading of a `XML template`, creating a tree from it, extending the tree and saving
+a tree snapshot:
+
+..  literalinclude:: ../../../python/molpher/examples/basics.py
+    :language: python
+    :caption: Loading a template and saving a built tree as a XML snapshot.
+    :lines: 155,158-174
+    :name: saving-snapshot
+    :linenos:
+
+Output:
+
+..  code-block:: none
+
+    Parse molecule CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2 >> COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    Parse molecule O=C(OCCN(CC)CC)c1ccc(N)cc1 >> CCN(CC)CCOC(=O)C1=CC=C(N)C=C1
+    The new iteration has been created from template:
+    source: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    target: CCN(CC)CCOC(=O)C1=CC=C(N)C=C1
+
+    Snapshot successfully created from: cocaine-procaine-template.xml
+    {
+        'max_morphs_total': 1500,
+        'far_close_threshold': 0.15,
+        'weight_max': 500.0,
+        'close_produce': 150,
+        'fingerprint': 'MORGAN',
+        'accept_min': 50,
+        'source': 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2',
+        'target': 'O=C(OCCN(CC)CC)c1ccc(N)cc1',
+        'weight_min': 0.0,
+        'non_producing_survive': 2,
+        'accept_max': 100,
+        'operators': (
+            'ADD_ATOM',
+            'ADD_BOND',
+            'BOND_CONTRACTION',
+            'BOND_REROUTE',
+            'INTERLAY_ATOM',
+            'MUTATE_ATOM',
+            'REMOVE_ATOM',
+            'REMOVE_BOND'
+        ),
+        'far_produce': 80,
+        'similarity': 'TANIMOTO'
+    }
+    [('COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C', 0.7627118644067796), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885), ('COC(=O)C1C2CCC(CC1COC(=O)C1=CC=CC=C1)N2C', 0.7741935483870968)]
+
+We can see that all the parameters are the same as in the `XML template` and that
+the resulting tree can be built using the same list of operations
+as in :numref:`operations-example`. We even get the same set of newly generated leaves.
+In :numref:`saving-snapshot` we also want to serialize our tree instance to disk so we save it as
+a snapshot using the `saveSnapshot()` method.
+
+The saved tree can be later recunstructed with the
+:meth:`~molpher.core.ExplorationTree.ExplorationTree.createFromSnapshot()` factory method:
+
+..  warning:: Note that there is currently a bug inside Molpher that prevents
+        loading of descendents of molecules in the tree. Therefore, the code
+        from :numref:`loading-snapshot` does not work correctly at the moment.
+
+..  literalinclude:: ../../../python/molpher/examples/basics.py
+    :language: python
+    :caption: Loading a snapshot of a previously generated tree.
+    :lines: 176-185
+    :name: loading-snapshot
+    :linenos:
+
+Output:
+
+..  code-block:: none
+
+    Snapshot successfully created from: snapshot.xml
+    {
+        'max_morphs_total': 1500,
+        'far_close_threshold': 0.15,
+        'weight_max': 500.0,
+        'close_produce': 150,
+        'fingerprint': 'MORGAN',
+        'accept_min': 50,
+        'source': 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2',
+        'target': 'O=C(OCCN(CC)CC)c1ccc(N)cc1',
+        'weight_min': 0.0,
+        'non_producing_survive': 2,
+        'accept_max': 100,
+        'operators': (
+            'ADD_ATOM',
+            'ADD_BOND',
+            'BOND_CONTRACTION',
+            'BOND_REROUTE',
+            'INTERLAY_ATOM',
+            'MUTATE_ATOM',
+            'REMOVE_ATOM',
+            'REMOVE_BOND'
+        ),
+        'far_produce': 80,
+        'similarity': 'TANIMOTO'
+    }
+    [('COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C', 0.7627118644067796), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885), ('COC(=O)C1C2CCC(CC1COC(=O)C1=CC=CC=C1)N2C', 0.7741935483870968)]
 
 Summary
 -------

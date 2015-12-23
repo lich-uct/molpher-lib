@@ -1,8 +1,8 @@
 from molpher.core import ExplorationTree as ETree
 from molpher.core.operations import *
 
-procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
+procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
 tree = ETree(source=cocaine, target=procaine)
 
@@ -149,5 +149,39 @@ def process(morph):
     print('Descendents: ', morph.getDescendants())
 
 tree.traverse(process)
+
+print('Tree Snapshots')
+
+template_file = 'cocaine-procaine-template.xml'
+import os
+template_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), template_file)
+
+tree = ETree.createFromSnapshot(template_file)
+print(tree.params)
+
+for oper in iteration:
+    tree.runOperation(oper)
+
+print(
+    sorted(
+    [
+        (x.getSMILES(), x.getDistToTarget())
+        for x in tree.leaves
+    ], key=lambda x : x[1]
+    )
+)
+
+tree.saveSnapshot('snapshot.xml')
+
+new_tree = ETree.createFromSnapshot('snapshot.xml')
+print(new_tree.params)
+print(
+    sorted(
+    [
+        (x.getSMILES(), x.getDistToTarget())
+        for x in new_tree.leaves
+    ], key=lambda x : x[1]
+    )
+)
 
 # TODO: make some of the stuff from this script part of the test suite

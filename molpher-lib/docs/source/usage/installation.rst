@@ -66,7 +66,7 @@ Building Molpher and Its Dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First, download the `Molpher dependency bundle
-<https://drive.google.com/file/d/0B2rizkCQQcoyOEZrMFV4STdFN28/view?usp=sharing>`_
+<https://drive.google.com/file/d/0B2rizkCQQcoybFdhOFExaVk5c0U/view?usp=sharing>`_
 and extract the contents to the :file:`dependecies/` directory of the repository root.
 
 When it's done, execute the :file:`install-redist-linux-ia64.sh` script from the repository root.

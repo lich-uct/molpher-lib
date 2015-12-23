@@ -1,7 +1,7 @@
 import molpher
 import warnings
 
-from molpher.swig_wrappers.core import TraverseCallback, TraverseOper, MolpherMol
+from molpher.swig_wrappers.core import TraverseCallback, TraverseOper, MolpherMol, ExplorationTreeSnapshot
 
 
 class Callback(TraverseCallback):
@@ -199,3 +199,33 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         else:
             cb = self._callback_class(callback)
             TraverseOper(self, cb)()
+
+    @staticmethod
+    def createFromSnapshot(snapshot):
+        """
+        Creates a tree from a file.
+
+        :param snapshot: a path to a snapshot or an instance of `ExplorationTreeSnapshot`
+        :type snapshot: `str` ot `ExplorationTreeSnapshot`
+        :return: new tree instance
+        :rtype: `ExplorationTree`
+        """
+
+        if type(snapshot) == str:
+            template = ExplorationTreeSnapshot.load(snapshot)
+            tree = molpher.swig_wrappers.core.ExplorationTree.createFromSnapshot(template)
+        else:
+            tree = molpher.swig_wrappers.core.ExplorationTree.createFromSnapshot(snapshot)
+        tree.__class__ = ExplorationTree
+        return tree
+
+    def saveSnapshot(self, name):
+        """
+        Saves current instance as a file.
+
+        :param name: path to the saved file
+        :type name: `str`
+        """
+
+        snapshot = self.createSnapshot()
+        snapshot.save(name)

@@ -29,7 +29,8 @@ setup (name = 'molpher',
        package_data = {
             #'molpher.swig_wrappers': ['lib/*.so', 'lib/*.so.2', '*.dat'],
             'molpher.swig_wrappers': ['*.dat'],
-            'molpher.swig_wrappers.tests' : ['test_files/*']
+            'molpher.swig_wrappers.tests' : ['test_files/*'],
+            'molpher.examples' : ['*.xml']
         },
        test_suite="tests"
        )

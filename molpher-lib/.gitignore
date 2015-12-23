@@ -4,3 +4,4 @@ SAScore.dat
 *.egg-info
 *.pyc
 .idea
+snapshot.xml
