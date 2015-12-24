@@ -1,3 +1,5 @@
+..  _source-code-docs:
+
 Source Code Documentation
 =========================
 

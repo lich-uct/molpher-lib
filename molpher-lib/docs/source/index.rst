@@ -6,41 +6,24 @@
 Molpher-lib: Python and C++ API for Molpher
 ===========================================
 
-Welcome and stuff. `usage/installation`
+What you have just stumbled upon is the documentation of *Molpher-lib*.
+*Molpher-lib* is essentially a C++ API derived from :term:`Molpher`
+-- a free open source software aimed at exploration of `chemical space`.
+It shouldn't be regarded as a full API to :term:`Molpher`, but as a
+standalone project that just builds upon its features.
+However, it is not out of the question that both of these projects
+will get more tightly integrated in the future.
 
-Link to a term in glossary: `exploration tree`.
+The goal of this project is to make :term:`Molpher` more accessible to developers
+by providing a flexible and extensible programming interface.
+It also tries to make the functionality available for wider audience by
+including a Python package that exposes the API to Python
+using the `Simplified Wrapper and Interface Generator (SWIG) <http://swig.org/>`_.
 
-Some abbreviation: :abbr:`LIFO (last-in, first-out)`
-
-Command line: :command:`rm -rf xxx`
-
-Filesystem path: :file:`/usr/lib/python2.{x}/site-packages`
-
-A make variable: :makevar:`BUILD_DIR`
-
-Code example with a variable part: :samp:`print 1+{variable}`
-
-Simple code example: ``simple code``
-
-Complex code example:
-
-..  code-block:: python
-    :linenos:
-
-    class Klass:
-        pass
-
-Today is |today| and this is the documentation for Molpher-lib |version|.
-
-Some bibliography reference [1]_.
-
-.. [1] Book or article reference, URL or whatever.
-
-
-TODO list
----------
-
-.. todolist::
+..  warning:: Please, note that the project is in a very early stage of developement
+        and that a lot of features mentioned in this documentation might, and probably
+        will, change in the future. Additionally, be wary of any use in production, because
+        bugs and performance issues will most probably occur.
 
 Table of Contents
 =================
@@ -61,3 +44,12 @@ Indices and Search
 * :ref:`modindex`
 * :ref:`genindex`
 * :ref:`glossary`
+
+TODO list
+=========
+
+This documentation should contain most of the information an average user might need,
+but there are still places where it needs to be clarified or completed. Here is
+a list of items that need further revision:
+
+.. todolist::

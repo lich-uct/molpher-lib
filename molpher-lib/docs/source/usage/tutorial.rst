@@ -1,7 +1,12 @@
 Tutorial
 ========
 
-..  todo:: write some very short intro (what the tutorial is going to be about and stuff)
+This section gives an overview of most of the features currently available in the library
+in the form of a very simple example. The example script is located in the `examples` package
+and can be downloaded from `here <../../../python/molpher/examples/basics.py>`_. The used example
+`XML template` is available from `this link <../../../python/molpher/examples/cocaine-procaine-template.xml>`_
+(see `templates-snapshots` for more details on templates). If you want to know more about the library or
+the source code, we suggest you check out the `source-code-docs`.
 
 Creating an Exploration Tree and Setting Morphing Parameters
 ------------------------------------------------------------
@@ -10,9 +15,12 @@ Creating an Exploration Tree and Setting Morphing Parameters
 
 As it was explained in the `../introduction`, Molpher maintains a data structure called an `exploration tree` to save and
 evaluate putative `paths in chemical space <chemical space path>`. This data structure is represented by
-a `molpher.core.ExplorationTree` instance in the Python API. Let's now initialize an exploration tree that will
-represent a path between *cocaine* (a popular recreational drug) and *procaine* (compound that replaced cocaine
-as a local anesthetic):
+a `molpher.core.ExplorationTree` instance in the Python API. This tutorial will show how to create and build
+an exploration tree that will try to search for a path
+between *cocaine* (a popular recreational drug) and *procaine* (compound that replaced cocaine
+as a local anesthetic). Both of these compounds act on sodium channels in the neuronal cell membrane
+and probably have the same mode of action, which makes them ideal candidates for a morphing experiment.
+Let's now initialize our exploration tree:
 
 ..  literalinclude:: ../../../python/molpher/examples/basics.py
     :language: python
@@ -40,10 +48,8 @@ the following output::
     Source:  CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
     Target:  O=C(OCCN(CC)CC)c1ccc(N)cc1
 
-just as we would expect.
-
 .. note:: Besides our source and target, we can also see that a data file was loaded successfully. That means
-    the `molpher` package was
+    the :mod:`molpher` package was
     initilaized successfully and is ready for use.
 
 The `ExplorationTree.params` dictionary doesn't just store the
@@ -473,6 +479,8 @@ Output:
     SMILES:  CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C
     Descendents:  ()
 
+..  _templates-snapshots:
+
 Templates and Tree Snapshots
 ----------------------------
 
@@ -589,5 +597,8 @@ Output:
 Summary
 -------
 
-..  todo:: write
+If you read the tutorial all the way to here, you now probably have a decent idea on what this library does
+and how to use it. If you have any ideas on how to improve the library or bug reports, please send them to
+sichom@vscht.cz. All help on the project is much appreciated.
+For more information on the source code itself refer to the `source-code-docs`.
 

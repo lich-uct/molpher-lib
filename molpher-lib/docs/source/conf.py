@@ -62,8 +62,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Molpher-lib'
-copyright = '2015, Martin Sicho'
-author = 'Martin Sicho'
+copyright = '2015, Martin Šícho (sichom@vscht.cz)'
+author = 'Martin Šícho (sichom@vscht.cz)'
 
 # tell breathe about the doxygen project
 breathe_projects = { project : "../doxygen/xml/" }

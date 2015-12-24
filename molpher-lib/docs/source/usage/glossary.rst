@@ -80,11 +80,22 @@ The glossary of important terms used in the `documentation <index>`.
         a `chemical operator <chemical operators>` on the newest morph on the path.
 
     chemical space
-        ..  todo:: document
+        Chemical space has many definitions. What we mean by chemical space in this documentation is
+        'the space spanned by all possible (i.e. energetically stable) molecules and chemical compounds' [1]_.
+        The ability to effectively explore this space is a cornerstone of any successfull drug discovery
+        and/or drug development project.
+
+        .. [1] https://en.wikipedia.org/wiki/Chemical_space
 
     morphing parameters
         A set of restrictions and rules the `exploration tree` follows when certain actions are carried out on it.
 
     non-producing molecule
         A molecule that have not generated any morphs that would be closer to the trget than itself.
+
+    Molpher
+        Software developed as a cooperation between the `Siret <http://siret.ms.mff.cuni.cz/>`_
+        and `LICH <http://ich.vscht.cz/>`_ research groups. The main goal of the project
+        is to implement an effective tool for `chemical space` exploration.
+        The Molpher program itself is available from `GitHub <https://github.com/siret/Molpher>`_.
 
