@@ -2,6 +2,8 @@
 #include <stdexcept>
 #include <iostream>
 
+#include "iteration_serializer.cpp"
+
 #include "molpher_API/ExplorationTree.hpp"
 #include "molpher_API/operations/FindLeavesOper.hpp"
 #include "molpher_API/operations/GenerateMorphsOper.hpp"
@@ -12,7 +14,6 @@
 #include "molpher_API/callbacks/EraseSubtreeCallback.hpp"
 
 ExplorationTree::ExplorationTree(IterationSnapshot& snp) : threadCount(0) {
-    PathFinderContext::SnapshotToContext(snp, context);
     treeInit(snp);
 }
 
@@ -39,6 +40,8 @@ void ExplorationTree::treeInit(IterationSnapshot& snp) {
         std::cerr << "WARNING: No target specified. Inserting default: 'C'" << std::endl;
     }
     PathFinderContext::SnapshotToContext(snp, context);
+    context.source = molpher::iteration::createMoleculeFromSmile(context.source.smile);
+    context.target = molpher::iteration::createMoleculeFromSmile(context.target.smile);
     PathFinderContext::CandidateMap::accessor ac;
     context.candidates.insert(ac, context.source.smile);
     ac->second = context.source;

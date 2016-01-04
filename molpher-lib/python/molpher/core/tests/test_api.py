@@ -6,7 +6,7 @@ class TestPythonAPI(unittest.TestCase):
     
     def setUp(self):
         self.test_source = 'CCO'
-        self.test_target = 'O1C=CC=C1'
+        self.test_target = 'C1=COC=C1'
 
     def tearDown(self):
         pass

@@ -3,6 +3,8 @@
 #include <tbb/partitioner.h>
 #include <tbb/parallel_for.h>
 
+#include "inout.h"
+
 #include "molpher_API/operations/ExtendTreeOper.hpp"
 
 ExtendTreeOper::ExtendTreeOper(ExplorationTree& expTree) : TreeOperation(expTree) {
@@ -51,6 +53,11 @@ void ExtendTreeOper::AcceptMorphs::operator()(
             if (mSurvivorCount < mCtx.params.cntCandidatesToKeepMax) {
                 PathFinderContext::CandidateMap::accessor ac;
 
+                if (mCtx.candidates.find(ac, mMorphs[idx].smile)) {
+                    SynchCout("Candidate morph: " + mMorphs[idx].smile + " already present in the tree. Skipping...");
+                    continue;
+                }
+            
                 mCtx.candidates.insert(ac, mMorphs[idx].smile);
                 ac->second = mMorphs[idx];
                 ac.release();
