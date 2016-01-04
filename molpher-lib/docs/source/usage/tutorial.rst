@@ -3,8 +3,8 @@ Tutorial
 
 This section gives an overview of most of the features currently available in the library
 in the form of a very simple example. The example script is located in the `examples` package
-and can be downloaded from `here <../../../python/molpher/examples/basics.py>`_. The used example
-`XML template` is available from `this link <../../../python/molpher/examples/cocaine-procaine-template.xml>`_
+and can be downloaded from :download:`here <../../../python/molpher/examples/basics.py>`. The used example
+`XML template` is available from :download:`this link <../../../python/molpher/examples/cocaine-procaine-template.xml>`
 (see `templates-snapshots` for more details on templates). If you want to know more about the library or
 the source code, we suggest you check out the `source-code-docs`.
 
