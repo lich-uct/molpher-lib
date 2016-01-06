@@ -39,12 +39,35 @@ void ExplorationTree::treeInit(IterationSnapshot& snp) {
         snp.target.smile = "C";
         std::cerr << "WARNING: No target specified. Inserting default: 'C'" << std::endl;
     }
-    PathFinderContext::SnapshotToContext(snp, context);
-    context.source = molpher::iteration::createMoleculeFromSmile(context.source.smile);
-    context.target = molpher::iteration::createMoleculeFromSmile(context.target.smile);
-    PathFinderContext::CandidateMap::accessor ac;
-    context.candidates.insert(ac, context.source.smile);
-    ac->second = context.source;
+    if (context.candidates.empty()) {
+        PathFinderContext::SnapshotToContext(snp, context);
+        context.source = molpher::iteration::createMoleculeFromSmile(context.source.smile);
+        context.target = molpher::iteration::createMoleculeFromSmile(context.target.smile);
+        PathFinderContext::CandidateMap::accessor ac;
+        context.candidates.insert(ac, context.source.smile);
+        ac->second = context.source;
+    } else {
+        context.jobId = snp.jobId;
+        context.iterIdx = snp.iterIdx;
+        context.elapsedSeconds = snp.elapsedSeconds;
+
+        context.fingerprintSelector = (FingerprintSelector) snp.fingerprintSelector;
+        context.simCoeffSelector = (SimCoeffSelector) snp.simCoeffSelector;
+        context.dimRedSelector = (DimRedSelector) snp.dimRedSelector;
+
+        context.chemOperSelectors.clear();
+        context.chemOperSelectors.resize(snp.chemOperSelectors.size(), (ChemOperSelector) 0);
+        for (size_t i = 0; i < snp.chemOperSelectors.size(); ++i) {
+            context.chemOperSelectors[i] = (ChemOperSelector) snp.chemOperSelectors[i];
+        }
+
+        context.params = snp.params;
+
+        context.source = snp.source;
+        context.target = snp.target;
+        context.decoys = snp.decoys;
+        std::cout << "Parameters changed successfully..." << std::endl;
+    }
 }
 
 void ExplorationTree::setParams(ExplorationParameters& params) {
