@@ -1,30 +1,6 @@
 from molpher.core import ExplorationTree as ETree
 from molpher.core.operations import *
 
-# from rdkit import DataStructs
-# from rdkit import Chem
-# from rdkit.Chem.Fingerprints import FingerprintMols
-
-# ACCEPT_MAX = 10
-#
-# class MyFilterMorphs(TreeOperation):
-#
-#     def __init__(self):
-#         super(MyFilterMorphs, self).__init__()
-#
-#     def __call__(self):
-#         tree = self.getTree()
-#         mask = [False for x in tree.candidates_mask]
-#         for i in range(ACCEPT_MAX):
-#             mask[i] = True
-#         tree.candidates_mask = mask
-#
-#     def getTree(self):
-#         tree = super(MyFilterMorphs, self).getTree()
-#         if tree:
-#             tree.__class__ = ETree # 'cast' the wrapped class to the 'pretty' Python proxy class
-#         return tree
-
 class FindClosest:
 
     def __init__(self):
