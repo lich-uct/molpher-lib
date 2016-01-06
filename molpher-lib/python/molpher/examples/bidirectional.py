@@ -1,100 +1,61 @@
-import sys
-
 from molpher.core import ExplorationTree as ETree
 from molpher.core.operations import *
 
-from rdkit import DataStructs
-from rdkit import Chem
-from rdkit.Chem.Fingerprints import FingerprintMols
+# from rdkit import DataStructs
+# from rdkit import Chem
+# from rdkit.Chem.Fingerprints import FingerprintMols
 
-ACCEPT_MAX = 10
+# ACCEPT_MAX = 10
+#
+# class MyFilterMorphs(TreeOperation):
+#
+#     def __init__(self):
+#         super(MyFilterMorphs, self).__init__()
+#
+#     def __call__(self):
+#         tree = self.getTree()
+#         mask = [False for x in tree.candidates_mask]
+#         for i in range(ACCEPT_MAX):
+#             mask[i] = True
+#         tree.candidates_mask = mask
+#
+#     def getTree(self):
+#         tree = super(MyFilterMorphs, self).getTree()
+#         if tree:
+#             tree.__class__ = ETree # 'cast' the wrapped class to the 'pretty' Python proxy class
+#         return tree
 
-class MyFilterMorphs(TreeOperation):
+class FindClosest:
 
     def __init__(self):
-        super(MyFilterMorphs, self).__init__()
+        self.closest = None
 
-    def __call__(self):
-        tree = self.getTree()
-        mask = [False for x in tree.candidates_mask]
-        for i in range(ACCEPT_MAX):
-            mask[i] = True
-        tree.candidates_mask = mask
-
-    def getTree(self):
-        tree = super(MyFilterMorphs, self).getTree()
-        if tree:
-            tree.__class__ = ETree # 'cast' the wrapped class to the 'pretty' Python proxy class
-        return tree
-
-class AdjustDistances(TreeOperation):
-
-        def __init__(self):
-            super(AdjustDistances, self).__init__()
-            self.other = None
-            self.path_found = False
-            self.minimum_distance = sys.float_info.max
-            self.closest_pair = None
-            self.max_closest_to_adjust = ACCEPT_MAX
-
-        def __call__(self):
-            super(AdjustDistances, self).__call__()
-            if self.tree.params['source'] != self.other.params['source'] and self.other:
-                other_morphs = sorted([x for x in self.other.candidates], key=lambda x : x.getDistToTarget())[:self.max_closest_to_adjust]
-                this_morphs = sorted([x for x in self.tree.candidates], key=lambda x : x.getDistToTarget())[:self.max_closest_to_adjust]
-                print('Closest to target (this): {0}'.format(this_morphs[0].getDistToTarget()))
-                print('Closest to target (other): {0}'.format(other_morphs[0].getDistToTarget()))
-                assert other_morphs and this_morphs
-
-                other_fps = [FingerprintMols.FingerprintMol(Chem.MolFromSmiles(x.getSMILES())) for x in other_morphs]
-                this_fps = [FingerprintMols.FingerprintMol(Chem.MolFromSmiles(x.getSMILES())) for x in this_morphs]
-
-                morph_other_smiles_min = None
-                for idx_this, morph_this in enumerate(this_morphs):
-                    min_dist = sys.float_info.max
-                    morph_this_smiles = morph_this.getSMILES()
-                    morph_other_smiles = None
-                    min_idx_other = 0
-                    for idx_other, morph_other in enumerate(other_morphs):
-                        morph_other_smiles = morph_other.getSMILES()
-                        dist = DataStructs.FingerprintSimilarity(this_fps[idx_this], other_fps[idx_other])
-                        if dist < min_dist:
-                            min_dist = dist
-                            min_idx_other = idx_other
-                            morph_other_smiles_min = morph_other_smiles
-
-                            if morph_this_smiles == morph_other_smiles or dist == 0:
-                                print('Path Found:')
-                                print('Two equal candidates are: {0} and {1}'.format(morph_this_smiles, morph_other_smiles))
-                                self.path_found = True
-
-                    target_dist = morph_this.getDistToTarget()
-                    if min_dist < target_dist:
-                        morph_this.setDistToTarget(min_dist)
-                        other_morphs[min_idx_other].setDistToTarget(min_dist)
-                    if min_dist < self.minimum_distance:
-                        self.minimum_distance = min_dist
-                        self.closest_pair = (morph_this_smiles, morph_other_smiles_min)
-
-            else:
-                raise AttributeError('Error: Same tree specified as other or no tree specified at all.')
-
-
-        def setOther(self, other):
-            self.other = other
+    def __call__(self, morph):
+        if not self.closest:
+            self.closest = morph.copy()
+            return
+        current_dist = self.closest.getDistToTarget()
+        morph_dist = morph.getDistToTarget()
+        if morph_dist < current_dist:
+            self.closest = morph.copy()
 
 class BidirectionalPathFinder:
 
     def __init__(self, source, target):
         self.source_target = ETree(source=source, target=target)
         self.target_source = ETree(source=target, target=source)
-        self.distance_adjust = AdjustDistances()
-        self.distance_adjust.setOther(self.target_source)
+        self.source_target.params = {
+            'fingerprint' : 'ATOM_PAIRS'
+        }
+        self.target_source.params = {
+            'fingerprint' : 'ATOM_PAIRS'
+        }
+        self.source_target_min = FindClosest()
+        self.target_source_min = FindClosest()
         self.ITERATION = [
             GenerateMorphsOper()
-            , self.distance_adjust
             , SortMorphsOper()
-            , MyFilterMorphs()
+            , FilterMorphsOper()
             , ExtendTreeOper()
             , PruneTreeOper()
         ]
@@ -105,14 +66,44 @@ class BidirectionalPathFinder:
             counter+=1
             print('Iteration {0}:'.format(counter))
             for oper in self.ITERATION:
-                if oper.__class__ != AdjustDistances:
-                    self.target_source.runOperation(oper)
                 self.source_target.runOperation(oper)
+                self.target_source.runOperation(oper)
 
-            print('Closest pair:', self.distance_adjust.closest_pair)
-            print('Distance:', self.distance_adjust.minimum_distance)
+            self.source_target.traverse(self.source_target_min)
+            self.target_source.traverse(self.target_source_min)
 
-            if self.distance_adjust.path_found:
+            print('Current Targets:')
+            print('source to target:', self.source_target.params['target'])
+            print('target to source:', self.target_source.params['target'])
+
+            print('Current Minima:')
+            print('source to target:', self.source_target_min.closest.getSMILES(), self.source_target_min.closest.getDistToTarget())
+            print('target to source:', self.target_source_min.closest.getSMILES(), self.target_source_min.closest.getDistToTarget())
+
+            self.source_target.params = {
+                'target' : self.target_source_min.closest.getSMILES()
+            }
+            self.target_source.params = {
+                'target' : self.source_target_min.closest.getSMILES()
+            }
+
+            print('New Targets:')
+            print('source to target:', self.source_target.params['target'])
+            print('target to source:', self.target_source.params['target'])
+
+            if self.source_target.path_found:
+                print('Path Found in tree going from source to target:')
+                connecting_molecule = self.source_target.params['target']
+                print('Connecting molecule:', connecting_molecule)
+                assert self.source_target.hasMol(connecting_molecule)
+                assert self.target_source.hasMol(connecting_molecule)
+                break
+            if self.target_source.path_found:
+                print('Path Found in tree going from target to source:')
+                connecting_molecule = self.target_source.params['target']
+                print('Connecting molecule:', connecting_molecule)
+                assert self.target_source.hasMol(connecting_molecule)
+                assert self.source_target.hasMol(connecting_molecule)
                 break
 
 cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
