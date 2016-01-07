@@ -785,7 +785,7 @@ Output:
 
     Process finished with exit code 0
 
-The above implementaion is nothing more than just the tutorial code bits inside a loop. The loop checks if a path was found at every iteration.
+The above implementaion is nothing more than just the tutorial code bits inside a loop. The loop checks if a path was found at each iteration.
 If the path is found it is backtracked through the tree and printed out as a sequence of molecules from source to target.
 
 The second example we have here is a little more elaborate, but implements a very simple idea. Instead of one exploration tree,
