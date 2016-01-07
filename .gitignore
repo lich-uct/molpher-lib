@@ -58,3 +58,6 @@ Results/
 
 # Python files
 __pycache__
+
+# Logfiles
+*.log
