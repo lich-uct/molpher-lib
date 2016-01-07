@@ -10,18 +10,11 @@ class MyFilterMorphs(TreeOperation):
         super(MyFilterMorphs, self).__init__()
 
     def __call__(self):
-        tree = self.getTree()
-        mask = [False for x in tree.candidates_mask]
+        mask = [False for x in self.tree.candidates_mask]
         mask[0] = True
         mask[1] = True
         mask[2] = True
-        tree.candidates_mask = mask
-
-    def getTree(self):
-        tree = super(MyFilterMorphs, self).getTree()
-        if tree:
-            tree.__class__ = ETree # 'cast' the wrapped class to the 'pretty' Python proxy class
-        return tree
+        self.tree.candidates_mask = mask
 
 def main():
     iteration = [

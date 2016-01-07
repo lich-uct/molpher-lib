@@ -8,6 +8,8 @@ and can be downloaded from :download:`here <../../../python/molpher/examples/bas
 (see `templates-snapshots` for more details on templates). If you want to know more about the library or
 the source code, we suggest you check out the `source-code-docs`.
 
+.. contents:: Table of Contents
+
 Creating an Exploration Tree and Setting Morphing Parameters
 ------------------------------------------------------------
 
@@ -22,24 +24,30 @@ as a local anesthetic). Both of these compounds act on sodium channels in the ne
 and probably have the same mode of action, which makes them ideal candidates for a morphing experiment.
 Let's now initialize our exploration tree:
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
-    :lines: 1,4-7
+..  code-block:: python
     :caption: The most basic way to initilize an exploration tree.
     :name: tree-init
     :linenos:
+
+    from molpher.core import ExplorationTree as ETree
+
+    cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
+    procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
+
+    tree = ETree(source=cocaine, target=procaine)
 
 The code shown in  :numref:`tree-init` simply initilizes the tree from the supplied SMILES.
 At the moment the tree is pretty simple. It only contains the root molecule (cocaine in this particular instance).
 We can manipulate this instance and read data from it in multiple ways, but let's start by printing out the
 `source molecule` and `target molecule` of the tree:
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
-    :lines: 9-10
+..  code-block:: python
     :caption: Printing out the source and target.
     :name: print-source-target
     :linenos:
+
+    print('Source: ', tree.params['source'])
+    print('Target: ', tree.params['target'])
 
 If we run the code from :numref:`tree-init` and :numref:`print-source-target` in a script or on command line, it produces
 the following output::
@@ -48,7 +56,7 @@ the following output::
     Source:  CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
     Target:  O=C(OCCN(CC)CC)c1ccc(N)cc1
 
-.. note:: Besides our source and target, we can also see that a data file was loaded successfully. That means
+.. note:: Besides the information about our source and target, we can also see that a data file was loaded successfully. That means
     the :mod:`molpher` package was
     initilaized successfully and is ready for use.
 
@@ -162,12 +170,16 @@ Now that we know how to initilize an exploration tree and how to set morphing pa
 
 Let's generate some `morphs <morph>` from the current leaves of the tree first:
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
-    :caption: Generating and exploring morphs.
-    :lines: 21-25
+..  code-block:: python
+    :caption: Generating and reading morphs.
     :name: generate-morphs
     :linenos:
+
+    print(tree.leaves)
+    print(tree.leaves[0].getSMILES())
+    tree.generateMorphs()
+    print(tree.candidates)
+    print(len(tree.candidates))
 
 Output:
 
@@ -208,12 +220,25 @@ to any tree and its lifetime is only affected by Python runtime and its garabage
 unbinding the molecule from the tree also means that the actual data in the tree will not be modified,
 if this instance is changed. The following code example ilustrates this behaviour:
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
+..  code-block:: python
     :caption: Copying morphs.
-    :lines: 29-42
     :name: copying-morphs
     :linenos:
+
+    candidate = tree.candidates[0]
+    print(candidate.isBound())
+    print(tree.candidates[0].getDistToTarget())
+    candidate.setDistToTarget(0.5)
+    print(tree.candidates[0].getDistToTarget())
+
+    print()
+
+    candidate_copy = candidate.copy()
+    print(candidate_copy.isBound())
+    print(candidate_copy.getDistToTarget())
+    candidate_copy.setDistToTarget(0.7)
+    print(candidate_copy.getDistToTarget())
+    print(candidate.getDistToTarget())
 
 Output:
 
@@ -246,12 +271,27 @@ When the list of candidates is populated and sorted, we need to choose the morph
 will form the next `generation <morph generation>`. The code below ilustrates
 how we can sort the morphs and do the subsequent filtering manually:
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
+..  code-block:: python
     :caption: Sorting and manually filtering morphs.
-    :lines: 46-61
     :name: filtering-morphs
     :linenos:
+
+    tree.sortMorphs()
+    print(tree.candidates_mask)
+    print(len(tree.candidates_mask))
+    mask = [False for x in tree.candidates_mask]
+    mask[0] = True
+    mask[1] = True
+    mask[2] = True
+    tree.candidates_mask = mask
+    print(tree.candidates_mask)
+    print(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for idx,x in enumerate(tree.candidates)
+            if tree.candidates_mask[idx]
+        ]
+    )
 
 Output:
 
@@ -284,12 +324,23 @@ Extending and Pruning
 When we have the morphs we want to attach to the tree selected, we can call `extend()`
 to connect them to their respective parents and make them the new leaves:
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
+..  code-block:: python
     :caption: Extending the tree.
-    :lines: 65-76
     :name: extending-tree
     :linenos:
+
+    tree.extend()
+    print(
+        sorted(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for x in tree.leaves
+        ], key=lambda x : x[1]
+        )
+    )
+    print(tree.generation_count)
+    print(tree.path_found)
+    tree.prune()
 
 Output:
 
@@ -327,7 +378,7 @@ Tree Operations
 ---------------
 
 We call every action that is performed on an `exploration tree` a *tree operation*.
-This concept is represented in the library as the `TreeOperation` abstract class.
+This concept is represented in the library as the :class:`molpher.core.operations.TreeOperation` abstract class.
 This class becomes useful, for example, when we run into a situation where we need to build
 several exploration trees at once. In such case we might want to apply the same set of operations
 to every tree in the set. Moreover, this abstraction allows us to implement our own tree operations
@@ -335,13 +386,46 @@ and reuse code easily. We can run any operation on a given tree simply by supply
 `runOperation()` method of the `ExplorationTree` class. The example below shows how to implement
 the same exploration algorithm as demonstrated in the preceeding sections:
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
+..  code-block:: python
     :caption: Using operations to implement simple chemical space exploration.
-    :lines: 2-3,80-121
-    :emphasize-lines: 3,27
+    :emphasize-lines: 3,17
     :name: operations-example
     :linenos:
+
+    from molpher.core.operations import *
+
+    class MyFilterMorphs(TreeOperation):
+
+        def __call__(self):
+            mask = [False for x in self.tree.candidates_mask]
+            mask[0] = True
+            mask[1] = True
+            mask[2] = True
+            self.tree.candidates_mask = mask
+
+    tree = ETree(source=cocaine, target=procaine)
+
+    iteration = [
+        GenerateMorphsOper()
+        , SortMorphsOper()
+        , MyFilterMorphs()
+        , ExtendTreeOper()
+        , PruneTreeOper()
+    ]
+
+    for oper in iteration:
+        tree.runOperation(oper)
+
+    print(tree.generation_count)
+    print(tree.path_found)
+    print(
+        sorted(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for x in tree.leaves
+        ], key=lambda x : x[1]
+        )
+    )
 
 Output:
 
@@ -357,21 +441,15 @@ Output:
 In :numref:`operations-example` we see an example where we create a list of operations to perform on a tree. Most of
 them are built-in operations (discussed below), but we also chose to define our own operation for the filtering step
 (see the highlighted lines).
-In order to do that, we simply create a subclass of the `TreeOperation` abstract class and we override its
+In order to do that, we simply create a subclass of the :class:`~molpher.core.operations.TreeOperation` abstract class and we override its
 :meth:`~molpher.swig_wrappers.core.TreeOperation.__call__()` method with the implementation we need --
 even though that our new filter is very likely to cause the exploration to get stuck in local optima.
 
-..  note:: In the above example we also redefine the `TreeOperation.getTree()` method so that it 'casts' the basic
-        `molpher.swig_wrappers.core.ExplorationTree` (returned by `TreeOperation.getTree()`)
-        to the 'more pythonic' `molpher.core.ExplorationTree`.
-        This override will probably be integrated in the library itself soon. Here, it just serves as another example
-        of how we can change the default behaviour.
-
 Each operation can have a tree associated with it, but it is not necessary.
 We can verify if a tree is associated with an operation by calling its :meth:`~molpher.swig_wrappers.core.TreeOperation.getTree()`
-method. If there is no tree associated with the instance, it returns `None`.
+method or accessing the `TreeOperation.tree` attribute of the class. If there is no tree associated with the instance, they both return `None`.
 
-..  note:: Most of the built-in operations will raise a `RuntimeError`, if invoked without a tree attached to them.
+..  note:: The built-in operations will raise a `RuntimeError`, if invoked without a tree attached to them.
 
 Built-in Operations
 ~~~~~~~~~~~~~~~~~~~
@@ -386,13 +464,13 @@ A few operations are already defined in the library:
     - `PruneTreeOper`
     - `TraverseOper`
 
-They are all dervied from `TreeOperation` and contain the full set of operations performed on a tree in
+They are all dervied from :class:`~molpher.core.operations.TreeOperation` and contain the full set of operations performed on a tree in
 the original Molpher algorithm as published in [1]_. Therefore, the original algorithm can be
 implemented using those operations.
 
 In this tutorial, we will pay particular attention to the `TraverseOper` operation, because it differs
 from the others and introduces the concept of a tree callback function (see `tree-traversal`).
-For more details on each operation, see the particular pages in the documentation.
+For more details on each operation, see the designated pages in the documentation.
 
 .. [1] Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
         `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/24655571>`_, `DOI <http://www.jcheminf.com/content/6/1/7>`_
@@ -406,12 +484,25 @@ A special place among the operations belongs to the `TraverseOper` class. It doe
 of a morphing algorithm, but serves as a means of traversing molecules in a tree and reading/modifying them
 as needed. Let's ilustrate this with an example:
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
+..  code-block:: python
     :caption: Traversing the tree using a callback.
-    :lines: 125-138
     :name: traverse-example
     :linenos:
+
+    class MyCallback(TraverseCallback):
+
+        def processMorph(self, morph):
+            if not morph.getParentSMILES():
+                print("# Root #")
+            else:
+                print('# Morph #')
+                print('Parent:', morph.getParentSMILES())
+            print('SMILES: ', morph.getSMILES())
+            print('Descendents: ', morph.getDescendants())
+
+    callback = MyCallback()
+    traverse = TraverseOper(callback)
+    tree.runOperation(traverse)
 
 Output:
 
@@ -452,12 +543,21 @@ the `traverse()` method. It simply takes any python callable and tries to use it
 However, under the hood it does the same thing as we did in :numref:`traverse-example`.
 Therefore, the above code can be turned into:
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
+..  code-block:: python
     :caption: Traversing the tree using a callback -- the simple version.
-    :lines: 142-151
     :name: short-traverse-example
     :linenos:
+
+    def process(morph):
+        if not morph.getParentSMILES():
+            print("# Root #")
+        else:
+            print('# Morph #')
+            print('Parent:', morph.getParentSMILES())
+        print('SMILES: ', morph.getSMILES())
+        print('Descendents: ', morph.getDescendants())
+
+    tree.traverse(process)
 
 Output:
 
@@ -497,12 +597,29 @@ A `XML template` is similar to a configuration file and can be loaded like an or
 The following example shows loading of a `XML template`, creating a tree from it, extending the tree and saving
 a tree snapshot:
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
+..  code-block:: python
     :caption: Loading a template and saving a built tree as a XML snapshot.
-    :lines: 155,158-174
     :name: saving-snapshot
     :linenos:
+
+    template_file = 'cocaine-procaine-template.xml'
+
+    tree = ETree.createFromSnapshot(template_file)
+    print(tree.params)
+
+    for oper in iteration:
+        tree.runOperation(oper)
+
+    print(
+        sorted(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for x in tree.leaves
+        ], key=lambda x : x[1]
+        )
+    )
+
+    tree.saveSnapshot('snapshot.xml')
 
 Output:
 
@@ -555,12 +672,21 @@ The saved tree can be later recunstructed with the
         loading of descendents of molecules in the tree. Therefore, the code
         from :numref:`loading-snapshot` does not work correctly at the moment.
 
-..  literalinclude:: ../../../python/molpher/examples/basics.py
-    :language: python
+..  code-block:: python
     :caption: Loading a snapshot of a previously generated tree.
-    :lines: 176-185
     :name: loading-snapshot
     :linenos:
+
+    new_tree = ETree.createFromSnapshot('snapshot.xml')
+    print(new_tree.params)
+    print(
+        sorted(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for x in new_tree.leaves
+        ], key=lambda x : x[1]
+        )
+    )
 
 Output:
 
@@ -594,12 +720,14 @@ Output:
     }
     [('COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C', 0.7627118644067796), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885), ('COC(=O)C1C2CCC(CC1COC(=O)C1=CC=CC=C1)N2C', 0.7741935483870968)]
 
-Complete Algorithm Implementation
----------------------------------
+Example Exploration Algorithm Implementations
+---------------------------------------------
 
-Let's now wrap up this tutorial with a complete example implementation of a single morphing experiment using
-the bits of code we have created above. The script in :numref:`complete-example` shows how to implement
-a search for a path in `chemical space` between *cocaine* and *procaine*:
+Let's now wrap up this tutorial with two example implementations of a morphing experiment (see :numref:`complete-example`
+and :numref:`bidirectional-example`).
+
+Using the bits of code we have created above. The script in :numref:`complete-example` shows how to implement
+a search for a path in `chemical space` between *cocaine* and *procaine* with a customized filtering step:
 
 ..  literalinclude:: ../../../python/molpher/examples/experiment.py
     :language: python
@@ -657,12 +785,52 @@ Output:
 
     Process finished with exit code 0
 
+The above implementaion is nothing more than just the tutorial code bits inside a loop. The loop checks if a path was found at every iteration.
+If the path is found it is backtracked through the tree and printed out as a sequence of molecules from source to target.
+
+The second example we have here is a little more elaborate, but implements a very simple idea. Instead of one exploration tree,
+it uses two trees that each search for a path aimed at some molecule in the other tree:
+
+..  literalinclude:: ../../../python/molpher/examples/bidirectional.py
+    :language: python
+    :caption: Example implementation of a bidirectional pathfinding algorithm.
+    :name: bidirectional-example
+    :linenos:
+
+Output (only the final print of the path is shown):
+
+..  code-block:: python
+
+    [
+        'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C',
+        'CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C',
+        'CCC1C(COC)C(OC(=O)C2=CC=CC=C2)CCN1C',
+        'CCC1C(COC)C(OC(=O)C2=CC=CC=C2)CCN1CC',
+        'CCN1CCC(OC(=O)C2=CC=CC=C2)C(COC)C1C',
+        'CCN1CC(OC(=O)C2=CC=CC=C2)C(COC)C1C',
+        'CCN1CC(OC(=O)C2=CC=CC=C2)C(CO)C1C',
+        'CCC1C(C)N(CC)CC1OC(=O)C1=CC=CC=C1',
+        'CCC1C(C)C(OC(=O)C2=CC=CC=C2)CN1CC',
+        'CCC1CC(OC(=O)C2=CC=CC=C2)CN1CC',
+        'CCC1C(OC(=O)C2=CC=CC=C2)CN1CC',
+        'CCC1C(OC(=O)C2=CC=C(N)C=C2)CN1CC',
+        'CCN1CC(OC(=O)C2=CC=C(N)C=C2)C1C',
+        'CCN(CC)CCOC(=O)C1=CC=C(N)C=C1'
+    ]
+
+This 'bidirectional search' algorithm uses the built-in operations to facilitate the search,
+but does one extra procedure after
+an iteration is completed -- it changes the target molecules of the trees.
+
+When the new leaves are connected, the trees are both traversed and molecules
+closest to the current target are identified in each. The closest molecule from one tree is then
+set as the new target for the tree searching in the opposite direction.
 
 Summary
 -------
 
-If you read the tutorial all the way to here, you now probably have a decent idea on what this library does
-and how to use it. If you have any ideas on how to improve the library or bug reports, please send them to
+If you have read the tutorial all the way to here, you now probably have a decent idea on what this library does
+and how to use it. If you have any suggestions on how to improve the library or bug reports, please send them to
 sichom@vscht.cz. All help on the project is much appreciated.
 For more information on the source code itself refer to the `source-code-docs`.
 

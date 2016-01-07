@@ -1,130 +1,144 @@
+"""
+Module with example code from the tutorial.
+
+"""
+
 from molpher.core import ExplorationTree as ETree
 from molpher.core.operations import *
 
-cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
-procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
+# TODO: make some of the stuff from this script part of the test suite
 
-tree = ETree(source=cocaine, target=procaine)
+def main():
+    cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
+    procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
-print('Source: ', tree.params['source'])
-print('Target: ', tree.params['target'])
+    tree = ETree(source=cocaine, target=procaine)
 
-print(tree.params)
-tree.params = {
-    'non_producing_survive' : 2,
-    'weight_max' : 500.0
-}
-print(tree.params)
+    print('Source: ', tree.params['source'])
+    print('Target: ', tree.params['target'])
 
-print('#Generating and Manipulating Morphs')
+    print(tree.params)
+    tree.params = {
+        'non_producing_survive' : 2,
+        'weight_max' : 500.0
+    }
+    print(tree.params)
 
-print(tree.leaves)
-print(tree.leaves[0].getSMILES())
-tree.generateMorphs()
-print(tree.candidates)
-print(len(tree.candidates))
+    print('#Generating and Manipulating Morphs')
 
-print()
+    print(tree.leaves)
+    print(tree.leaves[0].getSMILES())
+    tree.generateMorphs()
+    print(tree.candidates)
+    print(len(tree.candidates))
 
-candidate = tree.candidates[0]
-print(candidate.isBound())
-print(tree.candidates[0].getDistToTarget())
-candidate.setDistToTarget(0.5)
-print(tree.candidates[0].getDistToTarget())
+    print()
 
-print()
+    candidate = tree.candidates[0]
+    print(candidate.isBound())
+    print(tree.candidates[0].getDistToTarget())
+    candidate.setDistToTarget(0.5)
+    print(tree.candidates[0].getDistToTarget())
 
-candidate_copy = candidate.copy()
-print(candidate_copy.isBound())
-print(candidate_copy.getDistToTarget())
-candidate_copy.setDistToTarget(0.7)
-print(candidate_copy.getDistToTarget())
-print(candidate.getDistToTarget())
+    print()
 
-print('#Sorting and Filtering Morphs')
+    candidate_copy = candidate.copy()
+    print(candidate_copy.isBound())
+    print(candidate_copy.getDistToTarget())
+    candidate_copy.setDistToTarget(0.7)
+    print(candidate_copy.getDistToTarget())
+    print(candidate.getDistToTarget())
 
-tree.sortMorphs()
-print(tree.candidates_mask)
-print(len(tree.candidates_mask))
-mask = [False for x in tree.candidates_mask]
-mask[0] = True
-mask[1] = True
-mask[2] = True
-tree.candidates_mask = mask
-print(tree.candidates_mask)
-print(
-    [
-        (x.getSMILES(), x.getDistToTarget())
-        for idx,x in enumerate(tree.candidates)
-        if tree.candidates_mask[idx]
+    print('#Sorting and Filtering Morphs')
+
+    tree.sortMorphs()
+    print(tree.candidates_mask)
+    print(len(tree.candidates_mask))
+    mask = [False for x in tree.candidates_mask]
+    mask[0] = True
+    mask[1] = True
+    mask[2] = True
+    tree.candidates_mask = mask
+    print(tree.candidates_mask)
+    print(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for idx,x in enumerate(tree.candidates)
+            if tree.candidates_mask[idx]
+        ]
+    )
+
+    print('#Extending and Pruning')
+
+    tree.extend()
+    print(
+        sorted(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for x in tree.leaves
+        ], key=lambda x : x[1]
+        )
+    )
+    print(tree.generation_count)
+    print(tree.path_found)
+    tree.prune()
+
+    print('#Operations')
+
+    class MyFilterMorphs(TreeOperation):
+
+        def __call__(self):
+            # tree = self.getTree()
+            mask = [False for x in self.tree.candidates_mask]
+            mask[0] = True
+            mask[1] = True
+            mask[2] = True
+            self.tree.candidates_mask = mask
+
+    tree = ETree(source=cocaine, target=procaine)
+
+    iteration = [
+        GenerateMorphsOper()
+        , SortMorphsOper()
+        , MyFilterMorphs()
+        , ExtendTreeOper()
+        , PruneTreeOper()
     ]
-)
 
-print('#Extending and Pruning')
+    for oper in iteration:
+        tree.runOperation(oper)
 
-tree.extend()
-print(
-    sorted(
-    [
-        (x.getSMILES(), x.getDistToTarget())
-        for x in tree.leaves
-    ], key=lambda x : x[1]
+    print(tree.generation_count)
+    print(tree.path_found)
+    print(
+        sorted(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for x in tree.leaves
+        ], key=lambda x : x[1]
+        )
     )
-)
-print(tree.generation_count)
-print(tree.path_found)
-tree.prune()
 
-print('#Operations')
+    print('Traversing the Tree')
 
-class MyFilterMorphs(TreeOperation):
+    class MyCallback(TraverseCallback):
 
-    def __init__(self):
-        super(MyFilterMorphs, self).__init__()
+        def processMorph(self, morph):
+            if not morph.getParentSMILES():
+                print("# Root #")
+            else:
+                print('# Morph #')
+                print('Parent:', morph.getParentSMILES())
+            print('SMILES: ', morph.getSMILES())
+            print('Descendents: ', morph.getDescendants())
 
-    def __call__(self):
-        tree = self.getTree()
-        mask = [False for x in tree.candidates_mask]
-        mask[0] = True
-        mask[1] = True
-        mask[2] = True
-        tree.candidates_mask = mask
+    callback = MyCallback()
+    traverse = TraverseOper(callback)
+    tree.runOperation(traverse)
 
-    def getTree(self):
-        tree = super(MyFilterMorphs, self).getTree()
-        if tree:
-            tree.__class__ = ETree # 'cast' the wrapped class to the 'pretty' Python proxy class
-        return tree
+    print()
 
-tree = ETree(source=cocaine, target=procaine)
-
-iteration = [
-    GenerateMorphsOper()
-    , SortMorphsOper()
-    , MyFilterMorphs()
-    , ExtendTreeOper()
-    , PruneTreeOper()
-]
-
-for oper in iteration:
-    tree.runOperation(oper)
-
-print(tree.generation_count)
-print(tree.path_found)
-print(
-    sorted(
-    [
-        (x.getSMILES(), x.getDistToTarget())
-        for x in tree.leaves
-    ], key=lambda x : x[1]
-    )
-)
-
-print('Traversing the Tree')
-
-class MyCallback(TraverseCallback):
-
-    def processMorph(self, morph):
+    def process(morph):
         if not morph.getParentSMILES():
             print("# Root #")
         else:
@@ -133,55 +147,41 @@ class MyCallback(TraverseCallback):
         print('SMILES: ', morph.getSMILES())
         print('Descendents: ', morph.getDescendants())
 
-callback = MyCallback()
-traverse = TraverseOper(callback)
-tree.runOperation(traverse)
+    tree.traverse(process)
 
-print()
+    print('Tree Snapshots')
 
-def process(morph):
-    if not morph.getParentSMILES():
-        print("# Root #")
-    else:
-        print('# Morph #')
-        print('Parent:', morph.getParentSMILES())
-    print('SMILES: ', morph.getSMILES())
-    print('Descendents: ', morph.getDescendants())
+    template_file = 'cocaine-procaine-template.xml'
+    import os
+    template_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), template_file)
 
-tree.traverse(process)
+    tree = ETree.createFromSnapshot(template_file)
+    print(tree.params)
 
-print('Tree Snapshots')
+    for oper in iteration:
+        tree.runOperation(oper)
 
-template_file = 'cocaine-procaine-template.xml'
-import os
-template_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), template_file)
-
-tree = ETree.createFromSnapshot(template_file)
-print(tree.params)
-
-for oper in iteration:
-    tree.runOperation(oper)
-
-print(
-    sorted(
-    [
-        (x.getSMILES(), x.getDistToTarget())
-        for x in tree.leaves
-    ], key=lambda x : x[1]
+    print(
+        sorted(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for x in tree.leaves
+        ], key=lambda x : x[1]
+        )
     )
-)
 
-tree.saveSnapshot('snapshot.xml')
+    tree.saveSnapshot('snapshot.xml')
 
-new_tree = ETree.createFromSnapshot('snapshot.xml')
-print(new_tree.params)
-print(
-    sorted(
-    [
-        (x.getSMILES(), x.getDistToTarget())
-        for x in new_tree.leaves
-    ], key=lambda x : x[1]
+    new_tree = ETree.createFromSnapshot('snapshot.xml')
+    print(new_tree.params)
+    print(
+        sorted(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for x in new_tree.leaves
+        ], key=lambda x : x[1]
+        )
     )
-)
 
-# TODO: make some of the stuff from this script part of the test suite
+if __name__ == "__main__":
+    exit(main())

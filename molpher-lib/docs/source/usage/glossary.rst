@@ -66,7 +66,7 @@ The glossary of important terms used in the `documentation <index>`.
 
     tree operation
         Any operation that manipulates the `exploration tree` and or its elements. Can be defined using
-        the `TreeOperation` interface.
+        the :class:`molpher.core.operations.TreeOperation` interface.
 
     morphing iteration
         Any sequence of operations that ends with attaching new generation of morphs to the tree.

@@ -18,14 +18,13 @@ class FindClosest:
 class BidirectionalPathFinder:
 
     def __init__(self, source, target):
+        options = {
+            'fingerprint' : 'ATOM_PAIRS'
+        }
         self.source_target = ETree(source=source, target=target)
         self.target_source = ETree(source=target, target=source)
-        self.source_target.params = {
-            'fingerprint' : 'ATOM_PAIRS'
-        }
-        self.target_source.params = {
-            'fingerprint' : 'ATOM_PAIRS'
-        }
+        self.source_target.params = options
+        self.target_source.params = options
         self.source_target_min = FindClosest()
         self.target_source_min = FindClosest()
         self.ITERATION = [
@@ -35,9 +34,23 @@ class BidirectionalPathFinder:
             , ExtendTreeOper()
             , PruneTreeOper()
         ]
+        self.path = []
+
+    def _find_path(self, tree, connecting_mol):
+        path = []
+        current = tree.fetchMol(connecting_mol)
+        path.append(current.getSMILES())
+        while current != '':
+            current = current.getParentSMILES()
+            if current:
+                current = tree.fetchMol(current)
+                path.append(current.getSMILES())
+        path.reverse()
+        return path
 
     def __call__(self):
         counter = 0
+        connecting_molecule = None
         while True:
             counter+=1
             print('Iteration {0}:'.format(counter))
@@ -82,8 +95,20 @@ class BidirectionalPathFinder:
                 assert self.source_target.hasMol(connecting_molecule)
                 break
 
-cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
-procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
+        source_target_path = self._find_path(self.source_target, connecting_molecule)
+        target_source_path = self._find_path(self.target_source, connecting_molecule)
+        assert source_target_path.pop(-1) == connecting_molecule
+        target_source_path.reverse()
+        source_target_path.extend(target_source_path)
+        self.path = source_target_path
 
-pathfinder = BidirectionalPathFinder(cocaine, procaine)
-pathfinder()
+def main():
+    cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
+    procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
+
+    pathfinder = BidirectionalPathFinder(cocaine, procaine)
+    pathfinder()
+    print(pathfinder.path)
+
+if __name__ == "__main__":
+    exit(main())
