@@ -3,22 +3,22 @@ Installing the Library
 
 Given the early stage of development, installing the library is a little bit tricky at the moment.
 So far the library was only built and tested on a 64-bit Linux computer running the Debian
-operating system. If you want to use the library with this (or similar) setup, you can just download
-the current version (|version|) with all dependencies built from `here
+operating system. If you want to use the library with this (or compatible) setup, you can just download
+the current release (|version|) with all dependencies built from `here
 <https://drive.google.com/file/d/0B2rizkCQQcoyaHJjaFFSdE9DdUk/view?usp=sharing>`_.
 
 If you download this precompiled version, all you need to do is just unpack the linked archive
-and you can use the library right away. If you need to install the Python package,
+and you can use the library right away. If you want to install the Python package,
 just do:
 
 ..  code-block:: bash
 
-    cd molpher-lib # from the installation directory root
+    cd molpher-lib # from the root of the directory the release was unpacked to
     ./build_python.sh
     pip install .
 
 This will automatically build Python bindings and installs the library as a Python package into
-the presently active Python environment.
+the presently active Python environment (version of Python currently available from command line as :command:`python`).
 
 Building the most recent version from source
 --------------------------------------------
