@@ -822,9 +822,9 @@ This 'bidirectional search' algorithm uses the built-in operations to facilitate
 but does one extra procedure after
 an iteration is completed -- it changes the target molecules of the trees.
 
-When the new leaves are connected, the trees are both traversed and molecules
+When the new leaves are connected, both trees are traversed and molecules
 closest to the current target are identified in each. The closest molecule from one tree is then
-set as the new target for the tree searching in the opposite direction.
+set as the new target for the tree searching in the opposite direction and vice versa.
 
 Summary
 -------
