@@ -25,7 +25,7 @@ and probably have the same mode of action, which makes them ideal candidates for
 Let's now initialize our exploration tree:
 
 ..  code-block:: python
-    :caption: The most basic way to initilize an exploration tree.
+    :caption: The most basic way to initialize an exploration tree.
     :name: tree-init
     :linenos:
 
@@ -36,7 +36,7 @@ Let's now initialize our exploration tree:
 
     tree = ETree(source=cocaine, target=procaine)
 
-The code shown in  :numref:`tree-init` simply initilizes the tree from the supplied SMILES.
+The code shown in  :numref:`tree-init` simply initializes the tree from the supplied SMILES.
 At the moment the tree is pretty simple. It only contains the root molecule (cocaine in this particular instance).
 We can manipulate this instance and read data from it in multiple ways, but let's start by printing out the
 `source molecule` and `target molecule` of the tree:
@@ -58,7 +58,7 @@ the following output::
 
 .. note:: Besides the information about our source and target, we can also see that a data file was loaded successfully. That means
     the :mod:`molpher` package was
-    initilaized successfully and is ready for use.
+    initialized successfully and is ready for use.
 
 The `ExplorationTree.params` dictionary doesn't just store the
 source and target molecule, but also houses other `morphing parameters`. Let's take a look:
@@ -144,7 +144,7 @@ Output:
         'similarity': 'TANIMOTO'
     }
 
-Here we just tighthened the constraints on molecular weight and decreased the number of acceptable 'non-producing'
+Here we just tightened the constraints on molecular weight and decreased the number of acceptable 'non-producing'
 `morph generations <morph generation>` to 2 (see :numref:`param-table` for details on the  morphing parameters).
 If we supply an incomplete set of parameters (like in the above example), only the parameters specified in the
 given dictionary will be changed.
@@ -165,7 +165,7 @@ involved and introduces the user to the most basic concepts of the library and m
 Generating and Manipulating Morphs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now that we know how to initilize an exploration tree and how to set morphing parameters, let's take a look at how the
+Now that we know how to initialize an exploration tree and how to set morphing parameters, let's take a look at how the
 `chemical space` exploration works in practice.
 
 Let's generate some `morphs <morph>` from the current leaves of the tree first:
@@ -216,9 +216,9 @@ If it returns `True`, the molecule is bound to a tree and, therefore, it is not 
 If you want to have the information contained within a `MolpherMol` object available even when
 the molecule is destroyed, you can tell it to replicate itself by calling its `copy()` method.
 The replicated instance is not bound
-to any tree and its lifetime is only affected by Python runtime and its garabage collector. However,
+to any tree and its lifetime is only affected by Python runtime and its garbage collector. However,
 unbinding the molecule from the tree also means that the actual data in the tree will not be modified,
-if this instance is changed. The following code example ilustrates this behaviour:
+if this instance is changed. The following code example illustrates this behaviour:
 
 ..  code-block:: python
     :caption: Copying morphs.
@@ -265,10 +265,10 @@ Sometimes the order of molecules in `candidates` might matter to us. As of yet, 
 generated morphs in `candidates` is by calling the `sortMorphs()` method or using the `SortMorphsOper` operation
 (see :ref:`operations` for more on operations). This sorts the molecules in the order of increasing distance
 from the target. Placing the closest molecules at the very top of the list. For example, this order has meaning
-for the built-in probability fileter (see `PROBABILITY` for details).
+for the built-in probability filter (see `PROBABILITY` for details).
 
 When the list of candidates is populated and sorted, we need to choose the morphs that
-will form the next `generation <morph generation>`. The code below ilustrates
+will form the next `generation <morph generation>`. The code below illustrates
 how we can sort the morphs and do the subsequent filtering manually:
 
 ..  code-block:: python
@@ -308,7 +308,7 @@ Note that the list of selected morphs is sorted from the molecule closest to the
 because we called the `sortMorphs()` method previously.
 
 ..  warning:: The new mask must be the same length as the `candidates` member. If this requirement
-        is not satisified, an instance of `RuntimeError` is raised.
+        is not satisfied, an instance of `RuntimeError` is raised.
 
 ..  warning:: The mask should only be set after the morphs are sorted. If the mask is set and
         the order of morphs is changed, the mask will stay the same and will have to be updated
@@ -384,7 +384,7 @@ several exploration trees at once. In such case we might want to apply the same 
 to every tree in the set. Moreover, this abstraction allows us to implement our own tree operations
 and reuse code easily. We can run any operation on a given tree simply by supplying it to the
 `runOperation()` method of the `ExplorationTree` class. The example below shows how to implement
-the same exploration algorithm as demonstrated in the preceeding sections:
+the same exploration algorithm as demonstrated in the preceding sections:
 
 ..  code-block:: python
     :caption: Using operations to implement simple chemical space exploration.
@@ -482,7 +482,7 @@ Traversing the Tree
 
 A special place among the operations belongs to the `TraverseOper` class. It does not directly implement a part
 of a morphing algorithm, but serves as a means of traversing molecules in a tree and reading/modifying them
-as needed. Let's ilustrate this with an example:
+as needed. Let's illustrate this with an example:
 
 ..  code-block:: python
     :caption: Traversing the tree using a callback.
@@ -538,7 +538,7 @@ every molecule it encounters into our :meth:`~molpher.swig_wrappers.core.Travers
         using the specified molecule as the root of the subtree.
 
 There is also a much more convenient way to traverse the tree. The `ExplorationTree` class implements
-the `traverse()` method. It simply takes any python callable and tries to use it instad of the
+the `traverse()` method. It simply takes any python callable and tries to use it instead of the
 :meth:`~molpher.swig_wrappers.core.TraverseCallback.processMorph()` method.
 However, under the hood it does the same thing as we did in :numref:`traverse-example`.
 Therefore, the above code can be turned into:
@@ -665,7 +665,7 @@ as in :numref:`operations-example`. We even get the same set of newly generated 
 In :numref:`saving-snapshot` we also want to serialize our tree instance to disk so we save it as
 a snapshot using the `saveSnapshot()` method.
 
-The saved tree can be later recunstructed with the
+The saved tree can be later reconstructed with the
 :meth:`~molpher.core.ExplorationTree.ExplorationTree.createFromSnapshot()` factory method:
 
 ..  warning:: Note that there is currently a bug inside Molpher that prevents
@@ -785,11 +785,11 @@ Output:
 
     Process finished with exit code 0
 
-The above implementaion is nothing more than just the tutorial code bits inside a loop. The loop checks if a path was found at each iteration.
+The above implementation is nothing more than just the tutorial code bits inside a loop. The loop checks if a path was found at each iteration.
 If the path is found it is backtracked through the tree and printed out as a sequence of molecules from source to target.
 
 The second example we have here is a little more elaborate, but implements a very simple idea. Instead of one exploration tree,
-it uses two trees that each search for a path aimed at some molecule in the other tree:
+we build two trees that each searches for a path to the closest molecule in the other tree:
 
 ..  literalinclude:: ../../../python/molpher/examples/bidirectional.py
     :language: python
@@ -817,6 +817,7 @@ Output (only the final print of the path is shown):
         'CCN1CC(OC(=O)C2=CC=C(N)C=C2)C1C',
         'CCN(CC)CCOC(=O)C1=CC=C(N)C=C1'
     ]
+    Total Execution Time: 153964.77300000002 # in milliseconds
 
 This 'bidirectional search' algorithm uses the built-in operations to facilitate the search,
 but does one extra procedure after
@@ -825,6 +826,9 @@ an iteration is completed -- it changes the target molecules of the trees.
 When the new leaves are connected, both trees are traversed and molecules
 closest to the current target are identified in each. The closest molecule from one tree is then
 set as the new target for the tree searching in the opposite direction and vice versa.
+
+In :numref:`bidirectional-example` we also use the `time.clock` function to measure the execution
+times of each potentially time-consuming operation.
 
 Summary
 -------

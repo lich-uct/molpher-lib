@@ -1,5 +1,12 @@
+import time
+
 from molpher.core import ExplorationTree as ETree
 from molpher.core.operations import *
+
+def timeit(func):
+    milliseconds = 1000 * time.clock()
+    func()
+    return 1000 * time.clock() - milliseconds
 
 class FindClosest:
 
@@ -55,19 +62,31 @@ class BidirectionalPathFinder:
             counter+=1
             print('Iteration {0}:'.format(counter))
             for oper in self.ITERATION:
-                self.source_target.runOperation(oper)
-                self.target_source.runOperation(oper)
+                print('Execution times ({0}):'.format(type(oper).__name__))
 
-            self.source_target.traverse(self.source_target_min)
-            self.target_source.traverse(self.target_source_min)
+                source_target_time = timeit(lambda : self.source_target.runOperation(oper))
+                print('\tsource -> target: {0}'.format(source_target_time))
+                target_source_time = timeit(lambda : self.target_source.runOperation(oper))
+                print('\ttarget -> source: {0}'.format(target_source_time))
+
+                print('\ttotal time: {0}'.format(source_target_time + target_source_time))
+
+            print('Traversal times:')
+
+            source_target_time = timeit(lambda : self.source_target.traverse(self.source_target_min))
+            print('\tsource -> target: {0}'.format(source_target_time))
+            target_source_time = timeit(lambda : self.target_source.traverse(self.target_source_min))
+            print('\ttarget -> source: {0}'.format(target_source_time))
+
+            print('\ttotal time: {0}'.format(source_target_time + target_source_time))
 
             print('Current Targets:')
-            print('source to target:', self.source_target.params['target'])
-            print('target to source:', self.target_source.params['target'])
+            print('\tsource to target:', self.source_target.params['target'])
+            print('\ttarget to source:', self.target_source.params['target'])
 
             print('Current Minima:')
-            print('source to target:', self.source_target_min.closest.getSMILES(), self.source_target_min.closest.getDistToTarget())
-            print('target to source:', self.target_source_min.closest.getSMILES(), self.target_source_min.closest.getDistToTarget())
+            print('\tsource to target:', self.source_target_min.closest.getSMILES(), self.source_target_min.closest.getDistToTarget())
+            print('\ttarget to source:', self.target_source_min.closest.getSMILES(), self.target_source_min.closest.getDistToTarget())
 
             self.source_target.params = {
                 'target' : self.target_source_min.closest.getSMILES()
@@ -77,8 +96,8 @@ class BidirectionalPathFinder:
             }
 
             print('New Targets:')
-            print('source to target:', self.source_target.params['target'])
-            print('target to source:', self.target_source.params['target'])
+            print('\tsource to target:', self.source_target.params['target'])
+            print('\ttarget to source:', self.target_source.params['target'])
 
             if self.source_target.path_found:
                 print('Path Found in tree going from source to target:')
@@ -103,12 +122,14 @@ class BidirectionalPathFinder:
         self.path = source_target_path
 
 def main():
+    milliseconds_now = 1000 * time.clock()
     cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
     procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
     pathfinder = BidirectionalPathFinder(cocaine, procaine)
     pathfinder()
     print(pathfinder.path)
+    print('Total Execution Time: {0}'.format(1000 * time.clock() - milliseconds_now))
 
 if __name__ == "__main__":
     exit(main())
