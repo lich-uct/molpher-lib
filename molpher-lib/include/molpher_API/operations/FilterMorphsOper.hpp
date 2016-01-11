@@ -13,11 +13,12 @@
 class FilterMorphsOper : public TreeOperation {
 private:
     int filters;
+    bool verbose;
 
     class FilterMorphs {
     public:
         FilterMorphs(PathFinderContext &ctx, size_t globalMorphCount,
-                ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors, int filters);
+                ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors, int filters, bool verbose);
         void operator()(const tbb::blocked_range<size_t> &r) const;
 
     private:
@@ -26,6 +27,7 @@ private:
         ExplorationTree::MoleculeVector &mMorphs;
         std::vector<bool> &mSurvivors;
         int mFilters;
+        bool mVerboseOutput;
     };
 
 public:
@@ -40,10 +42,10 @@ public:
         ALL = PROBABILITY | WEIGHT | SYNTHESIS | MAX_DERIVATIONS | DUPLICATES | HISTORIC_DESCENDENTS
     };
 
-    FilterMorphsOper(ExplorationTree& expTree);
-    FilterMorphsOper();
-    FilterMorphsOper(ExplorationTree& expTree, int filters);
-    FilterMorphsOper(int filters);
+    FilterMorphsOper(ExplorationTree& expTree, bool verbose = false);
+    FilterMorphsOper(bool verbose = false);
+    FilterMorphsOper(ExplorationTree& expTree, int filters, bool verbose = false);
+    FilterMorphsOper(int filters, bool verbose = false);
     virtual void operator()();
 };
 

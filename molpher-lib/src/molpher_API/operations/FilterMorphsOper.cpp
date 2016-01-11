@@ -8,29 +8,46 @@
 
 #include "molpher_API/operations/FilterMorphsOper.hpp"
 
-FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree) : TreeOperation(expTree), filters(MorphFilters::ALL) {
+FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree, bool verbose) : 
+TreeOperation(expTree)
+, filters(MorphFilters::ALL) 
+, verbose(verbose)
+{
     // no action
 }
 
-FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree, int filters) : TreeOperation(expTree), filters(filters | MorphFilters::DUPLICATES) {
+FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree, int filters, bool verbose) : 
+TreeOperation(expTree)
+, filters(filters | MorphFilters::DUPLICATES)
+, verbose(verbose)
+{
     // no action
 }
 
-FilterMorphsOper::FilterMorphsOper() : TreeOperation(), filters(MorphFilters::ALL) {
+FilterMorphsOper::FilterMorphsOper(bool verbose) : 
+TreeOperation()
+, filters(MorphFilters::ALL) 
+, verbose(verbose)
+{
     // no action
 }
 
-FilterMorphsOper::FilterMorphsOper(int filters) : TreeOperation(), filters(filters | MorphFilters::DUPLICATES) {
+FilterMorphsOper::FilterMorphsOper(int filters, bool verbose) : 
+TreeOperation()
+, filters(filters | MorphFilters::DUPLICATES) 
+, verbose(verbose)
+{
     // no action
 }
 
 FilterMorphsOper::FilterMorphs::FilterMorphs(PathFinderContext &ctx,
-        size_t globalMorphCount, ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors, int filters
+        size_t globalMorphCount, ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors, int filters, bool verbose
         ) :
 mCtx(ctx),
 mGlobalMorphCount(globalMorphCount),
 mMorphs(morphs),
 mSurvivors(survivors),
+mVerboseOutput(verbose),
 mFilters(filters){
     assert(mMorphs.size() == mSurvivors.size());
 }
@@ -71,7 +88,7 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                             mCtx.params.minAcceptableMolecularWeight) ||
                             (mMorphs[idx].molecularWeight >
                             mCtx.params.maxAcceptableMolecularWeight);
-                    if (badWeight) {
+                    if (badWeight && mVerboseOutput) {
                         std::stringstream ss;
                         ss << "bad weight: " << mMorphs[idx].smile << " : " << mMorphs[idx].molecularWeight;
                         SynchCout(ss.str());
@@ -115,7 +132,7 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                         tooManyProducedMorphs =
                                 (ac->second > mCtx.params.cntMaxMorphs);
                     }
-                    if (tooManyProducedMorphs) {
+                    if (tooManyProducedMorphs && mVerboseOutput) {
                         std::stringstream ss;
                         ss << "too many morphs: " << mMorphs[idx].smile << " : " << ac->second;
                         SynchCout(ss.str());
@@ -129,7 +146,7 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                 if (!isDead) {
                     badSascore = mMorphs[idx].sascore > 6.0; // questionable, it is recommended value from Ertl
                     // in case of badSascore print message
-                    if (badSascore) {
+                    if (badSascore && mVerboseOutput) {
                         std::stringstream ss;
                         ss << "bad SAScore: " << mMorphs[idx].smile << " : " << mMorphs[idx].sascore;
                         SynchCout(ss.str());
@@ -142,9 +159,11 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
             mSurvivors[idx] = !isDead;
         } else {
             mSurvivors[idx] = false;
-            std::stringstream ss;
-                        ss << "probability filtered: " << mMorphs[idx].smile;
-                        SynchCout(ss.str());
+            if (mVerboseOutput) {
+                std::stringstream ss;
+                ss << "probability filtered: " << mMorphs[idx].smile;
+                SynchCout(ss.str());
+            }
         }
     }
 }
@@ -162,7 +181,7 @@ void FilterMorphsOper::operator()() {
         PathFinderContext& context = fetchTreeContext();
         ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
         assert(morphs.size() == survivors.size());
-        FilterMorphs filterMorphs(context, morphs.size(), morphs, survivors, filters);
+        FilterMorphs filterMorphs(context, morphs.size(), morphs, survivors, filters, verbose);
         tbb::parallel_for(
                 tbb::blocked_range<size_t>(0, morphs.size()),
                 filterMorphs, tbb::auto_partitioner(), tbbCtx);

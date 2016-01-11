@@ -6,6 +6,11 @@ FilterMorphsOper
 .. autoclass:: FilterMorphsOper
     :show-inheritance:
 
+    :param \*args: constructor takes either no arguments at all or the following positional arguments (in that order):
+    :param tree: the tree to operate on (optional)
+    :param filters: the union of filtering options to use (optional, see the descriptions below for more information)
+    :param verbose: toggles if a verbose output is required (optional, defaults to `False`)
+
     This operation can filter the `candidate morphs` in an `exploration tree`
     according to a given set of filtering options that it implements. The current set of
     available filters is in the table below. For more detailed information on each filter
