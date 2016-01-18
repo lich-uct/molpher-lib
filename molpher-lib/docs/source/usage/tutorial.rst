@@ -34,7 +34,7 @@ Let's now initialize our exploration tree:
     cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
     procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
-    tree = ETree(source=cocaine, target=procaine)
+    tree = ETree(source=cocaine, target=procaine) # initialize a tree that searches for a path from cocaine to procaine
 
 The code shown in  :numref:`tree-init` simply initializes the tree from the supplied SMILES.
 At the moment the tree is pretty simple. It only contains the root molecule (cocaine in this particular instance).
@@ -46,6 +46,7 @@ We can manipulate this instance and read data from it in multiple ways, but let'
     :name: print-source-target
     :linenos:
 
+    # print the smiles of the source and target molecule
     print('Source: ', tree.params['source'])
     print('Target: ', tree.params['target'])
 
@@ -106,6 +107,7 @@ of our tree instance with a new dictionary:
 
 ..  code-block:: python
 
+    # change selected parameters using a dictionary
     tree.params = {
         'non_producing_survive' : 2
         'weight_max' : 500.0
@@ -175,9 +177,9 @@ Let's generate some `morphs <morph>` from the current leaves of the tree first:
     :name: generate-morphs
     :linenos:
 
-    print(tree.leaves)
+    print(tree.leaves) # show the current leaves of the tree (only the source so far)
     print(tree.leaves[0].getSMILES())
-    tree.generateMorphs()
+    tree.generateMorphs() # generate new morphs
     print(tree.candidates)
     print(len(tree.candidates))
 
@@ -225,20 +227,22 @@ if this instance is changed. The following code example illustrates this behavio
     :name: copying-morphs
     :linenos:
 
-    candidate = tree.candidates[0]
-    print(candidate.isBound())
-    print(tree.candidates[0].getDistToTarget())
-    candidate.setDistToTarget(0.5)
-    print(tree.candidates[0].getDistToTarget())
+    candidate = tree.candidates[0] # get the first morph in the candidate list
+    print(candidate.isBound()) # print if it is bound to a tree
+    print(tree.candidates[0].getDistToTarget()) # print distance to target
+    candidate.setDistToTarget(0.5) # set new distance to target
+    print(tree.candidates[0].getDistToTarget()) # look in the list of candidates and print new distance
 
     print()
 
+    # get a copy of the candidate molecule and verify that the changes do not propagate into the tree
     candidate_copy = candidate.copy()
     print(candidate_copy.isBound())
     print(candidate_copy.getDistToTarget())
     candidate_copy.setDistToTarget(0.7)
     print(candidate_copy.getDistToTarget())
     print(candidate.getDistToTarget())
+    print(tree.candidates[0].getDistToTarget())
 
 Output:
 
@@ -276,20 +280,24 @@ how we can sort the morphs and do the subsequent filtering manually:
     :name: filtering-morphs
     :linenos:
 
-    tree.sortMorphs()
-    print(tree.candidates_mask)
+    tree.sortMorphs() # sort the candidates in the tree according to their distance from target
+    print(tree.candidates_mask) # print the current mask
     print(len(tree.candidates_mask))
+
+    # accept only the first three morphs (those with the lowest distance to target)
     mask = [False for x in tree.candidates_mask]
     mask[0] = True
     mask[1] = True
     mask[2] = True
-    tree.candidates_mask = mask
+    tree.candidates_mask = mask # save the new mask to the tree
+
+    # verify
     print(tree.candidates_mask)
     print(
         [
             (x.getSMILES(), x.getDistToTarget())
             for idx,x in enumerate(tree.candidates)
-            if tree.candidates_mask[idx]
+            if tree.candidates_mask[idx] # only fetch accepted molecules
         ]
     )
 
@@ -329,18 +337,18 @@ to connect them to their respective parents and make them the new leaves:
     :name: extending-tree
     :linenos:
 
-    tree.extend()
+    tree.extend() # connect the accepted morphs to the tree as new leaves
     print(
-        sorted(
+        sorted( # grab the new leaves as a list sorted according to their distance from target
         [
             (x.getSMILES(), x.getDistToTarget())
             for x in tree.leaves
         ], key=lambda x : x[1]
         )
     )
-    print(tree.generation_count)
-    print(tree.path_found)
-    tree.prune()
+    print(tree.generation_count) # get the number of generations
+    print(tree.path_found) # check if a path was found
+    tree.prune() # run the pruning operation on the updated tree
 
 Output:
 
@@ -388,23 +396,37 @@ the same exploration algorithm as demonstrated in the preceding sections:
 
 ..  code-block:: python
     :caption: Using operations to implement simple chemical space exploration.
-    :emphasize-lines: 3,17
+    :emphasize-lines: 3,31
     :name: operations-example
     :linenos:
 
     from molpher.core.operations import *
 
     class MyFilterMorphs(TreeOperation):
+        """
+        A custom tree operation that accepts
+        only the first three morphs
+        (those with the lowest distance to target).
+
+        """
 
         def __call__(self):
+            """
+            This method is called automatically by the tree.
+            The tree this operation is being run on is accessible
+            from `self.tree`.
+
+            """
+
             mask = [False for x in self.tree.candidates_mask]
             mask[0] = True
             mask[1] = True
             mask[2] = True
             self.tree.candidates_mask = mask
 
-    tree = ETree(source=cocaine, target=procaine)
+    tree = ETree(source=cocaine, target=procaine) # create the tree
 
+    # this list of tree operations defines one iteration
     iteration = [
         GenerateMorphsOper()
         , SortMorphsOper()
@@ -413,13 +435,15 @@ the same exploration algorithm as demonstrated in the preceding sections:
         , PruneTreeOper()
     ]
 
+    # apply the operations in the list one by one
     for oper in iteration:
         tree.runOperation(oper)
 
+    # observe the results
     print(tree.generation_count)
     print(tree.path_found)
     print(
-        sorted(
+        sorted( # grab the new leaves as a list sorted according to their distance from target
         [
             (x.getSMILES(), x.getDistToTarget())
             for x in tree.leaves
@@ -490,8 +514,19 @@ as needed. Let's illustrate this with an example:
     :linenos:
 
     class MyCallback(TraverseCallback):
+        """
+        This callback just prints some information
+        about the molecules in the tree.
+
+        """
 
         def processMorph(self, morph):
+            """
+            Method called on each morph in the tree
+            -- starting from root to leaves.
+
+            """
+
             if not morph.getParentSMILES():
                 print("# Root #")
             else:
@@ -500,9 +535,9 @@ as needed. Let's illustrate this with an example:
             print('SMILES: ', morph.getSMILES())
             print('Descendents: ', morph.getDescendants())
 
-    callback = MyCallback()
-    traverse = TraverseOper(callback)
-    tree.runOperation(traverse)
+    callback = MyCallback() # initialize a callback
+    traverse = TraverseOper(callback) # attach it to a tree traversal operation
+    tree.runOperation(traverse) # run the operation
 
 Output:
 
@@ -549,6 +584,12 @@ Therefore, the above code can be turned into:
     :linenos:
 
     def process(morph):
+        """
+        Prints some information
+        about the molecules in the tree.
+
+        """
+
         if not morph.getParentSMILES():
             print("# Root #")
         else:
@@ -557,7 +598,7 @@ Therefore, the above code can be turned into:
         print('SMILES: ', morph.getSMILES())
         print('Descendents: ', morph.getDescendants())
 
-    tree.traverse(process)
+    tree.traverse(process) # use the traverse method to run the callback function
 
 Output:
 
@@ -604,14 +645,15 @@ a tree snapshot:
 
     template_file = 'cocaine-procaine-template.xml'
 
-    tree = ETree.createFromSnapshot(template_file)
+    tree = ETree.createFromSnapshot(template_file) # create a tree from the template file
     print(tree.params)
 
+    # apply the tree operations
     for oper in iteration:
         tree.runOperation(oper)
 
     print(
-        sorted(
+        sorted( # grab the new leaves as a list sorted according to their distance from target
         [
             (x.getSMILES(), x.getDistToTarget())
             for x in tree.leaves
@@ -619,7 +661,7 @@ a tree snapshot:
         )
     )
 
-    tree.saveSnapshot('snapshot.xml')
+    tree.saveSnapshot('snapshot.xml') # save the tree in a snapshot file
 
 Output:
 
@@ -677,10 +719,10 @@ The saved tree can be later reconstructed with the
     :name: loading-snapshot
     :linenos:
 
-    new_tree = ETree.createFromSnapshot('snapshot.xml')
+    new_tree = ETree.createFromSnapshot('snapshot.xml') # create a new tree from the saved snapshot
     print(new_tree.params)
     print(
-        sorted(
+        sorted( # grab the leaves in the created tree (these should be the same as those in the original tree)
         [
             (x.getSMILES(), x.getDistToTarget())
             for x in new_tree.leaves
