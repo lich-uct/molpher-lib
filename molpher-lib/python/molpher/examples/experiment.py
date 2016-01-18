@@ -1,3 +1,8 @@
+"""
+Complete morphing example create from the tutorial code.
+
+"""
+
 from molpher.core import ExplorationTree as ETree
 from molpher.core.operations import *
 

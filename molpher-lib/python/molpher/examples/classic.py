@@ -1,3 +1,8 @@
+"""
+Implementation of the classical search algorithm.
+
+"""
+
 import time
 
 from molpher.core import ExplorationTree as ETree
@@ -8,7 +13,7 @@ def timeit(func):
     func()
     return 1000 * time.clock() - milliseconds
 
-class BidirectionalPathFinder:
+class ClassicPathFinder:
 
     def __init__(self, source, target):
         options = {
@@ -54,7 +59,7 @@ def main():
     cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
     procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
-    pathfinder = BidirectionalPathFinder(cocaine, procaine)
+    pathfinder = ClassicPathFinder(cocaine, procaine)
     pathfinder()
     print(pathfinder.path)
     print('Total Execution Time: {0}'.format(1000 * time.clock() - milliseconds_now))

@@ -1,3 +1,8 @@
+"""
+Implementation of the bidirectional search algorithm.
+
+"""
+
 import time
 
 from molpher.core import ExplorationTree as ETree
