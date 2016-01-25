@@ -12,7 +12,7 @@
 #include <chrono>
 #include <thread>
 
-#include "molpher_API/callbacks/TraverseCallback.hpp"
+#include "../include/operations/callbacks/TraverseCallback.hpp"
 
 class PrintMolCallback : public TraverseCallback {
     

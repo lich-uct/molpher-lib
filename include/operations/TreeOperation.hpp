@@ -8,7 +8,7 @@
 #ifndef TREEOPERATION_HPP
 #define	TREEOPERATION_HPP
 
-#include "molpher_API/ExplorationTree.hpp"
+#include "../ExplorationTree.hpp"
 #include <string>
 
 class ExplorationTree;

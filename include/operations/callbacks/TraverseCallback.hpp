@@ -2,7 +2,7 @@
 #ifndef TRAVERSECALLBACK_HPP
 #define	TRAVERSECALLBACK_HPP
 
-#include "core/PathFinderContext.h"
+#include "core/misc/PathFinderContext.h"
 
 #include "../MolpherMol.hpp"
 

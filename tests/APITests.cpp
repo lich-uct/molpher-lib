@@ -7,14 +7,14 @@
 
 #include "APITests.hpp"
 
-#include "extensions/SAScore.h"
+#include "../src/core/misc/SAScore.h"
 
-#include "../include/molpher_API/ExplorationParameters.hpp"
-#include "../include/molpher_API/MolpherMol.hpp"
-#include "../include/molpher_API/ExplorationTreeSnapshot.hpp"
-#include "../include/molpher_API/ExplorationTree.hpp"
-#include "molpher_API/operations/FilterMorphsOper.hpp"
-#include "molpher_API/operations/TraverseOper.hpp"
+#include "../include/data_structs/ExplorationParameters.hpp"
+#include "../include/data_structs/MolpherMol.hpp"
+#include "../include/data_structs/ExplorationTreeSnapshot.hpp"
+#include "../include/data_structs/ExplorationTree.hpp"
+#include "../include/operations/FilterMorphsOper.hpp"
+#include "../include/operations/TraverseOper.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(APITests);
 

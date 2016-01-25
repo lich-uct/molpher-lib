@@ -16,7 +16,7 @@
             </sourceRootList>
             <confList>
                 <confElem>
-                    <name>Debug</name>
+                    <name>Debug_DEV</name>
                     <type>2</type>
                 </confElem>
                 <confElem>

@@ -28,10 +28,10 @@
 #include <boost/serialization/tracking.hpp>
 #include <boost/serialization/level.hpp>
 
-#include "fingerprint_selectors.h"
-#include "simcoeff_selectors.h"
-#include "dimred_selectors.h"
-#include "chemoper_selectors.h"
+#include "core/misc/selectors/fingerprint_selectors.h"
+#include "core/misc/selectors/simcoeff_selectors.h"
+//#include "dimred_selectors.h"
+#include "core/misc/selectors/chemoper_selectors.h"
 
 #include "MolpherParam.h"
 #include "MolpherMolecule.h"
@@ -45,7 +45,7 @@ struct IterationSnapshot
     {
         fingerprintSelector = DEFAULT_FP;
         simCoeffSelector = DEFAULT_SC;
-        dimRedSelector = DEFAULT_DR;
+//        dimRedSelector = DEFAULT_DR;
         // in default add every ChemOperSelector
         chemOperSelectors.push_back(OP_ADD_ATOM);
         chemOperSelectors.push_back(OP_REMOVE_ATOM);
@@ -67,7 +67,7 @@ struct IterationSnapshot
             BOOST_SERIALIZATION_NVP(elapsedSeconds) &
             BOOST_SERIALIZATION_NVP(fingerprintSelector) & 
             BOOST_SERIALIZATION_NVP(simCoeffSelector) &
-            BOOST_SERIALIZATION_NVP(dimRedSelector) & 
+//            BOOST_SERIALIZATION_NVP(dimRedSelector) & 
             BOOST_SERIALIZATION_NVP(chemOperSelectors) &
             BOOST_SERIALIZATION_NVP(params) & 
             BOOST_SERIALIZATION_NVP(source) &

@@ -8,7 +8,7 @@
 #ifndef EXPLORATIONTREE_HPP
 #define	EXPLORATIONTREE_HPP
 
-#include "core/PathFinderContext.h"
+#include "core/misc/PathFinderContext.h"
 #include "ExplorationTreeSnapshot.hpp"
 #include "ExplorationParameters.hpp"
 #include "MolpherMol.hpp"

@@ -10,9 +10,9 @@
 
 #include "IterationSnapshot.h"
 #include "MolpherMol.hpp"
-#include "chemoper_selectors.h"
-#include "simcoeff_selectors.h"
-#include "fingerprint_selectors.h"
+#include "core/misc/selectors/chemoper_selectors.h"
+#include "core/misc/selectors/simcoeff_selectors.h"
+#include "core/misc/selectors/fingerprint_selectors.h"
 
 class ExplorationParameters {
     
