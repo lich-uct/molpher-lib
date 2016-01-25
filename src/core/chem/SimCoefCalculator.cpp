@@ -17,33 +17,33 @@
 
 #include <vector>
 
-#include "chem/simCoefStrategy/SimCoefStrategy.h"
-#include "chem/fingerprintStrategy/FingerprintStrategy.h"
+#include "core/chem/simCoefStrategy/SimCoefStrategy.h"
+#include "core/chem/fingerprintStrategy/FingerprintStrategy.h"
 
 // include strategies ..
-#include "chem/fingerprintStrategy/AtomPairsFngpr.hpp"
-#include "chem/fingerprintStrategy/MorganFngpr.hpp"
-#include "chem/fingerprintStrategy/TopolLayeredFngpr1.hpp"
-#include "chem/fingerprintStrategy/TopolLayeredFngpr2.hpp"
-#include "chem/fingerprintStrategy/TopolSingleFngpr.hpp"
-#include "chem/fingerprintStrategy/TopolTorsFngpr.hpp"
-#include "chem/SimCoefCalculator.hpp"
+#include "core/chem/fingerprintStrategy/AtomPairsFngpr.hpp"
+#include "core/chem/fingerprintStrategy/MorganFngpr.hpp"
+#include "core/chem/fingerprintStrategy/TopolLayeredFngpr1.hpp"
+#include "core/chem/fingerprintStrategy/TopolLayeredFngpr2.hpp"
+#include "core/chem/fingerprintStrategy/TopolSingleFngpr.hpp"
+#include "core/chem/fingerprintStrategy/TopolTorsFngpr.hpp"
+#include "core/chem/SimCoefCalculator.hpp"
 
 // TODO: merge into one?
 // include similarities 
-#include "chem/simCoefStrategy/AllBitSimCoef.hpp"
-#include "chem/simCoefStrategy/AsymmetricSimCoef.hpp"
-#include "chem/simCoefStrategy/BraunBlanquetSimCoef.hpp"
-#include "chem/simCoefStrategy/CosineSimCoef.hpp"
-#include "chem/simCoefStrategy/DiceSimCoef.hpp"
-#include "chem/simCoefStrategy/KulczynskiSimCoef.hpp"
-#include "chem/simCoefStrategy/McConnaugheySimCoef.hpp"
-#include "chem/simCoefStrategy/OnBitSimCoef.hpp"
-#include "chem/simCoefStrategy/RusselSimCoef.hpp"
-#include "chem/simCoefStrategy/SokalSimCoef.hpp"
-#include "chem/simCoefStrategy/TanimotoSimCoef.hpp"
-#include "chem/simCoefStrategy/TverskySimCoef.hpp"
-#include "fingerprintStrategy/VectorFpFngpr.hpp"
+#include "core/chem/simCoefStrategy/AllBitSimCoef.hpp"
+#include "core/chem/simCoefStrategy/AsymmetricSimCoef.hpp"
+#include "core/chem/simCoefStrategy/BraunBlanquetSimCoef.hpp"
+#include "core/chem/simCoefStrategy/CosineSimCoef.hpp"
+#include "core/chem/simCoefStrategy/DiceSimCoef.hpp"
+#include "core/chem/simCoefStrategy/KulczynskiSimCoef.hpp"
+#include "core/chem/simCoefStrategy/McConnaugheySimCoef.hpp"
+#include "core/chem/simCoefStrategy/OnBitSimCoef.hpp"
+#include "core/chem/simCoefStrategy/RusselSimCoef.hpp"
+#include "core/chem/simCoefStrategy/SokalSimCoef.hpp"
+#include "core/chem/simCoefStrategy/TanimotoSimCoef.hpp"
+#include "core/chem/simCoefStrategy/TverskySimCoef.hpp"
+#include "core/chem/fingerprintStrategy/VectorFpFngpr.hpp"
 
 // TODO: Remove use factory insted
 SimCoefCalculator::SimCoefCalculator(

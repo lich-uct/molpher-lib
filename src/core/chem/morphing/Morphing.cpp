@@ -27,24 +27,24 @@
 #include <tbb/parallel_for.h>
 #include <tbb/blocked_range.h>
 
-#include "main.hpp"
-#include "inout.h"
-#include "chem/fingerprintStrategy/FingerprintStrategy.h"
-#include "chem/simCoefStrategy/SimCoefStrategy.h"
+//#include "main.hpp"
+#include "core/misc/inout.h"
+#include "core/chem/fingerprintStrategy/FingerprintStrategy.h"
+#include "core/chem/simCoefStrategy/SimCoefStrategy.h"
 #include "MorphingData.h"
-#include "chem/morphingStrategy/MorphingStrategy.h"
-#include "chem/morphing/MorphingFtors.hpp"
-#include "chem/morphing/Morphing.hpp"
+#include "core/chem/morphingStrategy/MorphingStrategy.h"
+#include "core/chem/morphing/MorphingFtors.hpp"
+#include "core/chem/morphing/Morphing.hpp"
 
 // TODO: merge into one header file ?
-#include "chem/morphingStrategy/OpAddAtom.hpp"
-#include "chem/morphingStrategy/OpAddBond.hpp"
-#include "chem/morphingStrategy/OpBondContraction.hpp"
-#include "chem/morphingStrategy/OpBondReroute.hpp"
-#include "chem/morphingStrategy/OpInterlayAtom.hpp"
-#include "chem/morphingStrategy/OpMutateAtom.hpp"
-#include "chem/morphingStrategy/OpRemoveAtom.hpp"
-#include "chem/morphingStrategy/OpRemoveBond.hpp"
+#include "core/chem/morphingStrategy/OpAddAtom.hpp"
+#include "core/chem/morphingStrategy/OpAddBond.hpp"
+#include "core/chem/morphingStrategy/OpBondContraction.hpp"
+#include "core/chem/morphingStrategy/OpBondReroute.hpp"
+#include "core/chem/morphingStrategy/OpInterlayAtom.hpp"
+#include "core/chem/morphingStrategy/OpMutateAtom.hpp"
+#include "core/chem/morphingStrategy/OpRemoveAtom.hpp"
+#include "core/chem/morphingStrategy/OpRemoveBond.hpp"
 
 #if MORPHING_REPORTING == 1
 #define REPORT_RECOVERY(x) SynchCout((x))

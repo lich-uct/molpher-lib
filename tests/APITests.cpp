@@ -84,7 +84,7 @@ void APITests::testExplorationTreeClass() {
 }
 
 void APITests::testExploration() {
-    SAScore::loadData();
+    SAScore::loadData("res/SAScore.dat");
     
     // test morphing methods
     ExplorationTreeSnapshot* etreeSnap = ExplorationTreeSnapshot::load(test_files_path + "test-template.xml");
@@ -156,10 +156,9 @@ void APITests::testMisc() {
     }
     tree.extend();
     
-    delete &leaves;
-    leaves = tree.fetchLeaves();
-    CPPUNIT_ASSERT(leaves.size() > 0);
-    for (auto& mol : leaves) {
+    const std::vector<MolpherMol>& leaves2 = tree.fetchLeaves();
+    CPPUNIT_ASSERT(leaves2.size() > 0);
+    for (auto& mol : leaves2) {
         CPPUNIT_ASSERT(mol.isBound());
     }
 }

@@ -75,12 +75,12 @@ endif
 # Add your post 'build' code here...
 	cp $(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/*.so $(LIB_DIR)$(LIBNAME)
 	
-	cp $(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/libtbb_debug.so.2 $(LIB_DIR)libtbb.so.2
-	ln -sf $(LIB_DIR)libtbb.so.2 $(LIB_DIR)libtbb.so
-	cp $(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_debug.so.2 $(LIB_DIR)libtbbmalloc.so.2
-	ln -sf $(LIB_DIR)libtbbmalloc.so.2 $(LIB_DIR)libtbbmalloc.so
-	cp $(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy_debug.so.2 $(LIB_DIR)libtbbmalloc_proxy.so.2
-	ln -sf $(LIB_DIR)libtbbmalloc_proxy_debug.so.2 $(LIB_DIR)libtbbmalloc_proxy.so
+	cp $(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/libtbb_debug.so.2 $(LIB_DIR)libtbb_debug.so.2
+	ln -sf $(LIB_DIR)libtbb_debug.so.2 $(LIB_DIR)libtbb_debug.so
+	cp $(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_debug.so.2 $(LIB_DIR)libtbbmalloc_debug.so.2
+	ln -sf $(LIB_DIR)libtbbmalloc_debug.so.2 $(LIB_DIR)libtbbmalloc_debug.so
+	cp $(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy_debug.so.2 $(LIB_DIR)libtbbmalloc_proxy_debug.so.2
+	ln -sf $(LIB_DIR)libtbbmalloc_proxy_debug.so.2 $(LIB_DIR)libtbbmalloc_proxy_debug.so
 	
 #	cp $(LIB_DIR)$(LIBNAME) $(PYTHON_PACKAGE_DIR)/lib/
 #	cp $(LIB_DIR)/*.so.2 $(PYTHON_PACKAGE_DIR)/lib/

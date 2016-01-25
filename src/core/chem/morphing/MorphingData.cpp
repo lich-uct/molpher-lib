@@ -20,9 +20,9 @@
 #include <GraphMol/RDKitBase.h>
 #include <GraphMol/QueryOps.h>
 
-#include "auxiliary/SynchRand.h"
-#include "chemoper_selectors.h"
-#include "chem/ChemicalAuxiliary.h"
+#include "core/misc/SynchRand.h"
+#include "core/misc/selectors/chemoper_selectors.h"
+#include "core/chem/ChemicalAuxiliary.h"
 #include "MorphingData.h"
 
 MorphingData::MorphingData(

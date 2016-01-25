@@ -21,7 +21,7 @@
 
 #include <GraphMol/GraphMol.h>
 
-#include "global_types.h"
+#include "core/misc/global_types.h"
 
 void SetFormalCharge(int charge, RDKit::Atom &atom);
 

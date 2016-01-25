@@ -26,13 +26,13 @@
 #include <tbb/atomic.h>
 #include <tbb/blocked_range.h>
 
-#include "chemoper_selectors.h"
-#include "chem/fingerprintStrategy/FingerprintStrategy.h"
-#include "chem/simCoefStrategy/SimCoefStrategy.h"
-#include "MolpherMolecule.h"
+#include "core/misc/selectors/chemoper_selectors.h"
+#include "core/chem/fingerprintStrategy/FingerprintStrategy.h"
+#include "core/chem/simCoefStrategy/SimCoefStrategy.h"
+#include "data_structs/MolpherMolecule.h"
 #include "MorphingData.h"
-#include "chem/morphingStrategy/MorphingStrategy.h"
-#include "chem/SimCoefCalculator.hpp"
+#include "core/chem/morphingStrategy/MorphingStrategy.h"
+#include "core/chem/SimCoefCalculator.hpp"
 
 class ReturnResults
 {

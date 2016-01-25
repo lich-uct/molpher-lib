@@ -21,10 +21,10 @@
 
 #include <rdkit/DataStructs/BitOps.h>
 
-#include "global_types.h"
-#include "fingerprint_selectors.h"
-#include "simcoeff_selectors.h"
-#include "chem/fingerprintStrategy/FingerprintStrategy.h"
+#include "core/misc/global_types.h"
+#include "core/misc/selectors/fingerprint_selectors.h"
+#include "core/misc/selectors/simcoeff_selectors.h"
+#include "core/chem/fingerprintStrategy/FingerprintStrategy.h"
 
 /*
     Legend:

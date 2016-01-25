@@ -21,7 +21,7 @@
 #include <GraphMol/RDKitBase.h>
 #include <GraphMol/QueryOps.h>
 
-#include "auxiliary/SynchRand.h"
+#include "core/misc/SynchRand.h"
 #include "ChemicalAuxiliary.h"
 
 void SetFormalCharge(int charge, RDKit::Atom &atom)

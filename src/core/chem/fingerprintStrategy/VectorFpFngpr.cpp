@@ -5,7 +5,7 @@
  */
 
 #include "VectorFpFngpr.hpp"
-#include "global_types.h"
+#include "core/misc/global_types.h"
 
 #include <DataStructs/SparseIntVect.h>
 #include <DataStructs/ExplicitBitVect.h>

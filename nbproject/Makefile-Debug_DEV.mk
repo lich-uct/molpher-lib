@@ -49,9 +49,45 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o \
 	${OBJECTDIR}/src/core/API/operations/TraverseOper.o \
 	${OBJECTDIR}/src/core/API/operations/TreeOperation.o \
+	${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o \
+	${OBJECTDIR}/src/core/chem/SimCoefCalculator.o \
+	${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr.o \
+	${OBJECTDIR}/src/core/chem/fingerprintStrategy/FingerprintStrategy.o \
+	${OBJECTDIR}/src/core/chem/fingerprintStrategy/MorganFngpr.o \
+	${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr1.o \
+	${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr2.o \
+	${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolSingleFngpr.o \
+	${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolTorsFngpr.o \
+	${OBJECTDIR}/src/core/chem/fingerprintStrategy/VectorFpFngpr.o \
+	${OBJECTDIR}/src/core/chem/morphing/Morphing.o \
+	${OBJECTDIR}/src/core/chem/morphing/MorphingData.o \
+	${OBJECTDIR}/src/core/chem/morphing/MorphingFtors.o \
+	${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddAtom.o \
+	${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddBond.o \
+	${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondContraction.o \
+	${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondReroute.o \
+	${OBJECTDIR}/src/core/chem/morphingStrategy/OpInterlayAtom.o \
+	${OBJECTDIR}/src/core/chem/morphingStrategy/OpMutateAtom.o \
+	${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveAtom.o \
+	${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveBond.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/AllBitSimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/AsymmetricSimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/BraunBlanquetSimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/CosineSimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/DiceSimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/KulczynskiSimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/McConnaugheySimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/OnBitSimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/RusselSimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/SokalSimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/TanimotoSimCoef.o \
+	${OBJECTDIR}/src/core/chem/simCoefStrategy/TverskySimCoef.o \
+	${OBJECTDIR}/src/core/misc/PathFinderContext.o \
 	${OBJECTDIR}/src/core/misc/SAScore.o \
+	${OBJECTDIR}/src/core/misc/SynchRand.o \
 	${OBJECTDIR}/src/core/misc/inout.o \
 	${OBJECTDIR}/src/core/misc/iteration_serializer.o \
+	${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors.o \
 	${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors.o \
 	${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors.o
 
@@ -76,11 +112,93 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy_debug.so.2 deps/tbb/lib/intel64/gcc4.4/libtbb_debug.so.2 deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_debug.so.2
+LDLIBSOPTIONS=deps/rdkit/lib/libDistGeomHelpers_static.a deps/rdkit/lib/libMolAlign_static.a deps/rdkit/lib/libAlignment_static.a deps/rdkit/lib/libFragCatalog_static.a deps/rdkit/lib/libMolCatalog_static.a deps/rdkit/lib/libCatalogs_static.a deps/rdkit/lib/libChemReactions_static.a deps/rdkit/lib/libDepictor_static.a deps/rdkit/lib/libDescriptors_static.a deps/rdkit/lib/libDistGeometry_static.a deps/rdkit/lib/libFileParsers_static.a deps/rdkit/lib/libFingerprints_static.a deps/rdkit/lib/libSubgraphs_static.a deps/rdkit/lib/libForceFieldHelpers_static.a deps/rdkit/lib/libChemTransforms_static.a deps/rdkit/lib/libMolChemicalFeatures_static.a deps/rdkit/lib/libSubstructMatch_static.a deps/rdkit/lib/libSmilesParse_static.a deps/rdkit/lib/libPartialCharges_static.a deps/rdkit/lib/libShapeHelpers_static.a deps/rdkit/lib/libMolTransforms_static.a deps/rdkit/lib/libSLNParse_static.a deps/rdkit/lib/libGraphMol_static.a deps/rdkit/lib/libForceField_static.a deps/rdkit/lib/libRDGeometryLib_static.a deps/rdkit/lib/libDataStructs_static.a deps/rdkit/lib/libOptimizer_static.a deps/rdkit/lib/libEigenSolvers_static.a deps/rdkit/lib/libChemicalFeatures_static.a deps/rdkit/lib/libSimDivPickers_static.a deps/rdkit/lib/libRDGeneral_static.a deps/rdkit/lib/libhc_static.a deps/boost/stage/lib/libboost_date_time.a deps/boost/stage/lib/libboost_filesystem.a deps/boost/stage/lib/libboost_program_options.a deps/boost/stage/lib/libboost_regex.a deps/boost/stage/lib/libboost_wserialization.a deps/boost/stage/lib/libboost_serialization.a deps/boost/stage/lib/libboost_signals.a deps/boost/stage/lib/libboost_thread.a deps/boost/stage/lib/libboost_system.a deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy_debug.so.2 deps/tbb/lib/intel64/gcc4.4/libtbb_debug.so.2 deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_debug.so.2
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libDistGeomHelpers_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libMolAlign_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libAlignment_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libFragCatalog_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libMolCatalog_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libCatalogs_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libChemReactions_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libDepictor_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libDescriptors_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libDistGeometry_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libFileParsers_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libFingerprints_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libSubgraphs_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libForceFieldHelpers_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libChemTransforms_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libMolChemicalFeatures_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libSubstructMatch_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libSmilesParse_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libPartialCharges_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libShapeHelpers_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libMolTransforms_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libSLNParse_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libGraphMol_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libForceField_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libRDGeometryLib_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libDataStructs_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libOptimizer_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libEigenSolvers_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libChemicalFeatures_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libSimDivPickers_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libRDGeneral_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libhc_static.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_date_time.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_filesystem.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_program_options.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_regex.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_wserialization.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_serialization.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_signals.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_thread.a
+
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_system.a
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy_debug.so.2
 
@@ -95,97 +213,277 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: ${OBJ
 ${OBJECTDIR}/src/core/API/ExplorationParameters.o: src/core/API/ExplorationParameters.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationParameters.o src/core/API/ExplorationParameters.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationParameters.o src/core/API/ExplorationParameters.cpp
 
 ${OBJECTDIR}/src/core/API/ExplorationTree.o: src/core/API/ExplorationTree.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTree.o src/core/API/ExplorationTree.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTree.o src/core/API/ExplorationTree.cpp
 
 ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot.o: src/core/API/ExplorationTreeSnapshot.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot.o src/core/API/ExplorationTreeSnapshot.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot.o src/core/API/ExplorationTreeSnapshot.cpp
 
 ${OBJECTDIR}/src/core/API/MolpherMol.o: src/core/API/MolpherMol.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/MolpherMol.o src/core/API/MolpherMol.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/MolpherMol.o src/core/API/MolpherMol.cpp
 
 ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback.o: src/core/API/callbacks/EraseSubtreeCallback.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/callbacks
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback.o src/core/API/callbacks/EraseSubtreeCallback.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback.o src/core/API/callbacks/EraseSubtreeCallback.cpp
 
 ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback.o: src/core/API/callbacks/TraverseCallback.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/callbacks
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback.o src/core/API/callbacks/TraverseCallback.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback.o src/core/API/callbacks/TraverseCallback.cpp
 
 ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper.o: src/core/API/operations/ExtendTreeOper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper.o src/core/API/operations/ExtendTreeOper.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper.o src/core/API/operations/ExtendTreeOper.cpp
 
 ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o: src/core/API/operations/FilterMorphsOper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o src/core/API/operations/FilterMorphsOper.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o src/core/API/operations/FilterMorphsOper.cpp
 
 ${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o: src/core/API/operations/FindLeavesOper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o src/core/API/operations/FindLeavesOper.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o src/core/API/operations/FindLeavesOper.cpp
 
 ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o: src/core/API/operations/GenerateMorphsOper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o src/core/API/operations/GenerateMorphsOper.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o src/core/API/operations/GenerateMorphsOper.cpp
 
 ${OBJECTDIR}/src/core/API/operations/PruneTreeOper.o: src/core/API/operations/PruneTreeOper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/PruneTreeOper.o src/core/API/operations/PruneTreeOper.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/PruneTreeOper.o src/core/API/operations/PruneTreeOper.cpp
 
 ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o: src/core/API/operations/SortMorphsOper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o src/core/API/operations/SortMorphsOper.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o src/core/API/operations/SortMorphsOper.cpp
 
 ${OBJECTDIR}/src/core/API/operations/TraverseOper.o: src/core/API/operations/TraverseOper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TraverseOper.o src/core/API/operations/TraverseOper.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TraverseOper.o src/core/API/operations/TraverseOper.cpp
 
 ${OBJECTDIR}/src/core/API/operations/TreeOperation.o: src/core/API/operations/TreeOperation.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TreeOperation.o src/core/API/operations/TreeOperation.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TreeOperation.o src/core/API/operations/TreeOperation.cpp
+
+${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o: src/core/chem/ChemicalAuxiliary.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o src/core/chem/ChemicalAuxiliary.cpp
+
+${OBJECTDIR}/src/core/chem/SimCoefCalculator.o: src/core/chem/SimCoefCalculator.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/SimCoefCalculator.o src/core/chem/SimCoefCalculator.cpp
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr.o: src/core/chem/fingerprintStrategy/AtomPairsFngpr.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr.o src/core/chem/fingerprintStrategy/AtomPairsFngpr.cpp
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/FingerprintStrategy.o: src/core/chem/fingerprintStrategy/FingerprintStrategy.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/FingerprintStrategy.o src/core/chem/fingerprintStrategy/FingerprintStrategy.cpp
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/MorganFngpr.o: src/core/chem/fingerprintStrategy/MorganFngpr.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/MorganFngpr.o src/core/chem/fingerprintStrategy/MorganFngpr.cpp
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr1.o: src/core/chem/fingerprintStrategy/TopolLayeredFngpr1.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr1.o src/core/chem/fingerprintStrategy/TopolLayeredFngpr1.cpp
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr2.o: src/core/chem/fingerprintStrategy/TopolLayeredFngpr2.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr2.o src/core/chem/fingerprintStrategy/TopolLayeredFngpr2.cpp
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolSingleFngpr.o: src/core/chem/fingerprintStrategy/TopolSingleFngpr.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolSingleFngpr.o src/core/chem/fingerprintStrategy/TopolSingleFngpr.cpp
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolTorsFngpr.o: src/core/chem/fingerprintStrategy/TopolTorsFngpr.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolTorsFngpr.o src/core/chem/fingerprintStrategy/TopolTorsFngpr.cpp
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/VectorFpFngpr.o: src/core/chem/fingerprintStrategy/VectorFpFngpr.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/VectorFpFngpr.o src/core/chem/fingerprintStrategy/VectorFpFngpr.cpp
+
+${OBJECTDIR}/src/core/chem/morphing/Morphing.o: src/core/chem/morphing/Morphing.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphing
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphing/Morphing.o src/core/chem/morphing/Morphing.cpp
+
+${OBJECTDIR}/src/core/chem/morphing/MorphingData.o: src/core/chem/morphing/MorphingData.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphing
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphing/MorphingData.o src/core/chem/morphing/MorphingData.cpp
+
+${OBJECTDIR}/src/core/chem/morphing/MorphingFtors.o: src/core/chem/morphing/MorphingFtors.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphing
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphing/MorphingFtors.o src/core/chem/morphing/MorphingFtors.cpp
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddAtom.o: src/core/chem/morphingStrategy/OpAddAtom.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddAtom.o src/core/chem/morphingStrategy/OpAddAtom.cpp
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddBond.o: src/core/chem/morphingStrategy/OpAddBond.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddBond.o src/core/chem/morphingStrategy/OpAddBond.cpp
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondContraction.o: src/core/chem/morphingStrategy/OpBondContraction.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondContraction.o src/core/chem/morphingStrategy/OpBondContraction.cpp
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondReroute.o: src/core/chem/morphingStrategy/OpBondReroute.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondReroute.o src/core/chem/morphingStrategy/OpBondReroute.cpp
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpInterlayAtom.o: src/core/chem/morphingStrategy/OpInterlayAtom.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpInterlayAtom.o src/core/chem/morphingStrategy/OpInterlayAtom.cpp
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpMutateAtom.o: src/core/chem/morphingStrategy/OpMutateAtom.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpMutateAtom.o src/core/chem/morphingStrategy/OpMutateAtom.cpp
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveAtom.o: src/core/chem/morphingStrategy/OpRemoveAtom.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveAtom.o src/core/chem/morphingStrategy/OpRemoveAtom.cpp
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveBond.o: src/core/chem/morphingStrategy/OpRemoveBond.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveBond.o src/core/chem/morphingStrategy/OpRemoveBond.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/AllBitSimCoef.o: src/core/chem/simCoefStrategy/AllBitSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/AllBitSimCoef.o src/core/chem/simCoefStrategy/AllBitSimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/AsymmetricSimCoef.o: src/core/chem/simCoefStrategy/AsymmetricSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/AsymmetricSimCoef.o src/core/chem/simCoefStrategy/AsymmetricSimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/BraunBlanquetSimCoef.o: src/core/chem/simCoefStrategy/BraunBlanquetSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/BraunBlanquetSimCoef.o src/core/chem/simCoefStrategy/BraunBlanquetSimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/CosineSimCoef.o: src/core/chem/simCoefStrategy/CosineSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/CosineSimCoef.o src/core/chem/simCoefStrategy/CosineSimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/DiceSimCoef.o: src/core/chem/simCoefStrategy/DiceSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/DiceSimCoef.o src/core/chem/simCoefStrategy/DiceSimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/KulczynskiSimCoef.o: src/core/chem/simCoefStrategy/KulczynskiSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/KulczynskiSimCoef.o src/core/chem/simCoefStrategy/KulczynskiSimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/McConnaugheySimCoef.o: src/core/chem/simCoefStrategy/McConnaugheySimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/McConnaugheySimCoef.o src/core/chem/simCoefStrategy/McConnaugheySimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/OnBitSimCoef.o: src/core/chem/simCoefStrategy/OnBitSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/OnBitSimCoef.o src/core/chem/simCoefStrategy/OnBitSimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/RusselSimCoef.o: src/core/chem/simCoefStrategy/RusselSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/RusselSimCoef.o src/core/chem/simCoefStrategy/RusselSimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/SokalSimCoef.o: src/core/chem/simCoefStrategy/SokalSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/SokalSimCoef.o src/core/chem/simCoefStrategy/SokalSimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/TanimotoSimCoef.o: src/core/chem/simCoefStrategy/TanimotoSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/TanimotoSimCoef.o src/core/chem/simCoefStrategy/TanimotoSimCoef.cpp
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/TverskySimCoef.o: src/core/chem/simCoefStrategy/TverskySimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/TverskySimCoef.o src/core/chem/simCoefStrategy/TverskySimCoef.cpp
+
+${OBJECTDIR}/src/core/misc/PathFinderContext.o: src/core/misc/PathFinderContext.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/misc
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/PathFinderContext.o src/core/misc/PathFinderContext.cpp
 
 ${OBJECTDIR}/src/core/misc/SAScore.o: src/core/misc/SAScore.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/misc
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/SAScore.o src/core/misc/SAScore.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/SAScore.o src/core/misc/SAScore.cpp
+
+${OBJECTDIR}/src/core/misc/SynchRand.o: src/core/misc/SynchRand.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/misc
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/SynchRand.o src/core/misc/SynchRand.cpp
 
 ${OBJECTDIR}/src/core/misc/inout.o: src/core/misc/inout.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/misc
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/inout.o src/core/misc/inout.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/inout.o src/core/misc/inout.cpp
 
 ${OBJECTDIR}/src/core/misc/iteration_serializer.o: src/core/misc/iteration_serializer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/misc
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/iteration_serializer.o src/core/misc/iteration_serializer.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/iteration_serializer.o src/core/misc/iteration_serializer.cpp
+
+${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors.o: src/core/misc/selectors/chemoper_selectors.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/misc/selectors
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors.o src/core/misc/selectors/chemoper_selectors.cpp
 
 ${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors.o: src/core/misc/selectors/fingerprint_selectors.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/misc/selectors
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors.o src/core/misc/selectors/fingerprint_selectors.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors.o src/core/misc/selectors/fingerprint_selectors.cpp
 
 ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors.o: src/core/misc/selectors/simcoeff_selectors.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/misc/selectors
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors.o src/core/misc/selectors/simcoeff_selectors.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors.o src/core/misc/selectors/simcoeff_selectors.cpp
 
 # Subprojects
 .build-subprojects:
@@ -194,19 +492,19 @@ ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors.o: src/core/misc/selecto
 .build-tests-conf: .build-conf ${TESTFILES}
 ${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/APITests.o ${TESTDIR}/tests/testrunner.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} `cppunit-config --libs`   
+	${LINK.cc}  -pthread -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} -Wl,-rpath,libs `cppunit-config --libs`   
 
 
 ${TESTDIR}/tests/APITests.o: tests/APITests.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/APITests.o tests/APITests.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/APITests.o tests/APITests.cpp
 
 
 ${TESTDIR}/tests/testrunner.o: tests/testrunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testrunner.o tests/testrunner.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testrunner.o tests/testrunner.cpp
 
 
 ${OBJECTDIR}/src/core/API/ExplorationParameters_nomain.o: ${OBJECTDIR}/src/core/API/ExplorationParameters.o src/core/API/ExplorationParameters.cpp 
@@ -217,7 +515,7 @@ ${OBJECTDIR}/src/core/API/ExplorationParameters_nomain.o: ${OBJECTDIR}/src/core/
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationParameters_nomain.o src/core/API/ExplorationParameters.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationParameters_nomain.o src/core/API/ExplorationParameters.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/ExplorationParameters.o ${OBJECTDIR}/src/core/API/ExplorationParameters_nomain.o;\
 	fi
@@ -230,7 +528,7 @@ ${OBJECTDIR}/src/core/API/ExplorationTree_nomain.o: ${OBJECTDIR}/src/core/API/Ex
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTree_nomain.o src/core/API/ExplorationTree.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTree_nomain.o src/core/API/ExplorationTree.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/ExplorationTree.o ${OBJECTDIR}/src/core/API/ExplorationTree_nomain.o;\
 	fi
@@ -243,7 +541,7 @@ ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot_nomain.o: ${OBJECTDIR}/src/cor
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot_nomain.o src/core/API/ExplorationTreeSnapshot.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot_nomain.o src/core/API/ExplorationTreeSnapshot.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot.o ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot_nomain.o;\
 	fi
@@ -256,7 +554,7 @@ ${OBJECTDIR}/src/core/API/MolpherMol_nomain.o: ${OBJECTDIR}/src/core/API/Molpher
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/MolpherMol_nomain.o src/core/API/MolpherMol.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/MolpherMol_nomain.o src/core/API/MolpherMol.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/MolpherMol.o ${OBJECTDIR}/src/core/API/MolpherMol_nomain.o;\
 	fi
@@ -269,7 +567,7 @@ ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback_nomain.o: ${OBJECTDIR}/
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback_nomain.o src/core/API/callbacks/EraseSubtreeCallback.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback_nomain.o src/core/API/callbacks/EraseSubtreeCallback.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback.o ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback_nomain.o;\
 	fi
@@ -282,7 +580,7 @@ ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback_nomain.o: ${OBJECTDIR}/src/
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback_nomain.o src/core/API/callbacks/TraverseCallback.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback_nomain.o src/core/API/callbacks/TraverseCallback.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback.o ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback_nomain.o;\
 	fi
@@ -295,7 +593,7 @@ ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper_nomain.o: ${OBJECTDIR}/src/c
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper_nomain.o src/core/API/operations/ExtendTreeOper.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper_nomain.o src/core/API/operations/ExtendTreeOper.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper.o ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper_nomain.o;\
 	fi
@@ -308,7 +606,7 @@ ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper_nomain.o: ${OBJECTDIR}/src
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper_nomain.o src/core/API/operations/FilterMorphsOper.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper_nomain.o src/core/API/operations/FilterMorphsOper.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper_nomain.o;\
 	fi
@@ -321,7 +619,7 @@ ${OBJECTDIR}/src/core/API/operations/FindLeavesOper_nomain.o: ${OBJECTDIR}/src/c
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FindLeavesOper_nomain.o src/core/API/operations/FindLeavesOper.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FindLeavesOper_nomain.o src/core/API/operations/FindLeavesOper.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o ${OBJECTDIR}/src/core/API/operations/FindLeavesOper_nomain.o;\
 	fi
@@ -334,7 +632,7 @@ ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper_nomain.o: ${OBJECTDIR}/s
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper_nomain.o src/core/API/operations/GenerateMorphsOper.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper_nomain.o src/core/API/operations/GenerateMorphsOper.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper_nomain.o;\
 	fi
@@ -347,7 +645,7 @@ ${OBJECTDIR}/src/core/API/operations/PruneTreeOper_nomain.o: ${OBJECTDIR}/src/co
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/PruneTreeOper_nomain.o src/core/API/operations/PruneTreeOper.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/PruneTreeOper_nomain.o src/core/API/operations/PruneTreeOper.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/PruneTreeOper.o ${OBJECTDIR}/src/core/API/operations/PruneTreeOper_nomain.o;\
 	fi
@@ -360,7 +658,7 @@ ${OBJECTDIR}/src/core/API/operations/SortMorphsOper_nomain.o: ${OBJECTDIR}/src/c
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/SortMorphsOper_nomain.o src/core/API/operations/SortMorphsOper.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/SortMorphsOper_nomain.o src/core/API/operations/SortMorphsOper.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o ${OBJECTDIR}/src/core/API/operations/SortMorphsOper_nomain.o;\
 	fi
@@ -373,7 +671,7 @@ ${OBJECTDIR}/src/core/API/operations/TraverseOper_nomain.o: ${OBJECTDIR}/src/cor
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TraverseOper_nomain.o src/core/API/operations/TraverseOper.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TraverseOper_nomain.o src/core/API/operations/TraverseOper.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/TraverseOper.o ${OBJECTDIR}/src/core/API/operations/TraverseOper_nomain.o;\
 	fi
@@ -386,9 +684,451 @@ ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o: ${OBJECTDIR}/src/co
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o src/core/API/operations/TreeOperation.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o src/core/API/operations/TreeOperation.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/TreeOperation.o ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/ChemicalAuxiliary_nomain.o: ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o src/core/chem/ChemicalAuxiliary.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary_nomain.o src/core/chem/ChemicalAuxiliary.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/SimCoefCalculator_nomain.o: ${OBJECTDIR}/src/core/chem/SimCoefCalculator.o src/core/chem/SimCoefCalculator.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/SimCoefCalculator.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/SimCoefCalculator_nomain.o src/core/chem/SimCoefCalculator.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/SimCoefCalculator.o ${OBJECTDIR}/src/core/chem/SimCoefCalculator_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr_nomain.o: ${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr.o src/core/chem/fingerprintStrategy/AtomPairsFngpr.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr_nomain.o src/core/chem/fingerprintStrategy/AtomPairsFngpr.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr.o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/FingerprintStrategy_nomain.o: ${OBJECTDIR}/src/core/chem/fingerprintStrategy/FingerprintStrategy.o src/core/chem/fingerprintStrategy/FingerprintStrategy.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/FingerprintStrategy.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/FingerprintStrategy_nomain.o src/core/chem/fingerprintStrategy/FingerprintStrategy.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/FingerprintStrategy.o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/FingerprintStrategy_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/MorganFngpr_nomain.o: ${OBJECTDIR}/src/core/chem/fingerprintStrategy/MorganFngpr.o src/core/chem/fingerprintStrategy/MorganFngpr.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/MorganFngpr.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/MorganFngpr_nomain.o src/core/chem/fingerprintStrategy/MorganFngpr.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/MorganFngpr.o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/MorganFngpr_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr1_nomain.o: ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr1.o src/core/chem/fingerprintStrategy/TopolLayeredFngpr1.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr1.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr1_nomain.o src/core/chem/fingerprintStrategy/TopolLayeredFngpr1.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr1.o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr1_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr2_nomain.o: ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr2.o src/core/chem/fingerprintStrategy/TopolLayeredFngpr2.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr2.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr2_nomain.o src/core/chem/fingerprintStrategy/TopolLayeredFngpr2.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr2.o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolLayeredFngpr2_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolSingleFngpr_nomain.o: ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolSingleFngpr.o src/core/chem/fingerprintStrategy/TopolSingleFngpr.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolSingleFngpr.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolSingleFngpr_nomain.o src/core/chem/fingerprintStrategy/TopolSingleFngpr.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolSingleFngpr.o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolSingleFngpr_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolTorsFngpr_nomain.o: ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolTorsFngpr.o src/core/chem/fingerprintStrategy/TopolTorsFngpr.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolTorsFngpr.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolTorsFngpr_nomain.o src/core/chem/fingerprintStrategy/TopolTorsFngpr.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolTorsFngpr.o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/TopolTorsFngpr_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/fingerprintStrategy/VectorFpFngpr_nomain.o: ${OBJECTDIR}/src/core/chem/fingerprintStrategy/VectorFpFngpr.o src/core/chem/fingerprintStrategy/VectorFpFngpr.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/fingerprintStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/VectorFpFngpr.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/VectorFpFngpr_nomain.o src/core/chem/fingerprintStrategy/VectorFpFngpr.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/fingerprintStrategy/VectorFpFngpr.o ${OBJECTDIR}/src/core/chem/fingerprintStrategy/VectorFpFngpr_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphing/Morphing_nomain.o: ${OBJECTDIR}/src/core/chem/morphing/Morphing.o src/core/chem/morphing/Morphing.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphing
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphing/Morphing.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphing/Morphing_nomain.o src/core/chem/morphing/Morphing.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphing/Morphing.o ${OBJECTDIR}/src/core/chem/morphing/Morphing_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphing/MorphingData_nomain.o: ${OBJECTDIR}/src/core/chem/morphing/MorphingData.o src/core/chem/morphing/MorphingData.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphing
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphing/MorphingData.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphing/MorphingData_nomain.o src/core/chem/morphing/MorphingData.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphing/MorphingData.o ${OBJECTDIR}/src/core/chem/morphing/MorphingData_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphing/MorphingFtors_nomain.o: ${OBJECTDIR}/src/core/chem/morphing/MorphingFtors.o src/core/chem/morphing/MorphingFtors.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphing
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphing/MorphingFtors.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphing/MorphingFtors_nomain.o src/core/chem/morphing/MorphingFtors.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphing/MorphingFtors.o ${OBJECTDIR}/src/core/chem/morphing/MorphingFtors_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddAtom_nomain.o: ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddAtom.o src/core/chem/morphingStrategy/OpAddAtom.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddAtom.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddAtom_nomain.o src/core/chem/morphingStrategy/OpAddAtom.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddAtom.o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddAtom_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddBond_nomain.o: ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddBond.o src/core/chem/morphingStrategy/OpAddBond.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddBond.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddBond_nomain.o src/core/chem/morphingStrategy/OpAddBond.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddBond.o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpAddBond_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondContraction_nomain.o: ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondContraction.o src/core/chem/morphingStrategy/OpBondContraction.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondContraction.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondContraction_nomain.o src/core/chem/morphingStrategy/OpBondContraction.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondContraction.o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondContraction_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondReroute_nomain.o: ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondReroute.o src/core/chem/morphingStrategy/OpBondReroute.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondReroute.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondReroute_nomain.o src/core/chem/morphingStrategy/OpBondReroute.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondReroute.o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpBondReroute_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpInterlayAtom_nomain.o: ${OBJECTDIR}/src/core/chem/morphingStrategy/OpInterlayAtom.o src/core/chem/morphingStrategy/OpInterlayAtom.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpInterlayAtom.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpInterlayAtom_nomain.o src/core/chem/morphingStrategy/OpInterlayAtom.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpInterlayAtom.o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpInterlayAtom_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpMutateAtom_nomain.o: ${OBJECTDIR}/src/core/chem/morphingStrategy/OpMutateAtom.o src/core/chem/morphingStrategy/OpMutateAtom.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpMutateAtom.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpMutateAtom_nomain.o src/core/chem/morphingStrategy/OpMutateAtom.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpMutateAtom.o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpMutateAtom_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveAtom_nomain.o: ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveAtom.o src/core/chem/morphingStrategy/OpRemoveAtom.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveAtom.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveAtom_nomain.o src/core/chem/morphingStrategy/OpRemoveAtom.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveAtom.o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveAtom_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveBond_nomain.o: ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveBond.o src/core/chem/morphingStrategy/OpRemoveBond.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/morphingStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveBond.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveBond_nomain.o src/core/chem/morphingStrategy/OpRemoveBond.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveBond.o ${OBJECTDIR}/src/core/chem/morphingStrategy/OpRemoveBond_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/AllBitSimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/AllBitSimCoef.o src/core/chem/simCoefStrategy/AllBitSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/AllBitSimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/AllBitSimCoef_nomain.o src/core/chem/simCoefStrategy/AllBitSimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/AllBitSimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/AllBitSimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/AsymmetricSimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/AsymmetricSimCoef.o src/core/chem/simCoefStrategy/AsymmetricSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/AsymmetricSimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/AsymmetricSimCoef_nomain.o src/core/chem/simCoefStrategy/AsymmetricSimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/AsymmetricSimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/AsymmetricSimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/BraunBlanquetSimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/BraunBlanquetSimCoef.o src/core/chem/simCoefStrategy/BraunBlanquetSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/BraunBlanquetSimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/BraunBlanquetSimCoef_nomain.o src/core/chem/simCoefStrategy/BraunBlanquetSimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/BraunBlanquetSimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/BraunBlanquetSimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/CosineSimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/CosineSimCoef.o src/core/chem/simCoefStrategy/CosineSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/CosineSimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/CosineSimCoef_nomain.o src/core/chem/simCoefStrategy/CosineSimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/CosineSimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/CosineSimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/DiceSimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/DiceSimCoef.o src/core/chem/simCoefStrategy/DiceSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/DiceSimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/DiceSimCoef_nomain.o src/core/chem/simCoefStrategy/DiceSimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/DiceSimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/DiceSimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/KulczynskiSimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/KulczynskiSimCoef.o src/core/chem/simCoefStrategy/KulczynskiSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/KulczynskiSimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/KulczynskiSimCoef_nomain.o src/core/chem/simCoefStrategy/KulczynskiSimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/KulczynskiSimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/KulczynskiSimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/McConnaugheySimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/McConnaugheySimCoef.o src/core/chem/simCoefStrategy/McConnaugheySimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/McConnaugheySimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/McConnaugheySimCoef_nomain.o src/core/chem/simCoefStrategy/McConnaugheySimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/McConnaugheySimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/McConnaugheySimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/OnBitSimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/OnBitSimCoef.o src/core/chem/simCoefStrategy/OnBitSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/OnBitSimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/OnBitSimCoef_nomain.o src/core/chem/simCoefStrategy/OnBitSimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/OnBitSimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/OnBitSimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/RusselSimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/RusselSimCoef.o src/core/chem/simCoefStrategy/RusselSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/RusselSimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/RusselSimCoef_nomain.o src/core/chem/simCoefStrategy/RusselSimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/RusselSimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/RusselSimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/SokalSimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/SokalSimCoef.o src/core/chem/simCoefStrategy/SokalSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/SokalSimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/SokalSimCoef_nomain.o src/core/chem/simCoefStrategy/SokalSimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/SokalSimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/SokalSimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/TanimotoSimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/TanimotoSimCoef.o src/core/chem/simCoefStrategy/TanimotoSimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/TanimotoSimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/TanimotoSimCoef_nomain.o src/core/chem/simCoefStrategy/TanimotoSimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/TanimotoSimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/TanimotoSimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/chem/simCoefStrategy/TverskySimCoef_nomain.o: ${OBJECTDIR}/src/core/chem/simCoefStrategy/TverskySimCoef.o src/core/chem/simCoefStrategy/TverskySimCoef.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/chem/simCoefStrategy
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/chem/simCoefStrategy/TverskySimCoef.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/chem/simCoefStrategy/TverskySimCoef_nomain.o src/core/chem/simCoefStrategy/TverskySimCoef.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/chem/simCoefStrategy/TverskySimCoef.o ${OBJECTDIR}/src/core/chem/simCoefStrategy/TverskySimCoef_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/misc/PathFinderContext_nomain.o: ${OBJECTDIR}/src/core/misc/PathFinderContext.o src/core/misc/PathFinderContext.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/misc
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/misc/PathFinderContext.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/PathFinderContext_nomain.o src/core/misc/PathFinderContext.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/misc/PathFinderContext.o ${OBJECTDIR}/src/core/misc/PathFinderContext_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/misc/SAScore_nomain.o: ${OBJECTDIR}/src/core/misc/SAScore.o src/core/misc/SAScore.cpp 
@@ -399,9 +1139,22 @@ ${OBJECTDIR}/src/core/misc/SAScore_nomain.o: ${OBJECTDIR}/src/core/misc/SAScore.
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/SAScore_nomain.o src/core/misc/SAScore.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/SAScore_nomain.o src/core/misc/SAScore.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/misc/SAScore.o ${OBJECTDIR}/src/core/misc/SAScore_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/misc/SynchRand_nomain.o: ${OBJECTDIR}/src/core/misc/SynchRand.o src/core/misc/SynchRand.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/misc
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/misc/SynchRand.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/SynchRand_nomain.o src/core/misc/SynchRand.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/misc/SynchRand.o ${OBJECTDIR}/src/core/misc/SynchRand_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/misc/inout_nomain.o: ${OBJECTDIR}/src/core/misc/inout.o src/core/misc/inout.cpp 
@@ -412,7 +1165,7 @@ ${OBJECTDIR}/src/core/misc/inout_nomain.o: ${OBJECTDIR}/src/core/misc/inout.o sr
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/inout_nomain.o src/core/misc/inout.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/inout_nomain.o src/core/misc/inout.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/misc/inout.o ${OBJECTDIR}/src/core/misc/inout_nomain.o;\
 	fi
@@ -425,9 +1178,22 @@ ${OBJECTDIR}/src/core/misc/iteration_serializer_nomain.o: ${OBJECTDIR}/src/core/
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/iteration_serializer_nomain.o src/core/misc/iteration_serializer.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/iteration_serializer_nomain.o src/core/misc/iteration_serializer.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/misc/iteration_serializer.o ${OBJECTDIR}/src/core/misc/iteration_serializer_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors_nomain.o: ${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors.o src/core/misc/selectors/chemoper_selectors.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/misc/selectors
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors_nomain.o src/core/misc/selectors/chemoper_selectors.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors.o ${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors_nomain.o: ${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors.o src/core/misc/selectors/fingerprint_selectors.cpp 
@@ -438,7 +1204,7 @@ ${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors_nomain.o: ${OBJECTDIR
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors_nomain.o src/core/misc/selectors/fingerprint_selectors.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors_nomain.o src/core/misc/selectors/fingerprint_selectors.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors.o ${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors_nomain.o;\
 	fi
@@ -451,7 +1217,7 @@ ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors_nomain.o: ${OBJECTDIR}/s
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Isrc/ -Ideps/tbb/include/ -Iinclude/ -I/usr/include/rdkit/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors_nomain.o src/core/misc/selectors/simcoeff_selectors.cpp;\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors_nomain.o src/core/misc/selectors/simcoeff_selectors.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors.o ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors_nomain.o;\
 	fi

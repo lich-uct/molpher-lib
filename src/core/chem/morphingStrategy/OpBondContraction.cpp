@@ -20,8 +20,8 @@
 #include <GraphMol/RDKitBase.h>
 #include <GraphMol/QueryOps.h>
 
-#include "auxiliary/SynchRand.h"
-#include "chem/ChemicalAuxiliary.h"
+#include "core/misc/SynchRand.h"
+#include "core/chem/ChemicalAuxiliary.h"
 
 #include "OpBondContraction.hpp"
 

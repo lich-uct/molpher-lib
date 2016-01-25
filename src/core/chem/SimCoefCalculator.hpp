@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "chem/simCoefStrategy/SimCoefStrategy.h"
+#include "core/chem/simCoefStrategy/SimCoefStrategy.h"
 
 class SimCoefCalculator
 {

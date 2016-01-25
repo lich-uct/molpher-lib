@@ -20,11 +20,11 @@
 #include <GraphMol/SmilesParse/SmilesWrite.h>
 #include <GraphMol/Descriptors/MolDescriptors.h>
 
-#include "main.hpp"
-#include "auxiliary/SynchRand.h"
-#include "chem/ChemicalAuxiliary.h"
-#include "chem/morphing/MorphingFtors.hpp"
-#include "extensions/SAScore.h"
+//#include "main.hpp"
+#include "core/misc/SynchRand.h"
+#include "core/chem/ChemicalAuxiliary.h"
+#include "core/chem/morphing/MorphingFtors.hpp"
+#include "core/misc/SAScore.h"
 
 /*
  Added code for working with SAScore

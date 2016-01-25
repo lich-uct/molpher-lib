@@ -19,9 +19,9 @@
 
 #include <GraphMol/GraphMol.h>
 
-#include "global_types.h"
-#include "chemoper_selectors.h"
-#include "chem/morphing/MorphingData.h"
+#include "core/misc/global_types.h"
+#include "core/misc/selectors/chemoper_selectors.h"
+#include "core/chem/morphing/MorphingData.h"
 
 class MorphingStrategy
 {

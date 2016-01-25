@@ -26,7 +26,7 @@ void PathFinderContext::ContextToSnapshot(
 
     snp.fingerprintSelector = ctx.fingerprintSelector;
     snp.simCoeffSelector = ctx.simCoeffSelector;
-    snp.dimRedSelector = ctx.dimRedSelector;
+//    snp.dimRedSelector = ctx.dimRedSelector;
 
     snp.chemOperSelectors.clear();
     snp.chemOperSelectors.resize(ctx.chemOperSelectors.size(), 0);
@@ -68,7 +68,7 @@ void PathFinderContext::SnapshotToContext(
 
     ctx.fingerprintSelector = (FingerprintSelector) snp.fingerprintSelector;
     ctx.simCoeffSelector = (SimCoeffSelector) snp.simCoeffSelector;
-    ctx.dimRedSelector = (DimRedSelector) snp.dimRedSelector;
+//    ctx.dimRedSelector = (DimRedSelector) snp.dimRedSelector;
 
     ctx.chemOperSelectors.clear();
     ctx.chemOperSelectors.resize(snp.chemOperSelectors.size(), (ChemOperSelector) 0);
@@ -111,7 +111,7 @@ void PathFinderContext::ContextToLightSnapshot(
 
     snp.fingerprintSelector = ctx.fingerprintSelector;
     snp.simCoeffSelector = ctx.simCoeffSelector;
-    snp.dimRedSelector = ctx.dimRedSelector;
+//    snp.dimRedSelector = ctx.dimRedSelector;
 
     snp.chemOperSelectors.clear();
     snp.chemOperSelectors.resize(ctx.chemOperSelectors.size(), 0);
