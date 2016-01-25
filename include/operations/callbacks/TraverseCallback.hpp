@@ -4,7 +4,7 @@
 
 #include "core/misc/PathFinderContext.h"
 
-#include "../MolpherMol.hpp"
+#include "data_structs/MolpherMol.hpp"
 
 class TraverseCallback {
     

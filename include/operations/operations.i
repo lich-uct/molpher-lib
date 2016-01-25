@@ -1,14 +1,14 @@
 
 %{
-#include "molpher_API/operations/TreeOperation.hpp"
-#include "molpher_API/operations/FindLeavesOper.hpp"
-#include "molpher_API/operations/GenerateMorphsOper.hpp"
-#include "molpher_API/operations/SortMorphsOper.hpp"
-#include "molpher_API/operations/FilterMorphsOper.hpp"
-#include "molpher_API/operations/ExtendTreeOper.hpp"
-#include "molpher_API/operations/PruneTreeOper.hpp"
-#include "molpher_API/operations/TraverseOper.hpp"
-#include "molpher_API/callbacks/TraverseCallback.hpp"
+#include "operations/TreeOperation.hpp"
+#include "operations/FindLeavesOper.hpp"
+#include "operations/GenerateMorphsOper.hpp"
+#include "operations/SortMorphsOper.hpp"
+#include "operations/FilterMorphsOper.hpp"
+#include "operations/ExtendTreeOper.hpp"
+#include "operations/PruneTreeOper.hpp"
+#include "operations/TraverseOper.hpp"
+#include "operations/callbacks/TraverseCallback.hpp"
 %}
 
 %include "TreeOperation.hpp"

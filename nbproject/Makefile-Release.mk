@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/include/API.o \
+	${OBJECTDIR}/include/data_structs/data_structs.o \
 	${OBJECTDIR}/include/operations/callbacks/callbacks.o \
 	${OBJECTDIR}/include/operations/operations.o \
 	${OBJECTDIR}/src/core/API/ExplorationParameters.o \
@@ -95,6 +96,11 @@ ${OBJECTDIR}/include/API.o: include/API.i
 	${MKDIR} -p ${OBJECTDIR}/include
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/include/API.o include/API.i
+
+${OBJECTDIR}/include/data_structs/data_structs.o: include/data_structs/data_structs.i 
+	${MKDIR} -p ${OBJECTDIR}/include/data_structs
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/include/data_structs/data_structs.o include/data_structs/data_structs.i
 
 ${OBJECTDIR}/include/operations/callbacks/callbacks.o: include/operations/callbacks/callbacks.i 
 	${MKDIR} -p ${OBJECTDIR}/include/operations/callbacks
@@ -244,6 +250,19 @@ ${OBJECTDIR}/include/API_nomain.o: ${OBJECTDIR}/include/API.o include/API.i
 	    $(COMPILE.cc) -O2 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/include/API_nomain.o include/API.i;\
 	else  \
 	    ${CP} ${OBJECTDIR}/include/API.o ${OBJECTDIR}/include/API_nomain.o;\
+	fi
+
+${OBJECTDIR}/include/data_structs/data_structs_nomain.o: ${OBJECTDIR}/include/data_structs/data_structs.o include/data_structs/data_structs.i 
+	${MKDIR} -p ${OBJECTDIR}/include/data_structs
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/include/data_structs/data_structs.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/include/data_structs/data_structs_nomain.o include/data_structs/data_structs.i;\
+	else  \
+	    ${CP} ${OBJECTDIR}/include/data_structs/data_structs.o ${OBJECTDIR}/include/data_structs/data_structs_nomain.o;\
 	fi
 
 ${OBJECTDIR}/include/operations/callbacks/callbacks_nomain.o: ${OBJECTDIR}/include/operations/callbacks/callbacks.o include/operations/callbacks/callbacks.i 

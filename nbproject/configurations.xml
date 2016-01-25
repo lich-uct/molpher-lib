@@ -16,6 +16,7 @@
           <itemPath>include/data_structs/MolpherMol.hpp</itemPath>
           <itemPath>include/data_structs/MolpherMolecule.h</itemPath>
           <itemPath>include/data_structs/MolpherParam.h</itemPath>
+          <itemPath>include/data_structs/data_structs.i</itemPath>
         </logicalFolder>
         <logicalFolder name="operations" displayName="operations" projectFiles="true">
           <logicalFolder name="callbacks" displayName="callbacks" projectFiles="true">
@@ -204,7 +205,6 @@
             <pElem>include/</pElem>
             <pElem>/usr/include/rdkit/</pElem>
           </incDir>
-          <warningLevel>2</warningLevel>
         </ccTool>
         <linkerTool>
           <linkerLibItems>
@@ -618,8 +618,6 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="src/swig/molpher_wrap.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="src/swig/molpher_wrap.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/APITests.cpp" ex="false" tool="1" flavor2="0">
@@ -700,6 +698,11 @@
       <item path="include/data_structs/MolpherParam.h"
             ex="false"
             tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/data_structs/data_structs.i"
+            ex="false"
+            tool="1"
             flavor2="0">
       </item>
       <item path="include/operations/ExtendTreeOper.hpp"

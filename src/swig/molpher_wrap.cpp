@@ -3945,8 +3945,8 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 
 
 #define SWIG_FILE_WITH_INIT
-#include "morphing_functions.hpp"
-#include "extensions/SAScore.h"
+//#include "morphing_functions.hpp"
+#include "core/misc/SAScore.h"
 
 
   #define SWIG_From_double   PyFloat_FromDouble 
@@ -4072,6 +4072,38 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
 }
 
 
+#include "operations/TreeOperation.hpp"
+#include "operations/FindLeavesOper.hpp"
+#include "operations/GenerateMorphsOper.hpp"
+#include "operations/SortMorphsOper.hpp"
+#include "operations/FilterMorphsOper.hpp"
+#include "operations/ExtendTreeOper.hpp"
+#include "operations/PruneTreeOper.hpp"
+#include "operations/TraverseOper.hpp"
+#include "operations/callbacks/TraverseCallback.hpp"
+
+
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_int  (int value)
+{
+  return PyInt_FromLong((long) value);
+}
+
+
 #include <limits.h>
 #if !defined(SWIG_NO_LLONG_MAX)
 # if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
@@ -4098,45 +4130,13 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
-#include "molpher_API/MolpherMol.hpp"
-#include "molpher_API/ExplorationParameters.hpp"
-#include "molpher_API/ExplorationTreeSnapshot.hpp"
-#include "molpher_API/ExplorationTree.hpp"
+#include "operations/callbacks/TraverseCallback.hpp"
 
 
-#include "molpher_API/operations/TreeOperation.hpp"
-#include "molpher_API/operations/FindLeavesOper.hpp"
-#include "molpher_API/operations/GenerateMorphsOper.hpp"
-#include "molpher_API/operations/SortMorphsOper.hpp"
-#include "molpher_API/operations/FilterMorphsOper.hpp"
-#include "molpher_API/operations/ExtendTreeOper.hpp"
-#include "molpher_API/operations/PruneTreeOper.hpp"
-#include "molpher_API/operations/TraverseOper.hpp"
-#include "molpher_API/callbacks/TraverseCallback.hpp"
-
-
-SWIGINTERN int
-SWIG_AsVal_bool (PyObject *obj, bool *val)
-{
-  int r;
-  if (!PyBool_Check(obj))
-    return SWIG_ERROR;
-  r = PyObject_IsTrue(obj);
-  if (r == -1)
-    return SWIG_ERROR;
-  if (val) *val = r ? true : false;
-  return SWIG_OK;
-}
-
-
-SWIGINTERNINLINE PyObject*
-  SWIG_From_int  (int value)
-{
-  return PyInt_FromLong((long) value);
-}
-
-
-#include "molpher_API/callbacks/TraverseCallback.hpp"
+#include "data_structs/MolpherMol.hpp"
+#include "data_structs/ExplorationParameters.hpp"
+#include "data_structs/ExplorationTreeSnapshot.hpp"
+#include "data_structs/ExplorationTree.hpp"
 
 
 #include <set>
@@ -6934,63 +6934,6 @@ SWIGINTERN PyObject *SAScore_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
   SWIG_TypeNewClientData(SWIGTYPE_p_SAScore, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
-
-SWIGINTERN PyObject *_wrap_run_path_finder(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  int arg3 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int val3 ;
-  int ecode3 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOO:run_path_finder",&obj0,&obj1,&obj2)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "run_path_finder" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "run_path_finder" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "run_path_finder" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "run_path_finder" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "run_path_finder" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    run_path_finder((std::string const &)*arg1,(std::string const &)*arg2,arg3);
-    SWIG_PYTHON_THREAD_END_ALLOW;
-  }
-  resultobj = SWIG_Py_Void();
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  return NULL;
-}
-
 
 SWIGINTERN PyObject *_wrap_new_TreeOperation__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
@@ -19012,7 +18955,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SAScore_getScore", _wrap_SAScore_getScore, METH_VARARGS, NULL},
 	 { (char *)"SAScore_loadData", _wrap_SAScore_loadData, METH_VARARGS, NULL},
 	 { (char *)"SAScore_swigregister", SAScore_swigregister, METH_VARARGS, NULL},
-	 { (char *)"run_path_finder", _wrap_run_path_finder, METH_VARARGS, NULL},
 	 { (char *)"new_TreeOperation", _wrap_new_TreeOperation, METH_VARARGS, NULL},
 	 { (char *)"delete_TreeOperation", _wrap_delete_TreeOperation, METH_VARARGS, NULL},
 	 { (char *)"TreeOperation___call__", _wrap_TreeOperation___call__, METH_VARARGS, NULL},

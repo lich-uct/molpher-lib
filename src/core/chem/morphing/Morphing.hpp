@@ -19,10 +19,10 @@
 
 #include <vector>
 
-#include "fingerprint_selectors.h"
-#include "simcoeff_selectors.h"
-#include "chemoper_selectors.h"
-#include "MolpherMolecule.h"
+#include "core/misc/selectors/fingerprint_selectors.h"
+#include "core/misc/selectors/simcoeff_selectors.h"
+#include "core/misc/selectors/chemoper_selectors.h"
+#include "data_structs/MolpherMolecule.h"
 
 #ifndef MORPHING_REPORTING
 #define MORPHING_REPORTING 1

@@ -1,6 +1,6 @@
 
 %{
-#include "molpher_API/callbacks/TraverseCallback.hpp"
+#include "operations/callbacks/TraverseCallback.hpp"
 %}
 
 %ignore TraverseCallback::TraverseCallback(PathFinderContext& context);

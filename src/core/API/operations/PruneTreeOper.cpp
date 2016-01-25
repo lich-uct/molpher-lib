@@ -1,8 +1,8 @@
 
-#include "inout.h"
+#include "core/misc/inout.h"
 
 #include "operations/PruneTreeOper.hpp"
-#include "callbacks/EraseSubtreeCallback.hpp"
+#include "operations/callbacks/EraseSubtreeCallback.hpp"
 
 PruneTreeOper::PruneTreeOper(ExplorationTree& expTree) : TreeOperation(expTree) {
     // no action

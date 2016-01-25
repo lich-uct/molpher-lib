@@ -21,7 +21,7 @@
 #include <rdkit/DataStructs/ExplicitBitVect.h>
 #include <rdkit/GraphMol/Atom.h>
 
-#include "MolpherAtom.h"
+#include "data_structs/MolpherAtom.h"
 
 typedef unsigned int JobId;
 typedef unsigned int IterIdx;

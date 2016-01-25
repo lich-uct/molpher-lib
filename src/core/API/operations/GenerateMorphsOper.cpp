@@ -3,7 +3,7 @@
 #include <tbb/partitioner.h>
 #include <tbb/parallel_for.h>
 
-#include "chem/morphing/Morphing.hpp"
+#include "core/chem/morphing/Morphing.hpp"
 
 #include "operations/GenerateMorphsOper.hpp"
 

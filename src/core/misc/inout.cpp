@@ -36,9 +36,9 @@
 #include <GraphMol/MolOps.h>
 #include <RDGeneral/BadFileException.h>
 
-#include "chemoper_selectors.h"
-#include "inout.h"
-#include "iteration_serializer.hpp"
+#include "core/misc/selectors/chemoper_selectors.h"
+#include "core/misc/inout.h"
+#include "core/misc/iteration_serializer.hpp"
 
 boost::mutex gIoMutex;
 

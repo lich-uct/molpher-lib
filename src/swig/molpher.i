@@ -5,17 +5,14 @@
 
 %{
 #define SWIG_FILE_WITH_INIT
-#include "morphing_functions.hpp"
-#include "extensions/SAScore.h"
+//#include "morphing_functions.hpp"
+#include "core/misc/SAScore.h"
 %}
 
 //%init %{
 //    SAScore::loadData();
 //%}
-%include "../../../backend/extensions/SAScore.h"
-
-// complete morphing function
-%include "include/morphing_functions.hpp";
+%include "core/misc/SAScore.h"
 
 // the molpher API
-%include "include/molpher_API/molpher_API.i";
+%include "API.i";

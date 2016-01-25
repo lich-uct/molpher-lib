@@ -23,8 +23,8 @@
 #include <rdkit/GraphMol/Fingerprints/MorganFingerprints.h>
 #include <rdkit/GraphMol/Fingerprints/AtomPairs.h>
 
-#include "global_types.h"
-#include "fingerprint_selectors.h"
+#include "core/misc/global_types.h"
+#include "core/misc/selectors/fingerprint_selectors.h"
 
 class FingerprintStrategy
 {

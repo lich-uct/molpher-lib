@@ -3,7 +3,7 @@
 #include <tbb/partitioner.h>
 #include <tbb/parallel_for.h>
 
-#include "inout.h"
+#include "core/misc/inout.h"
 
 #include "operations/ExtendTreeOper.hpp"
 

@@ -1,5 +1,5 @@
 
-#include "MolpherMol.hpp"
+#include "data_structs/MolpherMol.hpp"
 
 MolpherMol::MolpherMol() : mol(new MolpherMolecule()), selfAllocated(true) {
     // no action

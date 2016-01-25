@@ -25,8 +25,8 @@
 #include <rdkit/GraphMol/GraphMol.h>
 
 #include "global_types.h"
-#include "IterationSnapshot.h"
-#include "MolpherMolecule.h"
+#include "data_structs/IterationSnapshot.h"
+#include "data_structs/MolpherMolecule.h"
 
 void SynchCout(const std::string &s);
 

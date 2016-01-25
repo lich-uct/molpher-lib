@@ -38,6 +38,7 @@ deps/
 # Generated project make files
 nbproject/private
 nbproject/*.bash
+.dep.inc
 
 # Molpher snapshots
 *.snp
@@ -56,3 +57,6 @@ doc/doxygen/xml
 
 # DB files
 *.db
+
+# Python package data files
+src/python/molpher/swig_wrappers/*.dat

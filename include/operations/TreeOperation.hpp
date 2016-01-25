@@ -8,7 +8,7 @@
 #ifndef TREEOPERATION_HPP
 #define	TREEOPERATION_HPP
 
-#include "../ExplorationTree.hpp"
+#include "data_structs/ExplorationTree.hpp"
 #include <string>
 
 class ExplorationTree;

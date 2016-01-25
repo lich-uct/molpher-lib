@@ -13,7 +13,7 @@
 #include <tbb/parallel_do.h>
 
 #include "TreeOperation.hpp"
-#include "../callbacks/TraverseCallback.hpp"
+#include "callbacks/TraverseCallback.hpp"
 
 class PruneTreeOper : public TreeOperation {
     

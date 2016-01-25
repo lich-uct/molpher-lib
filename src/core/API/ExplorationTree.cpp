@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <iostream>
 
-#include "iteration_serializer.cpp"
+#include "core/misc/iteration_serializer.hpp"
 
 #include "data_structs/ExplorationTree.hpp"
 #include "operations/FindLeavesOper.hpp"
@@ -11,7 +11,7 @@
 #include "operations/FilterMorphsOper.hpp"
 #include "operations/ExtendTreeOper.hpp"
 #include "operations/PruneTreeOper.hpp"
-#include "callbacks/EraseSubtreeCallback.hpp"
+#include "operations/callbacks/EraseSubtreeCallback.hpp"
 
 ExplorationTree::ExplorationTree(IterationSnapshot& snp) : threadCount(0) {
     treeInit(snp);
@@ -53,7 +53,7 @@ void ExplorationTree::treeInit(IterationSnapshot& snp) {
 
         context.fingerprintSelector = (FingerprintSelector) snp.fingerprintSelector;
         context.simCoeffSelector = (SimCoeffSelector) snp.simCoeffSelector;
-        context.dimRedSelector = (DimRedSelector) snp.dimRedSelector;
+//        context.dimRedSelector = (DimRedSelector) snp.dimRedSelector;
 
         context.chemOperSelectors.clear();
         context.chemOperSelectors.resize(snp.chemOperSelectors.size(), (ChemOperSelector) 0);

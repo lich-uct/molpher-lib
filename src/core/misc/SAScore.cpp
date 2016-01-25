@@ -8,7 +8,7 @@
 //#include "main.hpp"
 #include "SAScore.h"
 #include "global_types.h"
-#include "chem/fingerprintStrategy/FingerprintStrategy.h"
+#include "core/chem/fingerprintStrategy/FingerprintStrategy.h"
 #include <rdkit/DataStructs/SparseIntVect.h>
 #include <rdkit/GraphMol/Fingerprints/MorganFingerprints.h>
 

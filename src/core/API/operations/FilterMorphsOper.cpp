@@ -3,10 +3,10 @@
 #include <tbb/partitioner.h>
 #include <tbb/parallel_for.h>
 
-#include "inout.h"
-#include "SynchRand.h"
+#include "core/misc/inout.h"
+#include "core/misc/SynchRand.h"
 
-#include "include/operations/FilterMorphsOper.hpp"
+#include "operations/FilterMorphsOper.hpp"
 
 FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree, bool verbose) : 
 TreeOperation(expTree)

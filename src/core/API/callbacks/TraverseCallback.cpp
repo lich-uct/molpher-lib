@@ -1,5 +1,5 @@
 
-#include "callbacks/TraverseCallback.hpp"
+#include "operations/callbacks/TraverseCallback.hpp"
 
 TraverseCallback::TraverseCallback(PathFinderContext& context) : context(&context) {
     // no action

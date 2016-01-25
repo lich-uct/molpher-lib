@@ -2,8 +2,8 @@
 #include <stdexcept>
 #include <iostream>
 
-#include "ExplorationTreeSnapshot.hpp"
-#include "inout.h"
+#include "data_structs/ExplorationTreeSnapshot.hpp"
+#include "core/misc/inout.h"
 
 ExplorationTreeSnapshot::ExplorationTreeSnapshot(IterationSnapshot& iterSnapshot) {
     if (iterSnapshot.IsValid()) {

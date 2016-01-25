@@ -19,10 +19,12 @@
 
 #pragma once
 
-#include "IterationSnapshot.h"
+#include "data_structs/IterationSnapshot.h"
 
 namespace molpher {
 namespace iteration {
+    
+MolpherMolecule createMoleculeFromSmile(const std::string& inSmile);
 
 /**
  * Provide functionality that enable save/load iteration snapshot 

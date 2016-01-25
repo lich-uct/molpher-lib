@@ -199,10 +199,6 @@ def SAScore_loadData(*args):
     return _core.SAScore_loadData(*args)
 SAScore_loadData = _core.SAScore_loadData
 
-
-def run_path_finder(storagePath, jobFile, threadCnt):
-    return _core.run_path_finder(storagePath, jobFile, threadCnt)
-run_path_finder = _core.run_path_finder
 class TreeOperation(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, TreeOperation, name, value)

@@ -40,8 +40,8 @@
 
 #include "inout.h"
 #include "iteration_serializer.hpp"
-#include "fingerprint_selectors.h"
-#include "simcoeff_selectors.h"
+#include "selectors/fingerprint_selectors.h"
+#include "selectors/simcoeff_selectors.h"
 
 namespace molpher {
 namespace iteration {

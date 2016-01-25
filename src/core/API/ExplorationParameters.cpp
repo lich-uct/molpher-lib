@@ -1,7 +1,7 @@
 
 #include <algorithm>
 
-#include "ExplorationParameters.hpp"
+#include "data_structs/ExplorationParameters.hpp"
 
 std::map<std::string, ChemOperSelector> ExplorationParameters::CHEMOPERS_SELECTOR_MAPPPING {
         std::make_pair("ADD_ATOM", ChemOperSelector::OP_ADD_ATOM),

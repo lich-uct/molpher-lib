@@ -1,5 +1,5 @@
 
-#include "callbacks/EraseSubtreeCallback.hpp"
+#include "operations/callbacks/EraseSubtreeCallback.hpp"
 
 EraseSubtreeCallback::EraseSubtreeCallback(PathFinderContext& context) : TraverseCallback(context) {
     // no action
