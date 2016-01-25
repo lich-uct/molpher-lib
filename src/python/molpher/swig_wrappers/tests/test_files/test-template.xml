@@ -1,0 +1,32 @@
+
+<!--
+    Template can be loaded instead of snapsthot at any place.
+    Molper distinguish between snp a template file and use
+    proper loading function. The file must end on '-template.xml'
+    if Molpher should interpreate file as a template.
+    If file ends only on 'xml' Molpher try to load it as a regular
+    xml-snapstho file wich will almost surely failed.
+
+    When using templates Molpher write info about loaded into
+    snapshost. For information about other snaphost deafult values
+    please refer to commonst/iteration_snaphost.hpp.
+
+    The <fingerprint> respectively <similarity> should use
+    values from enums in common/fingerprintSelector.hpp
+    respectively common/simCoefSelector.hpp
+-->
+<iteration>
+    <source>
+        <smile>CC12CCC(=O)CC1CCC3C2CCC4(C3CCC4O)C</smile>
+    </source>
+    <target>
+        <smile>CC1(C(=O)N(C(=S)N1C2=CC(=C(C=C2)C(=O)NC)F)C3=CC(=C(C=C3)C#N)C(F)(F)F)C</smile>
+    </target>
+    <fingerprint>FP_MORGAN</fingerprint>
+    <similarity>SC_TANIMOTO</similarity>
+    <param>
+        <syntetizedFeasibility>true</syntetizedFeasibility>
+        <nonProducingSurvive>2</nonProducingSurvive>
+        <iterMax>5</iterMax>
+    </param>
+</iteration>
