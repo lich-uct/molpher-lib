@@ -181,25 +181,3 @@ BOOST_CLASS_IMPLEMENTATION(IterationSnapshot, object_serializable)
 BOOST_CLASS_TRACKING(IterationSnapshot, track_never)
 // specify version
 //BOOST_CLASS_VERSION(IterationSnapshot, 1)
-
-struct IterationSnapshotProxy
-{
-    IterationSnapshotProxy() :
-        jobId(0),
-        iterIdx(0)
-    {
-    }
-
-    IterationSnapshotProxy(std::string &storage,
-        boost::uint32_t jobId, boost::uint32_t iterIdx
-        ) :
-        storage(storage),
-        jobId(jobId),
-        iterIdx(iterIdx)
-    {
-    }
-
-    std::string storage;
-    boost::uint32_t jobId;
-    boost::uint32_t iterIdx;
-};

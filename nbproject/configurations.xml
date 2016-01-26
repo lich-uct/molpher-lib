@@ -131,11 +131,11 @@
       <logicalFolder name="src" displayName="src" projectFiles="true">
         <logicalFolder name="core" displayName="core" projectFiles="true">
           <logicalFolder name="API" displayName="API" projectFiles="true">
-            <logicalFolder name="callbacks" displayName="callbacks" projectFiles="true">
-              <itemPath>src/core/API/callbacks/EraseSubtreeCallback.cpp</itemPath>
-              <itemPath>src/core/API/callbacks/TraverseCallback.cpp</itemPath>
-            </logicalFolder>
             <logicalFolder name="operations" displayName="operations" projectFiles="true">
+              <logicalFolder name="callbacks" displayName="callbacks" projectFiles="true">
+                <itemPath>src/core/API/operations/callbacks/EraseSubtreeCallback.cpp</itemPath>
+                <itemPath>src/core/API/operations/callbacks/TraverseCallback.cpp</itemPath>
+              </logicalFolder>
               <itemPath>src/core/API/operations/ExtendTreeOper.cpp</itemPath>
               <itemPath>src/core/API/operations/FilterMorphsOper.cpp</itemPath>
               <itemPath>src/core/API/operations/FindLeavesOper.cpp</itemPath>
@@ -435,16 +435,6 @@
       </item>
       <item path="src/core/API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/core/API/callbacks/EraseSubtreeCallback.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/core/API/callbacks/TraverseCallback.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
       <item path="src/core/API/operations/ExtendTreeOper.cpp"
             ex="false"
             tool="1"
@@ -481,6 +471,16 @@
             flavor2="0">
       </item>
       <item path="src/core/API/operations/TreeOperation.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/callbacks/EraseSubtreeCallback.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/callbacks/TraverseCallback.cpp"
             ex="false"
             tool="1"
             flavor2="0">
@@ -1058,16 +1058,6 @@
       </item>
       <item path="src/core/API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/core/API/callbacks/EraseSubtreeCallback.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/core/API/callbacks/TraverseCallback.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
       <item path="src/core/API/operations/ExtendTreeOper.cpp"
             ex="false"
             tool="1"
@@ -1104,6 +1094,16 @@
             flavor2="0">
       </item>
       <item path="src/core/API/operations/TreeOperation.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/callbacks/EraseSubtreeCallback.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/callbacks/TraverseCallback.cpp"
             ex="false"
             tool="1"
             flavor2="0">

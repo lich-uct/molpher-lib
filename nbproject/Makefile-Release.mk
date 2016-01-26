@@ -43,8 +43,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/API/ExplorationTree.o \
 	${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot.o \
 	${OBJECTDIR}/src/core/API/MolpherMol.o \
-	${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback.o \
-	${OBJECTDIR}/src/core/API/callbacks/TraverseCallback.o \
 	${OBJECTDIR}/src/core/API/operations/ExtendTreeOper.o \
 	${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o \
 	${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o \
@@ -53,6 +51,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o \
 	${OBJECTDIR}/src/core/API/operations/TraverseOper.o \
 	${OBJECTDIR}/src/core/API/operations/TreeOperation.o \
+	${OBJECTDIR}/src/core/API/operations/callbacks/EraseSubtreeCallback.o \
+	${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o \
 	${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o \
 	${OBJECTDIR}/src/core/chem/SimCoefCalculator.o \
 	${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr.o \
@@ -168,16 +168,6 @@ ${OBJECTDIR}/src/core/API/MolpherMol.o: src/core/API/MolpherMol.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/MolpherMol.o src/core/API/MolpherMol.cpp
 
-${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback.o: src/core/API/callbacks/EraseSubtreeCallback.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core/API/callbacks
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback.o src/core/API/callbacks/EraseSubtreeCallback.cpp
-
-${OBJECTDIR}/src/core/API/callbacks/TraverseCallback.o: src/core/API/callbacks/TraverseCallback.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core/API/callbacks
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback.o src/core/API/callbacks/TraverseCallback.cpp
-
 ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper.o: src/core/API/operations/ExtendTreeOper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
@@ -217,6 +207,16 @@ ${OBJECTDIR}/src/core/API/operations/TreeOperation.o: src/core/API/operations/Tr
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TreeOperation.o src/core/API/operations/TreeOperation.cpp
+
+${OBJECTDIR}/src/core/API/operations/callbacks/EraseSubtreeCallback.o: src/core/API/operations/callbacks/EraseSubtreeCallback.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations/callbacks
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/callbacks/EraseSubtreeCallback.o src/core/API/operations/callbacks/EraseSubtreeCallback.cpp
+
+${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o: src/core/API/operations/callbacks/TraverseCallback.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations/callbacks
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o src/core/API/operations/callbacks/TraverseCallback.cpp
 
 ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o: src/core/chem/ChemicalAuxiliary.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/chem
@@ -559,32 +559,6 @@ ${OBJECTDIR}/src/core/API/MolpherMol_nomain.o: ${OBJECTDIR}/src/core/API/Molpher
 	    ${CP} ${OBJECTDIR}/src/core/API/MolpherMol.o ${OBJECTDIR}/src/core/API/MolpherMol_nomain.o;\
 	fi
 
-${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback_nomain.o: ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback.o src/core/API/callbacks/EraseSubtreeCallback.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core/API/callbacks
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback_nomain.o src/core/API/callbacks/EraseSubtreeCallback.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback.o ${OBJECTDIR}/src/core/API/callbacks/EraseSubtreeCallback_nomain.o;\
-	fi
-
-${OBJECTDIR}/src/core/API/callbacks/TraverseCallback_nomain.o: ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback.o src/core/API/callbacks/TraverseCallback.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core/API/callbacks
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback_nomain.o src/core/API/callbacks/TraverseCallback.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback.o ${OBJECTDIR}/src/core/API/callbacks/TraverseCallback_nomain.o;\
-	fi
-
 ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper_nomain.o: ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper.o src/core/API/operations/ExtendTreeOper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/operations/ExtendTreeOper.o`; \
@@ -687,6 +661,32 @@ ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o: ${OBJECTDIR}/src/co
 	    $(COMPILE.cc) -O2 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o src/core/API/operations/TreeOperation.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/TreeOperation.o ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/API/operations/callbacks/EraseSubtreeCallback_nomain.o: ${OBJECTDIR}/src/core/API/operations/callbacks/EraseSubtreeCallback.o src/core/API/operations/callbacks/EraseSubtreeCallback.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations/callbacks
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/operations/callbacks/EraseSubtreeCallback.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/callbacks/EraseSubtreeCallback_nomain.o src/core/API/operations/callbacks/EraseSubtreeCallback.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/API/operations/callbacks/EraseSubtreeCallback.o ${OBJECTDIR}/src/core/API/operations/callbacks/EraseSubtreeCallback_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback_nomain.o: ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o src/core/API/operations/callbacks/TraverseCallback.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations/callbacks
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback_nomain.o src/core/API/operations/callbacks/TraverseCallback.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary_nomain.o: ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o src/core/chem/ChemicalAuxiliary.cpp 

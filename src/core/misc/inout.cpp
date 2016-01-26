@@ -47,32 +47,32 @@ void SynchCout(const std::string &s) {
     std::cout << s << std::endl;
 }
 
-IterationSnapshot Materialize(IterationSnapshotProxy &proxy) {
-    IterationSnapshot snp;
-    ReadSnapshotFromFile(
-        GenerateFilename(proxy.storage, proxy.jobId, proxy.iterIdx), snp);
-    return snp;
-}
+//IterationSnapshot Materialize(IterationSnapshotProxy &proxy) {
+//    IterationSnapshot snp;
+//    ReadSnapshotFromFile(
+//        GenerateFilename(proxy.storage, proxy.jobId, proxy.iterIdx), snp);
+//    return snp;
+//}
 
-std::string GenerateFilename(
-        std::string &base, JobId jobId, unsigned int iterIdx) {
-    std::stringstream filename;
-    filename << base << "/" << jobId << "/" << iterIdx << ".snp";
-    return filename.str();
-}
-
-std::string GenerateFilename(
-        std::string &base, JobId jobId, std::string name) {
-    std::stringstream filename;
-    filename << base << "/" << jobId << "/" << name;
-    return filename.str();
-}
-
-std::string GenerateDirname(std::string &base, JobId jobId) {
-    std::stringstream dirname;
-    dirname << base << "/" << jobId;
-    return dirname.str();
-}
+//std::string GenerateFilename(
+//        std::string &base, JobId jobId, unsigned int iterIdx) {
+//    std::stringstream filename;
+//    filename << base << "/" << jobId << "/" << iterIdx << ".snp";
+//    return filename.str();
+//}
+//
+//std::string GenerateFilename(
+//        std::string &base, JobId jobId, std::string name) {
+//    std::stringstream filename;
+//    filename << base << "/" << jobId << "/" << name;
+//    return filename.str();
+//}
+//
+//std::string GenerateDirname(std::string &base, JobId jobId) {
+//    std::stringstream dirname;
+//    dirname << base << "/" << jobId;
+//    return dirname.str();
+//}
 
 void WriteMolpherPath(const std::string &file, const std::string &targetSmile,
         const IterationSnapshot::CandidateMap &candidates) {

@@ -30,7 +30,7 @@
 
 void SynchCout(const std::string &s);
 
-IterationSnapshot Materialize(IterationSnapshotProxy &proxy);
+//IterationSnapshot Materialize(IterationSnapshotProxy &proxy);
 
 std::string GenerateFilename(std::string &base,
     JobId jobId, unsigned int iterIdx);
