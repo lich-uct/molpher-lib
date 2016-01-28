@@ -8,30 +8,37 @@
 #ifndef TREEOPERATION_HPP
 #define	TREEOPERATION_HPP
 
-#include "data_structs/ExplorationTree.hpp"
 #include <string>
+
+#include "data_structs/ExplorationTree.hpp"
+
 
 class ExplorationTree;
 
 class TreeOperation {
-
-protected:
-    ExplorationTree* tree;
-    int threadCnt;
     
-    PathFinderContext& fetchTreeContext();
-    ExplorationTree::MoleculeVector& fetchGeneratedMorphs();
-    ExplorationTree::BoolVector& fetchGeneratedMorphsMask();
+//protected:
+//    int threadCnt;
+    
+//    PathFinderContext& fetchTreeContext();
+//    ExplorationTree::MoleculeVector& fetchGeneratedMorphs();
+//    ExplorationTree::BoolVector& fetchGeneratedMorphsMask();
 //    void fetchLeaves(ExplorationTree::MoleculePointerVector&);
     
 public:
+    class TreeOperationImpl;
+    
     TreeOperation(ExplorationTree& expTree);
     TreeOperation();
     virtual ~TreeOperation();
     virtual void operator()() = 0;
     
-    ExplorationTree* getTree();
-    void setTree(ExplorationTree& tree);
+    std::shared_ptr<ExplorationTree> getTree();
+    void setTree(std::shared_ptr<ExplorationTree> tree);
+    
+private:
+    std::shared_ptr<ExplorationTree> tree;
+    std::shared_ptr<TreeOperationImpl> pimpl;
 };
 
 #endif	/* TREEOPERATION_HPP */

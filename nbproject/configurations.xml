@@ -11,11 +11,7 @@
           <itemPath>include/data_structs/ExplorationParameters.hpp</itemPath>
           <itemPath>include/data_structs/ExplorationTree.hpp</itemPath>
           <itemPath>include/data_structs/ExplorationTreeSnapshot.hpp</itemPath>
-          <itemPath>include/data_structs/IterationSnapshot.h</itemPath>
-          <itemPath>include/data_structs/MolpherAtom.h</itemPath>
           <itemPath>include/data_structs/MolpherMol.hpp</itemPath>
-          <itemPath>include/data_structs/MolpherMolecule.h</itemPath>
-          <itemPath>include/data_structs/MolpherParam.h</itemPath>
           <itemPath>include/data_structs/data_structs.i</itemPath>
         </logicalFolder>
         <logicalFolder name="operations" displayName="operations" projectFiles="true">
@@ -39,10 +35,14 @@
       <logicalFolder name="src" displayName="src" projectFiles="true">
         <logicalFolder name="core" displayName="core" projectFiles="true">
           <logicalFolder name="API" displayName="API" projectFiles="true">
-            <logicalFolder name="callbacks" displayName="callbacks" projectFiles="true">
-            </logicalFolder>
             <logicalFolder name="operations" displayName="operations" projectFiles="true">
+              <logicalFolder name="callbacks" displayName="callbacks" projectFiles="true">
+              </logicalFolder>
+              <itemPath>src/core/API/operations/FindLeavesOperImpl.hpp</itemPath>
+              <itemPath>src/core/API/operations/TreeOperationImpl.hpp</itemPath>
             </logicalFolder>
+            <itemPath>src/core/API/ExplorationTreeImpl.h</itemPath>
+            <itemPath>src/core/API/MolpherMolImpl.hpp</itemPath>
           </logicalFolder>
           <logicalFolder name="chem" displayName="chem" projectFiles="true">
             <logicalFolder name="fingerprintStrategy"
@@ -98,13 +98,20 @@
             <itemPath>src/core/chem/ChemicalAuxiliary.h</itemPath>
             <itemPath>src/core/chem/SimCoefCalculator.hpp</itemPath>
           </logicalFolder>
+          <logicalFolder name="data_structs"
+                         displayName="data_structs"
+                         projectFiles="true">
+            <itemPath>src/core/data_structs/ExplorationData.hpp</itemPath>
+            <itemPath>src/core/data_structs/MolpherAtom.h</itemPath>
+            <itemPath>src/core/data_structs/MolpherMolData.hpp</itemPath>
+            <itemPath>src/core/data_structs/MolpherParam.h</itemPath>
+          </logicalFolder>
           <logicalFolder name="misc" displayName="misc" projectFiles="true">
             <logicalFolder name="selectors" displayName="selectors" projectFiles="true">
               <itemPath>src/core/misc/selectors/chemoper_selectors.h</itemPath>
               <itemPath>src/core/misc/selectors/fingerprint_selectors.h</itemPath>
               <itemPath>src/core/misc/selectors/simcoeff_selectors.h</itemPath>
             </logicalFolder>
-            <itemPath>src/core/misc/PathFinderContext.h</itemPath>
             <itemPath>src/core/misc/SAScore.h</itemPath>
             <itemPath>src/core/misc/SynchRand.h</itemPath>
             <itemPath>src/core/misc/global_types.h</itemPath>
@@ -147,6 +154,7 @@
             </logicalFolder>
             <itemPath>src/core/API/ExplorationParameters.cpp</itemPath>
             <itemPath>src/core/API/ExplorationTree.cpp</itemPath>
+            <itemPath>src/core/API/ExplorationTreeImpl.cpp</itemPath>
             <itemPath>src/core/API/ExplorationTreeSnapshot.cpp</itemPath>
             <itemPath>src/core/API/MolpherMol.cpp</itemPath>
           </logicalFolder>
@@ -199,13 +207,16 @@
             <itemPath>src/core/chem/ChemicalAuxiliary.cpp</itemPath>
             <itemPath>src/core/chem/SimCoefCalculator.cpp</itemPath>
           </logicalFolder>
+          <logicalFolder name="data_structs"
+                         displayName="data_structs"
+                         projectFiles="true">
+          </logicalFolder>
           <logicalFolder name="misc" displayName="misc" projectFiles="true">
             <logicalFolder name="selectors" displayName="selectors" projectFiles="true">
               <itemPath>src/core/misc/selectors/chemoper_selectors.cpp</itemPath>
               <itemPath>src/core/misc/selectors/fingerprint_selectors.cpp</itemPath>
               <itemPath>src/core/misc/selectors/simcoeff_selectors.cpp</itemPath>
             </logicalFolder>
-            <itemPath>src/core/misc/PathFinderContext.cpp</itemPath>
             <itemPath>src/core/misc/SAScore.cpp</itemPath>
             <itemPath>src/core/misc/SynchRand.cpp</itemPath>
             <itemPath>src/core/misc/inout.cpp</itemPath>
@@ -347,24 +358,7 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="include/data_structs/IterationSnapshot.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="include/data_structs/MolpherAtom.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="include/data_structs/MolpherMol.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="include/data_structs/MolpherMolecule.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="include/data_structs/MolpherParam.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -428,12 +422,21 @@
       </item>
       <item path="src/core/API/ExplorationTree.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/core/API/ExplorationTreeImpl.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/ExplorationTreeImpl.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/core/API/ExplorationTreeSnapshot.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="src/core/API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/core/API/MolpherMolImpl.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/core/API/operations/ExtendTreeOper.cpp"
             ex="false"
@@ -448,6 +451,11 @@
       <item path="src/core/API/operations/FindLeavesOper.cpp"
             ex="false"
             tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/FindLeavesOperImpl.hpp"
+            ex="false"
+            tool="3"
             flavor2="0">
       </item>
       <item path="src/core/API/operations/GenerateMorphsOper.cpp"
@@ -473,6 +481,11 @@
       <item path="src/core/API/operations/TreeOperation.cpp"
             ex="false"
             tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/TreeOperationImpl.hpp"
+            ex="false"
+            tool="3"
             flavor2="0">
       </item>
       <item path="src/core/API/operations/callbacks/EraseSubtreeCallback.cpp"
@@ -837,12 +850,25 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="src/core/misc/PathFinderContext.cpp"
+      <item path="src/core/data_structs/ExplorationData.hpp"
             ex="false"
-            tool="1"
+            tool="3"
             flavor2="0">
       </item>
-      <item path="src/core/misc/PathFinderContext.h" ex="false" tool="3" flavor2="0">
+      <item path="src/core/data_structs/MolpherAtom.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/core/data_structs/MolpherMolData.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/core/data_structs/MolpherParam.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="src/core/misc/SAScore.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -958,24 +984,7 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="include/data_structs/IterationSnapshot.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="include/data_structs/MolpherAtom.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="include/data_structs/MolpherMol.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="include/data_structs/MolpherMolecule.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="include/data_structs/MolpherParam.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -1051,12 +1060,21 @@
       </item>
       <item path="src/core/API/ExplorationTree.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/core/API/ExplorationTreeImpl.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/ExplorationTreeImpl.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/core/API/ExplorationTreeSnapshot.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="src/core/API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/core/API/MolpherMolImpl.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/core/API/operations/ExtendTreeOper.cpp"
             ex="false"
@@ -1071,6 +1089,11 @@
       <item path="src/core/API/operations/FindLeavesOper.cpp"
             ex="false"
             tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/FindLeavesOperImpl.hpp"
+            ex="false"
+            tool="3"
             flavor2="0">
       </item>
       <item path="src/core/API/operations/GenerateMorphsOper.cpp"
@@ -1096,6 +1119,11 @@
       <item path="src/core/API/operations/TreeOperation.cpp"
             ex="false"
             tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/TreeOperationImpl.hpp"
+            ex="false"
+            tool="3"
             flavor2="0">
       </item>
       <item path="src/core/API/operations/callbacks/EraseSubtreeCallback.cpp"
@@ -1460,12 +1488,25 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="src/core/misc/PathFinderContext.cpp"
+      <item path="src/core/data_structs/ExplorationData.hpp"
             ex="false"
-            tool="1"
+            tool="3"
             flavor2="0">
       </item>
-      <item path="src/core/misc/PathFinderContext.h" ex="false" tool="3" flavor2="0">
+      <item path="src/core/data_structs/MolpherAtom.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/core/data_structs/MolpherMolData.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/core/data_structs/MolpherParam.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="src/core/misc/SAScore.cpp" ex="false" tool="1" flavor2="0">
       </item>
