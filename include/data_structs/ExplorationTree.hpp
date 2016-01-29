@@ -15,10 +15,12 @@
 #include "MolpherMol.hpp"
 
 class TreeOperation; // forward declaration to resolve circular dependency
+class FindLeavesOper;
 
 class ExplorationTree {
     
     friend class TreeOperation;
+    friend class FindLeavesOper;
     
 public:
 //    typedef tbb::concurrent_vector<MolpherMolecule> MoleculeVector;

@@ -28,7 +28,7 @@ class TreeOperation {
 public:
     class TreeOperationImpl;
     
-    TreeOperation(ExplorationTree& expTree);
+    TreeOperation(std::shared_ptr<ExplorationTree> expTree);
     TreeOperation();
     virtual ~TreeOperation();
     virtual void operator()() = 0;

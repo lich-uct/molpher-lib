@@ -19,7 +19,7 @@ private:
     std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree;
     
 public:
-    TreeOperationImpl(ExplorationTree::ExplorationTreeImpl& expTree);
+    TreeOperationImpl(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> expTree);
     TreeOperationImpl();
     virtual void operator()() = 0;
     

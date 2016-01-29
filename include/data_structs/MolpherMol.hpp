@@ -23,6 +23,8 @@ private:
     
 public:
     class MolpherMolImpl;
+    
+    MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl);
 //    MolpherMol();
 //    MolpherMol(MolpherMolecule& mol);
 //    MolpherMol(MolpherMolecule& mol, bool copy);

@@ -38,6 +38,7 @@ typedef tbb::concurrent_hash_map<std::string, std::shared_ptr<MolpherMol::Molphe
 typedef tbb::concurrent_hash_map<std::string, unsigned int> MorphDerivationMap;
 typedef tbb::concurrent_vector<std::shared_ptr<MolpherMol::MolpherMolImpl>> ConcurrentMolVector;
 typedef std::vector<std::shared_ptr<MolpherMol::MolpherMolImpl>> MolVector;
+typedef std::vector<std::shared_ptr<MolpherMol>> MolVectorAPI;
 
 template<typename Content>
 void concurrent_vector_to_vector(const tbb::concurrent_vector<Content>& in, std::vector<Content>& out);

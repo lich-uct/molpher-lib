@@ -18,6 +18,12 @@ class FindLeavesOper : public TreeOperation {
     
     public:
         class FindLeavesOperImpl;
+        
+        FindLeavesOper(std::shared_ptr<ExplorationTree> expTree, bool increment_iters_without_dist_improve = false);
+        FindLeavesOper();
+        void operator()();
+        
+        std::vector<std::shared_ptr<MolpherMol> > fetchLeaves();
     
     private:
         std::shared_ptr<FindLeavesOperImpl> pimpl;

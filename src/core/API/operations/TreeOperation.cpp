@@ -4,13 +4,14 @@
 #include "core/API/ExplorationTreeImpl.h"
 
 
-TreeOperation::TreeOperation(ExplorationTree& expTree) : 
-pimpl(new TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree.pimpl))
+TreeOperation::TreeOperation(std::shared_ptr<ExplorationTree> expTree) : 
+pimpl(new TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree->pimpl))
 {
     // no action
 }
 
-TreeOperation::TreeOperation()
+TreeOperation::TreeOperation() :
+pimpl(new TreeOperation::TreeOperationImpl::TreeOperationImpl())
 {
     // no action
 }
@@ -53,7 +54,7 @@ void TreeOperation::setTree(std::shared_ptr<ExplorationTree> tree) {
     pimpl->setTree(tree->pimpl);
 }
 
-TreeOperation::TreeOperationImpl::TreeOperationImpl(ExplorationTree::ExplorationTreeImpl& expTree) :
+TreeOperation::TreeOperationImpl::TreeOperationImpl(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> expTree) :
 tree(expTree)
 {
     // no action

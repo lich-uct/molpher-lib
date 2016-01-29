@@ -32,11 +32,11 @@ class FindLeavesOper::FindLeavesOperImpl : public TreeOperation::TreeOperationIm
         
 
     public:
-        FindLeavesOperImpl(ExplorationTree::ExplorationTreeImpl& expTree, bool increment_iters_without_dist_improve = false);
+        FindLeavesOperImpl(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> expTree, bool increment_iters_without_dist_improve = false);
         FindLeavesOperImpl();
         void operator()();
         
-        std::shared_ptr<MolVector> fetchLeaves();
+        std::shared_ptr<MolVectorAPI> fetchLeaves();
 
 };
 
