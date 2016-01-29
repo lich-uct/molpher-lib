@@ -154,7 +154,6 @@
             </logicalFolder>
             <itemPath>src/core/API/ExplorationParameters.cpp</itemPath>
             <itemPath>src/core/API/ExplorationTree.cpp</itemPath>
-            <itemPath>src/core/API/ExplorationTreeImpl.cpp</itemPath>
             <itemPath>src/core/API/ExplorationTreeSnapshot.cpp</itemPath>
             <itemPath>src/core/API/MolpherMol.cpp</itemPath>
           </logicalFolder>
@@ -421,11 +420,6 @@
             flavor2="0">
       </item>
       <item path="src/core/API/ExplorationTree.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/core/API/ExplorationTreeImpl.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
       </item>
       <item path="src/core/API/ExplorationTreeImpl.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -1059,11 +1053,6 @@
             flavor2="0">
       </item>
       <item path="src/core/API/ExplorationTree.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/core/API/ExplorationTreeImpl.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
       </item>
       <item path="src/core/API/ExplorationTreeImpl.h" ex="false" tool="3" flavor2="0">
       </item>

@@ -8,36 +8,35 @@
 #ifndef FINDLEAVESOPERIMPL_HPP
 #define	FINDLEAVESOPERIMPL_HPP
 
+#include <memory>
+
+#include "core/misc/global_types.h"
 #include "TreeOperationImpl.hpp"
 
 class FindLeavesOper::FindLeavesOperImpl : public TreeOperation::TreeOperationImpl {
     
-//    friend class ExplorationTree;
-    
-    // TODO fit to new implementation
-    
+    private:
         class FindLeaves
         {
-        public:
-            FindLeaves(ExplorationTree::MoleculePointerVector &leaves, bool increment_iters_without_dist_improve);
-            void operator()(
-                const PathFinderContext::CandidateMap::range_type &candidates) const;
+            public:
+                FindLeaves(ConcurrentMolVector &leaves, bool increment_iters_without_dist_improve);
+                void operator()(const ConcurrentMolVector &tree) const;
 
-        private:
-            ExplorationTree::MoleculePointerVector &mLeaves;
-            bool mIncrementDistImproveCounter;
+            private:
+                ConcurrentMolVector &mLeaves;
+                bool mIncrementDistImproveCounter;
         };
     
-        ExplorationTree::MoleculePointerVector leaves;
+        ConcurrentMolVector leaves;
         bool mIncrementDistImproveCounter;
         
 
     public:
-        FindLeavesOper(ExplorationTree& expTree, bool increment_iters_without_dist_improve = false);
-        FindLeavesOper();
+        FindLeavesOperImpl(ExplorationTree::ExplorationTreeImpl& expTree, bool increment_iters_without_dist_improve = false);
+        FindLeavesOperImpl();
         void operator()();
         
-        const std::vector<MolpherMol>& fetchLeaves();
+        std::shared_ptr<MolVector> fetchLeaves();
 
 };
 

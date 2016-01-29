@@ -37,7 +37,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/core/API/ExplorationParameters.o \
 	${OBJECTDIR}/src/core/API/ExplorationTree.o \
-	${OBJECTDIR}/src/core/API/ExplorationTreeImpl.o \
 	${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot.o \
 	${OBJECTDIR}/src/core/API/MolpherMol.o \
 	${OBJECTDIR}/src/core/API/operations/ExtendTreeOper.o \
@@ -219,11 +218,6 @@ ${OBJECTDIR}/src/core/API/ExplorationTree.o: src/core/API/ExplorationTree.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTree.o src/core/API/ExplorationTree.cpp
-
-${OBJECTDIR}/src/core/API/ExplorationTreeImpl.o: src/core/API/ExplorationTreeImpl.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core/API
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTreeImpl.o src/core/API/ExplorationTreeImpl.cpp
 
 ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot.o: src/core/API/ExplorationTreeSnapshot.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
@@ -531,19 +525,6 @@ ${OBJECTDIR}/src/core/API/ExplorationTree_nomain.o: ${OBJECTDIR}/src/core/API/Ex
 	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTree_nomain.o src/core/API/ExplorationTree.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/ExplorationTree.o ${OBJECTDIR}/src/core/API/ExplorationTree_nomain.o;\
-	fi
-
-${OBJECTDIR}/src/core/API/ExplorationTreeImpl_nomain.o: ${OBJECTDIR}/src/core/API/ExplorationTreeImpl.o src/core/API/ExplorationTreeImpl.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core/API
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/ExplorationTreeImpl.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/ExplorationTreeImpl_nomain.o src/core/API/ExplorationTreeImpl.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/src/core/API/ExplorationTreeImpl.o ${OBJECTDIR}/src/core/API/ExplorationTreeImpl_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot_nomain.o: ${OBJECTDIR}/src/core/API/ExplorationTreeSnapshot.o src/core/API/ExplorationTreeSnapshot.cpp 

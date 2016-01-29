@@ -24,7 +24,7 @@
 #include <tbb/concurrent_hash_map.h>
 #include <tbb/concurrent_vector.h>
 
-//#include "global_types.h"
+#include "global_types.h"
 //#include "core/misc/selectors/fingerprint_selectors.h"
 //#include "core/misc/selectors/simcoeff_selectors.h"
 //#include "dimred_selectors.h"
@@ -85,21 +85,17 @@ class ExplorationTree::ExplorationTreeImpl
          */
         std::shared_ptr<MolpherMol::MolpherMolImpl> target;
 
-        typedef tbb::concurrent_vector<std::shared_ptr<MolpherMol::MolpherMolImpl>> CandidatesVector;
-        typedef std::vector<bool> CandidatesMaskVector;
-        typedef tbb::concurrent_hash_map<std::string, std::shared_ptr<MolpherMol::MolpherMolImpl>> TreeMap;
-        typedef tbb::concurrent_hash_map<std::string, unsigned int> MorphDerivationMap;
     //    typedef tbb::concurrent_vector<std::string> PrunedVector;
 
         /**
          * Candidate morphs.
          */
-        CandidatesVector candidates;
+        ConcurrentMolVector candidates;
 
         /**
          * Candidates mask.
          */
-        CandidatesMaskVector candidatesMask;
+        std::vector<bool> candidatesMask;
 
         /**
          * Molecules in the tree.
