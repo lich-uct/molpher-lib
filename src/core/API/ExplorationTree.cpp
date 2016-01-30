@@ -131,7 +131,7 @@ std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::Explorati
 }
 
 std::shared_ptr<MolVectorAPI> ExplorationTree::ExplorationTreeImpl::fetchLeaves(bool increase_dist_improve_counter) {
-    FindLeavesOper::FindLeavesOperImpl op(std::make_shared<decltype(*this)>(*this), increase_dist_improve_counter);
+    FindLeavesOper::FindLeavesOperImpl op(std::make_shared<decltype(this)>(this), increase_dist_improve_counter); // TODO: create an empty deleter so that the shared pointer doesnt kill the the object pointed to by this
     op();
     return op.fetchLeaves();
 }
