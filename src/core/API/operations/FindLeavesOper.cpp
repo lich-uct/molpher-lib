@@ -9,9 +9,9 @@
 #include "core/API/MolpherMolImpl.hpp"
 #include "core/API/ExplorationTreeImpl.h"
 
-FindLeavesOper::FindLeavesOper() : 
+FindLeavesOper::FindLeavesOper(bool increment_iters_without_dist_improve = false) : 
 TreeOperation() 
-, pimpl(new FindLeavesOper::FindLeavesOperImpl())
+, pimpl(new FindLeavesOper::FindLeavesOperImpl(increment_iters_without_dist_improve))
 {
     // no action
 }
@@ -56,7 +56,7 @@ FindLeavesOper::FindLeavesOperImpl::FindLeavesOperImpl(
     // no action
 }
 
-FindLeavesOper::FindLeavesOperImpl::FindLeavesOperImpl() : 
+FindLeavesOper::FindLeavesOperImpl::FindLeavesOperImpl(bool increment_iters_without_dist_improve = false) : 
 mIncrementDistImproveCounter(false)
 {
     // no action

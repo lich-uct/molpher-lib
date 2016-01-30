@@ -125,8 +125,7 @@ class ExplorationTree::ExplorationTreeImpl
         
         void runOperation(std::shared_ptr<TreeOperation::TreeOperationImpl> operation);
         
-        void fetchLeaves(std::vector<std::shared_ptr<MolpherMol::MolpherMolImpl> >& leaves, bool increase_dist_improve_counter = false);
-        std::shared_ptr<const std::vector<std::shared_ptr<MolpherMol::MolpherMolImpl> > > fetchLeaves();
+        std::shared_ptr<MolVectorAPI> fetchLeaves(bool increase_dist_improve_counter = false);
         std::shared_ptr<MolpherMol::MolpherMolImpl> fetchMol(const std::string& canonSMILES);
         bool hasMol(const std::string& canonSMILES);
         bool isPathFound();

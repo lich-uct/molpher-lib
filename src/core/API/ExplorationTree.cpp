@@ -8,6 +8,7 @@
 #include "ExplorationTreeImpl.h"
 #include "MolpherMolImpl.hpp"
 #include "operations/FindLeavesOper.hpp"
+#include "operations/FindLeavesOperImpl.hpp"
 //#include "operations/GenerateMorphsOper.hpp"
 //#include "operations/SortMorphsOper.hpp"
 //#include "operations/FilterMorphsOper.hpp"
@@ -129,12 +130,10 @@ std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::Explorati
     return std::make_shared<ExplorationTree::ExplorationTreeImpl>(data);
 }
 
-void ExplorationTree::ExplorationTreeImpl::fetchLeaves(std::vector<std::shared_ptr<MolpherMol::MolpherMolImpl> >& leaves, bool increase_dist_improve_counter) {
-    FindLeavesOper op(*this, increase_dist_improve_counter);
+std::shared_ptr<MolVectorAPI> ExplorationTree::ExplorationTreeImpl::fetchLeaves(bool increase_dist_improve_counter) {
+    FindLeavesOper::FindLeavesOperImpl op(std::make_shared<decltype(*this)>(*this), increase_dist_improve_counter);
     op();
-    for (auto leaf : op.leaves) {
-        leaves.push_back(leaf);
-    }
+    return op.fetchLeaves();
 }
 
 

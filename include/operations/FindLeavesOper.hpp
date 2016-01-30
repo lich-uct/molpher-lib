@@ -20,7 +20,7 @@ class FindLeavesOper : public TreeOperation {
         class FindLeavesOperImpl;
         
         FindLeavesOper(std::shared_ptr<ExplorationTree> expTree, bool increment_iters_without_dist_improve = false);
-        FindLeavesOper();
+        FindLeavesOper(bool increment_iters_without_dist_improve = false);
         void operator()();
         
         std::vector<std::shared_ptr<MolpherMol> > fetchLeaves();

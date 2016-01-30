@@ -33,7 +33,7 @@ class FindLeavesOper::FindLeavesOperImpl : public TreeOperation::TreeOperationIm
 
     public:
         FindLeavesOperImpl(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> expTree, bool increment_iters_without_dist_improve = false);
-        FindLeavesOperImpl();
+        FindLeavesOperImpl(bool increment_iters_without_dist_improve = false);
         void operator()();
         
         std::shared_ptr<MolVectorAPI> fetchLeaves();
