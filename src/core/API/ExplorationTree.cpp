@@ -43,6 +43,7 @@ void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData 
         source = std::make_shared<MolpherMol::MolpherMolImpl>(data.source);
     }
     target = std::make_shared<MolpherMol::MolpherMolImpl>(data.target);
+    threadCnt = data.threadCnt;
     
     if (treeMap.empty()) {
         for (auto& mol_data : data.treeMap) {
@@ -71,8 +72,8 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
         data->candidates.push_back(*(mol->asData()));
     }
     
-    data->candidatesMask.swap(candidatesMask)
-    data->chemOpers.swap(chemOpers)
+    data->candidatesMask.swap(candidatesMask);
+    data->chemOpers.swap(chemOpers);
     data->fingerprint = fingerprint;
     data->generationCnt = generationCnt;
     
@@ -84,6 +85,7 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     data->simCoeff = simCoeff;
     data->source = *(source->asData());
     data->target = *(target->asData());
+    data->threadCnt = threadCnt;
     
     for (auto& item : treeMap) {
         data->treeMap.insert(std::make_pair<std::string, MolpherMolData>(item.first, *(item.second->asData())));

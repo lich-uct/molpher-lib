@@ -40,6 +40,8 @@ struct ExplorationData
      * Number of generations.
      */
     unsigned generationCnt;
+    
+    unsigned threadCnt;
 
     /**
      * Fingerprint used in algorithm.
@@ -119,6 +121,7 @@ bool ExplorationData::isValid() {
 
 ExplorationData::ExplorationData() :
         generationCnt(0)
+        , threadCnt(0)
     {
         fingerprint = DEFAULT_FP;
         simCoeff = DEFAULT_SC;
@@ -142,7 +145,8 @@ BOOST_CLASS_TRACKING(ExplorationData, track_never)
 template <class Archive>
 void ExplorationData::save(Archive & ar, const unsigned int version) const {
     
-    ar  & BOOST_SERIALIZATION_NVP(generationCnt) 
+    ar  & BOOST_SERIALIZATION_NVP(generationCnt)
+        & BOOST_SERIALIZATION_NVP(threadCnt) 
         & BOOST_SERIALIZATION_NVP(fingerprint) 
         & BOOST_SERIALIZATION_NVP(simCoeff) 
         & BOOST_SERIALIZATION_NVP(chemOpers) 
@@ -150,14 +154,15 @@ void ExplorationData::save(Archive & ar, const unsigned int version) const {
         & BOOST_SERIALIZATION_NVP(source) 
         & BOOST_SERIALIZATION_NVP(target) 
         & BOOST_SERIALIZATION_NVP(treeMap) 
-        & BOOST_SERIALIZATION_NVP(morphDerivations) 
-        & BOOST_SERIALIZATION_NVP(pruned);
+        & BOOST_SERIALIZATION_NVP(morphDerivations);
+//        & BOOST_SERIALIZATION_NVP(pruned);
 }
 
 template <class Archive>
 void ExplorationData::load(Archive & ar, const unsigned int version) const {
     
-    ar  & BOOST_SERIALIZATION_NVP(generationCnt) 
+    ar  & BOOST_SERIALIZATION_NVP(generationCnt)
+        & BOOST_SERIALIZATION_NVP(threadCnt) 
         & BOOST_SERIALIZATION_NVP(fingerprint) 
         & BOOST_SERIALIZATION_NVP(simCoeff) 
         & BOOST_SERIALIZATION_NVP(chemOpers) 
@@ -165,8 +170,8 @@ void ExplorationData::load(Archive & ar, const unsigned int version) const {
         & BOOST_SERIALIZATION_NVP(source) 
         & BOOST_SERIALIZATION_NVP(target) 
         & BOOST_SERIALIZATION_NVP(treeMap) 
-        & BOOST_SERIALIZATION_NVP(morphDerivations) 
-        & BOOST_SERIALIZATION_NVP(pruned);
+        & BOOST_SERIALIZATION_NVP(morphDerivations);
+//        & BOOST_SERIALIZATION_NVP(pruned);
     
 }
 

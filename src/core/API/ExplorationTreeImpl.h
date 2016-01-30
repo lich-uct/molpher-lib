@@ -42,6 +42,7 @@ class ExplorationTree::ExplorationTreeImpl
 {
     
     friend class TreeOperation::TreeOperationImpl;
+    friend class FindLeavesOper::FindLeavesOperImpl;
 
     private:
         
@@ -49,6 +50,11 @@ class ExplorationTree::ExplorationTreeImpl
          * Number of generations.
          */
         unsigned generationCnt;
+        
+        /**
+         * Number of generations.
+         */
+        unsigned threadCnt;
 
         /**
          * Fingerprint used in algorithm.
