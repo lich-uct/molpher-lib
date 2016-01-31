@@ -9,6 +9,7 @@
 #define	TREEOPERATION_HPP
 
 #include <string>
+#include <memory>
 
 #include "data_structs/ExplorationTree.hpp"
 
@@ -37,8 +38,8 @@ public:
     void setTree(std::shared_ptr<ExplorationTree> tree);
     
 private:
-    std::shared_ptr<ExplorationTree> tree;
-    std::shared_ptr<TreeOperationImpl> pimpl;
+    std::weak_ptr<ExplorationTree> tree;
+    std::unique_ptr<TreeOperationImpl> pimpl;
 };
 
 #endif	/* TREEOPERATION_HPP */

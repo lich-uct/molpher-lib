@@ -17,7 +17,7 @@
 class MolpherMol::MolpherMolImpl {
     
 private:
-    std::shared_ptr<ExplorationTree> tree;
+    std::weak_ptr<ExplorationTree> tree;
     MolpherMolData data;
     
 public:

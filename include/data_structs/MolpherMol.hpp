@@ -19,7 +19,7 @@ private:
 //    MolpherMolecule* mol;
 //    bool selfAllocated;
     
-    std::shared_ptr<MolpherMolImpl> pimpl;
+    std::unique_ptr<MolpherMolImpl> pimpl;
     
 public:
     class MolpherMolImpl;

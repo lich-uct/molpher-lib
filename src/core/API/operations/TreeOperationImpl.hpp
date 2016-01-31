@@ -16,7 +16,7 @@
 class TreeOperation::TreeOperationImpl {
 
 private:
-    std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree;
+    std::weak_ptr<ExplorationTree::ExplorationTreeImpl> tree;
     
 public:
     TreeOperationImpl(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> expTree);

@@ -26,7 +26,7 @@ class FindLeavesOper : public TreeOperation {
         std::vector<std::shared_ptr<MolpherMol> > fetchLeaves();
     
     private:
-        std::shared_ptr<FindLeavesOperImpl> pimpl;
+        std::unique_ptr<FindLeavesOperImpl> pimpl;
 
 };
 

@@ -65,7 +65,7 @@ TreeOperation::TreeOperationImpl::TreeOperationImpl() {
 }
 
 std::shared_ptr<ExplorationTree::ExplorationTreeImpl> TreeOperation::TreeOperationImpl::getTree() {
-    return tree;
+    return tree.lock();
 }
 
 void TreeOperation::TreeOperationImpl::setTree(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree) {
