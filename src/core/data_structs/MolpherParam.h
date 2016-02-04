@@ -68,7 +68,7 @@ struct MolpherParam
         //}
     }
 
-    bool isValid()
+    bool isValid() const
     {
         return (cntCandidatesToKeepMax > 0) &&
             (cntCandidatesToKeepMax >= cntCandidatesToKeep) &&

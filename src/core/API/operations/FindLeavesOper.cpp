@@ -9,14 +9,14 @@
 #include "core/API/MolpherMolImpl.hpp"
 #include "core/API/ExplorationTreeImpl.h"
 
-FindLeavesOper::FindLeavesOper(bool increment_iters_without_dist_improve = false) : 
+FindLeavesOper::FindLeavesOper(bool increment_iters_without_dist_improve) : 
 TreeOperation() 
 , pimpl(new FindLeavesOper::FindLeavesOperImpl(increment_iters_without_dist_improve))
 {
     // no action
 }
 
-FindLeavesOper::FindLeavesOper(std::shared_ptr<ExplorationTree> expTree, bool increment_iters_without_dist_improve = false) :
+FindLeavesOper::FindLeavesOper(std::shared_ptr<ExplorationTree> expTree, bool increment_iters_without_dist_improve) :
 TreeOperation(expTree)
 , pimpl(new FindLeavesOper::FindLeavesOperImpl(expTree->pimpl, increment_iters_without_dist_improve))
 {
@@ -27,7 +27,7 @@ void FindLeavesOper::operator()() {
     (*pimpl)();
 }
 
-std::vector<std::shared_ptr<MolpherMol> > FindLeavesOper::fetchLeaves() {
+std::shared_ptr<std::vector<std::shared_ptr<MolpherMol> > > FindLeavesOper::fetchLeaves() {
     return pimpl->fetchLeaves();
 }
 
@@ -40,7 +40,7 @@ std::shared_ptr<MolVectorAPI> FindLeavesOper::FindLeavesOperImpl::fetchLeaves() 
         MolVector ret_pimpl;
         concurrent_vector_to_vector<std::shared_ptr<MolpherMol::MolpherMolImpl>>(leaves, ret_pimpl);
         for (auto& mol_pimpl : ret_pimpl) {
-            ret->push_back(std::make_shared<MolpherMol>(mol_pimpl));
+//            ret->push_back(std::make_shared<MolpherMol>(mol_pimpl));
         }
         return ret;
     }
@@ -56,7 +56,7 @@ FindLeavesOper::FindLeavesOperImpl::FindLeavesOperImpl(
     // no action
 }
 
-FindLeavesOper::FindLeavesOperImpl::FindLeavesOperImpl(bool increment_iters_without_dist_improve = false) : 
+FindLeavesOper::FindLeavesOperImpl::FindLeavesOperImpl(bool increment_iters_without_dist_improve) : 
 mIncrementDistImproveCounter(false)
 {
     // no action
@@ -70,22 +70,22 @@ mLeaves(leaves)
 }
 
 void FindLeavesOper::FindLeavesOperImpl::FindLeaves::operator()(
-        const TreeMap &tree) const {
+        const TreeMap::range_type &tree) const {
     TreeMap::iterator it;
     
-    for (it = tree.begin(); it != tree.end(); it++) {
-        if (!it->second->getParentSMILES().empty() && mIncrementDistImproveCounter) {
-            it->second->getItersWithoutDistImprovement()++;
-        }
-        bool isLeaf = it->second->getDescendants()->empty();
-        if (isLeaf) {
-            mLeaves.push_back(&(it->second));
-        }
-    }
+//    for (it = tree.begin(); it != tree.end(); it++) {
+//        if (!it->second->getParentSMILES().empty() && mIncrementDistImproveCounter) {
+//            it->second->setItersWithoutDistImprovement(it->second->getItersWithoutDistImprovement() + 1);
+//        }
+//        bool isLeaf = it->second->getDescendants()->empty();
+//        if (isLeaf) {
+//            mLeaves.push_back(it->second);
+//        }
+//    }
 }
 
 void FindLeavesOper::FindLeavesOperImpl::operator()() {
-    auto& tree = getTree();
+    auto tree = getTree();
     tbb::task_group_context tbbCtx;
     
     tbb::task_scheduler_init scheduler;
@@ -94,7 +94,7 @@ void FindLeavesOper::FindLeavesOperImpl::operator()() {
         scheduler.initialize(tree->threadCnt);
     }
     
-    FindLeaves findLeaves(leaves, mIncrementDistImproveCounter);
+    FindLeavesOper::FindLeavesOperImpl::FindLeaves findLeaves(leaves, mIncrementDistImproveCounter);
     tbb::parallel_for(
                 TreeMap::range_type(tree->treeMap),
                 findLeaves, tbb::auto_partitioner(), tbbCtx);

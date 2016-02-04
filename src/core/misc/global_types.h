@@ -19,11 +19,14 @@
 #pragma once
 
 #include <tbb/concurrent_vector.h>
+#include <tbb/concurrent_hash_map.h>
 
 #include <rdkit/DataStructs/ExplicitBitVect.h>
 #include <rdkit/GraphMol/Atom.h>
 
-#include "data_structs/MolpherAtom.h"
+#include "core/data_structs/MolpherAtom.h"
+#include "core/data_structs/MolpherMolData.hpp"
+#include "data_structs/MolpherMol.hpp"
 
 //typedef unsigned int JobId;
 //typedef unsigned int IterIdx;
@@ -39,6 +42,11 @@ typedef tbb::concurrent_hash_map<std::string, unsigned int> MorphDerivationMap;
 typedef tbb::concurrent_vector<std::shared_ptr<MolpherMol::MolpherMolImpl>> ConcurrentMolVector;
 typedef std::vector<std::shared_ptr<MolpherMol::MolpherMolImpl>> MolVector;
 typedef std::vector<std::shared_ptr<MolpherMol>> MolVectorAPI;
+
+typedef std::vector<MolpherMolData> CandidatesVectorData;
+typedef std::vector<bool> CandidatesMaskVectorData;
+typedef std::map<std::string, MolpherMolData> TreeMapData;
+typedef std::map<std::string, unsigned> MorphDerivationMapData;
 
 template<typename Content>
 void concurrent_vector_to_vector(const tbb::concurrent_vector<Content>& in, std::vector<Content>& out);

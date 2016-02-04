@@ -25,15 +25,12 @@
 #include "core/misc/selectors/simcoeff_selectors.h"
 #include "core/misc/selectors/chemoper_selectors.h"
 
+#include "core/misc/global_types.h"
+
 #include "MolpherParam.h"
-#include "MolpherMolData.hpp"
 
 struct ExplorationData
 {
-    typedef std::vector<MolpherMolData> CandidatesVector;
-    typedef std::vector<bool> CandidatesMaskVector;
-    typedef std::map<std::string, MolpherMolData> TreeMap;
-    typedef std::map<std::string, unsigned> MorphDerivationMap;
 //    typedef std::vector<std::string> PrunedVector;
     
     /**
@@ -81,24 +78,24 @@ struct ExplorationData
     /**
      * Candidate morphs.
      */
-    CandidatesVector candidates;
+    CandidatesVectorData candidates;
     
     /**
      * Candidates mask.
      */
-    CandidatesMaskVector candidatesMask;
+    CandidatesMaskVectorData candidatesMask;
 
     /**
      * Molecules in the tree.
      */
-    TreeMap treeMap;
+    TreeMapData treeMap;
     
-    MorphDerivationMap morphDerivations;
+    MorphDerivationMapData morphDerivations;
     
 //    PrunedVector pruned;
     
     ExplorationData();
-    bool isValid();
+    bool isValid() const;
 
     friend class boost::serialization::access;
     
@@ -111,7 +108,7 @@ struct ExplorationData
 
 };
 
-bool ExplorationData::isValid() {
+bool ExplorationData::isValid() const {
     return (!chemOpers.empty()) &&
             params.isValid() &&
             source.isValid() &&
@@ -159,7 +156,7 @@ void ExplorationData::save(Archive & ar, const unsigned int version) const {
 }
 
 template <class Archive>
-void ExplorationData::load(Archive & ar, const unsigned int version) const {
+void ExplorationData::load(Archive & ar, const unsigned int version) {
     
     ar  & BOOST_SERIALIZATION_NVP(generationCnt)
         & BOOST_SERIALIZATION_NVP(threadCnt) 

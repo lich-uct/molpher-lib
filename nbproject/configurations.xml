@@ -414,33 +414,13 @@
       </item>
       <item path="res/SAScore.dat" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/core/API/ExplorationParameters.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
       <item path="src/core/API/ExplorationTree.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/core/API/ExplorationTreeImpl.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/core/API/ExplorationTreeSnapshot.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
       <item path="src/core/API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/core/API/MolpherMolImpl.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/core/API/operations/ExtendTreeOper.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/core/API/operations/FilterMorphsOper.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
       </item>
       <item path="src/core/API/operations/FindLeavesOper.cpp"
             ex="false"
@@ -452,26 +432,6 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="src/core/API/operations/GenerateMorphsOper.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/core/API/operations/PruneTreeOper.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/core/API/operations/SortMorphsOper.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/core/API/operations/TraverseOper.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
       <item path="src/core/API/operations/TreeOperation.cpp"
             ex="false"
             tool="1"
@@ -480,16 +440,6 @@
       <item path="src/core/API/operations/TreeOperationImpl.hpp"
             ex="false"
             tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/core/API/operations/callbacks/EraseSubtreeCallback.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/core/API/operations/callbacks/TraverseCallback.cpp"
-            ex="false"
-            tool="1"
             flavor2="0">
       </item>
       <item path="src/core/chem/ChemicalAuxiliary.cpp"
@@ -874,14 +824,7 @@
       </item>
       <item path="src/core/misc/global_types.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/core/misc/inout.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="src/core/misc/inout.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/core/misc/iteration_serializer.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
       </item>
       <item path="src/core/misc/iteration_serializer.hpp"
             ex="false"

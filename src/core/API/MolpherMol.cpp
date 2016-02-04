@@ -1,9 +1,9 @@
 
 #include "data_structs/MolpherMol.hpp"
 
-MolpherMol::MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl) : pimpl(pimpl) {
-    // no action
-}
+//MolpherMol::MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl) : pimpl(pimpl) {
+//    // no action
+//}
 
 
 

@@ -15,16 +15,11 @@
 
 class MolpherMol {
     
-private:
-//    MolpherMolecule* mol;
-//    bool selfAllocated;
-    
-    std::unique_ptr<MolpherMolImpl> pimpl;
-    
 public:
     class MolpherMolImpl;
     
-    MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl);
+//    MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl);
+    
 //    MolpherMol();
 //    MolpherMol(MolpherMolecule& mol);
 //    MolpherMol(MolpherMolecule& mol, bool copy);
@@ -48,6 +43,12 @@ public:
 //    
 //    void setDistToTarget(double dist);
 //    void setSAScore(double score);
+    
+private:
+//    MolpherMolecule* mol;
+//    bool selfAllocated;
+    
+    std::unique_ptr<MolpherMolImpl> pimpl;
 };
 
 #endif	/* MOLPHERMOL_HPP */

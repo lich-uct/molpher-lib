@@ -58,7 +58,7 @@ struct MolpherMolData
     
     MolpherMolData();
     
-    bool isValid();
+    bool isValid() const;
     
     friend class boost::serialization::access;
     
@@ -86,7 +86,7 @@ MolpherMolData::MolpherMolData() :
     // no action
 }
 
-bool MolpherMolData::isValid() {
+bool MolpherMolData::isValid() const {
     return (!SMILES.empty());
 }
 
@@ -105,7 +105,7 @@ void MolpherMolData::save(Archive & ar, const unsigned int version) const {
 }
 
 template <class Archive>
-void MolpherMolData::load(Archive & ar, const unsigned int version) const {
+void MolpherMolData::load(Archive & ar, const unsigned int version) {
     
     std::set<std::string> descendants_saved;
     std::set<std::string> historicDescendants_saved;

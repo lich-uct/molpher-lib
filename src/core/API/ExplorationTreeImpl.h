@@ -24,17 +24,18 @@
 #include <tbb/concurrent_hash_map.h>
 #include <tbb/concurrent_vector.h>
 
-#include "global_types.h"
+#include "core/misc/global_types.h"
 //#include "core/misc/selectors/fingerprint_selectors.h"
 //#include "core/misc/selectors/simcoeff_selectors.h"
 //#include "dimred_selectors.h"
 //#include "core/misc/selectors/chemoper_selectors.h"
 
-#include "data_structs/MolpherParam.h"
+#include "core/data_structs/MolpherParam.h"
 #include "core/data_structs/ExplorationData.hpp"
 #include "data_structs/ExplorationTree.hpp"
 #include "operations/TreeOperation.hpp"
 #include "data_structs/MolpherMol.hpp"
+#include "operations/FindLeavesOper.hpp"
 
 //class TreeOperation::TreeOperationImpl; // forward declaration to resolve circular dependency
 
@@ -114,14 +115,14 @@ class ExplorationTree::ExplorationTreeImpl
         
     public:
         
-        static std::shared_ptr<ExplorationTree::ExplorationTreeImpl> createFromData(const ExplorationData &data);
+        static std::shared_ptr<ExplorationTree::ExplorationTreeImpl> createFromData(ExplorationData &data);
         
         ExplorationTreeImpl(const std::string& sourceMolAsSMILES);
         ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
-        ExplorationTreeImpl(const ExplorationData &data);
+        ExplorationTreeImpl(ExplorationData &data);
         
         std::shared_ptr<ExplorationData> asData();
-        updateFromData(const ExplorationData &data);
+        void updateFromData(ExplorationData& data);
         
         void runOperation(std::shared_ptr<TreeOperation::TreeOperationImpl> operation);
         

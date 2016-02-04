@@ -20,7 +20,7 @@ class FindLeavesOper::FindLeavesOperImpl : public TreeOperation::TreeOperationIm
         {
             public:
                 FindLeaves(ConcurrentMolVector &leaves, bool increment_iters_without_dist_improve);
-                void operator()(const ConcurrentMolVector &tree) const;
+                void operator()(const TreeMap::range_type &tree) const;
 
             private:
                 ConcurrentMolVector &mLeaves;

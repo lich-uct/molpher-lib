@@ -9,6 +9,7 @@
 #define	FINDLEAVES_HPP
 
 #include <memory>
+#include <vector>
 
 #include "TreeOperation.hpp"
 
@@ -23,7 +24,7 @@ class FindLeavesOper : public TreeOperation {
         FindLeavesOper(bool increment_iters_without_dist_improve = false);
         void operator()();
         
-        std::vector<std::shared_ptr<MolpherMol> > fetchLeaves();
+        std::shared_ptr<std::vector<std::shared_ptr<MolpherMol> > > fetchLeaves();
     
     private:
         std::unique_ptr<FindLeavesOperImpl> pimpl;

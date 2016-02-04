@@ -16,7 +16,7 @@
 //#include "operations/PruneTreeOper.hpp"
 //#include "operations/callbacks/EraseSubtreeCallback.hpp"
 
-void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData &data)
+void ExplorationTree::ExplorationTreeImpl::updateFromData(ExplorationData& data)
 {
     if (!data.isValid()) {
         throw std::runtime_error("Supplied exploration data is invalid.");
@@ -27,8 +27,8 @@ void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData 
         candidates.push_back(std::make_shared<MolpherMol::MolpherMolImpl>(mol_data));
     }
     
-    candidatesMask.swap(data.candidatesMask)
-    chemOpers.swap(data.chemOpers)
+    candidatesMask.swap(data.candidatesMask);
+    chemOpers.swap(data.chemOpers);
     fingerprint = data.fingerprint;
     generationCnt = data.generationCnt;
     
@@ -38,7 +38,7 @@ void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData 
         }
     }
     
-    params = data.params
+    params = data.params;
     simCoeff = data.simCoeff;
     if (!source) {
         source = std::make_shared<MolpherMol::MolpherMolImpl>(data.source);
@@ -49,7 +49,7 @@ void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData 
     if (treeMap.empty()) {
         for (auto& mol_data : data.treeMap) {
             treeMap.insert(
-                std::make_pair<std::string, std::shared_ptr<MolpherMol::MolpherMolImpl> >(
+                std::make_pair(
                     mol_data.first
                     , std::make_shared<MolpherMol::MolpherMolImpl>(mol_data.second)
                     )
@@ -58,7 +58,7 @@ void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData 
     }
     
     if (treeMap.empty()) {
-        treeMap.insert(std::make_pair<std::string, std::shared_ptr<MolpherMol::MolpherMolImpl> >(
+        treeMap.insert(std::make_pair(
                     source->getSMILES()
                     , source
                     )
@@ -89,7 +89,7 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     data->threadCnt = threadCnt;
     
     for (auto& item : treeMap) {
-        data->treeMap.insert(std::make_pair<std::string, MolpherMolData>(item.first, *(item.second->asData())));
+        data->treeMap.insert(std::make_pair(item.first, *(item.second->asData())));
     }
 }
 
@@ -122,18 +122,18 @@ ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const std::string& sou
     updateFromData(data);
 }
 
-ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const ExplorationData &data) {
+ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(ExplorationData &data) {
     updateFromData(data);
 }
 
-std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(const ExplorationData& data) {
+std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {
     return std::make_shared<ExplorationTree::ExplorationTreeImpl>(data);
 }
 
 std::shared_ptr<MolVectorAPI> ExplorationTree::ExplorationTreeImpl::fetchLeaves(bool increase_dist_improve_counter) {
-    FindLeavesOper::FindLeavesOperImpl op(std::make_shared<decltype(this)>(this), increase_dist_improve_counter); // TODO: create an empty deleter so that the shared pointer doesnt kill the the object pointed to by this
-    op();
-    return op.fetchLeaves();
+//    FindLeavesOper::FindLeavesOperImpl op(std::make_shared<ExplorationTree::ExplorationTreeImpl>(this), (bool) increase_dist_improve_counter); // TODO: create an empty deleter so that the shared pointer doesnt kill the the object pointed to by this
+//    op();
+//    return op.fetchLeaves();
 }
 
 

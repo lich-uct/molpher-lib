@@ -68,7 +68,7 @@ build: .build-post
 	mkdir -p $(LIB_DIR)
 #	mkdir -p $(PYTHON_PACKAGE_DIR)/lib/
 ifneq (,$(RUN_SWIG))
-	swig -python -Isrc/ -Iinclude/ -Wall -c++ -outdir $(PYTHON_PACKAGE_DIR) -o $(SRC_DIR)/swig/molpher_wrap.cpp $(SRC_DIR)/swig/molpher.i
+#	swig -python -Isrc/ -Iinclude/ -Wall -c++ -outdir $(PYTHON_PACKAGE_DIR) -o $(SRC_DIR)/swig/molpher_wrap.cpp $(SRC_DIR)/swig/molpher.i
 endif
 	
 .build-post: .build-impl
