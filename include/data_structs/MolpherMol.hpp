@@ -16,6 +16,8 @@
 
 #include "selectors/chemoper_selectors.h"
 
+class ExplorationTree; // forward declaration to resolve circular dependency
+
 class MolpherMol {
     
 public:
@@ -24,23 +26,25 @@ public:
     MolpherMol(std::string& smiles, std::string& formula, std::string& parentSmile,
                 ChemOperSelector* opers, double dist, double distToClosestDecoy,
                 double weight, double sascore);
+    MolpherMol(const std::string& smiles);
     
 //    MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl);
     
     MolpherMol();
 //    MolpherMol(MolpherMolecule& mol);
 //    MolpherMol(MolpherMolecule& mol, bool copy);
-//    MolpherMol(const MolpherMol& other);
+    MolpherMol(const MolpherMol& other);
     ~MolpherMol();
 //    
-//    MolpherMol& operator=(const MolpherMol&);
+    MolpherMol& operator=(const MolpherMol&);
 //    
 //    MolpherMolecule& fetchMolpherMolecule() const; // TODO: maybe get rid of this
 //    bool isBound() const;
-//    MolpherMol* copy() const;
+    std::unique_ptr<MolpherMol> copy() const;
     
     std::string getSMILES();
-//    double getDistToTarget();
+    double getDistToTarget();
+    std::shared_ptr<ExplorationTree> getTree();
 //    std::string getParentSMILES();
 //    const std::set<std::string>& getDescendants();
 //    const std::set<std::string>& getHistoricDescendants();
@@ -48,7 +52,7 @@ public:
 //    double getSAScore();
 //    double getMolecularWeight();
 //    
-//    void setDistToTarget(double dist);
+    void setDistToTarget(double dist);
 //    void setSAScore(double score);
     
 private:

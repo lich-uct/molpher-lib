@@ -1,36 +1,48 @@
 
 #include "data_structs/MolpherMol.hpp"
 #include "MolpherMolImpl.hpp"
+#include "data_structs/ExplorationTree.hpp"
 
 //MolpherMol::MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl) : pimpl(pimpl) {
 //    // no action
 //}
 
 MolpherMol::MolpherMol(std::string& smiles, std::string& formula, std::string& parentSmile, ChemOperSelector* opers, double dist, double distToClosestDecoy, double weight, double sascore) {
+    // TODO: implement
+}
 
+MolpherMol::MolpherMol(const std::string& smiles) : pimpl(new MolpherMol::MolpherMolImpl(smiles)) {
+    // no action
+}
+
+MolpherMol::MolpherMol() : pimpl(new MolpherMol::MolpherMolImpl()) {
+    // no action
+}
+
+MolpherMol::MolpherMol(const MolpherMol& other) : pimpl(std::move(other.pimpl->copy())) {
+    // no action
 }
 
 std::string MolpherMol::getSMILES() {
     return pimpl->getSMILES();
 }
 
-
-MolpherMol::MolpherMol() : pimpl(new MolpherMol::MolpherMolImpl()) {
-    // no action
+void MolpherMol::setDistToTarget(double dist) {
+    pimpl->setDistToTarget(dist);
 }
 
+double MolpherMol::getDistToTarget() {
+    return pimpl->getDistToTarget();
+}
 
-//MolpherMol::MolpherMol(const MolpherMol& other) : mol(nullptr), selfAllocated(true) {
-//    if (other.selfAllocated) {
-//        MolpherMolecule* new_mol = new MolpherMolecule();
-//        *new_mol = *(other.mol);
-//        this->mol = new_mol;
-//    } else {
-//        selfAllocated = false;
-//        this->mol = other.mol;
-//    }
-//}
-//
+std::shared_ptr<ExplorationTree> MolpherMol::getTree() {
+    return pimpl->getTree();
+}
+
+std::unique_ptr<MolpherMol> MolpherMol::copy() const {
+    return std::unique_ptr<MolpherMol>(new MolpherMol(*this));
+}
+
 //MolpherMol::MolpherMol(MolpherMolecule& mol) : mol(&mol), selfAllocated(false) {
 //    // no action
 //}
@@ -47,22 +59,13 @@ MolpherMol::MolpherMol() : pimpl(new MolpherMol::MolpherMolImpl()) {
 //    }
 //}
 //
+
 MolpherMol::~MolpherMol() = default;
-//
-//MolpherMol& MolpherMol::operator=(const MolpherMol& other) {
-//    if (selfAllocated) {
-//        MolpherMolecule* new_mol = new MolpherMolecule();
-//        *new_mol = *(other.mol);
-//        delete this->mol;
-//        this->mol = nullptr;
-//        this->mol = new_mol;
-//        this->selfAllocated = true;
-//    } else {
-//        this->mol = other.mol;
-//    }
-//    return *this;
-//}
-//
+
+MolpherMol& MolpherMol::operator=(const MolpherMol& other) {
+    pimpl = std::move(other.pimpl->copy());
+}
+
 //MolpherMolecule& MolpherMol::fetchMolpherMolecule() const {
 //    return *mol;
 //}
@@ -123,17 +126,39 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl() {
     // no action
 }
 
+MolpherMol::MolpherMolImpl::MolpherMolImpl(const std::string& smiles) {
+    data.SMILES = smiles;
+}
+
 MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMolData& data) : data(data) {
     // no action
 }
 
+MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMol::MolpherMolImpl& other) : data(other.data), tree(other.tree) {
+    // no action
+}
 
 std::string MolpherMol::MolpherMolImpl::getSMILES() const {
     return data.SMILES;
 }
 
+void MolpherMol::MolpherMolImpl::setDistToTarget(double dist) {
+    data.distToTarget = dist;
+}
+
+double MolpherMol::MolpherMolImpl::getDistToTarget() const {
+    return data.distToTarget;
+}
+
+std::shared_ptr<ExplorationTree> MolpherMol::MolpherMolImpl::getTree() {
+    return tree;
+}
+
+
 MolpherMolData MolpherMol::MolpherMolImpl::asData() const {
     return data;
 }
 
-
+std::unique_ptr<MolpherMol::MolpherMolImpl> MolpherMol::MolpherMolImpl::copy() const {
+    return std::unique_ptr<MolpherMol::MolpherMolImpl>(new MolpherMol::MolpherMolImpl(*this));
+}
