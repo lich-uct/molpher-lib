@@ -70,7 +70,7 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     auto data = std::make_shared<ExplorationData>();
     
     for (auto& mol : candidates) {
-        data->candidates.push_back(*(mol->asData()));
+        data->candidates.push_back(mol->asData());
     }
     
     data->candidatesMask.swap(candidatesMask);
@@ -84,12 +84,12 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     
     data->params = params;
     data->simCoeff = simCoeff;
-    data->source = *(source->asData());
-    data->target = *(target->asData());
+    data->source = source->asData();
+    data->target = target->asData();
     data->threadCnt = threadCnt;
     
     for (auto& item : treeMap) {
-        data->treeMap.insert(std::make_pair(item.first, *(item.second->asData())));
+        data->treeMap.insert(std::make_pair(item.first, item.second->asData()));
     }
 }
 

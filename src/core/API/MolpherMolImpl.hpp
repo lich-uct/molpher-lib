@@ -22,25 +22,26 @@ private:
     MolpherMolData data;
     
 public:
-    MolpherMolImpl(const std::string& SMILES);
+//    MolpherMolImpl(const std::string& SMILES);
     MolpherMolImpl(const MolpherMolData& data);
+    MolpherMolImpl();
     
-    std::shared_ptr<MolpherMolImpl> copy() const;
-    std::shared_ptr<MolpherMolData> asData() const;
-    bool isValid() const;
-    
+//    std::shared_ptr<MolpherMolImpl> copy() const;
+    MolpherMolData asData() const;
+//    bool isValid() const;
+//    
     std::string getSMILES() const;
-    double getDistToTarget() const;
-    std::string getParentSMILES() const;
-    std::shared_ptr<std::vector<std::shared_ptr<MolpherMolImpl> > > getDescendants() const;
-    std::shared_ptr<std::vector<std::shared_ptr<MolpherMolImpl> > > getHistoricDescendants() const;
-    unsigned int getItersWithoutDistImprovement() const;
-    double getSAScore() const;
-    double getMolecularWeight() const;
-    
-    void setDistToTarget(double dist);
-    void setSAScore(double score);
-    void setItersWithoutDistImprovement(unsigned int count);
+//    double getDistToTarget() const;
+//    std::string getParentSMILES() const;
+//    std::shared_ptr<std::vector<std::shared_ptr<MolpherMolImpl> > > getDescendants() const;
+//    std::shared_ptr<std::vector<std::shared_ptr<MolpherMolImpl> > > getHistoricDescendants() const;
+//    unsigned int getItersWithoutDistImprovement() const;
+//    double getSAScore() const;
+//    double getMolecularWeight() const;
+//    
+//    void setDistToTarget(double dist);
+//    void setSAScore(double score);
+//    void setItersWithoutDistImprovement(unsigned int count);
     
 };
 

@@ -15,11 +15,11 @@ std::string MolpherMol::getSMILES() {
 }
 
 
-//MolpherMol::MolpherMol() : mol(new MolpherMolecule()), selfAllocated(true) {
-//    // no action
-//}
-//
-//
+MolpherMol::MolpherMol() : pimpl(new MolpherMol::MolpherMolImpl()) {
+    // no action
+}
+
+
 //MolpherMol::MolpherMol(const MolpherMol& other) : mol(nullptr), selfAllocated(true) {
 //    if (other.selfAllocated) {
 //        MolpherMolecule* new_mol = new MolpherMolecule();
@@ -47,9 +47,7 @@ std::string MolpherMol::getSMILES() {
 //    }
 //}
 //
-//MolpherMol::~MolpherMol() {
-//    if (selfAllocated) delete mol;
-//}
+MolpherMol::~MolpherMol() = default;
 //
 //MolpherMol& MolpherMol::operator=(const MolpherMol& other) {
 //    if (selfAllocated) {
@@ -120,4 +118,22 @@ std::string MolpherMol::getSMILES() {
 //void MolpherMol::setSAScore(double dist) {
 //    mol->sascore = dist;
 //}
+
+MolpherMol::MolpherMolImpl::MolpherMolImpl() {
+    // no action
+}
+
+MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMolData& data) : data(data) {
+    // no action
+}
+
+
+std::string MolpherMol::MolpherMolImpl::getSMILES() const {
+    return data.SMILES;
+}
+
+MolpherMolData MolpherMol::MolpherMolImpl::asData() const {
+    return data;
+}
+
 

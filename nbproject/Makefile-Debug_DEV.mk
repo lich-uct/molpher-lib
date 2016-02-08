@@ -84,7 +84,7 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
-	${TESTDIR}/TestFiles/f1
+	${TESTDIR}/TestFiles/f2
 
 # C Compiler Flags
 CFLAGS=
@@ -418,21 +418,21 @@ ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors.o: src/core/misc/selecto
 
 # Build Test Targets
 .build-tests-conf: .build-conf ${TESTFILES}
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/APITests.o ${TESTDIR}/tests/testrunner.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/minimal_test/MinimalTest.o ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}  -pthread -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} -Wl,-rpath,libs `cppunit-config --libs`   
+	${LINK.cc}  -pthread -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} -Wl,-rpath,libs `cppunit-config --libs`   
 
 
-${TESTDIR}/tests/APITests.o: tests/APITests.cpp 
-	${MKDIR} -p ${TESTDIR}/tests
+${TESTDIR}/tests/minimal_test/MinimalTest.o: tests/minimal_test/MinimalTest.cpp 
+	${MKDIR} -p ${TESTDIR}/tests/minimal_test
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/APITests.o tests/APITests.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTest.o tests/minimal_test/MinimalTest.cpp
 
 
-${TESTDIR}/tests/testrunner.o: tests/testrunner.cpp 
-	${MKDIR} -p ${TESTDIR}/tests
+${TESTDIR}/tests/minimal_test/MinimalTestRunner.o: tests/minimal_test/MinimalTestRunner.cpp 
+	${MKDIR} -p ${TESTDIR}/tests/minimal_test
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/testrunner.o tests/testrunner.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o tests/minimal_test/MinimalTestRunner.cpp
 
 
 ${OBJECTDIR}/src/core/API/ExplorationTree_nomain.o: ${OBJECTDIR}/src/core/API/ExplorationTree.o src/core/API/ExplorationTree.cpp 
@@ -998,7 +998,7 @@ ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors_nomain.o: ${OBJECTDIR}/s
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
-	    ${TESTDIR}/TestFiles/f1 || true; \
+	    ${TESTDIR}/TestFiles/f2 || true; \
 	else  \
 	    ./${TEST} || true; \
 	fi

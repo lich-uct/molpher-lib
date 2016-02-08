@@ -49,7 +49,15 @@ typedef std::map<std::string, MolpherMolData> TreeMapData;
 typedef std::map<std::string, unsigned> MorphDerivationMapData;
 
 template<typename Content>
-void concurrent_vector_to_vector(const tbb::concurrent_vector<Content>& in, std::vector<Content>& out);
+void concurrent_vector_to_vector(const tbb::concurrent_vector<Content>& in, std::vector<Content>& out) {
+    for (auto& item : in) {
+        out.push_back(item);
+    }
+}
 
 template<typename Content>
-void vector_to_concurrent_vector(const std::vector<Content>& in, tbb::concurrent_vector<Content>& out);
+void vector_to_concurrent_vector(const std::vector<Content>& in, tbb::concurrent_vector<Content>& out) {
+    for (auto& item : in) {
+        out.push_back(item);
+    }
+}

@@ -27,11 +27,11 @@ public:
     
 //    MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl);
     
-//    MolpherMol();
+    MolpherMol();
 //    MolpherMol(MolpherMolecule& mol);
 //    MolpherMol(MolpherMolecule& mol, bool copy);
 //    MolpherMol(const MolpherMol& other);
-//    ~MolpherMol();
+    ~MolpherMol();
 //    
 //    MolpherMol& operator=(const MolpherMol&);
 //    
