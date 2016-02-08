@@ -8,7 +8,7 @@
 #ifndef MOLPHERMOLDATA_HPP
 #define	MOLPHERMOLDATA_HPP
 
-#pragma once
+//#pragma once
 
 #include <string>
 #include <set>
@@ -56,16 +56,57 @@ struct MolpherMolData
      */
     unsigned gensWithoutDistImprovement;
     
-    MolpherMolData();
-    
-    bool isValid() const;
-    
     friend class boost::serialization::access;
-    
-    template<class Archive>
-    void save(Archive & ar, const unsigned int version) const;
-    template<class Archive>
-    void load(Archive & ar, const unsigned int version);
+
+    MolpherMolData() :
+            parentOper(0),
+            distToTarget(DBL_MAX),
+            molecularWeight(0.0),
+            sascore(0.0),
+            gensWithoutDistImprovement(0)
+    {
+        // no action
+    }
+
+    bool isValid() const {
+        return (!SMILES.empty());
+    }
+
+    template <class Archive>
+    void save(Archive & ar, const unsigned int version) const {
+        ar  & BOOST_SERIALIZATION_NVP(SMILES) 
+            & BOOST_SERIALIZATION_NVP(formula)
+            & BOOST_SERIALIZATION_NVP(sascore)
+            & BOOST_SERIALIZATION_NVP(parentOper) 
+            & BOOST_SERIALIZATION_NVP(parentSmile)
+            & BOOST_SERIALIZATION_NVP(descendants) 
+            & BOOST_SERIALIZATION_NVP(historicDescendants) 
+            & BOOST_SERIALIZATION_NVP(distToTarget) 
+            & BOOST_SERIALIZATION_NVP(molecularWeight) 
+            & BOOST_SERIALIZATION_NVP(gensWithoutDistImprovement);
+    }
+
+    template <class Archive>
+    void load(Archive & ar, const unsigned int version) {
+
+        std::set<std::string> descendants_saved;
+        std::set<std::string> historicDescendants_saved;
+
+        ar  & BOOST_SERIALIZATION_NVP(SMILES) 
+            & BOOST_SERIALIZATION_NVP(formula)
+            & BOOST_SERIALIZATION_NVP(sascore)
+            & BOOST_SERIALIZATION_NVP(parentOper) 
+            & BOOST_SERIALIZATION_NVP(parentSmile)
+            & BOOST_SERIALIZATION_NVP(descendants_saved) 
+            & BOOST_SERIALIZATION_NVP(historicDescendants_saved) 
+            & BOOST_SERIALIZATION_NVP(distToTarget)
+            & BOOST_SERIALIZATION_NVP(molecularWeight) 
+            & BOOST_SERIALIZATION_NVP(gensWithoutDistImprovement);
+
+        descendants.swap(descendants_saved);
+        historicDescendants.swap(historicDescendants_saved);
+
+    }
     
     BOOST_SERIALIZATION_SPLIT_MEMBER()
 
@@ -75,56 +116,6 @@ struct MolpherMolData
 BOOST_CLASS_IMPLEMENTATION(MolpherMolData, object_serializable)
 // turn off tracking
 BOOST_CLASS_TRACKING(MolpherMolData, track_never)
-
-MolpherMolData::MolpherMolData() :
-        parentOper(0),
-        distToTarget(DBL_MAX),
-        molecularWeight(0.0),
-        sascore(0.0),
-        gensWithoutDistImprovement(0)
-{
-    // no action
-}
-
-bool MolpherMolData::isValid() const {
-    return (!SMILES.empty());
-}
-
-template <class Archive>
-void MolpherMolData::save(Archive & ar, const unsigned int version) const {
-    ar  & BOOST_SERIALIZATION_NVP(SMILES) 
-        & BOOST_SERIALIZATION_NVP(formula)
-        & BOOST_SERIALIZATION_NVP(sascore)
-        & BOOST_SERIALIZATION_NVP(parentOper) 
-        & BOOST_SERIALIZATION_NVP(parentSmile)
-        & BOOST_SERIALIZATION_NVP(descendants) 
-        & BOOST_SERIALIZATION_NVP(historicDescendants) 
-        & BOOST_SERIALIZATION_NVP(distToTarget) 
-        & BOOST_SERIALIZATION_NVP(molecularWeight) 
-        & BOOST_SERIALIZATION_NVP(gensWithoutDistImprovement);
-}
-
-template <class Archive>
-void MolpherMolData::load(Archive & ar, const unsigned int version) {
-    
-    std::set<std::string> descendants_saved;
-    std::set<std::string> historicDescendants_saved;
-    
-    ar  & BOOST_SERIALIZATION_NVP(SMILES) 
-        & BOOST_SERIALIZATION_NVP(formula)
-        & BOOST_SERIALIZATION_NVP(sascore)
-        & BOOST_SERIALIZATION_NVP(parentOper) 
-        & BOOST_SERIALIZATION_NVP(parentSmile)
-        & BOOST_SERIALIZATION_NVP(descendants_saved) 
-        & BOOST_SERIALIZATION_NVP(historicDescendants_saved) 
-        & BOOST_SERIALIZATION_NVP(distToTarget)
-        & BOOST_SERIALIZATION_NVP(molecularWeight) 
-        & BOOST_SERIALIZATION_NVP(gensWithoutDistImprovement);
-    
-    descendants.swap(descendants_saved);
-    historicDescendants.swap(historicDescendants_saved);
-    
-}
 
 #endif	/* MOLPHERMOLDATA_HPP */
 

@@ -15,7 +15,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "simcoeff_selectors.h"
+#include "selectors/simcoeff_selectors.h"
 
 #include <stdexcept>
 #include "boost/algorithm/string/predicate.hpp"

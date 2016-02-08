@@ -21,7 +21,7 @@
 #include <GraphMol/QueryOps.h>
 
 #include "core/misc/SynchRand.h"
-#include "core/misc/selectors/chemoper_selectors.h"
+#include "selectors/chemoper_selectors.h"
 #include "core/chem/ChemicalAuxiliary.h"
 #include "MorphingData.h"
 

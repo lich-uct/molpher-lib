@@ -9,6 +9,7 @@
 #define	MOLPHERMOLIMPL_HPP
 
 #include <memory>
+#include <vector>
 
 #include "core/data_structs/MolpherMolData.hpp"
 #include "data_structs/MolpherMol.hpp"

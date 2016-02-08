@@ -30,6 +30,11 @@
           <itemPath>include/operations/TreeOperation.hpp</itemPath>
           <itemPath>include/operations/operations.i</itemPath>
         </logicalFolder>
+        <logicalFolder name="selectors" displayName="selectors" projectFiles="true">
+          <itemPath>include/selectors/chemoper_selectors.h</itemPath>
+          <itemPath>include/selectors/fingerprint_selectors.h</itemPath>
+          <itemPath>include/selectors/simcoeff_selectors.h</itemPath>
+        </logicalFolder>
         <itemPath>include/API.i</itemPath>
       </logicalFolder>
       <logicalFolder name="src" displayName="src" projectFiles="true">
@@ -107,11 +112,6 @@
             <itemPath>src/core/data_structs/MolpherParam.h</itemPath>
           </logicalFolder>
           <logicalFolder name="misc" displayName="misc" projectFiles="true">
-            <logicalFolder name="selectors" displayName="selectors" projectFiles="true">
-              <itemPath>src/core/misc/selectors/chemoper_selectors.h</itemPath>
-              <itemPath>src/core/misc/selectors/fingerprint_selectors.h</itemPath>
-              <itemPath>src/core/misc/selectors/simcoeff_selectors.h</itemPath>
-            </logicalFolder>
             <itemPath>src/core/misc/SAScore.h</itemPath>
             <itemPath>src/core/misc/SynchRand.h</itemPath>
             <itemPath>src/core/misc/global_types.h</itemPath>
@@ -408,6 +408,21 @@
             flavor2="0">
       </item>
       <item path="include/operations/callbacks/TraverseCallback.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/selectors/chemoper_selectors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/selectors/fingerprint_selectors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/selectors/simcoeff_selectors.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -824,6 +839,8 @@
       </item>
       <item path="src/core/misc/global_types.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/core/misc/inout.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/core/misc/inout.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/core/misc/iteration_serializer.hpp"
@@ -836,29 +853,14 @@
             tool="1"
             flavor2="0">
       </item>
-      <item path="src/core/misc/selectors/chemoper_selectors.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="src/core/misc/selectors/fingerprint_selectors.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="src/core/misc/selectors/fingerprint_selectors.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="src/core/misc/selectors/simcoeff_selectors.cpp"
             ex="false"
             tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/core/misc/selectors/simcoeff_selectors.h"
-            ex="false"
-            tool="3"
             flavor2="0">
       </item>
       <item path="src/swig/molpher_wrap.h" ex="false" tool="3" flavor2="0">
@@ -987,6 +989,21 @@
             flavor2="0">
       </item>
       <item path="include/operations/operations.i" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="include/selectors/chemoper_selectors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/selectors/fingerprint_selectors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/selectors/simcoeff_selectors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="res/SAScore.dat" ex="false" tool="3" flavor2="0">
       </item>
@@ -1469,29 +1486,14 @@
             tool="1"
             flavor2="0">
       </item>
-      <item path="src/core/misc/selectors/chemoper_selectors.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="src/core/misc/selectors/fingerprint_selectors.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="src/core/misc/selectors/fingerprint_selectors.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="src/core/misc/selectors/simcoeff_selectors.cpp"
             ex="false"
             tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/core/misc/selectors/simcoeff_selectors.h"
-            ex="false"
-            tool="3"
             flavor2="0">
       </item>
       <item path="src/swig/molpher.i" ex="false" tool="1" flavor2="0">

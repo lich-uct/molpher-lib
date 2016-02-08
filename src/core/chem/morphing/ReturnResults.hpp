@@ -26,10 +26,10 @@
 #include <tbb/atomic.h>
 #include <tbb/blocked_range.h>
 
-#include "core/misc/selectors/chemoper_selectors.h"
+#include "selectors/chemoper_selectors.h"
 #include "core/chem/fingerprintStrategy/FingerprintStrategy.h"
 #include "core/chem/simCoefStrategy/SimCoefStrategy.h"
-#include "data_structs/MolpherMolecule.h"
+#include "data_structs/MolpherMol.hpp"
 #include "MorphingData.h"
 #include "core/chem/morphingStrategy/MorphingStrategy.h"
 #include "core/chem/SimCoefCalculator.hpp"
@@ -48,7 +48,7 @@ public:
         double *distToTarget,
         double *distToClosestDecoy,
         void *callerState,
-        void (*deliver)(MolpherMolecule *, void *)
+        void (*deliver)(std::shared_ptr<MolpherMol>, void *)
         );
 
     void operator()(const tbb::blocked_range<int> &r) const;
@@ -65,7 +65,7 @@ private:
     double *mDistToClosestDecoy;
 
     void *mCallerState;
-    void (*mDeliver)(MolpherMolecule *, void *);
+    void (*mDeliver)(std::shared_ptr<MolpherMol>, void *);
     
     /**
      * Value of last next target decoy for new molecules. If the current molecule

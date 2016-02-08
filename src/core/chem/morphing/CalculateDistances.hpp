@@ -26,10 +26,10 @@
 #include <tbb/atomic.h>
 #include <tbb/blocked_range.h>
 
-#include "core/misc/selectors/chemoper_selectors.h"
+#include "selectors/chemoper_selectors.h"
 #include "core/chem/fingerprintStrategy/FingerprintStrategy.h"
 #include "core/chem/simCoefStrategy/SimCoefStrategy.h"
-#include "data_structs/MolpherMolecule.h"
+#include "data_structs/MolpherMol.hpp"
 #include "MorphingData.h"
 #include "core/chem/morphingStrategy/MorphingStrategy.h"
 #include "core/chem/SimCoefCalculator.hpp"

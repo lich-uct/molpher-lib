@@ -5,13 +5,13 @@
 
 
 TreeOperation::TreeOperation(std::shared_ptr<ExplorationTree> expTree) : 
-pimpl(new TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree->pimpl))
+pimpl(new TreeOperation::TreeOperationImpl(expTree->pimpl))
 {
     // no action
 }
 
 TreeOperation::TreeOperation() :
-pimpl(new TreeOperation::TreeOperationImpl::TreeOperationImpl())
+pimpl(new TreeOperation::TreeOperationImpl())
 {
     // no action
 }
@@ -46,7 +46,7 @@ TreeOperation::~TreeOperation() {
 //}
 
 std::shared_ptr<ExplorationTree> TreeOperation::getTree() {
-    return tree;
+    return tree.lock();
 }
 
 void TreeOperation::setTree(std::shared_ptr<ExplorationTree> tree) {
@@ -71,3 +71,8 @@ std::shared_ptr<ExplorationTree::ExplorationTreeImpl> TreeOperation::TreeOperati
 void TreeOperation::TreeOperationImpl::setTree(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree) {
     this->tree = tree;
 }
+
+void TreeOperation::TreeOperationImpl::operator()() {
+    // no action
+}
+

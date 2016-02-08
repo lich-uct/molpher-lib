@@ -15,7 +15,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "fingerprint_selectors.h"
+#include "selectors/fingerprint_selectors.h"
 
 #include <stdexcept>
 #include "boost/algorithm/string/predicate.hpp"

@@ -15,7 +15,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "chemoper_selectors.h"
+#include "selectors/chemoper_selectors.h"
 
 static const char *shortDesc[] = {
     "AA",

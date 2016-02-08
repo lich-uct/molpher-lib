@@ -22,8 +22,8 @@
 #include <rdkit/DataStructs/BitOps.h>
 
 #include "core/misc/global_types.h"
-#include "core/misc/selectors/fingerprint_selectors.h"
-#include "core/misc/selectors/simcoeff_selectors.h"
+#include "selectors/fingerprint_selectors.h"
+#include "selectors/simcoeff_selectors.h"
 #include "core/chem/fingerprintStrategy/FingerprintStrategy.h"
 
 /*

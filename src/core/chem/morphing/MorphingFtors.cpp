@@ -25,6 +25,8 @@
 #include "core/chem/ChemicalAuxiliary.h"
 #include "core/chem/morphing/MorphingFtors.hpp"
 #include "core/misc/SAScore.h"
+#include "data_structs/MolpherMol.hpp"
+#include "core/API/MolpherMolImpl.hpp"
 
 /*
  Added code for working with SAScore
@@ -170,7 +172,7 @@ ReturnResults::ReturnResults(
     double *distToTarget,
     double *distToClosestDecoy,
     void *callerState,
-    void (*deliver)(MolpherMolecule *, void *)
+    void (*deliver)(std::shared_ptr<MolpherMol>, void *)
     ) :
     mNewMols(newMols),
     mSmiles(smiles),
@@ -196,8 +198,8 @@ void ReturnResults::operator()(const tbb::blocked_range<int> &r) const
     
     for (int i = r.begin(); i != r.end(); ++i) {
         if (mNewMols[i]) {
-            MolpherMolecule result(mSmiles[i], mFormulas[i], mParentSmile,
-                mOpers[i], mDistToTarget[i], mDistToClosestDecoy[i],
+            auto result = std::make_shared<MolpherMol>(mSmiles[i], mFormulas[i], mParentSmile,
+                &mOpers[i], mDistToTarget[i], mDistToClosestDecoy[i],
                 mWeights[i], mSascore[i]);
             
             /* Advance decoy functionality
@@ -210,7 +212,7 @@ void ReturnResults::operator()(const tbb::blocked_range<int> &r) const
                 result.nextDecoy = mDecoySize;
             }*/
 
-            mDeliver(&result, mCallerState);
+            mDeliver(result, mCallerState);
         }
     }
 }

@@ -23,7 +23,7 @@
 #include <GraphMol/GraphMol.h>
 
 #include "core/misc/global_types.h"
-#include "core/misc/selectors/chemoper_selectors.h"
+#include "selectors/chemoper_selectors.h"
 
 class MorphingData
 {

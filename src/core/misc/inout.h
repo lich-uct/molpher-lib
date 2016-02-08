@@ -25,36 +25,36 @@
 #include <rdkit/GraphMol/GraphMol.h>
 
 #include "global_types.h"
-#include "data_structs/IterationSnapshot.h"
-#include "data_structs/MolpherMolecule.h"
+//#include "data_structs/IterationSnapshot.h"
+//#include "data_structs/MolpherMolecule.h"
 
 void SynchCout(const std::string &s);
 
 //IterationSnapshot Materialize(IterationSnapshotProxy &proxy);
 
-std::string GenerateFilename(std::string &base,
-    JobId jobId, unsigned int iterIdx);
-std::string GenerateFilename(std::string &base,
-    JobId jobId, std::string name);
-std::string GenerateDirname(std::string &base, JobId jobId);
-
-void WriteMolpherPath(const std::string &file, const std::string &targetSmile,
-    const IterationSnapshot::CandidateMap &candidates);
-
-void WriteSnapshotToFile(const std::string &file, const IterationSnapshot &snp);
-bool ReadSnapshotFromFile(const std::string &file, IterationSnapshot &snp);
-
-void GatherMolphMols(const IterationSnapshot::CandidateMap &toGather,
-    std::map<std::string, MolpherMolecule> &gathered);
-void GatherMolphMols(const std::vector<MolpherMolecule> &toGather,
-    std::map<std::string, MolpherMolecule> &gathered);
-
-void WriteMolphMolsToSDF(const std::string &file,
-    const std::map<std::string, MolpherMolecule> &mols);
-void WriteMolphMolsToSDF(const std::string &file,
-    const std::vector<MolpherMolecule> &mols);
-void ReadMolphMolsFromFile(const std::string &file,
-    std::vector<MolpherMolecule> &mols);
+//std::string GenerateFilename(std::string &base,
+//    JobId jobId, unsigned int iterIdx);
+//std::string GenerateFilename(std::string &base,
+//    JobId jobId, std::string name);
+//std::string GenerateDirname(std::string &base, JobId jobId);
+//
+//void WriteMolpherPath(const std::string &file, const std::string &targetSmile,
+//    const IterationSnapshot::CandidateMap &candidates);
+//
+//void WriteSnapshotToFile(const std::string &file, const IterationSnapshot &snp);
+//bool ReadSnapshotFromFile(const std::string &file, IterationSnapshot &snp);
+//
+//void GatherMolphMols(const IterationSnapshot::CandidateMap &toGather,
+//    std::map<std::string, MolpherMolecule> &gathered);
+//void GatherMolphMols(const std::vector<MolpherMolecule> &toGather,
+//    std::map<std::string, MolpherMolecule> &gathered);
+//
+//void WriteMolphMolsToSDF(const std::string &file,
+//    const std::map<std::string, MolpherMolecule> &mols);
+//void WriteMolphMolsToSDF(const std::string &file,
+//    const std::vector<MolpherMolecule> &mols);
+//void ReadMolphMolsFromFile(const std::string &file,
+//    std::vector<MolpherMolecule> &mols);
 
 void WriteRWMolsToSDF(const std::string &file,
     std::vector<RDKit::RWMol *> &mols);

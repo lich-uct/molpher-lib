@@ -19,24 +19,24 @@
 
 #include <vector>
 
-#include "core/misc/selectors/fingerprint_selectors.h"
-#include "core/misc/selectors/simcoeff_selectors.h"
-#include "core/misc/selectors/chemoper_selectors.h"
-#include "data_structs/MolpherMolecule.h"
+#include "selectors/fingerprint_selectors.h"
+#include "selectors/simcoeff_selectors.h"
+#include "selectors/chemoper_selectors.h"
+#include "data_structs/MolpherMol.hpp"
 
 #ifndef MORPHING_REPORTING
 #define MORPHING_REPORTING 1
 #endif
 
 void GenerateMorphs(
-    MolpherMolecule &candidate,
+    MolpherMol &candidate,
     unsigned int morphAttempts,
     FingerprintSelector fingerprintSelector,
     SimCoeffSelector simCoeffSelector,
     std::vector<ChemOperSelector> &chemOperSelectors,
-    MolpherMolecule &target,
-    std::vector<MolpherMolecule> &decoys,
+    MolpherMol &target,
+    std::vector<MolpherMol> &decoys,
     tbb::task_group_context &tbbCtx,
     void *callerState,
-    void (*deliver)(MolpherMolecule *, void *)
+    void (*deliver)(std::shared_ptr<MolpherMol>, void *)
     );

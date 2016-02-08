@@ -89,20 +89,20 @@ static void InitStrategies(
 }
 
 void GenerateMorphs(
-    MolpherMolecule &candidate,
+    MolpherMol &candidate,
     unsigned int morphAttempts,
     FingerprintSelector fingerprintSelector,
     SimCoeffSelector simCoeffSelector,
     std::vector<ChemOperSelector> &chemOperSelectors,
-    MolpherMolecule &target,
-    std::vector<MolpherMolecule> &decoys,
+    MolpherMol&target,
+    std::vector<MolpherMol> &decoys,
     tbb::task_group_context &tbbCtx ,
     void *callerState,
-    void (*deliver)(MolpherMolecule *, void *) )
+    void (*deliver)(std::shared_ptr<MolpherMol>, void *) )
 {
     RDKit::RWMol *mol = NULL;
     try {
-        mol = RDKit::SmilesToMol(candidate.smile);
+        mol = RDKit::SmilesToMol(candidate.getSMILES());
         if (mol) {
             RDKit::MolOps::Kekulize(*mol);
         } else {
@@ -115,7 +115,7 @@ void GenerateMorphs(
 
     RDKit::RWMol *targetMol = NULL;
     try {
-        targetMol = RDKit::SmilesToMol(target.smile);
+        targetMol = RDKit::SmilesToMol(target.getSMILES());
         if (targetMol) {
             RDKit::MolOps::Kekulize(*targetMol);
         } else {
@@ -136,7 +136,7 @@ void GenerateMorphs(
     RDKit::RWMol *decoyMol = NULL;
     try {
         for (int i = 0; i < decoys.size(); ++i) {
-            RDKit::RWMol *decoyMol = RDKit::SmilesToMol(decoys[i].smile);
+            RDKit::RWMol *decoyMol = RDKit::SmilesToMol(decoys[i].getSMILES());
             if (decoyMol) {
                 RDKit::MolOps::Kekulize(*decoyMol);
                 decoysFp.push_back(scCalc.GetFingerprint(decoyMol));
@@ -218,8 +218,9 @@ void GenerateMorphs(
 
     // return results
     if (!tbbCtx.is_group_execution_cancelled()) {
+        std::string parent = candidate.getSMILES();
         ReturnResults returnResults(
-            newMols, smiles, formulas, candidate.smile, opers, weights, sascores,
+            newMols, smiles, formulas, parent, opers, weights, sascores,
             distToTarget, distToClosestDecoy, callerState, deliver);
         tbb::parallel_for(tbb::blocked_range<int>(0, morphAttempts),
             returnResults, tbb::auto_partitioner(), tbbCtx);

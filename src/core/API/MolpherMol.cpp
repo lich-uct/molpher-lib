@@ -1,10 +1,18 @@
 
 #include "data_structs/MolpherMol.hpp"
+#include "MolpherMolImpl.hpp"
 
 //MolpherMol::MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl) : pimpl(pimpl) {
 //    // no action
 //}
 
+MolpherMol::MolpherMol(std::string& smiles, std::string& formula, std::string& parentSmile, ChemOperSelector* opers, double dist, double distToClosestDecoy, double weight, double sascore) {
+
+}
+
+std::string MolpherMol::getSMILES() {
+    return pimpl->getSMILES();
+}
 
 
 //MolpherMol::MolpherMol() : mol(new MolpherMolecule()), selfAllocated(true) {

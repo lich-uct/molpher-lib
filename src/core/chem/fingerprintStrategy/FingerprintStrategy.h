@@ -24,7 +24,7 @@
 #include <rdkit/GraphMol/Fingerprints/AtomPairs.h>
 
 #include "core/misc/global_types.h"
-#include "core/misc/selectors/fingerprint_selectors.h"
+#include "selectors/fingerprint_selectors.h"
 
 class FingerprintStrategy
 {

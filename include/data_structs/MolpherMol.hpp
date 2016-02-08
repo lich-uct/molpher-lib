@@ -10,13 +10,20 @@
 
 #include <string>
 #include <memory>
+#include <set>
 
 //#include "MolpherMolecule.h"
+
+#include "selectors/chemoper_selectors.h"
 
 class MolpherMol {
     
 public:
     class MolpherMolImpl;
+    
+    MolpherMol(std::string& smiles, std::string& formula, std::string& parentSmile,
+                ChemOperSelector* opers, double dist, double distToClosestDecoy,
+                double weight, double sascore);
     
 //    MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl);
     
@@ -25,14 +32,14 @@ public:
 //    MolpherMol(MolpherMolecule& mol, bool copy);
 //    MolpherMol(const MolpherMol& other);
 //    ~MolpherMol();
-    
+//    
 //    MolpherMol& operator=(const MolpherMol&);
 //    
 //    MolpherMolecule& fetchMolpherMolecule() const; // TODO: maybe get rid of this
 //    bool isBound() const;
 //    MolpherMol* copy() const;
-//    
-//    std::string getSMILES();
+    
+    std::string getSMILES();
 //    double getDistToTarget();
 //    std::string getParentSMILES();
 //    const std::set<std::string>& getDescendants();
