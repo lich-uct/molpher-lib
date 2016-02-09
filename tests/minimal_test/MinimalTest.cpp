@@ -4,6 +4,7 @@
  *
  * Created on Feb 8, 2016, 11:38:51 AM
  */
+#include <stdexcept>
 
 #include "MinimalTest.hpp"
 
@@ -42,6 +43,7 @@ void MinimalTest::testMolpherMol() {
 }
 
 void MinimalTest::testTree() {
-    // TODO: test the ExplorationTree class
+    ExplorationTree tree("CC0", "C1CCC1");
+    ExplorationTree tree_no_target("CC0", "");
 }
 

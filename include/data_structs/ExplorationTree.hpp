@@ -41,8 +41,8 @@ private:
 //    
     std::shared_ptr<ExplorationTreeImpl> pimpl;
     
-//    
-//public:
+    
+public:
 //    static ExplorationTree* createFromSnapshot(ExplorationTreeSnapshot& snapshot);
 //    
     ExplorationTree(const std::string& sourceMolAsSMILES);
