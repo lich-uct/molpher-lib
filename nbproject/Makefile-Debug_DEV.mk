@@ -420,7 +420,7 @@ ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors.o: src/core/misc/selecto
 .build-tests-conf: .build-conf ${TESTFILES}
 ${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/minimal_test/MinimalTest.o ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}  -pthread -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} -Wl,-rpath,libs `cppunit-config --libs`   
+	${LINK.cc}  -pthread -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} -Wl,-rpath,dist/lib `cppunit-config --libs`   
 
 
 ${TESTDIR}/tests/minimal_test/MinimalTest.o: tests/minimal_test/MinimalTest.cpp 

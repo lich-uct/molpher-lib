@@ -341,8 +341,9 @@
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f2</output>
           <linkerDynSerch>
-            <pElem>libs</pElem>
+            <pElem>dist/lib</pElem>
           </linkerDynSerch>
+          <linkerKpic>false</linkerKpic>
           <linkerLibItems>
             <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
           </linkerLibItems>
