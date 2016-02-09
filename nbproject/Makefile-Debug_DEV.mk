@@ -104,99 +104,99 @@ LDLIBSOPTIONS=deps/rdkit/lib/libDistGeomHelpers_static.a deps/rdkit/lib/libMolAl
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk dist/lib/libmolpher.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libDistGeomHelpers_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libDistGeomHelpers_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libMolAlign_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libMolAlign_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libAlignment_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libAlignment_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libFragCatalog_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libFragCatalog_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libMolCatalog_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libMolCatalog_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libCatalogs_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libCatalogs_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libChemReactions_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libChemReactions_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libDepictor_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libDepictor_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libDescriptors_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libDescriptors_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libDistGeometry_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libDistGeometry_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libFileParsers_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libFileParsers_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libFingerprints_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libFingerprints_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libSubgraphs_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libSubgraphs_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libForceFieldHelpers_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libForceFieldHelpers_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libChemTransforms_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libChemTransforms_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libMolChemicalFeatures_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libMolChemicalFeatures_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libSubstructMatch_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libSubstructMatch_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libSmilesParse_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libSmilesParse_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libPartialCharges_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libPartialCharges_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libShapeHelpers_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libShapeHelpers_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libMolTransforms_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libMolTransforms_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libSLNParse_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libSLNParse_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libGraphMol_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libGraphMol_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libForceField_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libForceField_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libRDGeometryLib_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libRDGeometryLib_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libDataStructs_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libDataStructs_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libOptimizer_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libOptimizer_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libEigenSolvers_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libEigenSolvers_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libChemicalFeatures_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libChemicalFeatures_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libSimDivPickers_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libSimDivPickers_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libRDGeneral_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libRDGeneral_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/rdkit/lib/libhc_static.a
+dist/lib/libmolpher.so: deps/rdkit/lib/libhc_static.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_date_time.a
+dist/lib/libmolpher.so: deps/boost/stage/lib/libboost_date_time.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_filesystem.a
+dist/lib/libmolpher.so: deps/boost/stage/lib/libboost_filesystem.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_program_options.a
+dist/lib/libmolpher.so: deps/boost/stage/lib/libboost_program_options.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_regex.a
+dist/lib/libmolpher.so: deps/boost/stage/lib/libboost_regex.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_wserialization.a
+dist/lib/libmolpher.so: deps/boost/stage/lib/libboost_wserialization.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_serialization.a
+dist/lib/libmolpher.so: deps/boost/stage/lib/libboost_serialization.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_signals.a
+dist/lib/libmolpher.so: deps/boost/stage/lib/libboost_signals.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_thread.a
+dist/lib/libmolpher.so: deps/boost/stage/lib/libboost_thread.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/boost/stage/lib/libboost_system.a
+dist/lib/libmolpher.so: deps/boost/stage/lib/libboost_system.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy_debug.so.2
+dist/lib/libmolpher.so: deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy_debug.so.2
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/tbb/lib/intel64/gcc4.4/libtbb_debug.so.2
+dist/lib/libmolpher.so: deps/tbb/lib/intel64/gcc4.4/libtbb_debug.so.2
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_debug.so.2
+dist/lib/libmolpher.so: deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_debug.so.2
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}: ${OBJECTFILES}
-	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -lpthread -Wl,-rpath,'$$ORIGIN/' -shared -fPIC
+dist/lib/libmolpher.so: ${OBJECTFILES}
+	${MKDIR} -p dist/lib
+	${LINK.cc} -o dist/lib/libmolpher.so ${OBJECTFILES} ${LDLIBSOPTIONS} -lpthread -Wl,-rpath,'$$ORIGIN/' -shared -fPIC
 
 ${OBJECTDIR}/src/core/API/ExplorationTree.o: src/core/API/ExplorationTree.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
@@ -1006,7 +1006,7 @@ ${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors_nomain.o: ${OBJECTDIR}/s
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libmolpher-lib.${CND_DLIB_EXT}
+	${RM} dist/lib/libmolpher.so
 
 # Subprojects
 .clean-subprojects:

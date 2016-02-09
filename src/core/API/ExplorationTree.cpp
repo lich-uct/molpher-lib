@@ -16,6 +16,20 @@
 //#include "operations/PruneTreeOper.hpp"
 //#include "operations/callbacks/EraseSubtreeCallback.hpp"
 
+ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES) : 
+pimpl(new ExplorationTree::ExplorationTreeImpl(sourceMolAsSMILES)) 
+{
+    // no action
+}
+
+ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) : 
+pimpl(new ExplorationTree::ExplorationTreeImpl(sourceMolAsSMILES, targetMolAsSMILES))
+{
+    // no action
+}
+
+
+
 void ExplorationTree::ExplorationTreeImpl::updateFromData(ExplorationData& data)
 {
     if (!data.isValid()) {
@@ -109,9 +123,12 @@ ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const std::string& sou
     MolpherMolData target_data;
     if (!targetMolAsSMILES.empty()) {
         target_data.SMILES = targetMolAsSMILES;
-        if (!target_data.isValid()) {
-            throw std::runtime_error("Invalid target molecule specified for tree initialization.");
-        }
+    } else {
+        target_data.SMILES = "C";
+        std::cerr << "WARNING: No target specified. Inserting default: 'C'" << std::endl;
+    }
+    if (!target_data.isValid()) {
+        throw std::runtime_error("Invalid target molecule specified for tree initialization.");
     }
     
     

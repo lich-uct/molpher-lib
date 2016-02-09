@@ -8,6 +8,7 @@
 #include "MinimalTest.hpp"
 
 #include "data_structs/MolpherMol.hpp"
+#include "data_structs/ExplorationTree.hpp"
 
 
 CPPUNIT_TEST_SUITE_REGISTRATION(MinimalTest);
@@ -39,3 +40,8 @@ void MinimalTest::testMolpherMol() {
     CPPUNIT_ASSERT(!mol.getTree());
     CPPUNIT_ASSERT(!mol_copy->getTree());
 }
+
+void MinimalTest::testTree() {
+    // TODO: test the ExplorationTree class
+}
+

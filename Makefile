@@ -50,7 +50,7 @@ CP=cp
 CCADMIN=CCadmin
 
 # Misc directories
-LIB_DIR=$(CND_BASEDIR)/libs/
+LIB_DIR=$(CND_BASEDIR)/dist/lib/
 SRC_DIR=$(CND_BASEDIR)/src/
 PYTHON_PACKAGE_DIR=$(SRC_DIR)/python/molpher/swig_wrappers
 
@@ -73,7 +73,7 @@ endif
 	
 .build-post: .build-impl
 # Add your post 'build' code here...
-	cp $(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/*.so $(LIB_DIR)$(LIBNAME)
+#	cp $(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/*.so $(LIB_DIR)$(LIBNAME)
 	
 	cp $(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/libtbb_debug.so.2 $(LIB_DIR)libtbb_debug.so.2
 	ln -sf $(LIB_DIR)libtbb_debug.so.2 $(LIB_DIR)libtbb_debug.so

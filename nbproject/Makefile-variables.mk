@@ -8,20 +8,12 @@ CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug_DEV configuration
 CND_PLATFORM_Debug_DEV=GNU-Linux-x86
-CND_ARTIFACT_DIR_Debug_DEV=dist/Debug_DEV/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug_DEV=libmolpher-lib.so
-CND_ARTIFACT_PATH_Debug_DEV=dist/Debug_DEV/GNU-Linux-x86/libmolpher-lib.so
+CND_ARTIFACT_DIR_Debug_DEV=dist/lib
+CND_ARTIFACT_NAME_Debug_DEV=libmolpher.so
+CND_ARTIFACT_PATH_Debug_DEV=dist/lib/libmolpher.so
 CND_PACKAGE_DIR_Debug_DEV=dist/Debug_DEV/GNU-Linux-x86/package
 CND_PACKAGE_NAME_Debug_DEV=libmolpher-lib.so.tar
 CND_PACKAGE_PATH_Debug_DEV=dist/Debug_DEV/GNU-Linux-x86/package/libmolpher-lib.so.tar
-# Release configuration
-CND_PLATFORM_Release=GNU-Linux-x86
-CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=libmolpher-lib.so
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/libmolpher-lib.so
-CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=libmolpher-lib.so.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/libmolpher-lib.so.tar
 #
 # include compiler specific variables
 #

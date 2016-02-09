@@ -45,8 +45,8 @@ private:
 //public:
 //    static ExplorationTree* createFromSnapshot(ExplorationTreeSnapshot& snapshot);
 //    
-//    ExplorationTree(const std::string& sourceMolAsSMILES);
-//    ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
+    ExplorationTree(const std::string& sourceMolAsSMILES);
+    ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
 //    ExplorationTree(ExplorationParameters& params);
 //    
 //    ExplorationTreeSnapshot* createSnapshot() const;

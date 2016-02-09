@@ -14,6 +14,7 @@ class MinimalTest : public CPPUNIT_NS::TestFixture {
     CPPUNIT_TEST_SUITE(MinimalTest);
 
     CPPUNIT_TEST(testMolpherMol);
+    CPPUNIT_TEST(testTree);
 
     CPPUNIT_TEST_SUITE_END();
 
@@ -25,6 +26,7 @@ public:
 
 private:
     void testMolpherMol();
+    void testTree();
 };
 
 #endif	/* MINIMALTEST_HPP */
