@@ -20,46 +20,60 @@ class ExplorationTree; // forward declaration to resolve circular dependency
 
 class MolpherMol {
     
-public:
+private:
+//    MolpherMolecule* mol;
+//    bool selfAllocated;
     class MolpherMolImpl;
-    
-    MolpherMol(std::string& smiles, std::string& formula, std::string& parentSmile,
-                ChemOperSelector* opers, double dist, double distToClosestDecoy,
-                double weight, double sascore);
-    MolpherMol(const std::string& smiles);
-    
+    std::unique_ptr<MolpherMolImpl> pimpl;
+
+public:
 //    MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl);
     
     MolpherMol();
 //    MolpherMol(MolpherMolecule& mol);
 //    MolpherMol(MolpherMolecule& mol, bool copy);
+    MolpherMol(const std::string& smiles, const std::string& formula, const std::string& parentSmile,
+                const unsigned& oper, const double& dist, const double& distToClosestDecoy,
+                const double& weight, const double& sascore);
+    MolpherMol(const std::string& smiles);
     MolpherMol(const MolpherMol& other);
     ~MolpherMol();
-//    
+    
     MolpherMol& operator=(const MolpherMol&);
-//    
+    
 //    MolpherMolecule& fetchMolpherMolecule() const; // TODO: maybe get rid of this
-//    bool isBound() const;
     std::unique_ptr<MolpherMol> copy() const;
     
-    std::string getSMILES();
-    double getDistToTarget();
+    // getters
+    const std::string& getSMILES() const;
+    double getDistToTarget() const;
     std::shared_ptr<ExplorationTree> getTree();
-//    std::string getParentSMILES();
-//    const std::set<std::string>& getDescendants();
-//    const std::set<std::string>& getHistoricDescendants();
-//    unsigned int getItersWithoutDistImprovement();
-//    double getSAScore();
-//    double getMolecularWeight();
-//    
+    const std::string& getParentSMILES() const;
+    const std::set<std::string>& getDescendants() const;
+    const std::set<std::string>& getHistoricDescendants() const;
+    unsigned int getItersWithoutDistImprovement() const;
+    double getSAScore() const;
+    double getMolecularWeight() const;
+    const std::string& getFormula() const;
+    int getParentOper() const;
+    
+    // setters
+    void setSMILES(const std::string&);
+    void setParentSMILES(const std::string&);
     void setDistToTarget(double dist);
-//    void setSAScore(double score);
+    void setSAScore(double score);
+    void setItersWithoutDistImprovement(unsigned int count);
+    void increaseItersWithoutDistImprovement();
+    void decreaseItersWithoutDistImprovement();
+    void addToDescendants(const std::string& smiles);
+    void removeFromDescendants(const std::string& smiles);
+    void setDescendants(const std::set<std::string>&);
+    void addToHistoricDescendants(const std::string& smiles);
+    void removeFromHistoricDescendants(const std::string& smiles);
+    void setHistoricDescendants(const std::set<std::string>&);
     
-private:
-//    MolpherMolecule* mol;
-//    bool selfAllocated;
-    
-    std::unique_ptr<MolpherMolImpl> pimpl;
+    bool isValid() const;
+    bool isBoundToTree() const;
 };
 
 #endif	/* MOLPHERMOL_HPP */

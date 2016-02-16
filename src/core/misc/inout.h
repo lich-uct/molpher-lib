@@ -29,6 +29,7 @@
 //#include "data_structs/MolpherMolecule.h"
 
 void SynchCout(const std::string &s);
+void SynchCerr(const std::string &s, const std::string prefix = "WARNIG: ");
 
 //IterationSnapshot Materialize(IterationSnapshotProxy &proxy);
 

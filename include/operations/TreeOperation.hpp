@@ -31,14 +31,13 @@ public:
     
     TreeOperation(std::shared_ptr<ExplorationTree> expTree);
     TreeOperation();
-    virtual ~TreeOperation();
+//    virtual ~TreeOperation();
     virtual void operator()() = 0;
     
     std::shared_ptr<ExplorationTree> getTree();
     void setTree(std::shared_ptr<ExplorationTree> tree);
     
-private:
-    std::weak_ptr<ExplorationTree> tree;
+protected:
     std::unique_ptr<TreeOperationImpl> pimpl;
 };
 

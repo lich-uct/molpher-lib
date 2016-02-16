@@ -47,6 +47,11 @@ void SynchCout(const std::string &s) {
     std::cout << s << std::endl;
 }
 
+void SynchCerr(const std::string &s, const std::string prefix) {
+    boost::mutex::scoped_lock lock(gIoMutex);
+    std::cerr << prefix << s << std::endl;
+}
+
 //IterationSnapshot Materialize(IterationSnapshotProxy &proxy) {
 //    IterationSnapshot snp;
 //    ReadSnapshotFromFile(

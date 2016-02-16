@@ -31,7 +31,7 @@
 //#include "core/misc/selectors/chemoper_selectors.h"
 
 #include "core/data_structs/MolpherParam.h"
-#include "core/data_structs/ExplorationData.hpp"
+#include "data_structs/ExplorationData.hpp"
 #include "data_structs/ExplorationTree.hpp"
 #include "operations/TreeOperation.hpp"
 #include "data_structs/MolpherMol.hpp"
@@ -75,7 +75,7 @@ class ExplorationTree::ExplorationTreeImpl
          * new morphs.
          * @see ChemOperSelector
          */
-        std::vector<int> chemOpers;
+        std::set<int> chemOpers;
 
         /**
          * Parameters for morphing algorithm.
@@ -85,12 +85,12 @@ class ExplorationTree::ExplorationTreeImpl
         /**
          * Source molecule.
          */
-        std::shared_ptr<MolpherMol::MolpherMolImpl> source;
+        MolpherMol source;
 
         /**
          * Target molecule.
          */
-        std::shared_ptr<MolpherMol::MolpherMolImpl> target;
+        MolpherMol target;
 
     //    typedef tbb::concurrent_vector<std::string> PrunedVector;
 
@@ -117,29 +117,29 @@ class ExplorationTree::ExplorationTreeImpl
         
         static std::shared_ptr<ExplorationTree::ExplorationTreeImpl> createFromData(ExplorationData &data);
         
+        ExplorationTreeImpl();
         ExplorationTreeImpl(const std::string& sourceMolAsSMILES);
         ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
         ExplorationTreeImpl(ExplorationData &data);
         
-        std::shared_ptr<ExplorationData> asData();
-        void updateFromData(ExplorationData& data);
+        std::shared_ptr<ExplorationData> asData() const;
+        void updateFromData(const ExplorationData& data);
         
-        void runOperation(std::shared_ptr<TreeOperation::TreeOperationImpl> operation);
+//        void runOperation(std::shared_ptr<TreeOperation::TreeOperationImpl> operation);
+//        std::shared_ptr<MolVector> fetchLeaves(bool increase_dist_improve_counter = false);
+//        std::shared_ptr<MolpherMol> fetchMol(const std::string& canonSMILES);
+//        bool hasMol(const std::string& canonSMILES);
+//        bool isPathFound();
+//        void deleteSubtree(const std::string& canonSMILES);
+//        void generateMorphs();
+//        void sortMorphs();
+//        void filterMorphs();
+//        void filterMorphs(int filters);
+//        void extend();
+//        void prune();
         
-        std::shared_ptr<MolVectorAPI> fetchLeaves(bool increase_dist_improve_counter = false);
-        std::shared_ptr<MolpherMol::MolpherMolImpl> fetchMol(const std::string& canonSMILES);
-        bool hasMol(const std::string& canonSMILES);
-        bool isPathFound();
-        void deleteSubtree(const std::string& canonSMILES);
-        void generateMorphs();
-        void sortMorphs();
-        void filterMorphs();
-        void filterMorphs(int filters);
-        void extend();
-        void prune();
+//        std::shared_ptr<const std::vector<std::shared_ptr<MolpherMol> > > getCandidateMorphs();
+//        const std::vector<bool>& getCandidateMorphsMask(); // TODO add a bitset version
         
-        std::shared_ptr<const std::vector<std::shared_ptr<MolpherMol::MolpherMolImpl> > > getCandidateMorphs();
-        const std::vector<bool>& getCandidateMorphsMask(); // TODO add a bitset version
-        
-        void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
+//        void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
 };

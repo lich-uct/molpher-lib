@@ -5,14 +5,10 @@
  * Created on January 27, 2016, 10:11 AM
  */
 
-#ifndef EXPLORATIONDATA_HPP
-#define	EXPLORATIONDATA_HPP
+#ifndef EXPLORATIONDATAIMPL_HPP
+#define	EXPLORATIONDATAIMPL_HPP
 
 #pragma once
-
-#include <string>
-#include <vector>
-#include <map>
 
 #include <boost/version.hpp>
 //#include <boost/cstdint.hpp>
@@ -28,8 +24,10 @@
 #include "core/misc/global_types.h"
 
 #include "MolpherParam.h"
+#include "data_structs/ExplorationData.hpp"
+#include "MolpherMolData.hpp"
 
-struct ExplorationData
+struct ExplorationData::ExplorationDataImpl
 {
 //    typedef std::vector<std::string> PrunedVector;
     
@@ -58,7 +56,7 @@ struct ExplorationData
      * new morphs.
      * @see ChemOperSelector
      */
-    std::vector<int> chemOpers;
+    std::set<int> chemOpers;
 
     /**
      * Parameters for morphing algorithm.
@@ -104,7 +102,7 @@ struct ExplorationData
                 (source.SMILES != target.SMILES);
     }
 
-    ExplorationData() :
+    ExplorationDataImpl() :
             generationCnt(0)
             , threadCnt(0)
         {
@@ -112,14 +110,14 @@ struct ExplorationData
             simCoeff = DEFAULT_SC;
 
             // add all operators by default
-            chemOpers.push_back(OP_ADD_ATOM);
-            chemOpers.push_back(OP_REMOVE_ATOM);
-            chemOpers.push_back(OP_ADD_BOND);
-            chemOpers.push_back(OP_REMOVE_BOND);
-            chemOpers.push_back(OP_MUTATE_ATOM);
-            chemOpers.push_back(OP_INTERLAY_ATOM);
-            chemOpers.push_back(OP_BOND_REROUTE);
-            chemOpers.push_back(OP_BOND_CONTRACTION);
+            chemOpers.insert(OP_ADD_ATOM);
+            chemOpers.insert(OP_REMOVE_ATOM);
+            chemOpers.insert(OP_ADD_BOND);
+            chemOpers.insert(OP_REMOVE_BOND);
+            chemOpers.insert(OP_MUTATE_ATOM);
+            chemOpers.insert(OP_INTERLAY_ATOM);
+            chemOpers.insert(OP_BOND_REROUTE);
+            chemOpers.insert(OP_BOND_CONTRACTION);
         }
 
     template <class Archive>
@@ -164,5 +162,5 @@ BOOST_CLASS_IMPLEMENTATION(ExplorationData, object_serializable)
 // turn off tracking
 BOOST_CLASS_TRACKING(ExplorationData, track_never)
 
-#endif	/* EXPLORATIONDATA_HPP */
+#endif	/* EXPLORATIONDATAIMPL_HPP */
 

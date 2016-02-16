@@ -28,15 +28,15 @@ class FindLeavesOper::FindLeavesOperImpl : public TreeOperation::TreeOperationIm
         };
     
         ConcurrentMolVector leaves;
-        bool mIncrementDistImproveCounter;
+        bool incrementDistImproveCounter;
         
 
     public:
-        FindLeavesOperImpl(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> expTree, bool increment_iters_without_dist_improve = false);
+        FindLeavesOperImpl(std::shared_ptr<ExplorationTree> expTree, bool increment_iters_without_dist_improve = false);
         FindLeavesOperImpl(bool increment_iters_without_dist_improve = false);
         void operator()();
         
-        std::shared_ptr<MolVectorAPI> fetchLeaves();
+        std::shared_ptr<MolVector> fetchLeaves();
 
 };
 

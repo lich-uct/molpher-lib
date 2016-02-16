@@ -5,7 +5,7 @@
 
 
 TreeOperation::TreeOperation(std::shared_ptr<ExplorationTree> expTree) : 
-pimpl(new TreeOperation::TreeOperationImpl(expTree->pimpl))
+pimpl(new TreeOperation::TreeOperationImpl(expTree))
 {
     // no action
 }
@@ -16,9 +16,9 @@ pimpl(new TreeOperation::TreeOperationImpl())
     // no action
 }
 
-TreeOperation::~TreeOperation() {
-    // no action
-}
+//TreeOperation::~TreeOperation() {
+//    // no action
+//}
 
 //PathFinderContext& TreeOperation::fetchTreeContext() {
 //    return tree->context;
@@ -46,16 +46,16 @@ TreeOperation::~TreeOperation() {
 //}
 
 std::shared_ptr<ExplorationTree> TreeOperation::getTree() {
-    return tree.lock();
+    return pimpl->getTree();
 }
 
 void TreeOperation::setTree(std::shared_ptr<ExplorationTree> tree) {
-    this->tree = tree;
-    pimpl->setTree(tree->pimpl);
+    pimpl->setTree(tree);
 }
 
-TreeOperation::TreeOperationImpl::TreeOperationImpl(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> expTree) :
+TreeOperation::TreeOperationImpl::TreeOperationImpl(std::shared_ptr<ExplorationTree> expTree) :
 tree(expTree)
+, tree_pimpl(expTree->pimpl)
 {
     // no action
 }
@@ -64,15 +64,16 @@ TreeOperation::TreeOperationImpl::TreeOperationImpl() {
     // no action
 }
 
-std::shared_ptr<ExplorationTree::ExplorationTreeImpl> TreeOperation::TreeOperationImpl::getTree() {
-    return tree.lock();
+std::shared_ptr<ExplorationTree> TreeOperation::TreeOperationImpl::getTree() {
+    return tree;
 }
 
-void TreeOperation::TreeOperationImpl::setTree(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree) {
+void TreeOperation::TreeOperationImpl::setTree(std::shared_ptr<ExplorationTree> tree) {
     this->tree = tree;
+    this->tree_pimpl = tree->pimpl;
 }
 
-void TreeOperation::TreeOperationImpl::operator()() {
-    // no action
-}
+//void TreeOperation::TreeOperationImpl::operator()() {
+//    // no action
+//}
 

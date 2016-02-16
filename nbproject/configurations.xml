@@ -8,6 +8,7 @@
         <logicalFolder name="data_structs"
                        displayName="data_structs"
                        projectFiles="true">
+          <itemPath>include/data_structs/ExplorationData.hpp</itemPath>
           <itemPath>include/data_structs/ExplorationParameters.hpp</itemPath>
           <itemPath>include/data_structs/ExplorationTree.hpp</itemPath>
           <itemPath>include/data_structs/ExplorationTreeSnapshot.hpp</itemPath>
@@ -106,7 +107,7 @@
           <logicalFolder name="data_structs"
                          displayName="data_structs"
                          projectFiles="true">
-            <itemPath>src/core/data_structs/ExplorationData.hpp</itemPath>
+            <itemPath>src/core/data_structs/ExplorationDataImpl.hpp</itemPath>
             <itemPath>src/core/data_structs/MolpherAtom.h</itemPath>
             <itemPath>src/core/data_structs/MolpherMolData.hpp</itemPath>
             <itemPath>src/core/data_structs/MolpherParam.h</itemPath>
@@ -152,6 +153,7 @@
               <itemPath>src/core/API/operations/TraverseOper.cpp</itemPath>
               <itemPath>src/core/API/operations/TreeOperation.cpp</itemPath>
             </logicalFolder>
+            <itemPath>src/core/API/ExplorationData.cpp</itemPath>
             <itemPath>src/core/API/ExplorationParameters.cpp</itemPath>
             <itemPath>src/core/API/ExplorationTree.cpp</itemPath>
             <itemPath>src/core/API/ExplorationTreeSnapshot.cpp</itemPath>
@@ -350,6 +352,11 @@
           <commandLine>-pthread</commandLine>
         </linkerTool>
       </folder>
+      <item path="include/data_structs/ExplorationData.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="include/data_structs/ExplorationParameters.hpp"
             ex="false"
             tool="3"
@@ -436,6 +443,8 @@
             flavor2="0">
       </item>
       <item path="res/SAScore.dat" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/core/API/ExplorationData.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/core/API/ExplorationTree.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -817,7 +826,7 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="src/core/data_structs/ExplorationData.hpp"
+      <item path="src/core/data_structs/ExplorationDataImpl.hpp"
             ex="false"
             tool="3"
             flavor2="0">

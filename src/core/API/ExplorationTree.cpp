@@ -3,18 +3,27 @@
 #include <iostream>
 
 //#include "core/misc/iteration_serializer.hpp"
+#include "selectors/fingerprint_selectors.h"
+#include "selectors/chemoper_selectors.h"
+#include "selectors/simcoeff_selectors.h"
 
 #include "data_structs/ExplorationTree.hpp"
 #include "ExplorationTreeImpl.h"
+#include "core/data_structs/ExplorationDataImpl.hpp"
 #include "MolpherMolImpl.hpp"
 #include "operations/FindLeavesOper.hpp"
 #include "operations/FindLeavesOperImpl.hpp"
+#include "core/chem/fingerprintStrategy/MorganFngpr.hpp"
 //#include "operations/GenerateMorphsOper.hpp"
 //#include "operations/SortMorphsOper.hpp"
 //#include "operations/FilterMorphsOper.hpp"
 //#include "operations/ExtendTreeOper.hpp"
 //#include "operations/PruneTreeOper.hpp"
 //#include "operations/callbacks/EraseSubtreeCallback.hpp"
+
+ExplorationTree::ExplorationTree() : pimpl() {
+    // no action
+}
 
 ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES) : 
 pimpl(new ExplorationTree::ExplorationTreeImpl(sourceMolAsSMILES)) 
@@ -28,44 +37,91 @@ pimpl(new ExplorationTree::ExplorationTreeImpl(sourceMolAsSMILES, targetMolAsSMI
     // no action
 }
 
+std::shared_ptr<ExplorationTree> ExplorationTree::create(const ExplorationData& data) {
+    auto new_tree = std::make_shared<ExplorationTree>();
+    new_tree->updateFromData(data);
+    return new_tree;
+}
+
+std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) {
+    return std::make_shared<ExplorationTree>(sourceMolAsSMILES, targetMolAsSMILES);
+}
+
+std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sourceMolAsSMILES) {
+    return std::make_shared<ExplorationTree>(sourceMolAsSMILES);
+}
 
 
-void ExplorationTree::ExplorationTreeImpl::updateFromData(ExplorationData& data)
+std::shared_ptr<ExplorationData> ExplorationTree::asData() const {
+    return pimpl->asData();
+}
+
+void ExplorationTree::updateFromData(const ExplorationData& data) {
+    pimpl->updateFromData(data);
+}
+
+
+
+
+// pimpl
+
+ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl() : 
+generationCnt(0)
+, threadCnt(0)
+, fingerprint(FP_MORGAN)
+, simCoeff(SC_TANIMOTO)
+{
+    // no action
+}
+
+
+void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData& data)
 {
     if (!data.isValid()) {
-        throw std::runtime_error("Supplied exploration data is invalid.");
+        throw std::runtime_error("Supplied exploration data are invalid.");
     }
     
     candidates.clear();
-    for (auto& mol_data : data.candidates) {
-        candidates.push_back(std::make_shared<MolpherMol::MolpherMolImpl>(mol_data));
+    for (auto& mol : *(data.getCandidates())) {
+        candidates.push_back(std::make_shared<MolpherMol>(*mol));
     }
     
-    candidatesMask.swap(data.candidatesMask);
-    chemOpers.swap(data.chemOpers);
-    fingerprint = data.fingerprint;
-    generationCnt = data.generationCnt;
+    candidatesMask = data.getCandidatesMask();
+    chemOpers = data.getChemicalOperators();
+    fingerprint = data.getFingerprint();
+    generationCnt = data.getGenerationCount();
     
     if (morphDerivations.empty()) {
-        for (auto& mol_data : data.morphDerivations) {
+        for (auto& mol_data : data.getDerivationMap()) {
             morphDerivations.insert(mol_data);
         }
     }
     
-    params = data.params;
-    simCoeff = data.simCoeff;
-    if (!source) {
-        source = std::make_shared<MolpherMol::MolpherMolImpl>(data.source);
+    params.cntCandidatesToKeep = data.getCntCandidatesToKeep();
+    params.cntCandidatesToKeepMax = data.getCntCandidatesToKeepMax();
+    params.itThreshold = data.getItThreshold();
+    params.cntMaxMorphs = data.getCntMaxMorphs();
+    params.distToTargetDepthSwitch = data.getDistToTargetDepthSwitch();
+    params.cntMorphsInDepth = data.getCntMorphsInDepth();
+    params.cntMorphs = data.getCntMorphs();
+    params.minAcceptableMolecularWeight = data.getMinAcceptableMolecularWeight();
+    params.maxAcceptableMolecularWeight = data.getMaxAcceptableMolecularWeight();
+            
+    
+    simCoeff = data.getSimilarityCoefficient();
+    if (!source.isValid()) {
+        source = MolpherMol(*(data.getSource()));
     }
-    target = std::make_shared<MolpherMol::MolpherMolImpl>(data.target);
-    threadCnt = data.threadCnt;
+    target = MolpherMol(*(data.getTarget()));
+    threadCnt = data.getThreadCount();
     
     if (treeMap.empty()) {
-        for (auto& mol_data : data.treeMap) {
+        auto map = data.getTreeMap();
+        for (auto& mol_data : (*map)) {
             treeMap.insert(
                 std::make_pair(
                     mol_data.first
-                    , std::make_shared<MolpherMol::MolpherMolImpl>(mol_data.second)
+                    , std::make_shared<MolpherMol>(*(mol_data.second))
                     )
             );
         }
@@ -73,37 +129,46 @@ void ExplorationTree::ExplorationTreeImpl::updateFromData(ExplorationData& data)
     
     if (treeMap.empty()) {
         treeMap.insert(std::make_pair(
-                    source->getSMILES()
-                    , source
+                    source.getSMILES()
+                    , std::make_shared<MolpherMol>(source)
                     )
         );
     }
 }
 
-std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() {
+std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() const {
     auto data = std::make_shared<ExplorationData>();
     
-    for (auto& mol : candidates) {
-        data->candidates.push_back(mol->asData());
+    for (auto mol : candidates) {
+        data->addCandidate(*mol);
     }
     
-    data->candidatesMask.swap(candidatesMask);
-    data->chemOpers.swap(chemOpers);
-    data->fingerprint = fingerprint;
-    data->generationCnt = generationCnt;
+    data->setCandidatesMask(candidatesMask);
+    data->setChemicalOperators(chemOpers);
+    data->setFingerprint(fingerprint);
+    data->setGenerationCount(generationCnt);
     
     for (auto& item : morphDerivations) {
-        data->morphDerivations.insert(item);
+        data->addToDerivationMap(item.first, item.second);
     }
     
-    data->params = params;
-    data->simCoeff = simCoeff;
-    data->source = source->asData();
-    data->target = target->asData();
-    data->threadCnt = threadCnt;
+    data->setCntCandidatesToKeep(params.cntCandidatesToKeep);
+    data->setCntCandidatesToKeepMax(params.cntCandidatesToKeepMax);
+    data->setItThreshold(params.itThreshold);
+    data->setCntMaxMorphs(params.cntMaxMorphs);
+    data->setDistToTargetDepthSwitch(params.distToTargetDepthSwitch);
+    data->setCntMorphsInDepth(params.cntMorphsInDepth);
+    data->setCntMorphs(params.cntMorphs);
+    data->setMinAcceptableMolecularWeight(params.minAcceptableMolecularWeight);
+    data->setMaxAcceptableMolecularWeight(params.maxAcceptableMolecularWeight);
+    
+    data->setSimilarityCoefficient(simCoeff);
+    data->setSource(source);
+    data->setTarget(target);
+    data->setThreadCount(threadCnt);
     
     for (auto& item : treeMap) {
-        data->treeMap.insert(std::make_pair(item.first, item.second->asData()));
+        data->addToTreeMap(item.first, *(item.second));
     }
 }
 
@@ -113,30 +178,18 @@ ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(sourceMolAsSMILES, "")
     // no action
 }
 
-ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) {
-    MolpherMolData source_data;
-    source_data.SMILES = sourceMolAsSMILES;
-    if (!source_data.isValid()) {
+ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) : source(sourceMolAsSMILES), target(targetMolAsSMILES) {
+    if (!source.isValid()) {
         throw std::runtime_error("Invalid source molecule specified for tree initialization.");
     }
     
-    MolpherMolData target_data;
-    if (!targetMolAsSMILES.empty()) {
-        target_data.SMILES = targetMolAsSMILES;
-    } else {
-        target_data.SMILES = "C";
+    if (target.getSMILES().empty()) {
+        target.setSMILES("C");
         std::cerr << "WARNING: No target specified. Inserting default: 'C'" << std::endl;
     }
-    if (!target_data.isValid()) {
+    if (!target.isValid()) {
         throw std::runtime_error("Invalid target molecule specified for tree initialization.");
     }
-    
-    
-    ExplorationData data;
-    data.source = source_data;
-    data.target = target_data;
-    
-    updateFromData(data);
 }
 
 ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(ExplorationData &data) {
@@ -147,11 +200,15 @@ std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::Explorati
     return std::make_shared<ExplorationTree::ExplorationTreeImpl>(data);
 }
 
-std::shared_ptr<MolVectorAPI> ExplorationTree::ExplorationTreeImpl::fetchLeaves(bool increase_dist_improve_counter) {
+//void ExplorationTree::ExplorationTreeImpl::runOperation(std::shared_ptr<TreeOperation::TreeOperationImpl> operation) {
+//    
+//}
+
+//std::shared_ptr<MolVector> ExplorationTree::ExplorationTreeImpl::fetchLeaves(bool increase_dist_improve_counter) {
 //    FindLeavesOper::FindLeavesOperImpl op(std::make_shared<ExplorationTree::ExplorationTreeImpl>(this), (bool) increase_dist_improve_counter); // TODO: create an empty deleter so that the shared pointer doesnt kill the the object pointed to by this
 //    op();
 //    return op.fetchLeaves();
-}
+//}
 
 
 //ExplorationTree::ExplorationTree(IterationSnapshot& snp) : threadCount(0) {

@@ -15,16 +15,17 @@
 
 class TreeOperation::TreeOperationImpl {
 
-private:
-    std::weak_ptr<ExplorationTree::ExplorationTreeImpl> tree;
+protected:
+    std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree_pimpl;
+    std::shared_ptr<ExplorationTree> tree;
     
 public:
-    TreeOperationImpl(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> expTree);
+    TreeOperationImpl(std::shared_ptr<ExplorationTree> expTree);
     TreeOperationImpl();
     virtual void operator()();
     
-    std::shared_ptr<ExplorationTree::ExplorationTreeImpl> getTree();
-    void setTree(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree);
+    std::shared_ptr<ExplorationTree> getTree();
+    void setTree(std::shared_ptr<ExplorationTree> tree);
 };
 
 #endif	/* TREEOPERATIONIMPL_HPP */

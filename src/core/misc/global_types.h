@@ -37,11 +37,10 @@ typedef unsigned int BondIdx;
 
 typedef unsigned int MolpherAtomIdx;
 
-typedef tbb::concurrent_hash_map<std::string, std::shared_ptr<MolpherMol::MolpherMolImpl>> TreeMap;
+typedef tbb::concurrent_hash_map<std::string, std::shared_ptr<MolpherMol>> TreeMap;
 typedef tbb::concurrent_hash_map<std::string, unsigned int> MorphDerivationMap;
-typedef tbb::concurrent_vector<std::shared_ptr<MolpherMol::MolpherMolImpl>> ConcurrentMolVector;
-typedef std::vector<std::shared_ptr<MolpherMol::MolpherMolImpl>> MolVector;
-typedef std::vector<std::shared_ptr<MolpherMol>> MolVectorAPI;
+typedef tbb::concurrent_vector<std::shared_ptr<MolpherMol>> ConcurrentMolVector;
+typedef std::vector<std::shared_ptr<MolpherMol>> MolVector;
 
 typedef std::vector<MolpherMolData> CandidatesVectorData;
 typedef std::vector<bool> CandidatesMaskVectorData;

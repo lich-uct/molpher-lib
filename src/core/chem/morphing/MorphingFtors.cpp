@@ -199,7 +199,7 @@ void ReturnResults::operator()(const tbb::blocked_range<int> &r) const
     for (int i = r.begin(); i != r.end(); ++i) {
         if (mNewMols[i]) {
             auto result = std::make_shared<MolpherMol>(mSmiles[i], mFormulas[i], mParentSmile,
-                &mOpers[i], mDistToTarget[i], mDistToClosestDecoy[i],
+                mOpers[i], mDistToTarget[i], mDistToClosestDecoy[i],
                 mWeights[i], mSascore[i]);
             
             /* Advance decoy functionality
