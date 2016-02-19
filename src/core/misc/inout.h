@@ -22,7 +22,7 @@
 #include <vector>
 #include <map>
 
-#include <rdkit/GraphMol/GraphMol.h>
+#include <GraphMol/GraphMol.h>
 
 #include "global_types.h"
 //#include "data_structs/IterationSnapshot.h"

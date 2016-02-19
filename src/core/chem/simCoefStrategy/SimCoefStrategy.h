@@ -19,7 +19,7 @@
 
 #include <map>
 
-#include <rdkit/DataStructs/BitOps.h>
+#include <DataStructs/BitOps.h>
 
 #include "core/misc/global_types.h"
 #include "selectors/fingerprint_selectors.h"

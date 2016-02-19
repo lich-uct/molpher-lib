@@ -69,18 +69,7 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl() {
 }
 
 MolpherMol::MolpherMolImpl::MolpherMolImpl(const std::string& smiles) {
-    
-    RDKit::RWMol* mol = RDKit::SmilesToMol(smiles);
-    try {
-        RDKit::MolOps::Kekulize(*mol);
-    } catch (const ValueErrorException &exc) {
-        SynchCout("Cannot kekulize input molecule.");
-    }
-
-    data.SMILES = RDKit::MolToSmiles(*mol);
-    data.formula = RDKit::Descriptors::calcMolFormula(*mol);
-
-    SynchCout("Parsed molecule " + smiles + " >> " + data.SMILES);
+    this->setSMILES(smiles);
 }
 
 MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMolData& data) : data(data) {
@@ -89,6 +78,34 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMolData& data) : data(da
 
 MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMol::MolpherMolImpl& other) : data(other.data), tree(other.tree) {
     // no action
+}
+
+void MolpherMol::MolpherMolImpl::setSMILES(const std::string& smiles) {
+    RDKit::RWMol* mol = nullptr;
+    try {
+        if (smiles.empty()) {
+            SynchCerr("Creating a molecule with an empty SMILES string.");
+            data.SMILES = "";
+            return;
+        }
+        mol = RDKit::SmilesToMol(smiles);
+    } catch (RDKit::SmilesParseException &exp) {
+        SynchCerr("Error parsing supplied SMILES: \"" + smiles + "\"");
+        SynchCerr(exp.what());
+        throw exp;
+    }
+    
+    try {
+        RDKit::MolOps::Kekulize(*mol);
+    } catch (const ValueErrorException &exc) {
+        SynchCerr("Cannot kekulize input molecule.");
+        throw exc;
+    }
+
+    data.SMILES = RDKit::MolToSmiles(*mol);
+    data.formula = RDKit::Descriptors::calcMolFormula(*mol);
+
+    SynchCout("Parsed molecule " + smiles + " >> " + data.SMILES);
 }
 
 //MolpherMolData MolpherMol::MolpherMolImpl::asData() const {
@@ -202,7 +219,7 @@ void MolpherMol::setSAScore(double score) {
 }
 
 void MolpherMol::setSMILES(const std::string& smiles) {
-    pimpl->data.SMILES = smiles;
+    pimpl->setSMILES(smiles);
 }
 
 void MolpherMol::setParentSMILES(const std::string& smiles) {

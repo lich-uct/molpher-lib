@@ -115,10 +115,10 @@ class ExplorationTree::ExplorationTreeImpl
         
     public:
         
-        static std::shared_ptr<ExplorationTree::ExplorationTreeImpl> createFromData(ExplorationData &data);
+//        static std::shared_ptr<ExplorationTree::ExplorationTreeImpl> createFromData(ExplorationData &data);
         
         ExplorationTreeImpl();
-        ExplorationTreeImpl(const std::string& sourceMolAsSMILES);
+//        ExplorationTreeImpl(const std::string& sourceMolAsSMILES);
         ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
         ExplorationTreeImpl(ExplorationData &data);
         

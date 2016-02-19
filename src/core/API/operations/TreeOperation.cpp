@@ -73,7 +73,7 @@ void TreeOperation::TreeOperationImpl::setTree(std::shared_ptr<ExplorationTree> 
     this->tree_pimpl = tree->pimpl;
 }
 
-//void TreeOperation::TreeOperationImpl::operator()() {
-//    // no action
-//}
+void TreeOperation::TreeOperationImpl::operator()() {
+    throw std::runtime_error("This is just a dummy method. It should not be called directly!");
+}
 

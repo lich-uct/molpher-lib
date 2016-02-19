@@ -42,12 +42,12 @@ private:
     
 public:
     ExplorationTree();
-    ExplorationTree(const std::string& sourceMolAsSMILES);
+//    ExplorationTree(const std::string& sourceMolAsSMILES);
     ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
     //    ExplorationTree(ExplorationParameters& params);
     
     static std::shared_ptr<ExplorationTree> create(const ExplorationData& data);
-    static std::shared_ptr<ExplorationTree> create(const std::string& sourceMolAsSMILES);
+//    static std::shared_ptr<ExplorationTree> create(const std::string& sourceMolAsSMILES);
     static std::shared_ptr<ExplorationTree> create(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
     
     std::shared_ptr<ExplorationData> asData() const;

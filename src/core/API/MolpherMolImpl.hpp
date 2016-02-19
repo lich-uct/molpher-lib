@@ -39,6 +39,7 @@ public:
 //    double getSAScore() const;
 //    double getMolecularWeight() const;
 //    
+    void setSMILES(const std::string& smiles);
 //    void setDistToTarget(double dist);
 //    void setSAScore(double score);
 //    void setItersWithoutDistImprovement(unsigned int count);

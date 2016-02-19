@@ -25,11 +25,11 @@ ExplorationTree::ExplorationTree() : pimpl() {
     // no action
 }
 
-ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES) : 
-pimpl(new ExplorationTree::ExplorationTreeImpl(sourceMolAsSMILES)) 
-{
-    // no action
-}
+//ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES) : 
+//pimpl(new ExplorationTree::ExplorationTreeImpl(sourceMolAsSMILES)) 
+//{
+//    // no action
+//}
 
 ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) : 
 pimpl(new ExplorationTree::ExplorationTreeImpl(sourceMolAsSMILES, targetMolAsSMILES))
@@ -47,9 +47,9 @@ std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sour
     return std::make_shared<ExplorationTree>(sourceMolAsSMILES, targetMolAsSMILES);
 }
 
-std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sourceMolAsSMILES) {
-    return std::make_shared<ExplorationTree>(sourceMolAsSMILES);
-}
+//std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sourceMolAsSMILES) {
+//    return std::make_shared<ExplorationTree>(sourceMolAsSMILES);
+//}
 
 
 std::shared_ptr<ExplorationData> ExplorationTree::asData() const {
@@ -65,15 +65,46 @@ void ExplorationTree::updateFromData(const ExplorationData& data) {
 
 // pimpl
 
-ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl() : 
-generationCnt(0)
-, threadCnt(0)
-, fingerprint(FP_MORGAN)
-, simCoeff(SC_TANIMOTO)
+ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl() :
+ExplorationTreeImpl("", "")
 {
     // no action
 }
 
+//ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const std::string& sourceMolAsSMILES) : source(sourceMolAsSMILES)
+//{
+//    // no action
+//}
+
+ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) : 
+source(sourceMolAsSMILES)
+, target(targetMolAsSMILES)
+, generationCnt(0)
+, threadCnt(0)
+, fingerprint(FP_MORGAN)
+, simCoeff(SC_TANIMOTO)
+{
+    if (!source.isValid()) {
+        throw std::runtime_error("Invalid source molecule specified for tree initialization.");
+    }
+    
+    if (!target.isValid()) {
+        throw std::runtime_error("Invalid target molecule specified for tree initialization.");
+    }
+    
+    chemOpers.insert(OP_ADD_ATOM);
+    chemOpers.insert(OP_ADD_BOND);
+    chemOpers.insert(OP_BOND_CONTRACTION);
+    chemOpers.insert(OP_BOND_REROUTE);
+    chemOpers.insert(OP_INTERLAY_ATOM);
+    chemOpers.insert(OP_MUTATE_ATOM);
+    chemOpers.insert(OP_REMOVE_BOND);
+    chemOpers.insert(OP_REMOVE_ATOM);
+}
+
+ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(ExplorationData &data) {
+    updateFromData(data);
+}
 
 void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData& data)
 {
@@ -172,33 +203,9 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     }
 }
 
-ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const std::string& sourceMolAsSMILES) :
-ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(sourceMolAsSMILES, "")
-{
-    // no action
-}
-
-ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) : source(sourceMolAsSMILES), target(targetMolAsSMILES) {
-    if (!source.isValid()) {
-        throw std::runtime_error("Invalid source molecule specified for tree initialization.");
-    }
-    
-    if (target.getSMILES().empty()) {
-        target.setSMILES("C");
-        std::cerr << "WARNING: No target specified. Inserting default: 'C'" << std::endl;
-    }
-    if (!target.isValid()) {
-        throw std::runtime_error("Invalid target molecule specified for tree initialization.");
-    }
-}
-
-ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(ExplorationData &data) {
-    updateFromData(data);
-}
-
-std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {
-    return std::make_shared<ExplorationTree::ExplorationTreeImpl>(data);
-}
+//std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {
+//    return std::make_shared<ExplorationTree::ExplorationTreeImpl>(data);
+//}
 
 //void ExplorationTree::ExplorationTreeImpl::runOperation(std::shared_ptr<TreeOperation::TreeOperationImpl> operation) {
 //    

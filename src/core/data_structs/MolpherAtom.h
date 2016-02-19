@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "rdkit/GraphMol/Atom.h"
+#include "GraphMol/Atom.h"
 
 // used type definition
 typedef int AtomicNum;

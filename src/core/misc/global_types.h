@@ -21,8 +21,8 @@
 #include <tbb/concurrent_vector.h>
 #include <tbb/concurrent_hash_map.h>
 
-#include <rdkit/DataStructs/ExplicitBitVect.h>
-#include <rdkit/GraphMol/Atom.h>
+#include <DataStructs/ExplicitBitVect.h>
+#include <GraphMol/Atom.h>
 
 #include "core/data_structs/MolpherAtom.h"
 #include "core/data_structs/MolpherMolData.hpp"

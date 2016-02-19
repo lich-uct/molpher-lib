@@ -19,7 +19,7 @@
 
 #include <map>
 
-#include <rdkit/GraphMol/GraphMol.h>
+#include <GraphMol/GraphMol.h>
 
 class SAScore {
 public:

@@ -9,8 +9,8 @@
 #include "SAScore.h"
 #include "global_types.h"
 #include "core/chem/fingerprintStrategy/FingerprintStrategy.h"
-#include <rdkit/DataStructs/SparseIntVect.h>
-#include <rdkit/GraphMol/Fingerprints/MorganFingerprints.h>
+#include <DataStructs/SparseIntVect.h>
+#include <GraphMol/Fingerprints/MorganFingerprints.h>
 
 #include <fstream>
 #include <vector>

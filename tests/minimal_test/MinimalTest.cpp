@@ -43,7 +43,7 @@ void MinimalTest::testMolpherMol() {
 }
 
 void MinimalTest::testTree() {
-    ExplorationTree tree("CC0", "C1CCC1");
-    ExplorationTree tree_no_target("CC0", "");
+    ExplorationTree tree("CCO", "C1CCC1");
+    CPPUNIT_ASSERT_THROW(ExplorationTree tree_no_target("CCO", "");, std::runtime_error);
 }
 

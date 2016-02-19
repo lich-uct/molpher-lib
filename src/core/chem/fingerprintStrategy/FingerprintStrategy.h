@@ -17,11 +17,11 @@
 
 #pragma once
 
-#include <rdkit/GraphMol/GraphMol.h>
-#include <rdkit/GraphMol/RDKitBase.h>
-#include <rdkit/GraphMol/Fingerprints/Fingerprints.h>
-#include <rdkit/GraphMol/Fingerprints/MorganFingerprints.h>
-#include <rdkit/GraphMol/Fingerprints/AtomPairs.h>
+#include <GraphMol/GraphMol.h>
+#include <GraphMol/RDKitBase.h>
+#include <GraphMol/Fingerprints/Fingerprints.h>
+#include <GraphMol/Fingerprints/MorganFingerprints.h>
+#include <GraphMol/Fingerprints/AtomPairs.h>
 
 #include "core/misc/global_types.h"
 #include "selectors/fingerprint_selectors.h"
