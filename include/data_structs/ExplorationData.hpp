@@ -14,7 +14,10 @@
 
 #include "data_structs/MolpherMol.hpp"
 
-class ExplorationData {    
+class ExplorationData {
+
+    // TODO: add advanced integrity checking (if this instance is valid,
+    // it should always represent a consistent tree)
     
 private:
     struct ExplorationDataImpl;
@@ -23,6 +26,7 @@ private:
 public:
     
     ExplorationData();
+    ~ExplorationData();
     
     // getters
     

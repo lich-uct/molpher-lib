@@ -32,11 +32,14 @@ MolpherMol* MolDataToMolpherMol(const MolpherMolData& data) {
     mol->setDescendants(data.historicDescendants);
     mol->setHistoricDescendants(data.historicDescendants);
     mol->setItersWithoutDistImprovement(data.gensWithoutDistImprovement);
+    return mol;
 }
 
 ExplorationData::ExplorationData() : pimpl(new ExplorationData::ExplorationDataImpl()) {
     // no action
 }
+
+ExplorationData::~ExplorationData() = default;
 
 void ExplorationData::addCandidate(const MolpherMol& mol) {
     if (!mol.isBoundToTree()) {
@@ -174,7 +177,7 @@ double ExplorationData::getMinAcceptableMolecularWeight() const {
 }
 
 int ExplorationData::getSimilarityCoefficient() const {
-    pimpl->simCoeff;
+    return pimpl->simCoeff;
 }
 
 std::unique_ptr<MolpherMol> ExplorationData::getSource() const {
@@ -341,9 +344,14 @@ void ExplorationData::setSimilarityCoefficient(int val) {
 }
 
 void ExplorationData::setSource(const MolpherMol& mol) {
-    MolpherMolData data;
-    MolpherMolToMolData(mol, data);
-    pimpl->source = data;
+    if (pimpl->treeMap.empty()) {
+        MolpherMolData data;
+        MolpherMolToMolData(mol, data);
+        pimpl->source = data;
+        pimpl->treeMap.insert(std::make_pair(data.SMILES, data));
+    } else {
+        throw std::runtime_error("Cannot set a source molecule for non-empty tree data.");
+    }
 }
 
 void ExplorationData::setTarget(const MolpherMol& mol) {

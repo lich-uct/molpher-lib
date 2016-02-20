@@ -99,6 +99,7 @@ struct ExplorationData::ExplorationDataImpl
                 params.isValid() &&
                 source.isValid() &&
                 target.isValid() &&
+                !treeMap.empty() &&
                 (source.SMILES != target.SMILES);
     }
 
