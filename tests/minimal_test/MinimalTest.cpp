@@ -6,10 +6,15 @@
  */
 #include <stdexcept>
 
+#include <GraphMol/SmilesParse/SmilesParse.h>
+
 #include "MinimalTest.hpp"
 
 #include "data_structs/MolpherMol.hpp"
 #include "data_structs/ExplorationTree.hpp"
+#include "selectors/chemoper_selectors.h"
+#include "selectors/fingerprint_selectors.h"
+#include "selectors/simcoeff_selectors.h"
 
 
 CPPUNIT_TEST_SUITE_REGISTRATION(MinimalTest);
@@ -27,10 +32,12 @@ void MinimalTest::tearDown() {
 }
 
 void MinimalTest::testMolpherMol() {
+    // test the simple constructor
     MolpherMol mol("CCO");
     CPPUNIT_ASSERT_EQUAL(std::string("CCO"), mol.getSMILES());
     CPPUNIT_ASSERT_EQUAL(DBL_MAX, mol.getDistToTarget());
     
+    // test the copy method
     auto mol_copy = mol.copy();
     mol_copy->setDistToTarget(1.0);
     CPPUNIT_ASSERT_EQUAL(std::string("CCO"), mol_copy->getSMILES());
@@ -38,8 +45,31 @@ void MinimalTest::testMolpherMol() {
     CPPUNIT_ASSERT_EQUAL(std::string("CCO"), mol.getSMILES());
     CPPUNIT_ASSERT_EQUAL(DBL_MAX, mol.getDistToTarget());
     
+    // molecules created by themselves should not belong to a tree
     CPPUNIT_ASSERT(!mol.getTree());
     CPPUNIT_ASSERT(!mol_copy->getTree());
+    CPPUNIT_ASSERT(!mol.isBoundToTree());
+    CPPUNIT_ASSERT(!mol_copy->isBoundToTree());
+    
+    mol.setSMILES("C1CCC1");
+    CPPUNIT_ASSERT_EQUAL(std::string("C1CCC1"), mol.getSMILES());
+    CPPUNIT_ASSERT_EQUAL(std::string("CCO"), mol_copy->getSMILES());
+    
+//    CPPUNIT_ASSERT_THROW(mol.setSMILES("ABCDE");, RDKit::SmilesParseException); // rdkit also gives a segmentation fault for some reason...
+    
+    // test the empty constructor (molecule with empty SMILES should not be valid and all values should be initialized to defaults)
+    MolpherMol empty;
+    CPPUNIT_ASSERT_EQUAL(std::string(""), empty.getSMILES());
+    CPPUNIT_ASSERT(!empty.isValid());
+    CPPUNIT_ASSERT_EQUAL(OP_ADD_ATOM, static_cast<ChemOperSelector>(empty.getParentOper()));
+    CPPUNIT_ASSERT_EQUAL((unsigned) 0, empty.getItersWithoutDistImprovement());
+    
+    // test the complete constructor
+    MolpherMol complete("CC(=O)C", "C3O", "NC(=O)C",
+                OP_MUTATE_ATOM, 0.5, 0.0,
+                0.0, 3.1);
+    CPPUNIT_ASSERT_EQUAL(OP_MUTATE_ATOM, static_cast<ChemOperSelector>(complete.getParentOper()));
+    CPPUNIT_ASSERT_EQUAL(std::string("NC(=O)C"), complete.getParentSMILES());
 }
 
 void MinimalTest::testTree() {

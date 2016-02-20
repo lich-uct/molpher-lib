@@ -336,6 +336,7 @@
         <ccTool>
           <incDir>
             <pElem>include/</pElem>
+            <pElem>deps/rdkit/Code/</pElem>
           </incDir>
           <inheritIncValues>false</inheritIncValues>
           <commandLine>`cppunit-config --cflags`</commandLine>
