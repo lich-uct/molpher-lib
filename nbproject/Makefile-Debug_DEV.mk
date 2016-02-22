@@ -76,6 +76,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/misc/SAScore.o \
 	${OBJECTDIR}/src/core/misc/SynchRand.o \
 	${OBJECTDIR}/src/core/misc/inout.o \
+	${OBJECTDIR}/src/core/misc/iteration_serializer.o \
 	${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors.o \
 	${OBJECTDIR}/src/core/misc/selectors/fingerprint_selectors.o \
 	${OBJECTDIR}/src/core/misc/selectors/simcoeff_selectors.o
@@ -403,6 +404,11 @@ ${OBJECTDIR}/src/core/misc/inout.o: src/core/misc/inout.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/core/misc
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/inout.o src/core/misc/inout.cpp
+
+${OBJECTDIR}/src/core/misc/iteration_serializer.o: src/core/misc/iteration_serializer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/misc
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/iteration_serializer.o src/core/misc/iteration_serializer.cpp
 
 ${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors.o: src/core/misc/selectors/chemoper_selectors.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/misc/selectors
@@ -972,6 +978,19 @@ ${OBJECTDIR}/src/core/misc/inout_nomain.o: ${OBJECTDIR}/src/core/misc/inout.o sr
 	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/inout_nomain.o src/core/misc/inout.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/misc/inout.o ${OBJECTDIR}/src/core/misc/inout_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/misc/iteration_serializer_nomain.o: ${OBJECTDIR}/src/core/misc/iteration_serializer.o src/core/misc/iteration_serializer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/misc
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/misc/iteration_serializer.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/iteration_serializer_nomain.o src/core/misc/iteration_serializer.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/misc/iteration_serializer.o ${OBJECTDIR}/src/core/misc/iteration_serializer_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors_nomain.o: ${OBJECTDIR}/src/core/misc/selectors/chemoper_selectors.o src/core/misc/selectors/chemoper_selectors.cpp 

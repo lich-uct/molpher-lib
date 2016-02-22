@@ -21,16 +21,22 @@
 
 CPPUNIT_TEST_SUITE_REGISTRATION(MinimalTest);
 
-MinimalTest::MinimalTest() {
+MinimalTest::MinimalTest() :
+test_dir("tests/test_files/")
+{
+    // no action
 }
 
 MinimalTest::~MinimalTest() {
+    // no action
 }
 
 void MinimalTest::setUp() {
+    // no action
 }
 
 void MinimalTest::tearDown() {
+    // no action
 }
 
 void MinimalTest::testMolpherMol() {
@@ -110,6 +116,15 @@ void MinimalTest::testExplorationData() {
     for (auto& oper : operators) {
         std::cout << ChemOperLongDesc(oper) << std::endl;
     }
+    
+    // test the serialization
+    auto data_from_template = ExplorationData::load(test_dir + "test-template.xml");
+    CPPUNIT_ASSERT(data_from_template->isValid());
+    
+    data_from_template->setTarget(*target);
+    data_from_template->save(test_dir + "template_snapshot.xml");
+    auto data_from_snapshot = ExplorationData::load(test_dir + "template_snapshot.xml");
+    CPPUNIT_ASSERT_EQUAL(target->getSMILES(), data_from_snapshot->getTarget()->getSMILES());
 }
 
 

@@ -67,6 +67,17 @@ struct MolpherMolData
     {
         // no action
     }
+    
+    MolpherMolData(const std::string& smiles) :
+    SMILES(smiles),
+    parentOper(0),
+    distToTarget(DBL_MAX),
+    molecularWeight(0.0),
+    sascore(0.0),
+    gensWithoutDistImprovement(0)
+    {
+        // no action
+    }
 
     bool isValid() const {
         return (!SMILES.empty());
@@ -74,13 +85,16 @@ struct MolpherMolData
 
     template <class Archive>
     void save(Archive & ar, const unsigned int version) const {
-        ar  & BOOST_SERIALIZATION_NVP(SMILES) 
+        auto& descendants_saved = descendants;
+        auto& historicDescendants_saved = descendants;
+        
+        ar  & BOOST_SERIALIZATION_NVP(SMILES)
             & BOOST_SERIALIZATION_NVP(formula)
             & BOOST_SERIALIZATION_NVP(sascore)
             & BOOST_SERIALIZATION_NVP(parentOper) 
             & BOOST_SERIALIZATION_NVP(parentSmile)
-            & BOOST_SERIALIZATION_NVP(descendants) 
-            & BOOST_SERIALIZATION_NVP(historicDescendants) 
+            & BOOST_SERIALIZATION_NVP(descendants_saved) 
+            & BOOST_SERIALIZATION_NVP(historicDescendants_saved) 
             & BOOST_SERIALIZATION_NVP(distToTarget) 
             & BOOST_SERIALIZATION_NVP(molecularWeight) 
             & BOOST_SERIALIZATION_NVP(gensWithoutDistImprovement);

@@ -19,8 +19,10 @@ class ExplorationData {
     // TODO: add advanced integrity checking (if this instance is valid,
     // it should always represent a consistent tree)
     
-private:
+public:
     struct ExplorationDataImpl;
+    
+private:
     std::unique_ptr<ExplorationDataImpl> pimpl;
 
 public:
@@ -93,6 +95,9 @@ public:
     void increaseDerivationsCount(const std::string&);
     void decreaseDerivationsCount(const std::string&);
     unsigned popFromDerivationMap(const std::string&);
+    
+    static std::unique_ptr<ExplorationData> load(const std::string &file);
+    void save(const std::string &file);
     
     bool isValid() const;
 };

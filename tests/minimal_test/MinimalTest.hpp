@@ -26,6 +26,8 @@ public:
     void tearDown();
 
 private:
+    const std::string test_dir;
+    
     void testMolpherMol();
     void testTree();
     void testExplorationData();

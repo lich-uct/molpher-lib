@@ -19,12 +19,13 @@
 
 #pragma once
 
-#include "data_structs/IterationSnapshot.h"
+#include "data_structs/ExplorationData.hpp"
+#include "core/data_structs/ExplorationDataImpl.hpp"
 
 namespace molpher {
 namespace iteration {
     
-MolpherMolecule createMoleculeFromSmile(const std::string& inSmile);
+//MolpherMolecule createMoleculeFromSmile(const std::string& inSmile);
 
 /**
  * Provide functionality that enable save/load iteration snapshot 
@@ -38,7 +39,7 @@ public:
      * @param file Name of file into which save.
      * @param snp Snapshot to save.
      */
-    bool save(const std::string &file, const IterationSnapshot &snp) const;
+    static bool save(const std::string &file, const ExplorationData::ExplorationDataImpl &data);
     /**
      * Load snapshot from file. Based on given file extension decide
      * which file to load.
@@ -46,7 +47,7 @@ public:
      * @param snp Snapshot into which load data.
      * @return
      */
-    bool load(const std::string &file, IterationSnapshot &snp) const;
+    static bool load(const std::string &file, ExplorationData::ExplorationDataImpl &data);
 };
 
 } }

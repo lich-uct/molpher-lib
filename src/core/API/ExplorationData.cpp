@@ -3,6 +3,7 @@
 #include "core/data_structs/ExplorationDataImpl.hpp"
 #include "core/data_structs/MolpherMolData.hpp"
 #include "core/misc/inout.h"
+#include "core/misc/iteration_serializer.hpp"
 
 void MolpherMolToMolData(const MolpherMol& mol, MolpherMolData& data) {
     auto& descendants = mol.getDescendants();
@@ -362,4 +363,15 @@ void ExplorationData::setTarget(const MolpherMol& mol) {
 
 void ExplorationData::setThreadCount(unsigned val) {
     pimpl->threadCnt = val;
+}
+
+std::unique_ptr<ExplorationData> ExplorationData::load(const std::string& file) {
+    auto data = std::unique_ptr<ExplorationData>(new ExplorationData());
+    molpher::iteration::IterationSerializer::load(file, *(data->pimpl));
+    data->pimpl->treeMap.insert(std::make_pair(data->pimpl->source.SMILES, data->pimpl->source));
+    return data;
+}
+
+void ExplorationData::save(const std::string& file) {
+    molpher::iteration::IterationSerializer::save(file, *pimpl);
 }

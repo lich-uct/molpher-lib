@@ -861,6 +861,11 @@
       </item>
       <item path="src/core/misc/inout.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/core/misc/iteration_serializer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
       <item path="src/core/misc/iteration_serializer.hpp"
             ex="false"
             tool="3"

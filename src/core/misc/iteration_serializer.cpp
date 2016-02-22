@@ -59,7 +59,7 @@ enum FileType {
  * @param snp
  * @return
  */
-bool saveSnp(const std::string &file, const IterationSnapshot &snp) {
+bool saveSnp(const std::string &file, const ExplorationData::ExplorationDataImpl &data) {
     std::ofstream outStream;
     outStream.open(file.c_str(), std::ios_base::out | std::ios_base::trunc);
     if (!outStream.good()) {
@@ -69,7 +69,7 @@ bool saveSnp(const std::string &file, const IterationSnapshot &snp) {
     bool failed = false;
     try {
         boost::archive::text_oarchive oArchive(outStream);
-        oArchive << snp;
+        oArchive << data;
     } catch (boost::archive::archive_exception &exc) {
         failed = true;
         SynchCout(std::string(exc.what()));
@@ -84,7 +84,7 @@ bool saveSnp(const std::string &file, const IterationSnapshot &snp) {
  * @param snp
  * @return
  */
-bool saveXml(const std::string &file, const IterationSnapshot &snp) {
+bool saveXml(const std::string &file, const ExplorationData::ExplorationDataImpl &data) {
     std::ofstream outStream;
     outStream.open(file.c_str(), std::ios_base::out | std::ios_base::trunc);
     if (!outStream.good()) {
@@ -94,7 +94,7 @@ bool saveXml(const std::string &file, const IterationSnapshot &snp) {
     bool failed = false;
     try {
         boost::archive::xml_oarchive oArchive(outStream);
-        oArchive << BOOST_SERIALIZATION_NVP(snp);
+        oArchive << BOOST_SERIALIZATION_NVP(data);
     } catch (boost::archive::archive_exception &exc) {
         failed = true;
         SynchCout(std::string(exc.what()));
@@ -109,7 +109,7 @@ bool saveXml(const std::string &file, const IterationSnapshot &snp) {
  * @param snp
  * @return
  */
-bool loadSnp(const std::string &file, IterationSnapshot &snp) {
+bool loadSnp(const std::string &file, ExplorationData::ExplorationDataImpl &data) {
     std::ifstream inStream;
     inStream.open(file.c_str());
     if (!inStream.good()) {
@@ -118,7 +118,7 @@ bool loadSnp(const std::string &file, IterationSnapshot &snp) {
 
     try {
         boost::archive::text_iarchive iArchive(inStream);
-        iArchive >> snp;
+        iArchive >> data;
     } catch (boost::archive::archive_exception &exc) {
         SynchCout(std::string(exc.what()));
         inStream.close();
@@ -135,7 +135,7 @@ bool loadSnp(const std::string &file, IterationSnapshot &snp) {
  * @param snp
  * @return
  */
-bool loadXml(const std::string &file, IterationSnapshot &snp) {
+bool loadXml(const std::string &file, ExplorationData::ExplorationDataImpl &data) {
     std::ifstream inStream;
     inStream.open(file.c_str());
     if (!inStream.good()) {
@@ -144,7 +144,7 @@ bool loadXml(const std::string &file, IterationSnapshot &snp) {
 
     try {
         boost::archive::xml_iarchive iArchive(inStream);
-        iArchive >> BOOST_SERIALIZATION_NVP(snp);
+        iArchive >> BOOST_SERIALIZATION_NVP(data);
     } catch (boost::archive::archive_exception &exc) {
         SynchCout(std::string(exc.what()));
         inStream.close();
@@ -163,27 +163,27 @@ int toInt(const std::string& str) {
     return result;
 }
 
-/**
- * Create molecule from given smile. The smile may change as it's
- * RDKit smile
- * @param inSmile
- * @return
- */
-MolpherMolecule createMoleculeFromSmile(const std::string& inSmile) {
-    RDKit::RWMol* mol = RDKit::SmilesToMol(inSmile);
-    try {
-        RDKit::MolOps::Kekulize(*mol);
-    } catch (const ValueErrorException &exc) {
-        SynchCout("Cannot kekulize input molecule.");
-    }
-
-    std::string smile(RDKit::MolToSmiles(*mol));
-    std::string formula(RDKit::Descriptors::calcMolFormula(*mol));
-
-    SynchCout("Parse molecule " + inSmile + " >> " + smile);
-
-    return MolpherMolecule(smile, formula);
-}
+///**
+// * Create molecule from given smile. The smile may change as it's
+// * RDKit smile
+// * @param inSmile
+// * @return
+// */
+//MolpherMolecule createMoleculeFromSmile(const std::string& inSmile) {
+//    RDKit::RWMol* mol = RDKit::SmilesToMol(inSmile);
+//    try {
+//        RDKit::MolOps::Kekulize(*mol);
+//    } catch (const ValueErrorException &exc) {
+//        SynchCout("Cannot kekulize input molecule.");
+//    }
+//
+//    std::string smile(RDKit::MolToSmiles(*mol));
+//    std::string formula(RDKit::Descriptors::calcMolFormula(*mol));
+//
+//    SynchCout("Parse molecule " + inSmile + " >> " + smile);
+//
+//    return MolpherMolecule(smile, formula);
+//}
 
 /**
  * Based on given template fetch data into given snapshot. Values
@@ -191,7 +191,7 @@ MolpherMolecule createMoleculeFromSmile(const std::string& inSmile) {
  * @param is
  * @param snp
  */
-void loadXmlTemplate(std::istream &is, IterationSnapshot &snp) {
+void loadXmlTemplate(std::istream &is, ExplorationData::ExplorationDataImpl &data) {
     boost::property_tree::ptree pt;
     // read xml
     boost::property_tree::read_xml(is, pt);
@@ -199,44 +199,44 @@ void loadXmlTemplate(std::istream &is, IterationSnapshot &snp) {
     BOOST_FOREACH( boost::property_tree::ptree::value_type const& v, pt.get_child("iteration") ) {
 
         if (v.first == "source") {
-            snp.source = createMoleculeFromSmile(v.second.get<std::string>("smile"));
+            data.source = MolpherMolData(v.second.get<std::string>("smile"));
         } else if (v.first == "target") {
-            snp.target = createMoleculeFromSmile(v.second.get<std::string>("smile"));
+            data.target = MolpherMolData(v.second.get<std::string>("smile"));
         } else if (v.first == "fingerprint") {
-            snp.fingerprintSelector = FingerprintParse(v.second.data());
+            data.fingerprint = FingerprintParse(v.second.data());
         } else if (v.first == "similarity") {
-            snp.simCoeffSelector = SimCoeffParse(v.second.data());
+            data.simCoeff = SimCoeffParse(v.second.data());
         } else if (v.first == "param") {
             BOOST_FOREACH( boost::property_tree::ptree::value_type const& v,
                     v.second ) {
                 // parameters ..
                 if (v.first == "syntetizedFeasibility") {
-                    snp.params.useSyntetizedFeasibility =
+                    data.params.useSyntetizedFeasibility =
                             v.second.data() == "1" || v.second.data() == "true";
                 } else if (v.first == "acceptMin") {
-                    snp.params.cntCandidatesToKeep = toInt(v.second.data());
+                    data.params.cntCandidatesToKeep = toInt(v.second.data());
                 } else if (v.first == "acceptMax") {
-                    snp.params.cntCandidatesToKeepMax = toInt(v.second.data());
+                    data.params.cntCandidatesToKeepMax = toInt(v.second.data());
                 } else if (v.first == "farProduce") {
-                    snp.params.cntMorphs = toInt(v.second.data());
+                    data.params.cntMorphs = toInt(v.second.data());
                 } else if (v.first == "closeProduce") {
-                    snp.params.cntMorphsInDepth = toInt(v.second.data());
+                    data.params.cntMorphsInDepth = toInt(v.second.data());
                 } else if (v.first == "farCloseThreashold") {
                     std::stringstream ss;
                     ss << v.second.data();
-                    ss >> snp.params.distToTargetDepthSwitch;
+                    ss >> data.params.distToTargetDepthSwitch;
                 } else if (v.first == "maxMorhpsTotal") {
-                    snp.params.cntMaxMorphs = toInt(v.second.data());
+                    data.params.cntMaxMorphs = toInt(v.second.data());
                 } else if (v.first == "nonProducingSurvive") {
-                    snp.params.itThreshold = toInt(v.second.data());
+                    data.params.itThreshold = toInt(v.second.data());
                 } else if (v.first == "iterMax") {
-                    snp.params.cntIterations = toInt(v.second.data());
+                    data.params.cntIterations = toInt(v.second.data());
                 } else if (v.first == "maxTimeMinutes") {
-                    snp.params.timeMaxSeconds = toInt(v.second.data()) * 60;
+                    data.params.timeMaxSeconds = toInt(v.second.data()) * 60;
                 } else if (v.first == "weightMin") {
-                    snp.params.minAcceptableMolecularWeight = toInt(v.second.data());
+                    data.params.minAcceptableMolecularWeight = toInt(v.second.data());
                 } else if (v.first == "weightMax") {
-                    snp.params.maxAcceptableMolecularWeight = toInt(v.second.data());
+                    data.params.maxAcceptableMolecularWeight = toInt(v.second.data());
                 }
             }
         } else {
@@ -247,19 +247,19 @@ void loadXmlTemplate(std::istream &is, IterationSnapshot &snp) {
     // printout some statistics .. first prepare the report
     std::stringstream ss;
     ss << "The new iteration has been created from template: " << std::endl;
-    ss << "\tsource: " << snp.source.smile << std::endl;
-    ss << "\ttarget: " << snp.target.smile << std::endl;
+    ss << "\tsource: " << data.source.SMILES << std::endl;
+    ss << "\ttarget: " << data.target.SMILES << std::endl;
     // and print ..
     SynchCout(ss.str());
 }
 
-bool loadXmlTemplate(const std::string &file, IterationSnapshot &snp) {
+bool loadXmlTemplate(const std::string &file, ExplorationData::ExplorationDataImpl &data) {
     std::ifstream inStream;
     inStream.open(file.c_str(), std::ios_base::in);
     if (!inStream.good()) {
         return false;
     }
-    loadXmlTemplate(inStream, snp);
+    loadXmlTemplate(inStream, data);
     inStream.close();
     return true;
 }
@@ -282,28 +282,28 @@ FileType fileType(const std::string &file) {
     }
 }
 
-bool IterationSerializer::save(const std::string &file, const IterationSnapshot &snp) const {
+bool IterationSerializer::save(const std::string &file, const ExplorationData::ExplorationDataImpl &data) {
     switch(fileType(file)) {
         default:
         case UNKNOWN_FILE:
         case SNP_FILE:
-            return saveSnp(file, snp);
+            return saveSnp(file, data);
         case XML_FILE:
-            return saveXml(file, snp);
+            return saveXml(file, data);
         case XML_TEMPLATE_FILE:
             // we do not support save in xml template format
             return false;
     }
 }
 
-bool IterationSerializer::load(const std::string &file, IterationSnapshot &snp) const {
+bool IterationSerializer::load(const std::string &file, ExplorationData::ExplorationDataImpl &data) {
     switch(fileType(file)) {
         case SNP_FILE:
-            return loadSnp(file, snp);
+            return loadSnp(file, data);
         case XML_FILE:
-            return loadXml(file, snp);
+            return loadXml(file, data);
         case XML_TEMPLATE_FILE:
-            return loadXmlTemplate(file, snp);
+            return loadXmlTemplate(file, data);
         case UNKNOWN_FILE:
         default:
             return false;

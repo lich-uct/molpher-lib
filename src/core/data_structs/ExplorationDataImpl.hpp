@@ -133,6 +133,8 @@ struct ExplorationData::ExplorationDataImpl
             & BOOST_SERIALIZATION_NVP(source) 
             & BOOST_SERIALIZATION_NVP(target) 
             & BOOST_SERIALIZATION_NVP(treeMap) 
+            & BOOST_SERIALIZATION_NVP(candidates)
+            & BOOST_SERIALIZATION_NVP(candidatesMask)
             & BOOST_SERIALIZATION_NVP(morphDerivations);
     //        & BOOST_SERIALIZATION_NVP(pruned);
     }
@@ -149,6 +151,8 @@ struct ExplorationData::ExplorationDataImpl
             & BOOST_SERIALIZATION_NVP(source) 
             & BOOST_SERIALIZATION_NVP(target) 
             & BOOST_SERIALIZATION_NVP(treeMap) 
+            & BOOST_SERIALIZATION_NVP(candidates)
+            & BOOST_SERIALIZATION_NVP(candidatesMask)
             & BOOST_SERIALIZATION_NVP(morphDerivations);
     //        & BOOST_SERIALIZATION_NVP(pruned);
 

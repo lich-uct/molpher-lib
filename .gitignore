@@ -60,3 +60,6 @@ doc/doxygen/xml
 
 # Python package data files
 src/python/molpher/swig_wrappers/*.dat
+
+# test files
+tests/test_files/*_snapshot.xml
