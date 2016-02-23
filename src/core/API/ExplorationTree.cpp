@@ -14,6 +14,7 @@
 #include "operations/FindLeavesOper.hpp"
 #include "operations/FindLeavesOperImpl.hpp"
 #include "core/chem/fingerprintStrategy/MorganFngpr.hpp"
+#include "core/misc/inout.h"
 //#include "operations/GenerateMorphsOper.hpp"
 //#include "operations/SortMorphsOper.hpp"
 //#include "operations/FilterMorphsOper.hpp"
@@ -21,7 +22,7 @@
 //#include "operations/PruneTreeOper.hpp"
 //#include "operations/callbacks/EraseSubtreeCallback.hpp"
 
-ExplorationTree::ExplorationTree() : pimpl() {
+ExplorationTree::ExplorationTree() : pimpl(new ExplorationTree::ExplorationTreeImpl()) {
     // no action
 }
 
@@ -31,20 +32,23 @@ ExplorationTree::ExplorationTree() : pimpl() {
 //    // no action
 //}
 
-ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) : 
-pimpl(new ExplorationTree::ExplorationTreeImpl(sourceMolAsSMILES, targetMolAsSMILES))
-{
-    // no action
-}
+//ExplorationTree::ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) : 
+//pimpl(new ExplorationTree::ExplorationTreeImpl(sourceMolAsSMILES, targetMolAsSMILES))
+//{
+//    // no action
+//}
 
 std::shared_ptr<ExplorationTree> ExplorationTree::create(const ExplorationData& data) {
-    auto new_tree = std::make_shared<ExplorationTree>();
+    auto new_tree = std::shared_ptr<ExplorationTree>(new ExplorationTree());
     new_tree->updateFromData(data);
     return new_tree;
 }
 
 std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) {
-    return std::make_shared<ExplorationTree>(sourceMolAsSMILES, targetMolAsSMILES);
+    ExplorationData data;
+    data.setSource(MolpherMol(sourceMolAsSMILES));
+    data.setTarget(MolpherMol(targetMolAsSMILES));
+    return create(data);
 }
 
 //std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sourceMolAsSMILES) {
@@ -66,7 +70,10 @@ void ExplorationTree::updateFromData(const ExplorationData& data) {
 // pimpl
 
 ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl() :
-ExplorationTreeImpl("", "")
+generationCnt(0)
+, threadCnt(0)
+, fingerprint(FP_MORGAN)
+, simCoeff(SC_TANIMOTO)
 {
     // no action
 }
@@ -76,58 +83,81 @@ ExplorationTreeImpl("", "")
 //    // no action
 //}
 
-ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) : 
-source(sourceMolAsSMILES)
-, target(targetMolAsSMILES)
-, generationCnt(0)
-, threadCnt(0)
-, fingerprint(FP_MORGAN)
-, simCoeff(SC_TANIMOTO)
-{
-    if (!source.isValid()) {
-        throw std::runtime_error("Invalid source molecule specified for tree initialization.");
-    }
-    
-    if (!target.isValid()) {
-        throw std::runtime_error("Invalid target molecule specified for tree initialization.");
-    }
-    
-    chemOpers.insert(OP_ADD_ATOM);
-    chemOpers.insert(OP_ADD_BOND);
-    chemOpers.insert(OP_BOND_CONTRACTION);
-    chemOpers.insert(OP_BOND_REROUTE);
-    chemOpers.insert(OP_INTERLAY_ATOM);
-    chemOpers.insert(OP_MUTATE_ATOM);
-    chemOpers.insert(OP_REMOVE_BOND);
-    chemOpers.insert(OP_REMOVE_ATOM);
-}
+//ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) : 
+//source(sourceMolAsSMILES)
+//, target(targetMolAsSMILES)
+//, generationCnt(0)
+//, threadCnt(0)
+//, fingerprint(FP_MORGAN)
+//, simCoeff(SC_TANIMOTO)
+//{
+//    ExplorationData data;
+//    data.setSource(MolpherMol(sourceMolAsSMILES));
+//    data.setTarget(MolpherMol(targetMolAsSMILES));
+//    
+//    try {
+//        updateFromData(data);
+//    } catch(std::runtime_error& err) {
+//        throw std::runtime_error("Failed to create an exploration tree instance from invalid data.");
+//    }
+//}
 
-ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(ExplorationData &data) {
-    updateFromData(data);
-}
+//ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl(ExplorationData &data) {
+//    try {
+//        updateFromData(data);
+//    } catch(std::runtime_error& err) {
+//        throw std::runtime_error("Failed to create an exploration tree instance from invalid data.");
+//    }
+//}
 
 void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData& data)
 {
     if (!data.isValid()) {
-        throw std::runtime_error("Supplied exploration data are invalid.");
+        throw std::runtime_error("Supplied exploration data are invalid. " 
+                "Cannot update this instance.");
     }
     
-    candidates.clear();
-    for (auto& mol : *(data.getCandidates())) {
-        candidates.push_back(std::make_shared<MolpherMol>(*mol));
+    bool is_new_tree = false;
+    if (treeMap.empty()) {
+        is_new_tree = true;
+        auto map = data.getTreeMap();
+        for (auto& mol : (*map)) {
+            treeMap.insert(
+                std::make_pair(
+                    mol.first
+                    , std::make_shared<MolpherMol>(*(mol.second))
+                    )
+            );
+        }
+    } else {
+        Cerr("This tree is not empty. Only the morphing parameters will be changed.");
     }
     
-    candidatesMask = data.getCandidatesMask();
-    chemOpers = data.getChemicalOperators();
-    fingerprint = data.getFingerprint();
-    generationCnt = data.getGenerationCount();
-    
-    if (morphDerivations.empty()) {
+    if (is_new_tree) {
+        candidates.clear();
+        auto cndts = data.getCandidates();
+        for (auto& mol : (*cndts)) {
+            candidates.push_back(std::make_shared<MolpherMol>(*mol));
+        }
+        candidatesMask = data.getCandidatesMask();
+                
+        morphDerivations.clear();
         for (auto& mol_data : data.getDerivationMap()) {
             morphDerivations.insert(mol_data);
         }
+        
+        source = MolpherMol(*(data.getSource()));
+        
+        generationCnt = data.getGenerationCount();
     }
-    
+        
+    threadCnt = data.getThreadCount();
+    chemOpers = data.getChemicalOperators();
+    fingerprint = data.getFingerprint();
+    simCoeff = data.getSimilarityCoefficient();
+
+    target = MolpherMol(*(data.getTarget()));
+
     params.cntCandidatesToKeep = data.getCntCandidatesToKeep();
     params.cntCandidatesToKeepMax = data.getCntCandidatesToKeepMax();
     params.itThreshold = data.getItThreshold();
@@ -137,33 +167,12 @@ void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData&
     params.cntMorphs = data.getCntMorphs();
     params.minAcceptableMolecularWeight = data.getMinAcceptableMolecularWeight();
     params.maxAcceptableMolecularWeight = data.getMaxAcceptableMolecularWeight();
-            
     
-    simCoeff = data.getSimilarityCoefficient();
-    if (!source.isValid()) {
-        source = MolpherMol(*(data.getSource()));
-    }
-    target = MolpherMol(*(data.getTarget()));
-    threadCnt = data.getThreadCount();
-    
-    if (treeMap.empty()) {
-        auto map = data.getTreeMap();
-        for (auto& mol_data : (*map)) {
-            treeMap.insert(
-                std::make_pair(
-                    mol_data.first
-                    , std::make_shared<MolpherMol>(*(mol_data.second))
-                    )
-            );
-        }
-    }
-    
-    if (treeMap.empty()) {
-        treeMap.insert(std::make_pair(
-                    source.getSMILES()
-                    , std::make_shared<MolpherMol>(source)
-                    )
-        );
+    auto new_data = this->asData();
+    if (!new_data->isValid()) {
+        throw std::runtime_error("The tree was created with serious "
+                "inconsistencies. Check the 'error_snapshot.xml' file for more details...");
+        new_data->save("error_snapshot.xml");
     }
 }
 
@@ -201,6 +210,8 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     for (auto& item : treeMap) {
         data->addToTreeMap(item.first, *(item.second));
     }
+    
+    return data;
 }
 
 //std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {

@@ -31,6 +31,9 @@
 void SynchCout(const std::string &s);
 void SynchCerr(const std::string &s, const std::string prefix = "WARNIG: ");
 
+void Cout(const std::string &s);
+void Cerr(const std::string &s, const std::string prefix = "WARNIG: ");
+
 //IterationSnapshot Materialize(IterationSnapshotProxy &proxy);
 
 //std::string GenerateFilename(std::string &base,

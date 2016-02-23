@@ -31,7 +31,6 @@
 //#include "core/misc/selectors/chemoper_selectors.h"
 
 #include "core/data_structs/MolpherParam.h"
-#include "data_structs/ExplorationData.hpp"
 #include "data_structs/ExplorationTree.hpp"
 #include "operations/TreeOperation.hpp"
 #include "data_structs/MolpherMol.hpp"
@@ -119,8 +118,8 @@ class ExplorationTree::ExplorationTreeImpl
         
         ExplorationTreeImpl();
 //        ExplorationTreeImpl(const std::string& sourceMolAsSMILES);
-        ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
-        ExplorationTreeImpl(ExplorationData &data);
+//        ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
+//        ExplorationTreeImpl(ExplorationData &data);
         
         std::shared_ptr<ExplorationData> asData() const;
         void updateFromData(const ExplorationData& data);

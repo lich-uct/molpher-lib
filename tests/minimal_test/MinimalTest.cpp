@@ -129,7 +129,10 @@ void MinimalTest::testExplorationData() {
 
 
 void MinimalTest::testTree() {
-    ExplorationTree tree("CCO", "C1CCC1");
-    CPPUNIT_ASSERT_THROW(ExplorationTree tree_no_target("CCO", "");, std::runtime_error);
+    // tree creation
+    auto tree = ExplorationTree::create("CCO", "C1CCC1");
+    CPPUNIT_ASSERT_THROW(ExplorationTree::create("CCO", "");, std::runtime_error);
+    
+    // TODO: more tests
 }
 

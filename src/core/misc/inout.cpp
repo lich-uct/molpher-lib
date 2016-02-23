@@ -52,6 +52,14 @@ void SynchCerr(const std::string &s, const std::string prefix) {
     std::cerr << prefix << s << std::endl;
 }
 
+void Cout(const std::string &s) {
+    std::cout << s << std::endl;
+}
+
+void Cerr(const std::string &s, const std::string prefix) {
+    std::cerr << prefix << s << std::endl;
+}
+
 //IterationSnapshot Materialize(IterationSnapshotProxy &proxy) {
 //    IterationSnapshot snp;
 //    ReadSnapshotFromFile(

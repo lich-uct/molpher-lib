@@ -11,7 +11,6 @@
 #include <memory>
 
 #include "ExplorationData.hpp"
-#include "MolpherMol.hpp"
 
 class TreeOperation; // forward declaration to resolve circular dependency
 class FindLeavesOper;
@@ -40,10 +39,13 @@ private:
 //    
     std::shared_ptr<ExplorationTreeImpl> pimpl;
     
-public:
+private:
     ExplorationTree();
+//    ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
+    
+public:
+    
 //    ExplorationTree(const std::string& sourceMolAsSMILES);
-    ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
     //    ExplorationTree(ExplorationParameters& params);
     
     static std::shared_ptr<ExplorationTree> create(const ExplorationData& data);

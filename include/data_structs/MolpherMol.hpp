@@ -58,6 +58,7 @@ public:
     int getParentOper() const;
     
     // setters
+    void setTree(std::shared_ptr<ExplorationTree> tree);
     void setSMILES(const std::string&);
     void setParentSMILES(const std::string&);
     void setDistToTarget(double dist);
