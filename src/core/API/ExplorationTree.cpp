@@ -15,6 +15,7 @@
 #include "operations/FindLeavesOperImpl.hpp"
 #include "core/chem/fingerprintStrategy/MorganFngpr.hpp"
 #include "core/misc/inout.h"
+#include "core/chem/simCoefStrategy/TanimotoSimCoef.hpp"
 //#include "operations/GenerateMorphsOper.hpp"
 //#include "operations/SortMorphsOper.hpp"
 //#include "operations/FilterMorphsOper.hpp"
@@ -40,7 +41,7 @@ ExplorationTree::ExplorationTree() : pimpl(new ExplorationTree::ExplorationTreeI
 
 std::shared_ptr<ExplorationTree> ExplorationTree::create(const ExplorationData& data) {
     auto new_tree = std::shared_ptr<ExplorationTree>(new ExplorationTree());
-    new_tree->updateFromData(data);
+    new_tree->update(data);
     return new_tree;
 }
 
@@ -60,11 +61,21 @@ std::shared_ptr<ExplorationData> ExplorationTree::asData() const {
     return pimpl->asData();
 }
 
-void ExplorationTree::updateFromData(const ExplorationData& data) {
-    pimpl->updateFromData(data);
+void ExplorationTree::update(const ExplorationData& data) {
+    pimpl->updateData(data, shared_from_this());
 }
 
+bool ExplorationTree::hasMol(const std::string& canonSMILES) {
+    return pimpl->hasMol(canonSMILES);
+}
 
+bool ExplorationTree::hasMol(std::shared_ptr<MolpherMol> mol) {
+    return pimpl->hasMol(mol);
+}
+
+std::shared_ptr<MolpherMol> ExplorationTree::fetchMol(const std::string& canonSMILES) {
+    return pimpl->fetchMol(canonSMILES);
+}
 
 
 // pimpl
@@ -110,7 +121,7 @@ generationCnt(0)
 //    }
 //}
 
-void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData& data)
+void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& data, std::shared_ptr<ExplorationTree> tree)
 {
     if (!data.isValid()) {
         throw std::runtime_error("Supplied exploration data are invalid. " 
@@ -122,10 +133,12 @@ void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData&
         is_new_tree = true;
         auto map = data.getTreeMap();
         for (auto& mol : (*map)) {
+            auto added_mol = std::make_shared<MolpherMol>(*(mol.second)); // TODO: a simple move should be more efficient and safe here (http://stackoverflow.com/questions/11711034/stdshared-ptr-of-this)
+            added_mol->setOwner(tree);
             treeMap.insert(
                 std::make_pair(
-                    mol.first
-                    , std::make_shared<MolpherMol>(*(mol.second))
+                    added_mol->getSMILES()
+                    , added_mol
                     )
             );
         }
@@ -137,7 +150,7 @@ void ExplorationTree::ExplorationTreeImpl::updateFromData(const ExplorationData&
         candidates.clear();
         auto cndts = data.getCandidates();
         for (auto& mol : (*cndts)) {
-            candidates.push_back(std::make_shared<MolpherMol>(*mol));
+            candidates.push_back(std::make_shared<MolpherMol>(*mol)); // TODO: a simple move should be more efficient and safe here (http://stackoverflow.com/questions/11711034/stdshared-ptr-of-this)
         }
         candidatesMask = data.getCandidatesMask();
                 
@@ -212,6 +225,31 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     }
     
     return data;
+}
+
+std::shared_ptr<MolpherMol> ExplorationTree::ExplorationTreeImpl::fetchMol(const std::string& canonSMILES) {
+    if (hasMol(canonSMILES)) {
+        TreeMap::accessor ac;
+        treeMap.find(ac, canonSMILES);
+        return ac->second;
+    } else {
+        throw std::runtime_error("Molecule (" + canonSMILES + ") is not present in the tree.");
+    }
+}
+
+bool ExplorationTree::ExplorationTreeImpl::hasMol(const std::string& canonSMILES) {
+    TreeMap::accessor ac;
+    return treeMap.find(ac, canonSMILES);
+}
+
+bool ExplorationTree::ExplorationTreeImpl::hasMol(std::shared_ptr<MolpherMol> mol) {
+    TreeMap::accessor ac;
+    treeMap.find(ac, mol->getSMILES());
+    if (ac.empty()) {
+        return false;
+    } else {
+        return ac->second == mol;
+    }
 }
 
 //std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {

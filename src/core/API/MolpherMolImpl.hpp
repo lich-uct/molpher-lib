@@ -17,10 +17,13 @@
 
 class MolpherMol::MolpherMolImpl {
     
-public:
+    friend class MolpherMol;
+    
+private:
     std::shared_ptr<ExplorationTree> tree;
     MolpherMolData data;
-    
+
+public:
     MolpherMolImpl(const std::string& SMILES);
     MolpherMolImpl(const MolpherMolData& data);
     MolpherMolImpl(const MolpherMolImpl& other);

@@ -226,11 +226,12 @@ void MolpherMol::setParentSMILES(const std::string& smiles) {
     pimpl->data.parentSmile = smiles;
 }
 
-void MolpherMol::setTree(std::shared_ptr<ExplorationTree> tree) {
-    if (!pimpl->tree) {
+void MolpherMol::setOwner(std::shared_ptr<ExplorationTree> tree) {
+    bool is_owned = (bool) pimpl->tree;
+    if (!is_owned) {
         pimpl->tree = tree;
     } else {
-        std::runtime_error("Molecule is already associated with a tree. "
+        throw std::runtime_error("Molecule is already associated with a tree. "
             "Molecules cannot be assigned more than once.");
     }
 }

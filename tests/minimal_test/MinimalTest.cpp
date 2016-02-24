@@ -133,6 +133,16 @@ void MinimalTest::testTree() {
     auto tree = ExplorationTree::create("CCO", "C1CCC1");
     CPPUNIT_ASSERT_THROW(ExplorationTree::create("CCO", "");, std::runtime_error);
     
-    // TODO: more tests
+    // retrieve the source and see if it belongs to the correct tree
+    auto source = tree->fetchMol("CCO");
+    auto tree_of_source = source->getTree();
+    CPPUNIT_ASSERT(tree_of_source);
+    CPPUNIT_ASSERT_EQUAL(tree, tree_of_source);
+    CPPUNIT_ASSERT(tree_of_source->hasMol(source));
+    CPPUNIT_ASSERT(tree_of_source->hasMol(source->getSMILES()));
+    
+    // we should not be able to set ownership of an already owned molecule
+    CPPUNIT_ASSERT_THROW(source->setOwner(tree);, std::runtime_error);
+    
 }
 

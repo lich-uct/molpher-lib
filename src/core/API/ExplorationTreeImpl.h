@@ -122,12 +122,13 @@ class ExplorationTree::ExplorationTreeImpl
 //        ExplorationTreeImpl(ExplorationData &data);
         
         std::shared_ptr<ExplorationData> asData() const;
-        void updateFromData(const ExplorationData& data);
+        void updateData(const ExplorationData& data, std::shared_ptr<ExplorationTree> tree);
         
 //        void runOperation(std::shared_ptr<TreeOperation::TreeOperationImpl> operation);
 //        std::shared_ptr<MolVector> fetchLeaves(bool increase_dist_improve_counter = false);
-//        std::shared_ptr<MolpherMol> fetchMol(const std::string& canonSMILES);
-//        bool hasMol(const std::string& canonSMILES);
+        std::shared_ptr<MolpherMol> fetchMol(const std::string& canonSMILES);
+        bool hasMol(const std::string& canonSMILES);
+        bool hasMol(std::shared_ptr<MolpherMol> mol);
 //        bool isPathFound();
 //        void deleteSubtree(const std::string& canonSMILES);
 //        void generateMorphs();

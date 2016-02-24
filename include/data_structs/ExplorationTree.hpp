@@ -15,7 +15,7 @@
 class TreeOperation; // forward declaration to resolve circular dependency
 class FindLeavesOper;
 
-class ExplorationTree {
+class ExplorationTree : public std::enable_shared_from_this<ExplorationTree> {
     
     friend class TreeOperation;
     friend class FindLeavesOper;
@@ -53,15 +53,16 @@ public:
     static std::shared_ptr<ExplorationTree> create(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
     
     std::shared_ptr<ExplorationData> asData() const;
-    void updateFromData(const ExplorationData& data);
+    void update(const ExplorationData& data);
 //    
 //    void runOperation(TreeOperation& operation);
 //    
 //    void fetchLeaves(std::vector<MolpherMol>& leaves);
 //    void fetchLeaves(ExplorationTree::MoleculePointerVector&, bool increase_dist_improve_counter = false);
 //    const std::vector<MolpherMol>& fetchLeaves();
-//    MolpherMol* fetchMol(const std::string& canonSMILES);
-//    bool hasMol(const std::string& canonSMILES);
+    std::shared_ptr<MolpherMol> fetchMol(const std::string& canonSMILES);
+    bool hasMol(const std::string& canonSMILES);
+    bool hasMol(std::shared_ptr<MolpherMol> mol);
 //    bool isPathFound();
 //    void deleteSubtree(const std::string& canonSMILES);
 //    void generateMorphs();
