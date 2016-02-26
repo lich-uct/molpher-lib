@@ -15,8 +15,7 @@
 
 class TreeOperation::TreeOperationImpl {
 
-protected:
-    std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree_pimpl;
+private:
     std::shared_ptr<ExplorationTree> tree;
     
 public:

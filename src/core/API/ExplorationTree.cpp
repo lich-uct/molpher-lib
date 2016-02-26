@@ -77,6 +77,15 @@ std::shared_ptr<MolpherMol> ExplorationTree::fetchMol(const std::string& canonSM
     return pimpl->fetchMol(canonSMILES);
 }
 
+void ExplorationTree::runOperation(TreeOperation& operation) {
+    pimpl->runOperation(operation, shared_from_this());
+}
+
+std::unique_ptr<MolVector> ExplorationTree::fetchLeaves(bool increase_dist_improve_counter) {
+    return pimpl->fetchLeaves(shared_from_this(), increase_dist_improve_counter);
+}
+
+
 
 // pimpl
 
@@ -250,6 +259,18 @@ bool ExplorationTree::ExplorationTreeImpl::hasMol(std::shared_ptr<MolpherMol> mo
     } else {
         return ac->second == mol;
     }
+}
+
+void ExplorationTree::ExplorationTreeImpl::runOperation(TreeOperation& operation, std::shared_ptr<ExplorationTree> tree) {
+    operation.setTree(tree);
+    auto tree_from_oper = operation.getTree();
+    operation();
+}
+
+std::unique_ptr<MolVector> ExplorationTree::ExplorationTreeImpl::fetchLeaves(std::shared_ptr<ExplorationTree> tree, bool increase_dist_improve_counter) {
+    FindLeavesOper find(increase_dist_improve_counter);
+    runOperation(find, tree);
+    return find.fetchLeaves();
 }
 
 //std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {

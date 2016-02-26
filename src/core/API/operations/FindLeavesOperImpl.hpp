@@ -36,7 +36,7 @@ class FindLeavesOper::FindLeavesOperImpl : public TreeOperation::TreeOperationIm
         FindLeavesOperImpl(bool increment_iters_without_dist_improve = false);
         void operator()();
         
-        std::shared_ptr<MolVector> fetchLeaves();
+        std::unique_ptr<MolVector> fetchLeaves();
 
 };
 

@@ -38,7 +38,10 @@ public:
     void setTree(std::shared_ptr<ExplorationTree> tree);
     
 protected:
-    std::unique_ptr<TreeOperationImpl> pimpl;
+    void setTreeOperPimpl(std::shared_ptr<TreeOperationImpl> impl);
+    
+private:
+    std::shared_ptr<TreeOperationImpl> pimpl;
 };
 
 #endif	/* TREEOPERATION_HPP */

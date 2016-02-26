@@ -135,6 +135,7 @@ void MinimalTest::testTree() {
     
     // retrieve the source and see if it belongs to the correct tree
     auto source = tree->fetchMol("CCO");
+    CPPUNIT_ASSERT(source->isBoundToTree());
     auto tree_of_source = source->getTree();
     CPPUNIT_ASSERT(tree_of_source);
     CPPUNIT_ASSERT_EQUAL(tree, tree_of_source);
@@ -143,6 +144,13 @@ void MinimalTest::testTree() {
     
     // we should not be able to set ownership of an already owned molecule
     CPPUNIT_ASSERT_THROW(source->setOwner(tree);, std::runtime_error);
+    
+    // fetch leaves shouldn't increase the distance imporvement counter for source
+    auto leaves = tree->fetchLeaves(true);
+    CPPUNIT_ASSERT(leaves->size() == 1);
+    CPPUNIT_ASSERT_EQUAL(source, (*leaves)[0]);
+    CPPUNIT_ASSERT_EQUAL((unsigned) 0, source->getItersWithoutDistImprovement());
+    
     
 }
 

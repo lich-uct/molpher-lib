@@ -54,12 +54,10 @@ public:
     
     std::shared_ptr<ExplorationData> asData() const;
     void update(const ExplorationData& data);
-//    
-//    void runOperation(TreeOperation& operation);
-//    
-//    void fetchLeaves(std::vector<MolpherMol>& leaves);
-//    void fetchLeaves(ExplorationTree::MoleculePointerVector&, bool increase_dist_improve_counter = false);
-//    const std::vector<MolpherMol>& fetchLeaves();
+    
+    void runOperation(TreeOperation& operation);
+    
+    std::unique_ptr<std::vector<std::shared_ptr<MolpherMol> > > fetchLeaves(bool increase_dist_improve_counter = false);
     std::shared_ptr<MolpherMol> fetchMol(const std::string& canonSMILES);
     bool hasMol(const std::string& canonSMILES);
     bool hasMol(std::shared_ptr<MolpherMol> mol);

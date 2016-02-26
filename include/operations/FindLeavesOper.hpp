@@ -24,10 +24,10 @@ class FindLeavesOper : public TreeOperation {
         FindLeavesOper(bool increment_iters_without_dist_improve = false);
         void operator()();
         
-        std::shared_ptr<std::vector<std::shared_ptr<MolpherMol> > > fetchLeaves();
+        std::unique_ptr<std::vector<std::shared_ptr<MolpherMol> > > fetchLeaves();
     
     private:
-        std::unique_ptr<FindLeavesOperImpl> pimpl;
+        std::shared_ptr<FindLeavesOperImpl> pimpl;
 
 };
 
