@@ -147,8 +147,8 @@ void MinimalTest::testTree() {
     
     // fetch leaves shouldn't increase the distance imporvement counter for source
     auto leaves = tree->fetchLeaves(true);
-    CPPUNIT_ASSERT(leaves->size() == 1);
-    CPPUNIT_ASSERT_EQUAL(source, (*leaves)[0]);
+    CPPUNIT_ASSERT(leaves.size() == 1);
+    CPPUNIT_ASSERT_EQUAL(source, leaves[0]);
     CPPUNIT_ASSERT_EQUAL((unsigned) 0, source->getItersWithoutDistImprovement());
     
     

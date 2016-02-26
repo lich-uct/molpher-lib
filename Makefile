@@ -66,9 +66,9 @@ build: .build-post
 .build-pre:
 # Add your pre 'build' code here...
 	mkdir -p $(LIB_DIR)
-#	mkdir -p $(PYTHON_PACKAGE_DIR)/lib/
+	mkdir -p $(PYTHON_PACKAGE_DIR)/lib/
 ifneq (,$(RUN_SWIG))
-#	swig -python -Isrc/ -Iinclude/ -Wall -c++ -outdir $(PYTHON_PACKAGE_DIR) -o $(SRC_DIR)/swig/molpher_wrap.cpp $(SRC_DIR)/swig/molpher.i
+	swig3.0 -python -Iinclude/ -Wall -c++ -outdir $(PYTHON_PACKAGE_DIR) -o $(SRC_DIR)/swig/molpher_wrap.cpp $(CND_BASEDIR)/include/molpher.i
 endif
 	
 .build-post: .build-impl

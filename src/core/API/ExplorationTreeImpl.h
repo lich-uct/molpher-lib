@@ -125,7 +125,7 @@ class ExplorationTree::ExplorationTreeImpl
         void updateData(const ExplorationData& data, std::shared_ptr<ExplorationTree> tree);
         
         void runOperation(TreeOperation& operation, std::shared_ptr<ExplorationTree> tree);
-        std::unique_ptr<MolVector> fetchLeaves(std::shared_ptr<ExplorationTree> tree, bool increase_dist_improve_counter);
+        MolVector fetchLeaves(std::shared_ptr<ExplorationTree> tree, bool increase_dist_improve_counter);
         std::shared_ptr<MolpherMol> fetchMol(const std::string& canonSMILES);
         bool hasMol(const std::string& canonSMILES);
         bool hasMol(std::shared_ptr<MolpherMol> mol);

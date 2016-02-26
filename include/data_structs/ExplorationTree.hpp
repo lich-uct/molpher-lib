@@ -57,7 +57,7 @@ public:
     
     void runOperation(TreeOperation& operation);
     
-    std::unique_ptr<std::vector<std::shared_ptr<MolpherMol> > > fetchLeaves(bool increase_dist_improve_counter = false);
+    std::vector<std::shared_ptr<MolpherMol> > fetchLeaves(bool increase_dist_improve_counter = false);
     std::shared_ptr<MolpherMol> fetchMol(const std::string& canonSMILES);
     bool hasMol(const std::string& canonSMILES);
     bool hasMol(std::shared_ptr<MolpherMol> mol);

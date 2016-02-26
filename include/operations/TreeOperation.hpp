@@ -31,7 +31,7 @@ public:
     
     TreeOperation(std::shared_ptr<ExplorationTree> expTree);
     TreeOperation();
-//    virtual ~TreeOperation();
+    virtual ~TreeOperation();
     virtual void operator()() = 0;
     
     std::shared_ptr<ExplorationTree> getTree();

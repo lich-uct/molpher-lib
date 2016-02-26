@@ -37,6 +37,9 @@
           <itemPath>include/selectors/simcoeff_selectors.h</itemPath>
         </logicalFolder>
         <itemPath>include/API.i</itemPath>
+        <itemPath>include/SAScore_data_loader.hpp</itemPath>
+        <itemPath>include/molpher.i</itemPath>
+        <itemPath>include/std_unique_ptr.i</itemPath>
       </logicalFolder>
       <logicalFolder name="src" displayName="src" projectFiles="true">
         <logicalFolder name="core" displayName="core" projectFiles="true">
@@ -113,7 +116,7 @@
             <itemPath>src/core/data_structs/MolpherParam.h</itemPath>
           </logicalFolder>
           <logicalFolder name="misc" displayName="misc" projectFiles="true">
-            <itemPath>src/core/misc/SAScore.h</itemPath>
+            <itemPath>/home/sichom/Projects/molpher-lib/src/core/misc/SAScore.h</itemPath>
             <itemPath>src/core/misc/SynchRand.h</itemPath>
             <itemPath>src/core/misc/global_types.h</itemPath>
             <itemPath>src/core/misc/inout.h</itemPath>
@@ -121,7 +124,6 @@
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="swig" displayName="swig" projectFiles="true">
-          <itemPath>src/swig/molpher.i</itemPath>
           <itemPath>src/swig/molpher_wrap.h</itemPath>
         </logicalFolder>
       </logicalFolder>
@@ -219,6 +221,7 @@
               <itemPath>src/core/misc/selectors/simcoeff_selectors.cpp</itemPath>
             </logicalFolder>
             <itemPath>src/core/misc/SAScore.cpp</itemPath>
+            <itemPath>/home/sichom/Projects/molpher-lib/src/core/misc/SAScore_data_loader.cpp</itemPath>
             <itemPath>src/core/misc/SynchRand.cpp</itemPath>
             <itemPath>src/core/misc/inout.cpp</itemPath>
             <itemPath>src/core/misc/iteration_serializer.cpp</itemPath>
@@ -329,6 +332,16 @@
           <commandLine>-lpthread -Wl,-rpath,'$$ORIGIN/'</commandLine>
         </linkerTool>
       </compileType>
+      <item path="/home/sichom/Projects/molpher-lib/src/core/misc/SAScore.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/home/sichom/Projects/molpher-lib/src/core/misc/SAScore_data_loader.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
       <folder path="TestFiles/f2">
         <cTool>
           <commandLine>`cppunit-config --cflags`</commandLine>
@@ -353,6 +366,8 @@
           <commandLine>-pthread</commandLine>
         </linkerTool>
       </folder>
+      <item path="include/SAScore_data_loader.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/data_structs/ExplorationData.hpp"
             ex="false"
             tool="3"
@@ -848,8 +863,6 @@
             flavor2="0">
       </item>
       <item path="src/core/misc/SAScore.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/core/misc/SAScore.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/core/misc/SynchRand.cpp" ex="false" tool="1" flavor2="0">
       </item>

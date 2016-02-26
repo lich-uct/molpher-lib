@@ -52,8 +52,8 @@ std::shared_ptr<ExplorationTree> MolpherMol::getTree() {
     return pimpl->tree;
 }
 
-std::unique_ptr<MolpherMol> MolpherMol::copy() const {
-    return std::unique_ptr<MolpherMol>(new MolpherMol(*this));
+std::shared_ptr<MolpherMol> MolpherMol::copy() const {
+    return std::make_shared<MolpherMol>(*this);
 }
 
 MolpherMol::~MolpherMol() = default;

@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o \
 	${OBJECTDIR}/src/core/API/ExplorationData.o \
 	${OBJECTDIR}/src/core/API/ExplorationTree.o \
 	${OBJECTDIR}/src/core/API/MolpherMol.o \
@@ -199,6 +200,11 @@ dist/lib/libmolpher.so: deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_debug.so.2
 dist/lib/libmolpher.so: ${OBJECTFILES}
 	${MKDIR} -p dist/lib
 	${LINK.cc} -o dist/lib/libmolpher.so ${OBJECTFILES} ${LDLIBSOPTIONS} -lpthread -Wl,-rpath,'$$ORIGIN/' -shared -fPIC
+
+${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o: /home/sichom/Projects/molpher-lib/src/core/misc/SAScore_data_loader.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2083885495
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o /home/sichom/Projects/molpher-lib/src/core/misc/SAScore_data_loader.cpp
 
 ${OBJECTDIR}/src/core/API/ExplorationData.o: src/core/API/ExplorationData.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
@@ -446,6 +452,19 @@ ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o: tests/minimal_test/MinimalTes
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -Ideps/rdkit/Code/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o tests/minimal_test/MinimalTestRunner.cpp
 
+
+${OBJECTDIR}/_ext/2083885495/SAScore_data_loader_nomain.o: ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o /home/sichom/Projects/molpher-lib/src/core/misc/SAScore_data_loader.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/2083885495
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader_nomain.o /home/sichom/Projects/molpher-lib/src/core/misc/SAScore_data_loader.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader_nomain.o;\
+	fi
 
 ${OBJECTDIR}/src/core/API/ExplorationData_nomain.o: ${OBJECTDIR}/src/core/API/ExplorationData.o src/core/API/ExplorationData.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API

@@ -16,9 +16,9 @@ pimpl(new TreeOperation::TreeOperationImpl())
     // no action
 }
 
-//TreeOperation::~TreeOperation() {
-//    // no action
-//}
+TreeOperation::~TreeOperation() {
+    // no action
+}
 
 //PathFinderContext& TreeOperation::fetchTreeContext() {
 //    return tree->context;

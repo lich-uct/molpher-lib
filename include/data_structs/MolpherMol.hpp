@@ -42,7 +42,7 @@ public:
     MolpherMol& operator=(const MolpherMol&);
     
 //    MolpherMolecule& fetchMolpherMolecule() const; // TODO: maybe get rid of this
-    std::unique_ptr<MolpherMol> copy() const;
+    std::shared_ptr<MolpherMol> copy() const;
     
     // getters
     const std::string& getSMILES() const;

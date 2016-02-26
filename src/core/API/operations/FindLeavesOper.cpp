@@ -26,8 +26,8 @@ void FindLeavesOper::operator()() {
     (*pimpl)();
 }
 
-std::unique_ptr<std::vector<std::shared_ptr<MolpherMol> > > FindLeavesOper::fetchLeaves() {
-    return pimpl->fetchLeaves();
+std::vector<std::shared_ptr<MolpherMol> > FindLeavesOper::fetchLeaves() {
+    return *(pimpl->fetchLeaves());
 }
 
 std::unique_ptr<MolVector> FindLeavesOper::FindLeavesOperImpl::fetchLeaves() {
