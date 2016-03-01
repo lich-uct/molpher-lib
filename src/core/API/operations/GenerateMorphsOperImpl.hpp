@@ -18,7 +18,7 @@ private:
     class CollectMorphs
     {
     public:
-        CollectMorphs(ConcurrentMolVector &morphs);
+        CollectMorphs(ConcurrentMolVector &morphs, std::shared_ptr<ExplorationTree> tree);
         void operator()(std::shared_ptr<MolpherMol> morph);
         unsigned int WithdrawCollectAttemptCount();
         static void MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor);
@@ -26,6 +26,7 @@ private:
     private:
         ConcurrentSmileSet mDuplicateChecker;
         ConcurrentMolVector &mMorphs;
+        std::shared_ptr<ExplorationTree> mTree;
         tbb::atomic<unsigned int> mCollectAttemptCount;
     };
     

@@ -160,8 +160,10 @@ void MinimalTest::testTree() {
     CPPUNIT_ASSERT(!tree->getCandidateMorphs().empty());
     CPPUNIT_ASSERT(!tree->getCandidateMorphsMask().empty());
     CPPUNIT_ASSERT_EQUAL(tree->getCandidateMorphs().size(), tree->getCandidateMorphsMask().size());
-    int counter = 0;
+    int counter = 1;
     for (auto candidate : tree->getCandidateMorphs()) {
+        CPPUNIT_ASSERT(candidate->isBoundToTree());
+        CPPUNIT_ASSERT_EQUAL(tree, candidate->getTree());
         std::cout << NumberToStr(counter++) + ": " << candidate->getSMILES() << " -- " + NumberToStr(candidate->getSAScore()) << std::endl;
     }
 }

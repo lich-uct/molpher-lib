@@ -44,8 +44,10 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::MorphCollector(s
     (*collect)(morph);
 }
 
-GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::CollectMorphs(ConcurrentMolVector &morphs) :
-mMorphs(morphs) {
+GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::CollectMorphs(ConcurrentMolVector &morphs, std::shared_ptr<ExplorationTree> tree) :
+mMorphs(morphs), 
+mTree(tree)
+{
     mCollectAttemptCount = 0;
 }
 
@@ -53,6 +55,7 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::operator()(std::
     ++mCollectAttemptCount; // atomic
     ConcurrentSmileSet::const_accessor dummy;
     if (mDuplicateChecker.insert(dummy, morph->getSMILES())) {
+        morph->setOwner(mTree);
         mMorphs.push_back(morph);
     } else {
         // ignore duplicate
@@ -80,7 +83,7 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::operator()() {
         tree_pimpl->fetchLeaves(tree, true, leaves);
         
         tree_pimpl->candidates.clear();
-        CollectMorphs collectMorphs(tree_pimpl->candidates);
+        CollectMorphs collectMorphs(tree_pimpl->candidates, tree);
         for (auto leaf : leaves) {
             unsigned int morphAttempts = tree_pimpl->params.cntMorphs;
             if (leaf->getDistToTarget() < tree_pimpl->params.distToTargetDepthSwitch) {
