@@ -36,6 +36,7 @@
 #include "data_structs/MolpherMol.hpp"
 #include "operations/FindLeavesOper.hpp"
 #include "operations/GenerateMorphsOper.hpp"
+#include "operations/SortMorphsOper.hpp"
 
 //class TreeOperation::TreeOperationImpl; // forward declaration to resolve circular dependency
 
@@ -45,6 +46,7 @@ class ExplorationTree::ExplorationTreeImpl
     friend class TreeOperation::TreeOperationImpl;
     friend class FindLeavesOper::FindLeavesOperImpl;
     friend class GenerateMorphsOper::GenerateMorphsOperImpl;
+    friend class SortMorphsOper::SortMorphsOperImpl;
 
     private:
         
@@ -135,7 +137,7 @@ class ExplorationTree::ExplorationTreeImpl
 //        bool isPathFound();
 //        void deleteSubtree(const std::string& canonSMILES);
         void generateMorphs(std::shared_ptr<ExplorationTree>);
-//        void sortMorphs();
+        void sortMorphs(std::shared_ptr<ExplorationTree>);
 //        void filterMorphs();
 //        void filterMorphs(int filters);
 //        void extend();

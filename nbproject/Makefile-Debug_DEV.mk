@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/API/MolpherMol.o \
 	${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o \
 	${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o \
+	${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o \
 	${OBJECTDIR}/src/core/API/operations/TreeOperation.o \
 	${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o \
 	${OBJECTDIR}/src/core/chem/SimCoefCalculator.o \
@@ -226,6 +227,11 @@ ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o: src/core/API/operatio
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o src/core/API/operations/GenerateMorphsOper.cpp
+
+${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o: src/core/API/operations/SortMorphsOper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o src/core/API/operations/SortMorphsOper.cpp
 
 ${OBJECTDIR}/src/core/API/operations/TreeOperation.o: src/core/API/operations/TreeOperation.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
@@ -522,6 +528,19 @@ ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper_nomain.o: ${OBJECTDIR}/s
 	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper_nomain.o src/core/API/operations/GenerateMorphsOper.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/API/operations/SortMorphsOper_nomain.o: ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o src/core/API/operations/SortMorphsOper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/SortMorphsOper_nomain.o src/core/API/operations/SortMorphsOper.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o ${OBJECTDIR}/src/core/API/operations/SortMorphsOper_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o: ${OBJECTDIR}/src/core/API/operations/TreeOperation.o src/core/API/operations/TreeOperation.cpp 

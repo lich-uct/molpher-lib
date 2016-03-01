@@ -16,6 +16,7 @@
 #include "core/chem/fingerprintStrategy/MorganFngpr.hpp"
 #include "core/misc/inout.h"
 #include "core/chem/simCoefStrategy/TanimotoSimCoef.hpp"
+#include "operations/SortMorphsOper.hpp"
 //#include "operations/GenerateMorphsOper.hpp"
 //#include "operations/SortMorphsOper.hpp"
 //#include "operations/FilterMorphsOper.hpp"
@@ -95,7 +96,12 @@ std::vector<std::shared_ptr<MolpherMol> > ExplorationTree::getCandidateMorphs() 
 
 std::vector<bool> ExplorationTree::getCandidateMorphsMask() {
     return pimpl->getCandidateMorphsMask();
-}   
+}
+
+void ExplorationTree::sortMorphs() {
+    pimpl->sortMorphs(shared_from_this());
+}
+
 
 // pimpl
 
@@ -302,6 +308,11 @@ MolVector ExplorationTree::ExplorationTreeImpl::getCandidateMorphs() {
 
 std::vector<bool> ExplorationTree::ExplorationTreeImpl::getCandidateMorphsMask() {
     return candidatesMask;
+}
+
+void ExplorationTree::ExplorationTreeImpl::sortMorphs(std::shared_ptr<ExplorationTree> tree) {
+    SortMorphsOper sort;
+    runOperation(sort, tree);
 }
 
 //std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {

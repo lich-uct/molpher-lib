@@ -20,6 +20,7 @@ class ExplorationTree : public std::enable_shared_from_this<ExplorationTree> {
     friend class TreeOperation;
     friend class FindLeavesOper;
     friend class GenerateMorphsOper;
+    friend class SortMorphsOper;
     
 public:
 //    typedef tbb::concurrent_vector<MolpherMolecule> MoleculeVector;
@@ -65,7 +66,7 @@ public:
 //    bool isPathFound();
 //    void deleteSubtree(const std::string& canonSMILES);
     void generateMorphs();
-//    void sortMorphs();
+    void sortMorphs();
 //    void filterMorphs();
 //    void filterMorphs(int filters);
 //    void extend();

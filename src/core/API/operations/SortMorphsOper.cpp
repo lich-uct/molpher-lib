@@ -4,17 +4,40 @@
 #include <tbb/parallel_sort.h>
 
 #include "operations/SortMorphsOper.hpp"
+#include "SortMorphsOperImpl.hpp"
+#include "TreeOperationImpl.hpp"
+#include "core/API/ExplorationTreeImpl.h"
 
-SortMorphsOper::SortMorphsOper(ExplorationTree& expTree) : TreeOperation(expTree) {
+SortMorphsOper::SortMorphsOper(std::shared_ptr<ExplorationTree> expTree) : 
+pimpl(new SortMorphsOper::SortMorphsOperImpl(expTree))
+{
+     setTreeOperPimpl(pimpl);
+}
+
+SortMorphsOper::SortMorphsOper() :
+pimpl(new SortMorphsOper::SortMorphsOperImpl())
+{
+    setTreeOperPimpl(pimpl);
+}
+
+void SortMorphsOper::operator()() {
+    (*pimpl)();
+}
+
+SortMorphsOper::SortMorphsOperImpl::SortMorphsOperImpl(std::shared_ptr<ExplorationTree> expTree) :
+TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
+{
     // no action
 }
 
-SortMorphsOper::SortMorphsOper() : TreeOperation() {
+SortMorphsOper::SortMorphsOperImpl::SortMorphsOperImpl() :
+TreeOperation::TreeOperationImpl::TreeOperationImpl()
+{
     // no action
 }
 
-bool SortMorphsOper::CompareMorphs::operator()(
-        const MolpherMolecule &a, const MolpherMolecule &b) const {
+bool SortMorphsOper::SortMorphsOperImpl::CompareMorphs::operator()(
+        const std::shared_ptr<MolpherMol> &a, const std::shared_ptr<MolpherMol> &b) const {
     /* Morphs are rated according to their proximity to the connecting line
      between their closest decoy and the target (i.e. sum of both distances is
      minimal on the connecting line between decoy and target). When sums for
@@ -25,14 +48,14 @@ bool SortMorphsOper::CompareMorphs::operator()(
      algorithm when majority of morphs lie on the connecting line between
      decoy closest to the target and the target itself. */
 
-    double aSum = a.distToTarget + a.distToClosestDecoy;
-    double bSum = b.distToTarget + b.distToClosestDecoy;
+    double aSum = a->getDistToTarget();
+    double bSum = b->getDistToTarget();
 
     bool approximatelyEqual = (
             fabs(aSum - bSum) <= (32 * DBL_EPSILON * fmax(fabs(aSum), fabs(bSum))));
 
     if (approximatelyEqual) {
-        return a.distToTarget < b.distToTarget;
+        return a->getDistToTarget() < b->getDistToTarget();
     } else {
         return aSum < bSum;
     }
@@ -64,17 +87,18 @@ bool SortMorphsOper::CompareMorphs::operator()(
     }*/
 }
 
-void SortMorphsOper::operator()() {
-    if (this->tree) {
+void SortMorphsOper::SortMorphsOperImpl::operator()() {
+    auto tree = getTree();
+    if (tree) {
+        auto tree_pimpl = tree->pimpl;
         tbb::task_scheduler_init scheduler;
-        if (threadCnt > 0) {
+        if (tree_pimpl->threadCnt > 0) {
             scheduler.terminate();
-            scheduler.initialize(threadCnt);
+            scheduler.initialize(tree_pimpl->threadCnt);
         }
 
-        ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
         CompareMorphs compareMorphs;
-        tbb::parallel_sort(morphs.begin(), morphs.end(), compareMorphs);
+        tbb::parallel_sort(tree_pimpl->candidates.begin(), tree_pimpl->candidates.end(), compareMorphs);
     } else {
         throw std::runtime_error("Cannot sort morphs. No tree attached to this instance.");
     }

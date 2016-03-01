@@ -48,6 +48,7 @@
               </logicalFolder>
               <itemPath>src/core/API/operations/FindLeavesOperImpl.hpp</itemPath>
               <itemPath>src/core/API/operations/GenerateMorphsOperImpl.hpp</itemPath>
+              <itemPath>src/core/API/operations/SortMorphsOperImpl.hpp</itemPath>
               <itemPath>src/core/API/operations/TreeOperationImpl.hpp</itemPath>
             </logicalFolder>
             <itemPath>src/core/API/ExplorationTreeImpl.h</itemPath>
@@ -476,6 +477,16 @@
             flavor2="0">
       </item>
       <item path="src/core/API/operations/GenerateMorphsOperImpl.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/SortMorphsOper.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/SortMorphsOperImpl.hpp"
             ex="false"
             tool="3"
             flavor2="0">
