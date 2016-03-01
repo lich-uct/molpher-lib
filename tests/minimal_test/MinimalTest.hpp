@@ -10,6 +10,13 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
+template<typename Number>
+std::string NumberToStr(Number num) {
+    std::stringstream ss;
+    ss << num;
+    return ss.str();
+}
+
 class MinimalTest : public CPPUNIT_NS::TestFixture {
     CPPUNIT_TEST_SUITE(MinimalTest);
 

@@ -1,5 +1,5 @@
 %include <std_shared_ptr.i>;
-%include "std_unique_ptr.i"
+//%include "std_unique_ptr.i"
 
 %shared_ptr(ExplorationTree);
 %shared_ptr(MolpherMol);

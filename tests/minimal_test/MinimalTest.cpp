@@ -14,6 +14,8 @@
 #include "data_structs/ExplorationTree.hpp"
 #include "data_structs/ExplorationData.hpp"
 
+#include "SAScore_data_loader.hpp"
+
 #include "selectors/chemoper_selectors.h"
 #include "selectors/fingerprint_selectors.h"
 #include "selectors/simcoeff_selectors.h"
@@ -32,7 +34,7 @@ MinimalTest::~MinimalTest() {
 }
 
 void MinimalTest::setUp() {
-    // no action
+    load_data_from("res/SAScore.dat");
 }
 
 void MinimalTest::tearDown() {
@@ -151,6 +153,16 @@ void MinimalTest::testTree() {
     CPPUNIT_ASSERT_EQUAL(source, leaves[0]);
     CPPUNIT_ASSERT_EQUAL((unsigned) 0, source->getItersWithoutDistImprovement());
     
-    
+    // generate some morphs
+    CPPUNIT_ASSERT(tree->getCandidateMorphs().empty());
+    CPPUNIT_ASSERT(tree->getCandidateMorphsMask().empty());
+    tree->generateMorphs();
+    CPPUNIT_ASSERT(!tree->getCandidateMorphs().empty());
+    CPPUNIT_ASSERT(!tree->getCandidateMorphsMask().empty());
+    CPPUNIT_ASSERT_EQUAL(tree->getCandidateMorphs().size(), tree->getCandidateMorphsMask().size());
+    int counter = 0;
+    for (auto candidate : tree->getCandidateMorphs()) {
+        std::cout << NumberToStr(counter++) + ": " << candidate->getSMILES() << " -- " + NumberToStr(candidate->getSAScore()) << std::endl;
+    }
 }
 

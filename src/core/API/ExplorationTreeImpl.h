@@ -35,6 +35,7 @@
 #include "operations/TreeOperation.hpp"
 #include "data_structs/MolpherMol.hpp"
 #include "operations/FindLeavesOper.hpp"
+#include "operations/GenerateMorphsOper.hpp"
 
 //class TreeOperation::TreeOperationImpl; // forward declaration to resolve circular dependency
 
@@ -43,6 +44,7 @@ class ExplorationTree::ExplorationTreeImpl
     
     friend class TreeOperation::TreeOperationImpl;
     friend class FindLeavesOper::FindLeavesOperImpl;
+    friend class GenerateMorphsOper::GenerateMorphsOperImpl;
 
     private:
         
@@ -126,20 +128,21 @@ class ExplorationTree::ExplorationTreeImpl
         
         void runOperation(TreeOperation& operation, std::shared_ptr<ExplorationTree> tree);
         MolVector fetchLeaves(std::shared_ptr<ExplorationTree> tree, bool increase_dist_improve_counter);
+        void fetchLeaves(std::shared_ptr<ExplorationTree> tree, bool increase_dist_improve_counter, ConcurrentMolVector& ret);
         std::shared_ptr<MolpherMol> fetchMol(const std::string& canonSMILES);
         bool hasMol(const std::string& canonSMILES);
         bool hasMol(std::shared_ptr<MolpherMol> mol);
 //        bool isPathFound();
 //        void deleteSubtree(const std::string& canonSMILES);
-//        void generateMorphs();
+        void generateMorphs(std::shared_ptr<ExplorationTree>);
 //        void sortMorphs();
 //        void filterMorphs();
 //        void filterMorphs(int filters);
 //        void extend();
 //        void prune();
         
-//        std::shared_ptr<const std::vector<std::shared_ptr<MolpherMol> > > getCandidateMorphs();
-//        const std::vector<bool>& getCandidateMorphsMask(); // TODO add a bitset version
+        MolVector getCandidateMorphs();
+        std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version
         
 //        void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
 };

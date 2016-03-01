@@ -35,11 +35,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o \
 	${OBJECTDIR}/src/core/API/ExplorationData.o \
 	${OBJECTDIR}/src/core/API/ExplorationTree.o \
 	${OBJECTDIR}/src/core/API/MolpherMol.o \
 	${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o \
+	${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o \
 	${OBJECTDIR}/src/core/API/operations/TreeOperation.o \
 	${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o \
 	${OBJECTDIR}/src/core/chem/SimCoefCalculator.o \
@@ -75,6 +75,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/chem/simCoefStrategy/TanimotoSimCoef.o \
 	${OBJECTDIR}/src/core/chem/simCoefStrategy/TverskySimCoef.o \
 	${OBJECTDIR}/src/core/misc/SAScore.o \
+	${OBJECTDIR}/src/core/misc/SAScore_data_loader.o \
 	${OBJECTDIR}/src/core/misc/SynchRand.o \
 	${OBJECTDIR}/src/core/misc/inout.o \
 	${OBJECTDIR}/src/core/misc/iteration_serializer.o \
@@ -201,11 +202,6 @@ dist/lib/libmolpher.so: ${OBJECTFILES}
 	${MKDIR} -p dist/lib
 	${LINK.cc} -o dist/lib/libmolpher.so ${OBJECTFILES} ${LDLIBSOPTIONS} -lpthread -Wl,-rpath,'$$ORIGIN/' -shared -fPIC
 
-${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o: /home/sichom/Projects/molpher-lib/src/core/misc/SAScore_data_loader.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/2083885495
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o /home/sichom/Projects/molpher-lib/src/core/misc/SAScore_data_loader.cpp
-
 ${OBJECTDIR}/src/core/API/ExplorationData.o: src/core/API/ExplorationData.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
 	${RM} "$@.d"
@@ -225,6 +221,11 @@ ${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o: src/core/API/operations/F
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o src/core/API/operations/FindLeavesOper.cpp
+
+${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o: src/core/API/operations/GenerateMorphsOper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o src/core/API/operations/GenerateMorphsOper.cpp
 
 ${OBJECTDIR}/src/core/API/operations/TreeOperation.o: src/core/API/operations/TreeOperation.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
@@ -401,6 +402,11 @@ ${OBJECTDIR}/src/core/misc/SAScore.o: src/core/misc/SAScore.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/SAScore.o src/core/misc/SAScore.cpp
 
+${OBJECTDIR}/src/core/misc/SAScore_data_loader.o: src/core/misc/SAScore_data_loader.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/misc
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/SAScore_data_loader.o src/core/misc/SAScore_data_loader.cpp
+
 ${OBJECTDIR}/src/core/misc/SynchRand.o: src/core/misc/SynchRand.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/misc
 	${RM} "$@.d"
@@ -453,19 +459,6 @@ ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o: tests/minimal_test/MinimalTes
 	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -Ideps/rdkit/Code/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o tests/minimal_test/MinimalTestRunner.cpp
 
 
-${OBJECTDIR}/_ext/2083885495/SAScore_data_loader_nomain.o: ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o /home/sichom/Projects/molpher-lib/src/core/misc/SAScore_data_loader.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/2083885495
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader_nomain.o /home/sichom/Projects/molpher-lib/src/core/misc/SAScore_data_loader.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader.o ${OBJECTDIR}/_ext/2083885495/SAScore_data_loader_nomain.o;\
-	fi
-
 ${OBJECTDIR}/src/core/API/ExplorationData_nomain.o: ${OBJECTDIR}/src/core/API/ExplorationData.o src/core/API/ExplorationData.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/ExplorationData.o`; \
@@ -516,6 +509,19 @@ ${OBJECTDIR}/src/core/API/operations/FindLeavesOper_nomain.o: ${OBJECTDIR}/src/c
 	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FindLeavesOper_nomain.o src/core/API/operations/FindLeavesOper.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o ${OBJECTDIR}/src/core/API/operations/FindLeavesOper_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper_nomain.o: ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o src/core/API/operations/GenerateMorphsOper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper_nomain.o src/core/API/operations/GenerateMorphsOper.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o ${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o: ${OBJECTDIR}/src/core/API/operations/TreeOperation.o src/core/API/operations/TreeOperation.cpp 
@@ -971,6 +977,19 @@ ${OBJECTDIR}/src/core/misc/SAScore_nomain.o: ${OBJECTDIR}/src/core/misc/SAScore.
 	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/SAScore_nomain.o src/core/misc/SAScore.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/misc/SAScore.o ${OBJECTDIR}/src/core/misc/SAScore_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/misc/SAScore_data_loader_nomain.o: ${OBJECTDIR}/src/core/misc/SAScore_data_loader.o src/core/misc/SAScore_data_loader.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/misc
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/misc/SAScore_data_loader.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/misc/SAScore_data_loader_nomain.o src/core/misc/SAScore_data_loader.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/misc/SAScore_data_loader.o ${OBJECTDIR}/src/core/misc/SAScore_data_loader_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/misc/SynchRand_nomain.o: ${OBJECTDIR}/src/core/misc/SynchRand.o src/core/misc/SynchRand.cpp 

@@ -19,6 +19,7 @@ class ExplorationTree : public std::enable_shared_from_this<ExplorationTree> {
     
     friend class TreeOperation;
     friend class FindLeavesOper;
+    friend class GenerateMorphsOper;
     
 public:
 //    typedef tbb::concurrent_vector<MolpherMolecule> MoleculeVector;
@@ -63,7 +64,7 @@ public:
     bool hasMol(std::shared_ptr<MolpherMol> mol);
 //    bool isPathFound();
 //    void deleteSubtree(const std::string& canonSMILES);
-//    void generateMorphs();
+    void generateMorphs();
 //    void sortMorphs();
 //    void filterMorphs();
 //    void filterMorphs(int filters);
@@ -73,8 +74,8 @@ public:
 //    int getThreadCount();
 //    int getGenerationCount();
 //    ExplorationParameters& getParams();
-//    const std::vector<MolpherMol>& getCandidateMorphs();
-//    const std::vector<bool>& getCandidateMorphsMask(); // TODO add a bitset version 
+    std::vector<std::shared_ptr<MolpherMol> > getCandidateMorphs();
+    std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version 
 //    
 //    void setThreadCount(int threadCnt);
 //    void setParams(ExplorationParameters& params);

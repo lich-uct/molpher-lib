@@ -85,7 +85,17 @@ MolVector ExplorationTree::fetchLeaves(bool increase_dist_improve_counter) {
     return pimpl->fetchLeaves(shared_from_this(), increase_dist_improve_counter);
 }
 
+void ExplorationTree::generateMorphs() {
+    pimpl->generateMorphs(shared_from_this());
+}
 
+std::vector<std::shared_ptr<MolpherMol> > ExplorationTree::getCandidateMorphs() {
+    return pimpl->getCandidateMorphs();
+}
+
+std::vector<bool> ExplorationTree::getCandidateMorphsMask() {
+    return pimpl->getCandidateMorphsMask();
+}   
 
 // pimpl
 
@@ -263,7 +273,6 @@ bool ExplorationTree::ExplorationTreeImpl::hasMol(std::shared_ptr<MolpherMol> mo
 
 void ExplorationTree::ExplorationTreeImpl::runOperation(TreeOperation& operation, std::shared_ptr<ExplorationTree> tree) {
     operation.setTree(tree);
-    auto tree_from_oper = operation.getTree();
     operation();
 }
 
@@ -271,6 +280,28 @@ MolVector ExplorationTree::ExplorationTreeImpl::fetchLeaves(std::shared_ptr<Expl
     FindLeavesOper find(increase_dist_improve_counter);
     runOperation(find, tree);
     return find.fetchLeaves();
+}
+
+void ExplorationTree::ExplorationTreeImpl::fetchLeaves(std::shared_ptr<ExplorationTree> tree, bool increase_dist_improve_counter, ConcurrentMolVector& ret) {
+    FindLeavesOper::FindLeavesOperImpl find(tree, increase_dist_improve_counter);
+    find.fetchLeaves(ret);
+}
+
+void ExplorationTree::ExplorationTreeImpl::generateMorphs(std::shared_ptr<ExplorationTree> tree) {
+    GenerateMorphsOper generate;
+    runOperation(generate, tree);
+}
+
+MolVector ExplorationTree::ExplorationTreeImpl::getCandidateMorphs() {
+    MolVector ret;
+    for (auto morph : candidates) {
+        ret.push_back(morph);
+    }
+    return ret;
+}
+
+std::vector<bool> ExplorationTree::ExplorationTreeImpl::getCandidateMorphsMask() {
+    return candidatesMask;
 }
 
 //std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {

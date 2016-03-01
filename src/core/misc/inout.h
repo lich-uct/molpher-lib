@@ -34,6 +34,13 @@ void SynchCerr(const std::string &s, const std::string prefix = "WARNIG: ");
 void Cout(const std::string &s);
 void Cerr(const std::string &s, const std::string prefix = "WARNIG: ");
 
+template<typename Number>
+std::string parseNumber(Number num) {
+    std::stringstream ss;
+    ss << num;
+    return ss.str();
+}
+
 //IterationSnapshot Materialize(IterationSnapshotProxy &proxy);
 
 //std::string GenerateFilename(std::string &base,

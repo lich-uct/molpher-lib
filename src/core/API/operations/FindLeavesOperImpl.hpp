@@ -35,8 +35,10 @@ class FindLeavesOper::FindLeavesOperImpl : public TreeOperation::TreeOperationIm
         FindLeavesOperImpl(std::shared_ptr<ExplorationTree> expTree, bool increment_iters_without_dist_improve = false);
         FindLeavesOperImpl(bool increment_iters_without_dist_improve = false);
         void operator()();
+        void operator()(ConcurrentMolVector& ret);
         
         std::unique_ptr<MolVector> fetchLeaves();
+        void fetchLeaves(ConcurrentMolVector& ret);
 
 };
 

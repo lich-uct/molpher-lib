@@ -41,6 +41,10 @@ std::unique_ptr<MolVector> FindLeavesOper::FindLeavesOperImpl::fetchLeaves() {
     }
 }
 
+void FindLeavesOper::FindLeavesOperImpl::fetchLeaves(ConcurrentMolVector& ret) {
+    (*this)(ret);
+}
+
 FindLeavesOper::FindLeavesOperImpl::FindLeavesOperImpl(
     std::shared_ptr<ExplorationTree> expTree
     , bool increment_iters_without_dist_improve) 
@@ -80,7 +84,7 @@ void FindLeavesOper::FindLeavesOperImpl::FindLeaves::operator()(
     }
 }
 
-void FindLeavesOper::FindLeavesOperImpl::operator()() {
+void FindLeavesOper::FindLeavesOperImpl::operator()(ConcurrentMolVector& ret) {
     tbb::task_group_context tbbCtx;
     
     tbb::task_scheduler_init scheduler;
@@ -90,8 +94,12 @@ void FindLeavesOper::FindLeavesOperImpl::operator()() {
         scheduler.initialize(tree_pimpl->threadCnt);
     }
     
-    FindLeavesOper::FindLeavesOperImpl::FindLeaves findLeaves(leaves, incrementDistImproveCounter);
+    FindLeavesOper::FindLeavesOperImpl::FindLeaves findLeaves(ret, incrementDistImproveCounter);
     tbb::parallel_for(
                 TreeMap::range_type(tree_pimpl->treeMap),
                 findLeaves, tbb::auto_partitioner(), tbbCtx);
+}
+
+void FindLeavesOper::FindLeavesOperImpl::operator()() {
+    (*this)(leaves);
 }
