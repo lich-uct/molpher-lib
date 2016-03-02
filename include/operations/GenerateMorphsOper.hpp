@@ -16,8 +16,8 @@ class GenerateMorphsOper : public TreeOperation {
     
 public:
     class GenerateMorphsOperImpl;
-    GenerateMorphsOper(std::shared_ptr<ExplorationTree> expTree);
-    GenerateMorphsOper();
+    GenerateMorphsOper(std::shared_ptr<ExplorationTree> expTree, bool set_tree_ownership = false);
+    GenerateMorphsOper(bool set_tree_ownership = false);
     virtual void operator()();
     
 private:

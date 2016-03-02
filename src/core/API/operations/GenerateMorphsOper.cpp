@@ -10,14 +10,14 @@
 #include "core/API/ExplorationTreeImpl.h"
 #include "core/misc/inout.h"
 
-GenerateMorphsOper::GenerateMorphsOper(std::shared_ptr<ExplorationTree> expTree) : 
-pimpl(new GenerateMorphsOper::GenerateMorphsOperImpl(expTree)) 
+GenerateMorphsOper::GenerateMorphsOper(std::shared_ptr<ExplorationTree> expTree, bool set_tree_ownership) : 
+pimpl(new GenerateMorphsOper::GenerateMorphsOperImpl(expTree, set_tree_ownership)) 
 {
     setTreeOperPimpl(pimpl);
 }
 
-GenerateMorphsOper::GenerateMorphsOper() : 
-pimpl(new GenerateMorphsOper::GenerateMorphsOperImpl())
+GenerateMorphsOper::GenerateMorphsOper(bool set_tree_ownership) : 
+pimpl(new GenerateMorphsOper::GenerateMorphsOperImpl(set_tree_ownership))
 {
     setTreeOperPimpl(pimpl);
 }
@@ -26,14 +26,16 @@ void GenerateMorphsOper::operator()() {
     (*pimpl)();
 }
 
-GenerateMorphsOper::GenerateMorphsOperImpl::GenerateMorphsOperImpl(std::shared_ptr<ExplorationTree> expTree) :
+GenerateMorphsOper::GenerateMorphsOperImpl::GenerateMorphsOperImpl(std::shared_ptr<ExplorationTree> expTree, bool set_tree_ownership) :
 TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
+, mSetTreeOwnershipForMorphs(set_tree_ownership)
 {
     // no action
 }
 
-GenerateMorphsOper::GenerateMorphsOperImpl::GenerateMorphsOperImpl() : 
+GenerateMorphsOper::GenerateMorphsOperImpl::GenerateMorphsOperImpl(bool set_tree_ownership) : 
 TreeOperation::TreeOperationImpl::TreeOperationImpl()
+, mSetTreeOwnershipForMorphs(set_tree_ownership)
 {
     // no action
 }
@@ -44,9 +46,14 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::MorphCollector(s
     (*collect)(morph);
 }
 
-GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::CollectMorphs(ConcurrentMolVector &morphs, std::shared_ptr<ExplorationTree> tree) :
+GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::CollectMorphs(
+    ConcurrentMolVector &morphs
+    , std::shared_ptr<ExplorationTree> tree
+    , bool set_ownership) 
+:
 mMorphs(morphs), 
-mTree(tree)
+mTree(tree),
+mSetTreeOwnership(set_ownership)
 {
     mCollectAttemptCount = 0;
 }
@@ -55,7 +62,9 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::operator()(std::
     ++mCollectAttemptCount; // atomic
     ConcurrentSmileSet::const_accessor dummy;
     if (mDuplicateChecker.insert(dummy, morph->getSMILES())) {
-        morph->setOwner(mTree);
+        if (mSetTreeOwnership) {
+            morph->setOwner(mTree);
+        }
         mMorphs.push_back(morph);
     } else {
         // ignore duplicate
@@ -83,7 +92,7 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::operator()() {
         tree_pimpl->fetchLeaves(tree, true, leaves);
         
         tree_pimpl->candidates.clear();
-        CollectMorphs collectMorphs(tree_pimpl->candidates, tree);
+        CollectMorphs collectMorphs(tree_pimpl->candidates, tree, mSetTreeOwnershipForMorphs);
         for (auto leaf : leaves) {
             unsigned int morphAttempts = tree_pimpl->params.cntMorphs;
             if (leaf->getDistToTarget() < tree_pimpl->params.distToTargetDepthSwitch) {

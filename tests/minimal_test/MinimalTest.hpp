@@ -30,8 +30,6 @@ std::string NumberToStr(Number num) {
 void printCandidates(std::shared_ptr<ExplorationTree> tree) {
     int counter = 1;
     for (auto candidate : tree->getCandidateMorphs()) {
-        CPPUNIT_ASSERT(candidate->isBoundToTree());
-        CPPUNIT_ASSERT_EQUAL(tree, candidate->getTree());
         std::cout << NumberToStr(counter++) + ": " << candidate->getSMILES() << " -- " + NumberToStr(candidate->getDistToTarget()) << std::endl;
     }
 }

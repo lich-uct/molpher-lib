@@ -149,6 +149,10 @@ void MinimalTest::testTree() {
     CPPUNIT_ASSERT(!tree->getCandidateMorphs().empty());
     CPPUNIT_ASSERT(!tree->getCandidateMorphsMask().empty());
     CPPUNIT_ASSERT_EQUAL(tree->getCandidateMorphs().size(), tree->getCandidateMorphsMask().size());
+    for (auto candidate : tree->getCandidateMorphs()) {
+        CPPUNIT_ASSERT(!candidate->isBoundToTree());
+        CPPUNIT_ASSERT_EQUAL(false, (bool) candidate->getTree());
+    }
     printCandidates(tree);
     
     // sort the morphs
@@ -159,5 +163,7 @@ void MinimalTest::testTree() {
         CPPUNIT_ASSERT(candidate->getDistToTarget() >= previous);
         previous = candidate->getDistToTarget();
     }
+    
+    // filter morphs
 }
 
