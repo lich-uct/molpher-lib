@@ -37,6 +37,7 @@
 #include "operations/FindLeavesOper.hpp"
 #include "operations/GenerateMorphsOper.hpp"
 #include "operations/SortMorphsOper.hpp"
+#include "operations/FilterMorphsOper.hpp"
 
 //class TreeOperation::TreeOperationImpl; // forward declaration to resolve circular dependency
 
@@ -47,6 +48,7 @@ class ExplorationTree::ExplorationTreeImpl
     friend class FindLeavesOper::FindLeavesOperImpl;
     friend class GenerateMorphsOper::GenerateMorphsOperImpl;
     friend class SortMorphsOper::SortMorphsOperImpl;
+    friend class FilterMorphsOper::FilterMorphsOperImpl;
 
     private:
         
@@ -138,8 +140,8 @@ class ExplorationTree::ExplorationTreeImpl
 //        void deleteSubtree(const std::string& canonSMILES);
         void generateMorphs(std::shared_ptr<ExplorationTree>);
         void sortMorphs(std::shared_ptr<ExplorationTree>);
-//        void filterMorphs();
-//        void filterMorphs(int filters);
+        void filterMorphs(std::shared_ptr<ExplorationTree> tree, bool verbose_output);
+        void filterMorphs(FilterMorphsOper::MorphFilters filters, std::shared_ptr<ExplorationTree> tree, bool verbose_output);
 //        void extend();
 //        void prune();
         

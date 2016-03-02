@@ -29,8 +29,15 @@ std::string NumberToStr(Number num) {
 
 void printCandidates(std::shared_ptr<ExplorationTree> tree) {
     int counter = 1;
+    auto mask = tree->getCandidateMorphsMask();
     for (auto candidate : tree->getCandidateMorphs()) {
-        std::cout << NumberToStr(counter++) + ": " << candidate->getSMILES() << " -- " + NumberToStr(candidate->getDistToTarget()) << std::endl;
+        bool mask_val = mask[counter - 1];
+        std::cout 
+                << NumberToStr(counter++) + ": " 
+                << candidate->getSMILES() << " -- " 
+                << NumberToStr(candidate->getDistToTarget()) 
+                << "(" + NumberToStr(mask_val) + ")"
+                << std::endl;
     }
 }
 

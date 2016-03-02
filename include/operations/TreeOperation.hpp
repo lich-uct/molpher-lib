@@ -11,9 +11,6 @@
 #include <string>
 #include <memory>
 
-#include "data_structs/ExplorationTree.hpp"
-
-
 class ExplorationTree;
 
 class TreeOperation {

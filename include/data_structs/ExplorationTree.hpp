@@ -11,9 +11,7 @@
 #include <memory>
 
 #include "ExplorationData.hpp"
-
-class TreeOperation; // forward declaration to resolve circular dependency
-class FindLeavesOper;
+#include "operations/FilterMorphsOper.hpp"
 
 class ExplorationTree : public std::enable_shared_from_this<ExplorationTree> {
     
@@ -21,6 +19,7 @@ class ExplorationTree : public std::enable_shared_from_this<ExplorationTree> {
     friend class FindLeavesOper;
     friend class GenerateMorphsOper;
     friend class SortMorphsOper;
+    friend class FilterMorphsOper;
     
 public:
 //    typedef tbb::concurrent_vector<MolpherMolecule> MoleculeVector;
@@ -67,8 +66,8 @@ public:
 //    void deleteSubtree(const std::string& canonSMILES);
     void generateMorphs();
     void sortMorphs();
-//    void filterMorphs();
-//    void filterMorphs(int filters);
+    void filterMorphs(bool verbose_output = false);
+    void filterMorphs(FilterMorphsOper::MorphFilters filters, bool verbose_output = false);
 //    void extend();
 //    void prune();
 //    

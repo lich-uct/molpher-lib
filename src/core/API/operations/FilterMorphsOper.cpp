@@ -7,43 +7,88 @@
 #include "core/misc/SynchRand.h"
 
 #include "operations/FilterMorphsOper.hpp"
+#include "core/API/ExplorationTreeImpl.h"
+#include "FilterMorphsOperImpl.hpp"
 
-FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree, bool verbose) : 
-TreeOperation(expTree)
-, filters(MorphFilters::ALL) 
-, verbose(verbose)
+FilterMorphsOper::FilterMorphsOper(std::shared_ptr<ExplorationTree> expTree, bool verbose) : 
+pimpl(new FilterMorphsOper::FilterMorphsOperImpl(expTree, verbose))
 {
-    // no action
+    setTreeOperPimpl(pimpl);
 }
 
-FilterMorphsOper::FilterMorphsOper(ExplorationTree& expTree, int filters, bool verbose) : 
-TreeOperation(expTree)
-, filters(filters | MorphFilters::DUPLICATES)
-, verbose(verbose)
+FilterMorphsOper::FilterMorphsOper(std::shared_ptr<ExplorationTree> expTree, FilterMorphsOper::MorphFilters filters, bool verbose) : 
+pimpl(new FilterMorphsOper::FilterMorphsOperImpl(expTree, static_cast<int>(filters), verbose))
 {
-    // no action
+    setTreeOperPimpl(pimpl);
 }
 
 FilterMorphsOper::FilterMorphsOper(bool verbose) : 
-TreeOperation()
-, filters(MorphFilters::ALL) 
+pimpl(new FilterMorphsOper::FilterMorphsOperImpl(verbose))
+{
+    setTreeOperPimpl(pimpl);
+}
+
+FilterMorphsOper::FilterMorphsOper(FilterMorphsOper::MorphFilters filters, bool verbose) : 
+pimpl(new FilterMorphsOper::FilterMorphsOperImpl(static_cast<int>(filters), verbose))
+{
+    setTreeOperPimpl(pimpl);
+}
+
+void FilterMorphsOper::operator()() {
+    (*pimpl)();
+}
+
+// pimpl
+
+FilterMorphsOper::FilterMorphsOperImpl::FilterMorphsOperImpl(
+std::shared_ptr<ExplorationTree> expTree
+, bool verbose
+) 
+:
+TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
+, filters(FilterMorphsOper::MorphFilters::ALL)
 , verbose(verbose)
 {
     // no action
 }
 
-FilterMorphsOper::FilterMorphsOper(int filters, bool verbose) : 
-TreeOperation()
-, filters(filters | MorphFilters::DUPLICATES) 
+FilterMorphsOper::FilterMorphsOperImpl::FilterMorphsOperImpl(
+int filters
+, bool verbose
+) 
+:
+TreeOperation::TreeOperationImpl::TreeOperationImpl()
+, filters(filters | FilterMorphsOper::MorphFilters::DUPLICATES)
 , verbose(verbose)
 {
     // no action
 }
 
-FilterMorphsOper::FilterMorphs::FilterMorphs(PathFinderContext &ctx,
-        size_t globalMorphCount, ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors, int filters, bool verbose
+FilterMorphsOper::FilterMorphsOperImpl::FilterMorphsOperImpl(bool verbose) : 
+TreeOperation::TreeOperationImpl::TreeOperationImpl()
+, filters(FilterMorphsOper::MorphFilters::ALL)
+, verbose(verbose)
+{
+    // no action
+}
+
+FilterMorphsOper::FilterMorphsOperImpl::FilterMorphsOperImpl(
+std::shared_ptr<ExplorationTree> expTree
+, int filters
+, bool verbose
+) 
+:
+TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
+, filters(filters | FilterMorphsOper::MorphFilters::DUPLICATES)
+, verbose(verbose)
+{
+    // no action
+}
+
+FilterMorphsOper::FilterMorphsOperImpl::FilterMorphs::FilterMorphs(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree_impl,
+        size_t globalMorphCount, ConcurrentMolVector &morphs, std::vector<bool> &survivors, int filters, bool verbose
         ) :
-mCtx(ctx),
+mTreePimpl(tree_impl),
 mGlobalMorphCount(globalMorphCount),
 mMorphs(morphs),
 mSurvivors(survivors),
@@ -52,22 +97,24 @@ mFilters(filters){
     assert(mMorphs.size() == mSurvivors.size());
 }
 
-void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t> &r) const {
+void FilterMorphsOper::FilterMorphsOperImpl::FilterMorphs::operator()(const tbb::blocked_range<size_t> &r) const {
 
     for (size_t idx = r.begin(); idx != r.end(); ++idx) {
+        
+        std::string morph_smiles = mMorphs[idx]->getSMILES();
 
         bool mightSurvive = true;
         if (mFilters & MorphFilters::PROBABILITY) {
             double acceptProbability = 1.0;
-            bool isTarget = (mMorphs[idx].smile == mCtx.target.smile);
-            if (idx >= mCtx.params.cntCandidatesToKeep && !isTarget) {
+            bool isTarget = (morph_smiles == mTreePimpl->target.getSMILES());
+            if (idx >= mTreePimpl->params.cntCandidatesToKeep && !isTarget) {
                 acceptProbability =
-                        0.25 - (idx - mCtx.params.cntCandidatesToKeep) /
-                        ((mGlobalMorphCount - mCtx.params.cntCandidatesToKeep) * 4.0);
+                        0.25 - (idx - mTreePimpl->params.cntCandidatesToKeep) /
+                        ((mGlobalMorphCount - mTreePimpl->params.cntCandidatesToKeep) * 4.0);
             }
             mightSurvive = SynchRand::GetRandomNumber(0, 99) < (int) (acceptProbability * 100);
         }
-
+        
         if (mightSurvive) {
             bool isDead = false;
             bool badWeight = false;
@@ -77,20 +124,20 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
             bool tooManyProducedMorphs = false;
 
             // Tests are ordered according to their cost.
-            // Added test for SAScore
 
             if (mFilters & MorphFilters::WEIGHT) {
                 isDead = (badWeight || badSascore || alreadyInTree ||
                         alreadyTriedByParent || tooManyProducedMorphs);
                 if (!isDead) {
+                    double weight = mMorphs[idx]->getMolecularWeight();
                     badWeight =
-                            (mMorphs[idx].molecularWeight <
-                            mCtx.params.minAcceptableMolecularWeight) ||
-                            (mMorphs[idx].molecularWeight >
-                            mCtx.params.maxAcceptableMolecularWeight);
+                            ( weight <
+                            mTreePimpl->params.minAcceptableMolecularWeight) ||
+                            (weight >
+                            mTreePimpl->params.maxAcceptableMolecularWeight);
                     if (badWeight && mVerboseOutput) {
                         std::stringstream ss;
-                        ss << "bad weight: " << mMorphs[idx].smile << " : " << mMorphs[idx].molecularWeight;
+                        ss << "bad weight: " << morph_smiles << " : " << weight;
                         SynchCout(ss.str());
                     }
                 }
@@ -100,9 +147,10 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                 isDead = (badWeight || badSascore || alreadyInTree ||
                         alreadyTriedByParent || tooManyProducedMorphs);
                 if (!isDead) {
-                    PathFinderContext::CandidateMap::const_accessor ac;
-                    if (mCtx.candidates.find(ac, mMorphs[idx].smile)) {
+                    TreeMap::const_accessor ac;
+                    if (mTreePimpl->treeMap.find(ac, morph_smiles)) {
                         alreadyInTree = true;
+                        SynchCout("Duplicate molecule found: " + morph_smiles);
                     }
                 }
             }
@@ -111,12 +159,13 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                 isDead = (badWeight || badSascore || alreadyInTree ||
                         alreadyTriedByParent || tooManyProducedMorphs);
                 if (!isDead) {
-                    PathFinderContext::CandidateMap::const_accessor ac;
-                    if (mCtx.candidates.find(ac, mMorphs[idx].parentSmile)) {
+                    TreeMap::const_accessor ac;
+                    if (mTreePimpl->treeMap.find(ac, mMorphs[idx]->getParentSMILES())) {
+                        auto descendants = ac->second->getHistoricDescendants();
                         alreadyTriedByParent = (
-                                ac->second.historicDescendants.find(mMorphs[idx].smile)
+                                descendants.find(morph_smiles)
                                 !=
-                                ac->second.historicDescendants.end());
+                                descendants.end());
                     } else {
                         assert(false);
                     }
@@ -127,14 +176,14 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                 isDead = (badWeight || badSascore || alreadyInTree ||
                         alreadyTriedByParent || tooManyProducedMorphs);
                 if (!isDead) {
-                    PathFinderContext::MorphDerivationMap::const_accessor ac;
-                    if (mCtx.morphDerivations.find(ac, mMorphs[idx].smile)) {
+                    MorphDerivationMap::const_accessor ac;
+                    if (mTreePimpl->morphDerivations.find(ac, morph_smiles)) {
                         tooManyProducedMorphs =
-                                (ac->second > mCtx.params.cntMaxMorphs);
+                                (ac->second > mTreePimpl->params.cntMaxMorphs);
                     }
                     if (tooManyProducedMorphs && mVerboseOutput) {
                         std::stringstream ss;
-                        ss << "too many morphs: " << mMorphs[idx].smile << " : " << ac->second;
+                        ss << "too many morphs: " << morph_smiles << " : " << ac->second;
                         SynchCout(ss.str());
                     }
                 }
@@ -144,11 +193,12 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
                 isDead = (badWeight || badSascore || alreadyInTree ||
                         alreadyTriedByParent || tooManyProducedMorphs);
                 if (!isDead) {
-                    badSascore = mMorphs[idx].sascore > 6.0; // questionable, it is recommended value from Ertl
+                    double sascore = mMorphs[idx]->getSAScore();
+                    badSascore = sascore > 6.0; // questionable, it is recommended value from Ertl
                     // in case of badSascore print message
                     if (badSascore && mVerboseOutput) {
                         std::stringstream ss;
-                        ss << "bad SAScore: " << mMorphs[idx].smile << " : " << mMorphs[idx].sascore;
+                        ss << "bad SAScore: " << morph_smiles << " : " << sascore;
                         SynchCout(ss.str());
                     }
                 }
@@ -161,29 +211,28 @@ void FilterMorphsOper::FilterMorphs::operator()(const tbb::blocked_range<size_t>
             mSurvivors[idx] = false;
             if (mVerboseOutput) {
                 std::stringstream ss;
-                ss << "probability filtered: " << mMorphs[idx].smile;
+                ss << "probability filtered: " << morph_smiles;
                 SynchCout(ss.str());
             }
         }
     }
 }
 
-void FilterMorphsOper::operator()() {
-    if (this->tree) {
+void FilterMorphsOper::FilterMorphsOperImpl::operator()() {
+    auto tree = getTree();
+    if (tree) {
+        auto tree_impl = tree->pimpl;
         tbb::task_group_context tbbCtx;
         tbb::task_scheduler_init scheduler;
-        if (threadCnt > 0) {
+        if (tree_impl->threadCnt > 0) {
             scheduler.terminate();
-            scheduler.initialize(threadCnt);
+            scheduler.initialize(tree_impl->threadCnt);
         }
 
-        ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
-        PathFinderContext& context = fetchTreeContext();
-        ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
-        assert(morphs.size() == survivors.size());
-        FilterMorphs filterMorphs(context, morphs.size(), morphs, survivors, filters, verbose);
+        assert(tree_impl->candidates.size() == tree_impl->candidatesMask.size());
+        FilterMorphs filterMorphs(tree_impl, tree_impl->candidates.size(), tree_impl->candidates, tree_impl->candidatesMask, filters, verbose);
         tbb::parallel_for(
-                tbb::blocked_range<size_t>(0, morphs.size()),
+                tbb::blocked_range<size_t>(0, tree_impl->candidates.size()),
                 filterMorphs, tbb::auto_partitioner(), tbbCtx);
     } else {
         throw std::runtime_error("Cannot filter morphs. No tree associated with this instance.");

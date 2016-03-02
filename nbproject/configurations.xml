@@ -46,6 +46,7 @@
             <logicalFolder name="operations" displayName="operations" projectFiles="true">
               <logicalFolder name="callbacks" displayName="callbacks" projectFiles="true">
               </logicalFolder>
+              <itemPath>src/core/API/operations/FilterMorphsOperImpl.hpp</itemPath>
               <itemPath>src/core/API/operations/FindLeavesOperImpl.hpp</itemPath>
               <itemPath>src/core/API/operations/GenerateMorphsOperImpl.hpp</itemPath>
               <itemPath>src/core/API/operations/SortMorphsOperImpl.hpp</itemPath>
@@ -340,7 +341,6 @@
         <ccTool>
           <incDir>
             <pElem>include/</pElem>
-            <pElem>deps/rdkit/Code/</pElem>
           </incDir>
           <inheritIncValues>false</inheritIncValues>
           <commandLine>`cppunit-config --cflags`</commandLine>
@@ -460,6 +460,16 @@
       <item path="src/core/API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/core/API/MolpherMolImpl.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/core/API/operations/FilterMorphsOper.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/FilterMorphsOperImpl.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="src/core/API/operations/FindLeavesOper.cpp"
             ex="false"

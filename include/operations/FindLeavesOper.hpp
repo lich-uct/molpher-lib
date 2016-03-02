@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "TreeOperation.hpp"
+#include "data_structs/MolpherMol.hpp"
 
 class FindLeavesOper : public TreeOperation {
     

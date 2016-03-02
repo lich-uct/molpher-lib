@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/API/ExplorationData.o \
 	${OBJECTDIR}/src/core/API/ExplorationTree.o \
 	${OBJECTDIR}/src/core/API/MolpherMol.o \
+	${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o \
 	${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o \
 	${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o \
 	${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o \
@@ -217,6 +218,11 @@ ${OBJECTDIR}/src/core/API/MolpherMol.o: src/core/API/MolpherMol.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/core/API
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/MolpherMol.o src/core/API/MolpherMol.cpp
+
+${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o: src/core/API/operations/FilterMorphsOper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o src/core/API/operations/FilterMorphsOper.cpp
 
 ${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o: src/core/API/operations/FindLeavesOper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
@@ -456,13 +462,13 @@ ${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/minimal_test/MinimalTest.o ${TESTDIR}/
 ${TESTDIR}/tests/minimal_test/MinimalTest.o: tests/minimal_test/MinimalTest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests/minimal_test
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -Ideps/rdkit/Code/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTest.o tests/minimal_test/MinimalTest.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTest.o tests/minimal_test/MinimalTest.cpp
 
 
 ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o: tests/minimal_test/MinimalTestRunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests/minimal_test
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -Ideps/rdkit/Code/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o tests/minimal_test/MinimalTestRunner.cpp
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o tests/minimal_test/MinimalTestRunner.cpp
 
 
 ${OBJECTDIR}/src/core/API/ExplorationData_nomain.o: ${OBJECTDIR}/src/core/API/ExplorationData.o src/core/API/ExplorationData.cpp 
@@ -502,6 +508,19 @@ ${OBJECTDIR}/src/core/API/MolpherMol_nomain.o: ${OBJECTDIR}/src/core/API/Molpher
 	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/MolpherMol_nomain.o src/core/API/MolpherMol.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/MolpherMol.o ${OBJECTDIR}/src/core/API/MolpherMol_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/API/operations/FilterMorphsOper_nomain.o: ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o src/core/API/operations/FilterMorphsOper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper_nomain.o src/core/API/operations/FilterMorphsOper.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper.o ${OBJECTDIR}/src/core/API/operations/FilterMorphsOper_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/API/operations/FindLeavesOper_nomain.o: ${OBJECTDIR}/src/core/API/operations/FindLeavesOper.o src/core/API/operations/FindLeavesOper.cpp 

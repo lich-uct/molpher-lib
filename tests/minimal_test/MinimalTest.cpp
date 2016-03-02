@@ -6,8 +6,6 @@
  */
 #include <stdexcept>
 
-#include <GraphMol/SmilesParse/SmilesParse.h>
-
 #include "MinimalTest.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(MinimalTest);
@@ -165,5 +163,7 @@ void MinimalTest::testTree() {
     }
     
     // filter morphs
+    tree->filterMorphs(true);
+    printCandidates(tree);
 }
 

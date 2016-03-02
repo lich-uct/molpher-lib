@@ -102,6 +102,14 @@ void ExplorationTree::sortMorphs() {
     pimpl->sortMorphs(shared_from_this());
 }
 
+void ExplorationTree::filterMorphs(bool verbose_output) {
+    pimpl->filterMorphs(shared_from_this(), verbose_output);
+}
+
+void ExplorationTree::filterMorphs(FilterMorphsOper::MorphFilters filters, bool verbose_output) {
+    pimpl->filterMorphs(filters, shared_from_this(), verbose_output);
+}
+
 
 // pimpl
 
@@ -313,6 +321,16 @@ std::vector<bool> ExplorationTree::ExplorationTreeImpl::getCandidateMorphsMask()
 void ExplorationTree::ExplorationTreeImpl::sortMorphs(std::shared_ptr<ExplorationTree> tree) {
     SortMorphsOper sort;
     runOperation(sort, tree);
+}
+
+void ExplorationTree::ExplorationTreeImpl::filterMorphs(std::shared_ptr<ExplorationTree> tree, bool verbose_output) {
+    FilterMorphsOper filter(verbose_output);
+    runOperation(filter, tree);
+}
+
+void ExplorationTree::ExplorationTreeImpl::filterMorphs(FilterMorphsOper::MorphFilters filters, std::shared_ptr<ExplorationTree> tree, bool verbose_output) {
+    FilterMorphsOper filter(filters, verbose_output);
+    runOperation(filter, tree);
 }
 
 //std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {
