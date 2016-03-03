@@ -46,6 +46,7 @@
             <logicalFolder name="operations" displayName="operations" projectFiles="true">
               <logicalFolder name="callbacks" displayName="callbacks" projectFiles="true">
               </logicalFolder>
+              <itemPath>src/core/API/operations/ExtendTreeOperImpl.hpp</itemPath>
               <itemPath>src/core/API/operations/FilterMorphsOperImpl.hpp</itemPath>
               <itemPath>src/core/API/operations/FindLeavesOperImpl.hpp</itemPath>
               <itemPath>src/core/API/operations/GenerateMorphsOperImpl.hpp</itemPath>
@@ -460,6 +461,16 @@
       <item path="src/core/API/MolpherMol.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/core/API/MolpherMolImpl.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/core/API/operations/ExtendTreeOper.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/ExtendTreeOperImpl.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="src/core/API/operations/FilterMorphsOper.cpp"
             ex="false"

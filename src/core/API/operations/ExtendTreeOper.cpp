@@ -6,38 +6,66 @@
 #include "core/misc/inout.h"
 
 #include "operations/ExtendTreeOper.hpp"
+#include "core/API/ExplorationTreeImpl.h"
+#include "ExtendTreeOperImpl.hpp"
+#include "TreeOperationImpl.hpp"
 
-ExtendTreeOper::ExtendTreeOper(ExplorationTree& expTree) : TreeOperation(expTree) {
+ExtendTreeOper::ExtendTreeOper(std::shared_ptr<ExplorationTree> expTree) : 
+pimpl(new ExtendTreeOper::ExtendTreeOperImpl(expTree))
+{
+    setTreeOperPimpl(pimpl);
+}
+
+ExtendTreeOper::ExtendTreeOper() :
+pimpl(new ExtendTreeOper::ExtendTreeOperImpl())
+{
+    setTreeOperPimpl(pimpl);
+}
+
+void ExtendTreeOper::operator()() {
+    (*pimpl)();
+}
+
+
+// pimpl
+
+ExtendTreeOper::ExtendTreeOperImpl::ExtendTreeOperImpl(std::shared_ptr<ExplorationTree> expTree) :
+TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
+{
     // no action
 }
 
-ExtendTreeOper::ExtendTreeOper() : TreeOperation() {
+ExtendTreeOper::ExtendTreeOperImpl::ExtendTreeOperImpl() :
+TreeOperation::TreeOperationImpl::TreeOperationImpl()
+{
     // no action
 }
 
-ExtendTreeOper::AcceptMorphs::AcceptMorphs(
-        ExplorationTree::MoleculeVector &morphs, std::vector<bool> &survivors,
-        PathFinderContext &ctx, ExplorationTree::SmileSet &modifiedParents
+ExtendTreeOper::ExtendTreeOperImpl::AcceptMorphs::AcceptMorphs(
+        ConcurrentMolVector &morphs, std::vector<bool> &survivors
+        , std::shared_ptr<ExplorationTree> tree
+        , ConcurrentSmileSet &modifiedParents
         ) :
 mMorphs(morphs),
 mSurvivors(survivors),
-mCtx(ctx),
+mTree(tree),
+mTreePimpl(tree->pimpl),
 mModifiedParents(modifiedParents),
 mSurvivorCount(0) {
     assert(mMorphs.size() == mSurvivors.size());
 }
 
-ExtendTreeOper::AcceptMorphs::AcceptMorphs(
+ExtendTreeOper::ExtendTreeOperImpl::AcceptMorphs::AcceptMorphs(
         AcceptMorphs &toSplit, tbb::split
         ) :
-mCtx(toSplit.mCtx),
+mTreePimpl(toSplit.mTreePimpl),
 mMorphs(toSplit.mMorphs),
 mSurvivors(toSplit.mSurvivors),
 mModifiedParents(toSplit.mModifiedParents),
 mSurvivorCount(0) {
 }
 
-void ExtendTreeOper::AcceptMorphs::operator()(
+void ExtendTreeOper::ExtendTreeOperImpl::AcceptMorphs::operator()(
         const tbb::blocked_range<size_t> &r, tbb::pre_scan_tag) {
     for (size_t idx = r.begin(); idx != r.end(); ++idx) {
         if (mSurvivors[idx]) {
@@ -46,27 +74,28 @@ void ExtendTreeOper::AcceptMorphs::operator()(
     }
 }
 
-void ExtendTreeOper::AcceptMorphs::operator()(
+void ExtendTreeOper::ExtendTreeOperImpl::AcceptMorphs::operator()(
         const tbb::blocked_range<size_t> &r, tbb::final_scan_tag) {
     for (size_t idx = r.begin(); idx != r.end(); ++idx) {
         if (mSurvivors[idx]) {
-            if (mSurvivorCount < mCtx.params.cntCandidatesToKeepMax) {
-                PathFinderContext::CandidateMap::accessor ac;
+            if (mSurvivorCount < mTreePimpl->params.cntCandidatesToKeepMax) {
+                TreeMap::accessor ac;
+                auto morph_smiles = mMorphs[idx]->getSMILES();
 
-                if (mCtx.candidates.find(ac, mMorphs[idx].smile)) {
-                    SynchCout("Candidate morph: " + mMorphs[idx].smile + " already present in the tree. Skipping...");
+                if (mTreePimpl->treeMap.find(ac, morph_smiles)) {
+                    SynchCout("Candidate morph: " + morph_smiles + " already present in the tree. Skipping...");
                     continue;
                 }
             
-                mCtx.candidates.insert(ac, mMorphs[idx].smile);
+                mTreePimpl->treeMap.insert(ac, morph_smiles);
                 ac->second = mMorphs[idx];
                 ac.release();
 
-                if (mCtx.candidates.find(ac, mMorphs[idx].parentSmile)) {
-                    ac->second.descendants.insert(mMorphs[idx].smile);
-                    ac->second.historicDescendants.insert(mMorphs[idx].smile);
-                    ExplorationTree::SmileSet::const_accessor dummy;
-                    mModifiedParents.insert(dummy, ac->second.smile);
+                if (mTreePimpl->treeMap.find(ac, mMorphs[idx]->getParentSMILES())) {
+                    ac->second->addToDescendants(morph_smiles);
+                    ac->second->addToHistoricDescendants(morph_smiles);
+                    ConcurrentSmileSet::const_accessor dummy;
+                    mModifiedParents.insert(dummy, ac->second->getSMILES());
                 } else {
                     assert(false);
                 }
@@ -77,38 +106,47 @@ void ExtendTreeOper::AcceptMorphs::operator()(
     }
 }
 
-void ExtendTreeOper::AcceptMorphs::reverse_join(AcceptMorphs &toJoin) {
+void ExtendTreeOper::ExtendTreeOperImpl::AcceptMorphs::reverse_join(AcceptMorphs &toJoin) {
     mSurvivorCount += toJoin.mSurvivorCount;
 }
 
-void ExtendTreeOper::AcceptMorphs::assign(AcceptMorphs &toAssign) {
+void ExtendTreeOper::ExtendTreeOperImpl::AcceptMorphs::assign(AcceptMorphs &toAssign) {
     mSurvivorCount = toAssign.mSurvivorCount;
 }
 
-ExtendTreeOper::UpdateTree::UpdateTree(PathFinderContext &ctx) :
-mCtx(ctx) {
+ExtendTreeOper::ExtendTreeOperImpl::UpdateTree::UpdateTree(std::shared_ptr<ExplorationTree> tree) :
+mTree(tree),
+mTreePimpl(tree->pimpl)
+{
 }
 
-void ExtendTreeOper::UpdateTree::operator()(
-        const ExplorationTree::SmileSet::range_type &modifiedParents) const {
-    ExplorationTree::SmileSet::iterator itParent;
+void ExtendTreeOper::ExtendTreeOperImpl::UpdateTree::operator()(
+        const ConcurrentSmileSet::range_type &modifiedParents) const {
+    ConcurrentSmileSet::iterator itParent;
     for (itParent = modifiedParents.begin();
             itParent != modifiedParents.end(); itParent++) {
 
         // Determine what child is the closest to the target.
         double minDistance = DBL_MAX;
-        PathFinderContext::CandidateMap::accessor acParent;
-        if (mCtx.candidates.find(acParent, itParent->first)) {
+        TreeMap::accessor acParent;
+        if (mTreePimpl->treeMap.find(acParent, itParent->first)) {
 
             std::set<std::string>::iterator itChild;
-            for (itChild = acParent->second.descendants.begin();
-                    itChild != acParent->second.descendants.end();
+            auto descendants = acParent->second->getDescendants();
+            for (itChild = descendants.begin();
+                    itChild != descendants.end();
                     itChild++) {
 
-                PathFinderContext::CandidateMap::const_accessor acChild;
-                if (mCtx.candidates.find(acChild, (*itChild))) {
-                    if (acChild->second.distToTarget < minDistance) {
-                        minDistance = acChild->second.distToTarget;
+                TreeMap::const_accessor acChild;
+                if (mTreePimpl->treeMap.find(acChild, (*itChild))) {
+                    double dist = acChild->second->getDistToTarget();
+                    if (dist < minDistance) {
+                        minDistance = dist;
+                    }
+                    if (!acChild->second->getTree()) {
+                        acChild->second->setOwner(mTree);
+                    } else {
+                        assert(mTree == acChild->second->getTree());
                     }
                 } else {
                     assert(false);
@@ -121,45 +159,46 @@ void ExtendTreeOper::UpdateTree::operator()(
         }
 
         // Update the tree branch towards root.
-        while (!acParent->second.parentSmile.empty()) {
-            if (minDistance < acParent->second.distToTarget) {
-                acParent->second.itersWithoutDistImprovement = 0;
+        while (!acParent->second->getParentSMILES().empty()) {
+            if (minDistance < acParent->second->getDistToTarget()) {
+                acParent->second->setItersWithoutDistImprovement(0);
             }
-            std::string smile = acParent->second.parentSmile;
+            std::string smile = acParent->second->getParentSMILES();
             acParent.release();
-            mCtx.candidates.find(acParent, smile);
+            mTreePimpl->treeMap.find(acParent, smile);
             assert(!acParent.empty());
         }
 
     }
 }
 
-/**
- * Accept single morph with given index do not control anything.
- * @param idx Index or morph to accept.
- * @param morphs List of morphs.
- * @param ctx Context.
- * @param modifiedParents Parent to modify.
- */
-void ExtendTreeOper::acceptMorph(
-        size_t idx,
-        ExplorationTree::MoleculeVector &morphs,
-        PathFinderContext &ctx,
-        ExplorationTree::SmileSet &modifiedParents) {
-    PathFinderContext::CandidateMap::accessor ac;
-    ctx.candidates.insert(ac, morphs[idx].smile);
-    ac->second = morphs[idx];
-    ac.release();
-
-    if (ctx.candidates.find(ac, morphs[idx].parentSmile)) {
-        ac->second.descendants.insert(morphs[idx].smile);
-        ac->second.historicDescendants.insert(morphs[idx].smile);
-        ExplorationTree::SmileSet::const_accessor dummy;
-        modifiedParents.insert(dummy, ac->second.smile);
-    } else {
-        assert(false);
-    }
-}
+///**
+// * Accept single morph with given index do not control anything.
+// * @param idx Index or morph to accept.
+// * @param morphs List of morphs.
+// * @param ctx Context.
+// * @param modifiedParents Parent to modify.
+// */
+//void ExtendTreeOper::ExtendTreeOperImpl::acceptMorph(
+//        size_t idx,
+//        ConcurrentMolVector &morphs,
+//        std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree_pimpl,
+//        ConcurrentSmileSet &modifiedParents) {
+//    auto morph_smiles = morphs[idx]->getSMILES();
+//    TreeMap::accessor ac;
+//    tree_pimpl->treeMap.insert(ac, );
+//    ac->second = morphs[idx];
+//    ac.release();
+//
+//    if (tree_pimpl->treeMap.find(ac, morphs[idx]->getSMILES())) {
+//        ac->second->addToDescendants(morph_smiles);
+//        ac->second->addToHistoricDescendants(morph_smiles);
+//        ConcurrentSmileSet::const_accessor dummy;
+//        modifiedParents.insert(dummy, ac->second->getSMILES());
+//    } else {
+//        assert(false);
+//    }
+//}
 
 /**
  * Accept morphs from list. If there is no decoy the PathFinder::AcceptMorphs is 
@@ -170,14 +209,14 @@ void ExtendTreeOper::acceptMorph(
  * @param modifiedParents
  * @param decoySize Number of decoy used during exploration.
  */
-void ExtendTreeOper::acceptMorphs(ExplorationTree::MoleculeVector &morphs,
+void ExtendTreeOper::ExtendTreeOperImpl::acceptMorphs(ConcurrentMolVector &morphs,
         std::vector<bool> &survivors,
-        PathFinderContext &ctx,
-        ExplorationTree::SmileSet &modifiedParents,
+        std::shared_ptr<ExplorationTree> tree,
+        ConcurrentSmileSet &modifiedParents,
         int decoySize) {
 
     // no decoy .. we can use old parallel approach        
-    ExtendTreeOper::AcceptMorphs acceptMorphs(morphs, survivors, ctx, modifiedParents);
+    ExtendTreeOper::ExtendTreeOperImpl::AcceptMorphs acceptMorphs(morphs, survivors, tree, modifiedParents);
     // FIXME
     // Current TBB version does not support parallel_scan cancellation.
     // If it will be improved in the future, pass task_group_context
@@ -247,32 +286,35 @@ void ExtendTreeOper::acceptMorphs(ExplorationTree::MoleculeVector &morphs,
      */
 }
 
-void ExtendTreeOper::operator()() {
-    if (this->tree) {
+void ExtendTreeOper::ExtendTreeOperImpl::operator()() {
+    auto tree = getTree();
+    if (tree) {
+        auto tree_pimpl = tree->pimpl;
         tbb::task_group_context tbbCtx;
         tbb::task_scheduler_init scheduler;
-        if (threadCnt > 0) {
+        if (tree_pimpl->threadCnt > 0) {
             scheduler.terminate();
-            scheduler.initialize(threadCnt);
+            scheduler.initialize(tree_pimpl->threadCnt);
         }
 
-        PathFinderContext& context = fetchTreeContext();
-        ExplorationTree::MoleculeVector& morphs = fetchGeneratedMorphs();
-        ExplorationTree::BoolVector& survivors = fetchGeneratedMorphsMask();
+        ConcurrentSmileSet modifiedParents;
+        acceptMorphs(
+                tree_pimpl->candidates
+                , tree_pimpl->candidatesMask
+                , tree
+                , modifiedParents
+                , 0
+                );
 
-
-        ExplorationTree::SmileSet modifiedParents;
-        acceptMorphs(morphs, survivors, context, modifiedParents, context.decoys.size());
-
-        UpdateTree updateTree(context);
-        tbb::parallel_for(ExplorationTree::SmileSet::range_type(modifiedParents),
+        UpdateTree updateTree(tree);
+        tbb::parallel_for(ConcurrentSmileSet::range_type(modifiedParents),
                 updateTree, tbb::auto_partitioner(), tbbCtx);
 
-        morphs.clear();
-        survivors.clear();
-        ExplorationTree::MoleculePointerVector dummy;
-        this->tree->fetchLeaves(dummy, true);
-        ++context.iterIdx;
+        tree_pimpl->candidates.clear();
+        tree_pimpl->candidatesMask.clear();
+        ConcurrentMolVector dummy;
+        tree_pimpl->fetchLeaves(tree, true, dummy);
+        tree_pimpl->generationCnt++;
     } else {
         throw std::runtime_error("Can't extend. No tree associated with this instance.");
     }

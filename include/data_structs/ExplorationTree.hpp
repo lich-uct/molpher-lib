@@ -20,6 +20,7 @@ class ExplorationTree : public std::enable_shared_from_this<ExplorationTree> {
     friend class GenerateMorphsOper;
     friend class SortMorphsOper;
     friend class FilterMorphsOper;
+    friend class ExtendTreeOper;
     
 public:
 //    typedef tbb::concurrent_vector<MolpherMolecule> MoleculeVector;
@@ -68,7 +69,7 @@ public:
     void sortMorphs();
     void filterMorphs(bool verbose_output = false);
     void filterMorphs(FilterMorphsOper::MorphFilters filters, bool verbose_output = false);
-//    void extend();
+    void extend();
 //    void prune();
 //    
 //    int getThreadCount();

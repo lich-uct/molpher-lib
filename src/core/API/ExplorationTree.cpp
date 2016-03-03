@@ -17,6 +17,7 @@
 #include "core/misc/inout.h"
 #include "core/chem/simCoefStrategy/TanimotoSimCoef.hpp"
 #include "operations/SortMorphsOper.hpp"
+#include "operations/ExtendTreeOper.hpp"
 //#include "operations/GenerateMorphsOper.hpp"
 //#include "operations/SortMorphsOper.hpp"
 //#include "operations/FilterMorphsOper.hpp"
@@ -110,6 +111,9 @@ void ExplorationTree::filterMorphs(FilterMorphsOper::MorphFilters filters, bool 
     pimpl->filterMorphs(filters, shared_from_this(), verbose_output);
 }
 
+void ExplorationTree::extend() {
+    pimpl->extend(shared_from_this());
+}
 
 // pimpl
 
@@ -332,6 +336,12 @@ void ExplorationTree::ExplorationTreeImpl::filterMorphs(FilterMorphsOper::MorphF
     FilterMorphsOper filter(filters, verbose_output);
     runOperation(filter, tree);
 }
+
+void ExplorationTree::ExplorationTreeImpl::extend(std::shared_ptr<ExplorationTree> tree) {
+    ExtendTreeOper extend;
+    runOperation(extend, tree);
+}
+
 
 //std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {
 //    return std::make_shared<ExplorationTree::ExplorationTreeImpl>(data);

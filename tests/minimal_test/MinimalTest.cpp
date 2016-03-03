@@ -165,5 +165,22 @@ void MinimalTest::testTree() {
     // filter morphs
     tree->filterMorphs(true);
     printCandidates(tree);
+    
+    // extend the tree
+    tree->extend();
+    leaves = tree->fetchLeaves();
+    auto source_descendents = source->getDescendants();
+    for (auto leaf : leaves) {
+        CPPUNIT_ASSERT(leaf->isBoundToTree());
+        CPPUNIT_ASSERT_EQUAL(tree, leaf->getTree());
+        
+        auto parent_smiles = leaf->getParentSMILES();
+        CPPUNIT_ASSERT_EQUAL(source->getSMILES(), parent_smiles);
+        CPPUNIT_ASSERT_EQUAL(source, tree->fetchMol(parent_smiles));
+        
+        auto it = source_descendents.find(leaf->getSMILES());
+        CPPUNIT_ASSERT(it != source_descendents.end());
+        CPPUNIT_ASSERT_EQUAL(leaf, tree->fetchMol(*it));
+    }
 }
 
