@@ -40,6 +40,7 @@ typedef unsigned int MolpherAtomIdx;
 typedef tbb::concurrent_hash_map<std::string, std::shared_ptr<MolpherMol>> TreeMap;
 typedef tbb::concurrent_hash_map<std::string, unsigned int> MorphDerivationMap;
 typedef tbb::concurrent_hash_map<std::string, bool /*dummy*/> ConcurrentSmileSet;
+typedef tbb::concurrent_vector<std::string> ConcurrentSmileVector;
 typedef tbb::concurrent_vector<std::shared_ptr<MolpherMol>> ConcurrentMolVector;
 typedef std::vector<std::shared_ptr<MolpherMol>> MolVector;
 

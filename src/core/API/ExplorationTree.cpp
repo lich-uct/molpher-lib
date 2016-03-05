@@ -18,6 +18,7 @@
 #include "core/chem/simCoefStrategy/TanimotoSimCoef.hpp"
 #include "operations/SortMorphsOper.hpp"
 #include "operations/ExtendTreeOper.hpp"
+#include "operations/PruneTreeOper.hpp"
 //#include "operations/GenerateMorphsOper.hpp"
 //#include "operations/SortMorphsOper.hpp"
 //#include "operations/FilterMorphsOper.hpp"
@@ -114,6 +115,23 @@ void ExplorationTree::filterMorphs(FilterMorphsOper::MorphFilters filters, bool 
 void ExplorationTree::extend() {
     pimpl->extend(shared_from_this());
 }
+
+void ExplorationTree::deleteSubtree(const std::string& canonSMILES, bool descendents_only) {
+    pimpl->deleteSubtree(canonSMILES, descendents_only);
+}
+
+void ExplorationTree::prune() {
+    pimpl->prune(shared_from_this());
+}
+
+unsigned ExplorationTree::getGenerationCount() {
+    return pimpl->getGenerationCount();
+}
+
+bool ExplorationTree::isPathFound() {
+    return pimpl->isPathFound();
+}
+
 
 // pimpl
 
@@ -275,8 +293,7 @@ std::shared_ptr<MolpherMol> ExplorationTree::ExplorationTreeImpl::fetchMol(const
 }
 
 bool ExplorationTree::ExplorationTreeImpl::hasMol(const std::string& canonSMILES) {
-    TreeMap::accessor ac;
-    return treeMap.find(ac, canonSMILES);
+    return static_cast<bool>(treeMap.count(canonSMILES));
 }
 
 bool ExplorationTree::ExplorationTreeImpl::hasMol(std::shared_ptr<MolpherMol> mol) {
@@ -342,6 +359,79 @@ void ExplorationTree::ExplorationTreeImpl::extend(std::shared_ptr<ExplorationTre
     runOperation(extend, tree);
 }
 
+void ExplorationTree::ExplorationTreeImpl::deleteSubtree(const std::string& canonSMILES, bool descendents_only) {
+    if (hasMol(canonSMILES)) {
+        TreeMap::accessor acRoot; // root of the subtree to remove
+        treeMap.find(acRoot, canonSMILES);
+        assert(!acRoot.empty());
+        
+        if (!descendents_only) {
+            if (acRoot->second->getParentSMILES().empty()) {
+                throw std::runtime_error("Deleting the absolute root of the tree (" + canonSMILES + ") is not permitted.");
+            }
+
+            TreeMap::accessor acRootParent;
+            treeMap.find(acRootParent, acRoot->second->getParentSMILES());
+            assert(!acRootParent.empty());
+            acRootParent->second->removeFromDescendants(acRoot->second->getSMILES());
+            
+            acRootParent.release();
+            acRoot.release();
+            
+            erase(canonSMILES);
+        } else {
+            std::set<std::string>::const_iterator it;
+            auto descendants = acRoot->second->getDescendants();
+            for (it = descendants.begin();
+                    it != descendants.end(); it++) {
+                acRoot->second->removeFromDescendants(*it);
+                erase(*it);
+            }
+            acRoot->second->setItersWithoutDistImprovement(0);
+        }
+    } else {
+        throw std::runtime_error("Molecule (" + canonSMILES + ") is not present in the tree.");
+    }
+}
+
+void ExplorationTree::ExplorationTreeImpl::erase(const std::string& canonSMILES) {
+    std::deque<std::string> toErase;
+    toErase.push_back(canonSMILES);
+
+    while (!toErase.empty()) {
+        std::string current = toErase.front();
+        toErase.pop_front();
+
+        TreeMap::accessor ac;
+        treeMap.find(ac, current);
+        assert(!ac.empty());
+
+        std::set<std::string>::const_iterator it;
+        auto descendants = ac->second->getDescendants();
+        for (it = descendants.begin();
+                it != descendants.end(); it++) {
+            toErase.push_back(*it);
+        }
+
+//        pruned.push_back(current);
+        auto erased_mol = ac->second;
+        treeMap.erase(ac);
+        erased_mol->removeFromTree();
+    }
+}
+
+void ExplorationTree::ExplorationTreeImpl::prune(std::shared_ptr<ExplorationTree> tree) {
+    PruneTreeOper prune;
+    runOperation(prune, tree);
+}
+
+unsigned ExplorationTree::ExplorationTreeImpl::getGenerationCount() {
+    return generationCnt;
+}
+
+bool ExplorationTree::ExplorationTreeImpl::isPathFound() {
+    return hasMol(target.getSMILES());
+}
 
 //std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {
 //    return std::make_shared<ExplorationTree::ExplorationTreeImpl>(data);

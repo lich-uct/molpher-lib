@@ -75,6 +75,7 @@ public:
     
     bool isValid() const;
     bool isBoundToTree() const;
+    void removeFromTree();
 };
 
 #endif	/* MOLPHERMOL_HPP */

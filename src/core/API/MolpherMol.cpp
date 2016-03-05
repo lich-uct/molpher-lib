@@ -236,3 +236,14 @@ void MolpherMol::setOwner(std::shared_ptr<ExplorationTree> tree) {
     }
 }
 
+void MolpherMol::removeFromTree() {
+    auto tree = pimpl->tree;
+    if (tree) {
+        pimpl->tree.reset();
+        auto smiles = getSMILES();
+        if (tree->hasMol(smiles)) {
+            tree->deleteSubtree(smiles, false);
+        }
+    }
+}
+

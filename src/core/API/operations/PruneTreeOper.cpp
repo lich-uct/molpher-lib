@@ -2,98 +2,102 @@
 #include "core/misc/inout.h"
 
 #include "operations/PruneTreeOper.hpp"
-#include "operations/callbacks/EraseSubtreeCallback.hpp"
+#include "core/API/ExplorationTreeImpl.h"
+#include "PruneTreeOperImpl.hpp"
+#include "TreeOperationImpl.hpp"
 
-PruneTreeOper::PruneTreeOper(ExplorationTree& expTree) : TreeOperation(expTree) {
-    // no action
+PruneTreeOper::PruneTreeOper(std::shared_ptr<ExplorationTree> expTree) : 
+pimpl(new PruneTreeOper::PruneTreeOperImpl(expTree))
+{
+    setTreeOperPimpl(pimpl);
 }
 
-PruneTreeOper::PruneTreeOper() : TreeOperation() {
-    // no action
+PruneTreeOper::PruneTreeOper() :
+pimpl(new PruneTreeOper::PruneTreeOperImpl())
+{
+    setTreeOperPimpl(pimpl);
 }
 
-PruneTreeOper::PruneTree::PruneTree(PathFinderContext& ctx, TraverseCallback& callback) :
-mCtx(ctx)
-, mCallback(callback)
+void PruneTreeOper::operator()() {
+    (*pimpl)();
+}
+
+// pimpl
+
+PruneTreeOper::PruneTreeOperImpl::PruneTreeOperImpl(std::shared_ptr<ExplorationTree> expTree) :
+TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
 {
     // no action
 }
 
-void PruneTreeOper::PruneTree::operator()(const std::string& smile, tbb::parallel_do_feeder<std::string>& feeder) const {
-    PathFinderContext::CandidateMap::accessor ac;
-    mCtx.candidates.find(ac, smile);
+PruneTreeOper::PruneTreeOperImpl::PruneTreeOperImpl() :
+TreeOperation::TreeOperationImpl::TreeOperationImpl()
+{
+    // no action
+}
+
+
+
+PruneTreeOper::PruneTreeOperImpl::PruneTree::PruneTree(std::shared_ptr<ExplorationTree> expTree) :
+mTree(expTree)
+{
+    // no action
+}
+
+void PruneTreeOper::PruneTreeOperImpl::PruneTree::operator()(const std::string& smile, tbb::parallel_do_feeder<std::string>& feeder) const {
+    TreeMap::accessor ac;
+    auto tree_pimpl = mTree->pimpl;
+    tree_pimpl->treeMap.find(ac, smile);
     assert(!ac.empty());
 
-    bool prune = (ac->second.itersWithoutDistImprovement > mCtx.params.itThreshold);
+    bool prune = (ac->second->getItersWithoutDistImprovement() > tree_pimpl->params.itThreshold);
     if (prune) {
 
         bool tooManyDerivations = false;
-        PathFinderContext::MorphDerivationMap::const_accessor acDerivations;
-        if (mCtx.morphDerivations.find(acDerivations, smile)) {
-            tooManyDerivations = (acDerivations->second > mCtx.params.cntMaxMorphs);
+        MorphDerivationMap::const_accessor acDerivations;
+        if (tree_pimpl->morphDerivations.find(acDerivations, smile)) {
+            tooManyDerivations = (acDerivations->second > tree_pimpl->params.cntMaxMorphs);
         }
-
-        bool pruneThis = tooManyDerivations;
-
-        if (pruneThis) {
-            PathFinderContext::CandidateMap::accessor acParent;
-            mCtx.candidates.find(acParent, ac->second.parentSmile);
-            assert(!acParent.empty());
-
-            acParent->second.descendants.erase(smile);
-            acParent.release();
-            ac.release();
-            
-            std::stringstream ss;
-            ss << "Pruned: " << smile;
-            SynchCout(ss.str());
-
-            eraseSubtree(smile);
+        
+        acDerivations.release();
+        ac.release();
+        
+        if (tooManyDerivations) {
+            eraseSubtree(smile, false);
+            SynchCout("Pruned: " + smile);
         } else {
-            std::stringstream ss;
-            ss << "Pruned (descendents only): " << smile;
-            SynchCout(ss.str());
-            
-            std::set<std::string>::const_iterator it;
-            for (it = ac->second.descendants.begin();
-                    it != ac->second.descendants.end(); it++) {
-                eraseSubtree(*it);
-            }
-            ac->second.descendants.clear();
-            ac->second.itersWithoutDistImprovement = 0;
+            eraseSubtree(smile, true);
+            SynchCout("Pruned (descendents only): " + smile);
         }
 
     } else {
         std::set<std::string>::const_iterator it;
-        for (it = ac->second.descendants.begin();
-                it != ac->second.descendants.end(); it++) {
+        auto descendants = ac->second->getDescendants();
+        for (it = descendants.begin();
+                it != descendants.end(); it++) {
             feeder.add(*it);
         }
     }
 }
 
-void PruneTreeOper::PruneTree::eraseSubtree(const std::string& smile) const {
-    PathFinderContext::CandidateMap::accessor ac;
-    mCtx.candidates.find(ac, smile);
-    MolpherMol mol(ac->second);
-    ac.release();
-    mCallback.processMorph(mol);
+void PruneTreeOper::PruneTreeOperImpl::PruneTree::eraseSubtree(const std::string& smile, bool descendents_only) const {
+    mTree->deleteSubtree(smile, descendents_only);
 }
 
 
-void PruneTreeOper::operator()() {
-    if (this->tree) {
+void PruneTreeOper::PruneTreeOperImpl::operator()() {
+    auto tree = getTree();
+    if (tree) {
         tbb::task_group_context tbbCtx;
         tbb::task_scheduler_init scheduler;
-        if (threadCnt > 0) {
+        if (tree->pimpl->threadCnt > 0) {
             scheduler.terminate();
-            scheduler.initialize(threadCnt);
+            scheduler.initialize(tree->pimpl->threadCnt);
         }
-        ExplorationTree::SmileVector queue;
-        queue.push_back(fetchTreeContext().source.smile);
+        ConcurrentSmileVector queue;
+        queue.push_back(tree->pimpl->source.getSMILES());
 
-        EraseSubtreeCallback callback(fetchTreeContext());
-        PruneTree functor(fetchTreeContext(), callback);
+        PruneTree functor(tree);
         tbb::parallel_do(queue.begin(), queue.end(), functor, tbbCtx);
     } else {
         throw std::runtime_error("Cannot prune. No tree attached to this instance.");

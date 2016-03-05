@@ -8,8 +8,6 @@
 #ifndef EXTENDTREEOPER_HPP
 #define	EXTENDTREEOPER_HPP
 
-#include <tbb/parallel_scan.h>
-
 #include "TreeOperation.hpp"
 
 class ExtendTreeOper : public TreeOperation {

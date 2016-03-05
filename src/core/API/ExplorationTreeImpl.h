@@ -39,6 +39,7 @@
 #include "operations/SortMorphsOper.hpp"
 #include "operations/FilterMorphsOper.hpp"
 #include "operations/ExtendTreeOper.hpp"
+#include "operations/PruneTreeOper.hpp"
 
 //class TreeOperation::TreeOperationImpl; // forward declaration to resolve circular dependency
 
@@ -51,6 +52,7 @@ class ExplorationTree::ExplorationTreeImpl
     friend class SortMorphsOper::SortMorphsOperImpl;
     friend class FilterMorphsOper::FilterMorphsOperImpl;
     friend class ExtendTreeOper::ExtendTreeOperImpl;
+    friend class PruneTreeOper::PruneTreeOperImpl;
 
     private:
         
@@ -120,6 +122,8 @@ class ExplorationTree::ExplorationTreeImpl
 
 //        PrunedVector pruned;
         
+        void erase(const std::string& canonSMILES);
+        
     public:
         
 //        static std::shared_ptr<ExplorationTree::ExplorationTreeImpl> createFromData(ExplorationData &data);
@@ -138,17 +142,18 @@ class ExplorationTree::ExplorationTreeImpl
         std::shared_ptr<MolpherMol> fetchMol(const std::string& canonSMILES);
         bool hasMol(const std::string& canonSMILES);
         bool hasMol(std::shared_ptr<MolpherMol> mol);
-//        bool isPathFound();
-//        void deleteSubtree(const std::string& canonSMILES);
+        bool isPathFound();
+        void deleteSubtree(const std::string& canonSMILES, bool descendents_only);
         void generateMorphs(std::shared_ptr<ExplorationTree>);
         void sortMorphs(std::shared_ptr<ExplorationTree>);
         void filterMorphs(std::shared_ptr<ExplorationTree> tree, bool verbose_output);
         void filterMorphs(FilterMorphsOper::MorphFilters filters, std::shared_ptr<ExplorationTree> tree, bool verbose_output);
         void extend(std::shared_ptr<ExplorationTree> tree);
-//        void prune();
+        void prune(std::shared_ptr<ExplorationTree> tree);
         
         MolVector getCandidateMorphs();
         std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version
+        unsigned getGenerationCount();
         
 //        void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
 };

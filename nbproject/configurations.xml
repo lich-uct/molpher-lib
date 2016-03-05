@@ -502,6 +502,16 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="src/core/API/operations/PruneTreeOper.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/core/API/operations/PruneTreeOperImpl.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/core/API/operations/SortMorphsOper.cpp"
             ex="false"
             tool="1"

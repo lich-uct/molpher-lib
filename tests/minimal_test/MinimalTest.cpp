@@ -167,6 +167,8 @@ void MinimalTest::testTree() {
     printCandidates(tree);
     
     // extend the tree
+    CPPUNIT_ASSERT_EQUAL((unsigned) 0, tree->getGenerationCount());
+    
     tree->extend();
     leaves = tree->fetchLeaves();
     auto source_descendents = source->getDescendants();
@@ -181,6 +183,44 @@ void MinimalTest::testTree() {
         auto it = source_descendents.find(leaf->getSMILES());
         CPPUNIT_ASSERT(it != source_descendents.end());
         CPPUNIT_ASSERT_EQUAL(leaf, tree->fetchMol(*it));
+    }
+    
+    CPPUNIT_ASSERT(tree->getCandidateMorphs().empty());
+    CPPUNIT_ASSERT(tree->getCandidateMorphsMask().empty());
+    CPPUNIT_ASSERT_EQUAL((unsigned) 1, tree->getGenerationCount());
+    
+    // prune the tree
+    tree->prune();
+    auto leaf_zero = leaves[0];
+    tree->deleteSubtree(leaf_zero->getSMILES());
+    CPPUNIT_ASSERT(!tree->hasMol(leaf_zero->getSMILES()));
+    CPPUNIT_ASSERT(!leaf_zero->getTree());
+    leaf_zero->removeFromTree(); // shouldn't do anything
+    
+    // remove all newly generated morphs
+    CPPUNIT_ASSERT_THROW(tree->deleteSubtree(source->getSMILES(), false);, std::runtime_error); // should not be possible
+    tree->deleteSubtree(source->getSMILES(), true); // remove only descendents
+    
+    source_descendents = source->getDescendants();
+    auto source_hist_descendents = source->getHistoricDescendants();
+    for (auto leaf : leaves) {
+        CPPUNIT_ASSERT(!tree->hasMol(leaf->getSMILES()));
+        CPPUNIT_ASSERT(!leaf->getTree());
+        
+        auto it = source_descendents.find(leaf->getSMILES());
+        CPPUNIT_ASSERT(it == source_descendents.end());
+        CPPUNIT_ASSERT(it != source_hist_descendents.end());
+    }
+    
+    // make a few more generations
+    for (unsigned iter_idx = 0; iter_idx != 5; iter_idx++) {
+        tree->generateMorphs();
+        tree->sortMorphs();
+        tree->filterMorphs();
+        printCandidates(tree);
+        tree->extend();
+        std::cout << "Path found: " + NumberToStr(tree->isPathFound()) << std::endl;
+        tree->prune();
     }
 }
 

@@ -8,6 +8,8 @@
 #ifndef EXTENDTREEOPERIMPL_HPP
 #define	EXTENDTREEOPERIMPL_HPP
 
+#include <tbb/parallel_scan.h>
+
 #include "core/misc/global_types.h"
 #include "TreeOperationImpl.hpp"
 
