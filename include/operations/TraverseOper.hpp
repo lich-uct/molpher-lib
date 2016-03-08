@@ -20,9 +20,9 @@ class TraverseOper : public TreeOperation {
     public:
         class TraverseOperImpl;
         
-        TraverseOper(std::shared_ptr<ExplorationTree> expTree, std::shared_ptr<TraverseCallback> callback);
-        TraverseOper(std::shared_ptr<TraverseCallback> callback);
-        TraverseOper(std::shared_ptr<ExplorationTree> expTree, std::shared_ptr<TraverseCallback> callback, const std::string& rootSMILES);
+        TraverseOper(std::shared_ptr<ExplorationTree> expTree, TraverseCallback& callback);
+        TraverseOper(TraverseCallback& callback);
+        TraverseOper(std::shared_ptr<ExplorationTree> expTree, TraverseCallback& callback, const std::string& rootSMILES);
         virtual void operator()();
         
     private:

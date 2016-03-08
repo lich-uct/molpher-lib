@@ -13,6 +13,7 @@
 #include "data_structs/MolpherMol.hpp"
 #include "data_structs/ExplorationTree.hpp"
 #include "data_structs/ExplorationData.hpp"
+#include "operations/callbacks/TraverseCallback.hpp"
 
 #include "SAScore_data_loader.hpp"
 
@@ -40,6 +41,23 @@ void printCandidates(std::shared_ptr<ExplorationTree> tree) {
                 << std::endl;
     }
 }
+
+class PrintMols : public TraverseCallback {
+    
+    virtual void operator()(std::shared_ptr<MolpherMol> morph) const {
+        std::cout << morph->getSMILES() << " -- descendants:" << std::endl;
+        for (auto descendant : morph->getDescendants()) {
+            std::cout << "\t" << descendant << std::endl;
+        }
+    }
+    
+public:
+    
+    PrintMols() : TraverseCallback() {
+        // no action
+    }
+
+};
 
 class MinimalTest : public CPPUNIT_NS::TestFixture {
     CPPUNIT_TEST_SUITE(MinimalTest);

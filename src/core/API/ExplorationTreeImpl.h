@@ -152,7 +152,8 @@ class ExplorationTree::ExplorationTreeImpl
         void filterMorphs(FilterMorphsOper::MorphFilters filters, std::shared_ptr<ExplorationTree> tree, bool verbose_output);
         void extend(std::shared_ptr<ExplorationTree> tree);
         void prune(std::shared_ptr<ExplorationTree> tree);
-        void traverse(std::shared_ptr<ExplorationTree> tree, const std::string& rootSMILES, std::shared_ptr<TraverseCallback> callback);
+        void traverse(std::shared_ptr<ExplorationTree> tree, const std::string& rootSMILES, TraverseCallback& callback);
+        void traverse(std::shared_ptr<ExplorationTree> tree, TraverseCallback& callback);
         
         MolVector getCandidateMorphs();
         std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version

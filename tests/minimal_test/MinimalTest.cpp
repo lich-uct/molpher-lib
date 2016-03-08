@@ -222,5 +222,9 @@ void MinimalTest::testTree() {
         std::cout << "Path found: " + NumberToStr(tree->isPathFound()) << std::endl;
         tree->prune();
     }
+    
+    // test the tree traversal
+    PrintMols printing_callback;
+    tree->traverse(printing_callback);
 }
 

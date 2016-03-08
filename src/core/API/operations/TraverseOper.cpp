@@ -5,13 +5,13 @@
 #include "core/API/ExplorationTreeImpl.h"
 #include "TreeOperationImpl.hpp"
 
-TraverseOper::TraverseOper(std::shared_ptr<ExplorationTree> expTree, std::shared_ptr<TraverseCallback> callback) : 
+TraverseOper::TraverseOper(std::shared_ptr<ExplorationTree> expTree, TraverseCallback& callback) : 
 pimpl(new TraverseOper::TraverseOperImpl(expTree, callback)) 
 {
     setTreeOperPimpl(pimpl);
 }
 
-TraverseOper::TraverseOper(std::shared_ptr<TraverseCallback> callback) : 
+TraverseOper::TraverseOper(TraverseCallback& callback) : 
 pimpl(new TraverseOper::TraverseOperImpl(callback))
 {
     setTreeOperPimpl(pimpl);
@@ -19,7 +19,7 @@ pimpl(new TraverseOper::TraverseOperImpl(callback))
 
 TraverseOper::TraverseOper(
     std::shared_ptr<ExplorationTree> expTree
-    , std::shared_ptr<TraverseCallback> callback
+    , TraverseCallback& callback
     , const std::string& rootSMILES
     ) 
 : 
@@ -37,7 +37,7 @@ void TraverseOper::operator()() {
 
 TraverseOper::TraverseOperImpl::TraverseOperImpl(
     std::shared_ptr<ExplorationTree> expTree
-    , std::shared_ptr<TraverseCallback> callback
+    , TraverseCallback& callback
     , const std::string& rootSMILES
 ) 
 :
@@ -50,7 +50,7 @@ TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
 
 TraverseOper::TraverseOperImpl::TraverseOperImpl(
     std::shared_ptr<ExplorationTree> expTree
-    , std::shared_ptr<TraverseCallback> callback
+    , TraverseCallback& callback
 ) 
 :
 TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
@@ -59,7 +59,7 @@ TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
     // no action
 }
 
-TraverseOper::TraverseOperImpl::TraverseOperImpl(std::shared_ptr<TraverseCallback> callback) :
+TraverseOper::TraverseOperImpl::TraverseOperImpl(TraverseCallback& callback) :
 TreeOperation::TreeOperationImpl::TreeOperationImpl()
 , callback(callback)
 {
@@ -68,7 +68,7 @@ TreeOperation::TreeOperationImpl::TreeOperationImpl()
 
 TraverseOper::TraverseOperImpl::TraversalFunctor::TraversalFunctor(
     std::shared_ptr<ExplorationTree> tree
-    , std::shared_ptr<TraverseCallback> callback
+    , TraverseCallback& callback
     ) 
 : 
 mTree(tree)
@@ -95,7 +95,7 @@ void TraverseOper::TraverseOperImpl::TraversalFunctor::operator()(const std::str
 }
 
 void TraverseOper::TraverseOperImpl::TraversalFunctor::makeCallback(std::shared_ptr<MolpherMol> morph) const {
-    (*mCallback)(morph);
+    mCallback(morph);
 }
 
 void TraverseOper::TraverseOperImpl::operator()() {

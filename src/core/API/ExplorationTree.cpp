@@ -132,6 +132,13 @@ bool ExplorationTree::isPathFound() {
     return pimpl->isPathFound();
 }
 
+void ExplorationTree::traverse(const std::string& rootSMILES, TraverseCallback& callback) {
+    pimpl->traverse(shared_from_this(), rootSMILES, callback);
+}
+
+void ExplorationTree::traverse(TraverseCallback& callback) {
+    pimpl->traverse(shared_from_this(), callback);
+}
 
 // pimpl
 
@@ -433,8 +440,13 @@ bool ExplorationTree::ExplorationTreeImpl::isPathFound() {
     return hasMol(target.getSMILES());
 }
 
-void ExplorationTree::ExplorationTreeImpl::traverse(std::shared_ptr<ExplorationTree> tree, const std::string& rootSMILES, std::shared_ptr<TraverseCallback> callback) {
+void ExplorationTree::ExplorationTreeImpl::traverse(std::shared_ptr<ExplorationTree> tree, const std::string& rootSMILES, TraverseCallback& callback) {
     TraverseOper traverse(tree, callback, rootSMILES);
+    traverse();
+}
+
+void ExplorationTree::ExplorationTreeImpl::traverse(std::shared_ptr<ExplorationTree> tree, TraverseCallback& callback) {
+    TraverseOper traverse(tree, callback);
     traverse();
 }
 

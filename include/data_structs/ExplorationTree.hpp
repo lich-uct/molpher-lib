@@ -74,7 +74,8 @@ public:
     void filterMorphs(FilterMorphsOper::MorphFilters filters, bool verbose_output = false);
     void extend();
     void prune();
-    void traverse(const std::string& rootSMILES, std::shared_ptr<TraverseCallback> callback);
+    void traverse(const std::string& rootSMILES, TraverseCallback& callback);
+    void traverse(TraverseCallback& callback);
 //    
 //    int getThreadCount();
     unsigned getGenerationCount();
