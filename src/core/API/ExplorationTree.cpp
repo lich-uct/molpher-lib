@@ -36,6 +36,11 @@ std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sour
     return create(data);
 }
 
+std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& filename) {
+    auto data = ExplorationData::load(filename);
+    return create(*data);
+}
+
 std::shared_ptr<ExplorationData> ExplorationTree::asData() const {
     return pimpl->asData();
 }
@@ -114,6 +119,10 @@ void ExplorationTree::traverse(const std::string& rootSMILES, TraverseCallback& 
 
 void ExplorationTree::traverse(TraverseCallback& callback) {
     pimpl->traverse(shared_from_this(), callback);
+}
+
+void ExplorationTree::save(const std::string& filename) {
+    pimpl->save(filename);
 }
 
 // pimpl
@@ -392,4 +401,9 @@ void ExplorationTree::ExplorationTreeImpl::traverse(std::shared_ptr<ExplorationT
 void ExplorationTree::ExplorationTreeImpl::traverse(std::shared_ptr<ExplorationTree> tree, TraverseCallback& callback) {
     TraverseOper traverse(tree, callback);
     traverse();
+}
+
+void ExplorationTree::ExplorationTreeImpl::save(const std::string& filename) {
+    auto data = asData();
+    data->save(filename);
 }

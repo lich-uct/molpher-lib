@@ -142,6 +142,7 @@ class ExplorationTree::ExplorationTreeImpl
         void prune(std::shared_ptr<ExplorationTree> tree);
         void traverse(std::shared_ptr<ExplorationTree> tree, const std::string& rootSMILES, TraverseCallback& callback);
         void traverse(std::shared_ptr<ExplorationTree> tree, TraverseCallback& callback);
+        void save(const std::string& filename);
         
         MolVector getCandidateMorphs();
         std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version

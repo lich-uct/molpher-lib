@@ -226,5 +226,22 @@ void MinimalTest::testTree() {
     // test the tree traversal
     PrintMols printing_callback;
     tree->traverse(printing_callback);
+    
+    // serialize the tree into file
+    tree->save(test_dir + "testTree_snapshot.xml");
+    
+    // create new tree from the file
+    auto tree_from_file = ExplorationTree::create(test_dir + "testTree_snapshot.xml");
+    
+    // make a few more generations on the loaded tree
+    for (unsigned iter_idx = 0; iter_idx != 3; iter_idx++) {
+        tree_from_file->generateMorphs();
+        tree_from_file->sortMorphs();
+        tree_from_file->filterMorphs();
+        printCandidates(tree_from_file);
+        tree_from_file->extend();
+        std::cout << "Path found: " + NumberToStr(tree_from_file->isPathFound()) << std::endl;
+        tree_from_file->prune();
+    }
 }
 

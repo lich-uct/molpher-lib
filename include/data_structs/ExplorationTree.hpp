@@ -35,6 +35,7 @@ private:
 public:
     
     static std::shared_ptr<ExplorationTree> create(const ExplorationData& data);
+    static std::shared_ptr<ExplorationTree> create(const std::string& filename);
     static std::shared_ptr<ExplorationTree> create(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
     
     std::shared_ptr<ExplorationData> asData() const;
@@ -56,6 +57,7 @@ public:
     void prune();
     void traverse(const std::string& rootSMILES, TraverseCallback& callback);
     void traverse(TraverseCallback& callback);
+    void save(const std::string& filename);
 //    
 //    int getThreadCount();
     unsigned getGenerationCount();

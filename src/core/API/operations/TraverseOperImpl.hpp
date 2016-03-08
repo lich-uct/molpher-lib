@@ -8,6 +8,10 @@
 #ifndef TRAVERSEOPERIMPL_HPP
 #define	TRAVERSEOPERIMPL_HPP
 
+#include <tbb/task_scheduler_init.h>
+#include <tbb/partitioner.h>
+#include <tbb/parallel_do.h>
+
 #include "core/misc/global_types.h"
 #include "TreeOperationImpl.hpp"
 
