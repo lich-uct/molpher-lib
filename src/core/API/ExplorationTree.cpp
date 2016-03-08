@@ -433,6 +433,11 @@ bool ExplorationTree::ExplorationTreeImpl::isPathFound() {
     return hasMol(target.getSMILES());
 }
 
+void ExplorationTree::ExplorationTreeImpl::traverse(std::shared_ptr<ExplorationTree> tree, const std::string& rootSMILES, std::shared_ptr<TraverseCallback> callback) {
+    TraverseOper traverse(tree, callback, rootSMILES);
+    traverse();
+}
+
 //std::shared_ptr<ExplorationTree::ExplorationTreeImpl> ExplorationTree::ExplorationTreeImpl::createFromData(ExplorationData& data) {
 //    return std::make_shared<ExplorationTree::ExplorationTreeImpl>(data);
 //}

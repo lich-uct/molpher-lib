@@ -40,6 +40,7 @@
 #include "operations/FilterMorphsOper.hpp"
 #include "operations/ExtendTreeOper.hpp"
 #include "operations/PruneTreeOper.hpp"
+#include "operations/TraverseOper.hpp"
 
 //class TreeOperation::TreeOperationImpl; // forward declaration to resolve circular dependency
 
@@ -53,6 +54,7 @@ class ExplorationTree::ExplorationTreeImpl
     friend class FilterMorphsOper::FilterMorphsOperImpl;
     friend class ExtendTreeOper::ExtendTreeOperImpl;
     friend class PruneTreeOper::PruneTreeOperImpl;
+    friend class TraverseOper::TraverseOperImpl;
 
     private:
         
@@ -150,6 +152,7 @@ class ExplorationTree::ExplorationTreeImpl
         void filterMorphs(FilterMorphsOper::MorphFilters filters, std::shared_ptr<ExplorationTree> tree, bool verbose_output);
         void extend(std::shared_ptr<ExplorationTree> tree);
         void prune(std::shared_ptr<ExplorationTree> tree);
+        void traverse(std::shared_ptr<ExplorationTree> tree, const std::string& rootSMILES, std::shared_ptr<TraverseCallback> callback);
         
         MolVector getCandidateMorphs();
         std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version

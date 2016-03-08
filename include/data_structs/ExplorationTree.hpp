@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "ExplorationData.hpp"
+#include "operations/callbacks/TraverseCallback.hpp"
 #include "operations/FilterMorphsOper.hpp"
 
 class ExplorationTree : public std::enable_shared_from_this<ExplorationTree> {
@@ -22,6 +23,7 @@ class ExplorationTree : public std::enable_shared_from_this<ExplorationTree> {
     friend class FilterMorphsOper;
     friend class ExtendTreeOper;
     friend class PruneTreeOper;
+    friend class TraverseOper;
     
 public:
 //    typedef tbb::concurrent_vector<MolpherMolecule> MoleculeVector;
@@ -72,6 +74,7 @@ public:
     void filterMorphs(FilterMorphsOper::MorphFilters filters, bool verbose_output = false);
     void extend();
     void prune();
+    void traverse(const std::string& rootSMILES, std::shared_ptr<TraverseCallback> callback);
 //    
 //    int getThreadCount();
     unsigned getGenerationCount();

@@ -44,7 +44,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/API/operations/GenerateMorphsOper.o \
 	${OBJECTDIR}/src/core/API/operations/PruneTreeOper.o \
 	${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o \
+	${OBJECTDIR}/src/core/API/operations/TraverseOper.o \
 	${OBJECTDIR}/src/core/API/operations/TreeOperation.o \
+	${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o \
 	${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o \
 	${OBJECTDIR}/src/core/chem/SimCoefCalculator.o \
 	${OBJECTDIR}/src/core/chem/fingerprintStrategy/AtomPairsFngpr.o \
@@ -251,10 +253,20 @@ ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o: src/core/API/operations/S
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o src/core/API/operations/SortMorphsOper.cpp
 
+${OBJECTDIR}/src/core/API/operations/TraverseOper.o: src/core/API/operations/TraverseOper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TraverseOper.o src/core/API/operations/TraverseOper.cpp
+
 ${OBJECTDIR}/src/core/API/operations/TreeOperation.o: src/core/API/operations/TreeOperation.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TreeOperation.o src/core/API/operations/TreeOperation.cpp
+
+${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o: src/core/API/operations/callbacks/TraverseCallback.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations/callbacks
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o src/core/API/operations/callbacks/TraverseCallback.cpp
 
 ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o: src/core/chem/ChemicalAuxiliary.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/chem
@@ -600,6 +612,19 @@ ${OBJECTDIR}/src/core/API/operations/SortMorphsOper_nomain.o: ${OBJECTDIR}/src/c
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/SortMorphsOper.o ${OBJECTDIR}/src/core/API/operations/SortMorphsOper_nomain.o;\
 	fi
 
+${OBJECTDIR}/src/core/API/operations/TraverseOper_nomain.o: ${OBJECTDIR}/src/core/API/operations/TraverseOper.o src/core/API/operations/TraverseOper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/operations/TraverseOper.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TraverseOper_nomain.o src/core/API/operations/TraverseOper.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/API/operations/TraverseOper.o ${OBJECTDIR}/src/core/API/operations/TraverseOper_nomain.o;\
+	fi
+
 ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o: ${OBJECTDIR}/src/core/API/operations/TreeOperation.o src/core/API/operations/TreeOperation.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/operations/TreeOperation.o`; \
@@ -611,6 +636,19 @@ ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o: ${OBJECTDIR}/src/co
 	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o src/core/API/operations/TreeOperation.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/core/API/operations/TreeOperation.o ${OBJECTDIR}/src/core/API/operations/TreeOperation_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback_nomain.o: ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o src/core/API/operations/callbacks/TraverseCallback.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core/API/operations/callbacks
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Isrc/ -Ideps/tbb/include/ -Iinclude/ -Ideps/rdkit/Code/ -Ideps/boost/ -std=c++11 -fPIC  -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback_nomain.o src/core/API/operations/callbacks/TraverseCallback.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback.o ${OBJECTDIR}/src/core/API/operations/callbacks/TraverseCallback_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary_nomain.o: ${OBJECTDIR}/src/core/chem/ChemicalAuxiliary.o src/core/chem/ChemicalAuxiliary.cpp 
