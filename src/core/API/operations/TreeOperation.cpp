@@ -20,31 +20,6 @@ TreeOperation::~TreeOperation() {
     // no action
 }
 
-//PathFinderContext& TreeOperation::fetchTreeContext() {
-//    return tree->context;
-//}
-//
-//ExplorationTree::MoleculeVector& TreeOperation::fetchGeneratedMorphs() {
-//    return tree->candidateMoprhs;
-//}
-//
-//ExplorationTree::BoolVector& TreeOperation::fetchGeneratedMorphsMask() {
-//    return tree->candidateMorphsMask;
-//}
-
-
-//void TreeOperation::fetchLeaves(ExplorationTree::MoleculePointerVector& leaves) {
-//    tree->fetchLeaves(leaves);
-//}
-
-//ExplorationTree* TreeOperation::getTree() {
-//    return tree;
-//}
-//
-//void TreeOperation::setTree(ExplorationTree& expTree) {
-//    tree = &expTree;
-//}
-
 std::shared_ptr<ExplorationTree> TreeOperation::getTree() {
     return pimpl->getTree();
 }
@@ -74,8 +49,4 @@ void TreeOperation::TreeOperationImpl::setTree(std::shared_ptr<ExplorationTree> 
 void TreeOperation::setTreeOperPimpl(std::shared_ptr<TreeOperationImpl> pimpl) {
     this->pimpl = pimpl;
 }
-
-//void TreeOperation::TreeOperationImpl::operator()() {
-//    throw std::runtime_error("This is just a dummy method. It should not be called directly!");
-//}
 

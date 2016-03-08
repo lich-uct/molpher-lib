@@ -11,7 +11,6 @@
 #pragma once
 
 #include <boost/version.hpp>
-//#include <boost/cstdint.hpp>
 #include <boost/serialization/map.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/tracking.hpp>

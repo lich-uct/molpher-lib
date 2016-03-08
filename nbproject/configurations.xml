@@ -365,17 +365,7 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="include/data_structs/ExplorationParameters.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="include/data_structs/ExplorationTree.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="include/data_structs/ExplorationTreeSnapshot.hpp"
             ex="false"
             tool="3"
             flavor2="0">
@@ -421,11 +411,6 @@
             flavor2="0">
       </item>
       <item path="include/operations/TreeOperation.hpp"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="include/operations/callbacks/EraseSubtreeCallback.hpp"
             ex="false"
             tool="3"
             flavor2="0">

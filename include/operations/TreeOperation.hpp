@@ -15,14 +15,6 @@ class ExplorationTree;
 
 class TreeOperation {
     
-//protected:
-//    int threadCnt;
-    
-//    PathFinderContext& fetchTreeContext();
-//    ExplorationTree::MoleculeVector& fetchGeneratedMorphs();
-//    ExplorationTree::BoolVector& fetchGeneratedMorphsMask();
-//    void fetchLeaves(ExplorationTree::MoleculePointerVector&);
-    
 public:
     class TreeOperationImpl;
     

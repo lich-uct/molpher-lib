@@ -28,9 +28,6 @@
 #include "core/data_structs/MolpherMolData.hpp"
 #include "data_structs/MolpherMol.hpp"
 
-//typedef unsigned int JobId;
-//typedef unsigned int IterIdx;
-
 typedef ExplicitBitVect Fingerprint;
 typedef unsigned int AtomIdx;
 typedef unsigned int BondIdx;

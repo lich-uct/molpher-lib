@@ -8,13 +8,10 @@
 #ifndef MOLPHERMOLDATA_HPP
 #define	MOLPHERMOLDATA_HPP
 
-//#pragma once
-
 #include <string>
 #include <set>
 #include <cfloat>
 
-//#include <boost/cstdint.hpp>
 #include <boost/serialization/set.hpp>
 #include <boost/serialization/tracking.hpp>
 #include <boost/serialization/level.hpp>

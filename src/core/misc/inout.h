@@ -41,32 +41,6 @@ std::string parseNumber(Number num) {
     return ss.str();
 }
 
-//IterationSnapshot Materialize(IterationSnapshotProxy &proxy);
-
-//std::string GenerateFilename(std::string &base,
-//    JobId jobId, unsigned int iterIdx);
-//std::string GenerateFilename(std::string &base,
-//    JobId jobId, std::string name);
-//std::string GenerateDirname(std::string &base, JobId jobId);
-//
-//void WriteMolpherPath(const std::string &file, const std::string &targetSmile,
-//    const IterationSnapshot::CandidateMap &candidates);
-//
-//void WriteSnapshotToFile(const std::string &file, const IterationSnapshot &snp);
-//bool ReadSnapshotFromFile(const std::string &file, IterationSnapshot &snp);
-//
-//void GatherMolphMols(const IterationSnapshot::CandidateMap &toGather,
-//    std::map<std::string, MolpherMolecule> &gathered);
-//void GatherMolphMols(const std::vector<MolpherMolecule> &toGather,
-//    std::map<std::string, MolpherMolecule> &gathered);
-//
-//void WriteMolphMolsToSDF(const std::string &file,
-//    const std::map<std::string, MolpherMolecule> &mols);
-//void WriteMolphMolsToSDF(const std::string &file,
-//    const std::vector<MolpherMolecule> &mols);
-//void ReadMolphMolsFromFile(const std::string &file,
-//    std::vector<MolpherMolecule> &mols);
-
 void WriteRWMolsToSDF(const std::string &file,
     std::vector<RDKit::RWMol *> &mols);
 void ReadRWMolsFromSDF(const std::string &file,

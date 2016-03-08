@@ -16,8 +16,6 @@
 
 class FindLeavesOper : public TreeOperation {
     
-//    friend class ExplorationTree;
-    
     public:
         class FindLeavesOperImpl;
         

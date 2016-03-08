@@ -12,8 +12,6 @@
 #include <memory>
 #include <set>
 
-//#include "MolpherMolecule.h"
-
 #include "selectors/chemoper_selectors.h"
 
 class ExplorationTree; // forward declaration to resolve circular dependency
@@ -21,17 +19,11 @@ class ExplorationTree; // forward declaration to resolve circular dependency
 class MolpherMol {
     
 private:
-//    MolpherMolecule* mol;
-//    bool selfAllocated;
     class MolpherMolImpl;
     std::unique_ptr<MolpherMolImpl> pimpl;
 
-public:
-//    MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl);
-    
+public:  
     MolpherMol();
-//    MolpherMol(MolpherMolecule& mol);
-//    MolpherMol(MolpherMolecule& mol, bool copy);
     MolpherMol(const std::string& smiles, const std::string& formula, const std::string& parentSmile,
                 const unsigned& oper, const double& dist, const double& distToClosestDecoy,
                 const double& weight, const double& sascore);
@@ -40,8 +32,6 @@ public:
     ~MolpherMol();
     
     MolpherMol& operator=(const MolpherMol&);
-    
-//    MolpherMolecule& fetchMolpherMolecule() const; // TODO: maybe get rid of this
     std::shared_ptr<MolpherMol> copy() const;
     
     // getters

@@ -12,7 +12,6 @@ class TraverseCallback::TraverseCallbackImpl {
     
     public:
         TraverseCallbackImpl();
-//        virtual void operator()(std::shared_ptr<MolpherMol> morph);
 };
 
 #endif	/* TRAVERSECALLBACKIMPL_HPP */

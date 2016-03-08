@@ -26,35 +26,15 @@ class ExplorationTree : public std::enable_shared_from_this<ExplorationTree> {
     friend class TraverseOper;
     
 public:
-//    typedef tbb::concurrent_vector<MolpherMolecule> MoleculeVector;
-//    typedef tbb::concurrent_vector<MolpherMolecule*> MoleculePointerVector;
-//    typedef std::vector<bool> BoolVector;
-//    typedef tbb::concurrent_hash_map<std::string, bool /*dummy*/> SmileSet;
-//    typedef tbb::concurrent_vector<std::string> SmileVector;
-    
     class ExplorationTreeImpl;
     
 private:
-//    PathFinderContext context;
-//    int threadCount;
-//    MoleculeVector candidateMoprhs;
-//    BoolVector candidateMorphsMask;
-//    ExplorationTree(IterationSnapshot& snp);
-//    void treeInit(IterationSnapshot& snp);
-//    
     std::shared_ptr<ExplorationTreeImpl> pimpl;
-    
-private:
     ExplorationTree();
-//    ExplorationTree(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
     
 public:
     
-//    ExplorationTree(const std::string& sourceMolAsSMILES);
-    //    ExplorationTree(ExplorationParameters& params);
-    
     static std::shared_ptr<ExplorationTree> create(const ExplorationData& data);
-//    static std::shared_ptr<ExplorationTree> create(const std::string& sourceMolAsSMILES);
     static std::shared_ptr<ExplorationTree> create(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
     
     std::shared_ptr<ExplorationData> asData() const;
@@ -79,12 +59,10 @@ public:
 //    
 //    int getThreadCount();
     unsigned getGenerationCount();
-//    ExplorationParameters& getParams();
     std::vector<std::shared_ptr<MolpherMol> > getCandidateMorphs();
     std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version 
 //    
 //    void setThreadCount(int threadCnt);
-//    void setParams(ExplorationParameters& params);
 //    void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
 
 };

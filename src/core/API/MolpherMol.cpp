@@ -12,10 +12,6 @@
 #include "data_structs/ExplorationTree.hpp"
 #include "core/misc/inout.h"
 
-//MolpherMol::MolpherMol(std::shared_ptr<MolpherMolImpl> pimpl) : pimpl(pimpl) {
-//    // no action
-//}
-
 MolpherMol::MolpherMol(
     const std::string& smiles
     , const std::string& formula
@@ -107,10 +103,6 @@ void MolpherMol::MolpherMolImpl::setSMILES(const std::string& smiles) {
 
     SynchCout("Parsed molecule " + smiles + " >> " + data.SMILES);
 }
-
-//MolpherMolData MolpherMol::MolpherMolImpl::asData() const {
-//    return data;
-//}
 
 const std::string& MolpherMol::getSMILES() const {
     return pimpl->data.SMILES;

@@ -25,10 +25,6 @@
 #include <tbb/concurrent_vector.h>
 
 #include "core/misc/global_types.h"
-//#include "core/misc/selectors/fingerprint_selectors.h"
-//#include "core/misc/selectors/simcoeff_selectors.h"
-//#include "dimred_selectors.h"
-//#include "core/misc/selectors/chemoper_selectors.h"
 
 #include "core/data_structs/MolpherParam.h"
 #include "data_structs/ExplorationTree.hpp"
@@ -41,8 +37,6 @@
 #include "operations/ExtendTreeOper.hpp"
 #include "operations/PruneTreeOper.hpp"
 #include "operations/TraverseOper.hpp"
-
-//class TreeOperation::TreeOperationImpl; // forward declaration to resolve circular dependency
 
 class ExplorationTree::ExplorationTreeImpl
 {
@@ -127,13 +121,7 @@ class ExplorationTree::ExplorationTreeImpl
         void erase(const std::string& canonSMILES);
         
     public:
-        
-//        static std::shared_ptr<ExplorationTree::ExplorationTreeImpl> createFromData(ExplorationData &data);
-        
         ExplorationTreeImpl();
-//        ExplorationTreeImpl(const std::string& sourceMolAsSMILES);
-//        ExplorationTreeImpl(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
-//        ExplorationTreeImpl(ExplorationData &data);
         
         std::shared_ptr<ExplorationData> asData() const;
         void updateData(const ExplorationData& data, std::shared_ptr<ExplorationTree> tree);

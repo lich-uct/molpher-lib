@@ -163,28 +163,6 @@ int toInt(const std::string& str) {
     return result;
 }
 
-///**
-// * Create molecule from given smile. The smile may change as it's
-// * RDKit smile
-// * @param inSmile
-// * @return
-// */
-//MolpherMolecule createMoleculeFromSmile(const std::string& inSmile) {
-//    RDKit::RWMol* mol = RDKit::SmilesToMol(inSmile);
-//    try {
-//        RDKit::MolOps::Kekulize(*mol);
-//    } catch (const ValueErrorException &exc) {
-//        SynchCout("Cannot kekulize input molecule.");
-//    }
-//
-//    std::string smile(RDKit::MolToSmiles(*mol));
-//    std::string formula(RDKit::Descriptors::calcMolFormula(*mol));
-//
-//    SynchCout("Parse molecule " + inSmile + " >> " + smile);
-//
-//    return MolpherMolecule(smile, formula);
-//}
-
 /**
  * Based on given template fetch data into given snapshot. Values
  * that are not specified in the template are ignored.
