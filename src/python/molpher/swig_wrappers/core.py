@@ -669,7 +669,6 @@ class PruneTreeOper(TreeOperation):
         try: self.this.append(this)
         except: self.this = this
     def __call__(self): return _core.PruneTreeOper___call__(self)
-    def getPruned(self): return _core.PruneTreeOper_getPruned(self)
     __swig_destroy__ = _core.delete_PruneTreeOper
     __del__ = lambda self : None;
 PruneTreeOper_swigregister = _core.PruneTreeOper_swigregister

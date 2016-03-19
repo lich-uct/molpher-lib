@@ -24474,32 +24474,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_PruneTreeOper_getPruned(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  PruneTreeOper *arg1 = (PruneTreeOper *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  std::vector< std::string,std::allocator< std::string > > *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:PruneTreeOper_getPruned",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PruneTreeOper, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PruneTreeOper_getPruned" "', argument " "1"" of type '" "PruneTreeOper *""'"); 
-  }
-  arg1 = reinterpret_cast< PruneTreeOper * >(argp1);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    result = (std::vector< std::string,std::allocator< std::string > > *) &(arg1)->getPruned();
-    SWIG_PYTHON_THREAD_END_ALLOW;
-  }
-  resultobj = swig::from(static_cast< std::vector<std::string,std::allocator< std::string > > >(*result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_delete_PruneTreeOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   PruneTreeOper *arg1 = (PruneTreeOper *) 0 ;
@@ -25487,7 +25461,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExtendTreeOper_swigregister", ExtendTreeOper_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_PruneTreeOper", _wrap_new_PruneTreeOper, METH_VARARGS, NULL},
 	 { (char *)"PruneTreeOper___call__", _wrap_PruneTreeOper___call__, METH_VARARGS, NULL},
-	 { (char *)"PruneTreeOper_getPruned", _wrap_PruneTreeOper_getPruned, METH_VARARGS, NULL},
 	 { (char *)"delete_PruneTreeOper", _wrap_delete_PruneTreeOper, METH_VARARGS, NULL},
 	 { (char *)"PruneTreeOper_swigregister", PruneTreeOper_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_TraverseOper", _wrap_new_TraverseOper, METH_VARARGS, NULL},

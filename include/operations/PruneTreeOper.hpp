@@ -18,7 +18,7 @@ class PruneTreeOper : public TreeOperation {
         PruneTreeOper();
         virtual void operator()();
         
-        const std::vector<std::string>& getPruned();
+//        const std::vector<std::string>& getPruned();
         
     private:
         std::shared_ptr<PruneTreeOperImpl> pimpl;
