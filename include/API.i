@@ -8,7 +8,10 @@
 %include "operations/operations.i"
 
 // callbacks
-//%include "operations/callbacks/callbacks.i"
+%include "operations/callbacks/callbacks.i"
+        
+// selectors
+%include "selectors/selectors.i"
 
 // data structs
 %include "data_structs/data_structs.i"

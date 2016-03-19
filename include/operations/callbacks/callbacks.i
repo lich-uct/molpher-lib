@@ -3,5 +3,5 @@
 #include "operations/callbacks/TraverseCallback.hpp"
 %}
 
-%ignore TraverseCallback::TraverseCallback(PathFinderContext& context);
+%ignore TraverseCallback::TraverseCallbackImpl;
 %include "TraverseCallback.hpp"
