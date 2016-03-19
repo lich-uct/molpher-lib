@@ -14,7 +14,11 @@
 #include "operations/callbacks/TraverseCallback.hpp"
 #include "operations/FilterMorphsOper.hpp"
 
-class ExplorationTree : public std::enable_shared_from_this<ExplorationTree> {
+class ExplorationTree 
+#ifndef SWIG
+: public std::enable_shared_from_this<ExplorationTree>
+#endif
+ {
     
     friend class TreeOperation;
     friend class FindLeavesOper;

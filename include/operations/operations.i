@@ -1,17 +1,4 @@
 
-%{
-#include "operations/TreeOperation.hpp"
-#include "operations/FindLeavesOper.hpp"
-#include "operations/GenerateMorphsOper.hpp"
-#include "operations/SortMorphsOper.hpp"
-#include "operations/FilterMorphsOper.hpp"
-#include "operations/ExtendTreeOper.hpp"
-#include "operations/PruneTreeOper.hpp"
-#include "operations/TraverseOper.hpp"
-%}
-
-%template(MolVector) std::vector<std::shared_ptr<MolpherMol> >;
-
 %ignore TreeOperation::TreeOperationImpl;
 %include "TreeOperation.hpp";
 

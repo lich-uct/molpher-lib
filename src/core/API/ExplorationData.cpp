@@ -110,13 +110,13 @@ void ExplorationData::decreaseDerivationsCount(const std::string& smiles) {
     }
 }
 
-std::unique_ptr<std::vector<std::unique_ptr<MolpherMol> > > ExplorationData::getCandidates() const {
-    auto ret = std::unique_ptr<std::vector<std::unique_ptr<MolpherMol> > >(
-        new std::vector<std::unique_ptr<MolpherMol> >()
+std::shared_ptr<std::vector<std::shared_ptr<MolpherMol> > > ExplorationData::getCandidates() const {
+    auto ret = std::shared_ptr<std::vector<std::shared_ptr<MolpherMol> > >(
+        new std::vector<std::shared_ptr<MolpherMol> >()
     );
     for (auto& item : pimpl->candidates) {
         MolpherMol* mol = MolDataToMolpherMol(item);
-        ret->push_back(std::move(std::unique_ptr<MolpherMol>(mol)));
+        ret->push_back(std::shared_ptr<MolpherMol>(mol));
     }
     return ret;
 }
@@ -181,13 +181,13 @@ int ExplorationData::getSimilarityCoefficient() const {
     return pimpl->simCoeff;
 }
 
-std::unique_ptr<MolpherMol> ExplorationData::getSource() const {
-    auto ret = std::unique_ptr<MolpherMol>(MolDataToMolpherMol(pimpl->source));
+std::shared_ptr<MolpherMol> ExplorationData::getSource() const {
+    auto ret = std::shared_ptr<MolpherMol>(MolDataToMolpherMol(pimpl->source));
     return ret;
 }
 
-std::unique_ptr<MolpherMol> ExplorationData::getTarget() const {
-    auto ret = std::unique_ptr<MolpherMol>(MolDataToMolpherMol(pimpl->target));
+std::shared_ptr<MolpherMol> ExplorationData::getTarget() const {
+    auto ret = std::shared_ptr<MolpherMol>(MolDataToMolpherMol(pimpl->target));
     return ret;
 }
 
@@ -195,16 +195,16 @@ unsigned ExplorationData::getThreadCount() const {
     return pimpl->threadCnt;
 }
 
-std::unique_ptr<std::map<std::string, std::unique_ptr<MolpherMol> > > ExplorationData::getTreeMap() const {
-    auto ret = std::unique_ptr<std::map<std::string, std::unique_ptr<MolpherMol> > >(
-        new std::map<std::string, std::unique_ptr<MolpherMol> >()
+std::shared_ptr<std::map<std::string, std::shared_ptr<MolpherMol> > > ExplorationData::getTreeMap() const {
+    auto ret = std::shared_ptr<std::map<std::string, std::shared_ptr<MolpherMol> > >(
+        new std::map<std::string, std::shared_ptr<MolpherMol> >()
     );
     for (auto& item : pimpl->treeMap) {
         MolpherMol* mol = MolDataToMolpherMol(item.second);
         ret->insert(
             std::make_pair(
                 mol->getSMILES()
-                , std::move(std::unique_ptr<MolpherMol>(mol))
+                , std::shared_ptr<MolpherMol>(mol)
             )
         );
     }
@@ -237,10 +237,10 @@ unsigned ExplorationData::popFromDerivationMap(const std::string& smiles) {
     }
 }
 
-std::unique_ptr<MolpherMol> ExplorationData::popFromTreeMap(const std::string& smiles) {
+std::shared_ptr<MolpherMol> ExplorationData::popFromTreeMap(const std::string& smiles) {
     auto& tree = pimpl->treeMap;
     if (tree.find(smiles) != tree.end()) {
-        auto ret = std::unique_ptr<MolpherMol>(MolDataToMolpherMol(tree.find(smiles)->second));
+        auto ret = std::shared_ptr<MolpherMol>(MolDataToMolpherMol(tree.find(smiles)->second));
         tree.erase(smiles);
         return ret;
     } else {
@@ -365,8 +365,8 @@ void ExplorationData::setThreadCount(unsigned val) {
     pimpl->threadCnt = val;
 }
 
-std::unique_ptr<ExplorationData> ExplorationData::load(const std::string& file) {
-    auto data = std::unique_ptr<ExplorationData>(new ExplorationData());
+std::shared_ptr<ExplorationData> ExplorationData::load(const std::string& file) {
+    auto data = std::make_shared<ExplorationData>();
     molpher::iteration::IterationSerializer::load(file, *(data->pimpl));
     data->pimpl->treeMap.insert(std::make_pair(data->pimpl->source.SMILES, data->pimpl->source));
     return data;

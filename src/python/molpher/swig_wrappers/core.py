@@ -105,57 +105,432 @@ class SwigPyIterator(_object):
 SwigPyIterator_swigregister = _core.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SHARED_PTR_DISOWN = _core.SHARED_PTR_DISOWN
 
 def load_data_from(*args):
   return _core.load_data_from(*args)
 load_data_from = _core.load_data_from
-SHARED_PTR_DISOWN = _core.SHARED_PTR_DISOWN
-class MolVector(_object):
+class StringSet(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, MolVector, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, StringSet, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, MolVector, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, StringSet, name)
     __repr__ = _swig_repr
-    def iterator(self): return _core.MolVector_iterator(self)
+    def iterator(self): return _core.StringSet_iterator(self)
     def __iter__(self): return self.iterator()
-    def __nonzero__(self): return _core.MolVector___nonzero__(self)
-    def __bool__(self): return _core.MolVector___bool__(self)
-    def __len__(self): return _core.MolVector___len__(self)
-    def pop(self): return _core.MolVector_pop(self)
-    def __getslice__(self, *args): return _core.MolVector___getslice__(self, *args)
-    def __setslice__(self, *args): return _core.MolVector___setslice__(self, *args)
-    def __delslice__(self, *args): return _core.MolVector___delslice__(self, *args)
-    def __delitem__(self, *args): return _core.MolVector___delitem__(self, *args)
-    def __getitem__(self, *args): return _core.MolVector___getitem__(self, *args)
-    def __setitem__(self, *args): return _core.MolVector___setitem__(self, *args)
-    def append(self, *args): return _core.MolVector_append(self, *args)
-    def empty(self): return _core.MolVector_empty(self)
-    def size(self): return _core.MolVector_size(self)
-    def clear(self): return _core.MolVector_clear(self)
-    def swap(self, *args): return _core.MolVector_swap(self, *args)
-    def get_allocator(self): return _core.MolVector_get_allocator(self)
-    def begin(self): return _core.MolVector_begin(self)
-    def end(self): return _core.MolVector_end(self)
-    def rbegin(self): return _core.MolVector_rbegin(self)
-    def rend(self): return _core.MolVector_rend(self)
-    def pop_back(self): return _core.MolVector_pop_back(self)
-    def erase(self, *args): return _core.MolVector_erase(self, *args)
+    def __nonzero__(self): return _core.StringSet___nonzero__(self)
+    def __bool__(self): return _core.StringSet___bool__(self)
+    def __len__(self): return _core.StringSet___len__(self)
+    def append(self, *args): return _core.StringSet_append(self, *args)
+    def __contains__(self, *args): return _core.StringSet___contains__(self, *args)
+    def __getitem__(self, *args): return _core.StringSet___getitem__(self, *args)
+    def add(self, *args): return _core.StringSet_add(self, *args)
+    def discard(self, *args): return _core.StringSet_discard(self, *args)
     def __init__(self, *args): 
-        this = _core.new_MolVector(*args)
+        this = _core.new_StringSet(*args)
         try: self.this.append(this)
         except: self.this = this
-    def push_back(self, *args): return _core.MolVector_push_back(self, *args)
-    def front(self): return _core.MolVector_front(self)
-    def back(self): return _core.MolVector_back(self)
-    def assign(self, *args): return _core.MolVector_assign(self, *args)
-    def resize(self, *args): return _core.MolVector_resize(self, *args)
-    def insert(self, *args): return _core.MolVector_insert(self, *args)
-    def reserve(self, *args): return _core.MolVector_reserve(self, *args)
-    def capacity(self): return _core.MolVector_capacity(self)
-    __swig_destroy__ = _core.delete_MolVector
+    def empty(self): return _core.StringSet_empty(self)
+    def size(self): return _core.StringSet_size(self)
+    def clear(self): return _core.StringSet_clear(self)
+    def swap(self, *args): return _core.StringSet_swap(self, *args)
+    def count(self, *args): return _core.StringSet_count(self, *args)
+    def begin(self): return _core.StringSet_begin(self)
+    def end(self): return _core.StringSet_end(self)
+    def rbegin(self): return _core.StringSet_rbegin(self)
+    def rend(self): return _core.StringSet_rend(self)
+    def erase(self, *args): return _core.StringSet_erase(self, *args)
+    def find(self, *args): return _core.StringSet_find(self, *args)
+    def lower_bound(self, *args): return _core.StringSet_lower_bound(self, *args)
+    def upper_bound(self, *args): return _core.StringSet_upper_bound(self, *args)
+    def equal_range(self, *args): return _core.StringSet_equal_range(self, *args)
+    def insert(self, *args): return _core.StringSet_insert(self, *args)
+    __swig_destroy__ = _core.delete_StringSet
     __del__ = lambda self : None;
-MolVector_swigregister = _core.MolVector_swigregister
-MolVector_swigregister(MolVector)
+StringSet_swigregister = _core.StringSet_swigregister
+StringSet_swigregister(StringSet)
+
+class IntSet(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, IntSet, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, IntSet, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _core.IntSet_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _core.IntSet___nonzero__(self)
+    def __bool__(self): return _core.IntSet___bool__(self)
+    def __len__(self): return _core.IntSet___len__(self)
+    def append(self, *args): return _core.IntSet_append(self, *args)
+    def __contains__(self, *args): return _core.IntSet___contains__(self, *args)
+    def __getitem__(self, *args): return _core.IntSet___getitem__(self, *args)
+    def add(self, *args): return _core.IntSet_add(self, *args)
+    def discard(self, *args): return _core.IntSet_discard(self, *args)
+    def __init__(self, *args): 
+        this = _core.new_IntSet(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def empty(self): return _core.IntSet_empty(self)
+    def size(self): return _core.IntSet_size(self)
+    def clear(self): return _core.IntSet_clear(self)
+    def swap(self, *args): return _core.IntSet_swap(self, *args)
+    def count(self, *args): return _core.IntSet_count(self, *args)
+    def begin(self): return _core.IntSet_begin(self)
+    def end(self): return _core.IntSet_end(self)
+    def rbegin(self): return _core.IntSet_rbegin(self)
+    def rend(self): return _core.IntSet_rend(self)
+    def erase(self, *args): return _core.IntSet_erase(self, *args)
+    def find(self, *args): return _core.IntSet_find(self, *args)
+    def lower_bound(self, *args): return _core.IntSet_lower_bound(self, *args)
+    def upper_bound(self, *args): return _core.IntSet_upper_bound(self, *args)
+    def equal_range(self, *args): return _core.IntSet_equal_range(self, *args)
+    def insert(self, *args): return _core.IntSet_insert(self, *args)
+    __swig_destroy__ = _core.delete_IntSet
+    __del__ = lambda self : None;
+IntSet_swigregister = _core.IntSet_swigregister
+IntSet_swigregister(IntSet)
+
+class StringVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, StringVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, StringVector, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _core.StringVector_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _core.StringVector___nonzero__(self)
+    def __bool__(self): return _core.StringVector___bool__(self)
+    def __len__(self): return _core.StringVector___len__(self)
+    def pop(self): return _core.StringVector_pop(self)
+    def __getslice__(self, *args): return _core.StringVector___getslice__(self, *args)
+    def __setslice__(self, *args): return _core.StringVector___setslice__(self, *args)
+    def __delslice__(self, *args): return _core.StringVector___delslice__(self, *args)
+    def __delitem__(self, *args): return _core.StringVector___delitem__(self, *args)
+    def __getitem__(self, *args): return _core.StringVector___getitem__(self, *args)
+    def __setitem__(self, *args): return _core.StringVector___setitem__(self, *args)
+    def append(self, *args): return _core.StringVector_append(self, *args)
+    def empty(self): return _core.StringVector_empty(self)
+    def size(self): return _core.StringVector_size(self)
+    def clear(self): return _core.StringVector_clear(self)
+    def swap(self, *args): return _core.StringVector_swap(self, *args)
+    def get_allocator(self): return _core.StringVector_get_allocator(self)
+    def begin(self): return _core.StringVector_begin(self)
+    def end(self): return _core.StringVector_end(self)
+    def rbegin(self): return _core.StringVector_rbegin(self)
+    def rend(self): return _core.StringVector_rend(self)
+    def pop_back(self): return _core.StringVector_pop_back(self)
+    def erase(self, *args): return _core.StringVector_erase(self, *args)
+    def __init__(self, *args): 
+        this = _core.new_StringVector(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _core.StringVector_push_back(self, *args)
+    def front(self): return _core.StringVector_front(self)
+    def back(self): return _core.StringVector_back(self)
+    def assign(self, *args): return _core.StringVector_assign(self, *args)
+    def resize(self, *args): return _core.StringVector_resize(self, *args)
+    def insert(self, *args): return _core.StringVector_insert(self, *args)
+    def reserve(self, *args): return _core.StringVector_reserve(self, *args)
+    def capacity(self): return _core.StringVector_capacity(self)
+    __swig_destroy__ = _core.delete_StringVector
+    __del__ = lambda self : None;
+StringVector_swigregister = _core.StringVector_swigregister
+StringVector_swigregister(StringVector)
+
+class BoolVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, BoolVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, BoolVector, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _core.BoolVector_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _core.BoolVector___nonzero__(self)
+    def __bool__(self): return _core.BoolVector___bool__(self)
+    def __len__(self): return _core.BoolVector___len__(self)
+    def pop(self): return _core.BoolVector_pop(self)
+    def __getslice__(self, *args): return _core.BoolVector___getslice__(self, *args)
+    def __setslice__(self, *args): return _core.BoolVector___setslice__(self, *args)
+    def __delslice__(self, *args): return _core.BoolVector___delslice__(self, *args)
+    def __delitem__(self, *args): return _core.BoolVector___delitem__(self, *args)
+    def __getitem__(self, *args): return _core.BoolVector___getitem__(self, *args)
+    def __setitem__(self, *args): return _core.BoolVector___setitem__(self, *args)
+    def append(self, *args): return _core.BoolVector_append(self, *args)
+    def empty(self): return _core.BoolVector_empty(self)
+    def size(self): return _core.BoolVector_size(self)
+    def clear(self): return _core.BoolVector_clear(self)
+    def swap(self, *args): return _core.BoolVector_swap(self, *args)
+    def get_allocator(self): return _core.BoolVector_get_allocator(self)
+    def begin(self): return _core.BoolVector_begin(self)
+    def end(self): return _core.BoolVector_end(self)
+    def rbegin(self): return _core.BoolVector_rbegin(self)
+    def rend(self): return _core.BoolVector_rend(self)
+    def pop_back(self): return _core.BoolVector_pop_back(self)
+    def erase(self, *args): return _core.BoolVector_erase(self, *args)
+    def __init__(self, *args): 
+        this = _core.new_BoolVector(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _core.BoolVector_push_back(self, *args)
+    def front(self): return _core.BoolVector_front(self)
+    def back(self): return _core.BoolVector_back(self)
+    def assign(self, *args): return _core.BoolVector_assign(self, *args)
+    def resize(self, *args): return _core.BoolVector_resize(self, *args)
+    def insert(self, *args): return _core.BoolVector_insert(self, *args)
+    def reserve(self, *args): return _core.BoolVector_reserve(self, *args)
+    def capacity(self): return _core.BoolVector_capacity(self)
+    __swig_destroy__ = _core.delete_BoolVector
+    __del__ = lambda self : None;
+BoolVector_swigregister = _core.BoolVector_swigregister
+BoolVector_swigregister(BoolVector)
+
+class MolpherMolVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MolpherMolVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, MolpherMolVector, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _core.MolpherMolVector_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _core.MolpherMolVector___nonzero__(self)
+    def __bool__(self): return _core.MolpherMolVector___bool__(self)
+    def __len__(self): return _core.MolpherMolVector___len__(self)
+    def pop(self): return _core.MolpherMolVector_pop(self)
+    def __getslice__(self, *args): return _core.MolpherMolVector___getslice__(self, *args)
+    def __setslice__(self, *args): return _core.MolpherMolVector___setslice__(self, *args)
+    def __delslice__(self, *args): return _core.MolpherMolVector___delslice__(self, *args)
+    def __delitem__(self, *args): return _core.MolpherMolVector___delitem__(self, *args)
+    def __getitem__(self, *args): return _core.MolpherMolVector___getitem__(self, *args)
+    def __setitem__(self, *args): return _core.MolpherMolVector___setitem__(self, *args)
+    def append(self, *args): return _core.MolpherMolVector_append(self, *args)
+    def empty(self): return _core.MolpherMolVector_empty(self)
+    def size(self): return _core.MolpherMolVector_size(self)
+    def clear(self): return _core.MolpherMolVector_clear(self)
+    def swap(self, *args): return _core.MolpherMolVector_swap(self, *args)
+    def get_allocator(self): return _core.MolpherMolVector_get_allocator(self)
+    def begin(self): return _core.MolpherMolVector_begin(self)
+    def end(self): return _core.MolpherMolVector_end(self)
+    def rbegin(self): return _core.MolpherMolVector_rbegin(self)
+    def rend(self): return _core.MolpherMolVector_rend(self)
+    def pop_back(self): return _core.MolpherMolVector_pop_back(self)
+    def erase(self, *args): return _core.MolpherMolVector_erase(self, *args)
+    def __init__(self, *args): 
+        this = _core.new_MolpherMolVector(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _core.MolpherMolVector_push_back(self, *args)
+    def front(self): return _core.MolpherMolVector_front(self)
+    def back(self): return _core.MolpherMolVector_back(self)
+    def assign(self, *args): return _core.MolpherMolVector_assign(self, *args)
+    def resize(self, *args): return _core.MolpherMolVector_resize(self, *args)
+    def insert(self, *args): return _core.MolpherMolVector_insert(self, *args)
+    def reserve(self, *args): return _core.MolpherMolVector_reserve(self, *args)
+    def capacity(self): return _core.MolpherMolVector_capacity(self)
+    __swig_destroy__ = _core.delete_MolpherMolVector
+    __del__ = lambda self : None;
+MolpherMolVector_swigregister = _core.MolpherMolVector_swigregister
+MolpherMolVector_swigregister(MolpherMolVector)
+
+class MolpherMolMap(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MolpherMolMap, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, MolpherMolMap, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _core.MolpherMolMap_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _core.MolpherMolMap___nonzero__(self)
+    def __bool__(self): return _core.MolpherMolMap___bool__(self)
+    def __len__(self): return _core.MolpherMolMap___len__(self)
+    def __iter__(self): return self.key_iterator()
+    def iterkeys(self): return self.key_iterator()
+    def itervalues(self): return self.value_iterator()
+    def iteritems(self): return self.iterator()
+    def __getitem__(self, *args): return _core.MolpherMolMap___getitem__(self, *args)
+    def __delitem__(self, *args): return _core.MolpherMolMap___delitem__(self, *args)
+    def has_key(self, *args): return _core.MolpherMolMap_has_key(self, *args)
+    def keys(self): return _core.MolpherMolMap_keys(self)
+    def values(self): return _core.MolpherMolMap_values(self)
+    def items(self): return _core.MolpherMolMap_items(self)
+    def __contains__(self, *args): return _core.MolpherMolMap___contains__(self, *args)
+    def key_iterator(self): return _core.MolpherMolMap_key_iterator(self)
+    def value_iterator(self): return _core.MolpherMolMap_value_iterator(self)
+    def __setitem__(self, *args): return _core.MolpherMolMap___setitem__(self, *args)
+    def asdict(self): return _core.MolpherMolMap_asdict(self)
+    def __init__(self, *args): 
+        this = _core.new_MolpherMolMap(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def empty(self): return _core.MolpherMolMap_empty(self)
+    def size(self): return _core.MolpherMolMap_size(self)
+    def clear(self): return _core.MolpherMolMap_clear(self)
+    def swap(self, *args): return _core.MolpherMolMap_swap(self, *args)
+    def get_allocator(self): return _core.MolpherMolMap_get_allocator(self)
+    def begin(self): return _core.MolpherMolMap_begin(self)
+    def end(self): return _core.MolpherMolMap_end(self)
+    def rbegin(self): return _core.MolpherMolMap_rbegin(self)
+    def rend(self): return _core.MolpherMolMap_rend(self)
+    def count(self, *args): return _core.MolpherMolMap_count(self, *args)
+    def erase(self, *args): return _core.MolpherMolMap_erase(self, *args)
+    def find(self, *args): return _core.MolpherMolMap_find(self, *args)
+    def lower_bound(self, *args): return _core.MolpherMolMap_lower_bound(self, *args)
+    def upper_bound(self, *args): return _core.MolpherMolMap_upper_bound(self, *args)
+    __swig_destroy__ = _core.delete_MolpherMolMap
+    __del__ = lambda self : None;
+MolpherMolMap_swigregister = _core.MolpherMolMap_swigregister
+MolpherMolMap_swigregister(MolpherMolMap)
+
+class MolpherMol(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MolpherMol, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, MolpherMol, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _core.new_MolpherMol(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _core.delete_MolpherMol
+    __del__ = lambda self : None;
+    def copy(self): return _core.MolpherMol_copy(self)
+    def getSMILES(self): return _core.MolpherMol_getSMILES(self)
+    def getDistToTarget(self): return _core.MolpherMol_getDistToTarget(self)
+    def getTree(self): return _core.MolpherMol_getTree(self)
+    def getParentSMILES(self): return _core.MolpherMol_getParentSMILES(self)
+    def getDescendants(self): return _core.MolpherMol_getDescendants(self)
+    def getHistoricDescendants(self): return _core.MolpherMol_getHistoricDescendants(self)
+    def getItersWithoutDistImprovement(self): return _core.MolpherMol_getItersWithoutDistImprovement(self)
+    def getSAScore(self): return _core.MolpherMol_getSAScore(self)
+    def getMolecularWeight(self): return _core.MolpherMol_getMolecularWeight(self)
+    def getFormula(self): return _core.MolpherMol_getFormula(self)
+    def getParentOper(self): return _core.MolpherMol_getParentOper(self)
+    def setOwner(self, *args): return _core.MolpherMol_setOwner(self, *args)
+    def setSMILES(self, *args): return _core.MolpherMol_setSMILES(self, *args)
+    def setParentSMILES(self, *args): return _core.MolpherMol_setParentSMILES(self, *args)
+    def setDistToTarget(self, *args): return _core.MolpherMol_setDistToTarget(self, *args)
+    def setSAScore(self, *args): return _core.MolpherMol_setSAScore(self, *args)
+    def setItersWithoutDistImprovement(self, *args): return _core.MolpherMol_setItersWithoutDistImprovement(self, *args)
+    def increaseItersWithoutDistImprovement(self): return _core.MolpherMol_increaseItersWithoutDistImprovement(self)
+    def decreaseItersWithoutDistImprovement(self): return _core.MolpherMol_decreaseItersWithoutDistImprovement(self)
+    def addToDescendants(self, *args): return _core.MolpherMol_addToDescendants(self, *args)
+    def removeFromDescendants(self, *args): return _core.MolpherMol_removeFromDescendants(self, *args)
+    def setDescendants(self, *args): return _core.MolpherMol_setDescendants(self, *args)
+    def addToHistoricDescendants(self, *args): return _core.MolpherMol_addToHistoricDescendants(self, *args)
+    def removeFromHistoricDescendants(self, *args): return _core.MolpherMol_removeFromHistoricDescendants(self, *args)
+    def setHistoricDescendants(self, *args): return _core.MolpherMol_setHistoricDescendants(self, *args)
+    def isValid(self): return _core.MolpherMol_isValid(self)
+    def isBoundToTree(self): return _core.MolpherMol_isBoundToTree(self)
+    def removeFromTree(self): return _core.MolpherMol_removeFromTree(self)
+MolpherMol_swigregister = _core.MolpherMol_swigregister
+MolpherMol_swigregister(MolpherMol)
+
+class ExplorationData(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, ExplorationData, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, ExplorationData, name)
+    __repr__ = _swig_repr
+    def __init__(self): 
+        this = _core.new_ExplorationData()
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _core.delete_ExplorationData
+    __del__ = lambda self : None;
+    def getGenerationCount(self): return _core.ExplorationData_getGenerationCount(self)
+    def getThreadCount(self): return _core.ExplorationData_getThreadCount(self)
+    def getFingerprint(self): return _core.ExplorationData_getFingerprint(self)
+    def getSimilarityCoefficient(self): return _core.ExplorationData_getSimilarityCoefficient(self)
+    def getChemicalOperators(self): return _core.ExplorationData_getChemicalOperators(self)
+    def getMinAcceptableMolecularWeight(self): return _core.ExplorationData_getMinAcceptableMolecularWeight(self)
+    def getMaxAcceptableMolecularWeight(self): return _core.ExplorationData_getMaxAcceptableMolecularWeight(self)
+    def getCntCandidatesToKeep(self): return _core.ExplorationData_getCntCandidatesToKeep(self)
+    def getCntCandidatesToKeepMax(self): return _core.ExplorationData_getCntCandidatesToKeepMax(self)
+    def getCntMorphs(self): return _core.ExplorationData_getCntMorphs(self)
+    def getCntMorphsInDepth(self): return _core.ExplorationData_getCntMorphsInDepth(self)
+    def getDistToTargetDepthSwitch(self): return _core.ExplorationData_getDistToTargetDepthSwitch(self)
+    def getCntMaxMorphs(self): return _core.ExplorationData_getCntMaxMorphs(self)
+    def getItThreshold(self): return _core.ExplorationData_getItThreshold(self)
+    def getSource(self): return _core.ExplorationData_getSource(self)
+    def getTarget(self): return _core.ExplorationData_getTarget(self)
+    def getCandidates(self): return _core.ExplorationData_getCandidates(self)
+    def getCandidatesMask(self): return _core.ExplorationData_getCandidatesMask(self)
+    def getTreeMap(self): return _core.ExplorationData_getTreeMap(self)
+    def getDerivationMap(self): return _core.ExplorationData_getDerivationMap(self)
+    def setGenerationCount(self, *args): return _core.ExplorationData_setGenerationCount(self, *args)
+    def setThreadCount(self, *args): return _core.ExplorationData_setThreadCount(self, *args)
+    def setFingerprint(self, *args): return _core.ExplorationData_setFingerprint(self, *args)
+    def setSimilarityCoefficient(self, *args): return _core.ExplorationData_setSimilarityCoefficient(self, *args)
+    def setChemicalOperators(self, *args): return _core.ExplorationData_setChemicalOperators(self, *args)
+    def addChemicalOperator(self, *args): return _core.ExplorationData_addChemicalOperator(self, *args)
+    def removeChemicalOperator(self, *args): return _core.ExplorationData_removeChemicalOperator(self, *args)
+    def setMinAcceptableMolecularWeight(self, *args): return _core.ExplorationData_setMinAcceptableMolecularWeight(self, *args)
+    def setMaxAcceptableMolecularWeight(self, *args): return _core.ExplorationData_setMaxAcceptableMolecularWeight(self, *args)
+    def setCntCandidatesToKeep(self, *args): return _core.ExplorationData_setCntCandidatesToKeep(self, *args)
+    def setCntCandidatesToKeepMax(self, *args): return _core.ExplorationData_setCntCandidatesToKeepMax(self, *args)
+    def setCntMorphs(self, *args): return _core.ExplorationData_setCntMorphs(self, *args)
+    def setCntMorphsInDepth(self, *args): return _core.ExplorationData_setCntMorphsInDepth(self, *args)
+    def setDistToTargetDepthSwitch(self, *args): return _core.ExplorationData_setDistToTargetDepthSwitch(self, *args)
+    def setCntMaxMorphs(self, *args): return _core.ExplorationData_setCntMaxMorphs(self, *args)
+    def setItThreshold(self, *args): return _core.ExplorationData_setItThreshold(self, *args)
+    def setSource(self, *args): return _core.ExplorationData_setSource(self, *args)
+    def setTarget(self, *args): return _core.ExplorationData_setTarget(self, *args)
+    def setCandidates(self, *args): return _core.ExplorationData_setCandidates(self, *args)
+    def addCandidate(self, *args): return _core.ExplorationData_addCandidate(self, *args)
+    def removeCandidate(self, *args): return _core.ExplorationData_removeCandidate(self, *args)
+    def setCandidatesMask(self, *args): return _core.ExplorationData_setCandidatesMask(self, *args)
+    def setCandidatesMaskAt(self, *args): return _core.ExplorationData_setCandidatesMaskAt(self, *args)
+    def addToTreeMap(self, *args): return _core.ExplorationData_addToTreeMap(self, *args)
+    def popFromTreeMap(self, *args): return _core.ExplorationData_popFromTreeMap(self, *args)
+    def addToDerivationMap(self, *args): return _core.ExplorationData_addToDerivationMap(self, *args)
+    def increaseDerivationsCount(self, *args): return _core.ExplorationData_increaseDerivationsCount(self, *args)
+    def decreaseDerivationsCount(self, *args): return _core.ExplorationData_decreaseDerivationsCount(self, *args)
+    def popFromDerivationMap(self, *args): return _core.ExplorationData_popFromDerivationMap(self, *args)
+    __swig_getmethods__["load"] = lambda x: _core.ExplorationData_load
+    if _newclass:load = staticmethod(_core.ExplorationData_load)
+    def save(self, *args): return _core.ExplorationData_save(self, *args)
+    def isValid(self): return _core.ExplorationData_isValid(self)
+ExplorationData_swigregister = _core.ExplorationData_swigregister
+ExplorationData_swigregister(ExplorationData)
+
+def ExplorationData_load(*args):
+  return _core.ExplorationData_load(*args)
+ExplorationData_load = _core.ExplorationData_load
+
+class ExplorationTree(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, ExplorationTree, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, ExplorationTree, name)
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined")
+    __repr__ = _swig_repr
+    __swig_getmethods__["create"] = lambda x: _core.ExplorationTree_create
+    if _newclass:create = staticmethod(_core.ExplorationTree_create)
+    def asData(self): return _core.ExplorationTree_asData(self)
+    def update(self, *args): return _core.ExplorationTree_update(self, *args)
+    def runOperation(self, *args): return _core.ExplorationTree_runOperation(self, *args)
+    def fetchLeaves(self, increase_dist_improve_counter=False): return _core.ExplorationTree_fetchLeaves(self, increase_dist_improve_counter)
+    def fetchMol(self, *args): return _core.ExplorationTree_fetchMol(self, *args)
+    def hasMol(self, *args): return _core.ExplorationTree_hasMol(self, *args)
+    def isPathFound(self): return _core.ExplorationTree_isPathFound(self)
+    def deleteSubtree(self, *args): return _core.ExplorationTree_deleteSubtree(self, *args)
+    def generateMorphs(self): return _core.ExplorationTree_generateMorphs(self)
+    def sortMorphs(self): return _core.ExplorationTree_sortMorphs(self)
+    def filterMorphs(self, *args): return _core.ExplorationTree_filterMorphs(self, *args)
+    def extend(self): return _core.ExplorationTree_extend(self)
+    def prune(self): return _core.ExplorationTree_prune(self)
+    def traverse(self, *args): return _core.ExplorationTree_traverse(self, *args)
+    def save(self, *args): return _core.ExplorationTree_save(self, *args)
+    def getGenerationCount(self): return _core.ExplorationTree_getGenerationCount(self)
+    def getCandidateMorphs(self): return _core.ExplorationTree_getCandidateMorphs(self)
+    def getCandidateMorphsMask(self): return _core.ExplorationTree_getCandidateMorphsMask(self)
+    __swig_destroy__ = _core.delete_ExplorationTree
+    __del__ = lambda self : None;
+ExplorationTree_swigregister = _core.ExplorationTree_swigregister
+ExplorationTree_swigregister(ExplorationTree)
+
+def ExplorationTree_create(*args):
+  return _core.ExplorationTree_create(*args)
+ExplorationTree_create = _core.ExplorationTree_create
 
 class TreeOperation(_object):
     __swig_setmethods__ = {}
@@ -408,90 +783,6 @@ SimCoeffLongDesc = _core.SimCoeffLongDesc
 def SimCoeffParse(*args):
   return _core.SimCoeffParse(*args)
 SimCoeffParse = _core.SimCoeffParse
-class StringSet(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, StringSet, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, StringSet, name)
-    __repr__ = _swig_repr
-    def iterator(self): return _core.StringSet_iterator(self)
-    def __iter__(self): return self.iterator()
-    def __nonzero__(self): return _core.StringSet___nonzero__(self)
-    def __bool__(self): return _core.StringSet___bool__(self)
-    def __len__(self): return _core.StringSet___len__(self)
-    def append(self, *args): return _core.StringSet_append(self, *args)
-    def __contains__(self, *args): return _core.StringSet___contains__(self, *args)
-    def __getitem__(self, *args): return _core.StringSet___getitem__(self, *args)
-    def add(self, *args): return _core.StringSet_add(self, *args)
-    def discard(self, *args): return _core.StringSet_discard(self, *args)
-    def __init__(self, *args): 
-        this = _core.new_StringSet(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def empty(self): return _core.StringSet_empty(self)
-    def size(self): return _core.StringSet_size(self)
-    def clear(self): return _core.StringSet_clear(self)
-    def swap(self, *args): return _core.StringSet_swap(self, *args)
-    def count(self, *args): return _core.StringSet_count(self, *args)
-    def begin(self): return _core.StringSet_begin(self)
-    def end(self): return _core.StringSet_end(self)
-    def rbegin(self): return _core.StringSet_rbegin(self)
-    def rend(self): return _core.StringSet_rend(self)
-    def erase(self, *args): return _core.StringSet_erase(self, *args)
-    def find(self, *args): return _core.StringSet_find(self, *args)
-    def lower_bound(self, *args): return _core.StringSet_lower_bound(self, *args)
-    def upper_bound(self, *args): return _core.StringSet_upper_bound(self, *args)
-    def equal_range(self, *args): return _core.StringSet_equal_range(self, *args)
-    def insert(self, *args): return _core.StringSet_insert(self, *args)
-    __swig_destroy__ = _core.delete_StringSet
-    __del__ = lambda self : None;
-StringSet_swigregister = _core.StringSet_swigregister
-StringSet_swigregister(StringSet)
-
-class MolpherMol(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, MolpherMol, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, MolpherMol, name)
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        this = _core.new_MolpherMol(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_destroy__ = _core.delete_MolpherMol
-    __del__ = lambda self : None;
-    def copy(self): return _core.MolpherMol_copy(self)
-    def getSMILES(self): return _core.MolpherMol_getSMILES(self)
-    def getDistToTarget(self): return _core.MolpherMol_getDistToTarget(self)
-    def getTree(self): return _core.MolpherMol_getTree(self)
-    def getParentSMILES(self): return _core.MolpherMol_getParentSMILES(self)
-    def getDescendants(self): return _core.MolpherMol_getDescendants(self)
-    def getHistoricDescendants(self): return _core.MolpherMol_getHistoricDescendants(self)
-    def getItersWithoutDistImprovement(self): return _core.MolpherMol_getItersWithoutDistImprovement(self)
-    def getSAScore(self): return _core.MolpherMol_getSAScore(self)
-    def getMolecularWeight(self): return _core.MolpherMol_getMolecularWeight(self)
-    def getFormula(self): return _core.MolpherMol_getFormula(self)
-    def getParentOper(self): return _core.MolpherMol_getParentOper(self)
-    def setOwner(self, *args): return _core.MolpherMol_setOwner(self, *args)
-    def setSMILES(self, *args): return _core.MolpherMol_setSMILES(self, *args)
-    def setParentSMILES(self, *args): return _core.MolpherMol_setParentSMILES(self, *args)
-    def setDistToTarget(self, *args): return _core.MolpherMol_setDistToTarget(self, *args)
-    def setSAScore(self, *args): return _core.MolpherMol_setSAScore(self, *args)
-    def setItersWithoutDistImprovement(self, *args): return _core.MolpherMol_setItersWithoutDistImprovement(self, *args)
-    def increaseItersWithoutDistImprovement(self): return _core.MolpherMol_increaseItersWithoutDistImprovement(self)
-    def decreaseItersWithoutDistImprovement(self): return _core.MolpherMol_decreaseItersWithoutDistImprovement(self)
-    def addToDescendants(self, *args): return _core.MolpherMol_addToDescendants(self, *args)
-    def removeFromDescendants(self, *args): return _core.MolpherMol_removeFromDescendants(self, *args)
-    def setDescendants(self, *args): return _core.MolpherMol_setDescendants(self, *args)
-    def addToHistoricDescendants(self, *args): return _core.MolpherMol_addToHistoricDescendants(self, *args)
-    def removeFromHistoricDescendants(self, *args): return _core.MolpherMol_removeFromHistoricDescendants(self, *args)
-    def setHistoricDescendants(self, *args): return _core.MolpherMol_setHistoricDescendants(self, *args)
-    def isValid(self): return _core.MolpherMol_isValid(self)
-    def isBoundToTree(self): return _core.MolpherMol_isBoundToTree(self)
-    def removeFromTree(self): return _core.MolpherMol_removeFromTree(self)
-MolpherMol_swigregister = _core.MolpherMol_swigregister
-MolpherMol_swigregister(MolpherMol)
-
 # This file is compatible with both classic and new-style classes.
 
 

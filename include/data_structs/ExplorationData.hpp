@@ -49,12 +49,12 @@ public:
     int getCntMaxMorphs() const; // maxMorhpsTotal (prune this and all descendents if no distance improvement among children for this many iters)
     int getItThreshold() const; // nonProducingSurvive (prune descendents if no distance improvement among children after this many iters)
     
-    std::unique_ptr<MolpherMol> getSource() const;
-    std::unique_ptr<MolpherMol> getTarget() const;
+    std::shared_ptr<MolpherMol> getSource() const;
+    std::shared_ptr<MolpherMol> getTarget() const;
 
-    std::unique_ptr<std::vector<std::unique_ptr<MolpherMol> > > getCandidates() const;
+    std::shared_ptr<std::vector<std::shared_ptr<MolpherMol> > > getCandidates() const;
     const std::vector<bool>& getCandidatesMask() const;
-    std::unique_ptr<std::map<std::string, std::unique_ptr<MolpherMol> > > getTreeMap() const;
+    std::shared_ptr<std::map<std::string, std::shared_ptr<MolpherMol> > > getTreeMap() const;
     const std::map<std::string, unsigned>& getDerivationMap() const;
     
     // setters
@@ -89,14 +89,14 @@ public:
     void setCandidatesMaskAt(bool, unsigned);
 //    void setTreeMap(const std::map<std::string, MolpherMol>&);
     void addToTreeMap(const std::string&, const MolpherMol&);
-    std::unique_ptr<MolpherMol> popFromTreeMap(const std::string&);
+    std::shared_ptr<MolpherMol> popFromTreeMap(const std::string&);
 //    void setDerivationMap(const std::map<std::string, unsigned>&);
     void addToDerivationMap(const std::string&, unsigned);
     void increaseDerivationsCount(const std::string&);
     void decreaseDerivationsCount(const std::string&);
     unsigned popFromDerivationMap(const std::string&);
     
-    static std::unique_ptr<ExplorationData> load(const std::string &file);
+    static std::shared_ptr<ExplorationData> load(const std::string &file);
     void save(const std::string &file);
     
     bool isValid() const;
