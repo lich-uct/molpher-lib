@@ -16,7 +16,11 @@
             </sourceRootList>
             <confList>
                 <confElem>
-                    <name>Debug_DEV</name>
+                    <name>Debug_SWIG</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>Release_Linux_amd64</name>
                     <type>2</type>
                 </confElem>
             </confList>

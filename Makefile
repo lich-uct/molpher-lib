@@ -53,12 +53,14 @@ CCADMIN=CCadmin
 LIB_DIR=$(CND_BASEDIR)/dist/lib/
 SRC_DIR=$(CND_BASEDIR)/src/
 PYTHON_PACKAGE_DIR=$(SRC_DIR)/python/molpher/swig_wrappers
+TBB_LIBS=$(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/
 
 # filenames
 LIBNAME="libmolpher.so"
 
 # run swig
-RUN_SWIG=$(or $(SWIG),$(findstring DEV,$(CONF)))
+RUN_SWIG=$(or $(SWIG),$(findstring SWIG,$(CONF)))
+IS_RELEASE=$(findstring Release,$(CONF))
 
 # build
 build: .build-post
@@ -66,26 +68,31 @@ build: .build-post
 .build-pre:
 # Add your pre 'build' code here...
 	mkdir -p $(LIB_DIR)
-	mkdir -p $(PYTHON_PACKAGE_DIR)/lib/
 ifneq (,$(RUN_SWIG))
 	swig3.0 -python -Iinclude/ -Wall -c++ -outdir $(PYTHON_PACKAGE_DIR) -o $(SRC_DIR)/swig/molpher_wrap.cpp $(CND_BASEDIR)/include/molpher.i
 endif
 	
 .build-post: .build-impl
 # Add your post 'build' code here...
-#	cp $(CND_DISTDIR)/$(CONF)/$(CND_PLATFORM_$(CONF))/*.so $(LIB_DIR)$(LIBNAME)
-	
-	cp $(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/libtbb_debug.so.2 $(LIB_DIR)libtbb_debug.so.2
+
+# copy library files to the distribution directory for testing purposes
+ifneq (,$(IS_RELEASE))	
+	cp $(TBB_LIBS)libtbb.so.2 $(LIB_DIR)libtbb.so.2
+	ln -sf $(LIB_DIR)libtbb.so.2 $(LIB_DIR)libtbb.so
+	cp $(TBB_LIBS)libtbbmalloc.so.2 $(LIB_DIR)libtbbmalloc.so.2
+	ln -sf $(LIB_DIR)libtbbmalloc.so.2 $(LIB_DIR)libtbbmalloc.so
+	cp $(TBB_LIBS)libtbbmalloc_proxy.so.2 $(LIB_DIR)libtbbmalloc_proxy.so.2
+	ln -sf $(LIB_DIR)libtbbmalloc_proxy.so.2 $(LIB_DIR)libtbbmalloc_proxy.so
+else
+	cp $(TBB_LIBS)libtbb_debug.so.2 $(LIB_DIR)libtbb_debug.so.2
 	ln -sf $(LIB_DIR)libtbb_debug.so.2 $(LIB_DIR)libtbb_debug.so
-	cp $(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_debug.so.2 $(LIB_DIR)libtbbmalloc_debug.so.2
+	cp $(TBB_LIBS)libtbbmalloc_debug.so.2 $(LIB_DIR)libtbbmalloc_debug.so.2
 	ln -sf $(LIB_DIR)libtbbmalloc_debug.so.2 $(LIB_DIR)libtbbmalloc_debug.so
-	cp $(CND_BASEDIR)/deps/tbb/lib/intel64/gcc4.4/libtbbmalloc_proxy_debug.so.2 $(LIB_DIR)libtbbmalloc_proxy_debug.so.2
+	cp $(TBB_LIBS)libtbbmalloc_proxy_debug.so.2 $(LIB_DIR)libtbbmalloc_proxy_debug.so.2
 	ln -sf $(LIB_DIR)libtbbmalloc_proxy_debug.so.2 $(LIB_DIR)libtbbmalloc_proxy_debug.so
+endif
 	
-#	cp $(LIB_DIR)$(LIBNAME) $(PYTHON_PACKAGE_DIR)/lib/
-#	cp $(LIB_DIR)/*.so.2 $(PYTHON_PACKAGE_DIR)/lib/
 	cp $(CND_BASEDIR)/res/SAScore.dat $(PYTHON_PACKAGE_DIR)/SAScore.dat
-#	ln -sf $(CND_BASEDIR)/../backend/SAScore.dat SAScore.dat
 
 # clean
 clean: .clean-post
@@ -93,7 +100,6 @@ clean: .clean-post
 	rm -f $(PYTHON_PACKAGE_DIR)/*.dat
 	rm -rf dist/
 	rm -rf build/
-#	rm -rf python/*.egg-info
 	rm -f $(PYTHON_PACKAGE_DIR)/*.so
 
 .clean-pre:

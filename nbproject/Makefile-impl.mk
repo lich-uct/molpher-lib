@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=molpher-lib
 
 # Active Configuration
-DEFAULTCONF=Debug_DEV
+DEFAULTCONF=Debug_SWIG
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Debug_DEV 
+ALLCONFS=Debug_SWIG Release_Linux_amd64 
 
 
 # build
