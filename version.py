@@ -1,6 +1,12 @@
 VERSION = None
+BUILD_NUMBER = None
 
-with open('VERSION.TXT', 'r', encoding='utf-8') as versionfile:
-    VERSION = versionfile.read().strip()
+def load_stuff(path):
+    with open(path, 'r') as versionfile:
+        return versionfile.read().strip()
 
-print(VERSION)
+VERSION = load_stuff("VERSION.TXT")
+BUILD_NUMBER = load_stuff("BUILD.TXT")
+
+print('Version: ', VERSION)
+print('Build: ', BUILD_NUMBER)
