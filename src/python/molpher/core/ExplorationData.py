@@ -1,9 +1,13 @@
 import molpher
+from molpher.core import selectors
+from molpher.core.MolpherMol import MolpherMol
+from molpher.swig_wrappers.core import FingerprintShortDesc, SimCoeffShortDesc, ChemOperShortDesc
 
-class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
+
+class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
     """
     :param parameters: another instance to copy the parameters from
-    :type parameters: `molpher.swig_wrappers.core.ExplorationParameters` or its derived class
+    :type parameters: `molpher.swig_wrappers.core.ExplorationData` or its derived class
     :param \*\*kwargs: morphing parameters
     :type \*\*kwargs: `dict`
 
@@ -13,7 +17,7 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
 
     This class houses morphing parameters and can be used to initialize a `molpher.core.ExplorationTree` instance.
 
-    It inherits from `molpher.swig_wrappers.core.ExplorationParameters`. Therefore, it provides the same interface.
+    It inherits from `molpher.swig_wrappers.core.ExplorationData`. Therefore, it provides the same interface.
     However, it also exposes the parameters as object attributes that use a slightly different name convention
     (derived from the names of the parameters used in the `XML template` files) that should make the
     parameter names more self-explanatory.
@@ -33,17 +37,14 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
 
         pass
 
-    def __init__(self, parameters=None, **kwargs):
-        if parameters:
-            super(ExplorationParameters, self).__init__(parameters)
-        else:
-            super(ExplorationParameters, self).__init__()
+    def __init__(self, **kwargs):
+        super(ExplorationData, self).__init__()
         self._SETTERS_MAP = {
-            'source' : self.setSourceMol
-            , 'target' : self.setTargetMol
-            , 'operators' : self.setChemOperators
+            'source' : self.setSource
+            , 'target' : self.setTarget
+            , 'operators' : self.setChemicalOperators
             , 'fingerprint' : self.setFingerprint
-            , 'similarity' : self.setSimilarityCoef
+            , 'similarity' : self.setSimilarityCoefficient
             , 'weight_min' : self.setMinAcceptableMolecularWeight
             , 'weight_max' : self.setMaxAcceptableMolecularWeight
             , 'accept_min' : self.setCntCandidatesToKeep
@@ -55,11 +56,11 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
             , 'non_producing_survive' : self.setItThreshold
         }
         self._GETTERS_MAP = {
-            'source' : self.getSourceMol
-            , 'target' : self.getTargetMol
-            , 'operators' : self.getChemOperators
+            'source' : self.getSource
+            , 'target' : self.getTarget
+            , 'operators' : self.getChemicalOperators
             , 'fingerprint' : self.getFingerprint
-            , 'similarity' : self.getSimilarityCoef
+            , 'similarity' : self.getSimilarityCoefficient
             , 'weight_min' : self.getMinAcceptableMolecularWeight
             , 'weight_max' : self.getMaxAcceptableMolecularWeight
             , 'accept_min' : self.getCntCandidatesToKeep
@@ -71,6 +72,10 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
             , 'non_producing_survive' : self.getItThreshold
         }
         if kwargs:
+            if 'source' in kwargs and type(kwargs['source']) == str:
+                kwargs['source'] = MolpherMol(kwargs['source'])
+            if 'target' in kwargs and type(kwargs['target']) == str:
+                kwargs['target'] = MolpherMol(kwargs['target'])
             self._update_instance(kwargs)
 
     def _update_instance(self, options):
@@ -123,7 +128,7 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
         :rtype: `bool`
         """
 
-        return self.valid()
+        return self.isValid()
 
     @property
     def source(self):
@@ -131,15 +136,21 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
         The `source molecule`. All morphs in an `exploration tree` are derived from this
         molecule during morphing. This is the root of the tree.
 
-        :return: `MolpherMol` instance representing the current `source molecule`
+        :return: `MolpherMol` instance or SMILES string representing the current `source molecule`
         :rtype: `MolpherMol`
         """
 
-        return self._GETTERS_MAP['source']()
+        return MolpherMol(other=self._GETTERS_MAP['source']())
 
     @source.setter
     def source(self, value):
-        self._SETTERS_MAP['source'](value)
+        if type(value) == str:
+            mol = MolpherMol(value)
+            self._SETTERS_MAP['source'](mol)
+        elif isinstance(value, MolpherMol):
+            self._SETTERS_MAP['source'](value)
+        else:
+            raise Exception("Invalid input. Need 'str' or 'MolpherMol'...")
 
     @property
     def target(self):
@@ -151,11 +162,17 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
         :rtype: `MolpherMol`
         """
 
-        return self._GETTERS_MAP['target']()
+        return MolpherMol(other=self._GETTERS_MAP['target']())
 
     @target.setter
     def target(self, value):
-        self._SETTERS_MAP['target'](value)
+        if type(value) == str:
+            mol = MolpherMol(value)
+            self._SETTERS_MAP['target'](mol)
+        elif isinstance(value, MolpherMol):
+            self._SETTERS_MAP['target'](value)
+        else:
+            raise Exception("Invalid input. Need 'str' or 'MolpherMol'...")
 
     @property
     def operators(self):
@@ -170,11 +187,17 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
         :rtype: `tuple` of `str`
         """
 
-        return self._GETTERS_MAP['operators']()
+        return tuple( ChemOperShortDesc(operator) for operator in self._GETTERS_MAP['operators']() )
 
     @operators.setter
     def operators(self, value):
-        self._SETTERS_MAP['operators'](value)
+        chosen_selectors = set()
+        for selector in value:
+            if type(selector) == str:
+                chosen_selectors.add(getattr(selectors, selector))
+            else:
+                chosen_selectors.add(selector)
+        self._SETTERS_MAP['operators'](tuple(chosen_selectors))
 
     @property
     def fingerprint(self):
@@ -187,10 +210,12 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
         :rtype: `str`
         """
 
-        return self._GETTERS_MAP['fingerprint']()
+        return FingerprintShortDesc(self._GETTERS_MAP['fingerprint']())
 
     @fingerprint.setter
     def fingerprint(self, value):
+        if type(value) == str:
+            value = getattr(selectors, value)
         self._SETTERS_MAP['fingerprint'](value)
 
     @property
@@ -204,10 +229,12 @@ class ExplorationParameters(molpher.swig_wrappers.core.ExplorationParameters):
         :rtype: `str`
         """
 
-        return self._GETTERS_MAP['similarity']()
+        return SimCoeffShortDesc(self._GETTERS_MAP['similarity']())
 
     @similarity.setter
     def similarity(self, value):
+        if type(value) == str:
+            value = getattr(selectors, value)
         self._SETTERS_MAP['similarity'](value)
 
     @property

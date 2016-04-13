@@ -103,7 +103,6 @@ clean: .clean-post
 	rm -rf $(LIB_DIR)
 	rm -f $(PYTHON_PACKAGE_DIR)/*.dat
 	rm -f $(PYTHON_PACKAGE_DIR)/*.so
-	python setup.py clean --all
 
 .clean-pre:
 # Add your pre 'clean' code here...

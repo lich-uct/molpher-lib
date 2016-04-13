@@ -18,14 +18,14 @@
 #include "selectors/chemoper_selectors.h"
 
 static const char *shortDesc[] = {
-    "AA",
-    "RA",
-    "AB",
-    "RB",
-    "MA",
-    "IA",
-    "BR",
-    "BC"
+    "OP_ADD_ATOM",
+    "OP_REMOVE_ATOM",
+    "OP_ADD_BOND",
+    "OP_REMOVE_BOND",
+    "OP_MUTATE_ATOM",
+    "OP_INTERLAY_ATOM",
+    "OP_BOND_REROUTE",
+    "OP_BOND_CONTRACTION"
 };
 
 static const char *longDesc[] = {

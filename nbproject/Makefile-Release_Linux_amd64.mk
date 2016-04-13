@@ -486,13 +486,13 @@ ${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/minimal_test/MinimalTest.o ${TESTDIR}/
 ${TESTDIR}/tests/minimal_test/MinimalTest.o: tests/minimal_test/MinimalTest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests/minimal_test
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTest.o tests/minimal_test/MinimalTest.cpp
+	$(COMPILE.cc) -O2 -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTest.o tests/minimal_test/MinimalTest.cpp
 
 
 ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o: tests/minimal_test/MinimalTestRunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests/minimal_test
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o tests/minimal_test/MinimalTestRunner.cpp
+	$(COMPILE.cc) -O2 -DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB -Iinclude/ -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/minimal_test/MinimalTestRunner.o tests/minimal_test/MinimalTestRunner.cpp
 
 
 ${OBJECTDIR}/src/core/API/ExplorationData_nomain.o: ${OBJECTDIR}/src/core/API/ExplorationData.o src/core/API/ExplorationData.cpp 

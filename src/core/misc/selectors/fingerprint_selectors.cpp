@@ -21,19 +21,19 @@
 #include "boost/algorithm/string/predicate.hpp"
 
 static const char *shortDesc[] = {
-    "ATP",
-    "MRG",
-    "TOP",
-    "TL1",
-    "TL2",
-    "VectorFp",
-    "TPT",
-    "EATP",
-    "EMRG",
-    "ETOP",
-    "ETL1",
-    "ETL2",
-    "ETPT"
+    "FP_ATOM_PAIRS",
+    "FP_MORGAN",
+    "FP_TOPOLOGICAL",
+    "FP_TOPOLOGICAL_LAYERED_1",
+    "FP_TOPOLOGICAL_LAYERED_2",
+    "FP_TOPOLOGICAL_TORSION",
+    "FP_VECTORFP",
+    "FP_EXT_ATOM_PAIRS",
+    "FP_EXT_MORGAN",
+    "FP_EXT_TOPOLOGICAL",
+    "FP_EXT_TOPOLOGICAL_LAYERED_1",
+    "FP_EXT_TOPOLOGICAL_LAYERED_2",
+    "FP_EXT_TOPOLOGICAL_TORSION"
 };
 
 static const char *longDesc[] = {

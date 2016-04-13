@@ -1,0 +1,38 @@
+from molpher.swig_wrappers.core import \
+    FP_ATOM_PAIRS\
+    , FP_EXT_ATOM_PAIRS\
+    , FP_EXT_MORGAN\
+    , FP_EXT_TOPOLOGICAL\
+    , FP_EXT_TOPOLOGICAL_LAYERED_1\
+    , FP_EXT_TOPOLOGICAL_LAYERED_2\
+    , FP_EXT_TOPOLOGICAL_TORSION\
+    , FP_MORGAN, FP_TOPOLOGICAL\
+    , FP_TOPOLOGICAL_LAYERED_1\
+    , FP_TOPOLOGICAL_LAYERED_2\
+    , FP_TOPOLOGICAL_TORSION\
+    , FP_VECTORFP
+
+from molpher.swig_wrappers.core import \
+    SC_ALL_BIT\
+    , SC_ASYMMETRIC\
+    , SC_BRAUN_BLANQUET\
+    , SC_COSINE\
+    , SC_DICE\
+    , SC_KULCZYNSKI\
+    , SC_MC_CONNAUGHEY\
+    , SC_ON_BIT\
+    , SC_RUSSEL\
+    , SC_SOKAL\
+    , SC_TANIMOTO\
+    , SC_TVERSKY_SUBSTRUCTURE\
+    , SC_TVERSKY_SUPERSTRUCTURE
+
+from molpher.swig_wrappers.core import \
+    OP_ADD_ATOM\
+    , OP_ADD_BOND\
+    , OP_BOND_CONTRACTION\
+    , OP_BOND_REROUTE\
+    , OP_INTERLAY_ATOM\
+    , OP_MUTATE_ATOM\
+    , OP_REMOVE_ATOM\
+    , OP_REMOVE_BOND
