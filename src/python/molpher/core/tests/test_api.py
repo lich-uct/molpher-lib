@@ -1,5 +1,7 @@
+import os
 import unittest
 
+from molpher.core.ExplorationTree import ExplorationTree
 from molpher.core.selectors import *
 from molpher.core.ExplorationData import ExplorationData
 
@@ -8,11 +10,14 @@ class TestPythonAPI(unittest.TestCase):
     def setUp(self):
         self.test_source = 'CCO'
         self.test_target = 'C1=COC=C1'
+        self.test_dir = os.path.abspath('test_files/')
+        self.test_template_path = os.path.join(self.test_dir, 'test-template.xml')
 
     def tearDown(self):
         pass
 
     def test_MolpherMol(self):
+        # TODO: implement
         pass
 
     def testParams(self):
@@ -36,50 +41,73 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(params.source.smiles, self.test_source)
         self.assertEqual(params.target.smiles, self.test_target)
 
+        params.param_dict = {
+            'target' : self.test_source
+            , 'operators' : params.param_dict['operators'][:1]
+        }
+        self.assertEqual(params.target.smiles, self.test_source)
+        self.assertEqual(params.operators, ('OP_ADD_BOND',))
 
-    # def testTreeInit(self):
-    #     mol1 = self.test_source
-    #     mol2 = self.test_target
-    #     params = ExplorationParameters(
-    #         source=mol1
-    #         , target=mol2
-    #     )
-    #     params.param_dict = {
-    #         'source' : mol2
-    #         , 'target' : mol1
-    #         , 'operators' : params.param_dict['operators'][:3]
-    #     }
-    #     self.assertRaises(RuntimeError, lambda : ExplorationTree())
-    #     tree = ExplorationTree(source=mol1, target=mol2)
-    #     self.assertEqual(tree.params['source'], mol1)
-    #     self.assertEqual(tree.params['target'], mol2)
-    #     def func():
-    #         tree.params = {'source' : ''}
-    #     self.assertRaises(RuntimeError, func)
-    #     tree.params = params
-    #     self.assertEqual(tree.params['source'], mol2)
-    #     self.assertEqual(tree.params['target'], mol1)
-    #     self.assertEqual(tree.params['operators'], params.param_dict['operators'])
-    #     tree.params = {
-    #         'source' : mol1
-    #         , 'target' : mol2
-    #     }
-    #     self.assertEqual(tree.params['source'], mol1)
-    #     self.assertEqual(tree.params['target'], mol2)
-    #     self.assertEqual(tree.params['operators'], params.param_dict['operators'])
-    #
-    #     leaf = tree.leaves[0]
-    #     self.assertTrue(leaf.isBound())
-    #     leaf.setDistToTarget(0.5)
-    #     self.assertEqual(tree.leaves[0].getDistToTarget(), 0.5)
-    #
-    #     leaf_copy = leaf.copy()
-    #     self.assertFalse(leaf_copy.isBound())
-    #     self.assertEqual(leaf_copy.getDistToTarget(), 0.5)
-    #     leaf_copy.setDistToTarget(0.7)
-    #     self.assertEqual(leaf.getDistToTarget(), 0.5)
-    #     self.assertEqual(leaf_copy.getDistToTarget(), 0.7)
-    #
+        params_from_temp = ExplorationData.load(self.test_template_path)
+        self.assertRaises(RuntimeError, lambda : ExplorationData.load('not/a/valid/path'))
+        self.assertEqual(777, params_from_temp.far_produce)
+
+    def testTree(self):
+        mol1 = self.test_source
+        mol2 = self.test_target
+        params_dict = {
+            'source' : mol1
+            , 'target' : mol2
+            , 'operators' : (OP_ADD_BOND, OP_REMOVE_BOND, OP_MUTATE_ATOM)
+        }
+        params = ExplorationData(**params_dict)
+
+
+        self.assertRaises(AttributeError, lambda : ExplorationTree())
+        tree_from_dict = ExplorationTree.create(params=params_dict)
+        tree_from_params = ExplorationTree.create(params=params)
+        tree_from_SMILES = ExplorationTree.create(source=mol1, target=mol2)
+        def test_tree(tree):
+            self.assertEqual(tree.params['source'], mol1)
+            self.assertEqual(tree.params['target'], mol2)
+
+        test_tree(tree_from_dict)
+        test_tree(tree_from_params)
+        test_tree(tree_from_SMILES)
+
+        tree = tree_from_params
+
+        def func():
+            tree.params = {'source' : ''}
+        self.assertRaises(RuntimeError, func)
+
+        tree.params = {
+            'source' : mol2 # if we try to set source for non-empty tree, it shouldn't be changed
+            , 'target' : 'C'
+        }
+        self.assertEqual(tree.params['source'], mol1)
+        self.assertEqual(tree.params['target'], 'C')
+        self.assertEqual(tree.params['operators'], params.param_dict['operators']) # we should still have the same opers set
+
+        tree.params = params # assign the original parameters back
+        self.assertEqual(tree.params['source'], mol1)
+        self.assertEqual(tree.params['target'], mol2)
+        self.assertEqual(tree.params['operators'], params.param_dict['operators'])
+
+        leaf = tree.leaves[0]
+        self.assertTrue(tree.hasMol(leaf))
+        # self.assertEqual(tree, leaf.tree) # FIXME: add a reliable operator for tree comparisons
+        leaf.setDistToTarget(0.5)
+        self.assertEqual(tree.leaves[0].getDistToTarget(), 0.5)
+
+        leaf_copy = tree.leaves[0].copy()
+        self.assertFalse(tree.hasMol(leaf_copy))
+        self.assertEqual(leaf_copy.getDistToTarget(), 0.5)
+        leaf_copy.setDistToTarget(0.7)
+        self.assertEqual(leaf.getDistToTarget(), 0.5)
+        self.assertEqual(tree.leaves[0].getDistToTarget(), 0.5)
+        self.assertEqual(leaf_copy.getDistToTarget(), 0.7)
+
     # def testMorphing(self):
     #     def callback(morph):
     #         callback.morphs_in_tree += 1

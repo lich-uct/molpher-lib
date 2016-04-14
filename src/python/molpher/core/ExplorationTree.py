@@ -1,8 +1,9 @@
 import molpher
 import warnings
 
-from molpher.swig_wrappers.core import TraverseCallback, TraverseOper, MolpherMol, ExplorationTreeSnapshot
-
+from molpher.core.ExplorationData import ExplorationData
+from molpher.core.MolpherMol import MolpherMol
+from molpher.core.operations import TraverseCallback, TraverseOper
 
 class Callback(TraverseCallback):
     """
@@ -32,7 +33,7 @@ class Callback(TraverseCallback):
 class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
     """
     :param params: the morphing parameters (optional if ``source`` is specified)
-    :type params: `molpher.swig_wrappers.core.ExplorationParameters` or any of its derived classes
+    :type params: `molpher.swig_wrappers.core.ExplorationData` or any of its derived classes or a `dict` of parameters to `molpher.core.ExplorationData`
     :param source: SMILES of the source molecule
     :type source: `str`
     :param target: SMILES of the target molecule (optional)
@@ -47,27 +48,41 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
 
     """
 
-    def __init__(self, params=None, source=None, target=None):
+    def __init__(self):
+        super(ExplorationTree, self).__init__()
+
+    @staticmethod
+    def _cast_mols(mols):
+        ret = [ x for x in mols ]
+        for morph in ret:
+            morph.__class__ = MolpherMol
+        return ret
+
+    @staticmethod
+    def create(params=None, source=None, target=None):
+        ret = None
         if params and (source or target):
             warnings.warn(
-                "Both parameters and a source or a target specified. Using the values in parameters..."
+                "Both parameters and source, target or snapshot specified. Using the values in parameters..."
                 , RuntimeWarning
             )
-        if params and (params.__class__ == molpher.core.ExplorationParameters
-                or params.__class__ == molpher.wrappers.ExplorationParameters): # FIXME: check only for the base class molpher.wrappers.ExplorationParameters
-            super(ExplorationTree, self).__init__(params)
+        if params and isinstance(params, molpher.wrappers.ExplorationData):
+            ret = super(ExplorationTree, ExplorationTree).create(params)
         elif params:
-            _params = molpher.core.ExplorationParameters(**params)
-            super(ExplorationTree, self).__init__(_params)
-        elif source:
-            if not target:
-                super(ExplorationTree, self).__init__(source)
-            else:
-                super(ExplorationTree, self).__init__(source, target)
+            _params = ExplorationData(**params)
+            ret = super(ExplorationTree, ExplorationTree).create(_params)
+        elif source and target:
+            ret = super(ExplorationTree, ExplorationTree).create(source, target)
         else:
-            raise RuntimeError('You must specify either `params` or `source`.')
+            raise AttributeError('Invalid set of parameters specified.')
 
-        self._callback_class = Callback
+        if not ret:
+            raise RuntimeError('No tree initilized.')
+
+        ret.callback_class = Callback
+        ret.__class__ = ExplorationTree
+
+        return ret
 
     @property
     def params(self):
@@ -80,18 +95,18 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         :return: current parameters
         :rtype: `dict`
         """
-        params = molpher.core.ExplorationParameters(parameters=self.getParams())
+        params = ExplorationData(other=self.asData())
         return params.param_dict
 
     @params.setter
     def params(self, params):
-        if params.__class__ == molpher.core.ExplorationParameters \
-                or params.__class__ == molpher.wrappers.ExplorationParameters: # FIXME: check only for the base class molpher.wrappers.ExplorationParameters
-            self.setParams(params)
+        if isinstance(params, molpher.wrappers.ExplorationData):
+            self.update(params)
         else:
-            new = molpher.core.ExplorationParameters(parameters=self.getParams())
-            new.param_dict = params
-            self.setParams(new)
+            new_params = self.params
+            new_params.update(params)
+            data = ExplorationData(**new_params)
+            self.update(data)
 
     @property
     def generation_count(self):
@@ -124,7 +139,7 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         :rtype: `tuple`
         """
 
-        return self.fetchLeaves()
+        return tuple(self._cast_mols(self.fetchLeaves()))
 
     @property
     def candidates(self):
@@ -134,8 +149,7 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         :return: the `candidate morphs` as instances of `MolpherMol`
         :rtype: `tuple`
         """
-
-        return self.getCandidateMorphs()
+        return tuple(self._cast_mols(self.getCandidateMorphs()))
 
     @property
     def candidates_mask(self):
@@ -172,6 +186,11 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
     def thread_count(self, val):
         self.setThreadCount(val)
 
+    def fetchMol(self, canonSMILES):
+        ret = super(ExplorationTree, self).fetchMol(canonSMILES)
+        ret.__class__ = MolpherMol
+        return ret
+
     def traverse(self, callback, start_mol = None):
         """
         This method can be used to traverse the whole tree structure (or just a subtree)
@@ -192,40 +211,10 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         """
 
         if start_mol and type(start_mol) == MolpherMol:
-            TraverseOper(self, self._callback_class(callback), start_mol)()
+            TraverseOper(self, self.callback_class(callback), start_mol)()
         elif start_mol:
             mol = self.fetchMol(start_mol)
-            TraverseOper(self, self._callback_class(callback), mol)()
+            TraverseOper(self, self.callback_class(callback), mol)()
         else:
             cb = self._callback_class(callback)
             TraverseOper(self, cb)()
-
-    @staticmethod
-    def createFromSnapshot(snapshot):
-        """
-        Creates a tree from a file.
-
-        :param snapshot: a path to a snapshot or an instance of `ExplorationTreeSnapshot`
-        :type snapshot: `str` ot `ExplorationTreeSnapshot`
-        :return: new tree instance
-        :rtype: `ExplorationTree`
-        """
-
-        if type(snapshot) == str:
-            template = ExplorationTreeSnapshot.load(snapshot)
-            tree = molpher.swig_wrappers.core.ExplorationTree.createFromSnapshot(template)
-        else:
-            tree = molpher.swig_wrappers.core.ExplorationTree.createFromSnapshot(snapshot)
-        tree.__class__ = ExplorationTree
-        return tree
-
-    def saveSnapshot(self, name):
-        """
-        Saves current instance as a file.
-
-        :param name: path to the saved file
-        :type name: `str`
-        """
-
-        snapshot = self.createSnapshot()
-        snapshot.save(name)

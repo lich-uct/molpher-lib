@@ -144,9 +144,11 @@ class ExplorationTree::ExplorationTreeImpl
         void traverse(std::shared_ptr<ExplorationTree> tree, TraverseCallback& callback);
         void save(const std::string& filename);
         
+        int getThreadCount();
         MolVector getCandidateMorphs();
         std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version
         unsigned getGenerationCount();
         
-//        void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
+        void setThreadCount(int threadCnt);
+        void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
 };

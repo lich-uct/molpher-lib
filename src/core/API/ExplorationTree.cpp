@@ -125,6 +125,18 @@ void ExplorationTree::save(const std::string& filename) {
     pimpl->save(filename);
 }
 
+void ExplorationTree::setCandidateMorphsMask(const std::vector<bool>& new_mask) {
+    pimpl->setCandidateMorphsMask(new_mask);
+}
+
+void ExplorationTree::setThreadCount(int threadCnt) {
+    pimpl->setThreadCount(threadCnt);
+}
+
+int ExplorationTree::getThreadCount() {
+    return pimpl->getThreadCount();
+}
+
 // pimpl
 
 ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl() :
@@ -198,9 +210,9 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
     
     auto new_data = this->asData();
     if (!new_data->isValid()) {
+        new_data->save("error_snapshot.xml");
         throw std::runtime_error("The tree was created with serious "
                 "inconsistencies. Check the 'error_snapshot.xml' file for more details...");
-        new_data->save("error_snapshot.xml");
     }
 }
 
@@ -407,3 +419,16 @@ void ExplorationTree::ExplorationTreeImpl::save(const std::string& filename) {
     auto data = asData();
     data->save(filename);
 }
+
+void ExplorationTree::ExplorationTreeImpl::setCandidateMorphsMask(const std::vector<bool>& new_mask) {
+    candidatesMask = new_mask;
+}
+
+void ExplorationTree::ExplorationTreeImpl::setThreadCount(int threadCnt) {
+    this->threadCnt = threadCnt;
+}
+
+int ExplorationTree::ExplorationTreeImpl::getThreadCount() {
+    return threadCnt;
+}
+

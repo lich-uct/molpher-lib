@@ -1147,6 +1147,9 @@ class ExplorationTree(_object):
     def save(self, filename):
         return _core.ExplorationTree_save(self, filename)
 
+    def getThreadCount(self):
+        return _core.ExplorationTree_getThreadCount(self)
+
     def getGenerationCount(self):
         return _core.ExplorationTree_getGenerationCount(self)
 
@@ -1155,6 +1158,12 @@ class ExplorationTree(_object):
 
     def getCandidateMorphsMask(self):
         return _core.ExplorationTree_getCandidateMorphsMask(self)
+
+    def setThreadCount(self, threadCnt):
+        return _core.ExplorationTree_setThreadCount(self, threadCnt)
+
+    def setCandidateMorphsMask(self, arg2):
+        return _core.ExplorationTree_setCandidateMorphsMask(self, arg2)
     __swig_destroy__ = _core.delete_ExplorationTree
     __del__ = lambda self: None
 ExplorationTree_swigregister = _core.ExplorationTree_swigregister

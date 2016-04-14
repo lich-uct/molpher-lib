@@ -62,14 +62,14 @@ public:
     void traverse(const std::string& rootSMILES, TraverseCallback& callback);
     void traverse(TraverseCallback& callback);
     void save(const std::string& filename);
-//    
-//    int getThreadCount();
+    
+    int getThreadCount();
     unsigned getGenerationCount();
     std::vector<std::shared_ptr<MolpherMol> > getCandidateMorphs();
     std::vector<bool> getCandidateMorphsMask(); // TODO add a bitset version 
-//    
-//    void setThreadCount(int threadCnt);
-//    void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
+    
+    void setThreadCount(int threadCnt);
+    void setCandidateMorphsMask(const std::vector<bool>&); // TODO add a bitset version
 
 };
 

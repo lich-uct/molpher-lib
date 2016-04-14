@@ -1,4 +1,6 @@
 
+#include <boost/filesystem.hpp>
+
 #include "data_structs/ExplorationData.hpp"
 #include "core/data_structs/ExplorationDataImpl.hpp"
 #include "core/data_structs/MolpherMolData.hpp"
@@ -366,12 +368,26 @@ void ExplorationData::setThreadCount(unsigned val) {
 }
 
 std::shared_ptr<ExplorationData> ExplorationData::load(const std::string& file) {
-    auto data = std::make_shared<ExplorationData>();
-    molpher::iteration::IterationSerializer::load(file, *(data->pimpl));
-    data->pimpl->treeMap.insert(std::make_pair(data->pimpl->source.SMILES, data->pimpl->source));
-    return data;
+    boost::filesystem::path path;
+    try {
+        path = boost::filesystem::canonical( file );
+    } catch (boost::filesystem3::filesystem_error) {
+        throw std::runtime_error("Unable to open snapshot: " + file);
+    }
+    if (boost::filesystem::exists(path)) {
+        auto data = std::make_shared<ExplorationData>();
+        molpher::iteration::IterationSerializer::load(file, *(data->pimpl));
+        if (data->pimpl->treeMap.empty()) {
+            data->pimpl->treeMap.insert(std::make_pair(data->pimpl->source.SMILES, data->pimpl->source));
+        }
+        return data;
+    } else {
+        throw std::runtime_error("Given snapshot file does not exist: " + file);
+    }
 }
 
 void ExplorationData::save(const std::string& file) {
-    molpher::iteration::IterationSerializer::save(file, *pimpl);
+    if (!molpher::iteration::IterationSerializer::save(file, *pimpl)) {
+        throw std::runtime_error("Failed to save file: " + file);
+    }
 }

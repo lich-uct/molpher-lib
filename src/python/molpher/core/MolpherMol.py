@@ -1,6 +1,8 @@
 import warnings
 
 import molpher.swig_wrappers.core as wrappers
+import molpher.core.ExplorationTree
+
 
 class MolpherMol(wrappers.MolpherMol):
 
@@ -29,4 +31,19 @@ class MolpherMol(wrappers.MolpherMol):
 
     @property
     def tree(self):
-        return self.getTree()
+        ret = self.getTree()
+        ret.__class__ = molpher.core.ExplorationTree.ExplorationTree
+        return ret
+
+    def copy(self):
+        copy = super(MolpherMol, self).copy()
+        copy.__class__ = MolpherMol
+        return copy
+
+    @property
+    def dist_to_target(self):
+        return self.getDistToTarget()
+
+    @dist_to_target.setter
+    def dist_to_target(self, dist):
+        self.setDistToTarget(dist)

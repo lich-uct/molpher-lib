@@ -26,5 +26,6 @@
     <similarity>SC_TANIMOTO</similarity>
     <param>
         <iterMax>5</iterMax>
+        <farProduce>777</farProduce>
     </param>
 </iteration>

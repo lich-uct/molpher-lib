@@ -20419,11 +20419,17 @@ SWIGINTERN PyObject *_wrap_ExplorationData_setSource(PyObject *SWIGUNUSEDPARM(se
       arg2 = const_cast< MolpherMol * >(reinterpret_cast< std::shared_ptr< const MolpherMol > * >(argp2)->get());
     }
   }
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->setSource((MolpherMol const &)*arg2);
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->setSource((MolpherMol const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -20803,11 +20809,17 @@ SWIGINTERN PyObject *_wrap_ExplorationData_setCandidatesMask(PyObject *SWIGUNUSE
     }
     arg2 = ptr;
   }
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->setCandidatesMask((std::vector< bool,std::allocator< bool > > const &)*arg2);
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->setCandidatesMask((std::vector< bool,std::allocator< bool > > const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -21245,11 +21257,17 @@ SWIGINTERN PyObject *_wrap_ExplorationData_load(PyObject *SWIGUNUSEDPARM(self), 
     }
     arg1 = ptr;
   }
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    result = ExplorationData::load((std::string const &)*arg1);
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = ExplorationData::load((std::string const &)*arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   {
     std::shared_ptr<  ExplorationData > *smartresult = result ? new std::shared_ptr<  ExplorationData >(result) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_std__shared_ptrT_ExplorationData_t, SWIG_POINTER_OWN);
@@ -21301,11 +21319,17 @@ SWIGINTERN PyObject *_wrap_ExplorationData_save(PyObject *SWIGUNUSEDPARM(self), 
     }
     arg2 = ptr;
   }
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->save((std::string const &)*arg2);
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->save((std::string const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -21629,11 +21653,17 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_update(PyObject *SWIGUNUSEDPARM(self)
       arg2 = const_cast< ExplorationData * >(reinterpret_cast< std::shared_ptr< const ExplorationData > * >(argp2)->get());
     }
   }
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->update((ExplorationData const &)*arg2);
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->update((ExplorationData const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22113,11 +22143,17 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_deleteSubtree__SWIG_0(PyObject *SWIGU
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "ExplorationTree_deleteSubtree" "', argument " "3"" of type '" "bool""'");
   } 
   arg3 = static_cast< bool >(val3);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->deleteSubtree((std::string const &)*arg2,arg3);
-    SWIG_PYTHON_THREAD_END_ALLOW;
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      (arg1)->deleteSubtree((std::string const &)*arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
+  catch(std::runtime_error &_e) {
+    SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+  }
+  
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -22863,6 +22899,44 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ExplorationTree_getThreadCount(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< ExplorationTree > tempshared1 ;
+  std::shared_ptr< ExplorationTree > *smartarg1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ExplorationTree_getThreadCount",&obj0)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_getThreadCount" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      arg1 = const_cast< ExplorationTree * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      arg1 = const_cast< ExplorationTree * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)(arg1)->getThreadCount();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ExplorationTree_getGenerationCount(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = (ExplorationTree *) 0 ;
@@ -22973,6 +23047,105 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_getCandidateMorphsMask(PyObject *SWIG
   resultobj = swig::from(static_cast< std::vector<bool,std::allocator< bool > > >(result));
   return resultobj;
 fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationTree_setThreadCount(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< ExplorationTree > tempshared1 ;
+  std::shared_ptr< ExplorationTree > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationTree_setThreadCount",&obj0,&obj1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_setThreadCount" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      arg1 = const_cast< ExplorationTree * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      arg1 = const_cast< ExplorationTree * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExplorationTree_setThreadCount" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setThreadCount(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationTree_setCandidateMorphsMask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  std::vector< bool,std::allocator< bool > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< ExplorationTree > tempshared1 ;
+  std::shared_ptr< ExplorationTree > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationTree_setCandidateMorphsMask",&obj0,&obj1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_setCandidateMorphsMask" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      arg1 = const_cast< ExplorationTree * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      arg1 = const_cast< ExplorationTree * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::vector<bool,std::allocator< bool > > *ptr = (std::vector<bool,std::allocator< bool > > *)0;
+    res2 = swig::asptr(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExplorationTree_setCandidateMorphsMask" "', argument " "2"" of type '" "std::vector< bool,std::allocator< bool > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_setCandidateMorphsMask" "', argument " "2"" of type '" "std::vector< bool,std::allocator< bool > > const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->setCandidateMorphsMask((std::vector< bool,std::allocator< bool > > const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
 
@@ -25955,9 +26128,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExplorationTree_prune", _wrap_ExplorationTree_prune, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_traverse", _wrap_ExplorationTree_traverse, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_save", _wrap_ExplorationTree_save, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_getThreadCount", _wrap_ExplorationTree_getThreadCount, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getGenerationCount", _wrap_ExplorationTree_getGenerationCount, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getCandidateMorphs", _wrap_ExplorationTree_getCandidateMorphs, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_getCandidateMorphsMask", _wrap_ExplorationTree_getCandidateMorphsMask, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_setThreadCount", _wrap_ExplorationTree_setThreadCount, METH_VARARGS, NULL},
+	 { (char *)"ExplorationTree_setCandidateMorphsMask", _wrap_ExplorationTree_setCandidateMorphsMask, METH_VARARGS, NULL},
 	 { (char *)"delete_ExplorationTree", _wrap_delete_ExplorationTree, METH_VARARGS, NULL},
 	 { (char *)"ExplorationTree_swigregister", ExplorationTree_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_TreeOperation", _wrap_new_TreeOperation, METH_VARARGS, NULL},

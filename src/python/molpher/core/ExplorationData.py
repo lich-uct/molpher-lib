@@ -39,6 +39,9 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
 
     def __init__(self, **kwargs):
         super(ExplorationData, self).__init__()
+        other = None
+        if 'other' in kwargs:
+            other = kwargs.pop('other')
         self._SETTERS_MAP = {
             'source' : self.setSource
             , 'target' : self.setTarget
@@ -71,14 +74,32 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
             , 'max_morphs_total' : self.getCntMaxMorphs
             , 'non_producing_survive' : self.getItThreshold
         }
-        if kwargs:
-            if 'source' in kwargs and type(kwargs['source']) == str:
-                kwargs['source'] = MolpherMol(kwargs['source'])
-            if 'target' in kwargs and type(kwargs['target']) == str:
-                kwargs['target'] = MolpherMol(kwargs['target'])
+
+        if not other:
             self._update_instance(kwargs)
+        else:
+            self.this = other.this
+
+    @staticmethod
+    def _parse_options(options):
+        check = lambda key : key in options and type(options[key]) == str
+        check_iterable = lambda key : key in options and [x for x in options[key] if type(x) == str]
+        if options:
+            if check('source'):
+                options['source'] = MolpherMol(options['source'])
+            if check('target'):
+                options['target'] = MolpherMol(options['target'])
+            if check_iterable('operators'):
+                options['operators'] = tuple( getattr(selectors, operator) for operator in options['operators'] )
+            if check('fingerprint'):
+                options['fingerprint'] = getattr(selectors, options['fingerprint'])
+            if check('similarity'):
+                options['similarity'] = getattr(selectors, options['similarity'])
+        return options
+
 
     def _update_instance(self, options):
+        options = self._parse_options(options)
         for key in options:
             if key in self._SETTERS_MAP:
                 self._SETTERS_MAP[key](options[key])
@@ -99,9 +120,9 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
         return {
             'source' : self._GETTERS_MAP['source']().getSMILES()
             , 'target' : self._GETTERS_MAP['target']().getSMILES()
-            , 'operators' : self._GETTERS_MAP['operators']()
-            , 'fingerprint' : self._GETTERS_MAP['fingerprint']()
-            , 'similarity' : self._GETTERS_MAP['similarity']()
+            , 'operators' : tuple( ChemOperShortDesc(operator) for operator in self._GETTERS_MAP['operators']() )
+            , 'fingerprint' : FingerprintShortDesc(self._GETTERS_MAP['fingerprint']())
+            , 'similarity' : SimCoeffShortDesc(self._GETTERS_MAP['similarity']())
             , 'weight_min' : self._GETTERS_MAP['weight_min']()
             , 'weight_max' : self._GETTERS_MAP['weight_max']()
             , 'accept_min' : self._GETTERS_MAP['accept_min']()
@@ -413,3 +434,8 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
     @non_producing_survive.setter
     def non_producing_survive(self, value):
         self._SETTERS_MAP['non_producing_survive'](value)
+
+    @staticmethod
+    def load(snapshot):
+        data = super(ExplorationData, ExplorationData).load(snapshot)
+        return ExplorationData(other=data)
