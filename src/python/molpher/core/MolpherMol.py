@@ -21,6 +21,18 @@ class MolpherMol(wrappers.MolpherMol):
         else:
             raise AttributeError('Invalid argumetns supplied to the constructor.')
 
+    def copy(self):
+        copy = super(MolpherMol, self).copy()
+        copy.__class__ = MolpherMol
+        return copy
+
+    @property
+    def tree(self):
+        ret = self.getTree()
+        if ret:
+            ret.__class__ = molpher.core.ExplorationTree.ExplorationTree
+        return ret
+
     @property
     def smiles(self):
         return self.getSMILES()
@@ -30,16 +42,16 @@ class MolpherMol(wrappers.MolpherMol):
         self.setSMILES(val)
 
     @property
-    def tree(self):
-        ret = self.getTree()
-        if ret:
-            ret.__class__ = molpher.core.ExplorationTree.ExplorationTree
-        return ret
+    def parent_smiles(self):
+        return self.getParentSMILES()
 
-    def copy(self):
-        copy = super(MolpherMol, self).copy()
-        copy.__class__ = MolpherMol
-        return copy
+    @parent_smiles.setter
+    def parent_smiles(self, val):
+        self.setParentSMILES(val)
+
+    @property
+    def parent_operator(self):
+        return wrappers.ChemOperShortDesc(self.getParentOper())
 
     @property
     def dist_to_target(self):
@@ -48,3 +60,19 @@ class MolpherMol(wrappers.MolpherMol):
     @dist_to_target.setter
     def dist_to_target(self, dist):
         self.setDistToTarget(dist)
+
+    @property
+    def sascore(self):
+        return self.getSAScore()
+
+    @sascore.setter
+    def sascore(self, val):
+        self.setSAScore(val)
+
+    @property
+    def historic_descendents(self):
+        return self.getHistoricDescendants()
+
+    @historic_descendents.setter
+    def historic_descendents(self, val):
+        self.setHistoricDescendants(val)

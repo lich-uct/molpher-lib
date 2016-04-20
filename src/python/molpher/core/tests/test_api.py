@@ -2,6 +2,7 @@ import os
 import unittest
 
 from molpher.core.ExplorationTree import ExplorationTree
+from molpher.core.MolpherMol import MolpherMol
 from molpher.core.operations import TreeOperation
 from molpher.core.selectors import *
 from molpher.core.ExplorationData import ExplorationData
@@ -18,8 +19,16 @@ class TestPythonAPI(unittest.TestCase):
         pass
 
     def testMolpherMol(self):
-        # TODO: implement
-        pass
+        mol = MolpherMol(self.test_target)
+        mol.smiles = 'CCC'
+        self.assertTrue('CCC')
+        mol.historic_descendents = ('CCC', 'CCCC')
+        self.assertEqual(('CCC', 'CCCC'), mol.historic_descendents)
+
+        copy = mol.copy()
+        copy.sascore = 0.54
+        self.assertEqual(0.54, copy.sascore)
+        self.assertEqual(0, mol.sascore)
 
     def testExplorationData(self):
         params = ExplorationData(
@@ -117,6 +126,7 @@ class TestPythonAPI(unittest.TestCase):
         def callback(morph):
             callback.morphs_in_tree += 1
             self.assertTrue(morph)
+            self.assertTrue(morph.tree)
             if morph.getItersWithoutDistImprovement() > 3:
                 print('Callback output:')
                 print(morph.getSMILES(), morph.getItersWithoutDistImprovement(), morph.getDistToTarget())
