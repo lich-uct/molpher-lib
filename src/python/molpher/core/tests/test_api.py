@@ -17,7 +17,7 @@ class TestPythonAPI(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_MolpherMol(self):
+    def testMolpherMol(self):
         # TODO: implement
         pass
 
@@ -97,7 +97,7 @@ class TestPythonAPI(unittest.TestCase):
 
         leaf = tree.leaves[0]
         self.assertTrue(tree.hasMol(leaf))
-        # self.assertEqual(tree, leaf.tree) # FIXME: add a reliable operator for tree comparisons
+        # self.assertEqual(tree, leaf.tree) # FIXME: add a reliable operator for comparison between trees
         leaf.setDistToTarget(0.5)
         self.assertEqual(tree.leaves[0].getDistToTarget(), 0.5)
 
@@ -109,6 +109,9 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(tree.leaves[0].getDistToTarget(), 0.5)
         self.assertEqual(leaf_copy.getDistToTarget(), 0.7)
 
+    def testOperations(self):
+        # TODO: implement
+        pass
 
     def testMorphing(self):
         def callback(morph):
@@ -138,12 +141,12 @@ class TestPythonAPI(unittest.TestCase):
         callback.morphs_in_tree = 0
         callback.closest_mol = None
 
-        class RunIteration(TreeOperation):
+        class MorphingIteration(TreeOperation):
 
             parent = self
 
             def __init__(self, tree):
-                super(RunIteration, self).__init__()
+                super(MorphingIteration, self).__init__()
                 self._tree = tree
 
             def __call__(self):
@@ -173,7 +176,7 @@ class TestPythonAPI(unittest.TestCase):
             , 'target' : self.test_target
         })
 
-        iterate = RunIteration(tree)
+        iterate = MorphingIteration(tree)
         counter = 0
         while counter < 5:
             iterate()
@@ -188,7 +191,3 @@ class TestPythonAPI(unittest.TestCase):
         self.assertFalse(tree.hasMol(child))
         self.assertEqual(None, child.tree)
         self.assertEqual(parent, child.getParentSMILES())
-
-    def testOperations(self):
-        # TODO: implement
-        pass
