@@ -21,7 +21,7 @@ class TestPythonAPI(unittest.TestCase):
         # TODO: implement
         pass
 
-    def testParams(self):
+    def testExplorationData(self):
         params = ExplorationData(
             source=self.test_source
             , target=self.test_target
@@ -115,7 +115,15 @@ class TestPythonAPI(unittest.TestCase):
             callback.morphs_in_tree += 1
             self.assertTrue(morph)
             if morph.getItersWithoutDistImprovement() > 3:
-                print('Callback output:', morph.getSMILES(), morph.getItersWithoutDistImprovement(), morph.getDistToTarget())
+                print('Callback output:')
+                print(morph.getSMILES(), morph.getItersWithoutDistImprovement(), morph.getDistToTarget())
+            if not callback.closest_mol:
+                callback.closest_mol = morph.copy()
+            current_dist = morph.getDistToTarget()
+            min_dist = callback.closest_mol.getDistToTarget()
+            if min_dist > current_dist:
+                callback.closest_mol = morph.copy()
+
             # FIXME: code below doesn't work
                 # (causes a SEGFAULT when the memory is accessed,
                 # probably because the shared pointer is deleted
@@ -125,13 +133,10 @@ class TestPythonAPI(unittest.TestCase):
             #     callback.closest_mol = morph
             # current_dist = morph.getDistToTarget()
             # min_dist = callback.closest_mol.getDistToTarget()
-            # print('morph: ', current_dist)
-            # print('minimum: ', min_dist)
             # if min_dist > current_dist:
             #     callback.closest_mol = morph
-            #     print('new minimum: ', callback.closest_mol.getDistToTarget())
         callback.morphs_in_tree = 0
-        # callback.closest_mol = None
+        callback.closest_mol = None
 
         class RunIteration(TreeOperation):
 
@@ -152,10 +157,10 @@ class TestPythonAPI(unittest.TestCase):
                 callback.morphs_in_tree = 0
                 self._tree.traverse(callback)
                 print('Number of morphs in the tree: ', callback.morphs_in_tree)
-                # print('Closest molecule to target: {0} -- {1}'.format(
-                #     callback.closest_mol.getSMILES()
-                #     , callback.closest_mol.getDistToTarget()
-                # ))
+                print('Closest molecule to target: {0} -- distance: {1}'.format(
+                    callback.closest_mol.getSMILES()
+                    , callback.closest_mol.getDistToTarget()
+                ))
 
             def getTree(self):
                 return self._tree
@@ -187,9 +192,3 @@ class TestPythonAPI(unittest.TestCase):
     def testOperations(self):
         # TODO: implement
         pass
-
-    def testSnapshots(self):
-        # TODO: implement
-        pass
-
-
