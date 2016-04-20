@@ -101,7 +101,7 @@ void MolpherMol::MolpherMolImpl::setSMILES(const std::string& smiles) {
     data.SMILES = RDKit::MolToSmiles(*mol);
     data.formula = RDKit::Descriptors::calcMolFormula(*mol);
 
-    SynchCout("Parsed molecule " + smiles + " >> " + data.SMILES);
+//    SynchCout("Parsed molecule " + smiles + " >> " + data.SMILES);
 }
 
 const std::string& MolpherMol::getSMILES() const {

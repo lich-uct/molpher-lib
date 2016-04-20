@@ -2,6 +2,7 @@ import os
 import unittest
 
 from molpher.core.ExplorationTree import ExplorationTree
+from molpher.core.operations import TreeOperation
 from molpher.core.selectors import *
 from molpher.core.ExplorationData import ExplorationData
 
@@ -108,62 +109,87 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(tree.leaves[0].getDistToTarget(), 0.5)
         self.assertEqual(leaf_copy.getDistToTarget(), 0.7)
 
-    # def testMorphing(self):
-    #     def callback(morph):
-    #         callback.morphs_in_tree += 1
-    #         self.assertTrue(morph.isBound())
-    #         if morph.getItersWithoutDistImprovement() > 3:
-    #             print(morph.getSMILES(), morph.getItersWithoutDistImprovement())
-    #         if not callback.closest_mol:
-    #             callback.closest_mol = morph.copy()
-    #         if callback.closest_mol.getDistToTarget() > morph.getDistToTarget():
-    #             callback.closest_mol = morph.copy()
-    #     callback.morphs_in_tree = 0
-    #     callback.closest_mol = None
-    #
-    #     class RunIteration(TreeOperation):
-    #
-    #         def __init__(self, tree):
-    #             super(RunIteration, self).__init__()
-    #             self._tree = tree
-    #
-    #         def __call__(self):
-    #             print('Iteration: ', self._tree.getGenerationCount() + 1)
-    #             self._tree.generateMorphs()
-    #             self._tree.filterMorphs()
-    #             self._tree.extend()
-    #             self._tree.prune()
-    #             callback.morphs_in_tree = 0
-    #             self._tree.traverse(callback)
-    #             print('Number of morphs in the tree: ', callback.morphs_in_tree)
-    #             print('Closest molecule to target: {0} -- {1}'.format(
-    #                 callback.closest_mol.getSMILES()
-    #                 , callback.closest_mol.getDistToTarget()
-    #             ))
-    #
-    #         def getTree(self):
-    #             return self._tree
-    #
-    #         def setTree(self, tree):
-    #             self._tree = tree
-    #
-    #     tree = ExplorationTree(params={
-    #         'source' : self.test_source
-    #         , 'target' : self.test_target
-    #     })
-    #
-    #     iterate = RunIteration(tree)
-    #     counter = 0
-    #     while counter < 5:
-    #         iterate()
-    #         counter += 1
-    #
-    # def testOperations(self):
-    #     # TODO: implement
-    #     pass
-    #
-    # def testSnapshots(self):
-    #     # TODO: implement
-    #     pass
+
+    def testMorphing(self):
+        def callback(morph):
+            callback.morphs_in_tree += 1
+            self.assertTrue(morph)
+            if morph.getItersWithoutDistImprovement() > 3:
+                print('Callback output:', morph.getSMILES(), morph.getItersWithoutDistImprovement(), morph.getDistToTarget())
+            # FIXME: code below doesn't work
+                # (causes a SEGFAULT when the memory is accessed,
+                # probably because the shared pointer is deleted
+                # from the stack in the SWIG generated code when the callback is done)
+
+            # if not callback.closest_mol:
+            #     callback.closest_mol = morph
+            # current_dist = morph.getDistToTarget()
+            # min_dist = callback.closest_mol.getDistToTarget()
+            # print('morph: ', current_dist)
+            # print('minimum: ', min_dist)
+            # if min_dist > current_dist:
+            #     callback.closest_mol = morph
+            #     print('new minimum: ', callback.closest_mol.getDistToTarget())
+        callback.morphs_in_tree = 0
+        # callback.closest_mol = None
+
+        class RunIteration(TreeOperation):
+
+            parent = self
+
+            def __init__(self, tree):
+                super(RunIteration, self).__init__()
+                self._tree = tree
+
+            def __call__(self):
+                print('Iteration: ', self._tree.getGenerationCount() + 1)
+                self._tree.generateMorphs()
+                for mol in self._tree.candidates:
+                    self.parent.assertEqual(None, mol.tree)
+                self._tree.filterMorphs()
+                self._tree.extend()
+                self._tree.prune()
+                callback.morphs_in_tree = 0
+                self._tree.traverse(callback)
+                print('Number of morphs in the tree: ', callback.morphs_in_tree)
+                # print('Closest molecule to target: {0} -- {1}'.format(
+                #     callback.closest_mol.getSMILES()
+                #     , callback.closest_mol.getDistToTarget()
+                # ))
+
+            def getTree(self):
+                return self._tree
+
+            def setTree(self, tree):
+                self._tree = tree
+
+        tree = ExplorationTree.create(params={
+            'source' : self.test_source
+            , 'target' : self.test_target
+        })
+
+        iterate = RunIteration(tree)
+        counter = 0
+        while counter < 5:
+            iterate()
+            counter += 1
+
+        child = tree.leaves[0]
+        self.assertTrue(child.tree)
+        self.assertTrue(tree.hasMol(child))
+        parent = child.getParentSMILES()
+        tree.deleteSubtree(parent)
+        self.assertFalse(tree.hasMol(parent))
+        self.assertFalse(tree.hasMol(child))
+        self.assertEqual(None, child.tree)
+        self.assertEqual(parent, child.getParentSMILES())
+
+    def testOperations(self):
+        # TODO: implement
+        pass
+
+    def testSnapshots(self):
+        # TODO: implement
+        pass
 
 

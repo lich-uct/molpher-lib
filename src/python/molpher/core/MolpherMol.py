@@ -32,7 +32,8 @@ class MolpherMol(wrappers.MolpherMol):
     @property
     def tree(self):
         ret = self.getTree()
-        ret.__class__ = molpher.core.ExplorationTree.ExplorationTree
+        if ret:
+            ret.__class__ = molpher.core.ExplorationTree.ExplorationTree
         return ret
 
     def copy(self):

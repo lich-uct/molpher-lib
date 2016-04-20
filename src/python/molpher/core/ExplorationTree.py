@@ -17,10 +17,10 @@ class Callback(TraverseCallback):
     """
 
     def __init__(self, callback):
-        super(self.__class__, self).__init__()
+        super(Callback, self).__init__()
         self._callback = callback
 
-    def processMorph(self, morph):
+    def __call__(self, morph):
         """
         Calls the registered callback for a `morph`
 
@@ -28,6 +28,7 @@ class Callback(TraverseCallback):
         :type morph: `MolpherMol`
         """
 
+        morph.__class__ = MolpherMol
         self._callback(morph)
 
 class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
@@ -216,5 +217,5 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
             mol = self.fetchMol(start_mol)
             TraverseOper(self, self.callback_class(callback), mol)()
         else:
-            cb = self._callback_class(callback)
+            cb = self.callback_class(callback)
             TraverseOper(self, cb)()

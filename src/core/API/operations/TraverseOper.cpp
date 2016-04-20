@@ -1,4 +1,6 @@
 
+#include "core/misc/inout.h"
+
 #include "operations/TraverseOper.hpp"
 #include "TraverseOperImpl.hpp"
 #include "data_structs/ExplorationTree.hpp"
@@ -84,10 +86,13 @@ void TraverseOper::TraverseOperImpl::TraversalFunctor::operator()(const std::str
     tree_pimpl->treeMap.find(ac, smile);
     assert(!ac.empty());
 
-    makeCallback(ac->second);
+    std::shared_ptr<MolpherMol> mol = ac->second;
+//    int x = mol.use_count();
+    makeCallback(mol);
+//    SynchCout("use count (before/after): " + parseNumber(x) + "/" + parseNumber(mol.use_count()));
 
     std::set<std::string>::const_iterator it;
-    auto descendants = ac->second->getDescendants();
+    auto descendants = mol->getDescendants();
     for (it = descendants.begin();
             it != descendants.end(); it++) {
         feeder.add(*it);
