@@ -8,6 +8,9 @@ doxygen config.cfg
 cd ..
 
 # build the Sphinx documentation
-sphinx-apidoc -o source/documentation/python/ ../src/python/molpher/
+MOLPHER_PATH=../src/python/molpher/
+#PYTHONPATH="${MOLPHER_PATH}:${PYTHONPATH}"
+
+sphinx-apidoc -o source/documentation/python/ $MOLPHER_PATH
 make clean
 make html

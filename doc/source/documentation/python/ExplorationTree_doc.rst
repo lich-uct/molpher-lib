@@ -13,7 +13,7 @@ ExplorationTree
     is a tight wrapper around the C++ implementation. The `molpher.core.ExplorationTree` class
     extends upon this implementation and provides a more user-friendly version of this class.
 
-    .. automethod:: createFromSnapshot(snapshot)
+    .. automethod:: create(snapshot)
 
         Returns an `ExplorationTree` instance using a supplied `ExplorationTreeSnapshot`.
 
@@ -22,7 +22,7 @@ ExplorationTree
         :return: `ExplorationTree` instance created from the supplied snapshot
         :rtype: `ExplorationTree`
 
-    .. automethod:: createSnapshot
+    .. automethod:: save
 
         Creates an `ExplorationTreeSnapshot` instance that can be saved to disk and contains information about
         the molecules currently present in the `exploration tree` along with the morphing parameters.
@@ -133,7 +133,7 @@ ExplorationTree
         Returns the number of threads this particular `ExplorationTree` will use. The value of 0
         indicates that the same number of threads as the number of available cores will be used.
 
-    .. automethod:: getParams
+    .. automethod:: asData
 
         Can be used to obtain the current `exploration parameters`.
 
@@ -174,7 +174,7 @@ ExplorationTree
         :param threadCnt: an `int` indicating the number of threads to use
         :type threadCnt: `int`
 
-    .. automethod:: setParams
+    .. automethod:: update
 
         Change the current `exploration parameters` for this instance.
 

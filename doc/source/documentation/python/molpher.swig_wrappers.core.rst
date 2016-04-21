@@ -11,7 +11,5 @@ Classes
 
     MolpherMol_doc
     ExplorationTree_doc
-    ExplorationTreeSnapshot_doc
-    ExplorationParameters_doc
+    ExplorationData_doc
     operations/classes
-    callbacks/classes

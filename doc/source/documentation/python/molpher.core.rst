@@ -8,10 +8,10 @@ aspects of the morphing algorithm.
 Modules
 -------
 
-molpher.core.ExplorationParameters module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+molpher.core.ExplorationData module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: molpher.core.ExplorationParameters
+.. automodule:: molpher.core.ExplorationData
     :members:
     :undoc-members:
     :show-inheritance:
@@ -20,6 +20,22 @@ molpher.core.ExplorationTree module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: molpher.core.ExplorationTree
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+molpher.core.MolpherMol module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: molpher.core.MolpherMol
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+molpher.core.selectors module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: molpher.core.selectors
     :members:
     :undoc-members:
     :show-inheritance:
@@ -38,6 +54,7 @@ Subpackages
 .. toctree::
 
     molpher.core.tests
+    molpher.core.operations
 
 
 Module contents
@@ -46,16 +63,23 @@ Module contents
 MolpherMol
 ~~~~~~~~~~
 
-A direct reference to `molpher.swig_wrappers.core.MolpherMol`.
+A direct reference to `molpher.swig_wrappers.core.MolpherMol.MolpherMol`.
 
 .. seealso:: `MolpherMol`
 
-ExplorationTreeSnapshot
-~~~~~~~~~~~~~~~~~~~~~~~
+ExplorationTree
+~~~~~~~~~~~~~~~
 
-A direct reference to `molpher.swig_wrappers.core.ExplorationTreeSnapshot`.
+A direct reference to `molpher.swig_wrappers.core.ExplorationTree.ExplorationTree`.
 
-.. seealso:: `ExplorationTreeSnapshot`
+.. seealso:: `ExplorationTree`
+
+ExplorationData
+~~~~~~~~~~~~~~~
+
+A direct reference to `molpher.swig_wrappers.core.ExplorationData.ExplorationData`.
+
+.. seealso:: `ExplorationData`
 
 .. automodule:: molpher.core
     :members:

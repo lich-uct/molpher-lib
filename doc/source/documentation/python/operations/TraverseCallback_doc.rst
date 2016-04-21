@@ -13,7 +13,7 @@ TraverseCallback
 
     .. seealso:: `TraverseOper`
 
-    .. automethod:: processMorph
+    .. automethod:: __call__
 
        An abstract method that should be overriden in derived classes.
        It should implement the morph processing.

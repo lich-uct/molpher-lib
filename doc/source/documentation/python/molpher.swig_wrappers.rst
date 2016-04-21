@@ -10,13 +10,6 @@ Modules
 
     molpher.swig_wrappers.core
 
-Subpackages
------------
-
-.. toctree::
-
-    molpher.swig_wrappers.tests
-
 Module contents
 ---------------
 

@@ -13,3 +13,4 @@ A set of classes that can be used to operate on an `exploration tree`.
     ExtendTreeOper_doc
     PruneTreeOper_doc
     TraverseOper_doc
+    TraverseCallback_doc
