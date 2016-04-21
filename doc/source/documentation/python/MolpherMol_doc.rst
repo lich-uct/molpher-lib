@@ -36,7 +36,7 @@ MolpherMol
         :math:`similarity` is the similarity computed using the specified `molecular fingerprint`
         and `similarity measure`.
 
-        .. seealso:: `molpher.core.ExplorationParameters`
+        .. seealso:: `molpher.core.ExplorationData`
 
         .. note:: Distance to target can be easily modified, if needed (see `setDistToTarget`).
 
@@ -77,7 +77,7 @@ MolpherMol
 
         .. todo:: specify more accurately
 
-        .. seealso:: `molpher.core.ExplorationParameters.ExplorationParameters.non_producing_survive`
+        .. seealso:: `molpher.core.ExplorationData.ExplorationData.non_producing_survive`
 
         :return:  number of generations without distance improvement
         :rtype: :py:class:`int`

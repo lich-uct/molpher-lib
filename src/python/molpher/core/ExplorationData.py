@@ -157,8 +157,8 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
         The `source molecule`. All morphs in an `exploration tree` are derived from this
         molecule during morphing. This is the root of the tree.
 
-        :return: `MolpherMol` instance or SMILES string representing the current `source molecule`
-        :rtype: `MolpherMol`
+        :return: :py:class:`~molpher.core.MolpherMol.MolpherMol` instance or SMILES string representing the current `source molecule`
+        :rtype: :py:class:`~molpher.core.MolpherMol.MolpherMol`
         """
 
         return MolpherMol(other=self._GETTERS_MAP['source']())
@@ -179,8 +179,8 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
         The `target molecule`. This is the molecule being searched for during morphing. The goal is to
         maximize similarity (minimize distance) of the generated morphs and this molecule.
 
-        :return: `MolpherMol` instance representing the current `target molecule`
-        :rtype: `MolpherMol`
+        :return: :py:class:`~molpher.core.MolpherMol.MolpherMol` instance representing the current `target molecule`
+        :rtype: :py:class:`~molpher.core.MolpherMol.MolpherMol`
         """
 
         return MolpherMol(other=self._GETTERS_MAP['target']())

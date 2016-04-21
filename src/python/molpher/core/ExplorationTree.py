@@ -205,8 +205,9 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
 
         :param callback:
         :type callback: a callable object that takes a single argument
-        :param start_mol: the root of a subtree to explore as canonical SMILES or `MolpherMol` instance
-        :type start_mol: `str` or `MolpherMol`
+        :param start_mol: the root of a subtree to explore as canonical SMILES
+            or :py:class:`~molpher.core.MolpherMol.MolpherMol` instance
+        :type start_mol: `str` or :py:class:`~molpher.core.MolpherMol.MolpherMol`
         :return:
         :rtype:
         """

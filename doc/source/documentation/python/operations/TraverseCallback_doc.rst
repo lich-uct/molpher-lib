@@ -19,4 +19,4 @@ TraverseCallback
        It should implement the morph processing.
 
        :param morph: currently processed morph
-       :type morph: `MolpherMol`
+       :type morph: :py:class:`~molpher.core.MolpherMol.MolpherMol`

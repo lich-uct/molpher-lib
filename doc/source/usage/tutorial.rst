@@ -3,8 +3,8 @@ Tutorial
 
 This section gives an overview of most of the features currently available in the library
 in the form of a very simple example. The example script is located in the `examples` package
-and can be downloaded from :download:`here <../../../python/molpher/examples/basics.py>`. The used example
-`XML template` is available from :download:`this link <../../../python/molpher/examples/cocaine-procaine-template.xml>`
+and can be downloaded from :download:`here <../../../src/python/molpher/examples/basics.py>`. The used example
+`XML template` is available from :download:`this link <../../../src/python/molpher/examples/cocaine-procaine-template.xml>`
 (see `templates-snapshots` for more details on templates). If you want to know more about the library or
 the source code, we suggest you check out the `source-code-docs`.
 
@@ -99,7 +99,7 @@ Output:
     }
 
 As we can see there are many more. We will explain the most important ones in this tutorial, but you can see the
-description of `ExplorationParameters` (especially :numref:`param-table`) for a detailed reference.
+description of `ExplorationData` (especially :numref:`param-table`) for a detailed reference.
 
 
 We can adjust the morphing parameters during runtime as we like. All we need to do is just supply the `params` attribute
@@ -154,8 +154,8 @@ given dictionary will be changed.
 ..  warning:: Note that changing some parameters during runtime may have some adverse effects on the exploration
     process so use it with caution.
 
-..  seealso:: The class `ExplorationParameters` can be used to hold parameters independently of a tree.
-        It also includes a method that validates the parameters -- see `ExplorationParameters`
+..  seealso:: The class `ExplorationData` can be used to hold parameters independently of a tree.
+        It also includes a method that validates the parameters -- see `ExplorationData`
         and `ExplorationTree` for details on how to use this class.
 
 Building an Exploration Tree
@@ -213,10 +213,10 @@ The current implementation does not inform Python when and if the molecule is de
 (removed from the tree or otherwise invalidated). Therefore, one
 simple rule have to be followed: **Do not save references to tree-bound molecules.**
 
-You can tell whether a `MolpherMol` is tree-bound or not by calling its `isBound()` method.
+You can tell whether a `MolpherMol` is tree-bound or not by calling its isBound() method.
 If it returns `True`, the molecule is bound to a tree and, therefore, it is not safe to save it anywhere for later use.
 If you want to have the information contained within a `MolpherMol` object available even when
-the molecule is destroyed, you can tell it to replicate itself by calling its `copy()` method.
+the molecule is destroyed, you can tell it to replicate itself by calling its :py:meth:`MolpherMol.copy()` method.
 The replicated instance is not bound
 to any tree and its lifetime is only affected by Python runtime and its garbage collector. However,
 unbinding the molecule from the tree also means that the actual data in the tree will not be modified,
@@ -628,7 +628,7 @@ Templates and Tree Snapshots
 We don't always have to initialize `morphing parameters` by hand. We can use a `XML template` instead.
 Here is an example of a template file:
 
-..  literalinclude:: ../../../python/molpher/examples/cocaine-procaine-template.xml
+..  literalinclude:: ../../../src/python/molpher/examples/cocaine-procaine-template.xml
     :language: xml
     :caption: A complete XML template file.
     :name: template-file
@@ -705,7 +705,7 @@ We can see that all the parameters are the same as in the `XML template` and tha
 the resulting tree can be built using the same list of operations
 as in :numref:`operations-example`. We even get the same set of newly generated leaves.
 In :numref:`saving-snapshot` we also want to serialize our tree instance to disk so we save it as
-a snapshot using the `saveSnapshot()` method.
+a snapshot using the :py:meth:`ExplorationTree.save()` method.
 
 The saved tree can be later reconstructed with the
 :meth:`~molpher.core.ExplorationTree.ExplorationTree.createFromSnapshot()` factory method:
@@ -771,7 +771,7 @@ and :numref:`bidirectional-example`).
 Using the bits of code we have created above. The script in :numref:`complete-example` shows how to implement
 a search for a path in `chemical space` between *cocaine* and *procaine* with a customized filtering step:
 
-..  literalinclude:: ../../../python/molpher/examples/experiment.py
+..  literalinclude:: ../../../src/python/molpher/examples/experiment.py
     :language: python
     :caption: Example implementation of a pathfinding algorithm.
     :name: complete-example
@@ -833,7 +833,7 @@ If the path is found it is backtracked through the tree and printed out as a seq
 The second example we have here is a little more elaborate, but implements a very simple idea. Instead of one exploration tree,
 we build two trees that each searches for a path to the closest molecule in the other tree:
 
-..  literalinclude:: ../../../python/molpher/examples/bidirectional.py
+..  literalinclude:: ../../../src/python/molpher/examples/bidirectional.py
     :language: python
     :caption: Example implementation of a bidirectional pathfinding algorithm.
     :name: bidirectional-example

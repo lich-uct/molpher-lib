@@ -63,23 +63,23 @@ Module contents
 MolpherMol
 ~~~~~~~~~~
 
-A direct reference to `molpher.swig_wrappers.core.MolpherMol.MolpherMol`.
+A direct reference to `molpher.core.MolpherMol.MolpherMol`.
 
-.. seealso:: `MolpherMol`
+.. seealso:: :py:class:`~molpher.core.MolpherMol.MolpherMol`
 
 ExplorationTree
 ~~~~~~~~~~~~~~~
 
-A direct reference to `molpher.swig_wrappers.core.ExplorationTree.ExplorationTree`.
+A direct reference to `molpher.core.ExplorationTree.ExplorationTree`.
 
-.. seealso:: `ExplorationTree`
+.. seealso:: :py:class:`~molpher.core.ExplorationTree.ExplorationTree`
 
 ExplorationData
 ~~~~~~~~~~~~~~~
 
-A direct reference to `molpher.swig_wrappers.core.ExplorationData.ExplorationData`.
+A direct reference to `molpher.core.ExplorationData.ExplorationData`.
 
-.. seealso:: `ExplorationData`
+.. seealso:: :py:class:`~molpher.core.ExplorationData.ExplorationData`
 
 .. automodule:: molpher.core
     :members:

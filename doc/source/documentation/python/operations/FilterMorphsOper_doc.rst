@@ -16,23 +16,23 @@ FilterMorphsOper
     available filters is in the table below. For more detailed information on each filter
     see the member descriptions of this class.
 
-    ..  seealso:: `ExplorationTree.filterMorphs()` and `molpher.core.ExplorationParameters`
+    ..  seealso:: `ExplorationTree.filterMorphs()` and `molpher.core.ExplorationData`
 
     ..  include:: ../filters_table.rst
 
     .. autoattribute:: PROBABILITY
 
-        If the number of derived morphs for a molecule exceeds `ExplorationParameters.accept_min`,
+        If the number of derived morphs for a molecule exceeds `ExplorationData.accept_min`,
         then the probability of accepting every extra molecule is determined
         according to the following formula:
         :math:`\frac{0.25 - (idx - morphs_{min})}{4(morphs_{all} - morphs_{min})}`, where :math:`morphs_{min}`
-        is the `ExplorationParameters.accept_min` parameter, :math:`morphs_{all}` is the current
+        is the `ExplorationData.accept_min` parameter, :math:`morphs_{all}` is the current
         number of molecules in the `exploration tree` and :math:`idx` is the position of the given `morph`
         in `ExplorationTree.candidates`.
 
     .. autoattribute:: WEIGHT
 
-        Uses the `ExplorationParameters.weight_min` and `ExplorationParameters.weight_max` options
+        Uses the `ExplorationData.weight_min` and `ExplorationData.weight_max` options
         to remove `candidate morphs` that do not satisfy the weight constraints.
 
     .. autoattribute:: SYNTHESIS
@@ -43,7 +43,7 @@ FilterMorphsOper
 
         Each `ExplorationTree` instance keeps track of the number of morphs generated from each
         molecule in the tree. If there are `candidate morphs` in `ExplorationTree.candidates`
-        such that more than `ExplorationParameters.max_morphs_total` number of morphs would be derived from
+        such that more than `ExplorationData.max_morphs_total` number of morphs would be derived from
         the given molecule, then these `candidate morphs` will be filtered out.
 
     .. autoattribute:: DUPLICATES

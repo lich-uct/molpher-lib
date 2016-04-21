@@ -62,7 +62,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Molpher-lib'
-copyright = '2015, Martin Šícho (sichom@vscht.cz)'
+copyright = '2016, Martin Šícho (sichom@vscht.cz)'
 author = 'Martin Šícho (sichom@vscht.cz)'
 
 # tell breathe about the doxygen project

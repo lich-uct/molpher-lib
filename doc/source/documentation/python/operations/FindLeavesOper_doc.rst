@@ -17,4 +17,4 @@ FindLeavesOper
         Returns the leaves of the last tree on which `__call__` method was applied.
 
         :return: the leaves of the attached tree
-        :rtype: `tuple` of `MolpherMol` instances
+        :rtype: `tuple` of :py:class:`~molpher.core.MolpherMol.MolpherMol` instances

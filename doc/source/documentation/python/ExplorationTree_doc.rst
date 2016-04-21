@@ -5,9 +5,9 @@ ExplorationTree
 
 .. autoclass:: ExplorationTree
 
-    :param \*args: one positional argument (either an `molpher.swig_wrappers.core.ExplorationParameters`
+    :param \*args: one positional argument (either an `molpher.swig_wrappers.core.ExplorationData`
         instance or a `str` (SMILES representing the `source molecule`)
-    :type \*args: `str` or `molpher.swig_wrappers.core.ExplorationParameters`
+    :type \*args: `str` or `molpher.swig_wrappers.core.ExplorationData`
 
     Represents an `exploration tree` and facilitates the most basic interaction with it. It
     is a tight wrapper around the C++ implementation. The `molpher.core.ExplorationTree` class
@@ -15,23 +15,23 @@ ExplorationTree
 
     .. automethod:: create(snapshot)
 
-        Returns an `ExplorationTree` instance using a supplied `ExplorationTreeSnapshot`.
+        Returns an `ExplorationTree` instance using a supplied `ExplorationData`.
 
-        :param snapshot: an `ExplorationTreeSnapshot` to generate an `ExplorationTree` from
-        :type snapshot: `ExplorationTreeSnapshot`
+        :param snapshot: an `ExplorationData` to generate an `ExplorationTree` from
+        :type snapshot: `ExplorationData`
         :return: `ExplorationTree` instance created from the supplied snapshot
         :rtype: `ExplorationTree`
 
     .. automethod:: save
 
-        Creates an `ExplorationTreeSnapshot` instance that can be saved to disk and contains information about
+        Creates an `ExplorationData` instance that can be saved to disk and contains information about
         the molecules currently present in the `exploration tree` along with the morphing parameters.
 
         .. note:: Only the molecules attached to the cuurent `exploration tree` are serialized.
             If this instance contains unattached candidate morphs, this data will be lost.
 
-        :return: `ExplorationTreeSnapshot` instance created from this tree
-        :rtype: `ExplorationTreeSnapshot`
+        :return: `ExplorationData` instance created from this tree
+        :rtype: `ExplorationData`
 
     .. automethod:: runOperation
 
@@ -84,7 +84,7 @@ ExplorationTree
     .. automethod:: generateMorphs
 
         Generates mew `candidate morphs` using the current `exploration parameters`
-        and saves them (see `ExplorationParameters` for details).
+        and saves them (see `ExplorationData` for details).
 
         The generated compounds can be retrieved using the `getCandidateMorphs` method.
 
@@ -126,7 +126,7 @@ ExplorationTree
     .. automethod:: prune
 
         Perform the pruning of the tree according to the rules specified by current
-        `exploration parameters` (see `ExplorationParameters` for details).
+        `exploration parameters` (see `ExplorationData` for details).
 
     .. automethod:: getThreadCount
 
@@ -137,8 +137,8 @@ ExplorationTree
 
         Can be used to obtain the current `exploration parameters`.
 
-        :return: instance of `ExplorationParameters`, which holds the current configuration options for the computations on the tree
-        :rtype: `ExplorationParameters`
+        :return: instance of `ExplorationData`, which holds the current configuration options for the computations on the tree
+        :rtype: `ExplorationData`
 
     .. automethod:: getCandidateMorphs
 
@@ -181,8 +181,8 @@ ExplorationTree
         ..  warning:: This may invalidate some data in the tree (such as the distances from the `target molecule` computed so far).
                 Use with caution.
 
-        :param param: an instance of `ExplorationParameters`, which represents the new `exploration parameters` for this instance
-        :type param: `ExplorationParameters`
+        :param param: an instance of `ExplorationData`, which represents the new `exploration parameters` for this instance
+        :type param: `ExplorationData`
 
     .. automethod:: setCandidateMorphsMask(mask)
 
