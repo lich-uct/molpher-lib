@@ -30,7 +30,7 @@ class MolpherMol(wrappers.MolpherMol):
     def tree(self):
         ret = self.getTree()
         if ret:
-            ret.__class__ = molpher.core.ExplorationTree.ExplorationTree
+            ret.__class__ = molpher.core.ExplorationTree
         return ret
 
     @property

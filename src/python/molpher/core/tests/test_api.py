@@ -1,11 +1,11 @@
 import os
 import unittest
 
-from molpher.core.ExplorationTree import ExplorationTree
-from molpher.core.MolpherMol import MolpherMol
+from molpher.core import ExplorationTree
+from molpher.core import MolpherMol
 from molpher.core.operations import TreeOperation
 from molpher.core.selectors import *
-from molpher.core.ExplorationData import ExplorationData
+from molpher.core import ExplorationData
 
 class TestPythonAPI(unittest.TestCase):
     
