@@ -5,8 +5,9 @@ import subprocess
 from jinja2 import Template
 import version
 
+BUILD_ALL_PYTHON = False
 TARGETS = ["molpher-lib"]
-PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5']
+PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5'] if BUILD_ALL_PYTHON else ['3.5', '2.7']
 VERSION = version.VERSION
 BUILD_NUMBER = version.BUILD_NUMBER
 LICENSE_FILE = "LICENSE.txt"
@@ -28,8 +29,8 @@ for target in TARGETS:
                 , version=VERSION
                 , build_number=BUILD_NUMBER
                 , license_file=LICENSE_FILE
-                , build_string="py{0}".format(python_version)
-                , python_spec="python"
+                , build_string="py{0}_{1}".format(python_version.replace('.', ''), BUILD_NUMBER)
+                , python_spec="python {0}*".format(python_version)
             ))
 
         copyfile(os.path.join(BASE_DIR, LICENSE_FILE), os.path.join(PACKAGE_DIR, LICENSE_FILE))

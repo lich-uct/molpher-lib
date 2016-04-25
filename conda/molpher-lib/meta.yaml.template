@@ -12,6 +12,8 @@ build:
 requirements:
   build:
     - {{ python_spec }}
+  run:
+    - {{ python_spec }}
 
 about:
   license : GPL
