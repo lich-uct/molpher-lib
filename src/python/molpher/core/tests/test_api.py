@@ -36,7 +36,7 @@ class TestPythonAPI(unittest.TestCase):
             , target=self.test_target
         )
 
-        params.operators = {OP_ADD_BOND, 'OP_REMOVE_BOND'}
+        params.operators = set((OP_ADD_BOND, 'OP_REMOVE_BOND'))
         self.assertEqual(params.operators, ('OP_ADD_BOND', 'OP_REMOVE_BOND'))
 
         params.fingerprint = FP_EXT_ATOM_PAIRS
