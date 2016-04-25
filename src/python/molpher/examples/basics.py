@@ -3,7 +3,7 @@ Module with example code from the tutorial.
 
 """
 
-from molpher.core import ExplorationTree as ETree
+from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import *
 
 # TODO: make some of the stuff from this script part of the test suite
@@ -12,7 +12,7 @@ def main():
     cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
     procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
-    tree = ETree(source=cocaine, target=procaine) # initialize a tree that searches for a path from cocaine to procaine
+    tree = ETree.create(source=cocaine, target=procaine) # initialize a tree that searches for a path from cocaine to procaine
 
     # print the smiles of the source and target molecule
     print('Source: ', tree.params['source'])

@@ -5,7 +5,7 @@ Implementation of the bidirectional search algorithm.
 
 import time
 
-from molpher.core import ExplorationTree as ETree
+from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import *
 
 def timeit(func):
@@ -33,8 +33,8 @@ class BidirectionalPathFinder:
         options = {
             'fingerprint' : 'ATOM_PAIRS'
         }
-        self.source_target = ETree(source=source, target=target)
-        self.target_source = ETree(source=target, target=source)
+        self.source_target = ETree.create(source=source, target=target)
+        self.target_source = ETree.create(source=target, target=source)
         self.source_target.params = options
         self.target_source.params = options
         self.source_target_min = FindClosest()

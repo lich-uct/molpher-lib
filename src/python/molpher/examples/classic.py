@@ -19,7 +19,7 @@ class ClassicPathFinder:
         options = {
             'fingerprint' : 'ATOM_PAIRS'
         }
-        self.tree = ETree(source=source, target=target)
+        self.tree = ETree.create(source=source, target=target)
         self.ITERATION = [
             GenerateMorphsOper()
             , SortMorphsOper()
