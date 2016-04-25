@@ -26,7 +26,7 @@
 
 // [0,1] - enable for debugging
 #ifndef SYNCHRAND_DETERMINISTIC
-#define SYNCHRAND_DETERMINISTIC 1 // TODO: SET TO 0 IN RELEASES!!!
+#define SYNCHRAND_DETERMINISTIC 0 // TODO: SET TO 0 IN RELEASES!!!
 #endif
 
 // [0..3] - 0 most precise, 3 fastest
