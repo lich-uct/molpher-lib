@@ -1,3 +1,6 @@
+.. |nbsp| unicode:: 0xA0
+   :trim:
+
 .. _glossary:
 
 Glossary
@@ -70,10 +73,10 @@ The glossary of important terms used in the `documentation <index>`.
 
     morphing iteration
         Any sequence of operations that ends with attaching new generation of morphs to the tree.
-        For example, an iteration is commited when `ExplorationTree.extend()` is called.
+        For example, an iteration is committed when `ExplorationTree.extend()` is called.
 
     morph generation
-        The morphs attached to the tree upon commiting a `morphing iteration`.
+        The morphs attached to the tree upon committing a `morphing iteration`.
 
     chemical space path
         A consecutive sequence of `morphs <morph>` created by iteratively applying
@@ -94,8 +97,18 @@ The glossary of important terms used in the `documentation <index>`.
         A molecule that have not generated any morphs that would be closer to the trget than itself.
 
     Molpher
-        Software developed as a cooperation between the `Siret <http://siret.ms.mff.cuni.cz/>`_
+        Software developed as a collaboration between the `Siret <http://siret.ms.mff.cuni.cz/>`_
         and `LICH <http://ich.vscht.cz/>`_ research groups. The main goal of the project
-        is to implement an effective tool for `chemical space` exploration.
+        is to implement an effective tool for `chemical space` exploration with `molecular morphing`.
         The Molpher program itself is available from `GitHub <https://github.com/siret/Molpher>`_.
 
+    molecular morphing
+        Molecular morphing is an atom-based *de novo* method of computer-aided drug design.
+        It was developed by the `Siret <http://siret.ms.mff.cuni.cz/>`_
+        and `LICH <http://ich.vscht.cz/>`_ research groups and first implemented in the
+        `Molpher` program |nbsp| [2]_. It uses a set of `chemical operators` to transform
+        a compound into a different one. By applying these operators iteratively, it is possible to 'travel'
+        through chemical space in a certain direction (e.g. towards a desired compound)
+        by minimizing an objective function -- such as structural distance.
+
+        .. [2] D. Hoksza, P. Škoda, M. Voršilák, and D. Svozil, “Molpher: a software framework for systematic chemical space exploration,” Journal of Cheminformatics, vol. 6, no. 1, p. 7, Mar. 2014.

@@ -12,5 +12,5 @@ MOLPHER_PATH=../src/python/molpher/
 #PYTHONPATH="${MOLPHER_PATH}:${PYTHONPATH}"
 
 sphinx-apidoc -o source/documentation/python/ $MOLPHER_PATH
-make clean
+#make clean
 make html

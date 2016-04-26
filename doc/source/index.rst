@@ -1,29 +1,36 @@
-.. molpher-lib documentation master file, created by
-   sphinx-quickstart on Thu Nov 26 10:28:29 2015.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
 Molpher-lib: Python and C++ API for Molpher
 ===========================================
 
-What you have just stumbled upon is the documentation of *Molpher-lib*.
-*Molpher-lib* is essentially a C++ API derived from :term:`Molpher`
--- a free open source software aimed at exploration of `chemical space`.
-It shouldn't be regarded as a full API to :term:`Molpher`, but as a
-standalone project that just builds upon its features.
-However, it is not out of the question that both of these projects
-will get more tightly integrated in the future.
+What you have just stumbled upon is the documentation of *Molpher-lib*,
+a computer library for exploration of chemical space with :term:`molecular morphing`.
+It is essentially a fork of :term:`Molpher`
+-- a free open source software developed for the same purpose.
 
-The goal of this project is to make :term:`Molpher` more accessible to developers
-by providing a flexible and extensible programming interface.
-It also tries to make the functionality available for wider audience by
-including a Python package that exposes the API to Python
-using the `Simplified Wrapper and Interface Generator (SWIG) <http://swig.org/>`_.
+The original :term:`Molpher` is mostly aimed at users. Therefore, it contains a rich
+graphical user interface with visualizations of chemical space and many facilities
+to directly affect the exploration process.
+However, it is not very friendly
+when it comes to developers
+who usually prefer access to the facilities of a computer program via an API
+or would even like to alter the implementation so that it suits their needs.
+We have become more and more aware of these shortcomings during our research
+where we would often like to implement new ways of filtering the generated :term:`morphs <morph>`
+or evaluating their 'fitness', but the monolithic implementation in C++ would make
+it difficult and time-consuming.
 
-..  warning:: Please, note that the project is in a very early stage of developement
-        and that a lot of features mentioned in this documentation might, and probably
-        will, change in the future. Additionally, be wary of any use in production, because
-        bugs and performance issues will most probably occur.
+Therefore, the goal of this project is to make :term:`Molpher` more accessible to
+programmers, developers and scientists alike
+by providing a flexible and extensible programming interface including
+a Python package that exposes most of the features of *Molpher-lib* to the
+Python programming language as well.
+
+..  warning:: Please, note that the project is in early stage of development
+        and that a lot of the features mentioned in this documentation might
+        change in the future and that there might still be a considerable amount
+        of bugs and other issues.
+
+        .. todo:: Add link to the issue tracker
 
 Table of Contents
 =================
@@ -31,7 +38,7 @@ Table of Contents
 ..  toctree::
     :name: maintoc
     :numbered:
-    :maxdepth: 2
+    :maxdepth: 5
 
     self
     Introduction <introduction>
@@ -40,7 +47,6 @@ Table of Contents
 
 Indices and Search
 ==================
-* :ref:`search`
 * :ref:`modindex`
 * :ref:`genindex`
 * :ref:`glossary`
