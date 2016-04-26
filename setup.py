@@ -1,6 +1,6 @@
 from setuptools import setup, Extension, find_packages
 import os
-from version import VERSION
+from version import VERSION, BUILD_NUMBER
 
 molpher_cpp_module = Extension('molpher.swig_wrappers._core',
                            sources=[os.path.abspath('src/swig/molpher_wrap.cpp')],
@@ -13,7 +13,7 @@ molpher_cpp_module = Extension('molpher.swig_wrappers._core',
                            )
 
 setup (name = 'molpher',
-       version = VERSION,
+       version = VERSION + '-r' + BUILD_NUMBER if BUILD_NUMBER != '0' else VERSION,
        author      = "Martin Sicho",
        description = "Molpher-lib Python wrappers and library.",
        package_dir={'': 'src/python/'},

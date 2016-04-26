@@ -26,7 +26,7 @@ for target in TARGETS:
         with open(METAFILE_PATH, "w", encoding='utf-8') as metafile:
             metafile.write(template.render(
                 target=target
-                , version=VERSION
+                , version=VERSION + '_r' + BUILD_NUMBER if BUILD_NUMBER != '0' else VERSION
                 , build_number=BUILD_NUMBER
                 , license_file=LICENSE_FILE
                 , build_string="py{0}_{1}".format(python_version.replace('.', ''), BUILD_NUMBER)
