@@ -1,12 +1,18 @@
 Tutorial
 ========
 
-This section gives an overview of most of the features currently available in the library
-in the form of a very simple example. The example script is located in the `examples` package
-and can be downloaded from :download:`here <../../../src/python/molpher/examples/basics.py>`. The used example
-`XML template` is available from :download:`this link <../../../src/python/molpher/examples/cocaine-procaine-template.xml>`
-(see `templates-snapshots` for more details on templates). If you want to know more about the library or
-the source code, we suggest you check out the `source-code-docs`.
+This section gives an overview of the most important features currently available in the library
+by writing and commenting on an example Python script -- located in the `examples` package
+and available for download :download:`here <../../../src/python/molpher/examples/basics.py>`.
+However, not all of the available features or settings will be presented and we encourage
+you to take a look at the `source-code-docs` if you want to know more about the implementation itself
+or some more advanced topics.
+
+..  note:: We do not provide usage examples or a description of the C++ API in this tutorial,
+        but the Python interface actually follows the C++ implementation very closely
+        and the classes from the `core` package are in fact derived from the proxy
+        classes generated automatically by `SWIG <http://www.swig.org/>`_ when the C++ API is
+        wrapped for Python.
 
 .. contents:: Table of Contents
 
@@ -15,14 +21,19 @@ Creating an Exploration Tree and Setting Morphing Parameters
 
 .. py:currentmodule:: molpher.core
 
-As it was explained in the `../introduction`, Molpher maintains a data structure called an `exploration tree` to save and
-evaluate putative `paths in chemical space <chemical space path>`. This data structure is represented by
-a `molpher.core.ExplorationTree` instance in the Python API. This tutorial will show how to create and build
-an exploration tree that will try to search for a path
+In order to find a path that connects the :term:`source molecule` and :term:`target molecule` (see `../introduction`),
+Molpher maintains a data structure called an :term:`exploration tree` to save and
+evaluate putative :term:`paths in chemical space <chemical space path>`. It is basically a
+tree rooted at the source molecule that is grown by modifying its leaves with predefined :term:`morphing operators`.
+
+In our programs the :term:`exploration tree` is represented by
+an instance of the `molpher.core.ExplorationTree` an in this tutorial,
+our :term:`exploration tree` will search for a path
 between *cocaine* (a popular recreational drug) and *procaine* (compound that replaced cocaine
 as a local anesthetic). Both of these compounds act on sodium channels in the neuronal cell membrane
 and probably have the same mode of action, which makes them ideal candidates for a morphing experiment.
-Let's now initialize our exploration tree:
+
+Let us initialize this exploration tree now:
 
 ..  code-block:: python
     :caption: The most basic way to initialize an exploration tree.
@@ -34,7 +45,7 @@ Let's now initialize our exploration tree:
     cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
     procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
-    tree = ETree(source=cocaine, target=procaine) # initialize a tree that searches for a path from cocaine to procaine
+    tree = ETree.create(source=cocaine, target=procaine) # initialize a tree that searches for a path from cocaine to procaine
 
 The code shown in  :numref:`tree-init` simply initializes the tree from the supplied SMILES.
 At the moment the tree is pretty simple. It only contains the root molecule (cocaine in this particular instance).
@@ -57,9 +68,8 @@ the following output::
     Source:  CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
     Target:  O=C(OCCN(CC)CC)c1ccc(N)cc1
 
-.. note:: Besides the information about our source and target, we can also see that a data file was loaded successfully. That means
-    the :mod:`molpher` package was
-    initialized successfully and is ready for use.
+.. note:: Besides the information about our source and target, we can also see that a data file was loaded successfully.
+    That means the :mod:`molpher` package was initialized successfully and is ready for use.
 
 The `ExplorationTree.params` dictionary doesn't just store the
 source and target molecule, but also houses other `morphing parameters`. Let's take a look:
@@ -626,7 +636,8 @@ Templates and Tree Snapshots
 ----------------------------
 
 We don't always have to initialize `morphing parameters` by hand. We can use a `XML template` instead.
-Here is an example of a template file:
+Here is an example of a template file (you can also download it
+from :download:`here <../../../src/python/molpher/examples/cocaine-procaine-template.xml>`):
 
 ..  literalinclude:: ../../../src/python/molpher/examples/cocaine-procaine-template.xml
     :language: xml
