@@ -26,8 +26,6 @@ def main():
     }
     print(tree.params)
 
-    exit()
-
     print('#Generating and Manipulating Morphs')
 
     print(tree.leaves) # show the current leaves of the tree (only the source so far)
