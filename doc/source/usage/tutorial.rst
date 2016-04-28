@@ -231,10 +231,10 @@ the tree extended and the unfavorable paths (or their parts) removed from the tr
 Generating and Manipulating Morphs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now that we know how to initialize an exploration tree and how to set morphing parameters, let's take a look at how the
-`chemical space` exploration works in practice.
+Now that we know how to initialize an exploration tree and how to set morphing parameters,
+we will take a look at how the :term:`chemical space` exploration works in practice.
 
-Let's generate some `morphs <morph>` from the current leaves of the tree first:
+Let us generate a few `morphs <morph>` from the current leaves of the tree first:
 
 ..  code-block:: python
     :caption: Generating and reading morphs.
@@ -251,80 +251,87 @@ Output:
 
 ..  code-block:: none
 
-    (<molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9ec2c0f0> >,)
-    CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
-    (<molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9ec2c0f0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3253c0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3253f0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325420> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325450> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325480> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3254b0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3254e0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325510> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325540> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325570> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3255a0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3255d0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325600> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325630> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325660> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325690> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3256c0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3256f0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325720> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325750> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325780> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3257b0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3257e0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325810> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325840> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325870> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3258a0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3258d0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325900> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325930> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325960> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325990> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3259c0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c3259f0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325a20> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325a50> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325a80> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325ab0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325ae0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325b10> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325b40> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325b70> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325ba0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325bd0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325c00> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325c30> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325c60> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325c90> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325cc0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325cf0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325d20> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325d50> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325d80> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325db0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325de0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325e10> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325e40> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325e70> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325ea0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325ed0> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325f00> >, <molpher.swig_wrappers.core.MolpherMol; proxy of <Swig Object of type 'MolpherMol *' at 0x7f1c9c325f30> >)
-    63
+    (<molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bc30>,)
+    COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    Generated 62 morphs.
+    (<molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bc30>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bc00>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bc90>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bcc0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bcf0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bd20>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bd50>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bd80>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bdb0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bde0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78be10>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78be40>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78be70>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bea0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bed0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bf00>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bf30>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bf60>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bf90>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bfc0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06030>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06060>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06090>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae060c0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae060f0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06120>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06150>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06180>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae061b0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae061e0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06210>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06240>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06270>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae062a0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae062d0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06300>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06330>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06360>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06390>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae063c0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae063f0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06420>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06450>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06480>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae064b0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae064e0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06510>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06540>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06570>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae065a0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae065d0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06600>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06630>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06660>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06690>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae066c0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae066f0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06720>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06750>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06780>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae067b0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae067e0>)
+    62
 
 The code in :numref:`generate-morphs` first tells the tree to return its current leaves.
-As we only have one molecule in the tree (our cocaine `source molecule`), the `leaves` member
-only contains one element. We can verify that it is indeed our cocaine by calling its `getSMILES()` method.
+As we only have one molecule in the tree (our cocaine :term:`source molecule`), the `leaves` member
+only contains one element. We can verify that it is indeed our cocaine by asking
+the underlying :py:class:`~MolpherMol.MolpherMol` instance for its SMILES
+using the `smiles` attribute.
+
+..  hint:: The :py:class:`~MolpherMol.MolpherMol` class has a lot of useful attributes that
+    can often be written into as well. You can easily replace the computed value of the objective
+    function with your own, for example. See the documentation for the :py:class:`~MolpherMol.MolpherMol`
+    class to get an overview of how you can modify the molecules in the tree or the generated candidate morphs.
 
 The `generateMorphs()` method tells the tree to generate some `morphs <morph>`
-from the current leaves for us (how many depends on the current state of the tree
-and parameters `far_produce`, `close_produce` and `far_close_threshold`).
+from the current leaves for us. How many morphs will be generated depends
+mostly on the current state of the tree
+and parameters `far_produce`, `close_produce` and `far_close_threshold`.
+However, it also depends on other factors. For example, some structures
+might not be parsed correctly and hence might be removed from the list after the morphs are generated.
+Also, a different number of morphs can be generated each time the method is run. That si due to
+the non-deterministic character of the morphing algorithm which chooses the morphing operators to
+use and parts of the structure to modify randomly.
 
-..  note:: The number of generated morphs also depends on other factors as well. For example, some structures
-        might not be parsed correctly and hence might be removed from the list after the morphs are generated.
+We can access the newly generated morphs from the `candidates`
+member of the tree instance. It is a `tuple` of :py:class:`~MolpherMol.MolpherMol` instances.
+:py:class:`~MolpherMol.MolpherMol` instances serve
+as proxy objects for the underlying C++ representation of molecules generated by :term:`Molpher`.
+Hence, these instances can be used to read and manipulate compounds currently present in a tree
+or the generated morphs.
 
-We can access the created morphs from the `candidates`
-member of the tree instance. It is a `tuple` of `MolpherMol` instances. `MolpherMol` instances serve
-as proxy objects to the underlying C++ representation of molecules generated by Molpher.
+..  attention:: The molecules saved in the `candidates` attribute of the tree actually do not
+        belong to the tree just yet. See :ref:`extend-prune` for more information on
+        how it is with tree ownership of molecules.
 
-These instances can be used to read and manipulate compounds present in a tree.
-However, because of their C++ origin, these objects cannot be treated as regular python objects.
-The current implementation does not inform Python when and if the molecule is destroyed
-(removed from the tree or otherwise invalidated). Therefore, one
-simple rule have to be followed: **Do not save references to tree-bound molecules.**
+You can tell any molecule to replicate itself by calling its :py:meth:`~MolpherMol.MolpherMol.copy()` method.
+The replicated instance is never bound to any tree and all the changes made to the copy are only made to the copy
+and not the original instance. This is useful when we want to save the molecule from a tree for later use
+and make sure that its state does not change as we keep growing the tree in our program.
 
-You can tell whether a `MolpherMol` is tree-bound or not by calling its isBound() method.
-If it returns `True`, the molecule is bound to a tree and, therefore, it is not safe to save it anywhere for later use.
-If you want to have the information contained within a `MolpherMol` object available even when
-the molecule is destroyed, you can tell it to replicate itself by calling its :py:meth:`MolpherMol.copy()` method.
-The replicated instance is not bound
-to any tree and its lifetime is only affected by Python runtime and its garbage collector. However,
-unbinding the molecule from the tree also means that the actual data in the tree will not be modified,
-if this instance is changed. The following code example illustrates this behaviour:
+The following code example illustrates how we can change and copy :py:class:`~MolpherMol.MolpherMol` instances:
 
 ..  code-block:: python
-    :caption: Copying morphs.
+    :caption: Modifying and copying candidate morphs.
     :name: copying-morphs
     :linenos:
 
-    candidate = tree.candidates[0] # get the first morph in the candidate list
-    print(candidate.isBound()) # print if it is bound to a tree
-    print(tree.candidates[0].getDistToTarget()) # print distance to target
-    candidate.setDistToTarget(0.5) # set new distance to target
-    print(tree.candidates[0].getDistToTarget()) # look in the list of candidates and print new distance
+    # get the first morph in the candidate list
+    candidate = tree.candidates[0]
+    # print distance to target
+    print(tree.candidates[0].dist_to_target)
+    # set new distance to target
+    candidate.dist_to_target = 0.5
+    # look in the list of candidates and print new distance
+    print(tree.candidates[0].dist_to_target)
 
     print()
 
-    # get a copy of the candidate molecule and verify that the changes do not propagate into the tree
+    # make a copy of our molecule
     candidate_copy = candidate.copy()
-    print(candidate_copy.isBound())
-    print(candidate_copy.getDistToTarget())
-    candidate_copy.setDistToTarget(0.7)
-    print(candidate_copy.getDistToTarget())
-    print(candidate.getDistToTarget())
-    print(tree.candidates[0].getDistToTarget())
+    # set a new distance for the copy and verify that the original was not affected
+    print(candidate_copy.dist_to_target)
+    candidate_copy.dist_to_target = 0.7
+    print(candidate_copy.dist_to_target)
+    print(candidate.dist_to_target)
+    print(tree.candidates[0].dist_to_target)
 
 Output:
 
 ..  code-block:: none
 
-    True
-    0.90625
+    0.828125
     0.5
 
-    False
     0.5
     0.7
     0.5
-
-We can see that when modifying a bound instance the value in the tree is modified as well,
-but when we change an unbound instance the value stays the same.
-
-..  note:: For more information on the available methods see the `MolpherMol` documentation.
+    0.5
 
 Sorting and Filtering Morphs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -389,6 +396,8 @@ because we called the `sortMorphs()` method previously.
 ..  seealso:: The library also implements a few built-in filters. You can use the
         `filterMorphs()` method to invoke them. See the method's documentation for more information
         on the available filtering options.
+
+.. _extend-prune:
 
 Extending and Pruning
 ~~~~~~~~~~~~~~~~~~~~~

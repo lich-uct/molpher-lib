@@ -29,29 +29,32 @@ def main():
     print('#Generating and Manipulating Morphs')
 
     print(tree.leaves) # show the current leaves of the tree (only the source so far)
-    print(tree.leaves[0].getSMILES())
+    print(tree.leaves[0].smiles)
     tree.generateMorphs() # generate new morphs
     print(tree.candidates)
     print(len(tree.candidates))
 
     print()
 
-    candidate = tree.candidates[0] # get the first morph in the candidate list
-    print(candidate.isBound()) # print if it is bound to a tree
-    print(tree.candidates[0].getDistToTarget()) # print distance to target
-    candidate.setDistToTarget(0.5) # set new distance to target
-    print(tree.candidates[0].getDistToTarget()) # look in the list of candidates and print new distance
+    # get the first morph in the candidate list
+    candidate = tree.candidates[0]
+    # print distance to target
+    print(tree.candidates[0].dist_to_target)
+    # set new distance to target
+    candidate.dist_to_target = 0.5
+    # look in the list of candidates and print new distance
+    print(tree.candidates[0].dist_to_target)
 
     print()
 
-    # get a copy of the candidate molecule and verify that the changes do not propagate into the tree
+    # make a copy of our molecule
     candidate_copy = candidate.copy()
-    print(candidate_copy.isBound())
-    print(candidate_copy.getDistToTarget())
-    candidate_copy.setDistToTarget(0.7)
-    print(candidate_copy.getDistToTarget())
-    print(candidate.getDistToTarget())
-    print(tree.candidates[0].getDistToTarget())
+    # set a new distance for the copy and verify that the original was not affected
+    print(candidate_copy.dist_to_target)
+    candidate_copy.dist_to_target = 0.7
+    print(candidate_copy.dist_to_target)
+    print(candidate.dist_to_target)
+    print(tree.candidates[0].dist_to_target)
 
     print('#Sorting and Filtering Morphs')
 
