@@ -21,6 +21,12 @@ class MolpherMol(wrappers.MolpherMol):
         else:
             raise AttributeError('Invalid argumetns supplied to the constructor.')
 
+    def __repr__(self):
+        vals = super(MolpherMol, self).__repr__().split(';')
+        first = vals[0]
+        second = vals[1].split(' at ')[1].strip('>').strip()
+        return first + ' at ' + second
+
     def copy(self):
         copy = super(MolpherMol, self).copy()
         copy.__class__ = MolpherMol
