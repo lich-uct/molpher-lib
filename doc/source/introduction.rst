@@ -27,12 +27,15 @@ a :term:`source molecule` and a :term:`target molecule`. The path
 is then just a sequence of structures that connect the two (see :term:`chemical space path`
 for more details).
 
-The main reason to generate such a path is
-that some new interesting compounds might be discovered this way.
+The main motivation to generate such a path is
+that some new interesting compounds might be discovered along the way.
 The ones in the middle of the path are usually structurally different from both
 the source and the target, but at the same time combine
 their structural features, thus, some of them may form a good basis for
 a new drug.
+
+..  note:: If you want to know more about how the algorithm works, read `morphing-algorithm`
+        section of the :doc:`tutorial <usage/tutorial>`.
 
 What is Molpher-lib?
 --------------------

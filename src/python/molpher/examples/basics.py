@@ -3,7 +3,7 @@ Module with example code from the tutorial.
 
 """
 
-from molpher.core.ExplorationTree import ExplorationTree as ETree
+from molpher.core import ExplorationTree as ETree
 from molpher.core.operations import *
 
 # TODO: make some of the stuff from this script part of the test suite
@@ -25,6 +25,8 @@ def main():
         'weight_max' : 500.0
     }
     print(tree.params)
+
+    exit()
 
     print('#Generating and Manipulating Morphs')
 
