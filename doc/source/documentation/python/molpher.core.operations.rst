@@ -4,6 +4,14 @@ molpher.core.operations package
 Submodules
 ----------
 
+molpher.core.operations.SortMorphsOper module
+---------------------------------------------
+
+.. automodule:: molpher.core.operations.SortMorphsOper
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 molpher.core.operations.TreeOperation module
 --------------------------------------------
 

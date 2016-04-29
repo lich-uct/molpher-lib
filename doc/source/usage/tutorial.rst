@@ -340,8 +340,8 @@ for example, this order is used by the built-in probability filter (see `PROBABI
 to compute the probabilities of survival for each candidate.
 
 As of yet, the only way to sort the
-generated morphs is by calling the :py:meth:`~ExplorationTree.ExplorationTree.sortMorphs()`
-method on the tree instance or using the `~operations.SortMorphsOper` operation
+generated morphs is by calling the :py:meth:`~molpher.swig_wrappers.core.ExplorationTree.sortMorphs`
+method on the tree instance or using the :py:class:`~operations.SortMorphsOper.SortMorphsOper` operation
 (see :ref:`operations` for more). This sorts the molecules in the order of increasing value
 of the objective function (distance from the :term:`target molecule` by default).
 
@@ -349,7 +349,6 @@ Let us now sort the candidate morphs in our tree:
 
 ..  code-block:: python
     :caption: Sorting morphs according to the value of the objective function.
-    :name: filtering-morphs
     :linenos:
 
     # sort the candidates in the tree according to their distance from target
@@ -372,7 +371,7 @@ Output:
     [('COC(=O)C1C2CCC(CC1OC(=O)C1=CCC(C)C=C1)N2C', 0.5), ('CCC1N(C)C2CC(OC(=O)C3=CC=CC=C3)C12C(=O)OC', 0.7868852459016393), ('COC(=O)C1C2C3CN2C(C3)CC1OC(=O)C1=CC=CC=C1', 0.7868852459016393), ('CCC1CC(OC(=O)C2=CC=CC=C2)C(C(=O)OC)CN1C', 0.7868852459016393), ('COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C', 0.7903225806451613), ('CCN1C2CCC1C(C(=O)OC)C(OC(=O)C1=CC=CC=C1)C2', 0.7936507936507937), ('COC(=O)C1C2CCC(C(N)C1OC(=O)C1=CC=CC=C1)N2C', 0.8032786885245902), ('COCC1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8064516129032258), ('COC(=O)C1C2CCC(C1OC(=O)C1=CC=CC=C1)N2C', 0.8103448275862069), ('COC(=O)CC(CC1CCCN1C)OC(=O)C1=CC=CC=C1', 0.8125), ('COC(=O)C1C2CCC(CNC1OC(=O)C1=CC=CC=C1)N2C', 0.8125), ('COC(=O)C1C2CCC(CC1(N)OC(=O)C1=CC=CC=C1)N2C', 0.8125), ('CONC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8125), ('CNC1CCCCC(OC(=O)C2=CC=CC=C2)C1C(=O)OC', 0.8135593220338984), ('COC(=O)C1C2CC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8166666666666667), ('COC(=O)C1C(C)N(C)C(C)CC1OC(=O)C1=CC=CC=C1', 0.8166666666666667), ('COC(=O)C1C2CCC(N2)C(C)C1OC(=O)C1=CC=CC=C1', 0.8166666666666667), ('CN1C2CCC1C(C(=O)O)C(OC(=O)C1=CC=CC=C1)C2', 0.8166666666666667), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)C2C', 0.819672131147541), ('COC(=O)C1(OC(=O)C2=CC=CC=C2)CC2CCC1N2C', 0.819672131147541), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2', 0.819672131147541), ('CC1CC2CC(OC(=O)C3=CC=CC=C3)C(C(=O)O)C1N2C', 0.819672131147541), ('COC(=O)C1C2CCC(OC1OC(=O)C1=CC=CC=C1)N2C', 0.8225806451612903), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8225806451612903), ('COC(=O)C1C2C(C)CC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C12C(OC(=O)C3=CC=CC=C3)CC13CCC2N3C', 0.8253968253968254), ('COC(=O)C(C(C)OC(=O)C1=CC=CC=C1)C1CCCN1C', 0.8253968253968254), ('COC(=O)C1C2CCC(=CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C1C2CCC(CC1OCC1=CC=CC=C1)N2C', 0.8253968253968254), ('CNC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C1C2CCC(CC1NOC(=O)C1=CC=CC=C1)N2C', 0.828125), ('COC(=O)C1C2CCC(CC1(O)OC(=O)C1=CC=CC=C1)N2C', 0.828125), ('C=C(OC)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.828125), ('COC(=O)C1NC2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8307692307692307), ('COC(=O)C1C2CCC(OCC1OC(=O)C1=CC=CC=C1)N2C', 0.8307692307692307), ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCC1(C)N2C', 0.8307692307692307), ('COC12CCC(CC(OC(=O)C3=CC=CC=C3)C1C=O)N2C', 0.8333333333333334), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CNC=C1)N2C', 0.8382352941176471), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CCC=C1)N2C', 0.8484848484848485), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC3=CC=C31)N2C', 0.8507462686567164), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC(O)CC=C1)N2C', 0.8529411764705882), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CN=CC=C1)N2C', 0.855072463768116), ('COC(=O)C1C2CC3C4=CC=C(C=C4)C(=O)OC1CC3N2C', 0.859375), ('COC(=O)C1C2CCC3(CC1OC(=O)C1=CC=C3C=C1)N2C', 0.8636363636363636), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC1)N2C', 0.8656716417910448), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1C)N2C', 0.8656716417910448), ('COC(=O)C1C2CCN(C)C1CCC1=CC=CC=C1C(=O)O2', 0.8656716417910448), ('COC(=O)C1C2CCC(CC1OC(=O)C1=C=CC=C1)N2C', 0.8676470588235294), ('COC(=O)C1C2CCC(CC1OC(=O)C1=NC=CC=C1)N2C', 0.8695652173913043), ('COC(=O)C1C2=CC=CC(=C2)C(=O)OCCC2CCC1N2C', 0.8695652173913043), ('COC(=O)C1C2CCC3CC1OC(=O)C1=C(C=CC=C1)CN32', 0.8695652173913043), ('COC(=O)C1C2CCC(CC13OC(=O)C1=CC=CC=C13)N2C', 0.8695652173913043), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=N1)N2C', 0.8695652173913043), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC(C)C1)N2C', 0.8714285714285714), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CCC1C)N2C', 0.8714285714285714), ('COC(=O)C(C1CCCN1C)C1CC2=CC=CC(=C2)C(=O)O1', 0.875), ('COC(=O)C1C2CCC(CC1OC1=CC=C(C=O)C=C1)N2C', 0.8787878787878788), ('COC(=O)C1C2CCC(CC1OC(O)C1=CC=CC=C1)N2C', 0.8787878787878788), ('CN1C2CCC1C1C(=O)OCC3=CC=CC(=C3)C(=O)OC1C2', 0.8840579710144928), ('COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 0.90625), ('CC=CC=C(C)C(=O)OC1CC2CCC(C1C(=O)OC)N2C', 0.9285714285714286), ('C=CC=CC=CC(=O)OC1CC2CCC(C1C(=O)OC)N2C', 0.9285714285714286)]
 
 When the list of candidates is populated and sorted, we need to choose the morphs that
-will form the next `generation <morph generation>` (the next leaves of the tree from which new morphs can be generated).
+will form the next :term:`generation <morph generation>` (the next leaves of the tree from which new morphs can be generated).
 Here is an example implementation of a very simple filtering procedure:
 
 ..  code-block:: python
@@ -410,8 +409,8 @@ Output:
     (True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
     [('COC(=O)C1C2CCC(CC1OCC1=CC=CC=C1)N2C', 0.5), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885)]
 
-In :numref:`filtering-morphs`, `candidates_mask` member can be easily changed by writing
-a `list` or a `tuple` of new values into it. Here we simply select the first three morphs as the new `morph generation`.
+In :numref:`filtering-morphs` `candidates_mask` member can be easily changed by writing
+a `list` or a `tuple` of new values into it. Here we simply select the first three morphs as the new :term:`morph generation`.
 Note that the list of selected morphs is sorted from the molecule closest to the target to the farthest,
 because we called the `sortMorphs()` method previously.
 
@@ -432,12 +431,16 @@ Extending and Pruning
 ~~~~~~~~~~~~~~~~~~~~~
 
 When we have the morphs we want to attach to the tree selected, we can call `extend()`
-to connect them to their respective parents and make them the new leaves:
+which will connect them to their respective parents making them the new leaves
+of our tree:
 
 ..  code-block:: python
-    :caption: Extending the tree.
+    :caption: Extending and pruning the tree.
     :name: extending-tree
     :linenos:
+
+    # get the number of generations before
+    print(tree.generation_count)
 
     tree.extend() # connect the accepted morphs to the tree as new leaves
     print(
@@ -445,60 +448,76 @@ to connect them to their respective parents and make them the new leaves:
         [
             (x.getSMILES(), x.getDistToTarget())
             for x in tree.leaves
-        ], key=lambda x : x[1]
+        ], key=lambda item : item[1]
         )
     )
-    print(tree.generation_count) # get the number of generations
-    print(tree.path_found) # check if a path was found
-    tree.prune() # run the pruning operation on the updated tree
+
+    # get the number of generations after
+    print(tree.generation_count)
+
+    # check if a path was found
+    print(tree.path_found)
+
+    # run the pruning operation on the updated tree
+    tree.prune()
 
 Output:
 
 ..  code-block:: none
 
-    [('COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 0.5), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C', 0.7068965517241379), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143)]
+    [('COC(=O)C1C2CCC(CC1OCC1=CC=CC=C1)N2C', 0.5), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885)]
     1
     False
 
-We can see that after extending the tree, our selected morphs (see :numref:`filtering-morphs`) have become the new leaves and that the
-`morph generation` counter `generation_count` was set to one. We could now repeat this process
-and have Molpher iteratively explore further in `chemical space`. We can also read the `path_found` member
-at every iteration to check for the presence of the `target molecule` in the tree and terminate the process,
-if a path is found.
+We can see that after extending the tree, the selected morphs (see :numref:`filtering-morphs`)
+had become the new leaves and that the
+:term:`morph generation` counter (`generation_count`) was set to one.
 
 Because a tree generated in this way grows exponentially, a pruning strategy is needed in order
 to keep the number of explored putative paths to a minimum by discarding those that are not getting any
-closer to the `target molecule`.
+closer to the :term:`target molecule`.
 
-We call the molecule that have not generated any morphs closer to the target than itself a *non-producing molecule*.
-The number of generations to wait before removing the descendents of a `non-producing molecule`
-from the tree is given by the `non_producing_survive` parameter.
+We call the molecule that have not generated any morphs closer to the target than itself
+a :term:`non-producing molecule` and we can set
+the number of generations to wait before removing its descendents
+with the `non_producing_survive` parameter.
 
 Tree pruning can be requested anytime by calling the `prune()` method. In our example, the method didn't prune
 any paths, because the `non_producing_survive` parameter is set to 2 generations in this particular instance.
 
 ..  seealso:: In addition to the `non_producing_survive` parameter, there is the `max_morphs_total` parameter,
         which imposes a restriction on the maximum number of
-        descendents of one `non-producing molecule`. If the number of descendents
+        descendents of one :term:`non-producing molecule`. If the number of descendents
         reaches this threshold, the molecule is removed along with the descendents.
+
+..  hint:: We could now repeat the process of generating, filtering, extending and pruning
+        and have Molpher iteratively explore further in :term:`chemical space`. We could also read the `path_found` member
+        at every iteration to check for the presence of the :term:`target molecule` in the tree and terminate the process,
+        if a it is present. This would give us one complete implementation of a chemical space exploration algorithm.
+
+Now we know everything that is needed to implement a chemical space exploration algorithm with
+the *Molpher-lib* library. In the following sections, we describe more advanced topics
+and introduce some built-in features of the library that can help to make some more complex tasks
+(such as tree serialization) easier.
 
 ..  _operations:
 
 Tree Operations
 ---------------
 
-We call every action that is performed on an `exploration tree` a *tree operation*.
-This concept is represented in the library as the :class:`molpher.core.operations.TreeOperation` abstract class.
-This class becomes useful, for example, when we run into a situation where we need to build
-several exploration trees at once. In such case we might want to apply the same set of operations
-to every tree in the set. Moreover, this abstraction allows us to implement our own tree operations
-and reuse code easily. We can run any operation on a given tree simply by supplying it to the
-`runOperation()` method of the `ExplorationTree` class. The example below shows how to implement
-the same exploration algorithm as demonstrated in the preceding sections:
+We call every action that is performed on an :term:`exploration tree` a *tree operation*.
+This concept is represented in the library with the :class:`~molpher.core.operations.TreeOperation` abstract class and it
+becomes useful when we run into a situation where we need to build
+several exploration trees at once, want to reuse some existing code or store some interim results
+of an ongoing exploration.
+
+We can run any operation on a tree simply by supplying it to the
+`runOperation()` method of the :py:class:`~molpher.swig_wrappers.core.ExplorationTree` class. Here is how to implement
+the same workflow as in the preceding sections using operations:
 
 ..  code-block:: python
     :caption: Using operations to implement simple chemical space exploration.
-    :emphasize-lines: 3,31
+    :emphasize-lines: 3-23,31
     :name: operations-example
     :linenos:
 
@@ -526,7 +545,7 @@ the same exploration algorithm as demonstrated in the preceding sections:
             mask[2] = True
             self.tree.candidates_mask = mask
 
-    tree = ETree(source=cocaine, target=procaine) # create the tree
+    tree = ETree.create(source=cocaine, target=procaine) # create the tree
 
     # this list of tree operations defines one iteration
     iteration = [
@@ -561,19 +580,20 @@ Output:
     False
     [('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885), ('CN1C2CCC1C1C(=O)OCC2C1OC(=O)C1=CC=CC=C1', 0.7833333333333333)]
 
-..  note:: Because the morphing algorithm is not deterministic, the set of obtained morphs is slightly different from the
-        one in the above examples.
+..  note:: Because the morphing algorithm is not deterministic and we initilized a new tree,
+        the set of obtained morphs is slightly different from the one in the previous examples.
 
-In :numref:`operations-example` we see an example where we create a list of operations to perform on a tree. Most of
-them are built-in operations (discussed below), but we also chose to define our own operation for the filtering step
-(see the highlighted lines).
-In order to do that, we simply create a subclass of the :class:`~molpher.core.operations.TreeOperation` abstract class and we override its
-:meth:`~molpher.swig_wrappers.core.TreeOperation.__call__()` method with the implementation we need --
-even though that our new filter is very likely to cause the exploration to get stuck in local optima.
+Most of the operations in :numref:`operations-example` are built-in operations (discussed below), but
+we chose to define our own operation for the filtering step
+(see the highlighted lines). We simply created a subclass of the :class:`~molpher.core.operations.TreeOperation`
+abstract class and we overrode its
+:py:meth:`~molpher.swig_wrappers.core.TreeOperation.__call__` method with the implementation we want.
 
 Each operation can have a tree associated with it, but it is not necessary.
-We can verify if a tree is associated with an operation by calling its :meth:`~molpher.swig_wrappers.core.TreeOperation.getTree()`
-method or accessing the `TreeOperation.tree` attribute of the class. If there is no tree associated with the instance, they both return `None`.
+We can verify if a tree is associated with an operation by calling
+its :meth:`~operations.TreeOperation.TreeOperation.getTree()`
+method or accessing the `TreeOperation.tree` attribute of the class.
+If there is no tree associated with the instance, they both return `None`.
 
 ..  note:: The built-in operations will raise a `RuntimeError`, if invoked without a tree attached to them.
 
@@ -583,20 +603,23 @@ Built-in Operations
 A few operations are already defined in the library:
 
     - `GenerateMorphsOper`
-    - `SortMorphsOper`
+    - :py:class:`~operations.SortMorphsOper.SortMorphsOper`
     - `FilterMorphsOper`
     - `FindLeavesOper`
     - `ExtendTreeOper`
     - `PruneTreeOper`
     - `TraverseOper`
 
-They are all dervied from :class:`~molpher.core.operations.TreeOperation` and contain the full set of operations performed on a tree in
+They are all dervied from :class:`~molpher.swig_wrappers.core.TreeOperation` and contain
+the full set of operations performed on a tree in
 the original Molpher algorithm as published in [1]_. Therefore, the original algorithm can be
 implemented using those operations.
 
-In this tutorial, we will pay particular attention to the `TraverseOper` operation, because it differs
-from the others and introduces the concept of a tree callback function (see `tree-traversal`).
-For more details on each operation, see the designated pages in the documentation.
+In the next part of the tutorial, we will pay particular attention to the `TraverseOper` operation. It differs
+from the others, because it uses a callback function to perform actions on molecules
+in the tree and is, therefore, very useful for debugging and saving exporting various data (see `tree-traversal`).
+
+For more details on the other operations, see the designated pages in the documentation.
 
 .. [1] Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
         `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/24655571>`_, `DOI <http://www.jcheminf.com/content/6/1/7>`_
@@ -608,7 +631,7 @@ Traversing the Tree
 
 A special place among the operations belongs to the `TraverseOper` class. It does not directly implement a part
 of a morphing algorithm, but serves as a means of traversing molecules in a tree and reading/modifying them
-as needed. Let's illustrate this with an example:
+as needed:
 
 ..  code-block:: python
     :caption: Traversing the tree using a callback.
@@ -622,10 +645,10 @@ as needed. Let's illustrate this with an example:
 
         """
 
-        def processMorph(self, morph):
+        def __call__(self, morph):
             """
             Method called on each morph in the tree
-            -- starting from root to leaves.
+            -- starting from the root to leaves.
 
             """
 
@@ -646,37 +669,38 @@ Output:
 ..  code-block:: none
 
     # Root #
-    SMILES:  CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
-    Descendents:  ('CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C', 'CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 'COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C')
+    SMILES:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    Descendents:  ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCN1N2C', 'COCC1C2CC(=O)C(CC1OC(=O)C1=CC=CC=C1)N2C', 'COCC1C2CCC(C(=O)C1OC(=O)C1=CC=CC=C1)N2C')
     # Morph #
-    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
-    SMILES:  COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C
+    Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    SMILES:  COCC1C2CCC(C(=O)C1OC(=O)C1=CC=CC=C1)N2C
     Descendents:  ()
     # Morph #
-    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
-    SMILES:  CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    SMILES:  COCC1C2CC(=O)C(CC1OC(=O)C1=CC=CC=C1)N2C
     Descendents:  ()
     # Morph #
-    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
-    SMILES:  CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C
+    Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    SMILES:  COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCN1N2C
     Descendents:  ()
 
-In :numref:`traverse-example`, we derive from the `TraverseCallback` class, which is an abstract class with
-an abstract method called :meth:`~molpher.swig_wrappers.core.TraverseCallback.processMorph()`. This method takes one argument,
+In :numref:`traverse-example` we derive from the `TraverseCallback` class, an abstract class with
+an abstract method :meth:`~molpher.swig_wrappers.core.TraverseCallback.__call__`. This method takes one argument,
 which is a `MolpherMol` instance
 of a molecule in the tree. We need to override this method in our derived class in order to implement our own
 behaviour.
 
 The callback is then associated with a `TraverseOper` instance, which can be run on a tree as any other
-tree operation. When the operation is run it traverses the tree from root to leaves and injects
-every molecule it encounters into our :meth:`~molpher.swig_wrappers.core.TraverseCallback.processMorph()` method.
+tree operation. When the operation is run it traverses the tree from the root to the leaves and injects
+every molecule it encounters into our implementation of the
+:meth:`~molpher.swig_wrappers.core.TraverseCallback.__call__` method.
 
-..  note:: We can also pass a molecule to the `TraverseOper` constructor. In that case, a subtree will be traversed
+..  note:: We can also pass a SMILES string to the `TraverseOper` constructor. In that case, a subtree will be traversed
         using the specified molecule as the root of the subtree.
 
-There is also a much more convenient way to traverse the tree. The `ExplorationTree` class implements
-the `traverse()` method. It simply takes any python callable and tries to use it instead of the
-:meth:`~molpher.swig_wrappers.core.TraverseCallback.processMorph()` method.
+There is also a much more convenient way to traverse the tree. Because, the `ExplorationTree` class implements
+the `traverse()` method, we can simply take any python callable and use it instead of the
+:meth:`~molpher.swig_wrappers.core.TraverseCallback.__call__` method.
 However, under the hood it does the same thing as we did in :numref:`traverse-example`.
 Therefore, the above code can be turned into:
 
@@ -707,24 +731,24 @@ Output:
 ..  code-block:: none
 
     # Root #
-    SMILES:  CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
-    Descendents:  ('CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C', 'CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 'COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C')
+    SMILES:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    Descendents:  ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCN1N2C', 'COCC1C2CC(=O)C(CC1OC(=O)C1=CC=CC=C1)N2C', 'COCC1C2CCC(C(=O)C1OC(=O)C1=CC=CC=C1)N2C')
     # Morph #
-    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
-    SMILES:  COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C
+    Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    SMILES:  COCC1C2CCC(C(=O)C1OC(=O)C1=CC=CC=C1)N2C
     Descendents:  ()
     # Morph #
-    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
-    SMILES:  CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    SMILES:  COCC1C2CC(=O)C(CC1OC(=O)C1=CC=CC=C1)N2C
     Descendents:  ()
     # Morph #
-    Parent: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
-    SMILES:  CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C
+    Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    SMILES:  COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCN1N2C
     Descendents:  ()
 
 ..  _templates-snapshots:
 
-Templates and Tree Snapshots
+Tree Templates and Snapshots
 ----------------------------
 
 We don't always have to initialize `morphing parameters` by hand. We can use a `XML template` instead.
