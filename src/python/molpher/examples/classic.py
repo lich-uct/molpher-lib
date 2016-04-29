@@ -5,6 +5,8 @@ Implementation of the classical search algorithm.
 
 import time
 
+import gc
+
 from molpher.core import ExplorationTree as ETree
 from molpher.core.operations import *
 
@@ -32,12 +34,12 @@ class ClassicPathFinder:
     def path(self):
         current = self.tree.fetchMol(self.tree.params['target'])
         path = list()
-        path.append(current.getSMILES())
+        path.append(current.smiles)
         while current != '':
-            current = current.getParentSMILES()
+            current = current.parent_smiles
             if current:
                 current = self.tree.fetchMol(current)
-                path.append(current.getSMILES())
+                path.append(current.smiles)
 
         path.reverse()
         return path

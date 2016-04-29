@@ -250,11 +250,11 @@ Output:
 
 ..  code-block:: none
 
-    (<molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bc30>,)
+    (<molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d930>,)
     COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    Generated 62 morphs.
-    (<molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bc30>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bc00>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bc90>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bcc0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bcf0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bd20>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bd50>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bd80>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bdb0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bde0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78be10>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78be40>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78be70>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bea0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bed0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bf00>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bf30>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bf60>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bf90>, <molpher.core.MolpherMol.MolpherMol at 0x7f22ea78bfc0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06030>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06060>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06090>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae060c0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae060f0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06120>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06150>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06180>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae061b0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae061e0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06210>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06240>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06270>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae062a0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae062d0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06300>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06330>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06360>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06390>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae063c0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae063f0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06420>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06450>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06480>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae064b0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae064e0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06510>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06540>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06570>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae065a0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae065d0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06600>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06630>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06660>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06690>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae066c0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae066f0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06720>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06750>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae06780>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae067b0>, <molpher.core.MolpherMol.MolpherMol at 0x7f22eae067e0>)
-    62
+    Generated 60 morphs.
+    (<molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d930>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d8d0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d960>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d990>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d9c0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d9f0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6da20>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6da50>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6da80>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dab0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dae0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6db10>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6db40>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6db70>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dba0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dbd0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dc00>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dc30>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dc60>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dc90>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dcc0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dcf0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dd20>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dd50>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dd80>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6ddb0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dde0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6de10>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6de40>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6de70>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dea0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6ded0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6df00>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6df30>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6df60>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6df90>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dfc0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2030>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2060>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2090>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af20c0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af20f0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2120>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2150>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2180>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af21b0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af21e0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2210>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2240>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2270>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af22a0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af22d0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2300>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2330>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2360>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2390>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af23c0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af23f0>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2420>, <molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2450>)
+    60
 
 The code in :numref:`generate-morphs` first tells the tree to return its current leaves.
 As we only have one molecule in the tree (our cocaine :term:`source molecule`), the `leaves` member
@@ -367,8 +367,8 @@ Output:
 
 ..  code-block:: none
 
-    (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
-    [('COC(=O)C1C2CCC(CC1OC(=O)C1=CCC(C)C=C1)N2C', 0.5), ('CCC1N(C)C2CC(OC(=O)C3=CC=CC=C3)C12C(=O)OC', 0.7868852459016393), ('COC(=O)C1C2C3CN2C(C3)CC1OC(=O)C1=CC=CC=C1', 0.7868852459016393), ('CCC1CC(OC(=O)C2=CC=CC=C2)C(C(=O)OC)CN1C', 0.7868852459016393), ('COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C', 0.7903225806451613), ('CCN1C2CCC1C(C(=O)OC)C(OC(=O)C1=CC=CC=C1)C2', 0.7936507936507937), ('COC(=O)C1C2CCC(C(N)C1OC(=O)C1=CC=CC=C1)N2C', 0.8032786885245902), ('COCC1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8064516129032258), ('COC(=O)C1C2CCC(C1OC(=O)C1=CC=CC=C1)N2C', 0.8103448275862069), ('COC(=O)CC(CC1CCCN1C)OC(=O)C1=CC=CC=C1', 0.8125), ('COC(=O)C1C2CCC(CNC1OC(=O)C1=CC=CC=C1)N2C', 0.8125), ('COC(=O)C1C2CCC(CC1(N)OC(=O)C1=CC=CC=C1)N2C', 0.8125), ('CONC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8125), ('CNC1CCCCC(OC(=O)C2=CC=CC=C2)C1C(=O)OC', 0.8135593220338984), ('COC(=O)C1C2CC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8166666666666667), ('COC(=O)C1C(C)N(C)C(C)CC1OC(=O)C1=CC=CC=C1', 0.8166666666666667), ('COC(=O)C1C2CCC(N2)C(C)C1OC(=O)C1=CC=CC=C1', 0.8166666666666667), ('CN1C2CCC1C(C(=O)O)C(OC(=O)C1=CC=CC=C1)C2', 0.8166666666666667), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)C2C', 0.819672131147541), ('COC(=O)C1(OC(=O)C2=CC=CC=C2)CC2CCC1N2C', 0.819672131147541), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2', 0.819672131147541), ('CC1CC2CC(OC(=O)C3=CC=CC=C3)C(C(=O)O)C1N2C', 0.819672131147541), ('COC(=O)C1C2CCC(OC1OC(=O)C1=CC=CC=C1)N2C', 0.8225806451612903), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8225806451612903), ('COC(=O)C1C2C(C)CC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C12C(OC(=O)C3=CC=CC=C3)CC13CCC2N3C', 0.8253968253968254), ('COC(=O)C(C(C)OC(=O)C1=CC=CC=C1)C1CCCN1C', 0.8253968253968254), ('COC(=O)C1C2CCC(=CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C1C2CCC(CC1OCC1=CC=CC=C1)N2C', 0.8253968253968254), ('CNC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C1C2CCC(CC1NOC(=O)C1=CC=CC=C1)N2C', 0.828125), ('COC(=O)C1C2CCC(CC1(O)OC(=O)C1=CC=CC=C1)N2C', 0.828125), ('C=C(OC)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.828125), ('COC(=O)C1NC2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8307692307692307), ('COC(=O)C1C2CCC(OCC1OC(=O)C1=CC=CC=C1)N2C', 0.8307692307692307), ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCC1(C)N2C', 0.8307692307692307), ('COC12CCC(CC(OC(=O)C3=CC=CC=C3)C1C=O)N2C', 0.8333333333333334), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CNC=C1)N2C', 0.8382352941176471), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CCC=C1)N2C', 0.8484848484848485), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC3=CC=C31)N2C', 0.8507462686567164), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC(O)CC=C1)N2C', 0.8529411764705882), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CN=CC=C1)N2C', 0.855072463768116), ('COC(=O)C1C2CC3C4=CC=C(C=C4)C(=O)OC1CC3N2C', 0.859375), ('COC(=O)C1C2CCC3(CC1OC(=O)C1=CC=C3C=C1)N2C', 0.8636363636363636), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC1)N2C', 0.8656716417910448), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1C)N2C', 0.8656716417910448), ('COC(=O)C1C2CCN(C)C1CCC1=CC=CC=C1C(=O)O2', 0.8656716417910448), ('COC(=O)C1C2CCC(CC1OC(=O)C1=C=CC=C1)N2C', 0.8676470588235294), ('COC(=O)C1C2CCC(CC1OC(=O)C1=NC=CC=C1)N2C', 0.8695652173913043), ('COC(=O)C1C2=CC=CC(=C2)C(=O)OCCC2CCC1N2C', 0.8695652173913043), ('COC(=O)C1C2CCC3CC1OC(=O)C1=C(C=CC=C1)CN32', 0.8695652173913043), ('COC(=O)C1C2CCC(CC13OC(=O)C1=CC=CC=C13)N2C', 0.8695652173913043), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=N1)N2C', 0.8695652173913043), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC(C)C1)N2C', 0.8714285714285714), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CCC1C)N2C', 0.8714285714285714), ('COC(=O)C(C1CCCN1C)C1CC2=CC=CC(=C2)C(=O)O1', 0.875), ('COC(=O)C1C2CCC(CC1OC1=CC=C(C=O)C=C1)N2C', 0.8787878787878788), ('COC(=O)C1C2CCC(CC1OC(O)C1=CC=CC=C1)N2C', 0.8787878787878788), ('CN1C2CCC1C1C(=O)OCC3=CC=CC(=C3)C(=O)OC1C2', 0.8840579710144928), ('COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 0.90625), ('CC=CC=C(C)C(=O)OC1CC2CCC(C1C(=O)OC)N2C', 0.9285714285714286), ('C=CC=CC=CC(=O)OC1CC2CCC(C1C(=O)OC)N2C', 0.9285714285714286)]
+    (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
+    [('COC(=O)C1C2CCC(CC1(O)OC(=O)C1=CC=CC=C1)N2C', 0.5), ('COC(=O)C1C2C3CN2C(C3)CC1OC(=O)C1=CC=CC=C1', 0.7868852459016393), ('CCC1CC(OC(=O)C2=CC=CC=C2)C(C(=O)OC)CN1C', 0.7868852459016393), ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCN1N2C', 0.7868852459016393), ('CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C', 0.7868852459016393), ('COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C', 0.7903225806451613), ('COC(=O)C1C2CC(=O)C(CC1OCC1=CC=CC=C1)N2C', 0.7936507936507937), ('CN1C2CCC13CC(OC(=O)C1=CC=CC=C1)C2C(=O)OC3', 0.8), ('COC(=O)C1C2CCC(NC1OC(=O)C1=CC=CC=C1)N2C', 0.8064516129032258), ('COC(=O)C1C2CC(N)C(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8064516129032258), ('COCC1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8064516129032258), ('COC(=O)C1C2CCC(C1OC(=O)C1=CC=CC=C1)N2C', 0.8103448275862069), ('COC(=O)CC(CC1CCCN1C)OC(=O)C1=CC=CC=C1', 0.8125), ('COCC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8125), ('CNC1CCCCC(OC(=O)C2=CC=CC=C2)C1C(=O)OC', 0.8135593220338984), ('COC(=O)C1C(C)N(C)C(C)CC1OC(=O)C1=CC=CC=C1', 0.8166666666666667), ('CN1C2CCC1C(C(=O)O)C(OC(=O)C1=CC=CC=C1)C2', 0.8166666666666667), ('COC(=O)C1C2CC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8166666666666667), ('CN1C2CCC13COC(=O)C3C(OC(=O)C1=CC=CC=C1)C2', 0.8181818181818181), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2', 0.819672131147541), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)C2C', 0.819672131147541), ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)=CC2CCC1N2C', 0.8225806451612903), ('COC(=O)C1C2CCC(OC1OC(=O)C1=CC=CC=C1)N2C', 0.8225806451612903), ('COC(=O)C1C2CC3CN2C3CC1OC(=O)C1=CC=CC=C1', 0.8225806451612903), ('CN1C2CCC1C(C(=O)OO)C(OC(=O)C1=CC=CC=C1)C2', 0.8225806451612903), ('COC(=O)C1C2CCC(CC1OCC1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C1(C)C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C1C2NCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C1C2CCC(C(=O)C1OCC1=CC=CC=C1)N2C', 0.828125), ('COC(=O)C1C2OCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.828125), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=NC=C1)N2C', 0.828125), ('COC(=O)C1C2CCC(CC1OOC(=O)C1=CC=CC=C1)N2C', 0.828125), ('COC(=O)C1C2CCC(CC1(C)OC(=O)C1=CC=CC=C1)N2C', 0.828125), ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)C2C3CCC12N3C', 0.828125), ('COC(=O)C1C2CCC(CN2C)CC1OC(=O)C1=CC=CC=C1', 0.828125), ('COC(=O)C1C2CCC(C3C4=C(C=CC=C4)C(=O)OC13)N2C', 0.828125), ('COC(=O)C1C2CCC(COC1OC(=O)C1=CC=CC=C1)N2C', 0.8307692307692307), ('COC(=O)C1C2CCC(NCC1OC(=O)C1=CC=CC=C1)N2C', 0.8307692307692307), ('COC(=O)C1OC(OC(=O)C2=CC=CC=C2)CC2CCC1N2C', 0.8307692307692307), ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCOC1N2C', 0.8333333333333334), ('COC12CCC(CC(OC(=O)C3=CC=CC=C3)C1C=O)N2C', 0.8333333333333334), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CNC=C1)N2C', 0.8382352941176471), ('COC(=O)C1C2CCC(CC1ONC(=O)C1=CC=CC=C1)N2C', 0.8461538461538461), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C=C1)N2C', 0.8507462686567164), ('COC(=O)C1C2CCC(CC1OC=O)N2CC1=CC=CC=C1', 0.8507462686567164), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC(O)=C1)N2C', 0.8529411764705882), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CN=CC=C1)N2C', 0.855072463768116), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CCC(C)C=C1)N2C', 0.855072463768116), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CN=C1)N2C', 0.855072463768116), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C=C1)N2C', 0.8571428571428572), ('COC(=O)C1C2CCC(CC1OC(=O)C1=COC=CC=C1)N2C', 0.8571428571428572), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1C)N2C', 0.8656716417910448), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC1)N2C', 0.8656716417910448), ('COC(=O)C1C2CCC(CC1OC(=O)C1=C(O)C=CC=C1)N2C', 0.8656716417910448), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C3C=C31)N2C', 0.8676470588235294), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=N1)N2C', 0.8695652173913043), ('CNC1CCC2C3=CC=CC(=C3)C(=O)OC(C1)C2C(=O)OC', 0.8695652173913043), ('COC(=O)C1C2CCC(CC1OC(=O)C1=NC=CC=C1)N2C', 0.8695652173913043), ('CC=CC=CCC(=O)OC1CC2CCC(C1C(=O)OC)N2C', 0.9142857142857143), ('C=CC=CC=CC(=O)OC1CC2CCC(C1C(=O)OC)N2C', 0.9285714285714286)]
 
 When the list of candidates is populated and sorted, we need to choose the morphs that
 will form the next :term:`generation <morph generation>` (the next leaves of the tree from which new morphs can be generated).
@@ -405,9 +405,9 @@ Output:
 
 ..  code-block:: none
 
-    (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
-    (True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
-    [('COC(=O)C1C2CCC(CC1OCC1=CC=CC=C1)N2C', 0.5), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885)]
+    (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
+    (True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+    [('COC(=O)C1C2CCC(CC1(O)OC(=O)C1=CC=CC=C1)N2C', 0.5), ('COC(=O)C1C2C3CN2C(C3)CC1OC(=O)C1=CC=CC=C1', 0.7868852459016393), ('CCC1CC(OC(=O)C2=CC=CC=C2)C(C(=O)OC)CN1C', 0.7868852459016393)]
 
 In :numref:`filtering-morphs` `candidates_mask` member can be easily changed by writing
 a `list` or a `tuple` of new values into it. Here we simply select the first three morphs as the new :term:`morph generation`.
@@ -465,13 +465,14 @@ Output:
 
 ..  code-block:: none
 
-    [('COC(=O)C1C2CCC(CC1OCC1=CC=CC=C1)N2C', 0.5), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885)]
+    0
+    [('COC(=O)C1C2CCC(CC1(O)OC(=O)C1=CC=CC=C1)N2C', 0.5), ('COC(=O)C1C2C3CN2C(C3)CC1OC(=O)C1=CC=CC=C1', 0.7868852459016393), ('CCC1CC(OC(=O)C2=CC=CC=C2)C(C(=O)OC)CN1C', 0.7868852459016393)]
     1
     False
 
 We can see that after extending the tree, the selected morphs (see :numref:`filtering-morphs`)
-had become the new leaves and that the
-:term:`morph generation` counter (`generation_count`) was set to one.
+had become the new leaves and that the tree's
+:term:`morph generation` counter (`generation_count`) was increased by one.
 
 Because a tree generated in this way grows exponentially, a pruning strategy is needed in order
 to keep the number of explored putative paths to a minimum by discarding those that are not getting any
@@ -576,12 +577,13 @@ Output:
 
 ..  code-block:: none
 
+    Generated 67 morphs.
     1
     False
-    [('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885), ('CN1C2CCC1C1C(=O)OCC2C1OC(=O)C1=CC=CC=C1', 0.7833333333333333)]
+    [('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C', 0.7068965517241379), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143), ('COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C', 0.7586206896551724)]
 
 ..  note:: Because the morphing algorithm is not deterministic and we initilized a new tree,
-        the set of obtained morphs is slightly different from the one in the previous examples.
+        the set of obtained morphs is different from the one in the previous examples.
 
 Most of the operations in :numref:`operations-example` are built-in operations (discussed below), but
 we chose to define our own operation for the filtering step
@@ -670,19 +672,22 @@ Output:
 
     # Root #
     SMILES:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    Descendents:  ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCN1N2C', 'COCC1C2CC(=O)C(CC1OC(=O)C1=CC=CC=C1)N2C', 'COCC1C2CCC(C(=O)C1OC(=O)C1=CC=CC=C1)N2C')
+    Descendents:  ('COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C', 'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C', 'COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C')
     # Morph #
     Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    SMILES:  COCC1C2CCC(C(=O)C1OC(=O)C1=CC=CC=C1)N2C
+    # Morph #
+    Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+    SMILES:  COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C
     Descendents:  ()
     # Morph #
     Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    SMILES:  COCC1C2CC(=O)C(CC1OC(=O)C1=CC=CC=C1)N2C
+    SMILES:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C
+    SMILES:  COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C
     Descendents:  ()
-    # Morph #
-    Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    SMILES:  COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCN1N2C
     Descendents:  ()
+
+..  note:: The tree traversal algorithm uses multiple threads. Therefore,
+        the output might not be synchronized.
 
 In :numref:`traverse-example` we derive from the `TraverseCallback` class, an abstract class with
 an abstract method :meth:`~molpher.swig_wrappers.core.TraverseCallback.__call__`. This method takes one argument,
@@ -732,18 +737,18 @@ Output:
 
     # Root #
     SMILES:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    Descendents:  ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCN1N2C', 'COCC1C2CC(=O)C(CC1OC(=O)C1=CC=CC=C1)N2C', 'COCC1C2CCC(C(=O)C1OC(=O)C1=CC=CC=C1)N2C')
+    Descendents:  ('COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C', 'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C', 'COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C')
     # Morph #
     Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    SMILES:  COCC1C2CCC(C(=O)C1OC(=O)C1=CC=CC=C1)N2C
+    SMILES:  COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C
     Descendents:  ()
     # Morph #
     Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    SMILES:  COCC1C2CC(=O)C(CC1OC(=O)C1=CC=CC=C1)N2C
+    SMILES:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C
     Descendents:  ()
     # Morph #
     Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    SMILES:  COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCN1N2C
+    SMILES:  COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C
     Descendents:  ()
 
 ..  _templates-snapshots:
@@ -795,13 +800,10 @@ Output:
 
 ..  code-block:: none
 
-    Parse molecule CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2 >> COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    Parse molecule O=C(OCCN(CC)CC)c1ccc(N)cc1 >> CCN(CC)CCOC(=O)C1=CC=C(N)C=C1
     The new iteration has been created from template:
-    source: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    target: CCN(CC)CCOC(=O)C1=CC=C(N)C=C1
+    source: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
+    target: O=C(OCCN(CC)CC)c1ccc(N)cc1
 
-    Snapshot successfully created from: cocaine-procaine-template.xml
     {
         'max_morphs_total': 1500,
         'far_close_threshold': 0.15,
@@ -827,8 +829,8 @@ Output:
         'far_produce': 80,
         'similarity': 'TANIMOTO'
     }
-    [('COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C', 0.7627118644067796), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885), ('COC(=O)C1C2CCC(CC1COC(=O)C1=CC=CC=C1)N2C', 0.7741935483870968)]
-
+    Generated 66 morphs.
+    [('CN1C2CCC1C(C(=O)OCN)C(OC(=O)C1=CC=CC=C1)C2', 0.7777777777777778), ('CCN1C2CCC1C(C(=O)OC)C(OC(=O)C1=CC=CC=C1)C2', 0.7936507936507937), ('CN1C2CCC1C(C(=O)ON)C(OC(=O)C1=CC=CC=C1)C2', 0.8064516129032258)]
 In the above example we loaded an :term:`XML template`, created a tree from it, extended the tree and
 serialized it as a snapshot. We can see that all the parameters are the same as in the :term:`XML template` and that
 the resulting tree can be built using the same list of operations
@@ -885,7 +887,7 @@ Output:
         'far_produce': 80,
         'similarity': 'TANIMOTO'
     }
-    [('COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C', 0.7627118644067796), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885), ('COC(=O)C1C2CCC(CC1COC(=O)C1=CC=CC=C1)N2C', 0.7741935483870968)]
+    [('CN1C2CCC1C(C(=O)OCN)C(OC(=O)C1=CC=CC=C1)C2', 0.7777777777777778), ('CCN1C2CCC1C(C(=O)OC)C(OC(=O)C1=CC=CC=C1)C2', 0.7936507936507937), ('CN1C2CCC1C(C(=O)ON)C(OC(=O)C1=CC=CC=C1)C2', 0.8064516129032258)]
 
 Example Exploration Algorithm Implementations
 ---------------------------------------------
