@@ -216,15 +216,14 @@ def main():
 
     tree.traverse(process) # use the traverse method to run the callback function
 
-    print('Tree Snapshots')
-
-    exit()
+    print('\n#Tree Snapshots')
 
     template_file = 'cocaine-procaine-template.xml'
     import os
     template_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), template_file)
 
-    tree = ETree.createFromSnapshot(template_file) # create a tree from the template file
+    # create a tree from the template file
+    tree = ETree.create(template_file)
     print(tree.params)
 
     # apply the tree operations
@@ -240,9 +239,10 @@ def main():
         )
     )
 
-    tree.saveSnapshot('snapshot.xml') # save the tree in a snapshot file
+    # save the tree in a snapshot file
+    tree.save('snapshot.xml')
 
-    new_tree = ETree.createFromSnapshot('snapshot.xml') # create a new tree from the saved snapshot
+    new_tree = ETree.create('snapshot.xml') # create a new tree from the saved snapshot
     print(new_tree.params)
     print(
         sorted( # grab the leaves in the created tree (these should be the same as those in the original tree)

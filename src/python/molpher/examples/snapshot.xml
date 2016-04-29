@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
-<snp>
-	<jobId>0</jobId>
-	<iterIdx>1</iterIdx>
-	<elapsedSeconds>0</elapsedSeconds>
-	<fingerprintSelector>1</fingerprintSelector>
-	<simCoeffSelector>10</simCoeffSelector>
-	<dimRedSelector>1</dimRedSelector>
-	<chemOperSelectors>
+<data class_id="0" tracking_level="0" version="0">
+	<generationCnt>1</generationCnt>
+	<threadCnt>0</threadCnt>
+	<fingerprint>1</fingerprint>
+	<simCoeff>10</simCoeff>
+	<chemOpers>
 		<count>8</count>
 		<item_version>0</item_version>
 		<item>0</item>
@@ -19,7 +17,7 @@
 		<item>5</item>
 		<item>6</item>
 		<item>7</item>
-	</chemOperSelectors>
+	</chemOpers>
 	<params>
 		<cntCandidatesToKeep>50</cntCandidatesToKeep>
 		<cntCandidatesToKeepMax>100</cntCandidatesToKeepMax>
@@ -37,163 +35,150 @@
 		<decoyRange>0.20000000000000001</decoyRange>
 	</params>
 	<source>
-		<smile>COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</smile>
-		<formula>C17H21NO4</formula>
-		<parentChemOper>0</parentChemOper>
+		<SMILES>COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</SMILES>
+		<formula></formula>
+		<sascore>0</sascore>
+		<parentOper>0</parentOper>
 		<parentSmile></parentSmile>
-		<descendants class_id="1" tracking_level="0" version="0">
+		<descendants_saved class_id="2" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
-		</descendants>
-		<historicDescendants>
+		</descendants_saved>
+		<historicDescendants_saved>
 			<count>0</count>
 			<item_version>0</item_version>
-		</historicDescendants>
+		</historicDescendants_saved>
 		<distToTarget>1.7976931348623157e+308</distToTarget>
-		<distToClosestDecoy>0</distToClosestDecoy>
 		<molecularWeight>0</molecularWeight>
-		<itersWithoutDistImprovement>0</itersWithoutDistImprovement>
-		<posX>0</posX>
-		<posY>0</posY>
+		<gensWithoutDistImprovement>0</gensWithoutDistImprovement>
 	</source>
 	<target>
-		<smile>CCN(CC)CCOC(=O)C1=CC=C(N)C=C1</smile>
-		<formula>C13H20N2O2</formula>
-		<parentChemOper>0</parentChemOper>
+		<SMILES>CCN(CC)CCOC(=O)C1=CC=C(N)C=C1</SMILES>
+		<formula></formula>
+		<sascore>0</sascore>
+		<parentOper>0</parentOper>
 		<parentSmile></parentSmile>
-		<descendants>
+		<descendants_saved>
 			<count>0</count>
 			<item_version>0</item_version>
-		</descendants>
-		<historicDescendants>
+		</descendants_saved>
+		<historicDescendants_saved>
 			<count>0</count>
 			<item_version>0</item_version>
-		</historicDescendants>
+		</historicDescendants_saved>
 		<distToTarget>1.7976931348623157e+308</distToTarget>
-		<distToClosestDecoy>0</distToClosestDecoy>
 		<molecularWeight>0</molecularWeight>
-		<itersWithoutDistImprovement>0</itersWithoutDistImprovement>
-		<posX>0</posX>
-		<posY>0</posY>
+		<gensWithoutDistImprovement>0</gensWithoutDistImprovement>
 	</target>
-	<decoys class_id="2" tracking_level="0" version="0">
-		<count>0</count>
-		<item_version>0</item_version>
-	</decoys>
-	<candidates class_id="3" tracking_level="0" version="0">
+	<treeMap class_id="3" tracking_level="0" version="0">
 		<count>4</count>
 		<item_version>0</item_version>
 		<item class_id="4" tracking_level="0" version="0">
-			<first>COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C</first>
+			<first>CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</first>
 			<second>
-				<smile>COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C</smile>
-				<formula>C17H23NO4</formula>
-				<parentChemOper>3</parentChemOper>
+				<SMILES>CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</SMILES>
+				<formula>C18H23NO4</formula>
+				<sascore>6.189057588401278</sascore>
+				<parentOper>0</parentOper>
 				<parentSmile>COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</parentSmile>
-				<descendants>
+				<descendants_saved>
 					<count>0</count>
 					<item_version>0</item_version>
-				</descendants>
-				<historicDescendants>
+				</descendants_saved>
+				<historicDescendants_saved>
 					<count>0</count>
 					<item_version>0</item_version>
-				</historicDescendants>
-				<distToTarget>0.76271186440677963</distToTarget>
-				<distToClosestDecoy>0</distToClosestDecoy>
-				<molecularWeight>305.16270821600006</molecularWeight>
-				<itersWithoutDistImprovement>1</itersWithoutDistImprovement>
-				<posX>0</posX>
-				<posY>0</posY>
+				</historicDescendants_saved>
+				<distToTarget>0.77049180327868849</distToTarget>
+				<molecularWeight>317.16270821600006</molecularWeight>
+				<gensWithoutDistImprovement>1</gensWithoutDistImprovement>
 			</second>
 		</item>
 		<item>
-			<first>COC(=O)C1C2CCC(CC1COC(=O)C1=CC=CC=C1)N2C</first>
+			<first>COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C</first>
 			<second>
-				<smile>COC(=O)C1C2CCC(CC1COC(=O)C1=CC=CC=C1)N2C</smile>
-				<formula>C18H23NO4</formula>
-				<parentChemOper>5</parentChemOper>
+				<SMILES>COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C</SMILES>
+				<formula>C17H23NO4</formula>
+				<sascore>5.8804235683173784</sascore>
+				<parentOper>3</parentOper>
 				<parentSmile>COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</parentSmile>
-				<descendants>
+				<descendants_saved>
 					<count>0</count>
 					<item_version>0</item_version>
-				</descendants>
-				<historicDescendants>
+				</descendants_saved>
+				<historicDescendants_saved>
 					<count>0</count>
 					<item_version>0</item_version>
-				</historicDescendants>
-				<distToTarget>0.77419354838709675</distToTarget>
-				<distToClosestDecoy>0</distToClosestDecoy>
-				<molecularWeight>317.16270821600006</molecularWeight>
-				<itersWithoutDistImprovement>1</itersWithoutDistImprovement>
-				<posX>0</posX>
-				<posY>0</posY>
+				</historicDescendants_saved>
+				<distToTarget>0.76271186440677963</distToTarget>
+				<molecularWeight>305.16270821600006</molecularWeight>
+				<gensWithoutDistImprovement>1</gensWithoutDistImprovement>
 			</second>
 		</item>
 		<item>
 			<first>COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</first>
 			<second>
-				<smile>COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</smile>
-				<formula>C17H21NO4</formula>
-				<parentChemOper>0</parentChemOper>
+				<SMILES>COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</SMILES>
+				<formula></formula>
+				<sascore>0</sascore>
+				<parentOper>0</parentOper>
 				<parentSmile></parentSmile>
-				<descendants>
+				<descendants_saved>
 					<count>3</count>
 					<item_version>0</item_version>
+					<item>CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</item>
 					<item>COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C</item>
-					<item>COC(=O)C1C2CCC(CC1COC(=O)C1=CC=CC=C1)N2C</item>
 					<item>COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C</item>
-				</descendants>
-				<historicDescendants>
+				</descendants_saved>
+				<historicDescendants_saved>
 					<count>3</count>
 					<item_version>0</item_version>
+					<item>CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</item>
 					<item>COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C</item>
-					<item>COC(=O)C1C2CCC(CC1COC(=O)C1=CC=CC=C1)N2C</item>
 					<item>COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C</item>
-				</historicDescendants>
+				</historicDescendants_saved>
 				<distToTarget>1.7976931348623157e+308</distToTarget>
-				<distToClosestDecoy>0</distToClosestDecoy>
 				<molecularWeight>0</molecularWeight>
-				<itersWithoutDistImprovement>0</itersWithoutDistImprovement>
-				<posX>0</posX>
-				<posY>0</posY>
+				<gensWithoutDistImprovement>0</gensWithoutDistImprovement>
 			</second>
 		</item>
 		<item>
 			<first>COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C</first>
 			<second>
-				<smile>COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C</smile>
+				<SMILES>COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C</SMILES>
 				<formula>C17H23NO4</formula>
-				<parentChemOper>3</parentChemOper>
+				<sascore>5.6133732750273353</sascore>
+				<parentOper>3</parentOper>
 				<parentSmile>COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</parentSmile>
-				<descendants>
+				<descendants_saved>
 					<count>0</count>
 					<item_version>0</item_version>
-				</descendants>
-				<historicDescendants>
+				</descendants_saved>
+				<historicDescendants_saved>
 					<count>0</count>
 					<item_version>0</item_version>
-				</historicDescendants>
+				</historicDescendants_saved>
 				<distToTarget>0.7142857142857143</distToTarget>
-				<distToClosestDecoy>0</distToClosestDecoy>
 				<molecularWeight>305.16270821600006</molecularWeight>
-				<itersWithoutDistImprovement>1</itersWithoutDistImprovement>
-				<posX>0</posX>
-				<posY>0</posY>
+				<gensWithoutDistImprovement>1</gensWithoutDistImprovement>
 			</second>
 		</item>
-	</candidates>
-	<morphDerivations class_id="5" tracking_level="0" version="0">
-		<count>1</count>
-		<item_version>0</item_version>
-		<item class_id="6" tracking_level="0" version="0">
-			<first>COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</first>
-			<second>80</second>
-		</item>
-	</morphDerivations>
-	<prunedDuringThisIter class_id="7" tracking_level="0" version="0">
+	</treeMap>
+	<candidates class_id="5" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
-	</prunedDuringThisIter>
-</snp>
+	</candidates>
+	<candidatesMask>
+		<count>0</count>
+	</candidatesMask>
+	<morphDerivations class_id="7" tracking_level="0" version="0">
+		<count>1</count>
+		<item_version>0</item_version>
+		<item class_id="8" tracking_level="0" version="0">
+			<first>COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C</first>
+			<second>79</second>
+		</item>
+	</morphDerivations>
+</data>
 </boost_serialization>
 

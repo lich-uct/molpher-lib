@@ -51,9 +51,9 @@ physicochemical properties.
 By continuously morphing the compounds in this way, we can effectively 'travel' through :term:`chemical space`
 towards various areas of interest. Thanks to the flexible API of the library this 'journey' can be realized
 in many ways and can accommodate almost any exploration strategy one might think of. For example,
-in this tutorial we will
+in this tutorial we will, among other things,
 show how to :ref:`implement our own building blocks to use with the library <operations>` or
-:ref:`make two trees cooperate with each other as they search for a single path <bidirectional-example>`.
+:ref:`make two trees cooperate with each other as they search for a single path <bidirectional>`.
 
 Creating an Exploration Tree and Setting Morphing Parameters
 ------------------------------------------------------------
@@ -138,8 +138,8 @@ Output:
         'close_produce': 150,
         'fingerprint': 'MORGAN',
         'accept_min': 50,
-        'source': 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2',
-        'target': 'O=C(OCCN(CC)CC)c1ccc(N)cc1',
+        'source': 'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C',
+        'target': 'CCN(CC)CCOC(=O)C1=CC=C(N)C=C1',
         'weight_min': 0.0,
         'non_producing_survive': 5,
         'accept_max': 100,
@@ -187,8 +187,8 @@ Output:
         'close_produce': 150,
         'fingerprint': 'MORGAN',
         'accept_min': 50,
-        'source': 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2',
-        'target': 'O=C(OCCN(CC)CC)c1ccc(N)cc1',
+        'source': 'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C',
+        'target': 'CCN(CC)CCOC(=O)C1=CC=C(N)C=C1',
         'weight_min': 0.0,
         'non_producing_survive': 2,
         'accept_max': 100,
@@ -686,7 +686,7 @@ Output:
 
 In :numref:`traverse-example` we derive from the `TraverseCallback` class, an abstract class with
 an abstract method :meth:`~molpher.swig_wrappers.core.TraverseCallback.__call__`. This method takes one argument,
-which is a `MolpherMol` instance
+which is a :class:`~molpher.core.MolpherMol.MolpherMol` instance
 of a molecule in the tree. We need to override this method in our derived class in order to implement our own
 behaviour.
 
@@ -751,8 +751,8 @@ Output:
 Tree Templates and Snapshots
 ----------------------------
 
-We don't always have to initialize `morphing parameters` by hand. We can use a `XML template` instead.
-Here is an example of a template file (you can also download it
+We don't always have to initialize :term:`morphing parameters` by hand. We can use an :term:`XML template` instead.
+Here is an example of a template file (you can download this one
 from :download:`here <../../../src/python/molpher/examples/cocaine-procaine-template.xml>`):
 
 ..  literalinclude:: ../../../src/python/molpher/examples/cocaine-procaine-template.xml
@@ -761,9 +761,9 @@ from :download:`here <../../../src/python/molpher/examples/cocaine-procaine-temp
     :name: template-file
     :linenos:
 
-A `XML template` is similar to a configuration file and can be loaded like an ordinary snapshot (see :numref:`loading-snapshot`).
-The following example shows loading of a `XML template`, creating a tree from it, extending the tree and saving
-a tree snapshot:
+An :term:`XML template` is similar to a configuration file and can be loaded
+just like a snapshot (see :numref:`loading-snapshot`), but the resulting tree
+will only contain the :term:`source molecule` as its root.
 
 ..  code-block:: python
     :caption: Loading a template and saving a built tree as a XML snapshot.
@@ -772,7 +772,7 @@ a tree snapshot:
 
     template_file = 'cocaine-procaine-template.xml'
 
-    tree = ETree.createFromSnapshot(template_file) # create a tree from the template file
+    tree = ETree.create(template_file)
     print(tree.params)
 
     # apply the tree operations
@@ -788,7 +788,8 @@ a tree snapshot:
         )
     )
 
-    tree.saveSnapshot('snapshot.xml') # save the tree in a snapshot file
+    # save the tree in a snapshot file
+    tree.save('snapshot.xml')
 
 Output:
 
@@ -808,8 +809,8 @@ Output:
         'close_produce': 150,
         'fingerprint': 'MORGAN',
         'accept_min': 50,
-        'source': 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2',
-        'target': 'O=C(OCCN(CC)CC)c1ccc(N)cc1',
+        'source': 'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C',
+        'target': 'CCN(CC)CCOC(=O)C1=CC=C(N)C=C1',
         'weight_min': 0.0,
         'non_producing_survive': 2,
         'accept_max': 100,
@@ -828,25 +829,22 @@ Output:
     }
     [('COC(=O)C(COC(=O)C1=CC=CC=C1)C1CCC(C)N1C', 0.7627118644067796), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885), ('COC(=O)C1C2CCC(CC1COC(=O)C1=CC=CC=C1)N2C', 0.7741935483870968)]
 
-We can see that all the parameters are the same as in the `XML template` and that
+In the above example we loaded an :term:`XML template`, created a tree from it, extended the tree and
+serialized it as a snapshot. We can see that all the parameters are the same as in the :term:`XML template` and that
 the resulting tree can be built using the same list of operations
-as in :numref:`operations-example`. We even get the same set of newly generated leaves.
-In :numref:`saving-snapshot` we also want to serialize our tree instance to disk so we save it as
-a snapshot using the :py:meth:`ExplorationTree.save()` method.
+as in :numref:`operations-example`.
 
+In :numref:`saving-snapshot` we also serialized our tree instance to disk
+with the :py:meth:`~molpher.swig_wrappers.core.ExplorationTree.save` method.
 The saved tree can be later reconstructed with the
-:meth:`~molpher.core.ExplorationTree.ExplorationTree.createFromSnapshot()` factory method:
-
-..  warning:: Note that there is currently a bug inside Molpher that prevents
-        loading of descendents of molecules in the tree. Therefore, the code
-        from :numref:`loading-snapshot` does not work correctly at the moment.
+:meth:`~molpher.core.ExplorationTree.ExplorationTree.create` factory method:
 
 ..  code-block:: python
     :caption: Loading a snapshot of a previously generated tree.
     :name: loading-snapshot
     :linenos:
 
-    new_tree = ETree.createFromSnapshot('snapshot.xml') # create a new tree from the saved snapshot
+    new_tree = ETree.create('snapshot.xml') # create a new tree from the saved snapshot
     print(new_tree.params)
     print(
         sorted( # grab the leaves in the created tree (these should be the same as those in the original tree)
@@ -869,8 +867,8 @@ Output:
         'close_produce': 150,
         'fingerprint': 'MORGAN',
         'accept_min': 50,
-        'source': 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2',
-        'target': 'O=C(OCCN(CC)CC)c1ccc(N)cc1',
+        'source': 'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C',
+        'target': 'CCN(CC)CCOC(=O)C1=CC=C(N)C=C1',
         'weight_min': 0.0,
         'non_producing_survive': 2,
         'accept_max': 100,
@@ -892,11 +890,19 @@ Output:
 Example Exploration Algorithm Implementations
 ---------------------------------------------
 
-Let's now wrap up this tutorial with two example implementations of a morphing experiment (see :numref:`complete-example`
+Now we wrap up this tutorial with two simple chemical space exploration implementations
+(see :numref:`complete-example`
 and :numref:`bidirectional-example`).
 
-Using the bits of code we have created above. The script in :numref:`complete-example` shows how to implement
-a search for a path in `chemical space` between *cocaine* and *procaine* with a customized filtering step:
+..  _simple:
+
+Using the Tutorial to Implement a Search Algorithm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In the tutorial we showed how to implement
+one step of a simple algorithm that searches
+for a path in :term:`chemical space` between *cocaine* and *procaine*.
+Transforming the code into a full exploration algorithm is pretty much straightforward:
 
 ..  literalinclude:: ../../../src/python/molpher/examples/experiment.py
     :language: python
@@ -954,11 +960,19 @@ Output:
 
     Process finished with exit code 0
 
-The above implementation is nothing more than just the tutorial code bits inside a loop. The loop checks if a path was found at each iteration.
-If the path is found it is backtracked through the tree and printed out as a sequence of molecules from source to target.
+The above implementation is nothing more than just the tutorial code bits inside a loop.
+The loop checks if a path was found at each iteration.
+If the path is found, it backtracks through the tree
+and prints out a sequence of molecules lying on the path.
 
-The second example we have here is a little more elaborate, but implements a very simple idea. Instead of one exploration tree,
-we build two trees that each searches for a path to the closest molecule in the other tree:
+..  _bidirectional:
+
+Implementing a Bidirectional Search Algorithm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The second example we have here is a little bit more elaborate,
+but implements a very simple idea. Instead of one exploration tree,
+we build two trees that each search for a path to the closest molecule in the other:
 
 ..  literalinclude:: ../../../src/python/molpher/examples/bidirectional.py
     :language: python
@@ -988,11 +1002,10 @@ Output (only the final print of the path is shown):
     ]
     Total Execution Time: 153964.77300000002 # in milliseconds
 
-This 'bidirectional search' algorithm uses the built-in operations to facilitate the search,
+This bidirectional algorithm uses the built-in operations to facilitate the search,
 but does one extra procedure after
 an iteration is completed -- it changes the target molecules of the trees.
-
-When the new leaves are connected, both trees are traversed and molecules
+When the new leaves are connected both trees are traversed and molecules
 closest to the current target are identified in each. The closest molecule from one tree is then
 set as the new target for the tree searching in the opposite direction and vice versa.
 
@@ -1002,8 +1015,9 @@ times of each potentially time-consuming operation.
 Summary
 -------
 
-If you have read the tutorial all the way to here, you now probably have a decent idea on what this library does
-and how to use it. If you have any suggestions on how to improve the library or bug reports, please send them to
-sichom@vscht.cz. All help on the project is much appreciated.
-For more information on the source code itself refer to the `source-code-docs`.
+If you have read the tutorial all the way to here, you now probably have a decent idea on what the library does
+and how to use it. If you have any suggestions on how to improve it or bug reports, please send them to
+sichom@vscht.cz or create an issue on the issue tracker. All help on the project is much appreciated.
+
+..  todo:: link to issue tracker
 
