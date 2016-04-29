@@ -1,6 +1,8 @@
 import os
 import unittest
 
+from pkg_resources import resource_filename
+
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
 from molpher.core.operations import TreeOperation
@@ -12,7 +14,7 @@ class TestPythonAPI(unittest.TestCase):
     def setUp(self):
         self.test_source = 'CCO'
         self.test_target = 'C1=COC=C1'
-        self.test_dir = os.path.abspath('test_files/')
+        self.test_dir = os.path.abspath(resource_filename('molpher.core.tests', 'test_files/'))
         self.test_template_path = os.path.join(self.test_dir, 'test-template.xml')
 
     def tearDown(self):
