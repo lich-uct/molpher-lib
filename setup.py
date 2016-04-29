@@ -21,6 +21,7 @@ setup (name = 'molpher',
        ext_modules = [molpher_cpp_module,],
        package_data = {
             'molpher.core.tests' : ['test_files/*'],
+            'molpher.swig_wrappers': ['*.dat'],
             'molpher.examples' : ['*.xml']
         },
        test_suite="tests"
