@@ -80,7 +80,7 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
                 "Both parameters and source, target or snapshot specified. Using the values in parameters..."
                 , RuntimeWarning
             )
-        if params and isinstance(params, molpher.wrappers.ExplorationData):
+        if params and (isinstance(params, molpher.wrappers.ExplorationData) or type(params) == str):
             ret = super(ExplorationTree, ExplorationTree).create(params)
         elif params:
             _params = ExplorationData(**params)

@@ -34,7 +34,7 @@ class TreeOperation(molpher.swig_wrappers.core.TreeOperation):
 
         tree = super(TreeOperation, self).getTree()
         if tree:
-            tree.__class__ = molpher.core.ExplorationTree.ExplorationTree # 'cast' the wrapped class to the 'pretty' Python proxy class
+            tree.__class__ = molpher.core.ExplorationTree # 'cast' the wrapped class to the 'pretty' Python proxy class
         return tree
 
     @abstractmethod
