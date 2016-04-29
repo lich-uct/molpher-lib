@@ -88,6 +88,7 @@ void MolpherMol::MolpherMolImpl::setSMILES(const std::string& smiles) {
     } catch (RDKit::SmilesParseException &exp) {
         SynchCerr("Error parsing supplied SMILES: \"" + smiles + "\"");
         SynchCerr(exp.what());
+        delete mol;
         throw exp;
     }
     
@@ -95,11 +96,14 @@ void MolpherMol::MolpherMolImpl::setSMILES(const std::string& smiles) {
         RDKit::MolOps::Kekulize(*mol);
     } catch (const ValueErrorException &exc) {
         SynchCerr("Cannot kekulize input molecule.");
+        delete mol;
         throw exc;
     }
 
     data.SMILES = RDKit::MolToSmiles(*mol);
     data.formula = RDKit::Descriptors::calcMolFormula(*mol);
+    
+    delete mol;
 
 //    SynchCout("Parsed molecule " + smiles + " >> " + data.SMILES);
 }
