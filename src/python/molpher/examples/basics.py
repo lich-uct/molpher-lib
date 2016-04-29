@@ -56,26 +56,41 @@ def main():
     print(candidate.dist_to_target)
     print(tree.candidates[0].dist_to_target)
 
-    print('#Sorting and Filtering Morphs')
+    print('\n#Sorting and Filtering Morphs')
 
-    tree.sortMorphs() # sort the candidates in the tree according to their distance from target
-    print(tree.candidates_mask) # print the current mask
-    print(len(tree.candidates_mask))
+    # sort the candidates in the tree according to their distance from target
+    tree.sortMorphs()
 
-    # accept only the first three morphs (those with the lowest distance to target)
+    # show results
+    print(tree.candidates_mask)
+    print(
+        [
+            (x.smiles, x.dist_to_target)
+            for x in tree.candidates
+        ]
+    )
+
+    print()
+
+    # print the current candidates mask (all positions are on by default)
+    print(tree.candidates_mask)
+
+    # accept only the first three morphs in the sorted list (those with the lowest distance to target)
     mask = [False for x in tree.candidates_mask]
     mask[0] = True
     mask[1] = True
     mask[2] = True
-    tree.candidates_mask = mask # save the new mask to the tree
 
-    # verify
+    # save the new mask to the tree
+    tree.candidates_mask = mask
+
+    # show results
     print(tree.candidates_mask)
     print(
         [
-            (x.getSMILES(), x.getDistToTarget())
+            (x.smiles, x.dist_to_target)
             for idx,x in enumerate(tree.candidates)
-            if tree.candidates_mask[idx] # only fetch accepted molecules
+            if tree.candidates_mask[idx] # get accepted molecules only
         ]
     )
 

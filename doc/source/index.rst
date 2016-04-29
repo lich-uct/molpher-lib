@@ -1,6 +1,6 @@
 
-Molpher-lib: Python and C++ API for Molpher
-===========================================
+Molpher-lib: C++/Python Library For Chemical Space Exploration
+==============================================================
 
 What you have just stumbled upon is the documentation of *Molpher-lib*,
 a computer library for exploration of chemical space with :term:`molecular morphing`.

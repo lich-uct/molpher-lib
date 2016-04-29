@@ -50,11 +50,10 @@ physicochemical properties.
 
 By continuously morphing the compounds in this way, we can effectively 'travel' through :term:`chemical space`
 towards various areas of interest. Thanks to the flexible API of the library this 'journey' can be realized
-in many ways and can accommodate almost any exploration strategy one might think of. For example, in this tutorial we will
-show how to :ref:`implement our very own objective function <operations>` to affect the convergence of
-the original implementation or
-:ref:`make two trees cooperate with each other <bidirectional-example>`
-as they search for a path.
+in many ways and can accommodate almost any exploration strategy one might think of. For example,
+in this tutorial we will
+show how to :ref:`implement our own building blocks to use with the library <operations>` or
+:ref:`make two trees cooperate with each other as they search for a single path <bidirectional-example>`.
 
 Creating an Exploration Tree and Setting Morphing Parameters
 ------------------------------------------------------------
@@ -336,39 +335,32 @@ Output:
 Sorting and Filtering Morphs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sometimes the order of molecules in `candidates` might matter to us. As of yet, the only way to sort the
-generated morphs in `candidates` is by calling the `sortMorphs()` method or using the `SortMorphsOper` operation
-(see :ref:`operations` for more on operations). This sorts the molecules in the order of increasing distance
-from the target. Placing the closest molecules at the very top of the list. For example, this order has meaning
-for the built-in probability filter (see `PROBABILITY` for details).
+Sometimes the order of the newly generated molecules in the `candidates` list might have a meaning to us;
+for example, this order is used by the built-in probability filter (see `PROBABILITY` for details)
+to compute the probabilities of survival for each candidate.
 
-When the list of candidates is populated and sorted, we need to choose the morphs that
-will form the next `generation <morph generation>`. The code below illustrates
-how we can sort the morphs and do the subsequent filtering manually:
+As of yet, the only way to sort the
+generated morphs is by calling the :py:meth:`~ExplorationTree.ExplorationTree.sortMorphs()`
+method on the tree instance or using the `~operations.SortMorphsOper` operation
+(see :ref:`operations` for more). This sorts the molecules in the order of increasing value
+of the objective function (distance from the :term:`target molecule` by default).
+
+Let us now sort the candidate morphs in our tree:
 
 ..  code-block:: python
-    :caption: Sorting and manually filtering morphs.
+    :caption: Sorting morphs according to the value of the objective function.
     :name: filtering-morphs
     :linenos:
 
-    tree.sortMorphs() # sort the candidates in the tree according to their distance from target
-    print(tree.candidates_mask) # print the current mask
-    print(len(tree.candidates_mask))
-
-    # accept only the first three morphs (those with the lowest distance to target)
-    mask = [False for x in tree.candidates_mask]
-    mask[0] = True
-    mask[1] = True
-    mask[2] = True
-    tree.candidates_mask = mask # save the new mask to the tree
+    # sort the candidates in the tree according to their distance from target
+    tree.sortMorphs()
 
     # verify
     print(tree.candidates_mask)
     print(
         [
-            (x.getSMILES(), x.getDistToTarget())
+            (x.smiles, x.dist_to_target)
             for idx,x in enumerate(tree.candidates)
-            if tree.candidates_mask[idx] # only fetch accepted molecules
         ]
     )
 
@@ -376,24 +368,61 @@ Output:
 
 ..  code-block:: none
 
-    [('COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 0.5), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C', 0.7068965517241379), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143)]
-    (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
-    63
-    (True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+    (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
+    [('COC(=O)C1C2CCC(CC1OC(=O)C1=CCC(C)C=C1)N2C', 0.5), ('CCC1N(C)C2CC(OC(=O)C3=CC=CC=C3)C12C(=O)OC', 0.7868852459016393), ('COC(=O)C1C2C3CN2C(C3)CC1OC(=O)C1=CC=CC=C1', 0.7868852459016393), ('CCC1CC(OC(=O)C2=CC=CC=C2)C(C(=O)OC)CN1C', 0.7868852459016393), ('COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C', 0.7903225806451613), ('CCN1C2CCC1C(C(=O)OC)C(OC(=O)C1=CC=CC=C1)C2', 0.7936507936507937), ('COC(=O)C1C2CCC(C(N)C1OC(=O)C1=CC=CC=C1)N2C', 0.8032786885245902), ('COCC1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8064516129032258), ('COC(=O)C1C2CCC(C1OC(=O)C1=CC=CC=C1)N2C', 0.8103448275862069), ('COC(=O)CC(CC1CCCN1C)OC(=O)C1=CC=CC=C1', 0.8125), ('COC(=O)C1C2CCC(CNC1OC(=O)C1=CC=CC=C1)N2C', 0.8125), ('COC(=O)C1C2CCC(CC1(N)OC(=O)C1=CC=CC=C1)N2C', 0.8125), ('CONC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8125), ('CNC1CCCCC(OC(=O)C2=CC=CC=C2)C1C(=O)OC', 0.8135593220338984), ('COC(=O)C1C2CC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8166666666666667), ('COC(=O)C1C(C)N(C)C(C)CC1OC(=O)C1=CC=CC=C1', 0.8166666666666667), ('COC(=O)C1C2CCC(N2)C(C)C1OC(=O)C1=CC=CC=C1', 0.8166666666666667), ('CN1C2CCC1C(C(=O)O)C(OC(=O)C1=CC=CC=C1)C2', 0.8166666666666667), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)C2C', 0.819672131147541), ('COC(=O)C1(OC(=O)C2=CC=CC=C2)CC2CCC1N2C', 0.819672131147541), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2', 0.819672131147541), ('CC1CC2CC(OC(=O)C3=CC=CC=C3)C(C(=O)O)C1N2C', 0.819672131147541), ('COC(=O)C1C2CCC(OC1OC(=O)C1=CC=CC=C1)N2C', 0.8225806451612903), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8225806451612903), ('COC(=O)C1C2C(C)CC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C12C(OC(=O)C3=CC=CC=C3)CC13CCC2N3C', 0.8253968253968254), ('COC(=O)C(C(C)OC(=O)C1=CC=CC=C1)C1CCCN1C', 0.8253968253968254), ('COC(=O)C1C2CCC(=CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C1C2CCC(CC1OCC1=CC=CC=C1)N2C', 0.8253968253968254), ('CNC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8253968253968254), ('COC(=O)C1C2CCC(CC1NOC(=O)C1=CC=CC=C1)N2C', 0.828125), ('COC(=O)C1C2CCC(CC1(O)OC(=O)C1=CC=CC=C1)N2C', 0.828125), ('C=C(OC)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.828125), ('COC(=O)C1NC2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.8307692307692307), ('COC(=O)C1C2CCC(OCC1OC(=O)C1=CC=CC=C1)N2C', 0.8307692307692307), ('COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCC1(C)N2C', 0.8307692307692307), ('COC12CCC(CC(OC(=O)C3=CC=CC=C3)C1C=O)N2C', 0.8333333333333334), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CNC=C1)N2C', 0.8382352941176471), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CCC=C1)N2C', 0.8484848484848485), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC3=CC=C31)N2C', 0.8507462686567164), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC(O)CC=C1)N2C', 0.8529411764705882), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CN=CC=C1)N2C', 0.855072463768116), ('COC(=O)C1C2CC3C4=CC=C(C=C4)C(=O)OC1CC3N2C', 0.859375), ('COC(=O)C1C2CCC3(CC1OC(=O)C1=CC=C3C=C1)N2C', 0.8636363636363636), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC1)N2C', 0.8656716417910448), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1C)N2C', 0.8656716417910448), ('COC(=O)C1C2CCN(C)C1CCC1=CC=CC=C1C(=O)O2', 0.8656716417910448), ('COC(=O)C1C2CCC(CC1OC(=O)C1=C=CC=C1)N2C', 0.8676470588235294), ('COC(=O)C1C2CCC(CC1OC(=O)C1=NC=CC=C1)N2C', 0.8695652173913043), ('COC(=O)C1C2=CC=CC(=C2)C(=O)OCCC2CCC1N2C', 0.8695652173913043), ('COC(=O)C1C2CCC3CC1OC(=O)C1=C(C=CC=C1)CN32', 0.8695652173913043), ('COC(=O)C1C2CCC(CC13OC(=O)C1=CC=CC=C13)N2C', 0.8695652173913043), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=N1)N2C', 0.8695652173913043), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC(C)C1)N2C', 0.8714285714285714), ('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CCC1C)N2C', 0.8714285714285714), ('COC(=O)C(C1CCCN1C)C1CC2=CC=CC(=C2)C(=O)O1', 0.875), ('COC(=O)C1C2CCC(CC1OC1=CC=C(C=O)C=C1)N2C', 0.8787878787878788), ('COC(=O)C1C2CCC(CC1OC(O)C1=CC=CC=C1)N2C', 0.8787878787878788), ('CN1C2CCC1C1C(=O)OCC3=CC=CC(=C3)C(=O)OC1C2', 0.8840579710144928), ('COC(=O)C1C2CCC(CC1OC(=O)C1C=CC=C1)N2C', 0.90625), ('CC=CC=C(C)C(=O)OC1CC2CCC(C1C(=O)OC)N2C', 0.9285714285714286), ('C=CC=CC=CC(=O)OC1CC2CCC(C1C(=O)OC)N2C', 0.9285714285714286)]
+
+When the list of candidates is populated and sorted, we need to choose the morphs that
+will form the next `generation <morph generation>` (the next leaves of the tree from which new morphs can be generated).
+Here is an example implementation of a very simple filtering procedure:
+
+..  code-block:: python
+    :caption: A simple morph filter that selects only the first three closest morphs from the list.
+    :name: filtering-morphs
+    :linenos:
+
+    # print the current candidates mask (all positions are on by default)
+    print(tree.candidates_mask)
+
+    # accept only the first three morphs in the sorted list (those with the lowest distance to target)
+    mask = [False for x in tree.candidates_mask]
+    mask[0] = True
+    mask[1] = True
+    mask[2] = True
+
+    # save the new mask to the tree
+    tree.candidates_mask = mask
+
+    # show results
+    print(tree.candidates_mask)
+    print(
+        [
+            (x.smiles, x.dist_to_target)
+            for idx,x in enumerate(tree.candidates)
+            if tree.candidates_mask[idx] # get accepted molecules only
+        ]
+    )
+
+Output:
+
+..  code-block:: none
+
+    (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
+    (True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+    [('COC(=O)C1C2CCC(CC1OCC1=CC=CC=C1)N2C', 0.5), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143), ('CCOC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C', 0.7704918032786885)]
 
 In :numref:`filtering-morphs`, `candidates_mask` member can be easily changed by writing
-a `list` or `tuple` of new values into it. Here we simply select the first three morphs as the new `morph generation`.
+a `list` or a `tuple` of new values into it. Here we simply select the first three morphs as the new `morph generation`.
 Note that the list of selected morphs is sorted from the molecule closest to the target to the farthest,
 because we called the `sortMorphs()` method previously.
 
-..  warning:: The new mask must be the same length as the `candidates` member. If this requirement
+..  note:: The new mask must be the same length as the `candidates` member. If this requirement
         is not satisfied, an instance of `RuntimeError` is raised.
 
 ..  warning:: The mask should only be set after the morphs are sorted. If the mask is set and
         the order of morphs is changed, the mask will stay the same and will have to be updated
         to follow the new order.
 
-..  seealso:: The library also implements a few built-in filters. You can use the
+..  seealso:: The library implements a few built-in filters. You can use the
         `filterMorphs()` method to invoke them. See the method's documentation for more information
         on the available filtering options.
 

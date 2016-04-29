@@ -20,10 +20,8 @@ setup (name = 'molpher',
        packages=find_packages('src/python/'),
        ext_modules = [molpher_cpp_module,],
        package_data = {
-            #'molpher.swig_wrappers': ['lib/*.so', 'lib/*.so.2', '*.dat'],
-            'molpher.swig_wrappers': ['*.dat'],
-            'molpher.swig_wrappers.tests' : ['test_files/*'],
+            'molpher.core.tests' : ['test_files/*'],
             'molpher.examples' : ['*.xml']
-        }
-       #test_suite="tests"
+        },
+       test_suite="tests"
        )
