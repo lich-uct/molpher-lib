@@ -26,7 +26,7 @@ def main():
     }
     print(tree.params)
 
-    print('#Generating and Manipulating Morphs')
+    print('\n#Generating and Manipulating Morphs')
 
     print(tree.leaves) # show the current leaves of the tree (only the source so far)
     print(tree.leaves[0].smiles)
@@ -94,7 +94,10 @@ def main():
         ]
     )
 
-    print('#Extending and Pruning')
+    print('\n#Extending and Pruning')
+
+    # get the number of generations before
+    print(tree.generation_count)
 
     tree.extend() # connect the accepted morphs to the tree as new leaves
     print(
@@ -102,14 +105,20 @@ def main():
         [
             (x.getSMILES(), x.getDistToTarget())
             for x in tree.leaves
-        ], key=lambda x : x[1]
+        ], key=lambda item : item[1]
         )
     )
-    print(tree.generation_count) # get the number of generations
-    print(tree.path_found) # check if a path was found
-    tree.prune() # run the pruning operation on the updated tree
 
-    print('#Operations')
+    # get the number of generations after
+    print(tree.generation_count)
+
+    # check if a path was found
+    print(tree.path_found)
+
+    # run the pruning operation on the updated tree
+    tree.prune()
+
+    print('\n#Operations')
 
     class MyFilterMorphs(TreeOperation):
         """
@@ -133,7 +142,7 @@ def main():
             mask[2] = True
             self.tree.candidates_mask = mask
 
-    tree = ETree(source=cocaine, target=procaine) # create the tree
+    tree = ETree.create(source=cocaine, target=procaine) # create the tree
 
     # this list of tree operations defines one iteration
     iteration = [
@@ -160,7 +169,7 @@ def main():
         )
     )
 
-    print('Traversing the Tree')
+    print('\n#Traversing the Tree')
 
     class MyCallback(TraverseCallback):
         """
@@ -169,7 +178,7 @@ def main():
 
         """
 
-        def processMorph(self, morph):
+        def __call__(self, morph):
             """
             Method called on each morph in the tree
             -- starting from root to leaves.
@@ -208,6 +217,8 @@ def main():
     tree.traverse(process) # use the traverse method to run the callback function
 
     print('Tree Snapshots')
+
+    exit()
 
     template_file = 'cocaine-procaine-template.xml'
     import os
