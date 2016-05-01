@@ -1,9 +1,12 @@
 molpher.core package
 ====================
 
-This package contains the most essential functionality of the library. It provides facilities
-that can be used to interact with the morphing process during runtime and also alter some higher-level
-aspects of the morphing algorithm.
+This package contains the most essential features of the library.
+It provides everything that the user of the library will need.
+All the modules and classes below and their contents are
+meant to be imported by external scripts.
+
+.. contents:: Table of Contents
 
 Modules
 -------

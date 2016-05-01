@@ -1,6 +1,6 @@
 
-Molpher C++ API
-===============
+C++
+===
 
 .. warning:: This section is under construction at the moment so the information contained within
       is often missing or incomplete. However, the Python API very closely follows the C++ implementation

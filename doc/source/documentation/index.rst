@@ -8,5 +8,5 @@ Source Code Documentation
     :numbered:
     :maxdepth: 2
 
-    Python API Documentation <python/modules>
-    C++ API Documentation <cplusplus/index>
+    python/modules
+    cplusplus/index
