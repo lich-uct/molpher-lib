@@ -233,3 +233,6 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         else:
             cb = self.callback_class(callback)
             TraverseOper(self, cb)()
+
+    def asData(self):
+        return ExplorationData(other=super(ExplorationTree, self).asData())
