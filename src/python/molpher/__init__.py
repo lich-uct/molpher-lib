@@ -1,10 +1,17 @@
+"""
+When this module is imported,
+some actions are automatically
+performed (see below).
+
+"""
+
 from pkg_resources import resource_filename
 
 import molpher.swig_wrappers.core as wrappers
 
 def load_SAScore(path):
    """
-   Loads the data file used in computation of the syntetic feasibility scores.
+   Loads the data file used for the computation of the syntetic feasibility scores.
    This is performed automatically when the :py:mod:`molpher` package is imported.
    Use it only if you want to use a data file different from the dafault one.
 

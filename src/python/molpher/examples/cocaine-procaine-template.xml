@@ -1,9 +1,11 @@
 
 <!--
     Template can be loaded instead of a snapsthot to initilize a tree.
-    It only contains information about the morphing parameters.
+    It only contains information about the morphing parameters, however.
 
     IMPORTANT: The name of a template file must end with '-template.xml'.
+    Otherwise it will be interpreted as a snapshot and the resulting tree
+    will be invalid.
 -->
 <iteration>
     <source>

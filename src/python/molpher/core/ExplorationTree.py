@@ -61,6 +61,19 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
 
     @staticmethod
     def create(params=None, source=None, target=None):
+        """
+        create tree
+
+        :param params:
+        :type params:
+        :param source:
+        :type source:
+        :param target:
+        :type target:
+        :return:
+        :rtype:
+        """
+
         ret = None
         if params and (source or target):
             warnings.warn(

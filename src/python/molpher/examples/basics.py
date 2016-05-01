@@ -3,7 +3,7 @@ Module with example code from the tutorial.
 
 """
 
-from molpher.core.ExplorationTree import ExplorationTree as ETree
+from molpher.core import ExplorationTree as ETree
 from molpher.core.operations import *
 
 # TODO: make some of the stuff from this script part of the test suite
@@ -26,57 +26,78 @@ def main():
     }
     print(tree.params)
 
-    print('#Generating and Manipulating Morphs')
+    print('\n#Generating and Manipulating Morphs')
 
     print(tree.leaves) # show the current leaves of the tree (only the source so far)
-    print(tree.leaves[0].getSMILES())
+    print(tree.leaves[0].smiles)
     tree.generateMorphs() # generate new morphs
     print(tree.candidates)
     print(len(tree.candidates))
 
     print()
 
-    candidate = tree.candidates[0] # get the first morph in the candidate list
-    print(candidate.isBound()) # print if it is bound to a tree
-    print(tree.candidates[0].getDistToTarget()) # print distance to target
-    candidate.setDistToTarget(0.5) # set new distance to target
-    print(tree.candidates[0].getDistToTarget()) # look in the list of candidates and print new distance
+    # get the first morph in the candidate list
+    candidate = tree.candidates[0]
+    # print distance to target
+    print(tree.candidates[0].dist_to_target)
+    # set new distance to target
+    candidate.dist_to_target = 0.5
+    # look in the list of candidates and print new distance
+    print(tree.candidates[0].dist_to_target)
 
     print()
 
-    # get a copy of the candidate molecule and verify that the changes do not propagate into the tree
+    # make a copy of our molecule
     candidate_copy = candidate.copy()
-    print(candidate_copy.isBound())
-    print(candidate_copy.getDistToTarget())
-    candidate_copy.setDistToTarget(0.7)
-    print(candidate_copy.getDistToTarget())
-    print(candidate.getDistToTarget())
-    print(tree.candidates[0].getDistToTarget())
+    # set a new distance for the copy and verify that the original was not affected
+    print(candidate_copy.dist_to_target)
+    candidate_copy.dist_to_target = 0.7
+    print(candidate_copy.dist_to_target)
+    print(candidate.dist_to_target)
+    print(tree.candidates[0].dist_to_target)
 
-    print('#Sorting and Filtering Morphs')
+    print('\n#Sorting and Filtering Morphs')
 
-    tree.sortMorphs() # sort the candidates in the tree according to their distance from target
-    print(tree.candidates_mask) # print the current mask
-    print(len(tree.candidates_mask))
+    # sort the candidates in the tree according to their distance from target
+    tree.sortMorphs()
 
-    # accept only the first three morphs (those with the lowest distance to target)
+    # show results
+    print(tree.candidates_mask)
+    print(
+        [
+            (x.smiles, x.dist_to_target)
+            for x in tree.candidates
+        ]
+    )
+
+    print()
+
+    # print the current candidates mask (all positions are on by default)
+    print(tree.candidates_mask)
+
+    # accept only the first three morphs in the sorted list (those with the lowest distance to target)
     mask = [False for x in tree.candidates_mask]
     mask[0] = True
     mask[1] = True
     mask[2] = True
-    tree.candidates_mask = mask # save the new mask to the tree
 
-    # verify
+    # save the new mask to the tree
+    tree.candidates_mask = mask
+
+    # show results
     print(tree.candidates_mask)
     print(
         [
-            (x.getSMILES(), x.getDistToTarget())
+            (x.smiles, x.dist_to_target)
             for idx,x in enumerate(tree.candidates)
-            if tree.candidates_mask[idx] # only fetch accepted molecules
+            if tree.candidates_mask[idx] # get accepted molecules only
         ]
     )
 
-    print('#Extending and Pruning')
+    print('\n#Extending and Pruning')
+
+    # get the number of generations before
+    print(tree.generation_count)
 
     tree.extend() # connect the accepted morphs to the tree as new leaves
     print(
@@ -84,14 +105,20 @@ def main():
         [
             (x.getSMILES(), x.getDistToTarget())
             for x in tree.leaves
-        ], key=lambda x : x[1]
+        ], key=lambda item : item[1]
         )
     )
-    print(tree.generation_count) # get the number of generations
-    print(tree.path_found) # check if a path was found
-    tree.prune() # run the pruning operation on the updated tree
 
-    print('#Operations')
+    # get the number of generations after
+    print(tree.generation_count)
+
+    # check if a path was found
+    print(tree.path_found)
+
+    # run the pruning operation on the updated tree
+    tree.prune()
+
+    print('\n#Operations')
 
     class MyFilterMorphs(TreeOperation):
         """
@@ -115,7 +142,7 @@ def main():
             mask[2] = True
             self.tree.candidates_mask = mask
 
-    tree = ETree(source=cocaine, target=procaine) # create the tree
+    tree = ETree.create(source=cocaine, target=procaine) # create the tree
 
     # this list of tree operations defines one iteration
     iteration = [
@@ -142,7 +169,7 @@ def main():
         )
     )
 
-    print('Traversing the Tree')
+    print('\n#Traversing the Tree')
 
     class MyCallback(TraverseCallback):
         """
@@ -151,7 +178,7 @@ def main():
 
         """
 
-        def processMorph(self, morph):
+        def __call__(self, morph):
             """
             Method called on each morph in the tree
             -- starting from root to leaves.
@@ -189,13 +216,14 @@ def main():
 
     tree.traverse(process) # use the traverse method to run the callback function
 
-    print('Tree Snapshots')
+    print('\n#Tree Snapshots')
 
     template_file = 'cocaine-procaine-template.xml'
     import os
     template_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), template_file)
 
-    tree = ETree.createFromSnapshot(template_file) # create a tree from the template file
+    # create a tree from the template file
+    tree = ETree.create(template_file)
     print(tree.params)
 
     # apply the tree operations
@@ -211,9 +239,10 @@ def main():
         )
     )
 
-    tree.saveSnapshot('snapshot.xml') # save the tree in a snapshot file
+    # save the tree in a snapshot file
+    tree.save('snapshot.xml')
 
-    new_tree = ETree.createFromSnapshot('snapshot.xml') # create a new tree from the saved snapshot
+    new_tree = ETree.create('snapshot.xml') # create a new tree from the saved snapshot
     print(new_tree.params)
     print(
         sorted( # grab the leaves in the created tree (these should be the same as those in the original tree)

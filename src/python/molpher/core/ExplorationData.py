@@ -1,3 +1,8 @@
+"""
+This module houses the :class:`ExplorationData` class.
+
+"""
+
 import molpher
 from molpher.core import selectors
 from molpher.core.MolpherMol import MolpherMol
