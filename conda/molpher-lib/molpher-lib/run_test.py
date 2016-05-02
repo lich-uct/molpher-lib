@@ -1,7 +1,7 @@
 import unittest
 
 testmodules = [
-    'molpher.core.tests.test_api',
+    'molpher.core.tests.test_api', # TODO: automatically import all tests from the package
     ]
 
 suite = unittest.TestSuite()
