@@ -5,4 +5,3 @@ Python
    :maxdepth: 3
 
    molpher
-   tests

@@ -831,6 +831,7 @@ Output:
     }
     Generated 66 morphs.
     [('CN1C2CCC1C(C(=O)OCN)C(OC(=O)C1=CC=CC=C1)C2', 0.7777777777777778), ('CCN1C2CCC1C(C(=O)OC)C(OC(=O)C1=CC=CC=C1)C2', 0.7936507936507937), ('CN1C2CCC1C(C(=O)ON)C(OC(=O)C1=CC=CC=C1)C2', 0.8064516129032258)]
+
 In the above example we loaded an :term:`XML template`, created a tree from it, extended the tree and
 serialized it as a snapshot. We can see that all the parameters are the same as in the :term:`XML template` and that
 the resulting tree can be built using the same list of operations

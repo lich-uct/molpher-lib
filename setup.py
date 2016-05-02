@@ -24,5 +24,5 @@ setup (name = 'molpher',
             'molpher.swig_wrappers': ['*.dat'],
             'molpher.examples' : ['*.xml']
         },
-       test_suite="tests"
+       test_suite="molpher.core.tests"
        )

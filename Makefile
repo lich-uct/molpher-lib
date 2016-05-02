@@ -100,9 +100,11 @@ endif
 
 # clean
 clean: .clean-post
-	rm -rf $(LIB_DIR)
-	rm -f $(PYTHON_PACKAGE_DIR)/*.dat
-	rm -f $(PYTHON_PACKAGE_DIR)/*.so
+	rm -vrf $(CND_BASEDIR)/build
+	rm -vrf $(CND_BASEDIR)/dist
+	rm -vrf $(SRC_DIR)/python/molpher.egg-info/
+	rm -vf $(PYTHON_PACKAGE_DIR)/*.dat
+	rm -vf $(PYTHON_PACKAGE_DIR)/*.so
 
 .clean-pre:
 # Add your pre 'clean' code here...
