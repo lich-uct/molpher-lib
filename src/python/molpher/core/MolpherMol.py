@@ -118,7 +118,7 @@ class MolpherMol(wrappers.MolpherMol):
         this is the structural distance to the target
         molecule using a `similarity measure`.
 
-        This value can be written into.
+        This value can be changed.
 
         :return: value of the objective function
         :rtype: `float`
@@ -139,7 +139,7 @@ class MolpherMol(wrappers.MolpherMol):
 
         .. todo:: add reference
 
-        This value can be written into.
+        This value can be changed.
 
         :return: synthetic feasibility score
         :rtype: `float`
@@ -172,3 +172,22 @@ class MolpherMol(wrappers.MolpherMol):
         :rtype: `str`
         """
         return self.getDescendants()
+
+    @property
+    def gens_without_improvement(self):
+        """
+        Number of morph generations derived from this molecule that did not
+        contain any morphs with an improvement in the objective function
+        from the target molecule.
+
+        This value can be changed.
+
+        :return: number of non-producing generations
+        :rtype: `int`
+        """
+
+        return self.getItersWithoutDistImprovement()
+
+    @gens_without_improvement.setter
+    def gens_without_improvement(self, value):
+        self.setItersWithoutDistImprovement(value)

@@ -1,3 +1,5 @@
+..  _tutorial:
+
 Tutorial
 ========
 
@@ -711,7 +713,7 @@ every molecule it encounters into our implementation of the
         using the specified molecule as the root of the subtree.
 
 There is also a much more convenient way to traverse the tree. Because, the `ExplorationTree` class implements
-the `traverse()` method, we can simply take any python callable and use it instead of the
+the :meth:`molpher.core.ExplorationTree.ExplorationTree.traverse()` method, we can simply take any python callable and use it instead of the
 :meth:`~molpher.swig_wrappers.core.TraverseCallback.__call__` method.
 However, under the hood it does the same thing as we did in :numref:`traverse-example`.
 Therefore, the above code can be turned into:

@@ -44,6 +44,7 @@ Table of Contents
     Introduction <introduction>
     usage/index
     documentation/index
+    glossary
 
 Indices and Search
 ==================

@@ -6,7 +6,7 @@ FindLeavesOper
 .. autoclass:: FindLeavesOper
     :show-inheritance:
 
-    A `tree operation` used to access the leaves of an `exploration tree`.
+    A :term:`tree operation` used to access the leaves of an :term:`exploration tree`.
 
     .. automethod:: __call__
 

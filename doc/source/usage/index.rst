@@ -16,4 +16,3 @@ It contains notes on how to install it, an extensive tutorial and a brief descri
 
     Installation <installation>
     Tutorial <tutorial>
-    glossary

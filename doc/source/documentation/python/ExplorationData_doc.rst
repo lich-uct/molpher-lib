@@ -1,49 +1,48 @@
 ExplorationData
-=====================
+===============
 
 .. py:currentmodule:: molpher.swig_wrappers.core
 
 .. autoclass:: ExplorationData
 
-    :param \*args: either another instance of this class or empty
+    .. note::  If an instance of this class is created explicitly, all parameters are set to their default values
+        (see the description of `molpher.core.ExplorationData`).
 
-    .. note::  An instance of this class can be either initilized automatically (no arguments
-        provided to the constructor) or from another instance (passed as a single constructor parameter).
-        If the class is initilized automatically (no parameters passed to the constructor),
-        the `exploration parameters` are set to the default values (see the description of `molpher.core.ExplorationData`
-        for an overview of default parameter values).
+    Contains data about the state of an :term:`exploration tree` and provides facilities to
+    read it and change it along with the :term:`morphing parameters` set.
 
-    Contains information about the `exploration parameters` and provides facilities to read them
-    and change them.
-
-    This class uses getter and setter methods to read and modify the parameter values. The
+    This class uses getter and setter methods to read and modify the underlying data structure. The
     naming conventions tightly follow the wrapped C++ implementation and should be consistent
     with the parameter names published in [1]_.
 
     .. [1] Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
         `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/24655571>`_, `DOI <http://www.jcheminf.com/content/6/1/7>`_
 
+    ..  warning:: Not all methods that can manipulate the tree topology are implemented
+                and exposed in the API, yet. Those few that are exposed, however, should
+                still be considered as experimental.
+
     .. automethod:: getSource
 
-        Returns the `source molecule`.
+        Returns the :term:`source molecule`.
 
         .. seealso:: `molpher.core.ExplorationData.ExplorationData.source`
 
-        :return: `MolpherMol` instance representing the current `source molecule`
+        :return: `MolpherMol` instance representing the current :term:`source molecule`
         :rtype: `MolpherMol`
 
     .. automethod:: getTarget
 
-        Returns the `target molecule`.
+        Returns the :term:`target molecule`.
 
         .. seealso:: `molpher.core.ExplorationData.ExplorationData.target`
 
-        :return: `MolpherMol` instance representing the current `target molecule`
+        :return: `MolpherMol` instance representing the current :term:`target molecule`
         :rtype: `MolpherMol`
 
     .. automethod:: getChemicalOperators
 
-        Returns a `tuple` of current `chemical operators` as `str` identifiers.
+        Returns a `tuple` of current :term:`chemical operators` as `str` identifiers.
 
         .. include:: oper_table.rst
 
@@ -54,24 +53,24 @@ ExplorationData
 
     .. automethod:: getFingerprint
 
-        Returns an identifier of the currently set `molecular fingerprint`.
+        Returns an identifier of the currently set :term:`molecular fingerprint`.
 
         .. include:: fing_table.rst
 
         .. seealso:: `molpher.core.ExplorationData.ExplorationData.fingerprint`
 
-        :return: `molecular fingerprint` identifier
+        :return: :term:`molecular fingerprint` identifier
         :rtype: `str`
 
     .. automethod:: getSimilarityCoefficient
 
-        Returns an identifier of the currently set `similarity measure`.
+        Returns an identifier of the currently set :term:`similarity measure`.
 
         .. include:: sim_table.rst
 
         .. seealso:: `molpher.core.ExplorationData.ExplorationData.similarity`
 
-        :return: `similarity measure` identifier
+        :return: :term:`similarity measure` identifier
         :rtype: `str`
 
     .. automethod:: getMinAcceptableMolecularWeight
@@ -139,25 +138,25 @@ ExplorationData
 
     .. automethod:: setSource
 
-        Set the `source molecule`.
+        Set the :term:`source molecule`.
 
         .. seealso:: `molpher.core.ExplorationData.ExplorationData.source`
 
-        :param \*args: `MolpherMol` instance or SMILES representing the current `source molecule`
+        :param \*args: `MolpherMol` instance or SMILES representing the current :term:`source molecule`
         :type \*args: `MolpherMol` or `str`
 
     .. automethod:: setTarget
 
-        Set the `target molecule`.
+        Set the :term:`target molecule`.
 
         .. seealso:: `molpher.core.ExplorationData.ExplorationData.target`
 
-        :param \*args: `MolpherMol` instance or SMILES representing the current `source molecule`
+        :param \*args: `MolpherMol` instance or SMILES representing the current :term:`source molecule`
         :type \*args: `MolpherMol` or `str`
 
     .. automethod:: setChemicalOperators
 
-        Set the current `chemical operators` as `str` identifiers.
+        Set the current :term:`chemical operators` as `str` identifiers.
 
         .. include:: oper_table.rst
 
@@ -168,7 +167,7 @@ ExplorationData
 
     .. automethod:: setFingerprint
 
-        Set the `molecular fingerprint`.
+        Set the :term:`molecular fingerprint`.
 
         .. include:: fing_table.rst
 
@@ -179,13 +178,13 @@ ExplorationData
 
     .. automethod:: setSimilarityCoefficient
 
-        Set the `similarity measure`.
+        Set the :term:`similarity measure`.
 
         .. include:: sim_table.rst
 
         .. seealso:: `molpher.core.ExplorationData.ExplorationData.similarity`
 
-        :param \*args: `similarity measure` identifier
+        :param \*args: :term:`similarity measure` identifier
         :type \*args: `str`
 
     .. automethod:: setMinAcceptableMolecularWeight
@@ -250,3 +249,17 @@ ExplorationData
 
         :param \*args: number of generations until non-producing morphs are pruned
         :type \*args: `int`
+
+    .. automethod:: load(filename)
+
+        Load data and parameters from a :term:`tree snapshot` or a :term:`XML template`.
+
+        :param filename: path to the file to load from
+        :type filename: `str`
+
+    .. automethod:: save(filename)
+
+        Save data and parameters from a :term:`tree snapshot` or a :term:`XML template`.
+
+        :param filename: path to the file to save to
+        :type filename: `str`
