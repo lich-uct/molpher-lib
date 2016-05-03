@@ -3,8 +3,20 @@ import molpher.core.ExplorationTree
 
 from abc import ABCMeta, abstractmethod
 
+from molpher.core._utils import shorten_repr
+
+
 class TreeOperation(molpher.swig_wrappers.core.TreeOperation):
+    """
+    Abstract base class derived from the `molpher.swig_wrappers.core.TreeOperation`
+    proxy class.
+
+    """
+
     __metaclass__ = ABCMeta
+
+    def __repr__(self):
+        return shorten_repr(TreeOperation, self)
 
     @property
     def tree(self):

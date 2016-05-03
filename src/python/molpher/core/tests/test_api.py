@@ -5,7 +5,7 @@ from pkg_resources import resource_filename
 
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
-from molpher.core.operations import TreeOperation
+from molpher.core.operations import *
 from molpher.core.selectors import *
 from molpher.core import ExplorationData
 
@@ -24,8 +24,8 @@ class TestPythonAPI(unittest.TestCase):
         mol = MolpherMol(self.test_target)
         mol.smiles = 'CCC'
         self.assertTrue('CCC')
-        mol.historic_descendents = ('CCC', 'CCCC')
-        self.assertEqual(('CCC', 'CCCC'), mol.historic_descendents)
+        # mol.historic_descendents = ('CCC', 'CCCC')
+        # self.assertEqual(('CCC', 'CCCC'), mol.historic_descendents)
 
         copy = mol.copy()
         copy.sascore = 0.54
@@ -76,8 +76,8 @@ class TestPythonAPI(unittest.TestCase):
 
 
         self.assertRaises(AttributeError, lambda : ExplorationTree())
-        tree_from_dict = ExplorationTree.create(params=params_dict)
-        tree_from_params = ExplorationTree.create(params=params)
+        tree_from_dict = ExplorationTree.create(tree_data=params_dict)
+        tree_from_params = ExplorationTree.create(tree_data=params)
         tree_from_SMILES = ExplorationTree.create(source=mol1, target=mol2)
         def test_tree(tree):
             self.assertEqual(tree.params['source'], mol1)
@@ -121,8 +121,25 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(leaf_copy.getDistToTarget(), 0.7)
 
     def testOperations(self):
-        # TODO: implement
-        pass
+        tree = ExplorationTree.create(tree_data={
+            'source' : self.test_source
+            , 'target' : self.test_target
+        })
+
+        iteration = [
+            GenerateMorphsOper()
+            , SortMorphsOper()
+            , FilterMorphsOper()
+            , ExtendTreeOper()
+            , PruneTreeOper()
+        ]
+
+        fl = FindLeavesOper()
+        for oper in iteration:
+            tree.runOperation(oper)
+        tree.runOperation(fl)
+        for leaf1, leaf2, leaf3 in zip(sorted(fl.leaves), sorted(fl.tree.leaves), sorted(tree.leaves)):
+            self.assertTrue(leaf1.smiles == leaf2.smiles == leaf3.smiles)
 
     def testMorphing(self):
         def callback(morph):
@@ -183,7 +200,7 @@ class TestPythonAPI(unittest.TestCase):
             def setTree(self, tree):
                 self._tree = tree
 
-        tree = ExplorationTree.create(params={
+        tree = ExplorationTree.create(tree_data={
             'source' : self.test_source
             , 'target' : self.test_target
         })
@@ -203,3 +220,10 @@ class TestPythonAPI(unittest.TestCase):
         self.assertFalse(tree.hasMol(child))
         self.assertEqual(None, child.tree)
         self.assertEqual(parent, child.getParentSMILES())
+
+        # check descendents
+        def check_descs(morph):
+            for desc_smiles in morph.descendents:
+                desc = tree.fetchMol(desc_smiles)
+                self.assertTrue(desc.tree)
+        tree.traverse(check_descs)

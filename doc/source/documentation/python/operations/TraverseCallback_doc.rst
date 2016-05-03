@@ -5,7 +5,7 @@ TraverseCallback
 
 .. autoclass:: TraverseCallback
 
-    A simple callback that can process morphs in an `exploration tree`.
+    A simple callback that can process morphs in an :term:`exploration tree`.
     When supplied to `TraverseOper` the morphs that belong to the currently traversed
     subtree are processed using this method.
 

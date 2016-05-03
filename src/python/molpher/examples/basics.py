@@ -7,6 +7,8 @@ from molpher.core import ExplorationTree as ETree
 from molpher.core.operations import *
 
 # TODO: make some of the stuff from this script part of the test suite
+from molpher.core.operations.callbacks import TraverseCallback
+
 
 def main():
     cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'

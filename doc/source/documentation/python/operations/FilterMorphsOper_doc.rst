@@ -11,7 +11,7 @@ FilterMorphsOper
     :param filters: the union of filtering options to use (optional, see the descriptions below for more information)
     :param verbose: toggles if a verbose output is required (optional, defaults to `False`)
 
-    This operation can filter the `candidate morphs` in an `exploration tree`
+    This operation can filter the :term:`candidate morphs` in an :term:`exploration tree`
     according to a given set of filtering options that it implements. The current set of
     available filters is in the table below. For more detailed information on each filter
     see the member descriptions of this class.
@@ -27,13 +27,13 @@ FilterMorphsOper
         according to the following formula:
         :math:`\frac{0.25 - (idx - morphs_{min})}{4(morphs_{all} - morphs_{min})}`, where :math:`morphs_{min}`
         is the `ExplorationData.accept_min` parameter, :math:`morphs_{all}` is the current
-        number of molecules in the `exploration tree` and :math:`idx` is the position of the given `morph`
+        number of molecules in the :term:`exploration tree` and :math:`idx` is the position of the given :term:`morph`
         in `ExplorationTree.candidates`.
 
     .. autoattribute:: WEIGHT
 
         Uses the `ExplorationData.weight_min` and `ExplorationData.weight_max` options
-        to remove `candidate morphs` that do not satisfy the weight constraints.
+        to remove :term:`candidate morphs` that do not satisfy the weight constraints.
 
     .. autoattribute:: SYNTHESIS
 
@@ -42,9 +42,9 @@ FilterMorphsOper
     .. autoattribute:: MAX_DERIVATIONS
 
         Each `ExplorationTree` instance keeps track of the number of morphs generated from each
-        molecule in the tree. If there are `candidate morphs` in `ExplorationTree.candidates`
+        molecule in the tree. If there are :term:`candidate morphs` in `ExplorationTree.candidates`
         such that more than `ExplorationData.max_morphs_total` number of morphs would be derived from
-        the given molecule, then these `candidate morphs` will be filtered out.
+        the given molecule, then these :term:`candidate morphs` will be filtered out.
 
     .. autoattribute:: DUPLICATES
 
@@ -56,7 +56,7 @@ FilterMorphsOper
     .. autoattribute:: HISTORIC_DESCENDENTS
 
         The tree also keeps track of all molecules previously derived from any molecule in the tree.
-        This filter removes `candidate morphs` that have alredy been previously derived from their parent molecule.
+        This filter removes :term:`candidate morphs` that have already been previously derived from their parent molecule.
 
     .. autoattribute:: ALL
 

@@ -6,10 +6,10 @@ GenerateMorphsOper
 .. autoclass:: GenerateMorphsOper
     :show-inheritance:
 
-    A `tree operation` used to generate the `candidate morphs` in an `exploration tree`.
+    A :term:`tree operation` used to generate the :term:`candidate morphs` in an :term:`exploration tree`.
 
     .. automethod:: __call__
 
-        Generate new `candidate morphs` and save them to the `candidates` member of
+        Generate new :term:`candidate morphs` and save them to the `candidates` member of
         the attached `ExplorationTree` instance.
 
