@@ -3,7 +3,9 @@ import warnings
 
 from molpher.core.ExplorationData import ExplorationData
 from molpher.core.MolpherMol import MolpherMol
-from molpher.core.operations import TraverseCallback, TraverseOper
+from molpher.core._utils import shorten_repr
+from molpher.core.operations import TraverseOper
+from molpher.core.operations.callbacks import TraverseCallback
 
 class Callback(TraverseCallback):
     """
@@ -43,6 +45,9 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
     .. seealso:: `molpher.swig_wrappers.core.ExplorationTree`
 
     """
+
+    def __repr__(self):
+        return shorten_repr(ExplorationTree, self)
 
     def __init__(self):
         super(ExplorationTree, self).__init__()

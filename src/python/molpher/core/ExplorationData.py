@@ -6,6 +6,7 @@ This module houses the :class:`ExplorationData` class:
 import molpher
 from molpher.core import selectors
 from molpher.core.MolpherMol import MolpherMol
+from molpher.core._utils import shorten_repr
 from molpher.swig_wrappers.core import FingerprintShortDesc, SimCoeffShortDesc, ChemOperShortDesc
 
 
@@ -103,6 +104,9 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
             self.this = other.this
         if kwargs:
             self._update_instance(kwargs)
+
+    def __repr__(self):
+        return shorten_repr(ExplorationData, self)
 
     @staticmethod
     def _parse_options(options):

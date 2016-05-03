@@ -5,7 +5,7 @@ from pkg_resources import resource_filename
 
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
-from molpher.core.operations import TreeOperation
+from molpher.core.operations import *
 from molpher.core.selectors import *
 from molpher.core import ExplorationData
 
@@ -121,8 +121,25 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(leaf_copy.getDistToTarget(), 0.7)
 
     def testOperations(self):
-        # TODO: implement
-        pass
+        tree = ExplorationTree.create(tree_data={
+            'source' : self.test_source
+            , 'target' : self.test_target
+        })
+
+        iteration = [
+            GenerateMorphsOper()
+            , SortMorphsOper()
+            , FilterMorphsOper()
+            , ExtendTreeOper()
+            , PruneTreeOper()
+        ]
+
+        fl = FindLeavesOper()
+        for oper in iteration:
+            tree.runOperation(oper)
+        tree.runOperation(fl)
+        for leaf1, leaf2, leaf3 in zip(sorted(fl.leaves), sorted(fl.tree.leaves), sorted(tree.leaves)):
+            self.assertTrue(leaf1.smiles == leaf2.smiles == leaf3.smiles)
 
     def testMorphing(self):
         def callback(morph):

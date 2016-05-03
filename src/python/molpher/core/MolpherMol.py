@@ -2,6 +2,7 @@ import warnings
 
 import molpher.swig_wrappers.core as wrappers
 import molpher.core.ExplorationTree
+from molpher.core._utils import shorten_repr
 
 
 class MolpherMol(wrappers.MolpherMol):
@@ -34,10 +35,10 @@ class MolpherMol(wrappers.MolpherMol):
             raise AttributeError('Invalid argumetns supplied to the constructor.')
 
     def __repr__(self):
-        vals = super(MolpherMol, self).__repr__().split(';')
-        first = vals[0]
-        second = vals[1].split(' at ')[1].strip('>').strip()
-        return first + ' at ' + second
+        return shorten_repr(MolpherMol, self)
+
+    def __lt__(self, other):
+        return self.smiles < other.smiles
 
     def copy(self):
         """
