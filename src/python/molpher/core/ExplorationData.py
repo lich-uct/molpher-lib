@@ -20,7 +20,10 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
         then everything in ``**kwargs`` will be applied *after*
         the instance in ``other`` is wrapped.
 
-    This class contains all the information needed to initialize
+    This a specialized version of the `molpher.swig_wrappers.core.ExplorationData` proxy class.
+    It implements some additional functionality for ease of use from Python.
+
+    It contains all the information needed to initialize
     an :class:`~molpher.core.ExplorationTree.ExplorationTree` instance.
     Additionally, any tree can be transformed into an instance of this class
     by calling the :meth:`~molpher.core.ExplorationTree.ExplorationTree.asData` method.
@@ -49,6 +52,8 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
     of the base class:
 
     .. include:: param_table.rst
+
+    .. seealso:: `molpher.swig_wrappers.core.ExplorationData`
 
     """
 

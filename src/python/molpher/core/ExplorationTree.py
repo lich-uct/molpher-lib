@@ -37,7 +37,7 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
     This a specialized version of the `molpher.swig_wrappers.core.ExplorationTree` proxy class.
     It implements some additional functionality for ease of use from Python.
 
-    ..  note:: This class has no constructor defined. Use the :meth:`create`
+    ..  attention:: This class has no constructor defined. Use the :meth:`create`
             factory method to obtain instances of this class.
 
     .. seealso:: `molpher.swig_wrappers.core.ExplorationTree`

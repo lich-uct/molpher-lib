@@ -5,6 +5,18 @@ import molpher.core.ExplorationTree
 
 
 class MolpherMol(wrappers.MolpherMol):
+    """
+    :param smiles: smiles of the molecule that is to be created
+    :type smiles: `str`
+    :param other: another instance, the new instance will be its copy (tree ownership is not transferred onto the copy)
+    :type other: `molpher.swig_wrappers.core.MolpherMol` or its derived class
+
+    This a specialized version of the `molpher.swig_wrappers.core.MolpherMol` proxy class.
+    It implements some additional functionality for ease of use from Python.
+
+    .. seealso:: `molpher.swig_wrappers.core.MolpherMol`
+
+    """
 
     def __init__(self, smiles=None, other=None):
         if smiles and other:
@@ -28,12 +40,29 @@ class MolpherMol(wrappers.MolpherMol):
         return first + ' at ' + second
 
     def copy(self):
+        """
+        Returns a copy of this instance.
+        If this instance has a `tree` assigned,
+        the returned will have `None` instead.
+
+        :return: a copy of this instance
+        :rtype:
+        """
         copy = super(MolpherMol, self).copy()
         copy.__class__ = MolpherMol
         return copy
 
     @property
     def tree(self):
+        """
+        A reference to the tree this instance is currently in.
+        If the molecule is not present in any tree,
+        this value is `None`.
+
+        :return: reference to the tree this instance is currently in
+        :rtype: :class:`~molpher.core.ExplorationTree.ExplorationTree` or `None`
+        """
+
         ret = self.getTree()
         if ret:
             ret.__class__ = molpher.core.ExplorationTree
@@ -41,6 +70,11 @@ class MolpherMol(wrappers.MolpherMol):
 
     @property
     def smiles(self):
+        """
+        :return: canonical SMILES string of this molecule
+        :rtype: `str`
+        """
+
         return self.getSMILES()
 
     @smiles.setter
@@ -49,18 +83,46 @@ class MolpherMol(wrappers.MolpherMol):
 
     @property
     def parent_smiles(self):
-        return self.getParentSMILES()
+        """
+        Canonical SMILES string of the parent molecule
+        in the tree.
 
-    @parent_smiles.setter
-    def parent_smiles(self, val):
-        self.setParentSMILES(val)
+        Can be an empty `str`, if the molecule is a
+        root of the tree or is not associated with any.
+
+        :return: canonical SMILES string of the parent molecule in the tree
+        :rtype: `str`
+        """
+
+        return self.getParentSMILES()
 
     @property
     def parent_operator(self):
+        """
+        The name of the :term:`chemical operator <chemical operators>`
+        :term:`selector <selectors>` that lead to the creation of this
+        molecule.
+
+        :return: name of the parent chemical operator
+        :rtype: `str`
+        """
+
         return wrappers.ChemOperShortDesc(self.getParentOper())
 
     @property
     def dist_to_target(self):
+        """
+        The value of the objective function.
+        In the original implementation,
+        this is the structural distance to the target
+        molecule using a `similarity measure`.
+
+        This value can be written into.
+
+        :return: value of the objective function
+        :rtype: `float`
+        """
+
         return self.getDistToTarget()
 
     @dist_to_target.setter
@@ -69,6 +131,19 @@ class MolpherMol(wrappers.MolpherMol):
 
     @property
     def sascore(self):
+        """
+
+        The synthetic feasibility score of the molecule according
+        to Ertl.
+
+        .. todo:: add reference
+
+        This value can be written into.
+
+        :return: synthetic feasibility score
+        :rtype: `float`
+        """
+
         return self.getSAScore()
 
     @sascore.setter
@@ -77,8 +152,22 @@ class MolpherMol(wrappers.MolpherMol):
 
     @property
     def historic_descendents(self):
+        """
+        Canonical SMILES strings of all molecules derived from
+        this compound.
+
+        :return:
+        :rtype: `str`
+        """
         return self.getHistoricDescendants()
 
-    @historic_descendents.setter
-    def historic_descendents(self, val):
-        self.setHistoricDescendants(val)
+    @property
+    def descendents(self):
+        """
+        Canonical SMILES strings of all molecules derived from
+        this compound that are currently present in the tree.
+
+        :return:
+        :rtype: `str`
+        """
+        return self.getDescendants()

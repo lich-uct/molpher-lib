@@ -24,8 +24,8 @@ class TestPythonAPI(unittest.TestCase):
         mol = MolpherMol(self.test_target)
         mol.smiles = 'CCC'
         self.assertTrue('CCC')
-        mol.historic_descendents = ('CCC', 'CCCC')
-        self.assertEqual(('CCC', 'CCCC'), mol.historic_descendents)
+        # mol.historic_descendents = ('CCC', 'CCCC')
+        # self.assertEqual(('CCC', 'CCCC'), mol.historic_descendents)
 
         copy = mol.copy()
         copy.sascore = 0.54
@@ -203,3 +203,10 @@ class TestPythonAPI(unittest.TestCase):
         self.assertFalse(tree.hasMol(child))
         self.assertEqual(None, child.tree)
         self.assertEqual(parent, child.getParentSMILES())
+
+        # check descendents
+        def check_descs(morph):
+            for desc_smiles in morph.descendents:
+                desc = tree.fetchMol(desc_smiles)
+                self.assertTrue(desc.tree)
+        tree.traverse(check_descs)
