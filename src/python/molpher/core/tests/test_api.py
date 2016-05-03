@@ -76,8 +76,8 @@ class TestPythonAPI(unittest.TestCase):
 
 
         self.assertRaises(AttributeError, lambda : ExplorationTree())
-        tree_from_dict = ExplorationTree.create(params=params_dict)
-        tree_from_params = ExplorationTree.create(params=params)
+        tree_from_dict = ExplorationTree.create(tree_data=params_dict)
+        tree_from_params = ExplorationTree.create(tree_data=params)
         tree_from_SMILES = ExplorationTree.create(source=mol1, target=mol2)
         def test_tree(tree):
             self.assertEqual(tree.params['source'], mol1)
@@ -183,7 +183,7 @@ class TestPythonAPI(unittest.TestCase):
             def setTree(self, tree):
                 self._tree = tree
 
-        tree = ExplorationTree.create(params={
+        tree = ExplorationTree.create(tree_data={
             'source' : self.test_source
             , 'target' : self.test_target
         })
