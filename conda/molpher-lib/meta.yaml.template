@@ -1,0 +1,22 @@
+package:
+  name: {{ target }}
+  version: {{ version }}
+
+build:
+  number: {{ build_number }}
+  string: {{ build_string }}
+  preserve_egg_dir: True
+  script_env:
+    - BASE_DIR
+
+requirements:
+  build:
+    - {{ python_spec }}
+  run:
+    - {{ python_spec }}
+    - {{ tbb_spec }}
+
+about:
+  license : GPL
+  license_file: {{ license_file }}
+  summary: "Software library based on the program Molpher."
