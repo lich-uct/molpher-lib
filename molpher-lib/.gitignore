@@ -1,7 +1,0 @@
-docs/doxygen/xml
-*.db
-SAScore.dat
-*.egg-info
-*.pyc
-.idea
-snapshot.xml

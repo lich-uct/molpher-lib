@@ -1,5 +1,0 @@
-
-Callbacks
-=========
-
-sth about them
