@@ -1,0 +1,65 @@
+## Project
+build/
+dist/
+libs/
+deps/
+
+## C++
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Generated project make files
+nbproject/private
+nbproject/*.bash
+.dep.inc
+
+# Molpher snapshots
+*.snp
+
+# Python files
+__pycache__
+*.egg-info
+*.pyc
+.idea
+
+# Logfiles
+*.log
+
+# Doxygen output
+doc/doxygen/xml
+
+# DB files
+*.db
+
+# Python package data files
+src/python/molpher/swig_wrappers/*.dat
+
+# test files
+*_snapshot.xml
