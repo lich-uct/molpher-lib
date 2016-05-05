@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; Molpher-lib 0.0.0a3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Molpher-lib 0.0.0a3 documentation" href="index.html"/>
+        <link rel="next" title="Using the library" href="usage/index.html"/>
+        <link rel="prev" title="Molpher-lib: C++/Python Library For Chemical Space Exploration" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0a3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Molpher-lib: C++/Python Library For Chemical Space Exploration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-molpher">What is Molpher?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-molpher-lib">What is Molpher-lib?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage/index.html">Using the library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Molpher-lib</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This section attempts to introduce the uninformed to the main ideas behind the software
+and clarify some terminology used in the documentation. You can freely skip this section,
+if you are already familiar with <a class="reference internal" href="glossary.html#term-molpher"><span class="xref std std-term">Molpher</span></a> and <a class="reference internal" href="glossary.html#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a>.</p>
+<div class="section" id="what-is-molpher">
+<h2>What is Molpher?<a class="headerlink" href="#what-is-molpher" title="Permalink to this headline">¶</a></h2>
+<p>In early stages of any drug discovery endeavor a large library of compounds
+often needs to be screened
+for molecules that have the potential to become a new lead in the project. This
+is usually done in a laboratory setting using a technique called
+<a class="reference external" href="https://en.wikipedia.org/wiki/High-throughput_screening">high-throughput screening (HTS)</a>.
+HTS can be a very effective method, but is still very limiting in the number
+of compounds that can be screened when we consider the incredible vastness of <a class="reference internal" href="glossary.html#term-chemical-space"><span class="xref std std-term">chemical space</span></a>.</p>
+<p><a class="reference internal" href="glossary.html#term-molpher"><span class="xref std std-term">Molpher</span></a> is a tool developed for the purpose
+of finding  novel active compounds for synthesis/purchase and subsequent testing
+in drug discovery projects.
+It is capable of generating a library of potentially active compounds by
+connecting known active molecules
+with a <a class="reference internal" href="glossary.html#term-chemical-space-path"><span class="xref std std-term">chemical space path</span></a>. Just like any path, a <a class="reference internal" href="glossary.html#term-chemical-space-path"><span class="xref std std-term">chemical space path</span></a>
+has a start and a destination. However, in <a class="reference internal" href="glossary.html#term-chemical-space"><span class="xref std std-term">chemical space</span></a> this means
+a <a class="reference internal" href="glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a> and a <a class="reference internal" href="glossary.html#term-7"><span class="xref std std-term">target molecule</span></a>. The path
+is then just a sequence of structures that connect the two (see <a class="reference internal" href="glossary.html#term-chemical-space-path"><span class="xref std std-term">chemical space path</span></a>
+for more details).</p>
+<p>The main motivation to generate such a path is
+that some new interesting compounds might be discovered along the way.
+The ones in the middle of the path are usually structurally different from both
+the source and the target, but at the same time combine
+their structural features, thus, some of them may form a good basis for
+a new drug.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to know more about how the algorithm works, read <a class="reference internal" href="usage/tutorial.html#morphing-algorithm"><span class="std std-ref">The Morphing Algorithm</span></a>
+section of the <a class="reference internal" href="usage/tutorial.html"><span class="doc">tutorial</span></a>.</p>
+</div>
+</div>
+<div class="section" id="what-is-molpher-lib">
+<h2>What is Molpher-lib?<a class="headerlink" href="#what-is-molpher-lib" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="glossary.html#term-molpher"><span class="xref std std-term">Molpher</span></a> itself is aimed at users that might use it
+in their day to day practice to generate focused virtual libraries of compounds.
+However, there are many
+possible implementations of the search and many aspects of the
+exploration could be parametrized.
+Thus, came the motivation to develop a more flexible
+and extensible solution that would give everyone an opportunity
+to easily implement their own ideas or just easily integrate <a class="reference internal" href="glossary.html#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a>
+in their existing solutions.</p>
+<p>To make it as easy as possible to get up to speed with the library,
+we have prepared a <a class="reference internal" href="usage/tutorial.html"><span class="doc">tutorial</span></a> in the <a class="reference internal" href="usage/index.html"><span class="doc">next section</span></a>
+which contains information on how to install and use the library as well as
+a few example implementations of exploration algorithms using the library.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="usage/index.html" class="btn btn-neutral float-right" title="Using the library" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Molpher-lib: C++/Python Library For Chemical Space Exploration" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.0a3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

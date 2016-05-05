@@ -1,0 +1,712 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>molpher.core.ExplorationData &mdash; Molpher-lib 0.0.0a3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Molpher-lib 0.0.0a3 documentation" href="../../../index.html"/>
+        <link rel="up" title="molpher" href="../../molpher.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0a3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Molpher-lib: C++/Python Library For Chemical Space Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Molpher-lib</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../../molpher.html">molpher</a> &raquo;</li>
+      
+    <li>molpher.core.ExplorationData</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for molpher.core.ExplorationData</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module houses the :class:`ExplorationData` class:</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">molpher</span>
+<span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">selectors</span>
+<span class="kn">from</span> <span class="nn">molpher.core.MolpherMol</span> <span class="kn">import</span> <span class="n">MolpherMol</span>
+<span class="kn">from</span> <span class="nn">molpher.core._utils</span> <span class="kn">import</span> <span class="n">shorten_repr</span>
+<span class="kn">from</span> <span class="nn">molpher.swig_wrappers.core</span> <span class="kn">import</span> <span class="n">FingerprintShortDesc</span><span class="p">,</span> <span class="n">SimCoeffShortDesc</span><span class="p">,</span> <span class="n">ChemOperShortDesc</span>
+
+
+<div class="viewcode-block" id="ExplorationData"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData">[docs]</a><span class="k">class</span> <span class="nc">ExplorationData</span><span class="p">(</span><span class="n">molpher</span><span class="o">.</span><span class="n">swig_wrappers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">ExplorationData</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param other: an instance of `molpher.swig_wrappers.core.ExplorationData` to wrap with this class</span>
+<span class="sd">    :type other: `molpher.swig_wrappers.core.ExplorationData`</span>
+<span class="sd">    :param \*\*kwargs: the morphing parameters to be set (can be incomplete)</span>
+<span class="sd">    :type \*\*kwargs: `dict`</span>
+
+<span class="sd">    .. note:: If both ``other`` and ``**kwargs`` are specified,</span>
+<span class="sd">        then everything in ``**kwargs`` will be applied *after*</span>
+<span class="sd">        the instance in ``other`` is wrapped.</span>
+
+<span class="sd">    This a specialized version of the `molpher.swig_wrappers.core.ExplorationData` proxy class.</span>
+<span class="sd">    It implements some additional functionality for ease of use from Python.</span>
+
+<span class="sd">    It contains all the information needed to initialize</span>
+<span class="sd">    an :class:`~molpher.core.ExplorationTree.ExplorationTree` instance.</span>
+<span class="sd">    Additionally, any tree can be transformed into an instance of this class</span>
+<span class="sd">    by calling the :meth:`~molpher.core.ExplorationTree.ExplorationTree.asData` method.</span>
+
+<span class="sd">    One advantage of this class over the :class:`~molpher.core.ExplorationTree.ExplorationTree`</span>
+<span class="sd">    is that it allows direct modifications of</span>
+<span class="sd">    the exploration tree structure. This is especially useful when we want to create</span>
+<span class="sd">    an initial tree topology before the exploration itself.</span>
+
+<span class="sd">    ..  warning:: Note that current implementations of the modification</span>
+<span class="sd">            methods is experimental and may result</span>
+<span class="sd">            in undefined behaviour. Therefore, it is only recommended</span>
+<span class="sd">            to use it as a means of setting morphing parameters</span>
+<span class="sd">            and spawning tree instances or spawning new trees</span>
+<span class="sd">            from existing ones without the need to create a snapshot file.</span>
+
+<span class="sd">    Because it inherits from `molpher.swig_wrappers.core.ExplorationData`,</span>
+<span class="sd">    it provides the same interface as the corresponding C++ class,</span>
+<span class="sd">    but exposes the morphing parameters as object attributes for ease of use.</span>
+<span class="sd">    These attributes follow a slightly different name convention than the corresponding getters</span>
+<span class="sd">    and setters of the parent class.</span>
+<span class="sd">    Their names are derived from the names of the parameters used in the :term:`XML template` files</span>
+<span class="sd">    that are more self-explanatory and easier to remember and type.</span>
+<span class="sd">    The table below gives an overview of all available parameters,</span>
+<span class="sd">    their default values and short descriptions and the respective getters and setters</span>
+<span class="sd">    of the base class:</span>
+
+<span class="sd">    .. include:: param_table.rst</span>
+
+<span class="sd">    .. seealso:: `molpher.swig_wrappers.core.ExplorationData`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ExplorationData.UnknownParameterException"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.UnknownParameterException">[docs]</a>    <span class="k">class</span> <span class="nc">UnknownParameterException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Indicates that an unknown parameter was supplied.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">pass</span></div>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;source&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setSource</span>
+            <span class="p">,</span> <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setTarget</span>
+            <span class="p">,</span> <span class="s1">&#39;operators&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setChemicalOperators</span>
+            <span class="p">,</span> <span class="s1">&#39;fingerprint&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setFingerprint</span>
+            <span class="p">,</span> <span class="s1">&#39;similarity&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setSimilarityCoefficient</span>
+            <span class="p">,</span> <span class="s1">&#39;weight_min&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setMinAcceptableMolecularWeight</span>
+            <span class="p">,</span> <span class="s1">&#39;weight_max&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setMaxAcceptableMolecularWeight</span>
+            <span class="p">,</span> <span class="s1">&#39;accept_min&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setCntCandidatesToKeep</span>
+            <span class="p">,</span> <span class="s1">&#39;accept_max&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setCntCandidatesToKeepMax</span>
+            <span class="p">,</span> <span class="s1">&#39;far_produce&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setCntMorphs</span>
+            <span class="p">,</span> <span class="s1">&#39;close_produce&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setCntMorphsInDepth</span>
+            <span class="p">,</span> <span class="s1">&#39;far_close_threshold&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setDistToTargetDepthSwitch</span>
+            <span class="p">,</span> <span class="s1">&#39;max_morphs_total&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setCntMaxMorphs</span>
+            <span class="p">,</span> <span class="s1">&#39;non_producing_survive&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setItThreshold</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;source&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSource</span>
+            <span class="p">,</span> <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getTarget</span>
+            <span class="p">,</span> <span class="s1">&#39;operators&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getChemicalOperators</span>
+            <span class="p">,</span> <span class="s1">&#39;fingerprint&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getFingerprint</span>
+            <span class="p">,</span> <span class="s1">&#39;similarity&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSimilarityCoefficient</span>
+            <span class="p">,</span> <span class="s1">&#39;weight_min&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getMinAcceptableMolecularWeight</span>
+            <span class="p">,</span> <span class="s1">&#39;weight_max&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getMaxAcceptableMolecularWeight</span>
+            <span class="p">,</span> <span class="s1">&#39;accept_min&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCntCandidatesToKeep</span>
+            <span class="p">,</span> <span class="s1">&#39;accept_max&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCntCandidatesToKeepMax</span>
+            <span class="p">,</span> <span class="s1">&#39;far_produce&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCntMorphs</span>
+            <span class="p">,</span> <span class="s1">&#39;close_produce&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCntMorphsInDepth</span>
+            <span class="p">,</span> <span class="s1">&#39;far_close_threshold&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDistToTargetDepthSwitch</span>
+            <span class="p">,</span> <span class="s1">&#39;max_morphs_total&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCntMaxMorphs</span>
+            <span class="p">,</span> <span class="s1">&#39;non_producing_survive&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getItThreshold</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">other</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">this</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">this</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_instance</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">shorten_repr</span><span class="p">(</span><span class="n">ExplorationData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_options</span><span class="p">(</span><span class="n">options</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A prepossessing step to the :meth:`_update_instance` method.</span>
+<span class="sd">        Transforms some of the values into values acceptable by</span>
+<span class="sd">        the setter methods of the base class</span>
+
+<span class="sd">        :param options: morphing parameters supplied by caller</span>
+<span class="sd">        :type options: `dict`</span>
+<span class="sd">        :return: a transformed dictionary of options</span>
+<span class="sd">        :rtype: `dict`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO: add some error checking</span>
+
+        <span class="n">check</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span> <span class="p">:</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">==</span> <span class="nb">str</span>
+        <span class="n">check_iterable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span> <span class="p">:</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">options</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">options</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">):</span>
+                <span class="n">options</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">):</span>
+                <span class="n">options</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">check_iterable</span><span class="p">(</span><span class="s1">&#39;operators&#39;</span><span class="p">):</span>
+                <span class="n">options</span><span class="p">[</span><span class="s1">&#39;operators&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="n">operator</span><span class="p">)</span> <span class="k">for</span> <span class="n">operator</span> <span class="ow">in</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;operators&#39;</span><span class="p">]</span> <span class="p">)</span>
+            <span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s1">&#39;fingerprint&#39;</span><span class="p">):</span>
+                <span class="n">options</span><span class="p">[</span><span class="s1">&#39;fingerprint&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;fingerprint&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s1">&#39;similarity&#39;</span><span class="p">):</span>
+                <span class="n">options</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">options</span>
+
+
+    <span class="k">def</span> <span class="nf">_update_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parses a `dict` of :term:`morphing parameters`</span>
+<span class="sd">        and updates this instance accordingly.</span>
+
+<span class="sd">        :param options: morphing parameters to set</span>
+<span class="sd">        :type options: `dict`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_options</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">options</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">UnknownParameterException</span><span class="p">(</span><span class="s1">&#39;Unknown option: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">param_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Holds a dictionary of current :term:`morphing parameters` values for this instance.</span>
+<span class="sd">        A new dictionary of parameters can be assigned to change them.</span>
+
+<span class="sd">        :return: a dictionary of parameters</span>
+<span class="sd">        :rtype: `dict`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;source&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]()</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">()</span>
+            <span class="p">,</span> <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]()</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">()</span>
+            <span class="p">,</span> <span class="s1">&#39;operators&#39;</span> <span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span> <span class="n">ChemOperShortDesc</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span> <span class="k">for</span> <span class="n">operator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;operators&#39;</span><span class="p">]()</span> <span class="p">)</span>
+            <span class="p">,</span> <span class="s1">&#39;fingerprint&#39;</span> <span class="p">:</span> <span class="n">FingerprintShortDesc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;fingerprint&#39;</span><span class="p">]())</span>
+            <span class="p">,</span> <span class="s1">&#39;similarity&#39;</span> <span class="p">:</span> <span class="n">SimCoeffShortDesc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]())</span>
+            <span class="p">,</span> <span class="s1">&#39;weight_min&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;weight_min&#39;</span><span class="p">]()</span>
+            <span class="p">,</span> <span class="s1">&#39;weight_max&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;weight_max&#39;</span><span class="p">]()</span>
+            <span class="p">,</span> <span class="s1">&#39;accept_min&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;accept_min&#39;</span><span class="p">]()</span>
+            <span class="p">,</span> <span class="s1">&#39;accept_max&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;accept_max&#39;</span><span class="p">]()</span>
+            <span class="p">,</span> <span class="s1">&#39;far_produce&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;far_produce&#39;</span><span class="p">]()</span>
+            <span class="p">,</span> <span class="s1">&#39;close_produce&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;close_produce&#39;</span><span class="p">]()</span>
+            <span class="p">,</span> <span class="s1">&#39;far_close_threshold&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;far_close_threshold&#39;</span><span class="p">]()</span>
+            <span class="p">,</span> <span class="s1">&#39;max_morphs_total&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;max_morphs_total&#39;</span><span class="p">]()</span>
+            <span class="p">,</span> <span class="s1">&#39;non_producing_survive&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;non_producing_survive&#39;</span><span class="p">]()</span>
+        <span class="p">}</span>
+
+    <span class="nd">@param_dict.setter</span>
+    <span class="k">def</span> <span class="nf">param_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_instance</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shows if this instance represents valid parameters.</span>
+<span class="sd">        The instance becomes invalid, if there are any bad or nonsensical parameter values,</span>
+<span class="sd">        values are missing (such as undefined :term:`chemical operators`) or the tree structure</span>
+<span class="sd">        is for any reason unacceptable.</span>
+
+<span class="sd">        :return: `True` for a valid instance, `False` for invalid</span>
+<span class="sd">        :rtype: `bool`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The :term:`source molecule`. All morphs in an :term:`exploration tree` are derived from this</span>
+<span class="sd">        molecule during morphing. This is the root of the created tree.</span>
+
+<span class="sd">        Can be set using a :py:class:`~molpher.core.MolpherMol.MolpherMol` instance</span>
+<span class="sd">        or a SMILES string of the new :term:`source molecule`.</span>
+
+<span class="sd">        :return: current :term:`source molecule`</span>
+<span class="sd">        :rtype: :py:class:`~molpher.core.MolpherMol.MolpherMol`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">other</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]())</span>
+
+    <span class="nd">@source.setter</span>
+    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">](</span><span class="n">mol</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">MolpherMol</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid input. Need &#39;str&#39; or &#39;MolpherMol&#39;...&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The :term:`target molecule`. This is the molecule being searched for during morphing.</span>
+<span class="sd">        In the original version of the algorithm the goal is to</span>
+<span class="sd">        maximize similarity (minimize structural distance) of the generated morphs and this molecule.</span>
+
+<span class="sd">        Can be set using a :py:class:`~molpher.core.MolpherMol.MolpherMol` instance</span>
+<span class="sd">        or a SMILES string of the new :term:`target molecule`.</span>
+
+<span class="sd">        :return: current :term:`target molecule`</span>
+<span class="sd">        :rtype: :py:class:`~molpher.core.MolpherMol.MolpherMol`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">other</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]())</span>
+
+    <span class="nd">@target.setter</span>
+    <span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">](</span><span class="n">mol</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">MolpherMol</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid input. Need &#39;str&#39; or &#39;MolpherMol&#39;...&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">operators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A set of :term:`chemical operators` to use. These define how the input molecule and its descendants</span>
+<span class="sd">        can be manipulated during morphing.</span>
+
+<span class="sd">        Can be set using an iterable of the appropriate :term:`selectors` or their names as `str`.</span>
+<span class="sd">        Any duplicates are automatically removed</span>
+
+<span class="sd">        .. include:: oper_table.rst</span>
+
+<span class="sd">        :return: names of the current :term:`chemical operators`</span>
+<span class="sd">        :rtype: `tuple` of `str`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span> <span class="n">ChemOperShortDesc</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span> <span class="k">for</span> <span class="n">operator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;operators&#39;</span><span class="p">]()</span> <span class="p">)</span>
+
+    <span class="nd">@operators.setter</span>
+    <span class="k">def</span> <span class="nf">operators</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">chosen_selectors</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">selector</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">chosen_selectors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="n">selector</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># FIXME: check if the correct selectors were supplied</span>
+                <span class="n">chosen_selectors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;operators&#39;</span><span class="p">](</span><span class="nb">tuple</span><span class="p">(</span><span class="n">chosen_selectors</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fingerprint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an identifier of the currently used :term:`molecular fingerprint`.</span>
+
+<span class="sd">        .. include:: fing_table.rst</span>
+
+<span class="sd">        :return: :term:`molecular fingerprint` identifier</span>
+<span class="sd">        :rtype: `str`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">FingerprintShortDesc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;fingerprint&#39;</span><span class="p">]())</span>
+
+    <span class="nd">@fingerprint.setter</span>
+    <span class="k">def</span> <span class="nf">fingerprint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;fingerprint&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">similarity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an identifier of the currently used :term:`similarity measure`.</span>
+
+<span class="sd">        .. include:: sim_table.rst</span>
+
+<span class="sd">        :return: :term:`similarity measure` identifier</span>
+<span class="sd">        :rtype: `str`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">SimCoeffShortDesc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]())</span>
+
+    <span class="nd">@similarity.setter</span>
+    <span class="k">def</span> <span class="nf">similarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">selectors</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">weight_min</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If `FilterMorphsOper.WEIGHT` filter is used on an :term:`exploration tree`,</span>
+<span class="sd">        this will be the minimum weight</span>
+<span class="sd">        of the :term:`candidate morphs` accepted during a filtering procedure.</span>
+
+<span class="sd">        .. seealso:: `ExplorationTree.filterMorphs()`</span>
+
+<span class="sd">        :return: minimum acceptable weight during filtering</span>
+<span class="sd">        :rtype: `float`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;weight_min&#39;</span><span class="p">]()</span>
+
+    <span class="nd">@weight_min.setter</span>
+    <span class="k">def</span> <span class="nf">weight_min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;weight_min&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">weight_max</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If `FilterMorphsOper.WEIGHT` filter is used on an :term:`exploration tree`,</span>
+<span class="sd">        this will be the maximum weight</span>
+<span class="sd">        of the :term:`candidate morphs` accepted during a filtering procedure.</span>
+
+<span class="sd">        .. seealso:: `ExplorationTree.filterMorphs()`</span>
+
+<span class="sd">        :return: maximum acceptable weight during filtering</span>
+<span class="sd">        :rtype: `float`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;weight_max&#39;</span><span class="p">]()</span>
+
+    <span class="nd">@weight_max.setter</span>
+    <span class="k">def</span> <span class="nf">weight_max</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;weight_max&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">accept_min</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If `FilterMorphsOper.PROBABILITY` is used during filtering, this is the number of morphs</span>
+<span class="sd">        accepted with 100% probability.</span>
+
+<span class="sd">        .. seealso:: `ExplorationTree.filterMorphs()`</span>
+
+<span class="sd">        :return: minimum number of candidates accepted during probability filtering</span>
+<span class="sd">        :rtype: `int`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;accept_min&#39;</span><span class="p">]()</span>
+
+    <span class="nd">@accept_min.setter</span>
+    <span class="k">def</span> <span class="nf">accept_min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;accept_min&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">accept_max</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The maximum number of morphs allowed to be connected to the tree upon one call to `extend()`.</span>
+
+<span class="sd">        If more than `accept_max` morphs with `True` in the appropriate position of `candidates_mask`</span>
+<span class="sd">        are present in `candidates` and</span>
+<span class="sd">        `extend()` is called, only first `accept_max` morphs from `candidates` will</span>
+<span class="sd">        be connected to the tree and the rest will be discarded.</span>
+
+<span class="sd">        .. seealso:: `ExplorationTree.extend()`</span>
+
+<span class="sd">        :return: maximum number of candidates accepted upon `extend()`</span>
+<span class="sd">        :rtype: `int`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;accept_max&#39;</span><span class="p">]()</span>
+
+    <span class="nd">@accept_max.setter</span>
+    <span class="k">def</span> <span class="nf">accept_max</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;accept_max&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">far_produce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The maximum number of morphs generated from one leaf when the leaf of the tree currently being</span>
+<span class="sd">        processed with `generateMorphs()` lies more than `far_close_threshold` from</span>
+<span class="sd">        the :term:`target molecule`.</span>
+
+<span class="sd">        .. seealso:: `ExplorationTree.generateMorphs()`</span>
+
+<span class="sd">        :return: maximum number of morphs to produce with a `generateMorphs()` call</span>
+<span class="sd">        :rtype: `int`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;far_produce&#39;</span><span class="p">]()</span>
+
+    <span class="nd">@far_produce.setter</span>
+    <span class="k">def</span> <span class="nf">far_produce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;far_produce&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">close_produce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This is the maximum number of morphs generated from one leaf when the leaf of the tree currently being</span>
+<span class="sd">        processed with `generateMorphs()` lies less than `far_close_threshold` from</span>
+<span class="sd">        the :term:`target molecule`.</span>
+
+<span class="sd">        .. seealso:: `ExplorationTree.generateMorphs()`</span>
+
+<span class="sd">        :return: maximum number of morphs to produce with an `generateMorphs()` call</span>
+<span class="sd">        :rtype: `int`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;close_produce&#39;</span><span class="p">]()</span>
+
+    <span class="nd">@close_produce.setter</span>
+    <span class="k">def</span> <span class="nf">close_produce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;close_produce&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">far_close_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This distance threshold controls the number of :term:`morphs &lt;morph&gt;` generated</span>
+<span class="sd">        with `generateMorphs()` for molecules closer</span>
+<span class="sd">        or further from the :term:`target molecule`. :term:`Morphs &lt;morph&gt;` that</span>
+<span class="sd">        have distance from the :term:`target molecule` lower than `far_close_threshold`</span>
+<span class="sd">        are considered to be close.</span>
+
+<span class="sd">        .. seealso:: `far_produce` and `close_produce`</span>
+
+<span class="sd">        :return: distance threshold for `far_produce` and `close_produce`</span>
+<span class="sd">        :rtype: `float`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;far_close_threshold&#39;</span><span class="p">]()</span>
+
+    <span class="nd">@far_close_threshold.setter</span>
+    <span class="k">def</span> <span class="nf">far_close_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;far_close_threshold&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">max_morphs_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This value is the maximum number of morphs allowed to be generated from one molecule.</span>
+<span class="sd">        If the number of generated morphs exceeds this number, all additional morphs can be filtered</span>
+<span class="sd">        out using the `FilterMorphsOper.MAX_DERIVATIONS` filter.</span>
+
+<span class="sd">        It is also the maximum number of &#39;bad morphs&#39; generated from one molecule. If a molecule has more than `max_morphs_total`</span>
+<span class="sd">        descendants and none of them are closer to the :term:`target molecule` than the molecule in question, then</span>
+<span class="sd">        the molecule is permanently removed from the tree with all of its descendants when `prune()`</span>
+<span class="sd">        is called.</span>
+
+<span class="sd">        .. seealso:: `ExplorationTree.filterMorphs()` and `ExplorationTree.prune()`</span>
+
+<span class="sd">        :return: maximum number of &#39;bad morphs&#39; before pruning</span>
+<span class="sd">        :rtype: `int`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;max_morphs_total&#39;</span><span class="p">]()</span>
+
+    <span class="nd">@max_morphs_total.setter</span>
+    <span class="k">def</span> <span class="nf">max_morphs_total</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;max_morphs_total&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">non_producing_survive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A molecule that has not produced any morphs closer to the :term:`target molecule` than itself</span>
+<span class="sd">        (a :term:`non-producing molecule`) for `non_producing_survive` number of calls to `extend()`</span>
+<span class="sd">        will have its descendants removed during the next `prune()` call.</span>
+
+<span class="sd">        .. seealso:: `MolpherMol.getItersWithoutDistImprovement()`</span>
+
+<span class="sd">        :return: number of calls  to `generateMorphs()` before descendants of</span>
+<span class="sd">            a :term:`non-producing molecule`</span>
+<span class="sd">            are removed from the tree</span>
+<span class="sd">        :rtype: `int`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;non_producing_survive&#39;</span><span class="p">]()</span>
+
+    <span class="nd">@non_producing_survive.setter</span>
+    <span class="k">def</span> <span class="nf">non_producing_survive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SETTERS_MAP</span><span class="p">[</span><span class="s1">&#39;non_producing_survive&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ExplorationData.load"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">snapshot</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A factory method to create an instance of :class:`ExplorationData`</span>
+<span class="sd">        from a :term:`tree snapshot`.</span>
+
+<span class="sd">        :param snapshot: path to the snapshot file</span>
+<span class="sd">        :type snapshot: `str`</span>
+<span class="sd">        :return: new instance representing the data loaded from the snapshot file</span>
+<span class="sd">        :rtype: :class:`ExplorationData`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationData</span><span class="p">,</span> <span class="n">ExplorationData</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">snapshot</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ExplorationData</span><span class="p">(</span><span class="n">other</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.0.0a3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

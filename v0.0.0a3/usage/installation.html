@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Installing the Library &mdash; Molpher-lib 0.0.0a3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Molpher-lib 0.0.0a3 documentation" href="../index.html"/>
+        <link rel="up" title="Using the library" href="index.html"/>
+        <link rel="next" title="2. Tutorial" href="tutorial.html"/>
+        <link rel="prev" title="Using the library" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0a3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Molpher-lib: C++/Python Library For Chemical Space Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Using the library</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-with-anaconda">1.1. Installation with Anaconda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-and-installing-from-source">1.2. Building and Installing from source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">1.2.1. Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-molpher-and-its-dependencies">1.2.2. Building Molpher and Its Dependencies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">2. Tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Molpher-lib</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Using the library</a> &raquo;</li>
+      
+    <li>1. Installing the Library</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-the-library">
+<h1>1. Installing the Library<a class="headerlink" href="#installing-the-library" title="Permalink to this headline">¶</a></h1>
+<p>Below are two currently available methods of installation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As of yet, the library is only available for the Linux platform and will only run
+on 64-bit systems. However, other platforms will probably be supported in the future as well.</p>
+</div>
+<div class="section" id="installation-with-anaconda">
+<h2>1.1. Installation with Anaconda<a class="headerlink" href="#installation-with-anaconda" title="Permalink to this headline">¶</a></h2>
+<p>This is probably the easiest and preferred way to install the library and the associated Python package.
+All you need to do is just either get the full <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a> distribution
+or its lightweight variant, <a class="reference external" href="http://conda.pydata.org/miniconda.html">Miniconda</a>.</p>
+<p>Anaconda is essentially a Python distribution, package manager and virtual environment in one and makes setting up
+a development environment for your project very easy.
+After installing Anaconda/Miniconda all you need to do is to run the following
+in the terminal:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install -c lich molpher-lib
+</pre></div>
+</div>
+<p>This will automatically download the latest version of the library and the corresponding Python package
+and install in the currently active environment (for more information on environments and the
+<strong class="command">conda</strong> command see <a class="reference external" href="http://conda.pydata.org/docs/test-drive.html">Conda Test Drive</a>
+in the official documentation).</p>
+</div>
+<div class="section" id="building-and-installing-from-source">
+<h2>1.2. Building and Installing from source<a class="headerlink" href="#building-and-installing-from-source" title="Permalink to this headline">¶</a></h2>
+<p>If you are a developer and want to build the most recent version from source,
+you will need build everything from scratch. This section
+describes how to do that on the Linux platform
+and hints at possible problems one might encounter. If you want to build the library on
+a different platform, this section might provide useful information as well.</p>
+<div class="section" id="prerequisites">
+<h3>1.2.1. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>Before you start building, there are a few prerequisites that need to be satisfied on your system:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>build-essential</em> &#8211; You will need this package to be able to build the software. It contains a compiler and other tools important for the build.</li>
+<li><em>swig</em> &#8211; Used to generate the Python wrapping code (at least version 3.0 or later).</li>
+<li><em>bison</em> and <em>flex</em> &#8211; Required by the rdkit toolkit.</li>
+<li><em>setuptools</em> and <em>pip</em> &#8211; If you want to use <em>pip</em> to install the Python package, you will need this to be installed in your Python distribution.</li>
+<li><em>python{version}-dev</em> &#8211; You will need this package in order to build the Python bindings for the particular Python <em>version</em>.</li>
+</ul>
+</div></blockquote>
+<p>When those requirements are satisfied you can clone the source code from the repository:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://<span class="o">{</span>username<span class="o">}</span>@bitbucket.org/Krwemil/molpher-lib.git <span class="c1"># (replace {username} with your Bitbucket username)</span>
+</pre></div>
+</div>
+<p>and start building.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The repository is currently private and you will need the authorization of the author to access it.</p>
+</div>
+</div>
+<div class="section" id="building-molpher-and-its-dependencies">
+<h3>1.2.2. Building Molpher and Its Dependencies<a class="headerlink" href="#building-molpher-and-its-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>First, download the <a class="reference external" href="https://drive.google.com/file/d/0B2rizkCQQcoybFdhOFExaVk5c0U/view?usp=sharing">Molpher Dependency Bundle</a>
+and extract the contents to a directory called <code class="file docutils literal"><span class="pre">deps/</span></code> of the repository root.
+This bundle contains all the source code and binaries of the dependencies
+that you will need to build and use the library on the Linux platform.</p>
+<p>When it&#8217;s done, just run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>make <span class="nv">CONF</span><span class="o">=</span>Release_Linux_amd64
+</pre></div>
+</div>
+<p>to build the release version of the library (no debugging symbols SWIG code is not generated) or:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>make <span class="nv">CONF</span><span class="o">=</span>Debug_SWIG
+</pre></div>
+</div>
+<p>to build the development version with debug symbols and the SWIG code regenerated.</p>
+<p>If you want to build the conda packages as well you can use the following
+python script in the repository root:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python build_conda.py
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">You will need the <em>jinja2</em> Python library to do that.</p>
+</div>
+<p>You can then install the packages by running:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install --use-local molpher-lib
+</pre></div>
+</div>
+<p>You can also install the Python package directly with <em>pip</em>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install .
+</pre></div>
+</div>
+<p>in the repository root. This will install the Python package to the currently active Python distribution
+and links the compiled extension against the compiled library in the <code class="file docutils literal"><span class="pre">lib/</span></code> directory generated
+previously by <strong class="command">make</strong>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="2. Tutorial" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Using the library" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.0a3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
