@@ -62,4 +62,4 @@ doc/doxygen/xml
 src/python/molpher/swig_wrappers/*.dat
 
 # test files
-*_snapshot.xml
+*snapshot.xml

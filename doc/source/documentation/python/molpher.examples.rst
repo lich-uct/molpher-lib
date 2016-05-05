@@ -1,8 +1,8 @@
 molpher.examples package
 ========================
 
-Submodules
-----------
+Modules
+~~~~~~~
 
 molpher.examples.basics module
 ------------------------------
@@ -32,14 +32,6 @@ molpher.examples.classic module
 -------------------------------
 
 .. automodule:: molpher.examples.classic
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: molpher.examples
     :members:
     :undoc-members:
     :show-inheritance:

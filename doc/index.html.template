@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Molpher-lib</title>
+</head>
+<body>
+
+<h1>Molpher-lib</h1>
+
+<h3>
+    Documentation is currently available for
+    the following versions of the library:
+</h3>
+
+<ul>
+    {% for version in versions %}
+        <li>
+            <a href="./{{ version }}/">{{ version }}</a>
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
