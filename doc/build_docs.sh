@@ -11,12 +11,10 @@ doxygen config.cfg
 cd ..
 
 # build the Sphinx documentation
-MOLPHER_PATH=../src/python/
-
-sphinx-apidoc -o source/documentation/python/ $MOLPHER_PATH
 make clean
+MOLPHER_PATH=../src/python/
+sphinx-apidoc -o source/documentation/python/ $MOLPHER_PATH
 make html
-make html # needs to be built twice to number the sections correctly
 
 # upload the docs to GitHub if requested
 
