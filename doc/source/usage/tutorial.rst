@@ -115,7 +115,7 @@ molecule that is created.
 
 ..  attention:: The library also discards any information about the stereocenters in the molecules,
     because the current implementation does not account for stereochemistry and treats all enantiomers
-    as the same molecule. You might want to this in mind when working with the library.
+    as the same molecule. You might want to keep this in mind when working with the library.
 
 ..  note:: Besides the information about our source and target, we can also see that a data file was loaded successfully.
     That means the :mod:`molpher` package was initialized successfully and is ready for use. The data file itself is
