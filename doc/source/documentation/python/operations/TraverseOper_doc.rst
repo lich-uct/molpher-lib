@@ -12,7 +12,7 @@ TraverseOper
     :type \*args: `ExplorationTree`, `TraverseCallback` and :py:class:`~molpher.core.MolpherMol.MolpherMol` (optional)
 
     A :term:`tree operation` that can register a `TraverseCallback` and call its
-    :py:meth:`~TraverseCallback.processMorph` method on every molecule it encounters in the given subtree
+    :py:meth:`~TraverseCallback.__call__` method on every molecule it encounters in the given subtree
     (defined by its root).
 
     .. automethod:: __call__

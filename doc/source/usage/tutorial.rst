@@ -607,13 +607,13 @@ Built-in Operations
 
 A few operations are already defined in the library:
 
-    - :py:class:`~operations.SortMorphsOper.GenerateMorphsOper`
+    - :py:class:`~operations.GenerateMorphsOper.GenerateMorphsOper`
     - :py:class:`~operations.SortMorphsOper.SortMorphsOper`
-    - :py:class:`~operations.SortMorphsOper.FilterMorphsOper`
-    - :py:class:`~operations.SortMorphsOper.FindLeavesOper`
-    - :py:class:`~operations.SortMorphsOper.ExtendTreeOper`
-    - :py:class:`~operations.SortMorphsOper.PruneTreeOper`
-    - :py:class:`~operations.SortMorphsOper.TraverseOper`
+    - :py:class:`~operations.FilterMorphsOper.FilterMorphsOper`
+    - :py:class:`~operations.FindLeavesOper.FindLeavesOper`
+    - :py:class:`~operations.ExtendTreeOper.ExtendTreeOper`
+    - :py:class:`~operations.PruneTreeOper.PruneTreeOper`
+    - :py:class:`~operations.TraverseOper.TraverseOper`
 
 They are all dervied from :class:`~molpher.swig_wrappers.core.TreeOperation` and contain
 the full set of operations performed on a tree in
@@ -621,7 +621,7 @@ the original Molpher algorithm as published in [1]_. Therefore, the original alg
 implemented using those operations.
 
 In the next part of the tutorial, we will pay particular attention to the
-:py:class:`~operations.SortMorphsOper.TraverseOper` operation. It differs
+:py:class:`~operations.TraverseOper.TraverseOper` operation. It differs
 from the others, because it uses a callback function to perform actions on molecules
 in the tree and is, therefore, very useful for debugging and saving exporting various data (see `tree-traversal`).
 
@@ -635,7 +635,7 @@ For more details on the other operations, see the designated pages in the docume
 Traversing the Tree
 ^^^^^^^^^^^^^^^^^^^
 
-A special place among the operations belongs to the :py:class:`~operations.SortMorphsOper.TraverseOper`
+A special place among the operations belongs to the :py:class:`~operations.TraverseOper.TraverseOper`
 class. It does not directly implement a part
 of a morphing algorithm, but serves as a means of traversing molecules in a tree and reading/modifying them
 as needed:
@@ -702,13 +702,13 @@ which is a :class:`~molpher.core.MolpherMol.MolpherMol` instance
 of a molecule in the tree. We need to override this method in our derived class in order to implement our own
 behaviour.
 
-The callback is then associated with a :py:class:`~operations.SortMorphsOper.TraverseOper`
+The callback is then associated with a :py:class:`~operations.TraverseOper.TraverseOper`
 instance, which can be run on a tree as any other
 tree operation. When the operation is run it traverses the tree from the root to the leaves and injects
 every molecule it encounters into our implementation of the
 :meth:`~molpher.swig_wrappers.core.TraverseCallback.__call__` method.
 
-..  note:: We can also pass a SMILES string to the :py:class:`~operations.SortMorphsOper.TraverseOper`
+..  note:: We can also pass a SMILES string to the :py:class:`~operations.TraverseOper.TraverseOper`
         constructor. In that case, a subtree will be traversed
         using the specified molecule as the root of the subtree.
 
