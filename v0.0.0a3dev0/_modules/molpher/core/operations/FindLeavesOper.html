@@ -1,0 +1,216 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>molpher.core.operations.FindLeavesOper &mdash; Molpher-lib 0.0.0a3dev0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Molpher-lib 0.0.0a3dev0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="molpher" href="../../../molpher.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0a3dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">Molpher-lib: C++/Python Library For Chemical Space Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Molpher-lib</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../../../molpher.html">molpher</a> &raquo;</li>
+      
+    <li>molpher.core.operations.FindLeavesOper</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for molpher.core.operations.FindLeavesOper</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">molpher.swig_wrappers.core</span>
+<span class="kn">from</span> <span class="nn">molpher.core.operations.TreeOperation</span> <span class="kn">import</span> <span class="n">TreeOperation</span>
+<span class="kn">from</span> <span class="nn">molpher.core.MolpherMol</span> <span class="kn">import</span> <span class="n">MolpherMol</span>
+
+<div class="viewcode-block" id="FindLeavesOper"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.operations.html#molpher.core.operations.FindLeavesOper.FindLeavesOper">[docs]</a><span class="k">class</span> <span class="nc">FindLeavesOper</span><span class="p">(</span><span class="n">molpher</span><span class="o">.</span><span class="n">swig_wrappers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">FindLeavesOper</span><span class="p">,</span> <span class="n">TreeOperation</span><span class="p">):</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">leaves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The last set of leaves fetched from a tree.</span>
+
+<span class="sd">        :return: fetched leaves</span>
+<span class="sd">        :rtype: `tuple` of :class:`~molpher.core.MolpherMol.MolpherMol` instances</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetchLeaves</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">:</span>
+            <span class="n">mol</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">MolpherMol</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.0.0a3dev0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,456 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>molpher.examples.basics &mdash; Molpher-lib 0.0.0a3dev0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Molpher-lib 0.0.0a3dev0 documentation" href="../../../index.html"/>
+        <link rel="up" title="molpher" href="../../molpher.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0a3dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Molpher-lib: C++/Python Library For Chemical Space Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Molpher-lib</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../../molpher.html">molpher</a> &raquo;</li>
+      
+    <li>molpher.examples.basics</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for molpher.examples.basics</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module with example code from the tutorial.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">ExplorationTree</span> <span class="k">as</span> <span class="n">ETree</span>
+<span class="kn">from</span> <span class="nn">molpher.core.operations</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># TODO: make some of the stuff from this script part of the test suite</span>
+<span class="kn">from</span> <span class="nn">molpher.core.operations.callbacks</span> <span class="kn">import</span> <span class="n">TraverseCallback</span>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../documentation/python/molpher.examples.html#molpher.examples.basics.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">cocaine</span> <span class="o">=</span> <span class="s1">&#39;CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2&#39;</span>
+    <span class="n">procaine</span> <span class="o">=</span> <span class="s1">&#39;O=C(OCCN(CC)CC)c1ccc(N)cc1&#39;</span>
+
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">cocaine</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">procaine</span><span class="p">)</span> <span class="c1"># initialize a tree that searches for a path from cocaine to procaine</span>
+
+    <span class="c1"># print the smiles of the source and target molecule</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Source: &#39;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Target: &#39;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+
+    <span class="c1"># change selected parameters using a dictionary</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;non_producing_survive&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s1">&#39;weight_max&#39;</span> <span class="p">:</span> <span class="mf">500.0</span>
+    <span class="p">}</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">#Generating and Manipulating Morphs&#39;</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">)</span> <span class="c1"># show the current leaves of the tree (only the source so far)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">smiles</span><span class="p">)</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">generateMorphs</span><span class="p">()</span> <span class="c1"># generate new morphs</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">))</span>
+
+    <span class="k">print</span><span class="p">()</span>
+
+    <span class="c1"># get the first morph in the candidate list</span>
+    <span class="n">candidate</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># print distance to target</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+    <span class="c1"># set new distance to target</span>
+    <span class="n">candidate</span><span class="o">.</span><span class="n">dist_to_target</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="c1"># look in the list of candidates and print new distance</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">()</span>
+
+    <span class="c1"># make a copy of our molecule</span>
+    <span class="n">candidate_copy</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="c1"># set a new distance for the copy and verify that the original was not affected</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">candidate_copy</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+    <span class="n">candidate_copy</span><span class="o">.</span><span class="n">dist_to_target</span> <span class="o">=</span> <span class="mf">0.7</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">candidate_copy</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">candidate</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">#Sorting and Filtering Morphs&#39;</span><span class="p">)</span>
+
+    <span class="c1"># sort the candidates in the tree according to their distance from target</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">sortMorphs</span><span class="p">()</span>
+
+    <span class="c1"># show results</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">print</span><span class="p">()</span>
+
+    <span class="c1"># print the current candidates mask (all positions are on by default)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">)</span>
+
+    <span class="c1"># accept only the first three morphs in the sorted list (those with the lowest distance to target)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">]</span>
+    <span class="n">mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">mask</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">mask</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="c1"># save the new mask to the tree</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span> <span class="o">=</span> <span class="n">mask</span>
+
+    <span class="c1"># show results</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="c1"># get accepted molecules only</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">#Extending and Pruning&#39;</span><span class="p">)</span>
+
+    <span class="c1"># get the number of generations before</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">generation_count</span><span class="p">)</span>
+
+    <span class="n">tree</span><span class="o">.</span><span class="n">extend</span><span class="p">()</span> <span class="c1"># connect the accepted morphs to the tree as new leaves</span>
+    <span class="k">print</span><span class="p">(</span>
+        <span class="nb">sorted</span><span class="p">(</span> <span class="c1"># grab the new leaves as a list sorted according to their distance from target</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">leaves</span>
+        <span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span> <span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># get the number of generations after</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">generation_count</span><span class="p">)</span>
+
+    <span class="c1"># check if a path was found</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">path_found</span><span class="p">)</span>
+
+    <span class="c1"># run the pruning operation on the updated tree</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">#Operations&#39;</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">MyFilterMorphs</span><span class="p">(</span><span class="n">TreeOperation</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A custom tree operation that accepts</span>
+<span class="sd">        only the first three morphs</span>
+<span class="sd">        (those with the lowest distance to target).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            This method is called automatically by the tree.</span>
+<span class="sd">            The tree this operation is being run on is accessible</span>
+<span class="sd">            from `self.tree`.</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">]</span>
+            <span class="n">mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">mask</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">mask</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span> <span class="o">=</span> <span class="n">mask</span>
+
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">cocaine</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">procaine</span><span class="p">)</span> <span class="c1"># create the tree</span>
+
+    <span class="c1"># this list of tree operations defines one iteration</span>
+    <span class="n">iteration</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">GenerateMorphsOper</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">SortMorphsOper</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">MyFilterMorphs</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">ExtendTreeOper</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">PruneTreeOper</span><span class="p">()</span>
+    <span class="p">]</span>
+
+    <span class="c1"># apply the operations in the list one by one</span>
+    <span class="k">for</span> <span class="n">oper</span> <span class="ow">in</span> <span class="n">iteration</span><span class="p">:</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">)</span>
+
+    <span class="c1"># observe the results</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">generation_count</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">path_found</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span>
+        <span class="nb">sorted</span><span class="p">(</span> <span class="c1"># grab the new leaves as a list sorted according to their distance from target</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">leaves</span>
+        <span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">#Traversing the Tree&#39;</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">MyCallback</span><span class="p">(</span><span class="n">TraverseCallback</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This callback just prints some information</span>
+<span class="sd">        about the molecules in the tree.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">morph</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Method called on each morph in the tree</span>
+<span class="sd">            -- starting from root to leaves.</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">morph</span><span class="o">.</span><span class="n">getParentSMILES</span><span class="p">():</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;# Root #&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;# Morph #&#39;</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Parent:&#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getParentSMILES</span><span class="p">())</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;SMILES: &#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">())</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Descendents: &#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getDescendants</span><span class="p">())</span>
+
+    <span class="n">callback</span> <span class="o">=</span> <span class="n">MyCallback</span><span class="p">()</span> <span class="c1"># initialize a callback</span>
+    <span class="n">traverse</span> <span class="o">=</span> <span class="n">TraverseOper</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span> <span class="c1"># attach it to a tree traversal operation</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">traverse</span><span class="p">)</span> <span class="c1"># run the operation</span>
+
+    <span class="k">print</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prints some information</span>
+<span class="sd">        about the molecules in the tree.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">morph</span><span class="o">.</span><span class="n">getParentSMILES</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;# Root #&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;# Morph #&#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Parent:&#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getParentSMILES</span><span class="p">())</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;SMILES: &#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">())</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Descendents: &#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getDescendants</span><span class="p">())</span>
+
+    <span class="n">tree</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">process</span><span class="p">)</span> <span class="c1"># use the traverse method to run the callback function</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">#Tree Snapshots&#39;</span><span class="p">)</span>
+
+    <span class="n">template_file</span> <span class="o">=</span> <span class="s1">&#39;cocaine-procaine-template.xml&#39;</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="n">template_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">__file__</span><span class="p">)),</span> <span class="n">template_file</span><span class="p">)</span>
+
+    <span class="c1"># create a tree from the template file</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">template_file</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># apply the tree operations</span>
+    <span class="k">for</span> <span class="n">oper</span> <span class="ow">in</span> <span class="n">iteration</span><span class="p">:</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span>
+        <span class="nb">sorted</span><span class="p">(</span> <span class="c1"># grab the new leaves as a list sorted according to their distance from target</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">leaves</span>
+        <span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># save the tree in a snapshot file</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;snapshot.xml&#39;</span><span class="p">)</span>
+
+    <span class="n">new_tree</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;snapshot.xml&#39;</span><span class="p">)</span> <span class="c1"># create a new tree from the saved snapshot</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">new_tree</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span>
+        <span class="nb">sorted</span><span class="p">(</span> <span class="c1"># grab the leaves in the created tree (these should be the same as those in the original tree)</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">new_tree</span><span class="o">.</span><span class="n">leaves</span>
+        <span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.0.0a3dev0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.1.1.2.1.1.1.2. ExplorationTree &mdash; Molpher-lib 0.0.0a3dev0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Molpher-lib 0.0.0a3dev0 documentation" href="../../index.html"/>
+        <link rel="up" title="1.1.1.2.1.1. molpher.swig_wrappers.core module" href="molpher.swig_wrappers.core.html"/>
+        <link rel="next" title="1.1.1.2.1.1.1.3. ExplorationData" href="ExplorationData_doc.html"/>
+        <link rel="prev" title="1.1.1.2.1.1.1.1. MolpherMol" href="MolpherMol_doc.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0a3dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Molpher-lib: C++/Python Library For Chemical Space Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Source Code Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">1. Python</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="molpher.html">1.1. molpher package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="molpher.html#subpackages">1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="molpher.html#module-molpher">1.1.2. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cplusplus/index.html">2. C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Molpher-lib</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Source Code Documentation</a> &raquo;</li>
+      
+          <li><a href="modules.html">1. Python</a> &raquo;</li>
+      
+          <li><a href="molpher.html">1.1. molpher package</a> &raquo;</li>
+      
+          <li><a href="molpher.swig_wrappers.html">1.1.1.2. molpher.swig_wrappers package</a> &raquo;</li>
+      
+          <li><a href="molpher.swig_wrappers.core.html">1.1.1.2.1.1. molpher.swig_wrappers.core module</a> &raquo;</li>
+      
+    <li>1.1.1.2.1.1.1.2. ExplorationTree</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="explorationtree">
+<h1>1.1.1.2.1.1.1.2. ExplorationTree<a class="headerlink" href="#explorationtree" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="molpher.swig_wrappers.core.ExplorationTree">
+<em class="property">class </em><code class="descclassname">molpher.swig_wrappers.core.</code><code class="descname">ExplorationTree</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an <a class="reference internal" href="../../glossary.html#term-exploration-tree"><code class="xref any std std-term docutils literal"><span class="pre">exploration</span> <span class="pre">tree</span></code></a> and facilitates the most basic interaction with it. It
+is a tight wrapper around the C++ implementation. The <a class="reference internal" href="molpher.core.html#module-molpher.core.ExplorationTree" title="molpher.core.ExplorationTree"><code class="xref any py py-mod docutils literal"><span class="pre">molpher.core.ExplorationTree</span></code></a> class
+extends upon this implementation and provides a more user-friendly version of this class.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">This class does not define a constructor. Use
+the <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree.create" title="molpher.swig_wrappers.core.ExplorationTree.create"><code class="xref any py py-meth docutils literal"><span class="pre">create()</span></code></a> factory method to spawn instances.</p>
+</div>
+<dl class="staticmethod">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.create">
+<em class="property">static </em><code class="descname">create</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree" title="molpher.swig_wrappers.core.ExplorationTree"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a> instance using a supplied <a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationData</span></code></a>,
+<a class="reference internal" href="../../glossary.html#term-tree-snapshot"><span class="xref std std-term">tree snapshot</span></a> or SMILES strings
+of the <a class="reference internal" href="../../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a> and the <a class="reference internal" href="../../glossary.html#term-7"><span class="xref std std-term">target molecule</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationData</span></code></a> or <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a>) &#8211; an <a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationData</span></code></a> instance, path to a <a class="reference internal" href="../../glossary.html#term-tree-snapshot"><span class="xref std std-term">tree snapshot</span></a>
+or a <a class="reference internal" href="../../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a> and a <a class="reference internal" href="../../glossary.html#term-7"><span class="xref std std-term">target molecule</span></a> as two arguments.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree" title="molpher.swig_wrappers.core.ExplorationTree"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a> instance created from the supplied snapshot</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree" title="molpher.swig_wrappers.core.ExplorationTree"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the tree to a snapshot file. The filename should
+end with either <code class="docutils literal"><span class="pre">.xml</span></code> or <code class="docutils literal"><span class="pre">.snp</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a>) &#8211; path to the new snapshot file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.runOperation">
+<code class="descname">runOperation</code><span class="sig-paren">(</span><em>operation</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.runOperation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.runOperation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a <a class="reference internal" href="operations/TreeOperation_doc.html#molpher.swig_wrappers.core.TreeOperation" title="molpher.swig_wrappers.core.TreeOperation"><code class="xref any py py-class docutils literal"><span class="pre">TreeOperation</span></code></a> instance and attempts to run it by attaching itself
+to it and calling its <a class="reference internal" href="operations/TreeOperation_doc.html#molpher.swig_wrappers.core.TreeOperation.__call__" title="molpher.swig_wrappers.core.TreeOperation.__call__"><code class="xref py py-meth docutils literal"><span class="pre">__call__()</span></code></a> method.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="operations/classes.html"><span class="doc">Tree Operation Classes</span></a></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Doing this will also automatically attach the given <a class="reference internal" href="operations/TreeOperation_doc.html#molpher.swig_wrappers.core.TreeOperation" title="molpher.swig_wrappers.core.TreeOperation"><code class="xref any py py-class docutils literal"><span class="pre">TreeOperation</span></code></a> instance to
+this <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree" title="molpher.swig_wrappers.core.ExplorationTree"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a> object.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>operation</strong> (<a class="reference internal" href="operations/TreeOperation_doc.html#molpher.swig_wrappers.core.TreeOperation" title="molpher.swig_wrappers.core.TreeOperation"><code class="xref any py py-class docutils literal"><span class="pre">TreeOperation</span></code></a>) &#8211; a <a class="reference internal" href="operations/TreeOperation_doc.html#molpher.swig_wrappers.core.TreeOperation" title="molpher.swig_wrappers.core.TreeOperation"><code class="xref any py py-class docutils literal"><span class="pre">TreeOperation</span></code></a> instance to run</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.fetchLeaves">
+<code class="descname">fetchLeaves</code><span class="sig-paren">(</span><em>increase_dist_improve_counter=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.fetchLeaves"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.fetchLeaves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> instances that represent the leaves of this <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree" title="molpher.swig_wrappers.core.ExplorationTree"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> instances representing the leaves of this tree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.fetchMol">
+<code class="descname">fetchMol</code><span class="sig-paren">(</span><em>canonSMILES</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.fetchMol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.fetchMol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to fetch a molecule (represented by its canonical SMILES string) from the current tree.
+If the molecule exists, it returns
+an appropriate <a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> instance. Otherewise, it raises a <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#RuntimeError" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">RuntimeError</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>canonSMILES</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a>) &#8211; a <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a> representing SMILES of the molecule being searched for</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> representing the looked up molecule</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal"><span class="pre">MolpherMol</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#RuntimeError" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">RuntimeError</span></code></a> if the molecule specified could not be found in the tree</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.hasMol">
+<code class="descname">hasMol</code><span class="sig-paren">(</span><em>canonSMILES</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.hasMol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.hasMol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <a class="reference external" href="https://docs.python.org/3.5/library/constants.html#True" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">True</span></code></a> or <a class="reference external" href="https://docs.python.org/3.5/library/constants.html#False" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">False</span></code></a> to indicate the presence of a molecule in the current tree.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>canonSMILES</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a>) &#8211; a <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a> representing SMILES of the molecule being searched for</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">bool</span></code></a> value representing the presence of the searched molecule in this tree (<a class="reference external" href="https://docs.python.org/3.5/library/constants.html#True" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">True</span></code></a> if it is present, <a class="reference external" href="https://docs.python.org/3.5/library/constants.html#False" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">False</span></code></a> otherwise)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">bool</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.deleteSubtree">
+<code class="descname">deleteSubtree</code><span class="sig-paren">(</span><em>canonSMILES</em>, <em>descendents_only=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.deleteSubtree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.deleteSubtree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a specified molecule from the tree and all of its descendents.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>canonSMILES</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a>) &#8211; a <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a> representing SMILES of the molecule being removed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.generateMorphs">
+<code class="descname">generateMorphs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.generateMorphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.generateMorphs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates mew <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> using the current <a class="reference internal" href="../../glossary.html#term-exploration-parameters"><span class="xref std std-term">exploration parameters</span></a>
+and saves them (see <a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationData</span></code></a> for details).</p>
+<p>The generated compounds can be retrieved using the <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree.getCandidateMorphs" title="molpher.swig_wrappers.core.ExplorationTree.getCandidateMorphs"><code class="xref any py py-meth docutils literal"><span class="pre">getCandidateMorphs</span></code></a> method.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All morphs already present in the tree are filtered out automatically.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.sortMorphs">
+<code class="descname">sortMorphs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.sortMorphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.sortMorphs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorts the <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> according to their distances from the <a class="reference internal" href="../../glossary.html#term-7"><span class="xref std std-term">target molecule</span></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When morphs are generated the distance to the current target is saved for each morph.
+This distance <em>is not</em> updated if the target of the tree changes afterwards.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.filterMorphs">
+<code class="descname">filterMorphs</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.filterMorphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.filterMorphs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters the <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> according to the supplied filtering options
+(see the table below for a listing of the available filters).
+The filtering options can be easily combined and passed
+to the method using the <code class="docutils literal"><span class="pre">|</span></code> operator. For example, the method can be called like this:
+<code class="docutils literal"><span class="pre">tree.filterMorphs(FilterMorphsOper.SYNTHESIS</span> <span class="pre">|</span> <span class="pre">FilterMorphsOper.PROBABILITY)</span></code>. If no
+filter information is passed, all filters are used automatically
+(equal to passing <a class="reference internal" href="operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper.ALL" title="molpher.swig_wrappers.core.FilterMorphsOper.ALL"><code class="xref any py py-attr docutils literal"><span class="pre">FilterMorphsOper.ALL</span></code></a>).</p>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-number">Table 1.5 </span><span class="caption-text">Filtering options and their descriptions.</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper.PROBABILITY" title="molpher.swig_wrappers.core.FilterMorphsOper.PROBABILITY"><code class="xref any py py-attr docutils literal"><span class="pre">PROBABILITY</span></code></a></td>
+<td>Filter the <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><code class="xref any std std-term docutils literal"><span class="pre">candidate</span> <span class="pre">morphs</span></code></a> according to probability based on their position in <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">ExplorationTree.candidates</span></code></a>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper.WEIGHT" title="molpher.swig_wrappers.core.FilterMorphsOper.WEIGHT"><code class="xref any py py-attr docutils literal"><span class="pre">WEIGHT</span></code></a></td>
+<td>Remove molecules that do not satisfy the weight constraints.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper.SYNTHESIS" title="molpher.swig_wrappers.core.FilterMorphsOper.SYNTHESIS"><code class="xref any py py-attr docutils literal"><span class="pre">SYNTHESIS</span></code></a></td>
+<td>The inbuilt synthetic feasibility filter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper.MAX_DERIVATIONS" title="molpher.swig_wrappers.core.FilterMorphsOper.MAX_DERIVATIONS"><code class="xref any py py-attr docutils literal"><span class="pre">MAX_DERIVATIONS</span></code></a></td>
+<td>Maximum number of morphs derived from one molecule.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper.DUPLICATES" title="molpher.swig_wrappers.core.FilterMorphsOper.DUPLICATES"><code class="xref any py py-attr docutils literal"><span class="pre">DUPLICATES</span></code></a></td>
+<td>Remove candidates that are already in the tree (always on).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper.HISTORIC_DESCENDENTS" title="molpher.swig_wrappers.core.FilterMorphsOper.HISTORIC_DESCENDENTS"><code class="xref any py py-attr docutils literal"><span class="pre">HISTORIC_DESCENDENTS</span></code></a></td>
+<td>Remove candidates that have already been tried by their parents.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper.ALL" title="molpher.swig_wrappers.core.FilterMorphsOper.ALL"><code class="xref any py py-attr docutils literal"><span class="pre">ALL</span></code></a></td>
+<td>Use all of the above filters.</td>
+</tr>
+</tbody>
+</table>
+<p>The results of the filtering can be observed using the <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree.getCandidateMorphsMask" title="molpher.swig_wrappers.core.ExplorationTree.getCandidateMorphsMask"><code class="xref any py py-meth docutils literal"><span class="pre">getCandidateMorphsMask</span></code></a> method.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper" title="molpher.swig_wrappers.core.FilterMorphsOper"><code class="xref any py py-class docutils literal"><span class="pre">FilterMorphsOper</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference internal" href="operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper" title="molpher.swig_wrappers.core.FilterMorphsOper"><code class="xref any py py-class docutils literal"><span class="pre">FilterMorphsOper</span></code></a> options) &#8211; one or more filtering options combined using the <code class="docutils literal"><span class="pre">|</span></code> operator</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.extend">
+<code class="descname">extend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.extend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.extend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attach all <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> that have not been filtered out to the tree.
+In other words, make them the new leaves.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By calling this method a <a class="reference internal" href="../../glossary.html#term-morphing-iteration"><code class="xref any std std-term docutils literal"><span class="pre">morphing</span> <span class="pre">iteration</span></code></a> is committed.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.prune">
+<code class="descname">prune</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.prune" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the pruning of the tree according to the rules specified by current
+<a class="reference internal" href="../../glossary.html#term-exploration-parameters"><span class="xref std std-term">exploration parameters</span></a> (see <a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationData</span></code></a> for details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.getThreadCount">
+<code class="descname">getThreadCount</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.getThreadCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.getThreadCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of threads this particular <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree" title="molpher.swig_wrappers.core.ExplorationTree"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a> will use. The value of 0
+indicates that the same number of threads as the number of available cores will be used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.asData">
+<code class="descname">asData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.asData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.asData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Can be used to obtain the current <a class="reference internal" href="../../glossary.html#term-exploration-parameters"><span class="xref std std-term">exploration parameters</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">instance of <a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationData</span></code></a>, which holds the current configuration options for the computations on the tree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationData</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.getCandidateMorphs">
+<code class="descname">getCandidateMorphs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.getCandidateMorphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.getCandidateMorphs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> instances that represent the <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><code class="xref any std std-term docutils literal"><span class="pre">candidate</span> <span class="pre">morphs</span></code></a>
+of this <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree" title="molpher.swig_wrappers.core.ExplorationTree"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a> instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> instances representing the <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><code class="xref any std std-term docutils literal"><span class="pre">candidate</span> <span class="pre">morphs</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.getCandidateMorphsMask">
+<code class="descname">getCandidateMorphsMask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.getCandidateMorphsMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.getCandidateMorphsMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a mask for the <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a> returned by <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree.getCandidateMorphs" title="molpher.swig_wrappers.core.ExplorationTree.getCandidateMorphs"><code class="xref any py py-meth docutils literal"><span class="pre">getCandidateMorphs</span></code></a>. The filtered out morphs
+are denoted by <a class="reference external" href="https://docs.python.org/3.5/library/constants.html#False" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">False</span></code></a> at the respective position in the mask.</p>
+<p>Morphs filtered out in this way will not be attached to the tree when <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree.extend" title="molpher.swig_wrappers.core.ExplorationTree.extend"><code class="xref any py py-meth docutils literal"><span class="pre">extend</span></code></a> is called.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">bool</span></code></a> instances which shows what <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> were filtered out</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.getGenerationCount">
+<code class="descname">getGenerationCount</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.getGenerationCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.getGenerationCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of <a class="reference internal" href="../../glossary.html#term-morph-generation"><span class="xref std std-term">morph generations</span></a> in the tree. Basically
+the number of <a class="reference internal" href="../../glossary.html#term-morphing-iteration"><span class="xref std std-term">morphing iterations</span></a> performed so far.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">number of <a class="reference internal" href="../../glossary.html#term-morphing-iteration"><span class="xref std std-term">morphing iterations</span></a> performed so far</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">int</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.setThreadCount">
+<code class="descname">setThreadCount</code><span class="sig-paren">(</span><em>threadCnt</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.setThreadCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.setThreadCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the maximum number of threads used by this instance. The value of 0
+indicates that the same number of threads as the number of available cores will be used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>threadCnt</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">int</span></code></a>) &#8211; an <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">int</span></code></a> indicating the number of threads to use</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the current <a class="reference internal" href="../../glossary.html#term-exploration-parameters"><span class="xref std std-term">exploration parameters</span></a> for this instance. If
+the supplied <a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationData</span></code></a> instance contains a tree topology, it is
+ignored and only the parameters are taken into account.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This may invalidate some data in the tree (such as the distances from
+the <a class="reference internal" href="../../glossary.html#term-7"><span class="xref std std-term">target molecule</span></a> computed so far).</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>param</strong> (<a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationData</span></code></a>) &#8211; an instance of <a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationData</span></code></a>, which represents the new <a class="reference internal" href="../../glossary.html#term-exploration-parameters"><span class="xref std std-term">exploration parameters</span></a> for this instance</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.setCandidateMorphsMask">
+<code class="descname">setCandidateMorphsMask</code><span class="sig-paren">(</span><em>mask</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.setCandidateMorphsMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.setCandidateMorphsMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the morphs&#8217; mask of this instance to a custom value. If the length of the new mask does not
+correspond to the number of <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> in the tree, a <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#RuntimeError" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">RuntimeError</span></code></a> will be raised.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mask</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a>) &#8211; <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">bool</span></code></a> instances which shows what <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> will be filtered out
+(not attached to the tree when <a class="reference internal" href="#molpher.swig_wrappers.core.ExplorationTree.extend" title="molpher.swig_wrappers.core.ExplorationTree.extend"><code class="xref any py py-meth docutils literal"><span class="pre">extend()</span></code></a> is called)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#RuntimeError" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">RuntimeError</span></code></a> if the length of the new mask does not correspond to
+the number of <a class="reference internal" href="../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> in the tree</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationTree.traverse">
+<code class="descname">traverse</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationTree.traverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationTree.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses the tree and calls the <code class="docutils literal"><span class="pre">()</span></code> of the callback
+on each morph in it. A SMILES string of a root
+of a subtree can be specified before the callback in order
+to traverse just the subtree.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference internal" href="operations/TraverseCallback_doc.html#molpher.swig_wrappers.core.TraverseCallback" title="molpher.swig_wrappers.core.TraverseCallback"><code class="xref any py py-class docutils literal"><span class="pre">TraverseCallback</span></code></a> or <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a> and <a class="reference internal" href="operations/TraverseCallback_doc.html#molpher.swig_wrappers.core.TraverseCallback" title="molpher.swig_wrappers.core.TraverseCallback"><code class="xref any py py-class docutils literal"><span class="pre">TraverseCallback</span></code></a>) &#8211; either an instance of a class derived from <a class="reference internal" href="operations/TraverseCallback_doc.html#molpher.swig_wrappers.core.TraverseCallback" title="molpher.swig_wrappers.core.TraverseCallback"><code class="xref any py py-class docutils literal"><span class="pre">TraverseCallback</span></code></a> or
+both SMILES of the root of a subtree and a <a class="reference internal" href="operations/TraverseCallback_doc.html#molpher.swig_wrappers.core.TraverseCallback" title="molpher.swig_wrappers.core.TraverseCallback"><code class="xref any py py-class docutils literal"><span class="pre">TraverseCallback</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ExplorationData_doc.html" class="btn btn-neutral float-right" title="1.1.1.2.1.1.1.3. ExplorationData" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="MolpherMol_doc.html" class="btn btn-neutral" title="1.1.1.2.1.1.1.1. MolpherMol" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0.0a3dev0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
