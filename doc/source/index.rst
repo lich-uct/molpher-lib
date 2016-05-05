@@ -37,7 +37,6 @@ Table of Contents
 
 ..  toctree::
     :name: maintoc
-    :numbered:
     :maxdepth: 5
 
     self
@@ -51,12 +50,5 @@ Indices and Search
 * :ref:`modindex`
 * :ref:`genindex`
 * :ref:`glossary`
-
-TODO list
-=========
-
-This documentation should contain most of the information an average user might need,
-but there are still places where it needs to be clarified or completed. Here is
-a list of items that need further revision:
 
 .. todolist::
