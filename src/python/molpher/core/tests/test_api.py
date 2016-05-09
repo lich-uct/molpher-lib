@@ -123,6 +123,7 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(tree.params['operators'], params.param_dict['operators'])
 
         leaf = tree.leaves[0]
+        self.assertRaises(RuntimeError, lambda : leaf.setSMILES('CCCC'))
         self.assertTrue(tree.hasMol(leaf))
         # self.assertEqual(tree, leaf.tree) # FIXME: add a reliable operator for comparison between trees
         leaf.setDistToTarget(0.5)
@@ -150,6 +151,9 @@ class TestPythonAPI(unittest.TestCase):
             , PruneTreeOper()
         ]
 
+        for oper in iteration:
+            self.assertRaises(RuntimeError, lambda : oper())
+
         fl = FindLeavesOper()
         for oper in iteration:
             tree.runOperation(oper)
@@ -166,23 +170,11 @@ class TestPythonAPI(unittest.TestCase):
                 print('Callback output:')
                 print(morph.getSMILES(), morph.getItersWithoutDistImprovement(), morph.getDistToTarget())
             if not callback.closest_mol:
-                callback.closest_mol = morph.copy()
+                callback.closest_mol = morph
             current_dist = morph.getDistToTarget()
             min_dist = callback.closest_mol.getDistToTarget()
             if min_dist > current_dist:
-                callback.closest_mol = morph.copy()
-
-            # FIXME: code below doesn't work
-                # (causes a SEGFAULT when the memory is accessed,
-                # probably because the shared pointer is deleted
-                # from the stack in the SWIG generated code when the callback is done)
-
-            # if not callback.closest_mol:
-            #     callback.closest_mol = morph
-            # current_dist = morph.getDistToTarget()
-            # min_dist = callback.closest_mol.getDistToTarget()
-            # if min_dist > current_dist:
-            #     callback.closest_mol = morph
+                callback.closest_mol = morph
         callback.morphs_in_tree = 0
         callback.closest_mol = None
 

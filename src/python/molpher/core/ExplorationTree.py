@@ -48,7 +48,7 @@ class Callback(TraverseCallback):
         """
 
         morph.__class__ = MolpherMol
-        self._callback(morph)
+        self._callback(morph.tree.fetchMol(morph.smiles)) # needs to be done this way (SEGFAULT otherwise, the input parameter seems to be destroyed by SWIG after the call)
 
 class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
     """
@@ -240,35 +240,6 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         starting from the root to leaves. It takes a callback function that accepts a single required argument
         and traverses the whole tree starting from its root (or root of a specified subtree -- see ``start_mol``) and
         calls the supplied callback with with encountered morph as its parameter.
-
-        ..  warning:: The tree traversal is implemented in C++
-                and the callback to Python is realized using `SWIG's director feature
-                <http://www.swig.org/Doc3.0/Python.html#Python_directors>`_,
-                which makes it possible to keep the implementation
-                concurrent and efficient. However, there is a problem:
-
-                If a reference to the :py:class:`~molpher.core.MolpherMol.MolpherMol`
-                instance is saved into a variable that outlives the call to the
-                callback function, this reference then becomes invalid when the call is
-                finished. Therefore, doing something like this:
-
-                .. code-block:: python
-
-                    var = None
-                    def callback(morph):
-                        if var:
-                            print("Previous:", var.smiles)
-                        var = morph
-                    tree.traverse(callback)
-
-                will likely result in a segmentation fault upon a second call to the callback function,
-                because the object referenced by ``var`` will no longer refer to valid memory.
-                This is likely a result of SWIG freeing the pointer without taking
-                the existing reference from Python into account.
-
-                One way to work around this is
-                to just save the SMILES string of the molecule and then fetch the
-                reference to it using the :meth:`fetchMol` method.
 
         :param callback: the callback to call
         :type callback: a callable object that takes a single argument

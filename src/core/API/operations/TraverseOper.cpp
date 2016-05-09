@@ -105,6 +105,7 @@ void TraverseOper::TraverseOperImpl::TraversalFunctor::operator()(const std::str
 
     std::shared_ptr<MolpherMol> mol = ac->second;
 //    int x = mol.use_count();
+    ac.release();
     makeCallback(mol);
 //    SynchCout("use count (before/after): " + parseNumber(x) + "/" + parseNumber(mol.use_count()));
 
