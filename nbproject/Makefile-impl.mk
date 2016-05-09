@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=molpher
+PROJECTNAME=molpher-lib
 
 # Active Configuration
 DEFAULTCONF=Debug
