@@ -17,6 +17,9 @@
 
 // MoplherMol wrapper
 %ignore MolpherMol::operator=(const MolpherMol&);
+%catches(std::runtime_error) MolpherMol::setOwner(std::shared_ptr<ExplorationTree> tree);
+%catches(std::runtime_error) MolpherMol::setSMILES(const std::string& smiles);
+%catches(std::runtime_error) MolpherMol::setParentSMILES(const std::string& smiles);
 %include "MolpherMol.hpp"
 
 // ExplorationData wrapper
@@ -28,5 +31,6 @@
 
 // ExplorationTree wrapper
 %catches(std::runtime_error) ExplorationTree::update(const ExplorationData& data);
+%catches(std::runtime_error) ExplorationTree::fetchMol(const std::string& canonSMILES);
 %catches(std::runtime_error) ExplorationTree::deleteSubtree(const std::string& canonSMILES, bool descendents_only);
 %include "ExplorationTree.hpp";

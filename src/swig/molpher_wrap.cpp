@@ -19844,11 +19844,16 @@ SWIGINTERN PyObject *_wrap_MolpherMol_setOwner(PyObject *SWIGUNUSEDPARM(self), P
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setOwner(arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setOwner(arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -19902,11 +19907,16 @@ SWIGINTERN PyObject *_wrap_MolpherMol_setSMILES(PyObject *SWIGUNUSEDPARM(self), 
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setSMILES((std::string const &)*arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setSMILES((std::string const &)*arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -19962,11 +19972,16 @@ SWIGINTERN PyObject *_wrap_MolpherMol_setParentSMILES(PyObject *SWIGUNUSEDPARM(s
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setParentSMILES((std::string const &)*arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setParentSMILES((std::string const &)*arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -24256,11 +24271,16 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_fetchMol(PyObject *SWIGUNUSEDPARM(sel
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (arg1)->fetchMol((std::string const &)*arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (arg1)->fetchMol((std::string const &)*arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 

@@ -186,7 +186,7 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
             );
         }
     } else {
-        Cerr("This tree is not empty. Only the morphing parameters will be changed.");
+        Cerr("This tree has already been initialized. Only the morphing parameters will be changed.");
     }
     
     if (is_new_tree) {
@@ -229,6 +229,7 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
         new_data->save("error_snapshot.xml");
         throw std::runtime_error("The tree was created with serious "
                 "inconsistencies. Check the 'error_snapshot.xml' file for more details...");
+                // TODO: write some code to be able to find out what went wrong
     }
 }
 
