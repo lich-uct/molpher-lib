@@ -10,7 +10,7 @@ The purpose of the library is to make molecular morphing easily accessible to a 
 2. refactoring the code so that as many features as possible can be easily exposed via an API,
 3. exposing the API of the library to a high-level programming language (such as Python) for ease of use.
 
-An extensive documentation with a turorial for all versions of the library is available [here](ssss).
+An extensive documentation with a turorial for all versions of the library is available [here](https://lich-uct.github.io/molpher-lib/).
 
 ## Installation
 
@@ -26,4 +26,4 @@ conda install -c lich molpher-lib
 
 This will automatically download the latest version of the library and the corresponding Python package and install everything in the currently active environment (for more information on environments and the `conda` command see [Conda Test Drive](http://conda.pydata.org/docs/test-drive.html).
 
-And that's it! Now you can take a look at the [documentation](ssss) and do some molecular morphing.
+And that's it! Now you can take a look at the [documentation](https://lich-uct.github.io/molpher-lib/) and do some molecular morphing.
