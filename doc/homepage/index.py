@@ -32,6 +32,7 @@ else:
     versions.append(current_version)
 
 versions.sort(key=parse_version) # sort from newest to oldest
+versions.reverse()
 
 # render the homepage
 
