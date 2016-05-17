@@ -13,9 +13,7 @@ TMPREPO=/tmp/docs/$USER/
 rm -rf $TMPREPO
 mkdir -p -m 0755 $TMPREPO
 git clone `git config --get remote.origin.url` $TMPREPO
-echo "$BASE_DIR/*.template"
-cp $BASE_DIR/*.template $TMPREPO
-cp $BASE_DIR/*.py $TMPREPO
+cp $BASE_DIR/homepage/* $TMPREPO
 
 cd $TMPREPO
 git checkout gh-pages

@@ -17,7 +17,9 @@
 import os
 import shutil
 
-from jinja2 import Template
+from jinja2 import Template, Environment, FileSystemLoader
+
+from pkg_resources import parse_version
 
 # The short X.Y version.
 current_version = 'v' + os.environ['VERSION']
@@ -29,16 +31,19 @@ if current_version in versions:
 else:
     versions.append(current_version)
 
+versions.sort(key=parse_version) # sort from newest to oldest
+
+# render the homepage
+
 INDEX_TEMPLATE_PATH = "index.html.template"
 INDEX_PATH = "index.html"
 
-versions.sort()
-
-template = None
-with open(INDEX_TEMPLATE_PATH, "r", encoding="utf-8") as template_file:
-    template = Template(template_file.read())
+env = Environment()
+env.loader = FileSystemLoader('.')
+template = env.get_template('index.html.template')
 
 with open(INDEX_PATH, "w", encoding='utf-8') as index_file:
     index_file.write(template.render(
         versions=versions
+        , newest=versions[0]
     ))

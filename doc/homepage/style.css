@@ -1,0 +1,29 @@
+.mdi-navigation-menu {
+	padding-left: 5pt;
+}
+
+nav {
+	background-color: white;
+}
+
+nav ul a
+, nav * 
+, .side-nav a
+, .side-nav a
+, .dropdown-content li > a
+, nav .brand-logo
+{
+	color: black;
+}
+
+.collection a.collection-item {
+	color: #039be5;
+}
+
+nav .brand-logo-left a {
+	margin-left: 10pt;
+}
+
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,0.20),0 1px 7px 0 rgba(0,0,0,0.25);
+}
