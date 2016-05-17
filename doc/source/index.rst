@@ -1,33 +1,30 @@
 
-Molpher-lib: C++/Python Library For Chemical Space Exploration
-==============================================================
+Molpher-lib: a C++/Python Library For Systematic Chemical Space Exploration
+===========================================================================
 
-This is the documentation of *Molpher-lib*,
-a computer library for exploration of chemical space with :term:`molecular morphing`.
-It is essentially a fork of :term:`Molpher`
--- a free open source software developed for the same purpose.
+This library is a fork of :term:`Molpher`, a program for exploration of
+chemical space with :term:`molecular morphing`.
+Molpher mostly targets non-technical users. Therefore, it contains a rich
+graphical user interface with visualizations of chemical space and supports
+various platforms.
 
-The original :term:`Molpher` is mostly aimed at users. Therefore, it contains a rich
-graphical user interface with visualizations of chemical space and many facilities
-to directly affect the exploration process.
-However, it is not very friendly
+However, Molpher is not very friendly
 when it comes to developers
-who usually prefer access to the facilities of a computer program via an API
-or would even like to alter the implementation so that it suits their needs.
-We have become more and more aware of these shortcomings during our research
+who usually require access to a computer program via an API
+or would like to easily alter the implementation so that it suits better to
+their needs. We have become more and more aware of the shortcomings of Molpher during our research
 where we would often like to implement new ways of filtering the generated :term:`morphs <morph>`
-or evaluating their 'fitness', but the monolithic implementation in C++ would make
-it difficult and time-consuming.
+or evaluating their 'fitness', but there was no easy way to do that,
+because the underlying C++ implementation is not very flexible and user-friendly.
 
-Therefore, the goal of this project is to make :term:`Molpher` more accessible to
+The goal of this project is to make molecular morphing more accessible to
 programmers, developers and scientists alike
-by providing a flexible and extensible programming interface including
-a Python package that exposes most of the features of *Molpher-lib* to the
-Python programming language as well.
+by providing a flexible and extensible programming interface that can also be
+used from a high-level programming language such as Python.
 
 ..  warning:: Please, note that the project is in early stage of development
-        and that a lot of the features mentioned in this documentation might
-        change in the future and that there might still be a considerable amount
+        and so a lot of features mentioned in this documentation might
+        change in the future and there might still be a considerable amount
         of bugs and other issues.
 
         .. todo:: Add link to the issue tracker
