@@ -1,0 +1,1954 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Tutorial &mdash; Molpher-lib 0.0.0b0dev0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Molpher-lib 0.0.0b0dev0 documentation" href="../index.html"/>
+        <link rel="up" title="Using the library" href="index.html"/>
+        <link rel="next" title="Source Code Documentation" href="../documentation/index.html"/>
+        <link rel="prev" title="1. Installing the Library" href="installation.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b0dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Molpher-lib: a C++/Python Library For Systematic Chemical Space Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Using the library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">1. Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-morphing-algorithm">2.1. The Morphing Algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-an-exploration-tree-and-setting-morphing-parameters">2.2. Creating an Exploration Tree and Setting Morphing Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-morphs-and-extending-the-exploration-tree">2.3. Generating Morphs and Extending the Exploration Tree</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generating-and-manipulating-morphs">2.3.1. Generating and Manipulating Morphs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sorting-and-filtering-morphs">2.3.2. Sorting and Filtering Morphs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extending-and-pruning">2.3.3. Extending and Pruning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tree-operations">2.4. Tree Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#built-in-operations">2.4.1. Built-in Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tree-templates-and-snapshots">2.5. Tree Templates and Snapshots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-exploration-algorithm-implementations">2.6. Example Exploration Algorithm Implementations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-tutorial-to-implement-a-search-algorithm">2.6.1. Using the Tutorial to Implement a Search Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementing-a-bidirectional-search-algorithm">2.6.2. Implementing a Bidirectional Search Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">2.7. Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Molpher-lib</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Using the library</a> &raquo;</li>
+      
+    <li>2. Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial">
+<span id="id1"></span><h1><a class="toc-backref" href="#id4">2. Tutorial</a><a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This section gives a comprehensive overview of both the
+morphing algorithm itself as well as the
+software features currently available
+By writing and commenting on an example Python script (located in the <a class="reference external" href="https://docs.python.org/3.5/distutils/examples.html#examples" title="(in Python v3.5)"><code class="docutils literal"><span class="pre">Examples</span></code></a> package
+and available for download <a class="reference download internal" href="../_downloads/basics.py" download=""><code class="xref download docutils literal"><span class="pre">here</span></code></a>)
+we present the building blocks that anyone can easily put together to implement their own <a class="reference internal" href="../glossary.html#term-molpher"><span class="xref std std-term">Molpher</span></a>.</p>
+<p>However, not all of the features and settings will be presented and we encourage
+you to take a look at the <a class="reference internal" href="../documentation/index.html#source-code-docs"><span class="std std-ref">Source Code Documentation</span></a> if you want to know more about the implementation itself
+or more advanced topics.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We do not provide usage examples or a description of the C++ API in this tutorial,
+but the Python interface actually follows the C++ implementation very closely
+and the classes from the <a class="reference internal" href="../documentation/python/molpher.core.html#module-molpher.core" title="molpher.core"><code class="xref any py py-mod docutils literal"><span class="pre">core</span></code></a> package are in fact derived from the proxy
+classes generated automatically by <a class="reference external" href="http://www.swig.org/">SWIG</a> when the C++ API is
+wrapped for Python.</p>
+</div>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#tutorial" id="id4">Tutorial</a><ul>
+<li><a class="reference internal" href="#the-morphing-algorithm" id="id5">The Morphing Algorithm</a></li>
+<li><a class="reference internal" href="#creating-an-exploration-tree-and-setting-morphing-parameters" id="id6">Creating an Exploration Tree and Setting Morphing Parameters</a></li>
+<li><a class="reference internal" href="#generating-morphs-and-extending-the-exploration-tree" id="id7">Generating Morphs and Extending the Exploration Tree</a><ul>
+<li><a class="reference internal" href="#generating-and-manipulating-morphs" id="id8">Generating and Manipulating Morphs</a></li>
+<li><a class="reference internal" href="#sorting-and-filtering-morphs" id="id9">Sorting and Filtering Morphs</a></li>
+<li><a class="reference internal" href="#extending-and-pruning" id="id10">Extending and Pruning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tree-operations" id="id11">Tree Operations</a><ul>
+<li><a class="reference internal" href="#built-in-operations" id="id12">Built-in Operations</a><ul>
+<li><a class="reference internal" href="#traversing-the-tree" id="id13">Traversing the Tree</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tree-templates-and-snapshots" id="id14">Tree Templates and Snapshots</a></li>
+<li><a class="reference internal" href="#example-exploration-algorithm-implementations" id="id15">Example Exploration Algorithm Implementations</a><ul>
+<li><a class="reference internal" href="#using-the-tutorial-to-implement-a-search-algorithm" id="id16">Using the Tutorial to Implement a Search Algorithm</a></li>
+<li><a class="reference internal" href="#implementing-a-bidirectional-search-algorithm" id="id17">Implementing a Bidirectional Search Algorithm</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#summary" id="id18">Summary</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="the-morphing-algorithm">
+<span id="morphing-algorithm"></span><h2><a class="toc-backref" href="#id5">2.1. The Morphing Algorithm</a><a class="headerlink" href="#the-morphing-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>Let us first shortly describe how <a class="reference internal" href="../glossary.html#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a> works. This should help anyone who has never heard
+about the method to understand it and get an idea on what this library can do for them.</p>
+<p>In order to find a path that connects the <a class="reference internal" href="../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a> and the <a class="reference internal" href="../glossary.html#term-7"><span class="xref std std-term">target molecule</span></a>
+(see <a class="reference internal" href="../introduction.html"><span class="doc">Introduction</span></a> if you are not familiar with these terms),
+Molpher maintains a data structure called an <a class="reference internal" href="../glossary.html#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a> to save and
+evaluate possible <a class="reference internal" href="../glossary.html#term-chemical-space-path"><span class="xref std std-term">paths in chemical space</span></a>. It is basically a
+<em>directed rooted tree</em> (with the edges directed away from the root) where the source molecule acts as the root vertex.</p>
+<p>During <a class="reference internal" href="../glossary.html#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a>, the tree is grown by modifying the current leaves
+with predefined <a class="reference internal" href="../glossary.html#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a>. These operators act on
+an input structure by producing a new molecule as output, which is structurally very close to its parent compound.
+We can also see chemical operators as the labels of the edges of the tree that
+connect two compounds between which a transformation occurred, the parent and the child.</p>
+<p>By connecting the newly created molecules to the tree as the children of their parents, we can
+iteratively generate multiple <a class="reference internal" href="../glossary.html#term-chemical-space-path"><span class="xref std std-term">chemical space paths</span></a> at once and evaluate
+them according to a certain objective function. At the moment the objective function is
+simply the structural distance between the newest molecule on a path and the target molecule, but
+the user of the library is free to define his own criteria. For example, he/she can easily implement
+a method that will only extend paths that lead to compounds satisfying a given pharmacophore or
+physicochemical properties.</p>
+<p>By continuously morphing the compounds in this way, we can effectively &#8216;travel&#8217; through <a class="reference internal" href="../glossary.html#term-chemical-space"><span class="xref std std-term">chemical space</span></a>
+towards various areas of interest. Thanks to the flexible API of the library this &#8216;journey&#8217; can be realized
+in many ways and can accommodate almost any exploration strategy one might think of. For example,
+in this tutorial we will, among other things,
+show how to <a class="reference internal" href="#operations"><span class="std std-ref">implement our own building blocks to use with the library</span></a> or
+<a class="reference internal" href="#bidirectional"><span class="std std-ref">make two trees cooperate with each other as they search for a single path</span></a>.</p>
+</div>
+<div class="section" id="creating-an-exploration-tree-and-setting-morphing-parameters">
+<h2><a class="toc-backref" href="#id6">2.2. Creating an Exploration Tree and Setting Morphing Parameters</a><a class="headerlink" href="#creating-an-exploration-tree-and-setting-morphing-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Using the library the tree is represented by
+an instance of the <a class="reference internal" href="../documentation/python/molpher.core.html#module-molpher.core.ExplorationTree" title="molpher.core.ExplorationTree"><code class="xref any py py-mod docutils literal"><span class="pre">molpher.core.ExplorationTree</span></code></a> class and in this tutorial
+we will use it to search for a <a class="reference internal" href="../glossary.html#term-chemical-space-path"><span class="xref std std-term">chemical space path</span></a>
+between <em>cocaine</em> (a famous recreational drug) and <em>procaine</em> (compound that replaced cocaine
+as local anesthetic). Both of these compounds act as blockers of the sodium channels in the neuronal cell membrane
+which results in their anesthetic effects.</p>
+<p>Let us now explore the <a class="reference internal" href="../glossary.html#term-chemical-space"><span class="xref std std-term">chemical space</span></a> &#8216;between&#8217; cocaine and procaine
+by combining their structural features using the <em>Molpher-lib</em> library.
+We will initialize the exploration tree first:</p>
+<div class="literal-block-wrapper container" id="tree-init">
+<div class="code-block-caption"><span class="caption-number">Listing 2.1 </span><span class="caption-text">The most basic way to initialize an <a class="reference internal" href="../glossary.html#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a> in Python.</span><a class="headerlink" href="#tree-init" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">ExplorationTree</span> <span class="k">as</span> <span class="n">ETree</span>
+
+<span class="n">cocaine</span> <span class="o">=</span> <span class="s1">&#39;CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2&#39;</span>
+<span class="n">procaine</span> <span class="o">=</span> <span class="s1">&#39;O=C(OCCN(CC)CC)c1ccc(N)cc1&#39;</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">cocaine</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">procaine</span><span class="p">)</span> <span class="c1"># initialize a tree that searches for a path from cocaine to procaine</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>The code shown in  <a class="reference internal" href="#tree-init"><span class="std std-numref">Listing 2.1</span></a> simply initializes the tree from the supplied SMILES.
+At the moment the tree is pretty simple. It only contains the root molecule (cocaine in this particular instance).
+We can manipulate this instance and read data from it in multiple ways, but let&#8217;s start by printing out the
+<a class="reference internal" href="../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a> and <a class="reference internal" href="../glossary.html#term-7"><span class="xref std std-term">target molecule</span></a> of the tree:</p>
+<div class="literal-block-wrapper container" id="print-source-target">
+<div class="code-block-caption"><span class="caption-number">Listing 2.2 </span><span class="caption-text">Printing out the <a class="reference internal" href="../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a> and <a class="reference internal" href="../glossary.html#term-7"><span class="xref std std-term">target molecule</span></a> of a tree.</span><a class="headerlink" href="#print-source-target" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># print the smiles of the source and target</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Source: &#39;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Target: &#39;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>If we run the code from both <a class="reference internal" href="#tree-init"><span class="std std-numref">Listing 2.1</span></a> and <a class="reference internal" href="#print-source-target"><span class="std std-numref">Listing 2.2</span></a> in a script or command line, it produces
+the following output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>loading SAScore.dat ... done
+Source:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+Target:  CCN(CC)CCOC(=O)C1=CC=C(N)C=C1
+</pre></div>
+</div>
+<p>Notice that the SMILES strings we supplied to the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.create" title="molpher.core.ExplorationTree.ExplorationTree.create"><code class="xref py py-meth docutils literal"><span class="pre">create()</span></code></a>
+method of the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree" title="molpher.core.ExplorationTree.ExplorationTree"><code class="xref py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a> class are not the same as those
+that we supplied. That is because <em>Molpher-lib</em> automatically generates canonical SMILES for every
+molecule that is created.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">The library also discards any information about the stereocenters in the molecules,
+because the current implementation does not account for stereochemistry and treats all enantiomers
+as the same molecule. You might want to keep this in mind when working with the library.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Besides the information about our source and target, we can also see that a data file was loaded successfully.
+That means the <a class="reference internal" href="../documentation/python/molpher.html#module-molpher" title="molpher"><code class="xref py py-mod docutils literal"><span class="pre">molpher</span></code></a> package was initialized successfully and is ready for use. The data file itself is
+used to compute the synthetic feasibility scores for the generated morphs
+(can be read from any molecule by reading its <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol.sascore" title="molpher.core.MolpherMol.MolpherMol.sascore"><code class="xref any py py-attr docutils literal"><span class="pre">sascore</span></code></a> attribute).</p>
+</div>
+<p>The <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.params" title="molpher.core.ExplorationTree.ExplorationTree.params"><code class="xref any py py-attr docutils literal"><span class="pre">ExplorationTree.params</span></code></a> dictionary does not just store the
+source and target, but also houses other <a class="reference internal" href="../glossary.html#term-morphing-parameters"><code class="xref any std std-term docutils literal"><span class="pre">morphing</span> <span class="pre">parameters</span></code></a>. Let&#8217;s take a look:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;max_morphs_total&#39;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">,</span>
+    <span class="s1">&#39;far_close_threshold&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+    <span class="s1">&#39;weight_max&#39;</span><span class="p">:</span> <span class="mf">100000.0</span><span class="p">,</span>
+    <span class="s1">&#39;close_produce&#39;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+    <span class="s1">&#39;fingerprint&#39;</span><span class="p">:</span> <span class="s1">&#39;MORGAN&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;accept_min&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="s1">&#39;CCN(CC)CCOC(=O)C1=CC=C(N)C=C1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;weight_min&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;non_producing_survive&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s1">&#39;accept_max&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;operators&#39;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s1">&#39;ADD_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ADD_BOND&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BOND_CONTRACTION&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BOND_REROUTE&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;INTERLAY_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MUTATE_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;REMOVE_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;REMOVE_BOND&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;far_produce&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s1">&#39;similarity&#39;</span><span class="p">:</span> <span class="s1">&#39;TANIMOTO&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As we can see there is quite a lot of parameters that we can set.
+We will explain the most important ones in this tutorial, but you can see the
+documentation for the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData" title="molpher.core.ExplorationData.ExplorationData"><code class="xref py py-class docutils literal"><span class="pre">ExplorationData</span></code></a> class
+(especially <a class="reference internal" href="../documentation/python/molpher.core.html#param-table"><span class="std std-numref">Table 1.1</span></a>) for a detailed reference.</p>
+<p>We can adjust the morphing parameters during runtime as we like. All we need to do is just supply the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.params" title="molpher.core.ExplorationTree.ExplorationTree.params"><code class="xref any py py-attr docutils literal"><span class="pre">params</span></code></a> attribute
+of our tree instance with a new dictionary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># change selected parameters using a dictionary</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;non_producing_survive&#39;</span> <span class="p">:</span> <span class="mi">2</span>
+    <span class="s1">&#39;weight_max&#39;</span> <span class="p">:</span> <span class="mf">500.0</span>
+<span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;max_morphs_total&#39;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">,</span>
+    <span class="s1">&#39;far_close_threshold&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+<span class="hll">    <span class="s1">&#39;weight_max&#39;</span><span class="p">:</span> <span class="mf">500.0</span><span class="p">,</span>
+</span>    <span class="s1">&#39;close_produce&#39;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+    <span class="s1">&#39;fingerprint&#39;</span><span class="p">:</span> <span class="s1">&#39;MORGAN&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;accept_min&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="s1">&#39;CCN(CC)CCOC(=O)C1=CC=C(N)C=C1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;weight_min&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+<span class="hll">    <span class="s1">&#39;non_producing_survive&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span>    <span class="s1">&#39;accept_max&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;operators&#39;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s1">&#39;ADD_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ADD_BOND&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BOND_CONTRACTION&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BOND_REROUTE&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;INTERLAY_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MUTATE_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;REMOVE_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;REMOVE_BOND&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;far_produce&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s1">&#39;similarity&#39;</span><span class="p">:</span> <span class="s1">&#39;TANIMOTO&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Here we just tightened the constraints on molecular weight and decreased the number of acceptable &#8216;non-producing&#8217;
+<a class="reference internal" href="../glossary.html#term-morph-generation"><span class="xref std std-term">morph generations</span></a> to 2 (see <a class="reference internal" href="../documentation/python/molpher.core.html#param-table"><span class="std std-numref">Table 1.1</span></a> to get more information on what this parameter
+does). If we supply an incomplete set of parameters (like in the above example),
+only the parameters specified in the given dictionary will be changed.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Changing individual values in the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.params" title="molpher.core.ExplorationTree.ExplorationTree.params"><code class="xref any py py-attr docutils literal"><span class="pre">params</span></code></a> dictionary will have no effect.
+You always need to store a dictionary instance in it. This is because the value
+is regenerated every time the attribute is accessed to always reflect the current
+set of parameters valid for the current instance.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData" title="molpher.core.ExplorationData.ExplorationData"><code class="xref py py-class docutils literal"><span class="pre">ExplorationData</span></code></a></p>
+</div>
+</div>
+<div class="section" id="generating-morphs-and-extending-the-exploration-tree">
+<h2><a class="toc-backref" href="#id7">2.3. Generating Morphs and Extending the Exploration Tree</a><a class="headerlink" href="#generating-morphs-and-extending-the-exploration-tree" title="Permalink to this headline">¶</a></h2>
+<p>This part of the tutorial outlines all the steps
+involved in generating new morphs from the current leaves of the tree.
+It also describes how the generated morphs can be filtered using the value of
+the default objective function (structural distance from the target molecule),
+the tree extended and the unfavorable paths (or their parts) removed from the tree.</p>
+<div class="section" id="generating-and-manipulating-morphs">
+<h3><a class="toc-backref" href="#id8">2.3.1. Generating and Manipulating Morphs</a><a class="headerlink" href="#generating-and-manipulating-morphs" title="Permalink to this headline">¶</a></h3>
+<p>Now that we know how to initialize an exploration tree and how to set morphing parameters,
+we will take a look at how the <a class="reference internal" href="../glossary.html#term-chemical-space"><span class="xref std std-term">chemical space</span></a> exploration works in practice.</p>
+<p>Let us generate a few <a class="reference internal" href="../glossary.html#term-morph"><code class="xref any std std-term docutils literal"><span class="pre">morphs</span></code></a> from the current leaves of the tree first:</p>
+<div class="literal-block-wrapper container" id="generate-morphs">
+<div class="code-block-caption"><span class="caption-number">Listing 2.3 </span><span class="caption-text">Generating and reading morphs.</span><a class="headerlink" href="#generate-morphs" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">)</span> <span class="c1"># show the current leaves of the tree (only the source so far)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">())</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">generateMorphs</span><span class="p">()</span> <span class="c1"># generate new morphs</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>(&lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d930&gt;,)
+COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+Generated 60 morphs.
+(&lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d930&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d8d0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d960&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d990&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d9c0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d9f0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6da20&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6da50&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6da80&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dab0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dae0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6db10&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6db40&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6db70&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dba0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dbd0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dc00&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dc30&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dc60&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dc90&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dcc0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dcf0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dd20&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dd50&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dd80&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6ddb0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dde0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6de10&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6de40&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6de70&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dea0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6ded0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6df00&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6df30&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6df60&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6df90&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6dfc0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2030&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2060&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2090&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af20c0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af20f0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2120&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2150&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2180&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af21b0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af21e0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2210&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2240&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2270&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af22a0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af22d0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2300&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2330&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2360&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2390&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af23c0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af23f0&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2420&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8af2450&gt;)
+60
+</pre></div>
+</div>
+<p>The code in <a class="reference internal" href="#generate-morphs"><span class="std std-numref">Listing 2.3</span></a> first tells the tree to return its current leaves.
+As we only have one molecule in the tree (our cocaine <a class="reference internal" href="../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a>),
+the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.leaves" title="molpher.core.ExplorationTree.ExplorationTree.leaves"><code class="xref py py-attr docutils literal"><span class="pre">molpher.core.ExplorationTree.ExplorationTree.leaves</span></code></a> member
+only contains one element. We can verify that it is indeed our cocaine by asking
+the underlying <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> instance for its SMILES
+using the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol.smiles" title="molpher.core.MolpherMol.MolpherMol.smiles"><code class="xref any py py-attr docutils literal"><span class="pre">smiles</span></code></a> attribute.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">The <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> class has a lot of useful attributes that
+can often be written into as well. You can easily replace the computed value of the objective
+function with your own, for example. See the documentation for the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal"><span class="pre">MolpherMol</span></code></a>
+class to get an overview of how you can modify the molecules in the tree or the generated candidate morphs.</p>
+</div>
+<p>The <a class="reference internal" href="../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.generateMorphs" title="molpher.swig_wrappers.core.ExplorationTree.generateMorphs"><code class="xref any py py-meth docutils literal"><span class="pre">generateMorphs()</span></code></a> method tells the tree to generate some <a class="reference internal" href="../glossary.html#term-morph"><code class="xref any std std-term docutils literal"><span class="pre">morphs</span></code></a>
+from the current leaves for us. How many morphs will be generated depends
+mostly on the current state of the tree
+and parameters <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.far_produce" title="molpher.core.ExplorationData.ExplorationData.far_produce"><code class="xref any py py-attr docutils literal"><span class="pre">far_produce</span></code></a>, <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.close_produce" title="molpher.core.ExplorationData.ExplorationData.close_produce"><code class="xref any py py-attr docutils literal"><span class="pre">close_produce</span></code></a> and <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.far_close_threshold" title="molpher.core.ExplorationData.ExplorationData.far_close_threshold"><code class="xref any py py-attr docutils literal"><span class="pre">far_close_threshold</span></code></a>.
+However, it also depends on other factors. For example, some structures
+might not be parsed correctly and hence might be removed from the list after the morphs are generated.
+Also, a different number of morphs can be generated each time the method is run. That si due to
+the non-deterministic character of the morphing algorithm which chooses the morphing operators to
+use and parts of the structure to modify randomly.</p>
+<p>We can access the newly generated morphs from the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a>
+member of the tree instance. It is a <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> instances.
+<a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> instances serve
+as proxy objects for the underlying C++ representation of molecules generated by <a class="reference internal" href="../glossary.html#term-molpher"><span class="xref std std-term">Molpher</span></a>.
+Hence, these instances can be used to read and manipulate compounds currently present in a tree
+or the generated morphs.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">The molecules saved in the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a> attribute of the tree actually do not
+belong to the tree just yet. See <a class="reference internal" href="#extend-prune"><span class="std std-ref">Extending and Pruning</span></a> for more information on
+how it is with tree ownership of molecules.</p>
+</div>
+<p>You can tell any molecule to replicate itself by calling its <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol.copy" title="molpher.core.MolpherMol.MolpherMol.copy"><code class="xref py py-meth docutils literal"><span class="pre">copy()</span></code></a> method.
+The replicated instance is never bound to any tree and all the changes made to the copy are only made to the copy
+and not the original instance. This is useful when we want to save the molecule from a tree for later use
+and make sure that its state does not change as we keep growing the tree in our program.</p>
+<p>The following code example illustrates how we can change and copy <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> instances:</p>
+<div class="literal-block-wrapper container" id="copying-morphs">
+<div class="code-block-caption"><span class="caption-number">Listing 2.4 </span><span class="caption-text">Modifying and copying candidate morphs.</span><a class="headerlink" href="#copying-morphs" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># get the first morph in the candidate list</span>
+<span class="n">candidate</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># print distance to target</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+<span class="c1"># set new distance to target</span>
+<span class="n">candidate</span><span class="o">.</span><span class="n">dist_to_target</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="c1"># look in the list of candidates and print new distance</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">()</span>
+
+<span class="c1"># make a copy of our molecule</span>
+<span class="n">candidate_copy</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># set a new distance for the copy and verify that the original was not affected</span>
+<span class="k">print</span><span class="p">(</span><span class="n">candidate_copy</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+<span class="n">candidate_copy</span><span class="o">.</span><span class="n">dist_to_target</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="k">print</span><span class="p">(</span><span class="n">candidate_copy</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">candidate</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>0.828125
+0.5
+
+0.5
+0.7
+0.5
+0.5
+</pre></div>
+</div>
+</div>
+<div class="section" id="sorting-and-filtering-morphs">
+<h3><a class="toc-backref" href="#id9">2.3.2. Sorting and Filtering Morphs</a><a class="headerlink" href="#sorting-and-filtering-morphs" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes the order of the newly generated molecules in the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a> list might have a meaning to us;
+for example, this order is used by the built-in probability filter (see <a class="reference internal" href="../documentation/python/operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper.PROBABILITY" title="molpher.swig_wrappers.core.FilterMorphsOper.PROBABILITY"><code class="xref any py py-attr docutils literal"><span class="pre">PROBABILITY</span></code></a> for details)
+to compute the probabilities of survival for each candidate.</p>
+<p>As of yet, the only way to sort the
+generated morphs is by calling the <a class="reference internal" href="../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.sortMorphs" title="molpher.swig_wrappers.core.ExplorationTree.sortMorphs"><code class="xref py py-meth docutils literal"><span class="pre">sortMorphs()</span></code></a>
+method on the tree instance or using the <a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.SortMorphsOper.SortMorphsOper" title="molpher.core.operations.SortMorphsOper.SortMorphsOper"><code class="xref py py-class docutils literal"><span class="pre">SortMorphsOper</span></code></a> operation
+(see <a class="reference internal" href="#operations"><span class="std std-ref">Tree Operations</span></a> for more). This sorts the molecules in the order of increasing value
+of the objective function (distance from the <a class="reference internal" href="../glossary.html#term-7"><span class="xref std std-term">target molecule</span></a> by default).</p>
+<p>Let us now sort the candidate morphs in our tree:</p>
+<div class="literal-block-wrapper container" id="sorting-morphs-according-to-the-value-of-the-objective-function">
+<div class="code-block-caption"><span class="caption-number">Listing 2.5 </span><span class="caption-text">Sorting morphs according to the value of the objective function.</span><a class="headerlink" href="#sorting-morphs-according-to-the-value-of-the-objective-function" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># sort the candidates in the tree according to their distance from target</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">sortMorphs</span><span class="p">()</span>
+
+<span class="c1"># verify</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>(True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
+[(&#39;COC(=O)C1C2CCC(CC1(O)OC(=O)C1=CC=CC=C1)N2C&#39;, 0.5), (&#39;COC(=O)C1C2C3CN2C(C3)CC1OC(=O)C1=CC=CC=C1&#39;, 0.7868852459016393), (&#39;CCC1CC(OC(=O)C2=CC=CC=C2)C(C(=O)OC)CN1C&#39;, 0.7868852459016393), (&#39;COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCN1N2C&#39;, 0.7868852459016393), (&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C&#39;, 0.7868852459016393), (&#39;COC(=O)C1C2C(=O)CC(CC1OCC1=CC=CC=C1)N2C&#39;, 0.7903225806451613), (&#39;COC(=O)C1C2CC(=O)C(CC1OCC1=CC=CC=C1)N2C&#39;, 0.7936507936507937), (&#39;CN1C2CCC13CC(OC(=O)C1=CC=CC=C1)C2C(=O)OC3&#39;, 0.8), (&#39;COC(=O)C1C2CCC(NC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8064516129032258), (&#39;COC(=O)C1C2CC(N)C(CC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8064516129032258), (&#39;COCC1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8064516129032258), (&#39;COC(=O)C1C2CCC(C1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8103448275862069), (&#39;COC(=O)CC(CC1CCCN1C)OC(=O)C1=CC=CC=C1&#39;, 0.8125), (&#39;COCC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8125), (&#39;CNC1CCCCC(OC(=O)C2=CC=CC=C2)C1C(=O)OC&#39;, 0.8135593220338984), (&#39;COC(=O)C1C(C)N(C)C(C)CC1OC(=O)C1=CC=CC=C1&#39;, 0.8166666666666667), (&#39;CN1C2CCC1C(C(=O)O)C(OC(=O)C1=CC=CC=C1)C2&#39;, 0.8166666666666667), (&#39;COC(=O)C1C2CC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8166666666666667), (&#39;CN1C2CCC13COC(=O)C3C(OC(=O)C1=CC=CC=C1)C2&#39;, 0.8181818181818181), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2&#39;, 0.819672131147541), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)C2C&#39;, 0.819672131147541), (&#39;COC(=O)C1C(OC(=O)C2=CC=CC=C2)=CC2CCC1N2C&#39;, 0.8225806451612903), (&#39;COC(=O)C1C2CCC(OC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8225806451612903), (&#39;COC(=O)C1C2CC3CN2C3CC1OC(=O)C1=CC=CC=C1&#39;, 0.8225806451612903), (&#39;CN1C2CCC1C(C(=O)OO)C(OC(=O)C1=CC=CC=C1)C2&#39;, 0.8225806451612903), (&#39;COC(=O)C1C2CCC(CC1OCC1=CC=CC=C1)N2C&#39;, 0.8253968253968254), (&#39;COC(=O)C1(C)C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8253968253968254), (&#39;COC(=O)C1C2NCC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8253968253968254), (&#39;COC(=O)C1C2CCC(C(=O)C1OCC1=CC=CC=C1)N2C&#39;, 0.828125), (&#39;COC(=O)C1C2OCC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.828125), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=NC=C1)N2C&#39;, 0.828125), (&#39;COC(=O)C1C2CCC(CC1OOC(=O)C1=CC=CC=C1)N2C&#39;, 0.828125), (&#39;COC(=O)C1C2CCC(CC1(C)OC(=O)C1=CC=CC=C1)N2C&#39;, 0.828125), (&#39;COC(=O)C1C(OC(=O)C2=CC=CC=C2)C2C3CCC12N3C&#39;, 0.828125), (&#39;COC(=O)C1C2CCC(CN2C)CC1OC(=O)C1=CC=CC=C1&#39;, 0.828125), (&#39;COC(=O)C1C2CCC(C3C4=C(C=CC=C4)C(=O)OC13)N2C&#39;, 0.828125), (&#39;COC(=O)C1C2CCC(COC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8307692307692307), (&#39;COC(=O)C1C2CCC(NCC1OC(=O)C1=CC=CC=C1)N2C&#39;, 0.8307692307692307), (&#39;COC(=O)C1OC(OC(=O)C2=CC=CC=C2)CC2CCC1N2C&#39;, 0.8307692307692307), (&#39;COC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCOC1N2C&#39;, 0.8333333333333334), (&#39;COC12CCC(CC(OC(=O)C3=CC=CC=C3)C1C=O)N2C&#39;, 0.8333333333333334), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CNC=C1)N2C&#39;, 0.8382352941176471), (&#39;COC(=O)C1C2CCC(CC1ONC(=O)C1=CC=CC=C1)N2C&#39;, 0.8461538461538461), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C=C1)N2C&#39;, 0.8507462686567164), (&#39;COC(=O)C1C2CCC(CC1OC=O)N2CC1=CC=CC=C1&#39;, 0.8507462686567164), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC(O)=C1)N2C&#39;, 0.8529411764705882), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CN=CC=C1)N2C&#39;, 0.855072463768116), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CCC(C)C=C1)N2C&#39;, 0.855072463768116), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CN=C1)N2C&#39;, 0.855072463768116), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C=C1)N2C&#39;, 0.8571428571428572), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=COC=CC=C1)N2C&#39;, 0.8571428571428572), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1C)N2C&#39;, 0.8656716417910448), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC1)N2C&#39;, 0.8656716417910448), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=C(O)C=CC=C1)N2C&#39;, 0.8656716417910448), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C3C=C31)N2C&#39;, 0.8676470588235294), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=N1)N2C&#39;, 0.8695652173913043), (&#39;CNC1CCC2C3=CC=CC(=C3)C(=O)OC(C1)C2C(=O)OC&#39;, 0.8695652173913043), (&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=NC=CC=C1)N2C&#39;, 0.8695652173913043), (&#39;CC=CC=CCC(=O)OC1CC2CCC(C1C(=O)OC)N2C&#39;, 0.9142857142857143), (&#39;C=CC=CC=CC(=O)OC1CC2CCC(C1C(=O)OC)N2C&#39;, 0.9285714285714286)]
+</pre></div>
+</div>
+<p>When the list of candidates is populated and sorted, we need to choose the morphs that
+will form the next <a class="reference internal" href="../glossary.html#term-morph-generation"><span class="xref std std-term">generation</span></a> (the next leaves of the tree from which new morphs can be generated).
+Here is an example implementation of a very simple filtering procedure:</p>
+<div class="literal-block-wrapper container" id="filtering-morphs">
+<div class="code-block-caption"><span class="caption-number">Listing 2.6 </span><span class="caption-text">A simple morph filter that selects only the first three closest morphs from the list.</span><a class="headerlink" href="#filtering-morphs" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># print the current candidates mask (all positions are on by default)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">)</span>
+
+<span class="c1"># accept only the first three morphs in the sorted list (those with the lowest distance to target)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">]</span>
+<span class="n">mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">mask</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">mask</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c1"># save the new mask to the tree</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span> <span class="o">=</span> <span class="n">mask</span>
+
+<span class="c1"># show results</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="c1"># get accepted molecules only</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>(True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
+(True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+[(&#39;COC(=O)C1C2CCC(CC1(O)OC(=O)C1=CC=CC=C1)N2C&#39;, 0.5), (&#39;COC(=O)C1C2C3CN2C(C3)CC1OC(=O)C1=CC=CC=C1&#39;, 0.7868852459016393), (&#39;CCC1CC(OC(=O)C2=CC=CC=C2)C(C(=O)OC)CN1C&#39;, 0.7868852459016393)]
+</pre></div>
+</div>
+<p>In <a class="reference internal" href="#filtering-morphs"><span class="std std-numref">Listing 2.6</span></a> <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates_mask" title="molpher.core.ExplorationTree.ExplorationTree.candidates_mask"><code class="xref any py py-attr docutils literal"><span class="pre">candidates_mask</span></code></a> member can be easily changed by writing
+a <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">list</span></code></a> or a <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">tuple</span></code></a> of new values into it. Here we simply select the first three morphs as the new <a class="reference internal" href="../glossary.html#term-morph-generation"><span class="xref std std-term">morph generation</span></a>.
+Note that the list of selected morphs is sorted from the molecule closest to the target to the farthest,
+because we called the <a class="reference internal" href="../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.sortMorphs" title="molpher.swig_wrappers.core.ExplorationTree.sortMorphs"><code class="xref any py py-meth docutils literal"><span class="pre">sortMorphs()</span></code></a> method previously.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The new mask must be the same length as the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a> member. If this requirement
+is not satisfied, an instance of <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#RuntimeError" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">RuntimeError</span></code></a> is raised.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The mask should only be set after the morphs are sorted. If the mask is set and
+the order of morphs is changed, the mask will stay the same and will have to be updated
+to follow the new order.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The library implements a few built-in filters. You can use the
+<a class="reference internal" href="../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.filterMorphs" title="molpher.swig_wrappers.core.ExplorationTree.filterMorphs"><code class="xref any py py-meth docutils literal"><span class="pre">filterMorphs()</span></code></a> method to invoke them. See the method&#8217;s documentation for more information
+on the available filtering options.</p>
+</div>
+</div>
+<div class="section" id="extending-and-pruning">
+<span id="extend-prune"></span><h3><a class="toc-backref" href="#id10">2.3.3. Extending and Pruning</a><a class="headerlink" href="#extending-and-pruning" title="Permalink to this headline">¶</a></h3>
+<p>When we have the morphs we want to attach to the tree selected, we can call <a class="reference internal" href="../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.extend" title="molpher.swig_wrappers.core.ExplorationTree.extend"><code class="xref any py py-meth docutils literal"><span class="pre">extend()</span></code></a>
+which will connect them to their respective parents making them the new leaves
+of our tree:</p>
+<div class="literal-block-wrapper container" id="extending-tree">
+<div class="code-block-caption"><span class="caption-number">Listing 2.7 </span><span class="caption-text">Extending and pruning the tree.</span><a class="headerlink" href="#extending-tree" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># get the number of generations before</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">generation_count</span><span class="p">)</span>
+
+<span class="n">tree</span><span class="o">.</span><span class="n">extend</span><span class="p">()</span> <span class="c1"># connect the accepted morphs to the tree as new leaves</span>
+<span class="k">print</span><span class="p">(</span>
+    <span class="nb">sorted</span><span class="p">(</span> <span class="c1"># grab the new leaves as a list sorted according to their distance from target</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">leaves</span>
+    <span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span> <span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># get the number of generations after</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">generation_count</span><span class="p">)</span>
+
+<span class="c1"># check if a path was found</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">path_found</span><span class="p">)</span>
+
+<span class="c1"># run the pruning operation on the updated tree</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>0
+[(&#39;COC(=O)C1C2CCC(CC1(O)OC(=O)C1=CC=CC=C1)N2C&#39;, 0.5), (&#39;COC(=O)C1C2C3CN2C(C3)CC1OC(=O)C1=CC=CC=C1&#39;, 0.7868852459016393), (&#39;CCC1CC(OC(=O)C2=CC=CC=C2)C(C(=O)OC)CN1C&#39;, 0.7868852459016393)]
+1
+False
+</pre></div>
+</div>
+<p>We can see that after extending the tree, the selected morphs (see <a class="reference internal" href="#filtering-morphs"><span class="std std-numref">Listing 2.6</span></a>)
+had become the new leaves and that the tree&#8217;s
+<a class="reference internal" href="../glossary.html#term-morph-generation"><span class="xref std std-term">morph generation</span></a> counter (<a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.generation_count" title="molpher.core.ExplorationTree.ExplorationTree.generation_count"><code class="xref any py py-attr docutils literal"><span class="pre">generation_count</span></code></a>) was increased by one.</p>
+<p>Because a tree generated in this way grows exponentially, a pruning strategy is needed in order
+to keep the number of explored putative paths to a minimum by discarding those that are not getting any
+closer to the <a class="reference internal" href="../glossary.html#term-7"><span class="xref std std-term">target molecule</span></a>.</p>
+<p>We call the molecule that have not generated any morphs closer to the target than itself
+a <a class="reference internal" href="../glossary.html#term-non-producing-molecule"><span class="xref std std-term">non-producing molecule</span></a> and we can set
+the number of generations to wait before removing its descendents
+with the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.non_producing_survive" title="molpher.core.ExplorationData.ExplorationData.non_producing_survive"><code class="xref any py py-attr docutils literal"><span class="pre">non_producing_survive</span></code></a> parameter.</p>
+<p>Tree pruning can be requested anytime by calling the <a class="reference internal" href="../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.prune" title="molpher.swig_wrappers.core.ExplorationTree.prune"><code class="xref any py py-meth docutils literal"><span class="pre">prune()</span></code></a> method. In our example, the method didn&#8217;t prune
+any paths, because the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.non_producing_survive" title="molpher.core.ExplorationData.ExplorationData.non_producing_survive"><code class="xref any py py-attr docutils literal"><span class="pre">non_producing_survive</span></code></a> parameter is set to 2 generations in this particular instance.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">In addition to the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.non_producing_survive" title="molpher.core.ExplorationData.ExplorationData.non_producing_survive"><code class="xref any py py-attr docutils literal"><span class="pre">non_producing_survive</span></code></a> parameter, there is the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.max_morphs_total" title="molpher.core.ExplorationData.ExplorationData.max_morphs_total"><code class="xref any py py-attr docutils literal"><span class="pre">max_morphs_total</span></code></a> parameter,
+which imposes a restriction on the maximum number of
+descendents of one <a class="reference internal" href="../glossary.html#term-non-producing-molecule"><span class="xref std std-term">non-producing molecule</span></a>. If the number of descendents
+reaches this threshold, the molecule is removed along with the descendents.</p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">We could now repeat the process of generating, filtering, extending and pruning
+and have Molpher iteratively explore further in <a class="reference internal" href="../glossary.html#term-chemical-space"><span class="xref std std-term">chemical space</span></a>. We could also read the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.path_found" title="molpher.core.ExplorationTree.ExplorationTree.path_found"><code class="xref any py py-attr docutils literal"><span class="pre">path_found</span></code></a> member
+at every iteration to check for the presence of the <a class="reference internal" href="../glossary.html#term-7"><span class="xref std std-term">target molecule</span></a> in the tree and terminate the process,
+if a it is present. This would give us one complete implementation of a chemical space exploration algorithm.</p>
+</div>
+<p>Now we know everything that is needed to implement a chemical space exploration algorithm with
+the <em>Molpher-lib</em> library. In the following sections, we describe more advanced topics
+and introduce some built-in features of the library that can help to make some more complex tasks
+(such as tree serialization) easier.</p>
+</div>
+</div>
+<div class="section" id="tree-operations">
+<span id="operations"></span><h2><a class="toc-backref" href="#id11">2.4. Tree Operations</a><a class="headerlink" href="#tree-operations" title="Permalink to this headline">¶</a></h2>
+<p>We call every action that is performed on an <a class="reference internal" href="../glossary.html#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a> a <em>tree operation</em>.
+This concept is represented in the library with the <a class="reference internal" href="../documentation/python/molpher.core.operations.html#module-molpher.core.operations.TreeOperation" title="molpher.core.operations.TreeOperation"><code class="xref py py-class docutils literal"><span class="pre">TreeOperation</span></code></a> abstract class and it
+becomes useful when we run into a situation where we need to build
+several exploration trees at once, want to reuse some existing code or store some interim results
+of an ongoing exploration.</p>
+<p>We can run any operation on a tree simply by supplying it to the
+<a class="reference internal" href="../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.runOperation" title="molpher.swig_wrappers.core.ExplorationTree.runOperation"><code class="xref any py py-meth docutils literal"><span class="pre">runOperation()</span></code></a> method of the <a class="reference internal" href="../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree" title="molpher.swig_wrappers.core.ExplorationTree"><code class="xref py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a> class. Here is how to implement
+the same workflow as in the preceding sections using operations:</p>
+<div class="literal-block-wrapper container" id="operations-example">
+<div class="code-block-caption"><span class="caption-number">Listing 2.8 </span><span class="caption-text">Using operations to implement simple chemical space exploration.</span><a class="headerlink" href="#operations-example" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">molpher.core.operations</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="hll"><span class="k">class</span> <span class="nc">MyFilterMorphs</span><span class="p">(</span><span class="n">TreeOperation</span><span class="p">):</span>
+</span><span class="hll">    <span class="sd">&quot;&quot;&quot;</span>
+</span><span class="hll"><span class="sd">    A custom tree operation that accepts</span>
+</span><span class="hll"><span class="sd">    only the first three morphs</span>
+</span><span class="hll"><span class="sd">    (those with the lowest distance to target).</span>
+</span><span class="hll">
+</span><span class="hll"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class="hll">
+</span><span class="hll">    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="hll">        <span class="sd">&quot;&quot;&quot;</span>
+</span><span class="hll"><span class="sd">        This method is called automatically by the tree.</span>
+</span><span class="hll"><span class="sd">        The tree this operation is being run on is accessible</span>
+</span><span class="hll"><span class="sd">        from `self.tree`.</span>
+</span><span class="hll">
+</span><span class="hll"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span class="hll">
+</span><span class="hll">        <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">]</span>
+</span><span class="hll">        <span class="n">mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="hll">        <span class="n">mask</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="hll">        <span class="n">mask</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span> <span class="o">=</span> <span class="n">mask</span>
+</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">cocaine</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">procaine</span><span class="p">)</span> <span class="c1"># create the tree</span>
+
+<span class="c1"># this list of tree operations defines one iteration</span>
+<span class="n">iteration</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">GenerateMorphsOper</span><span class="p">()</span>
+    <span class="p">,</span> <span class="n">SortMorphsOper</span><span class="p">()</span>
+<span class="hll">    <span class="p">,</span> <span class="n">MyFilterMorphs</span><span class="p">()</span>
+</span>    <span class="p">,</span> <span class="n">ExtendTreeOper</span><span class="p">()</span>
+    <span class="p">,</span> <span class="n">PruneTreeOper</span><span class="p">()</span>
+<span class="p">]</span>
+
+<span class="c1"># apply the operations in the list one by one</span>
+<span class="k">for</span> <span class="n">oper</span> <span class="ow">in</span> <span class="n">iteration</span><span class="p">:</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">)</span>
+
+<span class="c1"># observe the results</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">generation_count</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">path_found</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span>
+    <span class="nb">sorted</span><span class="p">(</span> <span class="c1"># grab the new leaves as a list sorted according to their distance from target</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">leaves</span>
+    <span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Generated 67 morphs.
+1
+False
+[(&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C&#39;, 0.7068965517241379), (&#39;COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C&#39;, 0.7142857142857143), (&#39;COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C&#39;, 0.7586206896551724)]
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Because the morphing algorithm is not deterministic and we initilized a new tree,
+the set of obtained morphs is different from the one in the previous examples.</p>
+</div>
+<p>Most of the operations in <a class="reference internal" href="#operations-example"><span class="std std-numref">Listing 2.8</span></a> are built-in operations (discussed below), but
+we chose to define our own operation for the filtering step
+(see the highlighted lines). We simply created a subclass of the <a class="reference internal" href="../documentation/python/molpher.core.operations.html#module-molpher.core.operations.TreeOperation" title="molpher.core.operations.TreeOperation"><code class="xref py py-class docutils literal"><span class="pre">TreeOperation</span></code></a>
+abstract class and we overrode its
+<a class="reference internal" href="../documentation/python/operations/TreeOperation_doc.html#molpher.swig_wrappers.core.TreeOperation.__call__" title="molpher.swig_wrappers.core.TreeOperation.__call__"><code class="xref py py-meth docutils literal"><span class="pre">__call__()</span></code></a> method with the implementation we want.</p>
+<p>Each operation can have a tree associated with it, but it is not necessary.
+We can verify if a tree is associated with an operation by calling
+its <a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.TreeOperation.TreeOperation.getTree" title="molpher.core.operations.TreeOperation.TreeOperation.getTree"><code class="xref py py-meth docutils literal"><span class="pre">getTree()</span></code></a>
+method or accessing the <a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.TreeOperation.TreeOperation.tree" title="molpher.core.operations.TreeOperation.TreeOperation.tree"><code class="xref any py py-attr docutils literal"><span class="pre">TreeOperation.tree</span></code></a> attribute of the class.
+If there is no tree associated with the instance, they both return <a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">None</span></code></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The built-in operations will raise a <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#RuntimeError" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">RuntimeError</span></code></a>, if invoked without a tree attached to them.</p>
+</div>
+<div class="section" id="built-in-operations">
+<h3><a class="toc-backref" href="#id12">2.4.1. Built-in Operations</a><a class="headerlink" href="#built-in-operations" title="Permalink to this headline">¶</a></h3>
+<p>A few operations are already defined in the library:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.GenerateMorphsOper.GenerateMorphsOper" title="molpher.core.operations.GenerateMorphsOper.GenerateMorphsOper"><code class="xref py py-class docutils literal"><span class="pre">GenerateMorphsOper</span></code></a></li>
+<li><a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.SortMorphsOper.SortMorphsOper" title="molpher.core.operations.SortMorphsOper.SortMorphsOper"><code class="xref py py-class docutils literal"><span class="pre">SortMorphsOper</span></code></a></li>
+<li><a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.FilterMorphsOper.FilterMorphsOper" title="molpher.core.operations.FilterMorphsOper.FilterMorphsOper"><code class="xref py py-class docutils literal"><span class="pre">FilterMorphsOper</span></code></a></li>
+<li><a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.FindLeavesOper.FindLeavesOper" title="molpher.core.operations.FindLeavesOper.FindLeavesOper"><code class="xref py py-class docutils literal"><span class="pre">FindLeavesOper</span></code></a></li>
+<li><a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.ExtendTreeOper.ExtendTreeOper" title="molpher.core.operations.ExtendTreeOper.ExtendTreeOper"><code class="xref py py-class docutils literal"><span class="pre">ExtendTreeOper</span></code></a></li>
+<li><a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.PruneTreeOper.PruneTreeOper" title="molpher.core.operations.PruneTreeOper.PruneTreeOper"><code class="xref py py-class docutils literal"><span class="pre">PruneTreeOper</span></code></a></li>
+<li><a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.TraverseOper.TraverseOper" title="molpher.core.operations.TraverseOper.TraverseOper"><code class="xref py py-class docutils literal"><span class="pre">TraverseOper</span></code></a></li>
+</ul>
+</div></blockquote>
+<p>They are all dervied from <a class="reference internal" href="../documentation/python/operations/TreeOperation_doc.html#molpher.swig_wrappers.core.TreeOperation" title="molpher.swig_wrappers.core.TreeOperation"><code class="xref py py-class docutils literal"><span class="pre">TreeOperation</span></code></a> and contain
+the full set of operations performed on a tree in
+the original Molpher algorithm as published in <a class="footnote-reference" href="#id3" id="id2">[1]</a>. Therefore, the original algorithm can be
+implemented using those operations.</p>
+<p>In the next part of the tutorial, we will pay particular attention to the
+<a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.TraverseOper.TraverseOper" title="molpher.core.operations.TraverseOper.TraverseOper"><code class="xref py py-class docutils literal"><span class="pre">TraverseOper</span></code></a> operation. It differs
+from the others, because it uses a callback function to perform actions on molecules
+in the tree and is, therefore, very useful for debugging and saving exporting various data (see <a class="reference internal" href="#tree-traversal"><span class="std std-ref">Traversing the Tree</span></a>).</p>
+<p>For more details on the other operations, see the designated pages in the documentation.</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
+<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">PubMed</a>, <a class="reference external" href="http://www.jcheminf.com/content/6/1/7">DOI</a></td></tr>
+</tbody>
+</table>
+<div class="section" id="traversing-the-tree">
+<span id="tree-traversal"></span><h4><a class="toc-backref" href="#id13">2.4.1.1. Traversing the Tree</a><a class="headerlink" href="#traversing-the-tree" title="Permalink to this headline">¶</a></h4>
+<p>A special place among the operations belongs to the <a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.TraverseOper.TraverseOper" title="molpher.core.operations.TraverseOper.TraverseOper"><code class="xref py py-class docutils literal"><span class="pre">TraverseOper</span></code></a>
+class. It does not directly implement a part
+of a morphing algorithm, but serves as a means of traversing molecules in a tree and reading/modifying them
+as needed:</p>
+<div class="literal-block-wrapper container" id="traverse-example">
+<div class="code-block-caption"><span class="caption-number">Listing 2.9 </span><span class="caption-text">Traversing the tree using a callback.</span><a class="headerlink" href="#traverse-example" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">molpher.core.operations.callbacks</span> <span class="kn">import</span> <span class="n">TraverseCallback</span>
+
+<span class="k">class</span> <span class="nc">MyCallback</span><span class="p">(</span><span class="n">TraverseCallback</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This callback just prints some information</span>
+<span class="sd">    about the molecules in the tree.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">morph</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method called on each morph in the tree</span>
+<span class="sd">        -- starting from the root to leaves.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">morph</span><span class="o">.</span><span class="n">getParentSMILES</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;# Root #&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;# Morph #&#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Parent:&#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getParentSMILES</span><span class="p">())</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;SMILES: &#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">())</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Descendents: &#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getDescendants</span><span class="p">())</span>
+
+<span class="n">callback</span> <span class="o">=</span> <span class="n">MyCallback</span><span class="p">()</span> <span class="c1"># initialize a callback</span>
+<span class="n">traverse</span> <span class="o">=</span> <span class="n">TraverseOper</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span> <span class="c1"># attach it to a tree traversal operation</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">traverse</span><span class="p">)</span> <span class="c1"># run the operation</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span># Root #
+SMILES:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+Descendents:  (&#39;COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C&#39;, &#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C&#39;, &#39;COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C&#39;)
+# Morph #
+Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+# Morph #
+Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+SMILES:  COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C
+Descendents:  ()
+# Morph #
+Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+SMILES:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C
+SMILES:  COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C
+Descendents:  ()
+Descendents:  ()
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The tree traversal algorithm uses multiple threads. Therefore,
+the output might not be synchronized.</p>
+</div>
+<p>In <a class="reference internal" href="#traverse-example"><span class="std std-numref">Listing 2.9</span></a> we derive from the <a class="reference internal" href="../documentation/python/operations/TraverseCallback_doc.html#molpher.swig_wrappers.core.TraverseCallback" title="molpher.swig_wrappers.core.TraverseCallback"><code class="xref any py py-class docutils literal"><span class="pre">TraverseCallback</span></code></a> class, an abstract class with
+an abstract method <a class="reference internal" href="../documentation/python/operations/TraverseCallback_doc.html#molpher.swig_wrappers.core.TraverseCallback.__call__" title="molpher.swig_wrappers.core.TraverseCallback.__call__"><code class="xref py py-meth docutils literal"><span class="pre">__call__()</span></code></a>. This method takes one argument,
+which is a <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal"><span class="pre">MolpherMol</span></code></a> instance
+of a molecule in the tree. We need to override this method in our derived class in order to implement our own
+behaviour.</p>
+<p>The callback is then associated with a <a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.TraverseOper.TraverseOper" title="molpher.core.operations.TraverseOper.TraverseOper"><code class="xref py py-class docutils literal"><span class="pre">TraverseOper</span></code></a>
+instance, which can be run on a tree as any other
+tree operation. When the operation is run it traverses the tree from the root to the leaves and injects
+every molecule it encounters into our implementation of the
+<a class="reference internal" href="../documentation/python/operations/TraverseCallback_doc.html#molpher.swig_wrappers.core.TraverseCallback.__call__" title="molpher.swig_wrappers.core.TraverseCallback.__call__"><code class="xref py py-meth docutils literal"><span class="pre">__call__()</span></code></a> method.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We can also pass a SMILES string to the <a class="reference internal" href="../documentation/python/molpher.core.operations.html#molpher.core.operations.TraverseOper.TraverseOper" title="molpher.core.operations.TraverseOper.TraverseOper"><code class="xref py py-class docutils literal"><span class="pre">TraverseOper</span></code></a>
+constructor. In that case, a subtree will be traversed
+using the specified molecule as the root of the subtree.</p>
+</div>
+<p>There is also a much more convenient way to traverse the tree. Because, the <a class="reference internal" href="../documentation/python/molpher.core.html#module-molpher.core.ExplorationTree" title="molpher.core.ExplorationTree"><code class="xref any py py-mod docutils literal"><span class="pre">ExplorationTree</span></code></a> class implements
+the <a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.traverse" title="molpher.core.ExplorationTree.ExplorationTree.traverse"><code class="xref py py-meth docutils literal"><span class="pre">molpher.core.ExplorationTree.ExplorationTree.traverse()</span></code></a> method, we can simply take any python callable and use it instead of the
+<a class="reference internal" href="../documentation/python/operations/TraverseCallback_doc.html#molpher.swig_wrappers.core.TraverseCallback.__call__" title="molpher.swig_wrappers.core.TraverseCallback.__call__"><code class="xref py py-meth docutils literal"><span class="pre">__call__()</span></code></a> method.
+However, under the hood it does the same thing as we did in <a class="reference internal" href="#traverse-example"><span class="std std-numref">Listing 2.9</span></a>.
+Therefore, the above code can be turned into:</p>
+<div class="literal-block-wrapper container" id="short-traverse-example">
+<div class="code-block-caption"><span class="caption-number">Listing 2.10 </span><span class="caption-text">Traversing the tree using a callback &#8211; the simple version.</span><a class="headerlink" href="#short-traverse-example" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prints some information</span>
+<span class="sd">    about the molecules in the tree.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">morph</span><span class="o">.</span><span class="n">getParentSMILES</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;# Root #&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;# Morph #&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Parent:&#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getParentSMILES</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;SMILES: &#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Descendents: &#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">getDescendants</span><span class="p">())</span>
+
+<span class="n">tree</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">process</span><span class="p">)</span> <span class="c1"># use the traverse method to run the callback function</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span># Root #
+SMILES:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+Descendents:  (&#39;COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C&#39;, &#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C&#39;, &#39;COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C&#39;)
+# Morph #
+Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+SMILES:  COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C
+Descendents:  ()
+# Morph #
+Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+SMILES:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C
+Descendents:  ()
+# Morph #
+Parent: COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+SMILES:  COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C
+Descendents:  ()
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tree-templates-and-snapshots">
+<span id="templates-snapshots"></span><h2><a class="toc-backref" href="#id14">2.5. Tree Templates and Snapshots</a><a class="headerlink" href="#tree-templates-and-snapshots" title="Permalink to this headline">¶</a></h2>
+<p>We don&#8217;t always have to initialize <a class="reference internal" href="../glossary.html#term-morphing-parameters"><span class="xref std std-term">morphing parameters</span></a> by hand. We can use an <a class="reference internal" href="../glossary.html#term-xml-template"><span class="xref std std-term">XML template</span></a> instead.
+Here is an example of a template file (you can download this one
+from <a class="reference download internal" href="../_downloads/cocaine-procaine-template.xml" download=""><code class="xref download docutils literal"><span class="pre">here</span></code></a>):</p>
+<div class="literal-block-wrapper container" id="template-file">
+<div class="code-block-caption"><span class="caption-number">Listing 2.11 </span><span class="caption-text">A complete XML template file.</span><a class="headerlink" href="#template-file" title="Permalink to this code">¶</a></div>
+<div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!--</span>
+<span class="c">    Template can be loaded instead of a snapsthot to initilize a tree.</span>
+<span class="c">    It only contains information about the morphing parameters, however.</span>
+
+<span class="c">    IMPORTANT: The name of a template file must end with &#39;-template.xml&#39;.</span>
+<span class="c">    Otherwise it will be interpreted as a snapshot and the resulting tree</span>
+<span class="c">    will be invalid.</span>
+<span class="c">--&gt;</span>
+<span class="nt">&lt;iteration&gt;</span>
+    <span class="nt">&lt;source&gt;</span>
+        <span class="nt">&lt;smile&gt;</span>CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2<span class="nt">&lt;/smile&gt;</span>
+    <span class="nt">&lt;/source&gt;</span>
+    <span class="nt">&lt;target&gt;</span>
+        <span class="nt">&lt;smile&gt;</span>O=C(OCCN(CC)CC)c1ccc(N)cc1<span class="nt">&lt;/smile&gt;</span>
+    <span class="nt">&lt;/target&gt;</span>
+    <span class="nt">&lt;fingerprint&gt;</span>FP_MORGAN<span class="nt">&lt;/fingerprint&gt;</span>
+    <span class="nt">&lt;similarity&gt;</span>SC_TANIMOTO<span class="nt">&lt;/similarity&gt;</span>
+    <span class="nt">&lt;param&gt;</span>
+        <span class="nt">&lt;nonProducingSurvive&gt;</span>2<span class="nt">&lt;/nonProducingSurvive&gt;</span>
+        <span class="nt">&lt;acceptMin&gt;</span>50<span class="nt">&lt;/acceptMin&gt;</span>
+        <span class="nt">&lt;acceptMax&gt;</span>100<span class="nt">&lt;/acceptMax&gt;</span>
+        <span class="nt">&lt;farProduce&gt;</span>80<span class="nt">&lt;/farProduce&gt;</span>
+        <span class="nt">&lt;closeProduce&gt;</span>150<span class="nt">&lt;/closeProduce&gt;</span>
+        <span class="nt">&lt;farCloseThreashold&gt;</span>0.15<span class="nt">&lt;/farCloseThreashold&gt;</span>
+        <span class="nt">&lt;maxMorhpsTotal&gt;</span>1500<span class="nt">&lt;/maxMorhpsTotal&gt;</span>
+        <span class="nt">&lt;nonProducingSurvive&gt;</span>2<span class="nt">&lt;/nonProducingSurvive&gt;</span>
+        <span class="nt">&lt;weightMin&gt;</span>0.0<span class="nt">&lt;/weightMin&gt;</span>
+        <span class="nt">&lt;weightMax&gt;</span>500.0<span class="nt">&lt;/weightMax&gt;</span>
+    <span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/iteration&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>An <a class="reference internal" href="../glossary.html#term-xml-template"><span class="xref std std-term">XML template</span></a> is similar to a configuration file and can be loaded
+just like a snapshot (see <a class="reference internal" href="#loading-snapshot"><span class="std std-numref">Listing 2.13</span></a>), but the resulting tree
+will only contain the <a class="reference internal" href="../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a> as its root.</p>
+<div class="literal-block-wrapper container" id="saving-snapshot">
+<div class="code-block-caption"><span class="caption-number">Listing 2.12 </span><span class="caption-text">Loading a template and saving a built tree as a XML snapshot.</span><a class="headerlink" href="#saving-snapshot" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">template_file</span> <span class="o">=</span> <span class="s1">&#39;cocaine-procaine-template.xml&#39;</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">template_file</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+<span class="c1"># apply the tree operations</span>
+<span class="k">for</span> <span class="n">oper</span> <span class="ow">in</span> <span class="n">iteration</span><span class="p">:</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span>
+    <span class="nb">sorted</span><span class="p">(</span> <span class="c1"># grab the new leaves as a list sorted according to their distance from target</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">leaves</span>
+    <span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># save the tree in a snapshot file</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;snapshot.xml&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>The new iteration has been created from template:
+source: CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2
+target: O=C(OCCN(CC)CC)c1ccc(N)cc1
+
+{
+    &#39;max_morphs_total&#39;: 1500,
+    &#39;far_close_threshold&#39;: 0.15,
+    &#39;weight_max&#39;: 500.0,
+    &#39;close_produce&#39;: 150,
+    &#39;fingerprint&#39;: &#39;MORGAN&#39;,
+    &#39;accept_min&#39;: 50,
+    &#39;source&#39;: &#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;,
+    &#39;target&#39;: &#39;CCN(CC)CCOC(=O)C1=CC=C(N)C=C1&#39;,
+    &#39;weight_min&#39;: 0.0,
+    &#39;non_producing_survive&#39;: 2,
+    &#39;accept_max&#39;: 100,
+    &#39;operators&#39;: (
+        &#39;ADD_ATOM&#39;,
+        &#39;ADD_BOND&#39;,
+        &#39;BOND_CONTRACTION&#39;,
+        &#39;BOND_REROUTE&#39;,
+        &#39;INTERLAY_ATOM&#39;,
+        &#39;MUTATE_ATOM&#39;,
+        &#39;REMOVE_ATOM&#39;,
+        &#39;REMOVE_BOND&#39;
+    ),
+    &#39;far_produce&#39;: 80,
+    &#39;similarity&#39;: &#39;TANIMOTO&#39;
+}
+Generated 66 morphs.
+[(&#39;CN1C2CCC1C(C(=O)OCN)C(OC(=O)C1=CC=CC=C1)C2&#39;, 0.7777777777777778), (&#39;CCN1C2CCC1C(C(=O)OC)C(OC(=O)C1=CC=CC=C1)C2&#39;, 0.7936507936507937), (&#39;CN1C2CCC1C(C(=O)ON)C(OC(=O)C1=CC=CC=C1)C2&#39;, 0.8064516129032258)]
+</pre></div>
+</div>
+<p>In the above example we loaded an <a class="reference internal" href="../glossary.html#term-xml-template"><span class="xref std std-term">XML template</span></a>, created a tree from it, extended the tree and
+serialized it as a snapshot. We can see that all the parameters are the same as in the <a class="reference internal" href="../glossary.html#term-xml-template"><span class="xref std std-term">XML template</span></a> and that
+the resulting tree can be built using the same list of operations
+as in <a class="reference internal" href="#operations-example"><span class="std std-numref">Listing 2.8</span></a>.</p>
+<p>In <a class="reference internal" href="#saving-snapshot"><span class="std std-numref">Listing 2.12</span></a> we also serialized our tree instance to disk
+with the <a class="reference internal" href="../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.save" title="molpher.swig_wrappers.core.ExplorationTree.save"><code class="xref py py-meth docutils literal"><span class="pre">save()</span></code></a> method.
+The saved tree can be later reconstructed with the
+<a class="reference internal" href="../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.create" title="molpher.core.ExplorationTree.ExplorationTree.create"><code class="xref py py-meth docutils literal"><span class="pre">create()</span></code></a> factory method:</p>
+<div class="literal-block-wrapper container" id="loading-snapshot">
+<div class="code-block-caption"><span class="caption-number">Listing 2.13 </span><span class="caption-text">Loading a snapshot of a previously generated tree.</span><a class="headerlink" href="#loading-snapshot" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">new_tree</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;snapshot.xml&#39;</span><span class="p">)</span> <span class="c1"># create a new tree from the saved snapshot</span>
+<span class="k">print</span><span class="p">(</span><span class="n">new_tree</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span>
+    <span class="nb">sorted</span><span class="p">(</span> <span class="c1"># grab the leaves in the created tree (these should be the same as those in the original tree)</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">new_tree</span><span class="o">.</span><span class="n">leaves</span>
+    <span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Snapshot successfully created from: snapshot.xml
+{
+    &#39;max_morphs_total&#39;: 1500,
+    &#39;far_close_threshold&#39;: 0.15,
+    &#39;weight_max&#39;: 500.0,
+    &#39;close_produce&#39;: 150,
+    &#39;fingerprint&#39;: &#39;MORGAN&#39;,
+    &#39;accept_min&#39;: 50,
+    &#39;source&#39;: &#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;,
+    &#39;target&#39;: &#39;CCN(CC)CCOC(=O)C1=CC=C(N)C=C1&#39;,
+    &#39;weight_min&#39;: 0.0,
+    &#39;non_producing_survive&#39;: 2,
+    &#39;accept_max&#39;: 100,
+    &#39;operators&#39;: (
+        &#39;ADD_ATOM&#39;,
+        &#39;ADD_BOND&#39;,
+        &#39;BOND_CONTRACTION&#39;,
+        &#39;BOND_REROUTE&#39;,
+        &#39;INTERLAY_ATOM&#39;,
+        &#39;MUTATE_ATOM&#39;,
+        &#39;REMOVE_ATOM&#39;,
+        &#39;REMOVE_BOND&#39;
+    ),
+    &#39;far_produce&#39;: 80,
+    &#39;similarity&#39;: &#39;TANIMOTO&#39;
+}
+[(&#39;CN1C2CCC1C(C(=O)OCN)C(OC(=O)C1=CC=CC=C1)C2&#39;, 0.7777777777777778), (&#39;CCN1C2CCC1C(C(=O)OC)C(OC(=O)C1=CC=CC=C1)C2&#39;, 0.7936507936507937), (&#39;CN1C2CCC1C(C(=O)ON)C(OC(=O)C1=CC=CC=C1)C2&#39;, 0.8064516129032258)]
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-exploration-algorithm-implementations">
+<h2><a class="toc-backref" href="#id15">2.6. Example Exploration Algorithm Implementations</a><a class="headerlink" href="#example-exploration-algorithm-implementations" title="Permalink to this headline">¶</a></h2>
+<p>Now we wrap up this tutorial with two simple chemical space exploration implementations
+(see <a class="reference internal" href="#complete-example"><span class="std std-numref">Listing 2.14</span></a>
+and <a class="reference internal" href="#bidirectional-example"><span class="std std-numref">Listing 2.15</span></a>).</p>
+<div class="section" id="using-the-tutorial-to-implement-a-search-algorithm">
+<span id="simple"></span><h3><a class="toc-backref" href="#id16">2.6.1. Using the Tutorial to Implement a Search Algorithm</a><a class="headerlink" href="#using-the-tutorial-to-implement-a-search-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>In the tutorial we showed how to implement
+one step of a simple algorithm that searches
+for a path in <a class="reference internal" href="../glossary.html#term-chemical-space"><span class="xref std std-term">chemical space</span></a> between <em>cocaine</em> and <em>procaine</em>.
+Transforming the code into a full exploration algorithm is pretty much straightforward:</p>
+<div class="literal-block-wrapper container" id="complete-example">
+<div class="code-block-caption"><span class="caption-number">Listing 2.14 </span><span class="caption-text">Example implementation of a pathfinding algorithm.</span><a class="headerlink" href="#complete-example" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Complete morphing example create from the tutorial code.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Copyright (c) 2016 Martin Sicho</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">ExplorationTree</span> <span class="k">as</span> <span class="n">ETree</span>
+<span class="kn">from</span> <span class="nn">molpher.core.operations</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">cocaine</span> <span class="o">=</span> <span class="s1">&#39;CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2&#39;</span>
+<span class="n">procaine</span> <span class="o">=</span> <span class="s1">&#39;O=C(OCCN(CC)CC)c1ccc(N)cc1&#39;</span>
+
+<span class="k">class</span> <span class="nc">MyFilterMorphs</span><span class="p">(</span><span class="n">TreeOperation</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyFilterMorphs</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">]</span>
+        <span class="n">mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">mask</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">mask</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span> <span class="o">=</span> <span class="n">mask</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">iteration</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">GenerateMorphsOper</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">SortMorphsOper</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">MyFilterMorphs</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">ExtendTreeOper</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">PruneTreeOper</span><span class="p">()</span>
+    <span class="p">]</span>
+
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">ETree</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">cocaine</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">procaine</span><span class="p">)</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">tree</span><span class="o">.</span><span class="n">path_found</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">oper</span> <span class="ow">in</span> <span class="n">iteration</span><span class="p">:</span>
+            <span class="n">tree</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">)</span>
+        <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Iteration&quot;</span><span class="p">,</span> <span class="n">counter</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span>
+            <span class="nb">sorted</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">leaves</span>
+            <span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fetchMol</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">getParentSMILES</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current</span><span class="p">:</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fetchMol</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+
+    <span class="n">path</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Path found: &quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">mol</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Loading data from: /home/sichom/Projects/Molpher/Molpher_repo/molpher-lib/python/molpher/swig_wrappers/SAScore.dat
+loading SAScore.dat ... done
+Parse molecule CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2 &gt;&gt; COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
+Parse molecule O=C(OCCN(CC)CC)c1ccc(N)cc1 &gt;&gt; CCN(CC)CCOC(=O)C1=CC=C(N)C=C1
+Iteration 1
+[(&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C&#39;, 0.7068965517241379), (&#39;COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C&#39;, 0.7142857142857143), (&#39;COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1&#39;, 0.728813559322034)]
+Iteration 2
+[(&#39;COC(=O)CC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C&#39;, 0.5769230769230769), (&#39;CCC(CC(=O)OC)N(C)CCCOC(=O)C1=CC=CC=C1&#39;, 0.6415094339622642), (&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=C(N)C=C2)CCN1C&#39;, 0.6666666666666667), (&#39;COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1&#39;, 0.728813559322034)]
+Iteration 3
+[(&#39;CCC(CCOC(=O)C1=CC=C(N)C=C1)N(C)CCC(=O)OC&#39;, 0.4897959183673469), (&#39;CCC(CC(=O)OC)N(C)CCCOC(=O)C1=CC=C(N)C=C1&#39;, 0.4897959183673469), (&#39;COCCC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C&#39;, 0.5416666666666667), (&#39;CCC(CC(=O)OC)N(C)CCCOC(=O)C1=CC=CC=C1&#39;, 0.6415094339622642), (&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=C(N)C=C2)CCN1C&#39;, 0.6666666666666667), (&#39;COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1&#39;, 0.728813559322034)]
+Iteration 4
+[(&#39;CCC(CCOC(=O)C1=CC=C(N)C=C1)N(CC)CCC(=O)O&#39;, 0.44680851063829785), (&#39;CCC(CCOC(=O)C1=CC=C(N)C=C1)N(C)CCC(=O)O&#39;, 0.4565217391304348), (&#39;CCC(CC(=O)O)N(C)CCCOC(=O)C1=CC=C(N)C=C1&#39;, 0.46808510638297873), (&#39;COCCC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C&#39;, 0.5416666666666667), (&#39;CCC(CC(=O)OC)N(C)CCCOC(=O)C1=CC=CC=C1&#39;, 0.6415094339622642), (&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=C(N)C=C2)CCN1C&#39;, 0.6666666666666667), (&#39;COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1&#39;, 0.728813559322034)]
+Iteration 5
+[(&#39;CCN(CCOC(=O)C1=CC=C(N)C=C1)N(C)CCC(=O)O&#39;, 0.3571428571428571), (&#39;CCC(CC(=O)O)N(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.40909090909090906), (&#39;CCN(CCC(=O)O)C(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.4347826086956522), (&#39;COCCC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C&#39;, 0.5416666666666667), (&#39;CCC(CC(=O)OC)N(C)CCCOC(=O)C1=CC=CC=C1&#39;, 0.6415094339622642), (&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=C(N)C=C2)CCN1C&#39;, 0.6666666666666667), (&#39;COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1&#39;, 0.728813559322034)]
+Pruned (descendents only): COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1
+Iteration 6
+[(&#39;CN(CCOC(=O)C1=CC=C(N)C=C1)N(C)CCC(=O)O&#39;, 0.3157894736842105), (&#39;CCN(CCCOC(=O)C1=CC=C(N)C=C1)CCC(=O)O&#39;, 0.31707317073170727), (&#39;CCN(CCC(=O)O)N(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.3414634146341463), (&#39;CCC(CC(=O)O)N(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.40909090909090906), (&#39;COCCC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C&#39;, 0.5416666666666667), (&#39;CCC(CC(=O)OC)N(C)CCCOC(=O)C1=CC=CC=C1&#39;, 0.6415094339622642), (&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=C(N)C=C2)CCN1C&#39;, 0.6666666666666667), (&#39;COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1&#39;, 0.728813559322034)]
+Candidate morph: CCN(CCCOC(=O)C1=CC=C(N)C=C1)CCC(=O)O already present in the tree. Skipping...
+Pruned (descendents only): COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C
+Pruned (descendents only): CCC1C(C(=O)OC)C(OC(=O)C2=CC=C(N)C=C2)CCN1C
+Iteration 7
+[(&#39;CCN(CCCO)CCCOC(=O)C1=CC=C(N)C=C1&#39;, 0.30000000000000004), (&#39;CN(CCOC(=O)C1=CC=C(N)C=C1)N(C)CCC(=O)O&#39;, 0.3157894736842105), (&#39;CCN(CCCOC(=O)C1=CC=C(N)C=C1)CC(=O)O&#39;, 0.31707317073170727), (&#39;CCN(CCC(=O)O)N(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.3414634146341463), (&#39;CCC(CC(=O)O)N(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.40909090909090906), (&#39;COCCC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C&#39;, 0.5416666666666667), (&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=C(N)C=C2)CCN1C&#39;, 0.6666666666666667), (&#39;COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C&#39;, 0.7142857142857143), (&#39;COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1&#39;, 0.728813559322034)]
+Pruned (descendents only): COCCC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C
+Iteration 8
+[(&#39;CCN(CCOC(=O)C1=CC=C(N)C=C1)CC(=O)O&#39;, 0.18918918918918914), (&#39;CCN(CCCO)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.21052631578947367), (&#39;CCN(CCCOC(=O)C1=CC=C(N)C=C1)CCOO&#39;, 0.275), (&#39;CN(CCOC(=O)C1=CC=C(N)C=C1)N(C)CCC(=O)O&#39;, 0.3157894736842105), (&#39;CCN(CCC(=O)O)N(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.3414634146341463), (&#39;CCC(CC(=O)O)N(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.40909090909090906), (&#39;COCCC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C&#39;, 0.5416666666666667), (&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=C(N)C=C2)CCN1C&#39;, 0.6666666666666667), (&#39;COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C&#39;, 0.7142857142857143), (&#39;COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1&#39;, 0.728813559322034)]
+Iteration 9
+[(&#39;CCCN(CC)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.1428571428571429), (&#39;CCN(CCOO)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.16666666666666663), (&#39;CCN(CCO)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.16666666666666663), (&#39;CCN(CCOC(=O)C1=CC=C(N)C=C1)CC(=O)O&#39;, 0.18918918918918914), (&#39;CN(CCOC(=O)C1=CC=C(N)C=C1)N(C)CCC(=O)O&#39;, 0.3157894736842105), (&#39;CCN(CCC(=O)O)N(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.3414634146341463), (&#39;CCC(CC(=O)O)N(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.40909090909090906), (&#39;COCCC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C&#39;, 0.5416666666666667), (&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=C(N)C=C2)CCN1C&#39;, 0.6666666666666667), (&#39;COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C&#39;, 0.7142857142857143), (&#39;COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1&#39;, 0.728813559322034)]
+Candidate morph: CCCN(CC)CCOC(=O)C1=CC=C(N)C=C1 already present in the tree. Skipping...
+Pruned (descendents only): CCC(CC(=O)OC)N(C)CCCOC(=O)C1=CC=C(N)C=C1
+Iteration 10
+[(&#39;CCN(CC)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.0), (&#39;CCN(CO)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.1428571428571429), (&#39;CCN(CCOO)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.16666666666666663), (&#39;CCN(CCOC(=O)C1=CC=C(N)C=C1)CC(=O)O&#39;, 0.18918918918918914), (&#39;CN(CCOC(=O)C1=CC=C(N)C=C1)N(C)CCC(=O)O&#39;, 0.3157894736842105), (&#39;CCN(CCC(=O)O)N(C)CCOC(=O)C1=CC=C(N)C=C1&#39;, 0.3414634146341463), (&#39;CCC(CC(=O)OC)N(C)CCCOC(=O)C1=CC=C(N)C=C1&#39;, 0.4897959183673469), (&#39;COCCC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C&#39;, 0.5416666666666667), (&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=C(N)C=C2)CCN1C&#39;, 0.6666666666666667), (&#39;COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C&#39;, 0.7142857142857143), (&#39;COC(=O)C1C2CC1N(C)C2CCOC(=O)C1=CC=CC=C1&#39;, 0.728813559322034)]
+Path found:
+COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C 1.7976931348623157e+308
+COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C 0.7068965517241379
+COC(=O)CC1CCC(CCOC(=O)C2=CC=C(N)C=C2)N1C 0.5769230769230769
+CCC(CCOC(=O)C1=CC=C(N)C=C1)N(C)CCC(=O)OC 0.4897959183673469
+CCC(CCOC(=O)C1=CC=C(N)C=C1)N(CC)CCC(=O)O 0.44680851063829785
+CCN(CCC(=O)O)C(C)CCOC(=O)C1=CC=C(N)C=C1 0.4347826086956522
+CCN(CCCOC(=O)C1=CC=C(N)C=C1)CCC(=O)O 0.31707317073170727
+CCN(CCCO)CCCOC(=O)C1=CC=C(N)C=C1 0.30000000000000004
+CCN(CCCO)CCOC(=O)C1=CC=C(N)C=C1 0.21052631578947367
+CCCN(CC)CCOC(=O)C1=CC=C(N)C=C1 0.1428571428571429
+CCN(CC)CCOC(=O)C1=CC=C(N)C=C1 0.0
+
+Process finished with exit code 0
+</pre></div>
+</div>
+<p>The above implementation is nothing more than just the tutorial code bits inside a loop.
+The loop checks if a path was found at each iteration.
+If the path is found, it backtracks through the tree
+and prints out a sequence of molecules lying on the path.</p>
+</div>
+<div class="section" id="implementing-a-bidirectional-search-algorithm">
+<span id="bidirectional"></span><h3><a class="toc-backref" href="#id17">2.6.2. Implementing a Bidirectional Search Algorithm</a><a class="headerlink" href="#implementing-a-bidirectional-search-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>The second example we have here is a little bit more elaborate,
+but implements a very simple idea. Instead of one exploration tree,
+we build two trees that each search for a path to the closest molecule in the other:</p>
+<div class="literal-block-wrapper container" id="bidirectional-example">
+<div class="code-block-caption"><span class="caption-number">Listing 2.15 </span><span class="caption-text">Example implementation of a bidirectional pathfinding algorithm.</span><a class="headerlink" href="#bidirectional-example" title="Permalink to this code">¶</a></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Implementation of the bidirectional search algorithm.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Copyright (c) 2016 Martin Sicho</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">molpher.core.ExplorationTree</span> <span class="kn">import</span> <span class="n">ExplorationTree</span> <span class="k">as</span> <span class="n">ETree</span>
+<span class="kn">from</span> <span class="nn">molpher.core.operations</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">timeit</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">milliseconds</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+    <span class="n">func</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">-</span> <span class="n">milliseconds</span>
+
+<span class="k">class</span> <span class="nc">FindClosest</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closest</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">morph</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">closest</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">closest</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">return</span>
+        <span class="n">current_dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">()</span>
+        <span class="n">morph_dist</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">morph_dist</span> <span class="o">&lt;</span> <span class="n">current_dist</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">closest</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">BidirectionalPathFinder</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;fingerprint&#39;</span> <span class="p">:</span> <span class="s1">&#39;ATOM_PAIRS&#39;</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">source</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span> <span class="o">=</span> <span class="n">FindClosest</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span> <span class="o">=</span> <span class="n">FindClosest</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ITERATION</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">GenerateMorphsOper</span><span class="p">()</span>
+            <span class="p">,</span> <span class="n">SortMorphsOper</span><span class="p">()</span>
+            <span class="p">,</span> <span class="n">FilterMorphsOper</span><span class="p">()</span>
+            <span class="p">,</span> <span class="n">ExtendTreeOper</span><span class="p">()</span>
+            <span class="p">,</span> <span class="n">PruneTreeOper</span><span class="p">()</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_find_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">connecting_mol</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fetchMol</span><span class="p">(</span><span class="n">connecting_mol</span><span class="p">)</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">())</span>
+        <span class="k">while</span> <span class="n">current</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">getParentSMILES</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">current</span><span class="p">:</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fetchMol</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">())</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">path</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">connecting_molecule</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Iteration {0}:&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counter</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">oper</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ITERATION</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Execution times ({0}):&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">oper</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
+
+                <span class="n">source_target_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">))</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">source -&gt; target: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source_target_time</span><span class="p">))</span>
+                <span class="n">target_source_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">))</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">target -&gt; source: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_source_time</span><span class="p">))</span>
+
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">total time: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source_target_time</span> <span class="o">+</span> <span class="n">target_source_time</span><span class="p">))</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Traversal times:&#39;</span><span class="p">)</span>
+
+            <span class="n">source_target_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">source -&gt; target: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source_target_time</span><span class="p">))</span>
+            <span class="n">target_source_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">target -&gt; source: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_source_time</span><span class="p">))</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">total time: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source_target_time</span> <span class="o">+</span> <span class="n">target_source_time</span><span class="p">))</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Current Targets:&#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">source to target:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">target to source:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Current Minima:&#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">source to target:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">target to source:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">()</span>
+            <span class="p">}</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;New Targets:&#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">source to target:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">target to source:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">path_found</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Path Found in tree going from source to target:&#39;</span><span class="p">)</span>
+                <span class="n">connecting_molecule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Connecting molecule:&#39;</span><span class="p">,</span> <span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">path_found</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Path Found in tree going from target to source:&#39;</span><span class="p">)</span>
+                <span class="n">connecting_molecule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Connecting molecule:&#39;</span><span class="p">,</span> <span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">break</span>
+
+        <span class="n">source_target_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="p">,</span> <span class="n">connecting_molecule</span><span class="p">)</span>
+        <span class="n">target_source_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="p">,</span> <span class="n">connecting_molecule</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">source_target_path</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">connecting_molecule</span>
+        <span class="n">target_source_path</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="n">source_target_path</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">target_source_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">source_target_path</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">milliseconds_now</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+    <span class="n">cocaine</span> <span class="o">=</span> <span class="s1">&#39;CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2&#39;</span>
+    <span class="n">procaine</span> <span class="o">=</span> <span class="s1">&#39;O=C(OCCN(CC)CC)c1ccc(N)cc1&#39;</span>
+
+    <span class="n">pathfinder</span> <span class="o">=</span> <span class="n">BidirectionalPathFinder</span><span class="p">(</span><span class="n">cocaine</span><span class="p">,</span> <span class="n">procaine</span><span class="p">)</span>
+    <span class="n">pathfinder</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pathfinder</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Total Execution Time: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">-</span> <span class="n">milliseconds_now</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output (only the final print of the path is shown):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="s1">&#39;COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCC1C(COC)C(OC(=O)C2=CC=CC=C2)CCN1C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCC1C(COC)C(OC(=O)C2=CC=CC=C2)CCN1CC&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCN1CCC(OC(=O)C2=CC=CC=C2)C(COC)C1C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCN1CC(OC(=O)C2=CC=CC=C2)C(COC)C1C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCN1CC(OC(=O)C2=CC=CC=C2)C(CO)C1C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCC1C(C)N(CC)CC1OC(=O)C1=CC=CC=C1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCC1C(C)C(OC(=O)C2=CC=CC=C2)CN1CC&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCC1CC(OC(=O)C2=CC=CC=C2)CN1CC&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCC1C(OC(=O)C2=CC=CC=C2)CN1CC&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCC1C(OC(=O)C2=CC=C(N)C=C2)CN1CC&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCN1CC(OC(=O)C2=CC=C(N)C=C2)C1C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCN(CC)CCOC(=O)C1=CC=C(N)C=C1&#39;</span>
+<span class="p">]</span>
+<span class="n">Total</span> <span class="n">Execution</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">153964.77300000002</span> <span class="c1"># in milliseconds</span>
+</pre></div>
+</div>
+<p>This bidirectional algorithm uses the built-in operations to facilitate the search,
+but does one extra procedure after
+an iteration is completed &#8211; it changes the target molecules of the trees.
+When the new leaves are connected both trees are traversed and molecules
+closest to the current target are identified in each. The closest molecule from one tree is then
+set as the new target for the tree searching in the opposite direction and vice versa.</p>
+<p>In <a class="reference internal" href="#bidirectional-example"><span class="std std-numref">Listing 2.15</span></a> we also use the <a class="reference external" href="https://docs.python.org/3.5/library/time.html#time.clock" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">time.clock</span></code></a> function to measure the execution
+times of each potentially time-consuming operation.</p>
+</div>
+</div>
+<div class="section" id="summary">
+<h2><a class="toc-backref" href="#id18">2.7. Summary</a><a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>If you have read the tutorial all the way to here, you now probably have a decent idea on what the library does
+and how to use it. If you have any suggestions on how to improve it or bug reports, please send them to
+<a class="reference external" href="mailto:sichom&#37;&#52;&#48;vscht&#46;cz">sichom<span>&#64;</span>vscht<span>&#46;</span>cz</a> or create an issue on the issue tracker. All help on the project is much appreciated.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../documentation/index.html" class="btn btn-neutral float-right" title="Source Code Documentation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral" title="1. Installing the Library" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.0b0dev0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
