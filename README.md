@@ -10,7 +10,7 @@ The purpose of the library is to make molecular morphing easily accessible to a 
 2. refactoring the code so that as many features as possible can be easily exposed via an API,
 3. exposing the API of the library to a high-level programming language (such as Python) for ease of use.
 
-An extensive documentation with a turorial for all versions of the library is available [here](https://lich-uct.github.io/molpher-lib/).
+An extensive documentation with a tutorial for all versions of the library is available [here](https://lich-uct.github.io/molpher-lib/).
 
 ## Installation
 
