@@ -157,6 +157,7 @@
 
 <span class="kn">from</span> <span class="nn">molpher.core.ExplorationTree</span> <span class="kn">import</span> <span class="n">ExplorationTree</span> <span class="k">as</span> <span class="n">ETree</span>
 <span class="kn">from</span> <span class="nn">molpher.core.operations</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">molpher.core.selectors</span> <span class="kn">import</span> <span class="o">*</span>
 
 <div class="viewcode-block" id="timeit"><a class="viewcode-back" href="../../../documentation/python/molpher.examples.html#molpher.examples.bidirectional.timeit">[docs]</a><span class="k">def</span> <span class="nf">timeit</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="n">milliseconds</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
@@ -181,7 +182,7 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
         <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;fingerprint&#39;</span> <span class="p">:</span> <span class="s1">&#39;ATOM_PAIRS&#39;</span>
+            <span class="s1">&#39;fingerprint&#39;</span> <span class="p">:</span> <span class="n">FP_ATOM_PAIRS</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">source</span><span class="p">)</span>

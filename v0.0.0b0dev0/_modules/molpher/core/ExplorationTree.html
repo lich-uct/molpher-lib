@@ -213,14 +213,14 @@
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="ExplorationTree.create"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">tree_data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">callback_class</span><span class="o">=</span><span class="n">Callback</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        create tree</span>
+<span class="sd">        Create an exploration tree.</span>
 
 <span class="sd">        :param tree_data: the morphing parameters (optional if ``source`` and ``target`` are specified)</span>
 <span class="sd">        :type tree_data: `molpher.swig_wrappers.core.ExplorationData` (or its derived class),</span>
 <span class="sd">            a `dict` of parameters (in the same format as in :class:`~molpher.core.ExplorationData.ExplorationData`&#39;s constructor)</span>
 <span class="sd">            or a path to a :term:`XML template` or a :term:`tree snapshot`</span>
-<span class="sd">        :param source: SMILES of the source molecule</span>
-<span class="sd">        :type source: `str`</span>
+<span class="sd">        :param source: SMILES of the source molecule or a molecule directly (uses a copy not the instance itself)</span>
+<span class="sd">        :type source: `str` or :class:`~molpher.core.MolpherMol.MolpherMol`</span>
 <span class="sd">        :param target: SMILES of the target molecule</span>
 <span class="sd">        :type target: `str`</span>
 <span class="sd">        :param callback_class: the class to use when making a callback using the :meth:`traverse` method</span>
@@ -242,6 +242,11 @@
             <span class="n">_params</span> <span class="o">=</span> <span class="n">ExplorationData</span><span class="p">(</span><span class="o">**</span><span class="n">tree_data</span><span class="p">)</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="n">ExplorationTree</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">_params</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">source</span> <span class="ow">and</span> <span class="n">target</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">source</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">source</span><span class="p">)</span> <span class="o">==</span> <span class="n">MolpherMol</span><span class="p">:</span>
+                    <span class="n">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">==</span> <span class="n">MolpherMol</span><span class="p">:</span>
+                    <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">()</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="n">ExplorationTree</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;Invalid set of parameters specified.&#39;</span><span class="p">)</span>

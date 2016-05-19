@@ -90,7 +90,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#installation-with-anaconda">1.1. Installation with Anaconda</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#building-and-installing-from-source">1.2. Building and Installing from source</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#prerequisites">1.2.1. Prerequisites</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#building-molpher-and-its-dependencies">1.2.2. Building Molpher and Its Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-library">1.2.2. Building the Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-python-wrappers-and-the-conda-packages">1.2.3. Building the Python Wrappers and the Conda Packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-documentation">1.2.4. Building the Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -152,6 +154,11 @@
 <p class="last">As of yet, the library is only available for the Linux platform and will only run
 on 64-bit systems. However, other platforms will probably be supported in the future as well.</p>
 </div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The library has only been tested on a few Debian-based systems so far. Therefore, it might not work on
+different Linux distributions.</p>
+</div>
 <div class="section" id="installation-with-anaconda">
 <h2>1.1. Installation with Anaconda<a class="headerlink" href="#installation-with-anaconda" title="Permalink to this headline">¶</a></h2>
 <p>This is probably the easiest and preferred way to install the library and the associated Python package.
@@ -172,67 +179,161 @@ in the official documentation).</p>
 <div class="section" id="building-and-installing-from-source">
 <h2>1.2. Building and Installing from source<a class="headerlink" href="#building-and-installing-from-source" title="Permalink to this headline">¶</a></h2>
 <p>If you are a developer and want to build the most recent version from source,
-you will need build everything from scratch. This section
+you will need to build everything from scratch. This section
 describes how to do that on the Linux platform
 and hints at possible problems one might encounter. If you want to build the library on
 a different platform, this section might provide useful information as well.</p>
+<p>You can get the source code with the following git command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/lich-uct/molpher-lib.git
+</pre></div>
+</div>
 <div class="section" id="prerequisites">
 <h3>1.2.1. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
-<p>Before you start building, there are a few prerequisites that need to be satisfied on your system:</p>
+<p>Before you start building, there are a few requirements that need to be satisfied:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>build-essential</em> &#8211; You will need this package to be able to build the software. It contains a compiler and other tools important for the build.</p>
+</li>
+<li><p class="first"><em>swig</em> &#8211; It is used to generate the Python wrapping code (we are using version 3.0.8 at the moment).</p>
+<blockquote>
+<div><p>Only required if you made changes to the interface (header files under <code class="file docutils literal"><span class="pre">include/</span></code>) and need to compile the code
+using the <strong class="command">Debug_SWIG</strong> configuration. SWIG is invoked by make upon build with the <strong class="command">swig3.0</strong>
+command so make sure it resides somewhere on your <strong class="makevar">PATH</strong>.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>setuptools</em> and <em>pip</em> &#8211; If you want to use <em>pip</em> or <em>easy_install</em> to install the Python package, you will need this to be included in your Python distribution.</p>
+</li>
+<li><p class="first"><em>python{version}-dev</em> &#8211; You will need this package in order to build the Python bindings for the particular Python <em>version</em>.</p>
+<blockquote>
+<div><p>If you get &#8216;Missing Python.h&#8217; errors, you probably do not have this package installed.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>dependencies</em> &#8211; Molpher-lib depends on three third-party libraries:</p>
 <blockquote>
 <div><ul class="simple">
-<li><em>build-essential</em> &#8211; You will need this package to be able to build the software. It contains a compiler and other tools important for the build.</li>
-<li><em>swig</em> &#8211; Used to generate the Python wrapping code (at least version 3.0 or later).</li>
-<li><em>bison</em> and <em>flex</em> &#8211; Required by the rdkit toolkit.</li>
-<li><em>setuptools</em> and <em>pip</em> &#8211; If you want to use <em>pip</em> to install the Python package, you will need this to be installed in your Python distribution.</li>
-<li><em>python{version}-dev</em> &#8211; You will need this package in order to build the Python bindings for the particular Python <em>version</em>.</li>
+<li><em>boost</em> (1.49.0)</li>
+<li><em>rdkit</em> (2014.03.1)</li>
+<li><em>tbb</em> (4.2)</li>
+</ul>
+<p>You can build the individual dependencies yourself and place them in the <code class="file docutils literal"><span class="pre">deps/</span></code> folder
+in the repository root. For each dependency, there should be a folder of the same name under <code class="file docutils literal"><span class="pre">deps/</span></code>
+(for example, the path to the <em>tbb</em> files would be <code class="file docutils literal"><span class="pre">deps/tbb/</span></code>).</p>
+<p>Alternatively, you can download the <a class="reference external" href="https://drive.google.com/file/d/0B2rizkCQQcoybFdhOFExaVk5c0U/view?usp=sharing">Molpher Dependency Bundle</a>
+and extract the contents to the <code class="file docutils literal"><span class="pre">deps/</span></code> directory.
+This bundle contains pre-built dependencies for the Linux platform
+and should work out of the box on Debian-based systems.</p>
+</div></blockquote>
+</li>
 </ul>
 </div></blockquote>
-<p>When those requirements are satisfied you can clone the source code from the repository:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://<span class="o">{</span>username<span class="o">}</span>@bitbucket.org/Krwemil/molpher-lib.git <span class="c1"># (replace {username} with your Bitbucket username)</span>
+</div>
+<div class="section" id="building-the-library">
+<h3>1.2.2. Building the Library<a class="headerlink" href="#building-the-library" title="Permalink to this headline">¶</a></h3>
+<p>When the above requirements are met, you can start building. There are three configuration options:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Debug &#8211; Builds the library with debugging symbols, but without updating the SWIG wrapping code.</p>
+<blockquote>
+<div><p>If you did not make any changes to the header files under <code class="file docutils literal"><span class="pre">include/</span></code>,
+and do not require changes to the wrapping code, you can use this option.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Debug_SWIG &#8211; This builds the library and updates the SWIG wrapping code.</p>
+<blockquote>
+<div><p>Use it if you made
+changes to the header files under <code class="file docutils literal"><span class="pre">include/</span></code> or want to update the SWIG wrappers.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Release_Linux_amd64 &#8211; This builds the library for general use.</p>
+<blockquote>
+<div><p>Binaries produced with this
+configuration are intended for distribution.</p>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p>You run the build process with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>make <span class="nv">CONF</span><span class="o">=</span><span class="nv">$CONFIG_NAME</span> <span class="c1"># CONFIG_NAME is the name of one of the configurations above</span>
 </pre></div>
 </div>
-<p>and start building.</p>
-<div class="admonition note">
+<p>This will compile the shared object file and put it in the <code class="file docutils literal"><span class="pre">dist/lib/</span></code>
+directory along with the required <em>tbb</em> libraries that are dynamically
+linked during runtime.</p>
+</div>
+<div class="section" id="building-the-python-wrappers-and-the-conda-packages">
+<h3>1.2.3. Building the Python Wrappers and the Conda Packages<a class="headerlink" href="#building-the-python-wrappers-and-the-conda-packages" title="Permalink to this headline">¶</a></h3>
+<p>The above procedure only builds the library itself. If you want to compile the Python bindings,
+you can do so by invoking:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span>python setup.py build_ext
+</pre></div>
+</div>
+</div></blockquote>
+<p>in the repository root.</p>
+<p>You can also install the Python package with, for example:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span>pip install .
+</pre></div>
+</div>
+</div></blockquote>
+<p>This will compile the Python extension and install the Python package to the currently active Python environment.</p>
+<blockquote>
+<div><div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The repository is currently private and you will need the authorization of the author to access it.</p>
+<p class="last">The extension is linked against the compiled library in the <code class="file docutils literal"><span class="pre">lib/</span></code> directory generated
+previously by <strong class="command">make</strong>.</p>
 </div>
-</div>
-<div class="section" id="building-molpher-and-its-dependencies">
-<h3>1.2.2. Building Molpher and Its Dependencies<a class="headerlink" href="#building-molpher-and-its-dependencies" title="Permalink to this headline">¶</a></h3>
-<p>First, download the <a class="reference external" href="https://drive.google.com/file/d/0B2rizkCQQcoybFdhOFExaVk5c0U/view?usp=sharing">Molpher Dependency Bundle</a>
-and extract the contents to a directory called <code class="file docutils literal"><span class="pre">deps/</span></code> of the repository root.
-This bundle contains all the source code and binaries of the dependencies
-that you will need to build and use the library on the Linux platform.</p>
-<p>When it&#8217;s done, just run:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>make <span class="nv">CONF</span><span class="o">=</span>Release_Linux_amd64
-</pre></div>
-</div>
-<p>to build the release version of the library (no debugging symbols SWIG code is not generated) or:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>make <span class="nv">CONF</span><span class="o">=</span>Debug_SWIG
-</pre></div>
-</div>
-<p>to build the development version with debug symbols and the SWIG code regenerated.</p>
-<p>If you want to build the conda packages as well you can use the following
+</div></blockquote>
+<p>If you want to build the conda packages as well, you can use the following
 python script in the repository root:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>python build_conda.py
 </pre></div>
 </div>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
-<p class="last">You will need the <em>jinja2</em> Python library to do that.</p>
+<p class="last">You will need <a class="reference external" href="https://github.com/conda/conda-build">conda-build</a> and the  <em>jinja2</em> Python library to do that.</p>
 </div>
-<p>You can then install the packages by running:</p>
+<p>You can install the built packages by running:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>conda install --use-local molpher-lib
 </pre></div>
 </div>
-<p>You can also install the Python package directly with <em>pip</em>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install .
+</div>
+<div class="section" id="building-the-documentation">
+<h3>1.2.4. Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h3>
+<p>The library has an extensive documentation that is generated using the <code class="file docutils literal"><span class="pre">build_docs.sh</span></code>
+script under the <code class="file docutils literal"><span class="pre">doc/</span></code> directory. In order to successfully build the documentation,
+you will need a few packages in your Python environment:</p>
+<div class="literal-block-wrapper container" id="the-requirements-file-for-the-environment-used-to-build-the-documentation">
+<div class="code-block-caption"><span class="caption-number">Listing 1.1 </span><span class="caption-text">The requirements file for the environment used to build the documentation.</span><a class="headerlink" href="#the-requirements-file-for-the-environment-used-to-build-the-documentation" title="Permalink to this code">¶</a></div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>alabaster==0.7.7
+Babel==2.3.3
+breathe==4.2.0
+docutils==0.12
+imagesize==0.7.0
+Jinja2==2.8
+MarkupSafe==0.23
+Pygments==2.1.3
+pytz==2016.3
+six==1.10.0
+snowballstemmer==1.2.1
+Sphinx==1.4.1
+sphinx-rtd-theme==0.1.9
 </pre></div>
 </div>
-<p>in the repository root. This will install the Python package to the currently active Python distribution
-and links the compiled extension against the compiled library in the <code class="file docutils literal"><span class="pre">lib/</span></code> directory generated
-previously by <strong class="command">make</strong>.</p>
+</div>
+<p>You can easily install the packages with <em>pip</em>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install -r requirements.txt
+</pre></div>
+</div>
+<p>To update the GitHub pages with the current version of the documentation, you can simply
+run the <code class="file docutils literal"><span class="pre">build_docs.sh</span></code> with the <code class="docutils literal"><span class="pre">`--upload`</span></code> option:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>build_docs.sh --upload
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need write access to the repository and an SSH key attached to your account to do that.</p>
+</div>
 </div>
 </div>
 </div>
