@@ -1,3 +1,19 @@
+/*
+ Copyright (c) 2016 Martin Šícho
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <GraphMol/FileParsers/MolSupplier.h>
 #include <GraphMol/FileParsers/MolWriters.h>
@@ -77,33 +93,39 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMol::MolpherMolImpl& oth
 }
 
 void MolpherMol::MolpherMolImpl::setSMILES(const std::string& smiles) {
-    RDKit::RWMol* mol = nullptr;
-    try {
-        if (smiles.empty()) {
-            SynchCerr("Creating a molecule with an empty SMILES string.");
-            data.SMILES = "";
-            return;
+    bool is_owned = (bool) tree;
+    if (!is_owned) {
+        RDKit::RWMol* mol = nullptr;
+        try {
+            if (smiles.empty()) {
+                SynchCerr("Creating a molecule with an empty SMILES string.");
+                data.SMILES = "";
+                return;
+            }
+            mol = RDKit::SmilesToMol(smiles);
+        } catch (RDKit::SmilesParseException &exp) {
+            SynchCerr("Error parsing supplied SMILES: \"" + smiles + "\"");
+            SynchCerr(exp.what());
+            delete mol;
+            throw exp;
         }
-        mol = RDKit::SmilesToMol(smiles);
-    } catch (RDKit::SmilesParseException &exp) {
-        SynchCerr("Error parsing supplied SMILES: \"" + smiles + "\"");
-        SynchCerr(exp.what());
-        delete mol;
-        throw exp;
-    }
-    
-    try {
-        RDKit::MolOps::Kekulize(*mol);
-    } catch (const ValueErrorException &exc) {
-        SynchCerr("Cannot kekulize input molecule.");
-        delete mol;
-        throw exc;
-    }
 
-    data.SMILES = RDKit::MolToSmiles(*mol);
-    data.formula = RDKit::Descriptors::calcMolFormula(*mol);
-    
-    delete mol;
+        try {
+            RDKit::MolOps::Kekulize(*mol);
+        } catch (const ValueErrorException &exc) {
+            SynchCerr("Cannot kekulize input molecule.");
+            delete mol;
+            throw exc;
+        }
+
+        data.SMILES = RDKit::MolToSmiles(*mol);
+        data.formula = RDKit::Descriptors::calcMolFormula(*mol);
+
+        delete mol;
+    } else {
+        throw std::runtime_error("Molecule is already associated with a tree. "
+            "The SMILES string cannot be changed at the moment.");
+    }
 
 //    SynchCout("Parsed molecule " + smiles + " >> " + data.SMILES);
 }
@@ -219,7 +241,13 @@ void MolpherMol::setSMILES(const std::string& smiles) {
 }
 
 void MolpherMol::setParentSMILES(const std::string& smiles) {
-    pimpl->data.parentSmile = smiles;
+    bool is_owned = (bool) pimpl->tree;
+    if (!is_owned) {
+        pimpl->data.parentSmile = smiles;
+    } else {
+        throw std::runtime_error("Molecule is associated with a tree. "
+            "SMILES of the parent cannot be modified.");
+    }
 }
 
 void MolpherMol::setOwner(std::shared_ptr<ExplorationTree> tree) {

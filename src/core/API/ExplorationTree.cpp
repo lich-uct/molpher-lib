@@ -1,3 +1,19 @@
+/*
+ Copyright (c) 2016 Martin Šícho
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <stdexcept>
 #include <iostream>
@@ -33,6 +49,13 @@ std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sour
     ExplorationData data;
     data.setSource(MolpherMol(sourceMolAsSMILES));
     data.setTarget(MolpherMol(targetMolAsSMILES));
+    return create(data);
+}
+
+std::shared_ptr<ExplorationTree> ExplorationTree::create(std::shared_ptr<MolpherMol> source, std::shared_ptr<MolpherMol> target) {
+    ExplorationData data;
+    data.setSource(*source);
+    data.setTarget(*target);
     return create(data);
 }
 
@@ -170,7 +193,7 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
             );
         }
     } else {
-        Cerr("This tree is not empty. Only the morphing parameters will be changed.");
+        Cerr("This tree has already been initialized. Only the morphing parameters will be changed.");
     }
     
     if (is_new_tree) {
@@ -213,6 +236,7 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
         new_data->save("error_snapshot.xml");
         throw std::runtime_error("The tree was created with serious "
                 "inconsistencies. Check the 'error_snapshot.xml' file for more details...");
+                // TODO: write some code to be able to find out what went wrong
     }
 }
 
@@ -269,13 +293,7 @@ bool ExplorationTree::ExplorationTreeImpl::hasMol(const std::string& canonSMILES
 }
 
 bool ExplorationTree::ExplorationTreeImpl::hasMol(std::shared_ptr<MolpherMol> mol) {
-    TreeMap::accessor ac;
-    treeMap.find(ac, mol->getSMILES());
-    if (ac.empty()) {
-        return false;
-    } else {
-        return ac->second == mol;
-    }
+    return hasMol(mol->getSMILES());
 }
 
 void ExplorationTree::ExplorationTreeImpl::runOperation(TreeOperation& operation, std::shared_ptr<ExplorationTree> tree) {

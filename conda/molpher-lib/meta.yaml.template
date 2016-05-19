@@ -17,6 +17,6 @@ requirements:
     - {{ tbb_spec }}
 
 about:
-  license : GPL
+  license : GPL-3.0
   license_file: {{ license_file }}
   summary: "Software library based on the program Molpher."

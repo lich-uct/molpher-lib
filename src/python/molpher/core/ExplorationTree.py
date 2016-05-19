@@ -1,3 +1,19 @@
+
+# Copyright (c) 2016 Martin Sicho
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 import molpher
 import warnings
 
@@ -32,7 +48,7 @@ class Callback(TraverseCallback):
         """
 
         morph.__class__ = MolpherMol
-        self._callback(morph)
+        self._callback(morph.tree.fetchMol(morph.smiles)) # needs to be done this way (SEGFAULT otherwise, the input parameter seems to be destroyed by SWIG after the call)
 
 class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
     """
@@ -62,14 +78,14 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
     @staticmethod
     def create(tree_data=None, source=None, target=None, callback_class=Callback):
         """
-        create tree
+        Create an exploration tree.
 
         :param tree_data: the morphing parameters (optional if ``source`` and ``target`` are specified)
         :type tree_data: `molpher.swig_wrappers.core.ExplorationData` (or its derived class),
             a `dict` of parameters (in the same format as in :class:`~molpher.core.ExplorationData.ExplorationData`'s constructor)
             or a path to a :term:`XML template` or a :term:`tree snapshot`
-        :param source: SMILES of the source molecule
-        :type source: `str`
+        :param source: SMILES of the source molecule or a molecule directly (uses a copy not the instance itself)
+        :type source: `str` or :class:`~molpher.core.MolpherMol.MolpherMol`
         :param target: SMILES of the target molecule
         :type target: `str`
         :param callback_class: the class to use when making a callback using the :meth:`traverse` method
@@ -91,6 +107,11 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
             _params = ExplorationData(**tree_data)
             ret = super(ExplorationTree, ExplorationTree).create(_params)
         elif source and target:
+            if type(source) == str or type(target) == str:
+                if type(source) == MolpherMol:
+                    source = source.getSMILES()
+                if type(target) == MolpherMol:
+                    target = target.getSMILES()
             ret = super(ExplorationTree, ExplorationTree).create(source, target)
         else:
             raise AttributeError('Invalid set of parameters specified.')
@@ -224,35 +245,6 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         starting from the root to leaves. It takes a callback function that accepts a single required argument
         and traverses the whole tree starting from its root (or root of a specified subtree -- see ``start_mol``) and
         calls the supplied callback with with encountered morph as its parameter.
-
-        ..  warning:: The tree traversal is implemented in C++
-                and the callback to Python is realized using `SWIG's director feature
-                <http://www.swig.org/Doc3.0/Python.html#Python_directors>`_,
-                which makes it possible to keep the implementation
-                concurrent and efficient. However, there is a problem:
-
-                If a reference to the :py:class:`~molpher.core.MolpherMol.MolpherMol`
-                instance is saved into a variable that outlives the call to the
-                callback function, this reference then becomes invalid when the call is
-                finished. Therefore, doing something like this:
-
-                .. code-block:: python
-
-                    var = None
-                    def callback(morph):
-                        if var:
-                            print("Previous:", var.smiles)
-                        var = morph
-                    tree.traverse(callback)
-
-                will likely result in a segmentation fault upon a second call to the callback function,
-                because the object referenced by ``var`` will no longer refer to valid memory.
-                This is likely a result of SWIG freeing the pointer without taking
-                the existing reference from Python into account.
-
-                One way to work around this is
-                to just save the SMILES string of the molecule and then fetch the
-                reference to it using the :meth:`fetchMol` method.
 
         :param callback: the callback to call
         :type callback: a callable object that takes a single argument

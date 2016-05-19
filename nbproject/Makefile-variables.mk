@@ -6,6 +6,14 @@
 CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
+# Debug configuration
+CND_PLATFORM_Debug=GNU-Linux-x86
+CND_ARTIFACT_DIR_Debug=dist/lib
+CND_ARTIFACT_NAME_Debug=libmolpher.so
+CND_ARTIFACT_PATH_Debug=dist/lib/libmolpher.so
+CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
+CND_PACKAGE_NAME_Debug=libmolpher-lib.so.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/libmolpher-lib.so.tar
 # Debug_SWIG configuration
 CND_PLATFORM_Debug_SWIG=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug_SWIG=dist/lib

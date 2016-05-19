@@ -3,10 +3,26 @@ Implementation of the bidirectional search algorithm.
 
 """
 
+# Copyright (c) 2016 Martin Sicho
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 import time
 
 from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import *
+from molpher.core.selectors import *
 
 def timeit(func):
     milliseconds = 1000 * time.clock()
@@ -31,7 +47,7 @@ class BidirectionalPathFinder:
 
     def __init__(self, source, target):
         options = {
-            'fingerprint' : 'ATOM_PAIRS'
+            'fingerprint' : FP_ATOM_PAIRS
         }
         self.source_target = ETree.create(source=source, target=target)
         self.target_source = ETree.create(source=target, target=source)

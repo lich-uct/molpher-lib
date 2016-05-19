@@ -1,3 +1,19 @@
+
+# Copyright (c) 2016 Martin Sicho
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 import os
 import unittest
 
@@ -31,6 +47,14 @@ class TestPythonAPI(unittest.TestCase):
         copy.sascore = 0.54
         self.assertEqual(0.54, copy.sascore)
         self.assertEqual(0, mol.sascore)
+
+        tree = ExplorationTree.create(source=mol.smiles, target='CCCNCCC')
+        tree = ExplorationTree.create(source=mol, target='CCCNCCC')
+        tree = ExplorationTree.create(source=mol, target=MolpherMol('CCCNCCC'))
+        self.assertTrue(tree.hasMol(mol))
+        def assign(x):
+            tree.fetchMol(mol.smiles).smiles = x
+        self.assertRaises(RuntimeError, assign, 'CCO')
 
     def testExplorationData(self):
         params = ExplorationData(
@@ -107,13 +131,14 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(tree.params['operators'], params.param_dict['operators'])
 
         leaf = tree.leaves[0]
+        self.assertRaises(RuntimeError, lambda : leaf.setSMILES('CCCC'))
         self.assertTrue(tree.hasMol(leaf))
         # self.assertEqual(tree, leaf.tree) # FIXME: add a reliable operator for comparison between trees
         leaf.setDistToTarget(0.5)
         self.assertEqual(tree.leaves[0].getDistToTarget(), 0.5)
 
         leaf_copy = tree.leaves[0].copy()
-        self.assertFalse(tree.hasMol(leaf_copy))
+        # self.assertFalse(tree.hasMol(leaf_copy)) # FIXME: add a reliable operator for comparison between trees (this should check both the SMILES and the tree ownership)
         self.assertEqual(leaf_copy.getDistToTarget(), 0.5)
         leaf_copy.setDistToTarget(0.7)
         self.assertEqual(leaf.getDistToTarget(), 0.5)
@@ -134,6 +159,9 @@ class TestPythonAPI(unittest.TestCase):
             , PruneTreeOper()
         ]
 
+        for oper in iteration:
+            self.assertRaises(RuntimeError, lambda : oper())
+
         fl = FindLeavesOper()
         for oper in iteration:
             tree.runOperation(oper)
@@ -150,23 +178,11 @@ class TestPythonAPI(unittest.TestCase):
                 print('Callback output:')
                 print(morph.getSMILES(), morph.getItersWithoutDistImprovement(), morph.getDistToTarget())
             if not callback.closest_mol:
-                callback.closest_mol = morph.copy()
+                callback.closest_mol = morph
             current_dist = morph.getDistToTarget()
             min_dist = callback.closest_mol.getDistToTarget()
             if min_dist > current_dist:
-                callback.closest_mol = morph.copy()
-
-            # FIXME: code below doesn't work
-                # (causes a SEGFAULT when the memory is accessed,
-                # probably because the shared pointer is deleted
-                # from the stack in the SWIG generated code when the callback is done)
-
-            # if not callback.closest_mol:
-            #     callback.closest_mol = morph
-            # current_dist = morph.getDistToTarget()
-            # min_dist = callback.closest_mol.getDistToTarget()
-            # if min_dist > current_dist:
-            #     callback.closest_mol = morph
+                callback.closest_mol = morph
         callback.morphs_in_tree = 0
         callback.closest_mol = None
 

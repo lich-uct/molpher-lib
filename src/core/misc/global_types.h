@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2012 Peter Szepe
  Copyright (c) 2012 Petr Koupy
+ Copyright (c) 2016 Martin Šícho
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
