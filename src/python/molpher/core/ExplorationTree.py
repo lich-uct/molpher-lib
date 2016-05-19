@@ -78,14 +78,14 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
     @staticmethod
     def create(tree_data=None, source=None, target=None, callback_class=Callback):
         """
-        create tree
+        Create an exploration tree.
 
         :param tree_data: the morphing parameters (optional if ``source`` and ``target`` are specified)
         :type tree_data: `molpher.swig_wrappers.core.ExplorationData` (or its derived class),
             a `dict` of parameters (in the same format as in :class:`~molpher.core.ExplorationData.ExplorationData`'s constructor)
             or a path to a :term:`XML template` or a :term:`tree snapshot`
-        :param source: SMILES of the source molecule
-        :type source: `str`
+        :param source: SMILES of the source molecule or a molecule directly (uses a copy not the instance itself)
+        :type source: `str` or :class:`~molpher.core.MolpherMol.MolpherMol`
         :param target: SMILES of the target molecule
         :type target: `str`
         :param callback_class: the class to use when making a callback using the :meth:`traverse` method
