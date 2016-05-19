@@ -13,6 +13,22 @@
 
 <body>
 
+<div class="fork-me-wrapper hide-on-large-only">
+	<div class="fork-me">
+		<a class="fork-me-link" href="https://github.com/lich-uct/molpher-lib">
+			<span class="fork-me-text">Fork Me On GitHub</span>
+		</a>
+	</div>
+</div>
+
+<div class="fork-me-wrapper fork-me-left hide-on-med-and-down">
+	<div class="fork-me">
+		<a class="fork-me-link" href="https://github.com/lich-uct/molpher-lib">
+			<span class="fork-me-text">Fork Me On GitHub</span>
+		</a>
+	</div>
+</div>
+
 {% block navigation %}
 	navigation (no content)
 {% endblock %}
