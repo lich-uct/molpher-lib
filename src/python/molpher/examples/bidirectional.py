@@ -22,6 +22,7 @@ import time
 
 from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import *
+from molpher.core.selectors import *
 
 def timeit(func):
     milliseconds = 1000 * time.clock()
@@ -46,7 +47,7 @@ class BidirectionalPathFinder:
 
     def __init__(self, source, target):
         options = {
-            'fingerprint' : 'ATOM_PAIRS'
+            'fingerprint' : FP_ATOM_PAIRS
         }
         self.source_target = ETree.create(source=source, target=target)
         self.target_source = ETree.create(source=target, target=source)

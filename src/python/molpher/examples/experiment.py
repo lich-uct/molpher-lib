@@ -45,7 +45,7 @@ def main():
         , PruneTreeOper()
     ]
 
-    tree = ETree(source=cocaine, target=procaine)
+    tree = ETree.create(source=cocaine, target=procaine)
     counter = 0
     while not tree.path_found:
         for oper in iteration:
