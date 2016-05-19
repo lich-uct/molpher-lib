@@ -52,6 +52,13 @@ std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sour
     return create(data);
 }
 
+std::shared_ptr<ExplorationTree> ExplorationTree::create(std::shared_ptr<MolpherMol> source, std::shared_ptr<MolpherMol> target) {
+    ExplorationData data;
+    data.setSource(*source);
+    data.setTarget(*target);
+    return create(data);
+}
+
 std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& filename) {
     auto data = ExplorationData::load(filename);
     return create(*data);
@@ -286,13 +293,7 @@ bool ExplorationTree::ExplorationTreeImpl::hasMol(const std::string& canonSMILES
 }
 
 bool ExplorationTree::ExplorationTreeImpl::hasMol(std::shared_ptr<MolpherMol> mol) {
-    TreeMap::accessor ac;
-    treeMap.find(ac, mol->getSMILES());
-    if (ac.empty()) {
-        return false;
-    } else {
-        return ac->second == mol;
-    }
+    return hasMol(mol->getSMILES());
 }
 
 void ExplorationTree::ExplorationTreeImpl::runOperation(TreeOperation& operation, std::shared_ptr<ExplorationTree> tree) {

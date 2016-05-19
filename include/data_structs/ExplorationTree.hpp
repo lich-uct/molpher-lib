@@ -51,6 +51,7 @@ public:
     static std::shared_ptr<ExplorationTree> create(const ExplorationData& data);
     static std::shared_ptr<ExplorationTree> create(const std::string& filename);
     static std::shared_ptr<ExplorationTree> create(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
+    static std::shared_ptr<ExplorationTree> create(std::shared_ptr<MolpherMol> source, std::shared_ptr<MolpherMol> target);
     
     std::shared_ptr<ExplorationData> asData() const;
     void update(const ExplorationData& data);

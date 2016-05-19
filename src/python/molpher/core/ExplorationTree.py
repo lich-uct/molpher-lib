@@ -107,6 +107,11 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
             _params = ExplorationData(**tree_data)
             ret = super(ExplorationTree, ExplorationTree).create(_params)
         elif source and target:
+            if type(source) == str or type(target) == str:
+                if type(source) == MolpherMol:
+                    source = source.getSMILES()
+                if type(target) == MolpherMol:
+                    target = target.getSMILES()
             ret = super(ExplorationTree, ExplorationTree).create(source, target)
         else:
             raise AttributeError('Invalid set of parameters specified.')
