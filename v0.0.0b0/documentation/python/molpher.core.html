@@ -191,7 +191,7 @@ meant to be imported by external scripts.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>other</strong> (<a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">molpher.swig_wrappers.core.ExplorationData</span></code></a>) &#8211; an instance of <a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">molpher.swig_wrappers.core.ExplorationData</span></code></a> to wrap with this class</li>
-<li><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/3.5/reference/expressions.html#dict" title="(in Python v3.5)"><code class="docutils literal"><span class="pre">Dictionary</span> <span class="pre">displays</span></code></a>) &#8211; the morphing parameters to be set (can be incomplete)</li>
+<li><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">dict</span></code></a>) &#8211; the morphing parameters to be set (can be incomplete)</li>
 </ul>
 </td>
 </tr>
@@ -691,7 +691,7 @@ A new dictionary of parameters can be assigned to change them.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a dictionary of parameters</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/reference/expressions.html#dict" title="(in Python v3.5)"><code class="docutils literal"><span class="pre">Dictionary</span> <span class="pre">displays</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">dict</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -945,7 +945,7 @@ is called.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>tree_data</strong> (<a class="reference internal" href="ExplorationData_doc.html#molpher.swig_wrappers.core.ExplorationData" title="molpher.swig_wrappers.core.ExplorationData"><code class="xref any py py-class docutils literal"><span class="pre">molpher.swig_wrappers.core.ExplorationData</span></code></a> (or its derived class),
-a <a class="reference external" href="https://docs.python.org/3.5/reference/expressions.html#dict" title="(in Python v3.5)"><code class="docutils literal"><span class="pre">Dictionary</span> <span class="pre">displays</span></code></a> of parameters (in the same format as in <a class="reference internal" href="#molpher.core.ExplorationData.ExplorationData" title="molpher.core.ExplorationData.ExplorationData"><code class="xref py py-class docutils literal"><span class="pre">ExplorationData</span></code></a>&#8216;s constructor)
+a <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">dict</span></code></a> of parameters (in the same format as in <a class="reference internal" href="#molpher.core.ExplorationData.ExplorationData" title="molpher.core.ExplorationData.ExplorationData"><code class="xref py py-class docutils literal"><span class="pre">ExplorationData</span></code></a>&#8216;s constructor)
 or a path to a <a class="reference internal" href="../../glossary.html#term-xml-template"><span class="xref std std-term">XML template</span></a> or a <a class="reference internal" href="../../glossary.html#term-tree-snapshot"><span class="xref std std-term">tree snapshot</span></a>) &#8211; the morphing parameters (optional if <code class="docutils literal"><span class="pre">source</span></code> and <code class="docutils literal"><span class="pre">target</span></code> are specified)</li>
 <li><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a> or <a class="reference internal" href="#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal"><span class="pre">MolpherMol</span></code></a>) &#8211; SMILES of the source molecule or a molecule directly (uses a copy not the instance itself)</li>
 <li><strong>target</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a>) &#8211; SMILES of the target molecule</li>
@@ -1031,7 +1031,7 @@ remains the same).</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">current parameters</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/reference/expressions.html#dict" title="(in Python v3.5)"><code class="docutils literal"><span class="pre">Dictionary</span> <span class="pre">displays</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">dict</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1659,7 +1659,20 @@ when no other option is specified.</p>
           SphinxRtdTheme.StickyNav.enable();
       });
   </script>
-   
+  
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
 
 </body>
 </html>
