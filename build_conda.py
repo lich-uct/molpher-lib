@@ -26,7 +26,7 @@ TARGETS = ["tbb", "molpher-lib"]
 PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5'] if BUILD_ALL_PYTHON else ['3.5', '2.7']
 VERSION = version.VERSION
 BUILD_NUMBER = version.BUILD_NUMBER
-LICENSE_FILE = "LICENSE.txt"
+LICENSE_FILE = "LICENSE.md"
 TBB_LICENSE_FILE = "deps/tbb/COPYING"
 TBB_VERSION = "4.2"
 
