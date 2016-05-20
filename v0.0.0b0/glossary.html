@@ -138,7 +138,7 @@
 modifications that a molecule can undergo during <a class="reference internal" href="#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a>.</dd>
 <dt id="term-chemical-space">chemical space</dt>
 <dd>Chemical space has many definitions, but in this documentation we define it as
-<em>space spanned by all possible (i.e. energetically stable) molecules and chemical compounds</em> <a class="footnote-reference" href="#id6" id="id2">[1]</a>.</dd>
+<em>space spanned by all possible (i.e. energetically stable) molecules and chemical compounds</em> <a class="footnote-reference" href="#id4" id="id2">[1]</a>.</dd>
 <dt id="term-chemical-space-path">chemical space path</dt>
 <dd>A consecutive sequence of <a class="reference internal" href="#term-morph"><span class="xref std std-term">morphs</span></a> created by iteratively applying
 a <a class="reference internal" href="#term-chemical-operators"><span class="xref std std-term">chemical operator</span></a> on leaves in the <a class="reference internal" href="#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a>.</dd>
@@ -154,15 +154,16 @@ the <a class="reference internal" href="documentation/python/molpher.core.html#m
 <dt id="term-molecular-fingerprint">molecular fingerprint</dt>
 <dd>Molecular fingerprints are binary strings that encode certain structural features of a molecule.</dd>
 <dt id="term-molecular-morphing">molecular morphing</dt>
-<dd>Molecular morphing is an atom-based <em>de novo</em> method of computer-aided drug design.
-It was developed by the <a class="reference external" href="http://siret.ms.mff.cuni.cz/">Siret</a>
-and <a class="reference external" href="http://ich.vscht.cz/">LICH</a> research groups and first implemented in the
-<a class="reference internal" href="#term-molpher"><span class="xref std std-term">Molpher</span></a> program&nbsp;<a class="footnote-reference" href="#id7" id="id5">[2]</a>. It uses a set of <a class="reference internal" href="#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a> that modify
+<dd>Molecular morphing is an atom-based <em>de novo</em> method of computer-aided drug design
+and it was first implemented in the
+<a class="reference internal" href="#term-molpher"><span class="xref std std-term">Molpher</span></a> program&nbsp;<a class="footnote-reference" href="#id5" id="id3">[2]</a>. It uses a set of <a class="reference internal" href="#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a> that modify
 structures of compounds to &#8216;travel&#8217;
 through <a class="reference internal" href="#term-chemical-space"><span class="xref std std-term">chemical space</span></a> and sample certain biologically interesting areas.</dd>
 <dt id="term-molpher">Molpher</dt>
-<dd>Software developed as a collaboration between the <a class="reference external" href="http://siret.ms.mff.cuni.cz/">Siret</a>
-and <a class="reference external" href="http://ich.vscht.cz/">LICH</a> research groups. The main goal of the project
+<dd>Software developed as a collaboration between the <a class="reference external" href="http://siret.ms.mff.cuni.cz">SIRET Research Group</a>
+(<a class="reference external" href="http://www.mff.cuni.cz">Faculty of Mathematics and Physics, Charles University in Prague,</a>),
+<a class="reference external" href="http://ich.vscht.cz">Laboratory of Informatics and Chemistry</a> (<a class="reference external" href="http://www.vscht.cz">UCT Prague</a>)
+and <a class="reference external" href="http://www.openscreen.cz">CZ-OPENSCREEN</a>. The main goal of the project
 is to implement an effective tool for <a class="reference internal" href="#term-chemical-space"><span class="xref std std-term">chemical space</span></a> exploration with <a class="reference internal" href="#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a>.
 Molpher itself is a standalone program and is available from <a class="reference external" href="https://github.com/siret/Molpher">GitHub</a>.</dd>
 <dt id="term-morph">morph</dt>
@@ -206,16 +207,16 @@ and <a class="reference internal" href="documentation/python/molpher.core.html#m
 <dd>A file in XML format that can be used as a configuration file and is loaded the same way as a tree snapshot
 (using the <a class="reference internal" href="documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.create" title="molpher.core.ExplorationTree.ExplorationTree.create"><code class="xref py py-meth docutils literal"><span class="pre">create()</span></code></a> method).</dd>
 </dl>
-<table class="docutils footnote" frame="void" id="id6" rules="none">
+<table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Chemical_space">https://en.wikipedia.org/wiki/Chemical_space</a></td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id7" rules="none">
+<table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[2]</a></td><td><ol class="first last upperalpha simple" start="4">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td><ol class="first last upperalpha simple" start="4">
 <li>Hoksza, P. Škoda, M. Voršilák, and D. Svozil, “Molpher: a software framework for systematic chemical space exploration,” Journal of Cheminformatics, vol. 6, no. 1, p. 7, Mar. 2014.</li>
 </ol>
 </td></tr>
