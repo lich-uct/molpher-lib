@@ -88,15 +88,16 @@ Glossary
         have a value of the objective function lower than itself.
 
     Molpher
-        Software developed as a collaboration between the `Siret <http://siret.ms.mff.cuni.cz/>`_
-        and `LICH <http://ich.vscht.cz/>`_ research groups. The main goal of the project
+        Software developed as a collaboration between the `SIRET Research Group <http://siret.ms.mff.cuni.cz>`_
+        (`Faculty of Mathematics and Physics, Charles University in Prague, <http://www.mff.cuni.cz>`_),
+        `Laboratory of Informatics and Chemistry <http://ich.vscht.cz>`_ (`UCT Prague <http://www.vscht.cz>`_)
+        and `CZ-OPENSCREEN <http://www.openscreen.cz>`_. The main goal of the project
         is to implement an effective tool for :term:`chemical space` exploration with :term:`molecular morphing`.
         Molpher itself is a standalone program and is available from `GitHub <https://github.com/siret/Molpher>`_.
 
     molecular morphing
-        Molecular morphing is an atom-based *de novo* method of computer-aided drug design.
-        It was developed by the `Siret <http://siret.ms.mff.cuni.cz/>`_
-        and `LICH <http://ich.vscht.cz/>`_ research groups and first implemented in the
+        Molecular morphing is an atom-based *de novo* method of computer-aided drug design
+        and it was first implemented in the
         :term:`Molpher` program |nbsp| [2]_. It uses a set of :term:`chemical operators` that modify
         structures of compounds to 'travel'
         through :term:`chemical space` and sample certain biologically interesting areas.
