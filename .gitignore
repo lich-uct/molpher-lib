@@ -63,3 +63,6 @@ src/python/molpher/swig_wrappers/*.dat
 
 # test files
 *snapshot.xml
+
+# rendered homepage templates
+/doc/homepage/*.html
