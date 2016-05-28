@@ -16,7 +16,7 @@ important packages in the main :mod:`molpher` package:
          from C++, you can get some idea on the data structures available from there
          as well.
 
-There is also the `molpher.examples` package which contains runnable scripts
+There is also the `molpher.examples` which contains runnable scripts
 that were discussed in the :ref:`tutorial`.
 
 .. toctree::
