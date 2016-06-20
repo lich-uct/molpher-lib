@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 3.5)
 project(molpher_lib)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-# Set some general tool flags
+# Tool Flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,$ORIGIN/")
+SET(CMAKE_INSTALL_RPATH "$ORIGIN/")
 
-# search paths for the dependencies
+# Dependency Search Paths
 set(DEPS_DIR "deps")
 set(
         CMAKE_INCLUDE_PATH
@@ -27,13 +28,13 @@ set(
         ENV{LD_LIBRARY_PATH}
 )
 
-# include project directories
+# Project Include Directories
 include_directories(
         include/
         src/
 )
 
-# Find libraries
+# Dependencies
 
 ## Threads
 find_package(Threads REQUIRED)
@@ -46,8 +47,21 @@ add_definitions(${Threads_DEFINITIONS})
 
 ## Boost
 set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_STATIC_RUNTIME ON)
 set(Boost_USE_MULTITHREADED ON)
-find_package(Boost REQUIRED)
+find_package(
+        Boost REQUIRED
+
+        date_time
+        filesystem
+        program_options
+        regex
+        wserialization
+        serialization
+        signals
+        thread
+        system
+)
 if(NOT Boost_FOUND)
     message(FATAL_ERROR "Boost library not found")
 endif()
@@ -67,6 +81,9 @@ set(LIBS ${LIBS} ${RDKIT_LIBRARIES})
 add_definitions(${RDKIT_DEFINITIONS})
 
 ## TBB
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(TBB_USE_DEBUG_BUILD ON)
+endif()
 find_package(TBB REQUIRED)
 if(NOT TBB_FOUND)
     message(FATAL_ERROR "TBB library not found")
@@ -75,14 +92,7 @@ include_directories(${TBB_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${TBB_LIBRARIES})
 add_definitions(${TBB_DEFINITIONS})
 
-# print the variables set so far
-#get_cmake_property(_variableNames VARIABLES)
-#foreach (_variableName ${_variableNames})
-#    message(WARNING "${_variableName}=${${_variableName}}")
-#endforeach()
-
-# Target definition
-# Molpher-lib source files
+# create target
 set(SOURCE_FILES
         include/data_structs/ExplorationData.hpp
         include/data_structs/ExplorationTree.hpp
@@ -214,27 +224,84 @@ set(SOURCE_FILES
         )
 add_library(molpher SHARED ${SOURCE_FILES})
 
-# Linked libraries
+# link libraries
 target_link_libraries(molpher ${LIBS})
 
-# SWIG
-#set(PYTHON_PACKAGE_DIR ${CMAKE_SOURCE_DIR}/src/python/molpher/swig_wrappers)
-#option(RUN_SWIG "Run SWIG" ON)
-#if(RUN_SWIG)
-#    add_custom_command(
-#            TARGET molpher
-#            PRE_BUILD
-#            COMMAND swig3.0 -python -Iinclude/ -Wall -c++ -outdir ${CMAKE_SOURCE_DIR}/src/python/molpher/swig_wrappers -o ${CMAKE_SOURCE_DIR}/src/swig/molpher_wrap.cpp ${CMAKE_SOURCE_DIR}/include/molpher.i
-#    )
-#endif()
-#
-## copy the built library to the dist folder
-#add_custom_command(
-#        TARGET molpher
-#        POST_BUILD
-#        COMMAND ${CMAKE_COMMAND} -E make_directory dist/lib/
-#        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/* dist/lib/
-#)
-#
-## copy resource files
-#configure_file(${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}/SAScore.dat COPYONLY)
+# update the SWIG wrapping code if requested
+set(PYTHON_PACKAGE_DIR ${CMAKE_SOURCE_DIR}/src/python/molpher/swig_wrappers)
+option(RUN_SWIG "Run SWIG" OFF)
+if(RUN_SWIG)
+    message(WARNING "RUN_SWIG=${RUN_SWIG}")
+    add_custom_command(
+            TARGET molpher
+            PRE_BUILD
+            COMMAND swig3.0 -python -I${CMAKE_SOURCE_DIR}/include/ -Wall -c++ -outdir ${CMAKE_SOURCE_DIR}/src/python/molpher/swig_wrappers -o ${CMAKE_SOURCE_DIR}/src/swig/molpher_wrap.cpp ${CMAKE_SOURCE_DIR}/include/molpher.i
+    )
+endif()
+
+# Installation Settings
+
+## add target for installation
+add_custom_target(install_${PROJECT_NAME}
+        make install
+        DEPENDS molpher
+        COMMENT "Installing ${PROJECT_NAME}...")
+
+## install to "${CMAKE_SOURCE_DIR}/dist/" if not requested otherwise
+set(INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/dist/" CACHE PATH "The root of the library installation")
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    message(WARNING "Install path set to: ${INSTALL_PREFIX}")
+    SET(CMAKE_INSTALL_PREFIX
+            "${INSTALL_PREFIX}" CACHE PATH "install prefix" FORCE
+            )
+endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+
+## add the install prefix to clean
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${CMAKE_INSTALL_PREFIX}")
+SET(BUILD_PREFIX
+        "${CMAKE_SOURCE_DIR}/build" CACHE PATH "build prefix" FORCE
+        )
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${BUILD_PREFIX}")
+
+## install the library components
+install(
+        DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/include/molpher
+        FILES_MATCHING
+        PATTERN "*.h"
+        PATTERN "*.hpp"
+)
+install(
+        FILES $<TARGET_FILE:molpher>
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+)
+install(
+        DIRECTORY ${CMAKE_SOURCE_DIR}/res/
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/share/molpher
+)
+
+## install TBB if requested
+option(INSTALL_TBB "Install TBB with the library" ON)
+if(INSTALL_TBB)
+    message(WARNING "TBB will also be installed to ${CMAKE_INSTALL_PREFIX}")
+
+    foreach ( dir ${TBB_INCLUDE_DIRS} )
+        install(
+                DIRECTORY ${dir}/tbb/
+                DESTINATION ${CMAKE_INSTALL_PREFIX}/include/tbb
+                FILES_MATCHING
+                PATTERN "*.h"
+                PATTERN "*.hpp"
+        )
+    endforeach()
+    install(FILES ${TBB_LIBRARIES} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+endif()
+
+## add target for the Python SWIG wrappers
+add_custom_target(build_${PROJECT_NAME}_SWIG_wrappers_Python
+        python setup.py build_ext
+        DEPENDS install_${PROJECT_NAME}
+        COMMENT "Building SWIG wrappers for Python...")
+
+## copy resource files to the Python package
+configure_file(${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}/SAScore.dat COPYONLY)

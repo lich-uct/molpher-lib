@@ -81,6 +81,33 @@ else()
                     GraphMol
                     RDGeometryLib
                     RDGeneral
+
+                    DistGeomHelpers
+                    MolAlign
+                    Alignment
+                    FragCatalog
+                    MolCatalog
+                    Catalogs
+                    ChemReactions
+                    Descriptors
+                    DistGeometry
+                    Fingerprints
+                    Subgraphs
+                    ForceFieldHelpers
+                    ChemTransforms
+                    MolChemicalFeatures
+                    SubstructMatch
+                    PartialCharges
+                    ShapeHelpers
+                    MolTransforms
+                    SLNParse
+                    ForceField
+                    DataStructs
+                    Optimizer
+                    EigenSolvers
+                    ChemicalFeatures
+                    SimDivPickers
+                    hc
                     )
                 find_library(${name}_LIB NAMES "${name}${LIB_SUFFIX}"
                         HINTS ${RDKIT_LIBRARY_DIR})
