@@ -235,14 +235,15 @@ if(RUN_SWIG)
     add_custom_command(
             TARGET molpher
             PRE_BUILD
-            COMMAND swig3.0 -python -I${CMAKE_SOURCE_DIR}/include/ -Wall -c++ -outdir ${CMAKE_SOURCE_DIR}/src/python/molpher/swig_wrappers -o ${CMAKE_SOURCE_DIR}/src/swig/molpher_wrap.cpp ${CMAKE_SOURCE_DIR}/include/molpher.i
+            COMMAND swig3.0 -python -I${CMAKE_SOURCE_DIR}/include/ -Wall -c++ -outdir ${PYTHON_PACKAGE_DIR} -o ${CMAKE_SOURCE_DIR}/src/swig/molpher_wrap.cpp ${CMAKE_SOURCE_DIR}/include/molpher.i
     )
 endif()
 
 # Installation Settings
 
 ## add target for installation
-add_custom_target(install_${PROJECT_NAME}
+set(MOLPHER_INSTALL_TARGET "molpher_install")
+add_custom_target(${MOLPHER_INSTALL_TARGET}
         make install
         DEPENDS molpher
         COMMENT "Installing ${PROJECT_NAME}...")
@@ -250,7 +251,7 @@ add_custom_target(install_${PROJECT_NAME}
 ## install to "${CMAKE_SOURCE_DIR}/dist/" if not requested otherwise
 set(INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/dist/" CACHE PATH "The root of the library installation")
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-    message(WARNING "Install path set to: ${INSTALL_PREFIX}")
+    message(WARNING "CMAKE_INSTALL_PREFIX not set. Setting install path to: ${INSTALL_PREFIX}")
     SET(CMAKE_INSTALL_PREFIX
             "${INSTALL_PREFIX}" CACHE PATH "install prefix" FORCE
             )
@@ -258,10 +259,6 @@ endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 ## add the install prefix to clean
 set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${CMAKE_INSTALL_PREFIX}")
-SET(BUILD_PREFIX
-        "${CMAKE_SOURCE_DIR}/build" CACHE PATH "build prefix" FORCE
-        )
-set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${BUILD_PREFIX}")
 
 ## install the library components
 install(
@@ -298,10 +295,20 @@ if(INSTALL_TBB)
 endif()
 
 ## add target for the Python SWIG wrappers
-add_custom_target(build_${PROJECT_NAME}_SWIG_wrappers_Python
-        python setup.py build_ext
-        DEPENDS install_${PROJECT_NAME}
+if(NOT PYTHON_EXECUTABLE)
+    set(PYTHON_EXECUTABLE "python")
+endif()
+add_custom_target(molpher_build_SWIG_Python
+        ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py test
+        DEPENDS ${MOLPHER_INSTALL_TARGET}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Building SWIG wrappers for Python...")
 
+##
+SET(BUILD_PREFIX
+        "${CMAKE_SOURCE_DIR}/build" CACHE PATH "build prefix" FORCE
+        )
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${BUILD_PREFIX}")
+
 ## copy resource files to the Python package
-configure_file(${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}/SAScore.dat COPYONLY)
+install(FILES ${CMAKE_SOURCE_DIR}/res/SAScore.dat DESTINATION ${PYTHON_PACKAGE_DIR})
