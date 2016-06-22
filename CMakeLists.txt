@@ -12,20 +12,21 @@ set(DEPS_DIR "deps")
 set(
         CMAKE_INCLUDE_PATH
 
-        ${CMAKE_INCLUDE_PATH}
+        $ENV{CPATH}
+        $ENV{CPATH}/rdkit/
         ${DEPS_DIR}/boost/
         ${DEPS_DIR}/rdkit/Code/
         ${DEPS_DIR}/tbb/include/
-        ENV{CPATH}
+        ${CMAKE_INCLUDE_PATH}
 )
 set(
         CMAKE_LIBRARY_PATH
 
-        ${CMAKE_LIBRARY_PATH}
+        $ENV{LD_LIBRARY_PATH}
         ${DEPS_DIR}/boost/stage/lib/
         ${DEPS_DIR}/rdkit/lib/
         ${DEPS_DIR}/tbb/lib/intel64/gcc4.4/
-        ENV{LD_LIBRARY_PATH}
+        ${CMAKE_LIBRARY_PATH}
 )
 
 # Project Include Directories
