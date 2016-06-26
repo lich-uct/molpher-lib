@@ -3,9 +3,14 @@ project(molpher_lib)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
+# versioning
+file (STRINGS "BUILD.TXT" BUILD_NUMBER LIMIT_COUNT 1)
+file (STRINGS "VERSION.TXT" VERSION_NUMBER LIMIT_COUNT 1)
+
 # Tool Flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-SET(CMAKE_INSTALL_RPATH "$ORIGIN/")
+set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
+set(CMAKE_INSTALL_RPATH "$ORIGIN/")
 
 # Dependency Search Paths
 set(DEPS_DIR "deps")
@@ -224,6 +229,12 @@ set(SOURCE_FILES
         src/core/misc/SynchRand.h
         )
 add_library(molpher SHARED ${SOURCE_FILES})
+set_target_properties(
+        molpher
+        PROPERTIES
+            VERSION "0.0.0" # TODO: do this automatically
+            SOVERSION "0.0"
+)
 
 # link libraries
 target_link_libraries(molpher ${LIBS})
@@ -232,22 +243,17 @@ target_link_libraries(molpher ${LIBS})
 set(PYTHON_PACKAGE_DIR ${CMAKE_SOURCE_DIR}/src/python/molpher/swig_wrappers)
 option(RUN_SWIG "Run SWIG" OFF)
 if(RUN_SWIG)
-    message(WARNING "RUN_SWIG=${RUN_SWIG}")
+    message(WARNING "SWIG wrapping code will be updated")
     add_custom_command(
             TARGET molpher
             PRE_BUILD
             COMMAND swig3.0 -python -I${CMAKE_SOURCE_DIR}/include/ -Wall -c++ -outdir ${PYTHON_PACKAGE_DIR} -o ${CMAKE_SOURCE_DIR}/src/swig/molpher_wrap.cpp ${CMAKE_SOURCE_DIR}/include/molpher.i
     )
+else()
+    message(WARNING "SWIG wrapping code will NOT be updated. Use the -DRUN_SWIG=ON to update.")
 endif()
 
-# Installation Settings
-
-## add target for installation
-set(MOLPHER_INSTALL_TARGET "molpher_install")
-add_custom_target(${MOLPHER_INSTALL_TARGET}
-        make install
-        DEPENDS molpher
-        COMMENT "Installing ${PROJECT_NAME}...")
+# setup installation prefix
 
 ## install to "${CMAKE_SOURCE_DIR}/dist/" if not requested otherwise
 set(INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/dist/" CACHE PATH "The root of the library installation")
@@ -261,7 +267,54 @@ endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 ## add the install prefix to clean
 set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${CMAKE_INSTALL_PREFIX}")
 
-## install the library components
+# install TBB
+
+## create the TBB installation target
+#set(TBB_LIBRARIES_LS ${TBB_LIBRARIES})
+#list(GET TBB_LIBRARIES 0 SOME_TBB_LIB)
+#get_filename_component(TBB_LIB_DIR ${SOME_TBB_LIB} DIRECTORY CACHE)
+foreach(lib ${TBB_LIBRARIES})
+    list(APPEND TBB_LIBRARIES_PATTERNS "${lib}.*")
+endforeach()
+add_custom_command(
+        OUTPUT
+            ${CMAKE_INSTALL_PREFIX}/include/*.h
+            ${CMAKE_INSTALL_PREFIX}/include/*.hpp
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${TBB_INCLUDE_DIRS}/tbb/ ${CMAKE_INSTALL_PREFIX}/include/tbb
+)
+add_custom_command(
+        OUTPUT
+        ${CMAKE_INSTALL_PREFIX}/lib/*.so
+        ${CMAKE_INSTALL_PREFIX}/lib/*.so*
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
+        COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/ # FIXME: older versions do not support copying of multiple files
+)
+
+set(TBB_TARGET "tbb_install")
+add_custom_target(
+        ${TBB_TARGET}
+        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/*.so ${CMAKE_INSTALL_PREFIX}/include/*.h
+        COMMENT "Installing TBB..."
+)
+
+# Install the library
+
+## add target for installation of the library
+set(MOLPHER_INSTALL_TARGET "molpher_install")
+set(MOLPHER_INSTALL_TARGET_DEPENDS "molpher")
+option(INSTALL_TBB "Install TBB with the library" ON)
+if (INSTALL_TBB)
+    message(WARNING "TBB will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_TBB=OFF to disable.")
+    set(MOLPHER_INSTALL_TARGET_DEPENDS ${MOLPHER_INSTALL_TARGET_DEPENDS} ${TBB_TARGET})
+else()
+    message(WARNING "The TBB runtime dependency will NOT be installed with the library. Use -DINSTALL_TBB=ON to enable.")
+endif()
+add_custom_target(${MOLPHER_INSTALL_TARGET}
+        make install
+        DEPENDS ${MOLPHER_INSTALL_TARGET_DEPENDS}
+        COMMENT "Installing ${PROJECT_NAME}...")
+
+## set library components to install
 install(
         DIRECTORY ${CMAKE_SOURCE_DIR}/include/
         DESTINATION ${CMAKE_INSTALL_PREFIX}/include/molpher
@@ -270,7 +323,8 @@ install(
         PATTERN "*.hpp"
 )
 install(
-        FILES $<TARGET_FILE:molpher>
+        TARGETS molpher
+        LIBRARY
         DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
 )
 install(
@@ -278,38 +332,27 @@ install(
         DESTINATION ${CMAKE_INSTALL_PREFIX}/share/molpher
 )
 
-## install TBB if requested
-option(INSTALL_TBB "Install TBB with the library" ON)
-if(INSTALL_TBB)
-    message(WARNING "TBB will also be installed to ${CMAKE_INSTALL_PREFIX}")
+# Build the SWIG wrappers for Python
 
-    foreach ( dir ${TBB_INCLUDE_DIRS} )
-        install(
-                DIRECTORY ${dir}/tbb/
-                DESTINATION ${CMAKE_INSTALL_PREFIX}/include/tbb
-                FILES_MATCHING
-                PATTERN "*.h"
-                PATTERN "*.hpp"
-        )
-    endforeach()
-    install(FILES ${TBB_LIBRARIES} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-endif()
-
-## add target for the Python SWIG wrappers
+## add target for the binaries and resource files
 if(NOT PYTHON_EXECUTABLE)
+    message(WARNING "PYTHON_EXECUTABLE not set. Using system defaults.")
     set(PYTHON_EXECUTABLE "python")
 endif()
-add_custom_target(molpher_build_SWIG_Python
-        ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py test
+add_custom_command(
+        OUTPUT ${PYTHON_PACKAGE_DIR}/SAScore.dat ${PYTHON_PACKAGE_DIR}/*.so
+        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py build_ext
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}
         DEPENDS ${MOLPHER_INSTALL_TARGET}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+add_custom_target(molpher_build_SWIG_Python
+        DEPENDS ${PYTHON_PACKAGE_DIR}/*.so # for some reason this works, but the library files are not cleaned
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Building SWIG wrappers for Python...")
 
-##
-SET(BUILD_PREFIX
+## add build directory to clean
+set(BUILD_PREFIX
         "${CMAKE_SOURCE_DIR}/build" CACHE PATH "build prefix" FORCE
         )
 set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${BUILD_PREFIX}")
-
-## copy resource files to the Python package
-install(FILES ${CMAKE_SOURCE_DIR}/res/SAScore.dat DESTINATION ${PYTHON_PACKAGE_DIR})

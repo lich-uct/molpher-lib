@@ -2,6 +2,9 @@ package:
   name: {{ target }}
   version: {{ version }}
 
+source:
+  path: .
+
 build:
   number: {{ build_number }}
   string: {{ build_string }}

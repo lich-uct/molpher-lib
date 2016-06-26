@@ -2,6 +2,9 @@ package:
   name: {{ target }}
   version: {{ tbb_version }}
 
+source:
+  path: .
+
 build:
   script_env:
     - BASE_DIR

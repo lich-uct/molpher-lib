@@ -243,3 +243,6 @@ class TestPythonAPI(unittest.TestCase):
                 desc = tree.fetchMol(desc_smiles)
                 self.assertTrue(desc.tree)
         tree.traverse(check_descs)
+
+if __name__ == "__main__":
+    unittest.main()

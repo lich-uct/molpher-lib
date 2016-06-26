@@ -1,14 +1,14 @@
 #!/bin/bash
 
-cd $BASE_DIR
+# setup the project
+BUILD_DIR=$BASE_DIR/build/tbb/
+mkdir -p $BUILD_DIR
+cd $BUILD_DIR
+cmake $BASE_DIR -DINSTALL_TBB=OFF
+make tbb_install
 
-LIB_DIR="$PREFIX/lib/"
-mkdir -p $LIB_DIR
-TBB_LIBS_DIR="${BASE_DIR}/deps/tbb/lib/intel64/gcc4.4/"
-cp ${TBB_LIBS_DIR}/libtbbmalloc_proxy.* $LIB_DIR
-cp ${TBB_LIBS_DIR}/libtbbmalloc.* $LIB_DIR
-cp ${TBB_LIBS_DIR}/libtbb.* $LIB_DIR
+# install to the build environment
+cp -r $BASE_DIR/dist/. $PREFIX
 
-INCLUDE_DIR="$PREFIX/include/tbb/"
-mkdir -p $INCLUDE_DIR
-cp -r deps/tbb/include/tbb/* $INCLUDE_DIR
+# clean up
+rm -rf ${BASE_DIR}/dist
