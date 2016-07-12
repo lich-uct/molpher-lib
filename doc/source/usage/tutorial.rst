@@ -1024,6 +1024,22 @@ set as the new target for the tree searching in the opposite direction and vice 
 In :numref:`bidirectional-example` we also use the `time.clock` function to measure the execution
 times of each potentially time-consuming operation.
 
+Implementing the Original Molpher Algorithm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We can, of course, also implement the original exploration algorithm from the :term:`Molpher`
+program:
+
+..  literalinclude:: ../../../src/python/molpher/examples/classic.py
+    :language: python
+    :caption: The classic algorithm implemented in the :term:`Molpher` program.
+    :name: classic-example
+    :linenos:
+
+The code above implements a simple *ClassicPathFinder* class that just
+runs some of the default operations defined in the library on a single tree.
+Because those operations are based on the original code, no change or configuration is needed.
+
 Summary
 -------
 
