@@ -4,8 +4,9 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # versioning
-file (STRINGS "BUILD.TXT" BUILD_NUMBER LIMIT_COUNT 1)
-file (STRINGS "VERSION.TXT" VERSION_NUMBER LIMIT_COUNT 1)
+file(STRINGS "BUILD.TXT" BUILD_NUMBER LIMIT_COUNT 1)
+file(STRINGS "VERSION.TXT" VERSION_NUMBER LIMIT_COUNT 1)
+string(REGEX MATCH "^[0-9]+\\.[0-9]+" VERSION_NUMBER_SO "${VERSION_NUMBER}")
 
 # Tool Flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -98,7 +99,7 @@ include_directories(${TBB_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${TBB_LIBRARIES})
 add_definitions(${TBB_DEFINITIONS})
 
-# create target
+# create main target for the library itself
 set(SOURCE_FILES
         include/data_structs/ExplorationData.hpp
         include/data_structs/ExplorationTree.hpp
@@ -232,8 +233,8 @@ add_library(molpher SHARED ${SOURCE_FILES})
 set_target_properties(
         molpher
         PROPERTIES
-            VERSION "0.0.0" # TODO: do this automatically
-            SOVERSION "0.0"
+            VERSION "${VERSION_NUMBER}_${BUILD_NUMBER}"
+            SOVERSION "${VERSION_NUMBER_SO}"
 )
 
 # link libraries
