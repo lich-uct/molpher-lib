@@ -37,9 +37,11 @@
 %{
 #define SWIG_FILE_WITH_INIT
 #include "SAScore_data_loader.hpp"
+#include "random_seed.hpp"
 %}
 
 %include "SAScore_data_loader.hpp"
+%include "random_seed.hpp"
 
 // the molpher API
 %include "API.i";

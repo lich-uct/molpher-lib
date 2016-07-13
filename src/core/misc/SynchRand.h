@@ -24,11 +24,6 @@
 #include <tbb/spin_mutex.h>
 #include <tbb/enumerable_thread_specific.h>
 
-// [0,1] - enable for debugging
-#ifndef SYNCHRAND_DETERMINISTIC
-#define SYNCHRAND_DETERMINISTIC 0 // TODO: SET TO 0 IN RELEASES!!!
-#endif
-
 // [0..3] - 0 most precise, 3 fastest
 #ifndef SYNCHRAND_SPEED_OVER_PRECISION
 #define SYNCHRAND_SPEED_OVER_PRECISION 3
@@ -54,7 +49,9 @@ public:
      * @param max
      * @return 
      */
-    static int GetRandomNumber(int max);    
+    static int GetRandomNumber(int max);
+
+    static void SetSeed(unsigned seed);
 private:
     SynchRand();
     SynchRand(const SynchRand &other);

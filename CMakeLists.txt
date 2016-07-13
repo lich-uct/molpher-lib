@@ -228,7 +228,7 @@ set(SOURCE_FILES
         src/core/misc/SAScore_data_loader.cpp
         src/core/misc/SynchRand.cpp
         src/core/misc/SynchRand.h
-        )
+        include/random_seed.hpp src/core/misc/random_seed.cpp)
 add_library(molpher SHARED ${SOURCE_FILES})
 set_target_properties(
         molpher

@@ -174,6 +174,14 @@ SHARED_PTR_DISOWN = _core.SHARED_PTR_DISOWN
 def load_data_from(path):
     return _core.load_data_from(path)
 load_data_from = _core.load_data_from
+
+def set_random_seed(seed):
+    return _core.set_random_seed(seed)
+set_random_seed = _core.set_random_seed
+
+def get_random_number(min, max):
+    return _core.get_random_number(min, max)
+get_random_number = _core.get_random_number
 class StringSet(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, StringSet, name, value)

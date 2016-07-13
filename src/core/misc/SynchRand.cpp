@@ -21,12 +21,11 @@
 
 SynchRand::SynchRand()
 {
-#if SYNCHRAND_DETERMINISTIC == 1
-    mSeedEngine.seed(0);
-#else
-    // TODO - on MPI cluster, node ID should be included into seed
     mSeedEngine.seed(static_cast<unsigned int>(std::time(NULL)));
-#endif
+}
+
+void SynchRand::SetSeed(unsigned seed) {
+    instance.mSeedEngine.seed(seed);
 }
 
 SynchRand SynchRand::instance;
