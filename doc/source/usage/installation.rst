@@ -56,11 +56,12 @@ Prerequisites
 Before you start building, there are a few requirements that need to be satisfied:
 
     - *build-essential* -- You will need this package in order to be able to build software on most Linux platforms. It contains a compiler and other tools important for the build.
-    - *swig* -- It is used to generate the Python wrapping code (we are using version 3.0.8 at the moment).
+    - *swig* -- It is used to generate the Python wrapping code (we are using version 3.0.10 at the moment).
 
-        SWIG is only required if you made changes to the interface (header files under :file:`include/`) and need to run cmake
-        with the :command:`-DRUN_SWIG=ON` option to pick up the changes in the next build. SWIG is then invoked by make upon build with the :command:`swig3.0`
-        command so make sure it resides somewhere on your :makevar:`PATH` in the working environment.
+        SWIG is only required if you made changes to the interface (header files under :file:`include/`) and want to configure cmake
+        with the :command:`-DRUN_SWIG=ON` option (see the description of the *molpher_build_SWIG_Python* target in the section below).
+        If this option is turned on, SWIG will be invoked by make upon build with the :command:`swig3.0`
+        command so make sure the SWIG executable is available in the working environment.
 
     - *setuptools* and *pip* -- If you want to use *pip* or *easy_install* to install the Python package when the build and installation of the library are complete, you will need these to be installed with Python.
     - *python{version}-dev* -- You will need this package in order to build the Python bindings for the particular Python *version*.

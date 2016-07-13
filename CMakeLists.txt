@@ -350,7 +350,7 @@ add_custom_command(
 add_custom_target(molpher_build_SWIG_Python
         DEPENDS ${PYTHON_PACKAGE_DIR}/*.so # for some reason this works, but the library files are not cleaned
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        COMMENT "Building SWIG wrappers for Python...")
+        COMMENT "Built SWIG wrappers for Python...")
 
 ## add build directory to clean
 set(BUILD_PREFIX

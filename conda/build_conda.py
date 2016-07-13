@@ -16,10 +16,13 @@
 import os
 from shutil import copyfile
 import subprocess
+
+import shutil
 from jinja2 import Template
 import imp
-version = imp.load_source('module.name', '../version.py')
 
+BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
+version = imp.load_source('module.name', os.path.join(BASE_DIR, 'version.py'))
 BUILD_ALL_PYTHON = False
 TARGETS = ["tbb", "molpher-lib"]
 PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5'] if BUILD_ALL_PYTHON else ['3.5', '2.7']
@@ -29,8 +32,11 @@ LICENSE_FILE_NAME = "LICENSE"
 TBB_LICENSE_FILE = "deps/tbb/COPYING"
 TBB_VERSION = "4.2"
 
+# remove previously generated files
+shutil.rmtree(os.path.join(BASE_DIR, 'build'), ignore_errors=True)
+shutil.rmtree(os.path.join(BASE_DIR, 'dist'), ignore_errors=True)
+
 for target in TARGETS:
-    BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
     os.chdir(BASE_DIR)
     for python_version in PYTHON_VERSIONS:
         PACKAGE_DIR = os.path.join(BASE_DIR, "conda/{0}/{0}/".format(target))
