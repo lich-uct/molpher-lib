@@ -1,8 +1,9 @@
 ## Project
 build/
-dist/
-libs/
-deps/
+/dist/
+/libs/
+/deps/
+/.idea/
 
 ## C++
 
@@ -35,19 +36,15 @@ deps/
 *.out
 *.app
 
-# Generated project make files
-nbproject/private
-nbproject/*.bash
-.dep.inc
-
 # Molpher snapshots
 *.snp
+*snapshot.xml
 
 # Python files
 __pycache__
 *.egg-info
 *.pyc
-.idea
+*.pickle
 
 # Logfiles
 *.log
@@ -59,10 +56,7 @@ doc/doxygen/xml
 *.db
 
 # Python package data files
-src/python/molpher/swig_wrappers/*.dat
-
-# test files
-*snapshot.xml
+/src/python/molpher/swig_wrappers/*.dat
 
 # rendered homepage templates
 /doc/homepage/*.html
