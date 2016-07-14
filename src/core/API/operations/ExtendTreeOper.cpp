@@ -329,8 +329,6 @@ void ExtendTreeOper::ExtendTreeOperImpl::operator()() {
 
         tree_pimpl->candidates.clear();
         tree_pimpl->candidatesMask.clear();
-        ConcurrentMolVector dummy;
-        tree_pimpl->fetchLeaves(tree, true, dummy);
         tree_pimpl->generationCnt++;
     } else {
         throw std::runtime_error("Can't extend. No tree associated with this instance.");

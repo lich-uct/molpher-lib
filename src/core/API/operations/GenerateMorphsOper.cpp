@@ -146,7 +146,7 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::operator()() {
         tree_pimpl->candidates.shrink_to_fit();
         tree_pimpl->candidatesMask.clear();
         tree_pimpl->candidatesMask.resize(tree_pimpl->candidates.size(), true);
-        SynchCout("Generated " + parseNumber(tree_pimpl->candidates.size()) + " morphs.");
+//        SynchCout("Generated " + parseNumber(tree_pimpl->candidates.size()) + " morphs.");
     } else {
         throw std::runtime_error("Cannot generate morphs. No tree associated with this instance.");
     }

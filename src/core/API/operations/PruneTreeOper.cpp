@@ -81,10 +81,10 @@ void PruneTreeOper::PruneTreeOperImpl::PruneTree::operator()(const std::string& 
         
         if (tooManyDerivations) {
             eraseSubtree(smile, false);
-            SynchCout("Pruned: " + smile);
+//            SynchCout("Pruned: " + smile);
         } else {
             eraseSubtree(smile, true);
-            SynchCout("Pruned (descendents only): " + smile);
+//            SynchCout("Pruned (descendents only): " + smile);
         }
 
     } else {
