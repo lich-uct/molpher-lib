@@ -193,7 +193,7 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
             );
         }
     } else {
-        Cerr("This tree has already been initialized. Only the morphing parameters will be changed.");
+//        Cerr("This tree has already been initialized. Only the morphing parameters will be changed.");
     }
     
     if (is_new_tree) {

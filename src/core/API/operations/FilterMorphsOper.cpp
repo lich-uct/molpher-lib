@@ -167,7 +167,7 @@ void FilterMorphsOper::FilterMorphsOperImpl::FilterMorphs::operator()(const tbb:
                     TreeMap::const_accessor ac;
                     if (mTreePimpl->treeMap.find(ac, morph_smiles)) {
                         alreadyInTree = true;
-                        SynchCout("Duplicate molecule found: " + morph_smiles);
+//                        SynchCout("Duplicate molecule found: " + morph_smiles);
                     }
                 }
             }
