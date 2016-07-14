@@ -16,6 +16,21 @@ from molpher import random
 
 random.set_random_seed(42)
 
+# dir for stored data
+STORAGE_DIR = os.path.abspath('data')
+if not os.path.exists(STORAGE_DIR):
+    os.mkdir(STORAGE_DIR)
+
+# important stuff for the pharmacophore fingerprints
+FDEF_FILE = os.path.join(RDConfig.RDDataDir, 'BaseFeatures.fdef')  # get basic feature definitions
+FEATURE_FACTORY = ChemicalFeatures.BuildFeatureFactory(FDEF_FILE)  # make feature factory
+SIG_FAC = SigFactory(FEATURE_FACTORY, minPointCount=2, maxPointCount=3, trianglePruneBins=False)  # make signature factory
+SIG_FAC.SetBins([(0, 2), (2, 5), (5, 8)])
+SIG_FAC.Init()
+
+# threshold for the bits in common percentage
+COMMON_BITS_PERC_THRS = 0.5
+
 def timeit(func):
     milliseconds = 1000 * time.clock()
     func()
@@ -43,8 +58,24 @@ class AntidecoysFilter(TreeOperation):
 
     def __call__(self):
         if self.antifingerprint:
-            # TODO: implement
-            pass
+            tree = self.tree
+            mask = list(tree.candidates_mask)
+            candidates = [Chem.MolFromSmiles(mol.smiles) if mask[idx] else None for idx, mol in enumerate(tree.candidates)]
+            candidates_fps = [Generate.Gen2DFingerprint(mol, SIG_FAC) if mol else None for mol in candidates]
+
+            counter = 0
+            for idx, fp in enumerate(candidates_fps):
+                if fp:
+                    candidate_bits = fp.GetNumOnBits()
+                    common_fp = self.antifingerprint & fp
+                    common_bits = common_fp.GetNumOnBits()
+                    common_bits_perc = common_bits / candidate_bits
+                    if common_bits_perc > COMMON_BITS_PERC_THRS:
+                        mask[idx] = False
+                        counter += 1
+            print('Anti-decoys filter eliminated {0} molecules...'.format(counter))
+            tree.candidates_mask = mask
+
 
 class BidirectionalPathFinder:
 
@@ -89,27 +120,35 @@ class BidirectionalPathFinder:
             counter+=1
             print('Iteration {0}:'.format(counter))
             for oper in self.ITERATION:
-                print('Execution times ({0}):'.format(type(oper).__name__)) if self.verbose else None
+                if self.verbose:
+                    print('Execution times ({0}):'.format(type(oper).__name__))
 
-                source_target_time = timeit(lambda : self.source_target.runOperation(oper))
-                print('\tsource -> target: {0}'.format(source_target_time)) if self.verbose else None
-                target_source_time = timeit(lambda : self.target_source.runOperation(oper))
-                print('\ttarget -> source: {0}'.format(target_source_time)) if self.verbose else None
+                    source_target_time = timeit(lambda : self.source_target.runOperation(oper))
+                    print('\tsource -> target: {0}'.format(source_target_time))
+                    target_source_time = timeit(lambda : self.target_source.runOperation(oper))
+                    print('\ttarget -> source: {0}'.format(target_source_time))
 
-                print('\ttotal time: {0}'.format(source_target_time + target_source_time)) if self.verbose else None
+                    print('\ttotal time: {0}'.format(source_target_time + target_source_time))
+                else:
+                    self.source_target.runOperation(oper)
+                    self.target_source.runOperation(oper)
 
-            print('Traversal times:') if self.verbose else None
+            if self.verbose:
+                print('Traversal times:')
 
-            source_target_time = timeit(lambda : self.source_target.traverse(self.source_target_min))
-            print('\tsource -> target: {0}'.format(source_target_time)) if self.verbose else None
-            target_source_time = timeit(lambda : self.target_source.traverse(self.target_source_min))
-            print('\ttarget -> source: {0}'.format(target_source_time)) if self.verbose else None
+                source_target_time = timeit(lambda : self.source_target.traverse(self.source_target_min))
+                print('\tsource -> target: {0}'.format(source_target_time))
+                target_source_time = timeit(lambda : self.target_source.traverse(self.target_source_min))
+                print('\ttarget -> source: {0}'.format(target_source_time))
 
-            print('\ttotal execution time: {0}'.format(source_target_time + target_source_time))
+                print('\ttotal execution time: {0}'.format(source_target_time + target_source_time))
 
-            print('Current Targets:') if self.verbose else None
-            print('\tsource to target:', self.source_target.params['target']) if self.verbose else None
-            print('\ttarget to source:', self.target_source.params['target']) if self.verbose else None
+                print('Current Targets:')
+                print('\tsource to target:', self.source_target.params['target'])
+                print('\ttarget to source:', self.target_source.params['target'])
+            else:
+                self.source_target.traverse(self.source_target_min)
+                self.target_source.traverse(self.target_source_min)
 
             print('Current Minima:')
             print('\tsource to target:', self.source_target_min.closest.getSMILES(), self.source_target_min.closest.getDistToTarget())
@@ -122,21 +161,24 @@ class BidirectionalPathFinder:
                 'target' : self.source_target_min.closest.getSMILES()
             }
 
-            print('New Targets:') if self.verbose else None
-            print('\tsource to target:', self.source_target.params['target']) if self.verbose else None
-            print('\ttarget to source:', self.target_source.params['target']) if self.verbose else None
+            if self.verbose:
+                print('New Targets:')
+                print('\tsource to target:', self.source_target.params['target'])
+                print('\ttarget to source:', self.target_source.params['target'])
 
             if self.source_target.path_found:
-                print('Path Found in tree going from source to target') if self.verbose else None
                 connecting_molecule = self.source_target.params['target']
-                print('Connecting molecule:', connecting_molecule) if self.verbose else None
+                if self.verbose:
+                    print('Path Found in tree going from source to target')
+                    print('Connecting molecule:', connecting_molecule)
                 assert self.source_target.hasMol(connecting_molecule)
                 assert self.target_source.hasMol(connecting_molecule)
                 break
             if self.target_source.path_found:
-                print('Path Found in tree going from target to source') if self.verbose else None
                 connecting_molecule = self.target_source.params['target']
-                print('Connecting molecule:', connecting_molecule) if self.verbose else None
+                if self.verbose:
+                    print('Path Found in tree going from target to source')
+                    print('Connecting molecule:', connecting_molecule)
                 assert self.target_source.hasMol(connecting_molecule)
                 assert self.source_target.hasMol(connecting_molecule)
                 break
@@ -151,39 +193,52 @@ class BidirectionalPathFinder:
         return self.path
 
 
-def antifingerprint_from_paths(path, antifingerprint=None):
-    fdef_name = os.path.join(RDConfig.RDDataDir, 'BaseFeatures.fdef')  # get basic feature definitions
-    feature_factory = ChemicalFeatures.BuildFeatureFactory(fdef_name)  # make feature factory
-    sign_fac = SigFactory(feature_factory, minPointCount=2, maxPointCount=3)
-    sign_fac.SetBins([(0,2),(2,5),(5,8)])
-    sign_fac.Init()
-
-    antifingerprint = antifingerprint
+def antifingerprint_from_paths(path, antifp_old=None):
+    antifp_new = antifp_old
     for smiles in path:
         mol = Chem.MolFromSmiles(smiles)
-        if not antifingerprint:
-            antifingerprint = Generate.Gen2DFingerprint(mol, sign_fac)
+        if not antifp_new:
+            antifp_new = Generate.Gen2DFingerprint(mol, SIG_FAC)
         else:
-            antifingerprint = antifingerprint | Generate.Gen2DFingerprint(mol, sign_fac)
+            antifp_new = antifp_new | Generate.Gen2DFingerprint(mol, SIG_FAC)
 
-    return antifingerprint
+    return antifp_new
 
 def main():
     milliseconds_now = 1000 * time.clock()
     cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
     procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
+    antifp_path = os.path.join(STORAGE_DIR, 'antifingerprint.pickle')
+    paths_path = os.path.join(STORAGE_DIR, 'paths.pickle')
+
     paths = []
+    if os.path.exists(paths_path):
+        pickled_paths = open(paths_path, mode='rb')
+        paths.extend(pickle.load(pickled_paths))
+        pickled_paths.close()
     antidecoys_filter = AntidecoysFilter()
-    for i in range(10):
+    if os.path.exists(antifp_path):
+        pickled_antifp = open(antifp_path, mode='rb')
+        antidecoys_filter.antifingerprint = pickle.load(pickled_antifp)
+        pickled_antifp.close()
+    for i in range(5):
         # find a path
         pathfinder = BidirectionalPathFinder(cocaine, procaine, verbose=False, antidecoys_filter=antidecoys_filter)
+        pathfinder()
         paths.append(pathfinder.path)
-        pickle.dump(paths, open('paths.pickle'.format(i)), mode='bw')
         print('Total Execution Time (search #{1}): {0}'.format(1000 * time.clock() - milliseconds_now, i + 1))
 
         # compute and save new antifingerprint
         antidecoys_filter.antifingerprint = antifingerprint_from_paths(pathfinder.path, antidecoys_filter.antifingerprint)
+
+        # pickle the results for future use
+        pickled_antifp = open(antifp_path, mode='wb')
+        pickle.dump(antidecoys_filter.antifingerprint, pickled_antifp)
+        pickled_antifp.close()
+        pickled_paths = open(paths_path, mode='wb')
+        pickle.dump(paths, pickled_paths)
+        pickled_paths.close()
 
 
 if __name__ == "__main__":
