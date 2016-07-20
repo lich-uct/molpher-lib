@@ -97,6 +97,8 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
             , 'far_close_threshold' : self.setDistToTargetDepthSwitch
             , 'max_morphs_total' : self.setCntMaxMorphs
             , 'non_producing_survive' : self.setItThreshold
+            , 'threads' : self.setThreadCount
+            , 'generations' : self.setGenerationCount
         }
         self._GETTERS_MAP = {
             'source' : self.getSource
@@ -199,6 +201,12 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
 
     @param_dict.setter
     def param_dict(self, options):
+        options.update(
+            {
+                'threads': self.getThreadCount()
+                , 'generations': self.getGenerationCount()
+            }
+        )
         self._update_instance(options)
 
     @property

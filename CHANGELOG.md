@@ -10,3 +10,4 @@ Previous version: 0.0.0b0
 ## Fixes
 - prevented the extend operation from incrementing the distance
 improvement counter of the newly appended leaves
+- fixed a problem with thread and generation counts being reset when ExplorationTree.params was used to update morphing parameters
