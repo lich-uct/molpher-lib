@@ -1,4 +1,3 @@
-
 # Copyright (c) 2016 Martin Sicho
 #
 # This program is free software: you can redistribute it and/or modify
@@ -22,6 +21,7 @@ from molpher.core.MolpherMol import MolpherMol
 from molpher.core._utils import shorten_repr
 from molpher.core.operations import TraverseOper
 from molpher.core.operations.callbacks import TraverseCallback
+
 
 class Callback(TraverseCallback):
     """
@@ -48,7 +48,9 @@ class Callback(TraverseCallback):
         """
 
         morph.__class__ = MolpherMol
-        self._callback(morph.tree.fetchMol(morph.smiles)) # needs to be done this way (SEGFAULT otherwise, the input parameter seems to be destroyed by SWIG after the call)
+        self._callback(morph.tree.fetchMol(
+            morph.smiles))  # needs to be done this way (SEGFAULT otherwise, the input parameter seems to be destroyed by SWIG after the call)
+
 
 class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
     """
@@ -70,7 +72,7 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
 
     @staticmethod
     def _cast_mols(mols):
-        ret = [ x for x in mols ]
+        ret = [x for x in mols]
         for morph in ret:
             morph.__class__ = MolpherMol
         return ret
@@ -149,10 +151,9 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         if isinstance(params, molpher.wrappers.ExplorationData):
             self.update(params)
         else:
-            new_params = self.params
-            new_params.update(params)
-            data = ExplorationData(**new_params)
-            self.update(data)
+            self_data = self.asData()
+            self_data.param_dict = params
+            self.update(self_data)
 
     @property
     def generation_count(self):
@@ -239,7 +240,7 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         ret.__class__ = MolpherMol
         return ret
 
-    def traverse(self, callback, start_mol = None):
+    def traverse(self, callback, start_mol=None):
         """
         This method can be used to traverse the whole tree structure (or just a subtree)
         starting from the root to leaves. It takes a callback function that accepts a single required argument

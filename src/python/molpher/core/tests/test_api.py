@@ -113,19 +113,25 @@ class TestPythonAPI(unittest.TestCase):
 
         tree = tree_from_params
 
+        # if we try to set source for non-empty tree, exception should be raised
         def func():
-            tree.params = {'source' : ''}
+            tree.params = {
+                'source' : mol2
+                , 'target' : 'C'
+            }
         self.assertRaises(RuntimeError, func)
 
+        tree.thread_count = 1
         tree.params = {
-            'source' : mol2 # if we try to set source for non-empty tree, it shouldn't be changed
-            , 'target' : 'C'
+            'target' : 'C'
         }
+        self.assertEqual(1, tree.thread_count)
         self.assertEqual(tree.params['source'], mol1)
         self.assertEqual(tree.params['target'], 'C')
         self.assertEqual(tree.params['operators'], params.param_dict['operators']) # we should still have the same opers set
 
-        tree.params = params # assign the original parameters back
+        tree.params = params; tree.thread_count = 0 # assign the original parameters back
+        self.assertEqual(0, tree.thread_count)
         self.assertEqual(tree.params['source'], mol1)
         self.assertEqual(tree.params['target'], mol2)
         self.assertEqual(tree.params['operators'], params.param_dict['operators'])

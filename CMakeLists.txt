@@ -288,7 +288,7 @@ add_custom_command(
         ${CMAKE_INSTALL_PREFIX}/lib/*.so
         ${CMAKE_INSTALL_PREFIX}/lib/*.so*
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/ # FIXME: older versions do not support copying of multiple files
+        COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/ # FIXME: older versions do not support copying of multiple files (http://stackoverflow.com/questions/14368919/cmake-custom-command-copy-multiple-files?rq=1)
 )
 
 set(TBB_TARGET "tbb_install")
