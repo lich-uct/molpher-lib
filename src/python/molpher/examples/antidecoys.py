@@ -11,7 +11,6 @@ from rdkit.Chem.Pharm2D.SigFactory import SigFactory
 
 from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import *
-from molpher.core.selectors import *
 from molpher import random
 
 #random.set_random_seed(42)
