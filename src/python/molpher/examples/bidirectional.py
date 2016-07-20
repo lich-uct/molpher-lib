@@ -1,13 +1,22 @@
-"""
-Implementation of the bidirectional search algorithm.
-
-"""
-
+import os
+import pickle
 import time
 
 from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import *
-from molpher.core.selectors import *
+from molpher import random
+
+#random.set_random_seed(42)
+
+# dir for stored data
+from molpher.core.selectors import FP_ATOM_PAIRS
+
+STORAGE_DIR = os.path.abspath('data')
+if not os.path.exists(STORAGE_DIR):
+    os.mkdir(STORAGE_DIR)
+
+# number of threads to use    
+THREADS = 2
 
 def timeit(func):
     milliseconds = 1000 * time.clock()
@@ -30,16 +39,22 @@ class FindClosest:
 
 class BidirectionalPathFinder:
 
-    def __init__(self, source, target):
+    def __init__(self, source, target, verbose=True):
+        self.verbose = verbose
         options = {
             'fingerprint' : FP_ATOM_PAIRS
         }
+
         self.source_target = ETree.create(source=source, target=target)
-        self.target_source = ETree.create(source=target, target=source)
+        self.source_target.thread_count = THREADS
         self.source_target.params = options
-        self.target_source.params = options
         self.source_target_min = FindClosest()
+
+        self.target_source = ETree.create(source=target, target=source)
+        self.target_source.thread_count = THREADS
+        self.target_source.params = options
         self.target_source_min = FindClosest()
+
         self.ITERATION = [
             GenerateMorphsOper()
             , SortMorphsOper()
@@ -68,27 +83,35 @@ class BidirectionalPathFinder:
             counter+=1
             print('Iteration {0}:'.format(counter))
             for oper in self.ITERATION:
-                print('Execution times ({0}):'.format(type(oper).__name__))
+                if self.verbose:
+                    print('Execution times ({0}):'.format(type(oper).__name__))
 
-                source_target_time = timeit(lambda : self.source_target.runOperation(oper))
+                    source_target_time = timeit(lambda : self.source_target.runOperation(oper))
+                    print('\tsource -> target: {0}'.format(source_target_time))
+                    target_source_time = timeit(lambda : self.target_source.runOperation(oper))
+                    print('\ttarget -> source: {0}'.format(target_source_time))
+
+                    print('\ttotal time: {0}'.format(source_target_time + target_source_time))
+                else:
+                    self.source_target.runOperation(oper)
+                    self.target_source.runOperation(oper)
+
+            if self.verbose:
+                print('Traversal times:')
+
+                source_target_time = timeit(lambda : self.source_target.traverse(self.source_target_min))
                 print('\tsource -> target: {0}'.format(source_target_time))
-                target_source_time = timeit(lambda : self.target_source.runOperation(oper))
+                target_source_time = timeit(lambda : self.target_source.traverse(self.target_source_min))
                 print('\ttarget -> source: {0}'.format(target_source_time))
 
-                print('\ttotal time: {0}'.format(source_target_time + target_source_time))
+                print('\ttotal execution time: {0}'.format(source_target_time + target_source_time))
 
-            print('Traversal times:')
-
-            source_target_time = timeit(lambda : self.source_target.traverse(self.source_target_min))
-            print('\tsource -> target: {0}'.format(source_target_time))
-            target_source_time = timeit(lambda : self.target_source.traverse(self.target_source_min))
-            print('\ttarget -> source: {0}'.format(target_source_time))
-
-            print('\ttotal time: {0}'.format(source_target_time + target_source_time))
-
-            print('Current Targets:')
-            print('\tsource to target:', self.source_target.params['target'])
-            print('\ttarget to source:', self.target_source.params['target'])
+                print('Current Targets:')
+                print('\tsource to target:', self.source_target.params['target'])
+                print('\ttarget to source:', self.target_source.params['target'])
+            else:
+                self.source_target.traverse(self.source_target_min)
+                self.target_source.traverse(self.target_source_min)
 
             print('Current Minima:')
             print('\tsource to target:', self.source_target_min.closest.getSMILES(), self.source_target_min.closest.getDistToTarget())
@@ -101,21 +124,24 @@ class BidirectionalPathFinder:
                 'target' : self.source_target_min.closest.getSMILES()
             }
 
-            print('New Targets:')
-            print('\tsource to target:', self.source_target.params['target'])
-            print('\ttarget to source:', self.target_source.params['target'])
+            if self.verbose:
+                print('New Targets:')
+                print('\tsource to target:', self.source_target.params['target'])
+                print('\ttarget to source:', self.target_source.params['target'])
 
             if self.source_target.path_found:
-                print('Path Found in tree going from source to target:')
                 connecting_molecule = self.source_target.params['target']
-                print('Connecting molecule:', connecting_molecule)
+                if self.verbose:
+                    print('Path Found in tree going from source to target')
+                    print('Connecting molecule:', connecting_molecule)
                 assert self.source_target.hasMol(connecting_molecule)
                 assert self.target_source.hasMol(connecting_molecule)
                 break
             if self.target_source.path_found:
-                print('Path Found in tree going from target to source:')
                 connecting_molecule = self.target_source.params['target']
-                print('Connecting molecule:', connecting_molecule)
+                if self.verbose:
+                    print('Path Found in tree going from target to source')
+                    print('Connecting molecule:', connecting_molecule)
                 assert self.target_source.hasMol(connecting_molecule)
                 assert self.source_target.hasMol(connecting_molecule)
                 break
@@ -126,16 +152,33 @@ class BidirectionalPathFinder:
         target_source_path.reverse()
         source_target_path.extend(target_source_path)
         self.path = source_target_path
+        print('Path:', self.path)
+        return self.path
 
 def main():
     milliseconds_now = 1000 * time.clock()
     cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
     procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
-    pathfinder = BidirectionalPathFinder(cocaine, procaine)
-    pathfinder()
-    print(pathfinder.path)
-    print('Total Execution Time: {0}'.format(1000 * time.clock() - milliseconds_now))
+    paths_path = os.path.join(STORAGE_DIR, 'paths.pickle')
+
+    paths = []
+    if os.path.exists(paths_path):
+        pickled_paths = open(paths_path, mode='rb')
+        paths.extend(pickle.load(pickled_paths))
+        pickled_paths.close()
+    for i in range(5):
+        # find a path
+        pathfinder = BidirectionalPathFinder(cocaine, procaine, verbose=True)
+        pathfinder()
+        paths.append(pathfinder.path)
+        print('Total Execution Time (search #{1}): {0}'.format(1000 * time.clock() - milliseconds_now, i + 1))
+
+        # pickle the results for future use
+        pickled_paths = open(paths_path, mode='wb')
+        pickle.dump(paths, pickled_paths)
+        pickled_paths.close()
+
 
 if __name__ == "__main__":
     exit(main())

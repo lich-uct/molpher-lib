@@ -14,12 +14,15 @@ from molpher.core.operations import *
 from molpher.core.selectors import *
 from molpher import random
 
-random.set_random_seed(42)
+#random.set_random_seed(42)
 
 # dir for stored data
 STORAGE_DIR = os.path.abspath('data')
 if not os.path.exists(STORAGE_DIR):
     os.mkdir(STORAGE_DIR)
+
+# number of threads to use
+THREADS = 2
 
 # important stuff for the pharmacophore fingerprints
 FDEF_FILE = os.path.join(RDConfig.RDDataDir, 'BaseFeatures.fdef')  # get basic feature definitions
@@ -82,15 +85,16 @@ class BidirectionalPathFinder:
     def __init__(self, source, target, verbose=True, antidecoys_filter=AntidecoysFilter()):
         self.antidecoys_filter = antidecoys_filter
         self.verbose = verbose
-        options = {
-            'fingerprint' : FP_ATOM_PAIRS
-        }
+
         self.source_target = ETree.create(source=source, target=target)
+        self.source_target.thread_count = THREADS
+
         self.target_source = ETree.create(source=target, target=source)
-        self.source_target.params = options
-        self.target_source.params = options
+        self.target_source.thread_count = THREADS
+
         self.source_target_min = FindClosest()
         self.target_source_min = FindClosest()
+
         self.ITERATION = [
             GenerateMorphsOper()
             , SortMorphsOper()
