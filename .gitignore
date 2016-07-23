@@ -2,7 +2,8 @@
 build/
 /dist/
 /libs/
-/deps/
+/deps/*
+!/deps/*.sh
 /.idea/
 
 ## C++

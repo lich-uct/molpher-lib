@@ -70,26 +70,30 @@ Before you start building, there are a few requirements that need to be satisfie
 
     - *dependencies* -- Molpher-lib depends on three third-party libraries:
 
-        - *boost* (1.49.0)
+        - *boost* (1.50.0)
         - *rdkit* (2014.03.1)
         - *tbb* (4.2)
 
         You can build the individual dependencies yourself and place them in the :file:`deps/` folder
         in the repository root. For each dependency, there should be a folder of the same name under :file:`deps/`
         (for example, the path to the *tbb* files would be :file:`deps/tbb/`). The cmake build script will automatically
-        identify and prioritize dependencies in this directory.
+        identify and prioritize dependencies in this directory. There is also a build script located under in :file:`deps/`
+        which will attempt to download and build the libraries automatically.
 
         You can also install the libraries on
-        your system using a package manager or other means. In that case, cmake will automatically try to find them on
-        your system and link them during the build. Please, note that the build system is configured so that only static
+        your system using a package manager or other means. In that case, cmake will automatically try to find them and
+        link them during the build. Please, note that the build system is configured so that only static
         libraries of *boost* and *rdkit* are recognized. If you wish to link dynamically, you will need to modify
-        the :file:`CMakeLists.txt` file.
+        the :file:`CMakeLists.txt` file accordingly.
 
-        If you are building on a 64-bit Linux machine, you can download the `Molpher Dependency Bundle
+        If you are building on a 64-bit Linux machine, you can try your luck with the `Molpher Dependency Bundle
         <https://drive.google.com/file/d/0B2rizkCQQcoybFdhOFExaVk5c0U/view?usp=sharing>`_.
-        This bundle contains pre-built dependencies for this platform
+        This bundle contains pre-built dependencies
         and should work out of the box on Debian-based systems. You just need to extract
         the contents of the downloaded archive into the :file:`deps/` directory in the repository root.
+
+        ..  warning:: The dependency bundle works well with Debian itself, but Ubuntu users may encounter runtime
+                problems.
 
 Building the Library
 ~~~~~~~~~~~~~~~~~~~~
