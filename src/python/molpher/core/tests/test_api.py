@@ -19,11 +19,14 @@ import unittest
 
 from pkg_resources import resource_filename
 
+from molpher import random
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
 from molpher.core.operations import *
 from molpher.core.selectors import *
 from molpher.core import ExplorationData
+
+random.set_random_seed(42)
 
 class TestPythonAPI(unittest.TestCase):
     
