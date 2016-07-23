@@ -387,7 +387,7 @@ std::shared_ptr<ExplorationData> ExplorationData::load(const std::string& file) 
     boost::filesystem::path path;
     try {
         path = boost::filesystem::canonical( file );
-    } catch (boost::filesystem3::filesystem_error) {
+    } catch (boost::filesystem::filesystem_error) {
         throw std::runtime_error("Unable to open snapshot: " + file);
     }
     if (boost::filesystem::exists(path)) {
