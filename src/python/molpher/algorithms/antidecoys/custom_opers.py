@@ -1,5 +1,4 @@
 import multiprocessing
-from multiprocessing.managers import BaseManager
 
 from multiprocessing import Manager
 
@@ -52,30 +51,6 @@ class AntidecoysFilter(TreeOperation):
 
 class AntidecoysFilterMulti(TreeOperation):
 
-    # class ComparisonProxy(object):
-    #     def __init__(self, mask):
-    #         self._mask = mask
-    #         self._counter = 0
-    #
-    #     def update_mask(self, idx, val):
-    #         self._mask[idx] = val
-    #         self._counter += 1
-    #
-    #     def get_mask(self):
-    #         return self._mask
-    #
-    #     def get_counter(self):
-    #         return self._counter
-    #
-    # class ComparisonManager(BaseManager):
-    #     pass
-
-    # @staticmethod
-    # def get_manager():
-    #     m = AntidecoysFilterMulti.ComparisonManager()
-    #     m.start()
-    #     return m
-
     @staticmethod
     def eval_morph(data):
         if data:
@@ -93,8 +68,6 @@ class AntidecoysFilterMulti(TreeOperation):
     def __init__(self):
         super(AntidecoysFilterMulti, self).__init__()
         self.antifingerprint = None
-        # self.manager = self.get_manager()
-        # self.manager.register('ComparisonProxy', self.ComparisonProxy)
 
     def __call__(self):
         if self.antifingerprint:

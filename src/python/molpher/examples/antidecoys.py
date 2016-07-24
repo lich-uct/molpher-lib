@@ -1,5 +1,7 @@
-from molpher.examples.antidecoys.utils import run
-from molpher.examples.antidecoys.custom_opers import AntidecoysFilter
+from molpher.algorithms.antidecoys.utils import run
+
+from molpher.algorithms.antidecoys.custom_opers import AntidecoysFilter
+
 
 def main():
     cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
