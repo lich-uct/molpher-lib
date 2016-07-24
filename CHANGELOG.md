@@ -7,6 +7,8 @@ Previous version: 0.0.0b0
 - made the C++ code less verbose
 - added pathfinder with antidecoys to examples
 - added a script for building dependencies
+- created the 'molpher.algorithms' package to house implementations 
+of complete pathfinding algorithms and added one
 
 ## Fixes
 - prevented the extend operation from incrementing the distance
