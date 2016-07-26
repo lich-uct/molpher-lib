@@ -63,7 +63,6 @@ class AntidecoysFilterMulti(TreeOperation):
             common_bits_perc = common_bits / candidate_bits
             assert common_bits_perc <= 1.0
             if common_bits_perc > COMMON_BITS_PERC_THRS:
-                # proxy.update_mask(idx, False)
                 shared_list[idx] = False
                 shared_counter.value += 1
 
