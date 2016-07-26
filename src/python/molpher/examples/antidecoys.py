@@ -1,4 +1,4 @@
-from molpher.algorithms.antidecoys.utils import run
+from molpher.algorithms.antidecoys.core import run
 
 from molpher.algorithms.antidecoys.custom_opers import AntidecoysFilter
 

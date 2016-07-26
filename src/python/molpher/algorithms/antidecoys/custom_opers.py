@@ -9,20 +9,6 @@ from .settings import *
 from rdkit import Chem
 from rdkit.Chem.Pharm2D import Generate
 
-class FindClosest:
-
-    def __init__(self):
-        self.closest = None
-
-    def __call__(self, morph):
-        if not self.closest:
-            self.closest = morph.copy()
-            return
-        current_dist = self.closest.getDistToTarget()
-        morph_dist = morph.getDistToTarget()
-        if morph_dist < current_dist:
-            self.closest = morph.copy()
-
 class AntidecoysFilter(TreeOperation):
 
     def __init__(self):
@@ -76,18 +62,20 @@ class AntidecoysFilterMulti(TreeOperation):
             mask = list(tree.candidates_mask)
 
             manager = Manager()
-            # shared_data = {
-            #     'counter' : counter
-            # }
-            _shared_list = manager.list(mask)
-            _shared_counter = manager.Value('I', value=0)
+            shared_mask = manager.list(mask)
+            shared_counter = manager.Value('I', value=0)
 
-            candidates = [(Chem.MolFromSmiles(mol.smiles), idx, self.antifingerprint, _shared_list, _shared_counter) if mask[idx] else None for idx, mol in enumerate(tree.candidates)]
+            candidates_data = [
+                (Chem.MolFromSmiles(mol.smiles), idx, self.antifingerprint, shared_mask, shared_counter)
+                if mask[idx]
+                else None
+                for idx, mol in enumerate(tree.candidates)
+                ]
 
             pool = multiprocessing.Pool(MAX_THREADS)
-            pool.map(func=self.eval_morph, iterable=candidates)
+            pool.map(func=self.eval_morph, iterable=candidates_data)
             pool.close()
             pool.join()
 
-            print('Anti-decoys filter eliminated {0}/{1} molecules.'.format(_shared_counter.value, sum(mask)))
-            tree.candidates_mask = _shared_list
+            tree.candidates_mask = shared_mask
+            print('Anti-decoys filter eliminated {0}/{1} molecules. Remaining: {2}.'.format(shared_counter.value, sum(mask), sum(tree.candidates_mask)))

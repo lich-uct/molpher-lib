@@ -7,9 +7,22 @@ from molpher.core.operations import SortMorphsOper
 
 from .utils import timeit
 from .settings import *
-from .custom_opers import FindClosest
 
 class BidirectionalPathFinder:
+
+    class FindClosest:
+
+        def __init__(self):
+            self.closest = None
+
+        def __call__(self, morph):
+            if not self.closest:
+                self.closest = morph.copy()
+                return
+            current_dist = self.closest.getDistToTarget()
+            morph_dist = morph.getDistToTarget()
+            if morph_dist < current_dist:
+                self.closest = morph.copy()
 
     def __init__(self, source, target, verbose=True, antidecoys_filter=None):
         self.antidecoys_filter = antidecoys_filter
@@ -21,8 +34,8 @@ class BidirectionalPathFinder:
         self.target_source = ETree.create(source=target, target=source)
         self.target_source.thread_count = MAX_THREADS
 
-        self.source_target_min = FindClosest()
-        self.target_source_min = FindClosest()
+        self.source_target_min = self.FindClosest()
+        self.target_source_min = self.FindClosest()
 
         print("Tree Parameters:")
         print('\tsource -> target: {0}'.format(self.source_target.params))
@@ -38,6 +51,7 @@ class BidirectionalPathFinder:
         ]
         self._iteration = [x for x in self._iteration if x]
         self.path = []
+        self.connecting_molecule = None
 
     def _find_path(self, tree, connecting_mol):
         path = []
@@ -82,7 +96,7 @@ class BidirectionalPathFinder:
                     self.source_target.runOperation(oper)
                     self.target_source.runOperation(oper)
                 if issubclass(oper.__class__, GenerateMorphsOper):
-                    print("Genereated morphs:")
+                    print("Generated morphs:")
                     print('\tsource -> target: {0}'.format(len(self.source_target.candidates)))
                     print('\ttarget -> source: {0}'.format(len(self.target_source.candidates)))
 
@@ -142,6 +156,7 @@ class BidirectionalPathFinder:
                 break
 
         if not search_failed:
+            self.connecting_molecule = connecting_molecule
             source_target_path = self._find_path(self.source_target, connecting_molecule)
             target_source_path = self._find_path(self.target_source, connecting_molecule)
             assert source_target_path.pop(-1) == connecting_molecule
