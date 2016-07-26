@@ -4,7 +4,7 @@ from multiprocessing import Manager
 
 from molpher.core.operations import TreeOperation
 
-from .settings import *
+from .settings import SIG_FAC, COMMON_BITS_PERC_THRS, MAX_THREADS
 
 from rdkit import Chem
 from rdkit.Chem.Pharm2D import Generate

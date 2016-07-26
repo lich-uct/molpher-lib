@@ -3,6 +3,8 @@ import time
 from rdkit import Chem
 from rdkit.Chem.Pharm2D import Generate
 
+from .settings import SIG_FAC
+
 def timeit(func):
     milliseconds = 1000 * time.clock()
     func()

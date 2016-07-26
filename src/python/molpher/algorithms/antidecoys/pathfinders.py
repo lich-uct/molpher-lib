@@ -6,7 +6,8 @@ from molpher.core.operations import PruneTreeOper
 from molpher.core.operations import SortMorphsOper
 
 from .utils import timeit
-from .settings import *
+
+from .settings import MAX_THREADS, MAX_ITERS_PER_PATH, WAIT_FOR_ANTIDECOYS, ANTIDECOYS_DISTANCE_SWITCH
 
 class BidirectionalPathFinder:
 
