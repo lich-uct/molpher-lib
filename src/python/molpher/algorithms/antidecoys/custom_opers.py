@@ -55,16 +55,17 @@ class AntidecoysFilterMulti(TreeOperation):
     @staticmethod
     def eval_morph(data):
         if data:
-            mol, idx, antifingerprint, _shared = data
+            mol, idx, antifingerprint, shared_list, shared_counter = data
             fp = Generate.Gen2DFingerprint(mol, SIG_FAC)
             candidate_bits = fp.GetNumOnBits()
             common_fp = antifingerprint & fp
             common_bits = common_fp.GetNumOnBits()
             common_bits_perc = common_bits / candidate_bits
+            assert common_bits_perc <= 1.0
             if common_bits_perc > COMMON_BITS_PERC_THRS:
                 # proxy.update_mask(idx, False)
-                _shared['mask'][idx] = False
-                _shared['counter'] += 1
+                shared_list[idx] = False
+                shared_counter.value += 1
 
     def __init__(self):
         super(AntidecoysFilterMulti, self).__init__()
@@ -74,21 +75,20 @@ class AntidecoysFilterMulti(TreeOperation):
         if self.antifingerprint:
             tree = self.tree
             mask = list(tree.candidates_mask)
-            counter = 0
 
             manager = Manager()
-            shared_data = {
-                'mask' : mask
-                , 'counter' : counter
-            }
-            _shared_data = manager.dict(shared_data)
+            # shared_data = {
+            #     'counter' : counter
+            # }
+            _shared_list = manager.list(mask)
+            _shared_counter = manager.Value('I', value=0)
 
-            candidates = [(Chem.MolFromSmiles(mol.smiles), idx, self.antifingerprint, _shared_data) if mask[idx] else None for idx, mol in enumerate(tree.candidates)]
+            candidates = [(Chem.MolFromSmiles(mol.smiles), idx, self.antifingerprint, _shared_list, _shared_counter) if mask[idx] else None for idx, mol in enumerate(tree.candidates)]
 
             pool = multiprocessing.Pool(MAX_THREADS)
             pool.map(func=self.eval_morph, iterable=candidates)
             pool.close()
             pool.join()
 
-            print('Anti-decoys filter eliminated {0}/{1} molecules.'.format(_shared_data['counter'], sum(mask)))
-            tree.candidates_mask = _shared_data['mask']
+            print('Anti-decoys filter eliminated {0}/{1} molecules.'.format(_shared_counter.value, sum(mask)))
+            tree.candidates_mask = _shared_list
