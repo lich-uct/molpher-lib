@@ -87,7 +87,11 @@ struct MolpherMolData
     }
 
     bool isValid() const {
-        return (!SMILES.empty());
+        if (SMILES.empty()) {
+            std::cerr << "SMILES string is empty." << std::endl;
+            return false;
+        }
+        return true;
     }
 
     template <class Archive>
