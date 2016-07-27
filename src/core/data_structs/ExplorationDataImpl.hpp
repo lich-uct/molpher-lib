@@ -25,6 +25,7 @@
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/tracking.hpp>
 #include <boost/serialization/level.hpp>
+#include <core/misc/inout.h>
 
 #include "selectors/fingerprint_selectors.h"
 #include "selectors/simcoeff_selectors.h"
@@ -104,12 +105,31 @@ struct ExplorationData::ExplorationDataImpl
     friend class boost::serialization::access;
     
     bool isValid() const {
-        return (!chemOpers.empty()) &&
-                params.isValid() &&
-                source.isValid() &&
-                target.isValid() &&
-                !treeMap.empty() &&
-                (source.SMILES != target.SMILES);
+        if (chemOpers.empty()) {
+            Cerr("No chemical operators specified.");
+            return false;
+        }
+        if (!params.isValid()) {
+            Cerr("Parameters instance is not valid.");
+            return false;
+        }
+        if (!source.isValid()) {
+            Cerr("Source is not a valid instance.");
+            return false;
+        }
+        if (!target.isValid()) {
+            Cerr("Target is not a valid instance.");
+            return false;
+        }
+        if (treeMap.empty()) {
+            Cerr("There are no molecules in the tree.");
+            return false;
+        }
+        if (source.SMILES.compare(target.SMILES) == 0) {
+            Cerr("Source and target are the same.");
+            return false;
+        }
+        return true;
     }
 
     ExplorationDataImpl() :
