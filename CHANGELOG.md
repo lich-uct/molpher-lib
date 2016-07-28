@@ -7,6 +7,7 @@ Previous version: 0.0.0b0
 - made the C++ code less verbose
 - added pathfinder with antidecoys to examples
 - added a script for building dependencies
+- created a separate cmake project for tests
 
 ## Fixes
 - prevented the extend operation from incrementing the distance
