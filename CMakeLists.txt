@@ -279,14 +279,12 @@ foreach(lib ${TBB_LIBRARIES})
 endforeach()
 add_custom_command(
         OUTPUT
-            ${CMAKE_INSTALL_PREFIX}/include/*.h
-            ${CMAKE_INSTALL_PREFIX}/include/*.hpp
+            ${CMAKE_INSTALL_PREFIX}/include/tbb/*.h
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${TBB_INCLUDE_DIRS}/tbb/ ${CMAKE_INSTALL_PREFIX}/include/tbb
 )
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/lib/*.so
-        ${CMAKE_INSTALL_PREFIX}/lib/*.so*
+        ${CMAKE_INSTALL_PREFIX}/lib/libtbb*.so
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
         COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/ # FIXME: older versions do not support copying of multiple files (http://stackoverflow.com/questions/14368919/cmake-custom-command-copy-multiple-files?rq=1)
 )
@@ -294,8 +292,8 @@ add_custom_command(
 set(TBB_TARGET "tbb_install")
 add_custom_target(
         ${TBB_TARGET}
-        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/*.so ${CMAKE_INSTALL_PREFIX}/include/*.h
-        COMMENT "Installing TBB..."
+        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/libtbb*.so ${CMAKE_INSTALL_PREFIX}/include/tbb/*.h
+        COMMENT "Installed TBB."
 )
 
 # Install the library
