@@ -89,9 +89,10 @@ class BidirectionalPathFinder:
         assert not tree.hasMol(start_mol)
 
     def update_target(self, tree, target):
-        tree.params = {
-            'target' : target
-        }
+        if target != tree.params['source']:
+            tree.params = {
+                'target' : target
+            }
         self.source_target_min = self.FindClosest()
         self.target_source_min = self.FindClosest()
 
@@ -186,12 +187,8 @@ class BidirectionalPathFinder:
                 antidecoys_off = True
                 print("Antidecoys turned off.")
 
-            self.source_target.params = {
-                'target' : self.target_source_min.closest.getSMILES()
-            }
-            self.target_source.params = {
-                'target' : self.source_target_min.closest.getSMILES()
-            }
+            self.update_target(self.source_target, self.target_source_min.closest.getSMILES())
+            self.update_target(self.target_source, self.source_target_min.closest.getSMILES())
 
             if self.verbose:
                 print('New Targets:')
@@ -222,6 +219,7 @@ class BidirectionalPathFinder:
 
             if self.path:
                 path_valid = True
+                common_perc = None
                 if self.path_antifingerprint:
                     path_valid, common_perc = evaluate_path(self.path, self.path_antifingerprint)
                 if not path_valid:
