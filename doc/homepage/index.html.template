@@ -76,7 +76,7 @@
 			<div class="section">
 				<h3>Documentation</h3>
 				<p>
-					At the moment the highest version of the library is {{ newest }}.
+					At the moment the highest stable version of the library is <b>{{ newest }}</b>.
 					The documentation for each version is available through the links below:
 				</p>
 

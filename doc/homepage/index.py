@@ -43,8 +43,13 @@ env = Environment()
 env.loader = FileSystemLoader('.')
 template = env.get_template('index.html.template')
 
+newest = None
+for item in versions:
+    if not 'dev' in item:
+        newest = item
+        break
 with open(INDEX_PATH, "w", encoding='utf-8') as index_file:
     index_file.write(template.render(
         versions=versions
-        , newest=versions[0]
+        , newest=newest
     ))
