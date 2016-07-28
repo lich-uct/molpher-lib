@@ -7,7 +7,7 @@ from molpher.core.operations import SortMorphsOper
 
 from .utils import timeit, evaluate_path
 
-from .settings import MAX_THREADS, MAX_ITERS_PER_PATH, WAIT_FOR_ANTIDECOYS, ANTIDECOYS_DISTANCE_SWITCH, ROLLBACK_MAX_ITERS, RESET_CLOSE_THRESHOLD
+from .settings import MAX_THREADS, MAX_ITERS_PER_PATH, WAIT_FOR_ANTIDECOYS, ANTIDECOYS_DISTANCE_SWITCH, ROLLBACK_MAX_ITERS, RESET_CLOSEST_THRESHOLD, ROLLBACK_MAX_ITERS_ON_CLOSEST
 
 class BidirectionalPathFinder:
 
@@ -24,6 +24,16 @@ class BidirectionalPathFinder:
             morph_dist = morph.getDistToTarget()
             if morph_dist < current_dist:
                 self.closest = morph.copy()
+
+    class FindTopClosest:
+
+        def __init__(self, threshold):
+            self.top_closest = []
+            self.threshold = threshold
+
+        def __call__(self, morph):
+            if morph.dist_to_target < self.threshold:
+                self.top_closest.append(morph.smiles)
 
     def __init__(self, source, target, verbose=True, antidecoys_filter=None, path_antifingerprint=None):
         self.source = source
@@ -93,31 +103,33 @@ class BidirectionalPathFinder:
             tree.params = {
                 'target' : target
             }
-        self.source_target_min = self.FindClosest()
-        self.target_source_min = self.FindClosest()
-
 
     @staticmethod
-    def fetch_top_closest(tree, threshold=RESET_CLOSE_THRESHOLD):
-        return [x.smiles for x in tree.leaves if x.dist_to_target < threshold]
+    def fetch_top_closest(tree, threshold=RESET_CLOSEST_THRESHOLD):
+        find_top_closest = BidirectionalPathFinder.FindTopClosest(threshold)
+        tree.traverse(find_top_closest)
+        return find_top_closest.top_closest
+        # return [x.smiles for x in tree.leaves if x.dist_to_target < threshold]
 
     def _rollback_closest(self, tree, rollback_max_iters):
         for x in self.fetch_top_closest(tree):
             if tree.hasMol(x):
                 self._rollback_path(tree, start_mol=x, rollback_max_iters=rollback_max_iters)
 
-    def reset(self, connecting_molecule=None, max_iters_rollback=ROLLBACK_MAX_ITERS):
+    def reset(self, connecting_molecule=None, max_iters_rollback=ROLLBACK_MAX_ITERS, max_iters_rollback_closest=ROLLBACK_MAX_ITERS_ON_CLOSEST):
         if not connecting_molecule:
             assert self.connecting_molecule
             connecting_molecule = self.connecting_molecule
         self._rollback_path(tree=self.source_target, start_mol=connecting_molecule, rollback_max_iters=max_iters_rollback)
         self._rollback_path(tree=self.target_source, start_mol=connecting_molecule, rollback_max_iters=max_iters_rollback)
 
-        self._rollback_closest(tree=self.source_target, rollback_max_iters=max_iters_rollback)
-        self._rollback_closest(tree=self.target_source, rollback_max_iters=max_iters_rollback)
+        self._rollback_closest(tree=self.source_target, rollback_max_iters=max_iters_rollback_closest)
+        self._rollback_closest(tree=self.target_source, rollback_max_iters=max_iters_rollback_closest)
 
         self.update_target(tree=self.source_target, target=self.target)
         self.update_target(tree=self.target_source, target=self.source)
+        self.source_target_min = self.FindClosest()
+        self.target_source_min = self.FindClosest()
 
         self.path = []
         self.connecting_molecule = None
@@ -188,7 +200,9 @@ class BidirectionalPathFinder:
                 print("Antidecoys turned off.")
 
             self.update_target(self.source_target, self.target_source_min.closest.getSMILES())
+            self.target_source_min = self.FindClosest()
             self.update_target(self.target_source, self.source_target_min.closest.getSMILES())
+            self.source_target_min = self.FindClosest()
 
             if self.verbose:
                 print('New Targets:')

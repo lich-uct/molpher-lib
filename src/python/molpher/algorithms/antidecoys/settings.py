@@ -31,10 +31,13 @@ def init():
         THIS_MODULE.COMMON_BITS_PERC_THRS = 0.75
 
         # paths with leaves within this distance from target will be rolled back during reset
-        THIS_MODULE.RESET_CLOSE_THRESHOLD = 0.2
+        THIS_MODULE.RESET_CLOSEST_THRESHOLD = 0.5
 
-        # maximum number of iterations to roll back when removing a path
-        THIS_MODULE.ROLLBACK_MAX_ITERS = 5
+        # maximum number of iterations to roll back an unsuitable path
+        THIS_MODULE.ROLLBACK_MAX_ITERS = 10
+
+        # maximum number of iterations to roll back when removing the closest molecules
+        THIS_MODULE.ROLLBACK_MAX_ITERS_ON_CLOSEST = 1
 
         # number of iterations to wait before the antidecoys filter is applied
         THIS_MODULE.WAIT_FOR_ANTIDECOYS = 3
