@@ -100,7 +100,7 @@ void ExtendTreeOper::ExtendTreeOperImpl::AcceptMorphs::operator()(
                 auto morph_smiles = mMorphs[idx]->getSMILES();
 
                 if (mTreePimpl->treeMap.find(ac, morph_smiles)) {
-                    SynchCout("Candidate morph: " + morph_smiles + " already present in the tree. Skipping...");
+                    SynchCerr("Candidate morph: " + morph_smiles + " already present in the tree. Skipping...");
                     continue;
                 }
             
