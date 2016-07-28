@@ -28,13 +28,13 @@ def init():
         THIS_MODULE.FG_MAX_POINTS = 3 # max number of features
 
         # threshold for the bits in common percentage
-        THIS_MODULE.COMMON_BITS_PERC_THRS = 0.75
+        THIS_MODULE.COMMON_BITS_PERC_THRS = 0.8
 
-        # paths with leaves within this distance from target will be rolled back during reset
+        # paths containing molecules within this distance from target will be rolled back ROLLBACK_MAX_ITERS_ON_CLOSEST iterations during reset
         THIS_MODULE.RESET_CLOSEST_THRESHOLD = 0.5
 
         # maximum number of iterations to roll back an unsuitable path
-        THIS_MODULE.ROLLBACK_MAX_ITERS = 10
+        THIS_MODULE.ROLLBACK_MAX_ITERS = 5
 
         # maximum number of iterations to roll back when removing the closest molecules
         THIS_MODULE.ROLLBACK_MAX_ITERS_ON_CLOSEST = 1
@@ -46,10 +46,10 @@ def init():
         THIS_MODULE.ANTIDECOYS_DISTANCE_SWITCH = 0.2
 
         # maximum number of paths to find
-        THIS_MODULE.PATHS_TO_FIND = 100
+        THIS_MODULE.PATHS_TO_FIND = 50
 
         # maximum iterations to spend on one path in seconds
-        THIS_MODULE.MAX_ITERS_PER_PATH = 100
+        THIS_MODULE.MAX_ITERS_PER_PATH = 500
 
         if THIS_MODULE.SEED not in (None, False):
             random.set_random_seed(THIS_MODULE.SEED)

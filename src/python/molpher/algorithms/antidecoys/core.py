@@ -31,15 +31,17 @@ def run(source, target, antidecoys_filter=None, use_path_antifp=True, verbose=Tr
         paths.append(pathfinder.path)
         print('Total Execution Time (search #{1}): {0}'.format(exec_time, i + 1))
 
-        # compute and save new antifingerprint
-        if antidecoys_filter:
-            antidecoys_filter.antifingerprint = antifingerprint_from_paths(pathfinder.path, antidecoys_filter.antifingerprint)
-        if use_path_antifp:
-            path_antifp = antifingerprint_from_paths(pathfinder.path, path_antifp)
-            pathfinder.path_antifingerprint = path_antifp
-
         # reset the pathfinder for another search
-        pathfinder.reset()
+        if pathfinder.path:
+            # compute and save new antifingerprint
+            if antidecoys_filter:
+                antidecoys_filter.antifingerprint = antifingerprint_from_paths(pathfinder.path, antidecoys_filter.antifingerprint)
+            if use_path_antifp:
+                path_antifp = antifingerprint_from_paths(pathfinder.path, path_antifp)
+                pathfinder.path_antifingerprint = path_antifp
+            pathfinder.reset()
+        else:
+            pathfinder = BidirectionalPathFinder(source, target, verbose=verbose, path_antifingerprint=path_antifp)
 
         # pickle the results for future use
         pickled_antifp = open(antifp_path, mode='wb') # FIXME: path_antifp and antifp should be serialized to different files
