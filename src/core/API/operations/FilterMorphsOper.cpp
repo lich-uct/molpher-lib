@@ -117,118 +117,127 @@ mFilters(filters){
 void FilterMorphsOper::FilterMorphsOperImpl::FilterMorphs::operator()(const tbb::blocked_range<size_t> &r) const {
 
     for (size_t idx = r.begin(); idx != r.end(); ++idx) {
-        
+
         std::string morph_smiles = mMorphs[idx]->getSMILES();
 
-        bool mightSurvive = true;
-        if (mFilters & MorphFilters::PROBABILITY) {
-            double acceptProbability = 1.0;
-            bool isTarget = (morph_smiles == mTreePimpl->target.getSMILES());
-            if (idx >= mTreePimpl->params.cntCandidatesToKeep && !isTarget) {
-                acceptProbability =
-                        0.25 - (idx - mTreePimpl->params.cntCandidatesToKeep) /
-                        ((mGlobalMorphCount - mTreePimpl->params.cntCandidatesToKeep) * 4.0);
+        if (mSurvivors[idx]) {
+
+            bool mightSurvive = true;
+            if (mFilters & MorphFilters::PROBABILITY) {
+                double acceptProbability = 1.0;
+                bool isTarget = (morph_smiles == mTreePimpl->target.getSMILES());
+                if (idx >= mTreePimpl->params.cntCandidatesToKeep && !isTarget) {
+                    acceptProbability =
+                            0.25 - (idx - mTreePimpl->params.cntCandidatesToKeep) /
+                                   ((mGlobalMorphCount - mTreePimpl->params.cntCandidatesToKeep) * 4.0);
+                }
+                mightSurvive = SynchRand::GetRandomNumber(0, 99) < (int) (acceptProbability * 100);
             }
-            mightSurvive = SynchRand::GetRandomNumber(0, 99) < (int) (acceptProbability * 100);
-        }
-        
-        if (mightSurvive) {
-            bool isDead = false;
-            bool badWeight = false;
-            bool badSascore = false;
-            bool alreadyInTree = false;
-            bool alreadyTriedByParent = false;
-            bool tooManyProducedMorphs = false;
 
-            // Tests are ordered according to their cost.
+            if (mightSurvive) {
+                bool isDead = false;
+                bool badWeight = false;
+                bool badSascore = false;
+                bool alreadyInTree = false;
+                bool alreadyTriedByParent = false;
+                bool tooManyProducedMorphs = false;
 
-            if (mFilters & MorphFilters::WEIGHT) {
-                isDead = (badWeight || badSascore || alreadyInTree ||
-                        alreadyTriedByParent || tooManyProducedMorphs);
-                if (!isDead) {
-                    double weight = mMorphs[idx]->getMolecularWeight();
-                    badWeight =
-                            ( weight <
-                            mTreePimpl->params.minAcceptableMolecularWeight) ||
-                            (weight >
-                            mTreePimpl->params.maxAcceptableMolecularWeight);
-                    if (badWeight && mVerboseOutput) {
-                        std::stringstream ss;
-                        ss << "bad weight: " << morph_smiles << " : " << weight;
-                        SynchCout(ss.str());
+                // Tests are ordered according to their cost.
+
+                if (mFilters & MorphFilters::WEIGHT) {
+                    isDead = (badWeight || badSascore || alreadyInTree ||
+                              alreadyTriedByParent || tooManyProducedMorphs);
+                    if (!isDead) {
+                        double weight = mMorphs[idx]->getMolecularWeight();
+                        badWeight =
+                                ( weight <
+                                  mTreePimpl->params.minAcceptableMolecularWeight) ||
+                                (weight >
+                                 mTreePimpl->params.maxAcceptableMolecularWeight);
+                        if (badWeight && mVerboseOutput) {
+                            std::stringstream ss;
+                            ss << "bad weight: " << morph_smiles << " : " << weight;
+                            SynchCout(ss.str());
+                        }
                     }
                 }
-            }
 
-            if (mFilters & MorphFilters::DUPLICATES) {
-                isDead = (badWeight || badSascore || alreadyInTree ||
-                        alreadyTriedByParent || tooManyProducedMorphs);
-                if (!isDead) {
-                    TreeMap::const_accessor ac;
-                    if (mTreePimpl->treeMap.find(ac, morph_smiles)) {
-                        alreadyInTree = true;
+                if (mFilters & MorphFilters::DUPLICATES) {
+                    isDead = (badWeight || badSascore || alreadyInTree ||
+                              alreadyTriedByParent || tooManyProducedMorphs);
+                    if (!isDead) {
+                        TreeMap::const_accessor ac;
+                        if (mTreePimpl->treeMap.find(ac, morph_smiles)) {
+                            alreadyInTree = true;
 //                        SynchCout("Duplicate molecule found: " + morph_smiles);
+                        }
                     }
                 }
-            }
 
-            if (mFilters & MorphFilters::HISTORIC_DESCENDENTS) {
-                isDead = (badWeight || badSascore || alreadyInTree ||
-                        alreadyTriedByParent || tooManyProducedMorphs);
-                if (!isDead) {
-                    TreeMap::const_accessor ac;
-                    if (mTreePimpl->treeMap.find(ac, mMorphs[idx]->getParentSMILES())) {
-                        auto descendants = ac->second->getHistoricDescendants();
-                        alreadyTriedByParent = (
-                                descendants.find(morph_smiles)
-                                !=
-                                descendants.end());
-                    } else {
-                        assert(false);
+                if (mFilters & MorphFilters::HISTORIC_DESCENDENTS) {
+                    isDead = (badWeight || badSascore || alreadyInTree ||
+                              alreadyTriedByParent || tooManyProducedMorphs);
+                    if (!isDead) {
+                        TreeMap::const_accessor ac;
+                        if (mTreePimpl->treeMap.find(ac, mMorphs[idx]->getParentSMILES())) {
+                            auto descendants = ac->second->getHistoricDescendants();
+                            alreadyTriedByParent = (
+                                    descendants.find(morph_smiles)
+                                    !=
+                                    descendants.end());
+                        } else {
+                            assert(false);
+                        }
                     }
                 }
-            }
 
-            if (mFilters & MorphFilters::MAX_DERIVATIONS) {
-                isDead = (badWeight || badSascore || alreadyInTree ||
-                        alreadyTriedByParent || tooManyProducedMorphs);
-                if (!isDead) {
-                    MorphDerivationMap::const_accessor ac;
-                    if (mTreePimpl->morphDerivations.find(ac, morph_smiles)) {
-                        tooManyProducedMorphs =
-                                (ac->second > mTreePimpl->params.cntMaxMorphs);
-                    }
-                    if (tooManyProducedMorphs && mVerboseOutput) {
-                        std::stringstream ss;
-                        ss << "too many morphs: " << morph_smiles << " : " << ac->second;
-                        SynchCout(ss.str());
-                    }
-                }
-            }
-            
-            if (mFilters & MorphFilters::SYNTHESIS) {
-                isDead = (badWeight || badSascore || alreadyInTree ||
-                        alreadyTriedByParent || tooManyProducedMorphs);
-                if (!isDead) {
-                    double sascore = mMorphs[idx]->getSAScore();
-                    badSascore = sascore > 6.0; // questionable, it is recommended value from Ertl
-                    // in case of badSascore print message
-                    if (badSascore && mVerboseOutput) {
-                        std::stringstream ss;
-                        ss << "bad SAScore: " << morph_smiles << " : " << sascore;
-                        SynchCout(ss.str());
+                if (mFilters & MorphFilters::MAX_DERIVATIONS) {
+                    isDead = (badWeight || badSascore || alreadyInTree ||
+                              alreadyTriedByParent || tooManyProducedMorphs);
+                    if (!isDead) {
+                        MorphDerivationMap::const_accessor ac;
+                        if (mTreePimpl->morphDerivations.find(ac, morph_smiles)) {
+                            tooManyProducedMorphs =
+                                    (ac->second > mTreePimpl->params.cntMaxMorphs);
+                        }
+                        if (tooManyProducedMorphs && mVerboseOutput) {
+                            std::stringstream ss;
+                            ss << "too many morphs: " << morph_smiles << " : " << ac->second;
+                            SynchCout(ss.str());
+                        }
                     }
                 }
-            }
 
-            isDead = (badWeight || badSascore || alreadyInTree ||
-                    alreadyTriedByParent || tooManyProducedMorphs);
-            mSurvivors[idx] = !isDead;
+                if (mFilters & MorphFilters::SYNTHESIS) {
+                    isDead = (badWeight || badSascore || alreadyInTree ||
+                              alreadyTriedByParent || tooManyProducedMorphs);
+                    if (!isDead) {
+                        double sascore = mMorphs[idx]->getSAScore();
+                        badSascore = sascore > 6.0; // questionable, it is recommended value from Ertl
+                        // in case of badSascore print message
+                        if (badSascore && mVerboseOutput) {
+                            std::stringstream ss;
+                            ss << "bad SAScore: " << morph_smiles << " : " << sascore;
+                            SynchCout(ss.str());
+                        }
+                    }
+                }
+
+                isDead = (badWeight || badSascore || alreadyInTree ||
+                          alreadyTriedByParent || tooManyProducedMorphs);
+                mSurvivors[idx] = !isDead;
+            } else {
+                mSurvivors[idx] = false;
+                if (mVerboseOutput) {
+                    std::stringstream ss;
+                    ss << "probability filtered: " << morph_smiles;
+                    SynchCout(ss.str());
+                }
+            }
         } else {
-            mSurvivors[idx] = false;
             if (mVerboseOutput) {
                 std::stringstream ss;
-                ss << "probability filtered: " << morph_smiles;
+                ss << "Morph already filtered before (" + morph_smiles + "). Skipping... ";
                 SynchCout(ss.str());
             }
         }
