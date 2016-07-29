@@ -19,4 +19,9 @@ from molpher.core.operations.TreeOperation import TreeOperation
 
 
 class SortMorphsOper(molpher.swig_wrappers.core.SortMorphsOper, TreeOperation):
-    pass
+
+    def __init__(self, tree=None, callback=molpher.swig_wrappers.core.DefaultSortCallback()):
+        if tree:
+            super(SortMorphsOper, self).__init__(tree, callback)
+        else:
+            super(SortMorphsOper, self).__init__(callback)

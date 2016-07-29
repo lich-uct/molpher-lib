@@ -1438,6 +1438,60 @@ class TraverseCallback(_object):
 TraverseCallback_swigregister = _core.TraverseCallback_swigregister
 TraverseCallback_swigregister(TraverseCallback)
 
+class SortMorphsCallback(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SortMorphsCallback, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, SortMorphsCallback, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        if self.__class__ == SortMorphsCallback:
+            _self = None
+        else:
+            _self = self
+        this = _core.new_SortMorphsCallback(_self, )
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _core.delete_SortMorphsCallback
+    __del__ = lambda self: None
+
+    def __call__(self, morph_1, morph_2):
+        return _core.SortMorphsCallback___call__(self, morph_1, morph_2)
+    def __disown__(self):
+        self.this.disown()
+        _core.disown_SortMorphsCallback(self)
+        return weakref_proxy(self)
+SortMorphsCallback_swigregister = _core.SortMorphsCallback_swigregister
+SortMorphsCallback_swigregister(SortMorphsCallback)
+
+class DefaultSortCallback(SortMorphsCallback):
+    __swig_setmethods__ = {}
+    for _s in [SortMorphsCallback]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, DefaultSortCallback, name, value)
+    __swig_getmethods__ = {}
+    for _s in [SortMorphsCallback]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, DefaultSortCallback, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        this = _core.new_DefaultSortCallback()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def __call__(self, morph_1, morph_2):
+        return _core.DefaultSortCallback___call__(self, morph_1, morph_2)
+    __swig_destroy__ = _core.delete_DefaultSortCallback
+    __del__ = lambda self: None
+DefaultSortCallback_swigregister = _core.DefaultSortCallback_swigregister
+DefaultSortCallback_swigregister(DefaultSortCallback)
+
 OP_ADD_ATOM = _core.OP_ADD_ATOM
 OP_REMOVE_ATOM = _core.OP_REMOVE_ATOM
 OP_ADD_BOND = _core.OP_ADD_BOND

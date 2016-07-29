@@ -19,13 +19,14 @@
 #define	SORTMORPHSOPER_HPP
 
 #include "TreeOperation.hpp"
+#include "callbacks/SortMorphsCallback.hpp"
 
 class SortMorphsOper : public TreeOperation {
     
 public:
     class SortMorphsOperImpl;
-    SortMorphsOper(std::shared_ptr<ExplorationTree> expTree);
-    SortMorphsOper();
+    SortMorphsOper(std::shared_ptr<ExplorationTree> expTree, SortMorphsCallback &sort_callback);
+    SortMorphsOper(SortMorphsCallback &sort_callback);
     virtual void operator()();
     
 private:

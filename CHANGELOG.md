@@ -9,6 +9,7 @@ Previous version: 0.0.0b0
 - added a script for building dependencies
 - created the 'molpher.algorithms' package to house implementations 
 of complete pathfinding algorithms and added one
+- it is now possible to change how morphs are filtered with a callback function
 
 ## Fixes
 - prevented the extend operation from incrementing the distance

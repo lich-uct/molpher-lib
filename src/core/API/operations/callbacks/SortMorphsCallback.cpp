@@ -15,8 +15,27 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-%ignore TraverseCallback::TraverseCallbackImpl;
-%include "TraverseCallback.hpp"
+#include "operations/callbacks/SortMorphsCallback.hpp"
+#include "SortMorphsCallbackImpl.hpp"
 
-%ignore SortMorphsCallback::SortMorphsCallbackImpl;
-%include "SortMorphsCallback.hpp"
+SortMorphsCallback::SortMorphsCallback() :
+        pimpl(new SortMorphsCallback::SortMorphsCallbackImpl())
+{
+    // no action
+}
+
+
+SortMorphsCallback::~SortMorphsCallback() {
+    // no action
+}
+
+void SortMorphsCallback::setSortMorphsPimpl(std::shared_ptr<SortMorphsCallbackImpl> pimpl) {
+    this->pimpl = pimpl;
+}
+
+// pimpl
+
+SortMorphsCallback::SortMorphsCallbackImpl::SortMorphsCallbackImpl() {
+    // no action
+}
+

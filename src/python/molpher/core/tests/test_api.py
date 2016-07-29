@@ -23,6 +23,7 @@ from molpher import random
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
 from molpher.core.operations import *
+from molpher.core.operations.callbacks import SortMorphsCallback
 from molpher.core.selectors import *
 from molpher.core import ExplorationData
 
@@ -177,6 +178,39 @@ class TestPythonAPI(unittest.TestCase):
         tree.runOperation(fl)
         for leaf1, leaf2, leaf3 in zip(sorted(fl.leaves), sorted(fl.tree.leaves), sorted(tree.leaves)):
             self.assertTrue(leaf1.smiles == leaf2.smiles == leaf3.smiles)
+
+        tree.generateMorphs()
+        print(tree.candidates_mask)
+        tree.sortMorphs()
+        previous = None
+        for morph in tree.candidates:
+            if previous:
+                self.assertTrue(morph.dist_to_target >= previous)
+                previous = morph.dist_to_target
+            else:
+                previous = morph.dist_to_target
+        print([x.dist_to_target for x in tree.candidates])
+
+        class MySort(SortMorphsCallback):
+
+            def __call__(self, a, b):
+                return a.getDistToTarget() > b.getDistToTarget()
+
+        from molpher.swig_wrappers.core import SortMorphsOper as x
+        my_callback = MySort()
+        my_sort = x(tree, my_callback) # x(tree, MySort()) gives a segfault
+        my_sort()
+
+        previous = None
+        for morph in tree.candidates:
+            if previous:
+                self.assertTrue(morph.dist_to_target <= previous)
+                previous = morph.dist_to_target
+            else:
+                previous = morph.dist_to_target
+        print([x.dist_to_target for x in tree.candidates])
+        tree.filterMorphs()
+        print(tree.candidates_mask)
 
     def testMorphing(self):
         def callback(morph):

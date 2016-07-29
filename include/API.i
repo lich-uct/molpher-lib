@@ -33,6 +33,7 @@
 
 // callbacks
 #include "operations/callbacks/TraverseCallback.hpp"
+#include "operations/callbacks/SortMorphsCallback.hpp"
 
 // selectors
 #include "selectors/chemoper_selectors.h"

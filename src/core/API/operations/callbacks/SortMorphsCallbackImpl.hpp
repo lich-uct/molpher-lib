@@ -15,8 +15,13 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-%ignore TraverseCallback::TraverseCallbackImpl;
-%include "TraverseCallback.hpp"
+#ifndef MOLPHER_LIB_SORTMOPRHSCALLBACKIMPL_HPP
+#define MOLPHER_LIB_SORTMOPRHSCALLBACKIMPL_HPP
 
-%ignore SortMorphsCallback::SortMorphsCallbackImpl;
-%include "SortMorphsCallback.hpp"
+class SortMorphsCallback::SortMorphsCallbackImpl {
+
+public:
+    SortMorphsCallbackImpl();
+};
+
+#endif //MOLPHER_LIB_SORTMOPRHSCALLBACKIMPL_HPP
