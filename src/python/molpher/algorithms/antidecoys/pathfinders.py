@@ -35,11 +35,11 @@ class BidirectionalPathFinder:
             if morph.dist_to_target < self.threshold:
                 self.top_closest.append(morph.smiles)
 
-    def __init__(self, source, target, verbose=True, antidecoys_filter=None, path_antifingerprint=None):
+    def __init__(self, source, target, verbose=True, antidecoys_filter=None, paths_antifingerprint=None):
         self.source = source
         self.target = target
         self.antidecoys_filter = antidecoys_filter
-        self.path_antifingerprint = path_antifingerprint
+        self.paths_antifingerprint = paths_antifingerprint
         self.verbose = verbose
 
         self.source_target = ETree.create(source=source, target=target)
@@ -234,8 +234,8 @@ class BidirectionalPathFinder:
             if self.path:
                 path_valid = True
                 common_perc = None
-                if self.path_antifingerprint:
-                    path_valid, common_perc = evaluate_path(self.path, self.path_antifingerprint)
+                if self.paths_antifingerprint:
+                    path_valid, common_perc = evaluate_path(self.path, self.paths_antifingerprint)
                 if not path_valid:
                     print('Path will be removed due to antidecoys (% in common {0}): {1}'.format(common_perc, self.path))
                     print('Rolling back...')
