@@ -104,5 +104,5 @@ class GatherAntiFPScores(TreeOperation):
         self.antitfp = anti_fp
 
     def __call__(self):
-        candidates = self.tree.candidates
-        self.out.update(compute_antifp_scores([x.smiles for x in candidates], self.antitfp))
+        results = compute_antifp_scores(self.tree.candidates, self.antitfp)
+        self.out.update(results)

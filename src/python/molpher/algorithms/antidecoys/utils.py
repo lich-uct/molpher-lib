@@ -1,9 +1,10 @@
 import time
 
+import multiprocessing
 from rdkit import Chem
 from rdkit.Chem.Pharm2D import Generate
 
-from .settings import SIG_FAC, COMMON_BITS_PERC_THRS
+from .settings import SIG_FAC, COMMON_BITS_PERC_THRS, MAX_THREADS
 
 def timeit(func):
     milliseconds = 1000 * time.clock()
@@ -34,8 +35,15 @@ def evaluate_path(path, anti_fp):
     else:
         return True, common_bits_perc
 
+def compute_antifp_score(data):
+    smiles, anti_fp = data
+    return smiles, evaluate_path([smiles], anti_fp)[1]
+
 def compute_antifp_scores(mols, anti_fp):
-    scores = dict()
-    for mol in mols:
-        scores[mol] = evaluate_path([mol], anti_fp)[1]
-    return scores
+    data = list([(x.smiles, anti_fp) for x in mols])
+
+    pool = multiprocessing.Pool(MAX_THREADS)
+    results = pool.map(func=compute_antifp_score, iterable=data)
+    pool.close()
+    pool.join()
+    return dict(results)
