@@ -1409,6 +1409,31 @@ class TraverseOper(TreeOperation):
 TraverseOper_swigregister = _core.TraverseOper_swigregister
 TraverseOper_swigregister(TraverseOper)
 
+class CleanMorphsOper(TreeOperation):
+    __swig_setmethods__ = {}
+    for _s in [TreeOperation]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CleanMorphsOper, name, value)
+    __swig_getmethods__ = {}
+    for _s in [TreeOperation]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, CleanMorphsOper, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        this = _core.new_CleanMorphsOper(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def __call__(self):
+        return _core.CleanMorphsOper___call__(self)
+    __swig_destroy__ = _core.delete_CleanMorphsOper
+    __del__ = lambda self: None
+CleanMorphsOper_swigregister = _core.CleanMorphsOper_swigregister
+CleanMorphsOper_swigregister(CleanMorphsOper)
+
 class TraverseCallback(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, TraverseCallback, name, value)

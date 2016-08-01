@@ -38,7 +38,8 @@ class ExplorationTree
     friend class ExtendTreeOper;
     friend class PruneTreeOper;
     friend class TraverseOper;
-    
+    friend class CleanMorphsOper;
+
 public:
     class ExplorationTreeImpl;
     

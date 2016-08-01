@@ -45,3 +45,7 @@
 %ignore TraverseOper::TraverseOperImpl;
 %catches(std::runtime_error) TraverseOper::operator()();
 %include "TraverseOper.hpp";
+
+%ignore CleanMorphsOper::CleanMorphsOperImpl;
+%catches(std::runtime_error) CleanMorphsOper::operator()();
+%include "CleanMorphsOper.hpp";

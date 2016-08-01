@@ -180,7 +180,6 @@ class TestPythonAPI(unittest.TestCase):
             self.assertTrue(leaf1.smiles == leaf2.smiles == leaf3.smiles)
 
         tree.generateMorphs()
-        print(tree.candidates_mask)
         tree.sortMorphs()
         previous = None
         for morph in tree.candidates:
@@ -208,8 +207,12 @@ class TestPythonAPI(unittest.TestCase):
             else:
                 previous = morph.dist_to_target
         print([x.dist_to_target for x in tree.candidates])
+
         tree.filterMorphs()
-        print(tree.candidates_mask)
+        selected = sum(tree.candidates_mask)
+        clean_stuff = CleanMorphsOper()
+        tree.runOperation(clean_stuff)
+        self.assertEquals(len(tree.candidates), selected)
 
     def testMorphing(self):
         def callback(morph):

@@ -14,12 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import molpher.swig_wrappers.core as core
 from molpher.core.operations.TreeOperation import TreeOperation
-from molpher.core.operations.SortMorphsOper import SortMorphsOper
-from molpher.core.operations.FindLeavesOper import FindLeavesOper
-from molpher.core.operations.FilterMorphsOper import FilterMorphsOper
-from molpher.core.operations.ExtendTreeOper import ExtendTreeOper
-from molpher.core.operations.PruneTreeOper import PruneTreeOper
-from molpher.core.operations.TraverseOper import TraverseOper
-from molpher.core.operations.GenerateMorphsOper import GenerateMorphsOper
-from molpher.core.operations.CleanMorphsOper import CleanMorphsOper
+
+
+class CleanMorphsOper(core.CleanMorphsOper, TreeOperation):
+    pass

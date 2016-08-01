@@ -3453,53 +3453,54 @@ namespace Swig {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_DefaultSortCallback swig_types[0]
-#define SWIGTYPE_p_ExplorationData swig_types[1]
-#define SWIGTYPE_p_ExplorationTree swig_types[2]
-#define SWIGTYPE_p_ExtendTreeOper swig_types[3]
-#define SWIGTYPE_p_FilterMorphsOper swig_types[4]
-#define SWIGTYPE_p_FindLeavesOper swig_types[5]
-#define SWIGTYPE_p_GenerateMorphsOper swig_types[6]
-#define SWIGTYPE_p_MolpherMol swig_types[7]
-#define SWIGTYPE_p_PruneTreeOper swig_types[8]
-#define SWIGTYPE_p_SortMorphsCallback swig_types[9]
-#define SWIGTYPE_p_SortMorphsOper swig_types[10]
-#define SWIGTYPE_p_TraverseCallback swig_types[11]
-#define SWIGTYPE_p_TraverseOper swig_types[12]
-#define SWIGTYPE_p_TreeOperation swig_types[13]
-#define SWIGTYPE_p_allocator_type swig_types[14]
-#define SWIGTYPE_p_char swig_types[15]
-#define SWIGTYPE_p_const_reference swig_types[16]
-#define SWIGTYPE_p_difference_type swig_types[17]
-#define SWIGTYPE_p_key_type swig_types[18]
-#define SWIGTYPE_p_mapped_type swig_types[19]
-#define SWIGTYPE_p_p_PyObject swig_types[20]
-#define SWIGTYPE_p_reference swig_types[21]
-#define SWIGTYPE_p_size_type swig_types[22]
-#define SWIGTYPE_p_std__allocatorT_bool_t swig_types[23]
-#define SWIGTYPE_p_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t swig_types[24]
-#define SWIGTYPE_p_std__allocatorT_std__shared_ptrT_MolpherMol_t_t swig_types[25]
-#define SWIGTYPE_p_std__allocatorT_std__string_t swig_types[26]
-#define SWIGTYPE_p_std__invalid_argument swig_types[27]
-#define SWIGTYPE_p_std__lessT_int_t swig_types[28]
-#define SWIGTYPE_p_std__lessT_std__string_t swig_types[29]
-#define SWIGTYPE_p_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t swig_types[30]
-#define SWIGTYPE_p_std__mapT_std__string_unsigned_int_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_unsigned_int_t_t_t swig_types[31]
-#define SWIGTYPE_p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t swig_types[32]
-#define SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t swig_types[33]
-#define SWIGTYPE_p_std__shared_ptrT_ExplorationData_t swig_types[34]
-#define SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t swig_types[35]
-#define SWIGTYPE_p_std__shared_ptrT_MolpherMol_t swig_types[36]
-#define SWIGTYPE_p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t swig_types[37]
-#define SWIGTYPE_p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t swig_types[38]
-#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[39]
-#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[40]
-#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t swig_types[41]
-#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[42]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[43]
-#define SWIGTYPE_p_value_type swig_types[44]
-static swig_type_info *swig_types[46];
-static swig_module_info swig_module = {swig_types, 45, 0, 0, 0, 0};
+#define SWIGTYPE_p_CleanMorphsOper swig_types[0]
+#define SWIGTYPE_p_DefaultSortCallback swig_types[1]
+#define SWIGTYPE_p_ExplorationData swig_types[2]
+#define SWIGTYPE_p_ExplorationTree swig_types[3]
+#define SWIGTYPE_p_ExtendTreeOper swig_types[4]
+#define SWIGTYPE_p_FilterMorphsOper swig_types[5]
+#define SWIGTYPE_p_FindLeavesOper swig_types[6]
+#define SWIGTYPE_p_GenerateMorphsOper swig_types[7]
+#define SWIGTYPE_p_MolpherMol swig_types[8]
+#define SWIGTYPE_p_PruneTreeOper swig_types[9]
+#define SWIGTYPE_p_SortMorphsCallback swig_types[10]
+#define SWIGTYPE_p_SortMorphsOper swig_types[11]
+#define SWIGTYPE_p_TraverseCallback swig_types[12]
+#define SWIGTYPE_p_TraverseOper swig_types[13]
+#define SWIGTYPE_p_TreeOperation swig_types[14]
+#define SWIGTYPE_p_allocator_type swig_types[15]
+#define SWIGTYPE_p_char swig_types[16]
+#define SWIGTYPE_p_const_reference swig_types[17]
+#define SWIGTYPE_p_difference_type swig_types[18]
+#define SWIGTYPE_p_key_type swig_types[19]
+#define SWIGTYPE_p_mapped_type swig_types[20]
+#define SWIGTYPE_p_p_PyObject swig_types[21]
+#define SWIGTYPE_p_reference swig_types[22]
+#define SWIGTYPE_p_size_type swig_types[23]
+#define SWIGTYPE_p_std__allocatorT_bool_t swig_types[24]
+#define SWIGTYPE_p_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t swig_types[25]
+#define SWIGTYPE_p_std__allocatorT_std__shared_ptrT_MolpherMol_t_t swig_types[26]
+#define SWIGTYPE_p_std__allocatorT_std__string_t swig_types[27]
+#define SWIGTYPE_p_std__invalid_argument swig_types[28]
+#define SWIGTYPE_p_std__lessT_int_t swig_types[29]
+#define SWIGTYPE_p_std__lessT_std__string_t swig_types[30]
+#define SWIGTYPE_p_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t swig_types[31]
+#define SWIGTYPE_p_std__mapT_std__string_unsigned_int_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_unsigned_int_t_t_t swig_types[32]
+#define SWIGTYPE_p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t swig_types[33]
+#define SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t swig_types[34]
+#define SWIGTYPE_p_std__shared_ptrT_ExplorationData_t swig_types[35]
+#define SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t swig_types[36]
+#define SWIGTYPE_p_std__shared_ptrT_MolpherMol_t swig_types[37]
+#define SWIGTYPE_p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t swig_types[38]
+#define SWIGTYPE_p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t swig_types[39]
+#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[40]
+#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[41]
+#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t swig_types[42]
+#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[43]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[44]
+#define SWIGTYPE_p_value_type swig_types[45]
+static swig_type_info *swig_types[47];
+static swig_module_info swig_module = {swig_types, 46, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4334,6 +4335,7 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 #include "operations/ExtendTreeOper.hpp"
 #include "operations/PruneTreeOper.hpp"
 #include "operations/TraverseOper.hpp"
+#include "operations/CleanMorphsOper.hpp"
 
 // callbacks
 #include "operations/callbacks/TraverseCallback.hpp"
@@ -28406,6 +28408,176 @@ SWIGINTERN PyObject *TraverseOper_swigregister(PyObject *SWIGUNUSEDPARM(self), P
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_CleanMorphsOper__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::shared_ptr< ExplorationTree > arg1 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  CleanMorphsOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_CleanMorphsOper",&obj0)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CleanMorphsOper" "', argument " "1"" of type '" "std::shared_ptr< ExplorationTree >""'"); 
+    }
+    if (argp1) arg1 = *(reinterpret_cast< std::shared_ptr< ExplorationTree > * >(argp1));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< std::shared_ptr< ExplorationTree > * >(argp1);
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (CleanMorphsOper *)new CleanMorphsOper(arg1);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CleanMorphsOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CleanMorphsOper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CleanMorphsOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_CleanMorphsOper")) SWIG_fail;
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (CleanMorphsOper *)new CleanMorphsOper();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CleanMorphsOper, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CleanMorphsOper(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[2] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_CleanMorphsOper__SWIG_1(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_CleanMorphsOper__SWIG_0(self, args);
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_CleanMorphsOper'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    CleanMorphsOper::CleanMorphsOper(std::shared_ptr< ExplorationTree >)\n"
+    "    CleanMorphsOper::CleanMorphsOper()\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_CleanMorphsOper___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CleanMorphsOper *arg1 = (CleanMorphsOper *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CleanMorphsOper___call__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CleanMorphsOper, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CleanMorphsOper___call__" "', argument " "1"" of type '" "CleanMorphsOper *""'"); 
+  }
+  arg1 = reinterpret_cast< CleanMorphsOper * >(argp1);
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->operator ()();
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_CleanMorphsOper(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CleanMorphsOper *arg1 = (CleanMorphsOper *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CleanMorphsOper",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CleanMorphsOper, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CleanMorphsOper" "', argument " "1"" of type '" "CleanMorphsOper *""'"); 
+  }
+  arg1 = reinterpret_cast< CleanMorphsOper * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        delete arg1;
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *CleanMorphsOper_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_CleanMorphsOper, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_new_TraverseCallback(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   PyObject *arg1 = (PyObject *) 0 ;
@@ -29488,6 +29660,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TraverseOper___call__", _wrap_TraverseOper___call__, METH_VARARGS, NULL},
 	 { (char *)"delete_TraverseOper", _wrap_delete_TraverseOper, METH_VARARGS, NULL},
 	 { (char *)"TraverseOper_swigregister", TraverseOper_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_CleanMorphsOper", _wrap_new_CleanMorphsOper, METH_VARARGS, NULL},
+	 { (char *)"CleanMorphsOper___call__", _wrap_CleanMorphsOper___call__, METH_VARARGS, NULL},
+	 { (char *)"delete_CleanMorphsOper", _wrap_delete_CleanMorphsOper, METH_VARARGS, NULL},
+	 { (char *)"CleanMorphsOper_swigregister", CleanMorphsOper_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_TraverseCallback", _wrap_new_TraverseCallback, METH_VARARGS, NULL},
 	 { (char *)"delete_TraverseCallback", _wrap_delete_TraverseCallback, METH_VARARGS, NULL},
 	 { (char *)"TraverseCallback___call__", _wrap_TraverseCallback___call__, METH_VARARGS, NULL},
@@ -29525,6 +29701,9 @@ static void *_p_SortMorphsOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(ne
 static void *_p_FilterMorphsOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((TreeOperation *)  ((FilterMorphsOper *) x));
 }
+static void *_p_CleanMorphsOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((TreeOperation *)  ((CleanMorphsOper *) x));
+}
 static void *_p_FindLeavesOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((TreeOperation *)  ((FindLeavesOper *) x));
 }
@@ -29540,6 +29719,7 @@ static void *_p_TraverseOperTo_p_TreeOperation(void *x, int *SWIGUNUSEDPARM(newm
 static void *_p_DefaultSortCallbackTo_p_SortMorphsCallback(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((SortMorphsCallback *)  ((DefaultSortCallback *) x));
 }
+static swig_type_info _swigt__p_CleanMorphsOper = {"_p_CleanMorphsOper", "CleanMorphsOper *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_DefaultSortCallback = {"_p_DefaultSortCallback", "DefaultSortCallback *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ExplorationData = {"_p_ExplorationData", "ExplorationData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ExplorationTree = {"_p_ExplorationTree", "ExplorationTree *", 0, 0, (void*)0, 0};
@@ -29587,6 +29767,7 @@ static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_CleanMorphsOper,
   &_swigt__p_DefaultSortCallback,
   &_swigt__p_ExplorationData,
   &_swigt__p_ExplorationTree,
@@ -29634,6 +29815,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_value_type,
 };
 
+static swig_cast_info _swigc__p_CleanMorphsOper[] = {  {&_swigt__p_CleanMorphsOper, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_DefaultSortCallback[] = {  {&_swigt__p_DefaultSortCallback, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ExplorationData[] = {  {&_swigt__p_ExplorationData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ExplorationTree[] = {  {&_swigt__p_ExplorationTree, 0, 0, 0},{0, 0, 0, 0}};
@@ -29647,7 +29829,7 @@ static swig_cast_info _swigc__p_SortMorphsCallback[] = {  {&_swigt__p_SortMorphs
 static swig_cast_info _swigc__p_SortMorphsOper[] = {  {&_swigt__p_SortMorphsOper, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TraverseCallback[] = {  {&_swigt__p_TraverseCallback, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_TraverseOper[] = {  {&_swigt__p_TraverseOper, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_TreeOperation[] = {  {&_swigt__p_TreeOperation, 0, 0, 0},  {&_swigt__p_GenerateMorphsOper, _p_GenerateMorphsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_SortMorphsOper, _p_SortMorphsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FilterMorphsOper, _p_FilterMorphsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FindLeavesOper, _p_FindLeavesOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_ExtendTreeOper, _p_ExtendTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_PruneTreeOper, _p_PruneTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_TraverseOper, _p_TraverseOperTo_p_TreeOperation, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_TreeOperation[] = {  {&_swigt__p_TreeOperation, 0, 0, 0},  {&_swigt__p_GenerateMorphsOper, _p_GenerateMorphsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_SortMorphsOper, _p_SortMorphsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FilterMorphsOper, _p_FilterMorphsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_CleanMorphsOper, _p_CleanMorphsOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_FindLeavesOper, _p_FindLeavesOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_ExtendTreeOper, _p_ExtendTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_PruneTreeOper, _p_PruneTreeOperTo_p_TreeOperation, 0, 0},  {&_swigt__p_TraverseOper, _p_TraverseOperTo_p_TreeOperation, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_const_reference[] = {  {&_swigt__p_const_reference, 0, 0, 0},{0, 0, 0, 0}};
@@ -29681,6 +29863,7 @@ static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__Sw
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_CleanMorphsOper,
   _swigc__p_DefaultSortCallback,
   _swigc__p_ExplorationData,
   _swigc__p_ExplorationTree,
