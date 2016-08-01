@@ -196,9 +196,8 @@ class TestPythonAPI(unittest.TestCase):
             def __call__(self, a, b):
                 return a.getDistToTarget() > b.getDistToTarget()
 
-        from molpher.swig_wrappers.core import SortMorphsOper as x
         my_callback = MySort()
-        my_sort = x(tree, my_callback) # x(tree, MySort()) gives a segfault
+        my_sort = SortMorphsOper(tree, my_callback) # x(tree, MySort()) gives a segfault
         my_sort()
 
         previous = None
