@@ -33,3 +33,9 @@ def evaluate_path(path, anti_fp):
         return False, common_bits_perc
     else:
         return True, common_bits_perc
+
+def compute_antifp_scores(mols, anti_fp):
+    scores = dict()
+    for mol in mols:
+        scores[mol] = evaluate_path([mol], anti_fp)[1]
+    return scores

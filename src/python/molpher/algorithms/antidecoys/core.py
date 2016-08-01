@@ -8,11 +8,13 @@ from .utils import timeit, antifingerprint_from_paths
 def run(source, target, antidecoys_filter=None, use_paths_antifp=True, verbose=True):
     filter_antifp_path = os.path.join(STORAGE_DIR, 'antifingerprint_filter.pickle')
     paths_antifp_path = os.path.join(STORAGE_DIR, 'antifingerprint_paths.pickle')
+    antifp_path = os.path.join(STORAGE_DIR, 'antifingerprint.pickle')
     paths_path = os.path.join(STORAGE_DIR, 'paths.pickle')
     from .pathfinders import BidirectionalPathFinder
 
     paths = []
     paths_antifp = None
+    antifp = None
     if os.path.exists(paths_path):
         pickled_file = open(paths_path, mode='rb')
         paths.extend(pickle.load(pickled_file))
@@ -24,8 +26,12 @@ def run(source, target, antidecoys_filter=None, use_paths_antifp=True, verbose=T
         pickled_file = open(paths_antifp_path, mode='rb')
         paths_antifp = pickle.load(pickled_file)
         pickled_file.close()
+    if os.path.exists(antifp_path):
+        pickled_file = open(antifp_path, mode='rb')
+        antifp = pickle.load(pickled_file)
+        pickled_file.close()
 
-    pathfinder = BidirectionalPathFinder(source, target, verbose=verbose, paths_antifingerprint=paths_antifp)
+    pathfinder = BidirectionalPathFinder(source, target, verbose=verbose, paths_antifingerprint=paths_antifp, antifingerprint=antifp)
     for i in range(PATHS_TO_FIND):
         # find a path
         exec_time = timeit(pathfinder)
@@ -42,7 +48,9 @@ def run(source, target, antidecoys_filter=None, use_paths_antifp=True, verbose=T
                 pathfinder.paths_antifingerprint = paths_antifp
             pathfinder.reset()
         else:
-            pathfinder = BidirectionalPathFinder(source, target, verbose=verbose, paths_antifingerprint=paths_antifp)
+            if pathfinder.path:
+                antifp = antifingerprint_from_paths(pathfinder.path, antifp)
+            pathfinder = BidirectionalPathFinder(source, target, verbose=verbose, paths_antifingerprint=paths_antifp, antifingerprint=antifp)
 
         # pickle the results for future use
         if antidecoys_filter:
@@ -52,6 +60,10 @@ def run(source, target, antidecoys_filter=None, use_paths_antifp=True, verbose=T
         if use_paths_antifp:
             pickled_file = open(paths_antifp_path, mode='wb')
             pickle.dump(paths_antifp, pickled_file)
+            pickled_file.close()
+        if antifp:
+            pickled_file = open(antifp_path, mode='wb')
+            pickle.dump(antifp, pickled_file)
             pickled_file.close()
         pickled_file = open(paths_path, mode='wb')
         pickle.dump(paths, pickled_file)

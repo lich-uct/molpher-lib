@@ -27,8 +27,14 @@ def init():
         THIS_MODULE.FG_MIN_POINTS = 2 # min number of features
         THIS_MODULE.FG_MAX_POINTS = 3 # max number of features
 
+        # top farthest molecules from antidecoys to select
+        THIS_MODULE.MAX_ANTIFP_SURVIVORS = 1000
+
         # threshold for the bits in common percentage
-        THIS_MODULE.COMMON_BITS_PERC_THRS = 0.8
+        THIS_MODULE.COMMON_BITS_PERC_THRS = 0.5
+
+        # minimum number of iterations where antidecoys are optimized
+        THIS_MODULE.MIN_ANTIDECOY_ITERS = 10
 
         # paths containing molecules within this distance from target will be rolled back ROLLBACK_MAX_ITERS_ON_CLOSEST iterations during reset
         THIS_MODULE.RESET_CLOSEST_THRESHOLD = 0.5

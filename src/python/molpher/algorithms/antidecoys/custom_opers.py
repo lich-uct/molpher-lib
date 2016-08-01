@@ -5,6 +5,7 @@ from multiprocessing import Manager
 from molpher.core.operations import TreeOperation
 
 from .settings import SIG_FAC, COMMON_BITS_PERC_THRS, MAX_THREADS
+from .utils import compute_antifp_scores
 
 from rdkit import Chem
 from rdkit.Chem.Pharm2D import Generate
@@ -79,3 +80,29 @@ class AntidecoysFilterMulti(TreeOperation):
 
             tree.candidates_mask = shared_mask
             print('Anti-decoys filter eliminated {0}/{1} molecules. Remaining: {2}.'.format(shared_counter.value, sum(mask), sum(tree.candidates_mask)))
+
+class TopXFilter(TreeOperation):
+
+    def __init__(self, top_max_count):
+        super(TopXFilter, self).__init__()
+        self.top_max_count = top_max_count
+
+    def __call__(self):
+        candidates_mask = list(self.tree.candidates_mask)
+        if len(candidates_mask) > self.top_max_count:
+            for i in range(self.top_max_count):
+                candidates_mask[i] = True
+            for i in range(self.top_max_count, len(candidates_mask)):
+                candidates_mask[i] = False
+        self.tree.candidates_mask = candidates_mask
+
+class GatherAntiFPScores(TreeOperation):
+
+    def __init__(self, out_var, anti_fp):
+        super(GatherAntiFPScores, self).__init__()
+        self.out = out_var
+        self.antitfp = anti_fp
+
+    def __call__(self):
+        candidates = self.tree.candidates
+        self.out.update(compute_antifp_scores([x.smiles for x in candidates], self.antitfp))
