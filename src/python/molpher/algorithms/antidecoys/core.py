@@ -33,7 +33,7 @@ def run(source, target, antidecoys_filter=None, use_paths_antifp=True, verbose=T
         print('Total Execution Time (search #{1}): {0}'.format(exec_time, i + 1))
 
         # reset the pathfinder for another search
-        if pathfinder.path:
+        if (antidecoys_filter or use_paths_antifp) and pathfinder.path:
             # compute and save new antifingerprint
             if antidecoys_filter:
                 antidecoys_filter.antifingerprint = antifingerprint_from_paths(pathfinder.path, antidecoys_filter.antifingerprint)
