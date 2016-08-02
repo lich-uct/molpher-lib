@@ -77,6 +77,7 @@ class BidirectionalPathFinder:
             print('\ttarget -> source: {0}'.format(self.target_source.params))
 
         self._antifp_scores = None
+        self._antifp_sort_callback = None
         self.antifingerprint = None
         if antifingerprint:
             self._antifp_scores = dict()
