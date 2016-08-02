@@ -84,20 +84,29 @@ class BidirectionalPathFinder:
             self._antifp_sort_callback = self.AntiFpSortCallback(antifp_scores=self._antifp_scores)
             self.antifingerprint = antifingerprint
 
-        self._iteration = [
-            GenerateMorphsOper()
-            , FilterMorphsOper(FilterMorphsOper.SYNTHESIS | FilterMorphsOper.WEIGHT | FilterMorphsOper.DUPLICATES | FilterMorphsOper.HISTORIC_DESCENDENTS | FilterMorphsOper.MAX_DERIVATIONS, self.verbose)
-            , CleanMorphsOper() if self._antifp_sort_callback else None
-            , GatherAntiFPScores(self._antifp_scores, self.antifingerprint)
-            , SortMorphsOper(callback=self._antifp_sort_callback) if self._antifp_sort_callback else None
-            , TopXFilter(MAX_ANTIFP_SURVIVORS) if self._antifp_sort_callback else None
-            , CleanMorphsOper()
-            , SortMorphsOper()
-            , FilterMorphsOper(FilterMorphsOper.PROBABILITY, self.verbose)
-            , self.antidecoys_filter
-            , ExtendTreeOper()
-            , PruneTreeOper()
-        ]
+        if self._antifp_sort_callback:
+            self._iteration = [
+                GenerateMorphsOper()
+                , FilterMorphsOper(FilterMorphsOper.SYNTHESIS | FilterMorphsOper.WEIGHT | FilterMorphsOper.DUPLICATES | FilterMorphsOper.HISTORIC_DESCENDENTS | FilterMorphsOper.MAX_DERIVATIONS, self.verbose)
+                , CleanMorphsOper() if self._antifp_sort_callback else None
+                , GatherAntiFPScores(self._antifp_scores, self.antifingerprint)
+                , SortMorphsOper(callback=self._antifp_sort_callback) if self._antifp_sort_callback else None
+                , TopXFilter(MAX_ANTIFP_SURVIVORS) if self._antifp_sort_callback else None
+                , CleanMorphsOper()
+                , SortMorphsOper()
+                , FilterMorphsOper(FilterMorphsOper.PROBABILITY, self.verbose)
+                , self.antidecoys_filter
+                , ExtendTreeOper()
+                , PruneTreeOper()
+            ]
+        else:
+            self._iteration = [
+                GenerateMorphsOper()
+                , SortMorphsOper()
+                , FilterMorphsOper(self.verbose)
+                , ExtendTreeOper()
+                , PruneTreeOper()
+            ]
         self._iteration = [x for x in self._iteration if x]
         self.path = []
         self.connecting_molecule = None
@@ -227,7 +236,8 @@ class BidirectionalPathFinder:
                     , ExtendTreeOper()
                     , PruneTreeOper()
                 ]
-            self._antifp_scores.clear()
+            if self._antifp_scores:
+                self._antifp_scores.clear()
 
             print("Accepted morphs:")
             print('\tsource -> target: {0}'.format(len(self.source_target.leaves)))
