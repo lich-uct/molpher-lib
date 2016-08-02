@@ -71,9 +71,10 @@ class BidirectionalPathFinder:
         self.source_target_min = self.FindClosest()
         self.target_source_min = self.FindClosest()
 
-        print("Tree Parameters:")
-        print('\tsource -> target: {0}'.format(self.source_target.params))
-        print('\ttarget -> source: {0}'.format(self.target_source.params))
+        if self.verbose:
+            print("Tree Parameters:")
+            print('\tsource -> target: {0}'.format(self.source_target.params))
+            print('\ttarget -> source: {0}'.format(self.target_source.params))
 
         self._antifp_scores = None
         self.antifingerprint = None
@@ -214,6 +215,7 @@ class BidirectionalPathFinder:
                     print("Mean antidecoys score: {0}".format(mean_score))
                     if mean_score < COMMON_BITS_PERC_THRS:
                         antidecoys_off = True
+                        print("Antidecoys turned off (COMMON_BITS_PERC_THRS).")
                     print("Antifingerprint distance (absolute minimum):", self._antifp_sort_callback.minimum_common_bits_perc)
 
             if antidecoys_off and counter >= MIN_ANTIDECOY_ITERS:
@@ -254,7 +256,7 @@ class BidirectionalPathFinder:
             print('\ttarget to source:', self.target_source_min.closest.getSMILES(), target_source_min_dist)
             if min(source_target_min_dist, target_source_min_dist) < ANTIDECOYS_DISTANCE_SWITCH and self.antidecoys_filter:
                 antidecoys_off = True
-                print("Antidecoys turned off.")
+                print("Antidecoys turned off (ANTIDECOYS_DISTANCE_SWITCH).")
 
             self.update_target(self.source_target, self.target_source_min.closest.getSMILES())
             self.target_source_min = self.FindClosest()
@@ -310,4 +312,5 @@ class BidirectionalPathFinder:
             return self.path
         else:
             print('Search reached maximum number of iterations. Aborting...')
+            self.path = None
             return None

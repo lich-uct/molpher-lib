@@ -31,10 +31,10 @@ def init():
         THIS_MODULE.MAX_ANTIFP_SURVIVORS = 1000
 
         # threshold for the bits in common percentage
-        THIS_MODULE.COMMON_BITS_PERC_THRS = 0.5
+        THIS_MODULE.COMMON_BITS_PERC_THRS = 0.75
 
         # minimum number of iterations where antidecoys are optimized
-        THIS_MODULE.MIN_ANTIDECOY_ITERS = 10
+        THIS_MODULE.MIN_ANTIDECOY_ITERS = 3
 
         # paths containing molecules within this distance from target will be rolled back ROLLBACK_MAX_ITERS_ON_CLOSEST iterations during reset
         THIS_MODULE.RESET_CLOSEST_THRESHOLD = 0.5
@@ -46,16 +46,16 @@ def init():
         THIS_MODULE.ROLLBACK_MAX_ITERS_ON_CLOSEST = 1
 
         # number of iterations to wait before the antidecoys filter is applied
-        THIS_MODULE.WAIT_FOR_ANTIDECOYS = 3
+        THIS_MODULE.WAIT_FOR_ANTIDECOYS = 0
 
         # turn antidecoys filter off when the distance between two closest molecules between the two trees gets below this value
         THIS_MODULE.ANTIDECOYS_DISTANCE_SWITCH = 0.2
 
         # maximum number of paths to find
-        THIS_MODULE.PATHS_TO_FIND = 50
+        THIS_MODULE.PATHS_TO_FIND = 100
 
         # maximum iterations to spend on one path in seconds
-        THIS_MODULE.MAX_ITERS_PER_PATH = 500
+        THIS_MODULE.MAX_ITERS_PER_PATH = 50
 
         if THIS_MODULE.SEED not in (None, False):
             random.set_random_seed(THIS_MODULE.SEED)
