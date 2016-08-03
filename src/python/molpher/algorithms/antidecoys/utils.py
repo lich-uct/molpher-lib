@@ -28,7 +28,7 @@ def evaluate_path(path, anti_fp):
 
     on_bits = path_fp.GetNumOnBits()
     common_bits = common_fp.GetNumOnBits()
-    common_bits_perc = common_bits / on_bits
+    common_bits_perc = common_bits / on_bits if on_bits else 0.0
     assert common_bits_perc <= 1.0
     if common_bits_perc > COMMON_BITS_PERC_THRS:
         return False, common_bits_perc

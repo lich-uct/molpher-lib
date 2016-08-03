@@ -28,13 +28,16 @@ def init():
         THIS_MODULE.FG_MAX_POINTS = 3 # max number of features
 
         # top farthest molecules from antidecoys to select
-        THIS_MODULE.MAX_ANTIFP_SURVIVORS = 1000
+        THIS_MODULE.MAX_ANTIFP_SURVIVORS = 500
 
-        # threshold for the bits in common percentage
+        # threshold for the mean bits in common percentage
         THIS_MODULE.COMMON_BITS_PERC_THRS = 0.75
 
+        # maximum acceptable common bits percentage in accapted morphs
+        THIS_MODULE.COMMON_BITS_PERC_THRS_MIN = 0.75
+
         # minimum number of iterations where antidecoys are optimized
-        THIS_MODULE.MIN_ANTIDECOY_ITERS = 3
+        THIS_MODULE.MIN_ANTIDECOY_ITERS = 5
 
         # paths containing molecules within this distance from target will be rolled back ROLLBACK_MAX_ITERS_ON_CLOSEST iterations during reset
         THIS_MODULE.RESET_CLOSEST_THRESHOLD = 0.5
@@ -52,10 +55,10 @@ def init():
         THIS_MODULE.ANTIDECOYS_DISTANCE_SWITCH = 0.2
 
         # maximum number of paths to find
-        THIS_MODULE.PATHS_TO_FIND = 100
+        THIS_MODULE.PATHS_TO_FIND = 50
 
         # maximum iterations to spend on one path in seconds
-        THIS_MODULE.MAX_ITERS_PER_PATH = 50
+        THIS_MODULE.MAX_ITERS_PER_PATH = 100
 
         if THIS_MODULE.SEED not in (None, False):
             random.set_random_seed(THIS_MODULE.SEED)
