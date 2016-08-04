@@ -64,9 +64,6 @@ def init():
         if THIS_MODULE.SEED not in (None, False):
             random.set_random_seed(THIS_MODULE.SEED)
 
-        if not os.path.exists(THIS_MODULE.STORAGE_DIR):
-            os.mkdir(THIS_MODULE.STORAGE_DIR)
-
         # important stuff for the pharmacophore fingerprints
         THIS_MODULE.FDEF_FILE = os.path.join(RDConfig.RDDataDir, 'BaseFeatures.fdef') # get basic feature definitions
         THIS_MODULE.FEATURE_FACTORY = ChemicalFeatures.BuildFeatureFactory(THIS_MODULE.FDEF_FILE) # make feature factory
@@ -76,6 +73,7 @@ def init():
         THIS_MODULE.SIG_FAC = sig_fac
 
         THIS_MODULE._initialized = True
+        setattr(THIS_MODULE, 'INITIALIZED', True)
     elif not THIS_MODULE._initialized:
         delattr(THIS_MODULE, 'INITIALIZED')
         init()

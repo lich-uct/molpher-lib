@@ -5,11 +5,16 @@ from .settings import STORAGE_DIR, PATHS_TO_FIND
 from .utils import timeit, antifingerprint_from_paths
 
 
-def run(source, target, antidecoys_filter=None, use_paths_antifp=True, verbose=True):
-    filter_antifp_path = os.path.join(STORAGE_DIR, 'antifingerprint_filter.pickle')
-    paths_antifp_path = os.path.join(STORAGE_DIR, 'antifingerprint_paths.pickle')
-    antifp_path = os.path.join(STORAGE_DIR, 'antifingerprint.pickle')
-    paths_path = os.path.join(STORAGE_DIR, 'paths.pickle')
+def run(source, target, antidecoys_filter=None, use_paths_antifp=True, verbose=True, storage_dir=None):
+    if not storage_dir:
+        storage_dir = STORAGE_DIR
+    if not os.path.exists(storage_dir):
+        os.mkdir(storage_dir)
+    filter_antifp_path = os.path.join(storage_dir, 'antifingerprint_filter.pickle')
+    paths_antifp_path = os.path.join(storage_dir, 'antifingerprint_paths.pickle')
+    antifp_path = os.path.join(storage_dir, 'antifingerprint.pickle')
+    paths_path = os.path.join(storage_dir, 'paths.pickle')
+
     from .pathfinders import BidirectionalPathFinder
 
     paths = []
