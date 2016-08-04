@@ -12,7 +12,7 @@ from molpher.core.operations.callbacks import SortMorphsCallback
 from .utils import timeit, evaluate_path
 from .custom_opers import TopScoringFilter, GatherAntiFPScores
 
-from .settings import MAX_THREADS, MAX_ITERS_PER_PATH, WAIT_FOR_ANTIDECOYS, ANTIDECOYS_DISTANCE_SWITCH, ROLLBACK_MAX_ITERS, RESET_CLOSEST_THRESHOLD, ROLLBACK_MAX_ITERS_ON_CLOSEST, MAX_ANTIFP_SURVIVORS, COMMON_BITS_PERC_THRS, MIN_ANTIDECOY_ITERS, COMMON_BITS_PERC_THRS_MIN
+from .settings import MAX_THREADS, MAX_ITERS_PER_PATH, WAIT_FOR_ANTIDECOYS, ANTIDECOYS_DISTANCE_SWITCH, ROLLBACK_MAX_ITERS, RESET_CLOSEST_THRESHOLD, ROLLBACK_MAX_ITERS_ON_CLOSEST, MAX_ANTIFP_SURVIVORS, COMMON_BITS_PERC_THRS, MIN_ANTIDECOY_ITERS, COMMON_BITS_PERC_THRS_MIN, MAX_ANTIDECOY_ITERS
 
 class BidirectionalPathFinder:
 
@@ -192,10 +192,9 @@ class BidirectionalPathFinder:
             if counter > MAX_ITERS_PER_PATH:
                 search_failed = True
                 break
-            if counter < WAIT_FOR_ANTIDECOYS + 1:
+            if counter > MAX_ANTIDECOY_ITERS:
+                print("Antidecoys turned off (MAX_ANTIDECOY_ITERS).")
                 antidecoys_off = True
-            else:
-                antidecoys_off = False
             print('Iteration {0}:'.format(counter))
             for oper in self._iteration:
                 if self.verbose:
@@ -227,7 +226,7 @@ class BidirectionalPathFinder:
                     scores = source_target_mins + target_source_mins
                     mean_score = mean(scores)
                     print("Mean antidecoys score: {0}".format(mean_score))
-                    if mean_score < COMMON_BITS_PERC_THRS and counter >= MIN_ANTIDECOY_ITERS:
+                    if mean_score < COMMON_BITS_PERC_THRS:
                         antidecoys_off = True
                         print("Antidecoys turned off (COMMON_BITS_PERC_THRS).")
 
@@ -269,7 +268,7 @@ class BidirectionalPathFinder:
             print('Current Minima:')
             print('\tsource to target:', self.source_target_min.closest.getSMILES(), source_target_min_dist)
             print('\ttarget to source:', self.target_source_min.closest.getSMILES(), target_source_min_dist)
-            if min(source_target_min_dist, target_source_min_dist) < ANTIDECOYS_DISTANCE_SWITCH and self.antidecoys_filter:
+            if min(source_target_min_dist, target_source_min_dist) < ANTIDECOYS_DISTANCE_SWITCH:
                 antidecoys_off = True
                 print("Antidecoys turned off (ANTIDECOYS_DISTANCE_SWITCH).")
 

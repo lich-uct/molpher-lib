@@ -37,7 +37,8 @@ def init():
         THIS_MODULE.COMMON_BITS_PERC_THRS_MIN = 0.75
 
         # minimum number of iterations where antidecoys are optimized
-        THIS_MODULE.MIN_ANTIDECOY_ITERS = 5
+        THIS_MODULE.MIN_ANTIDECOY_ITERS = 10
+        THIS_MODULE.MAX_ANTIDECOY_ITERS = 50
 
         # paths containing molecules within this distance from target will be rolled back ROLLBACK_MAX_ITERS_ON_CLOSEST iterations during reset
         THIS_MODULE.RESET_CLOSEST_THRESHOLD = 0.5
@@ -52,7 +53,7 @@ def init():
         THIS_MODULE.WAIT_FOR_ANTIDECOYS = 0
 
         # turn antidecoys filter off when the distance between two closest molecules between the two trees gets below this value
-        THIS_MODULE.ANTIDECOYS_DISTANCE_SWITCH = 0.2
+        THIS_MODULE.ANTIDECOYS_DISTANCE_SWITCH = 0.4
 
         # maximum number of paths to find
         THIS_MODULE.PATHS_TO_FIND = 50
