@@ -17,12 +17,12 @@ class AntidecoysSettings:
             , fg_bins = ((0, 2), (2, 5), (5, 8)) # distance bins in the pharmacophore fingerprint
             , fg_min_points = 2 # min number of features encoded in the pharmacophore fingerprint
             , fg_max_points = 3 # max number of features encoded in the pharmacophore fingerprint
-            , min_accepted = 500 # minimum number of morphs the filter will accept on every iteration
+            , min_accepted = 1000 # minimum number of morphs the filter will accept on every iteration
             , common_bits_max_thrs = 0.75 # maximum common bits percentage the filter will accept on every iteration
-            , common_bits_mean_thrs = 0.75 # if for the mols selected by the filter the mean common bits percentage falls below this value, antidecoys are turned off
+            , common_bits_mean_thrs = 0.5 # if for the mols selected by the filter the mean common bits percentage falls below this value, antidecoys will be turned off
             , min_iters = 10 # minimum number of iterations where antidecoys are optimized
             , max_iters = 50 # maximum number of iterations where antidecoys are optimized
-            , distance_thrs = 0.4 # turn antidecoys filter off when the distance between two closest molecules from each tree gets below this value
+            , distance_thrs = 0.2 # turn antidecoys filter off when the distance between two closest molecules from each tree gets below this value
             , max_iters_per_path = 100  # maximum number of iterations to spend looking for a path
             , max_paths = 50
     ):
