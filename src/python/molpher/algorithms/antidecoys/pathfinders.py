@@ -9,12 +9,12 @@ from molpher.core.operations import SortMorphsOper
 from molpher.core.operations import CleanMorphsOper
 from molpher.core.operations.callbacks import SortMorphsCallback
 
-from .utils import timeit, evaluate_path
+from .utils import timeit, update_target, find_path
 from .custom_opers import TopScoringFilter, GatherAntiFPScores
 
-from .settings import MAX_THREADS, MAX_ITERS_PER_PATH, WAIT_FOR_ANTIDECOYS, ANTIDECOYS_DISTANCE_SWITCH, ROLLBACK_MAX_ITERS, RESET_CLOSEST_THRESHOLD, ROLLBACK_MAX_ITERS_ON_CLOSEST, MAX_ANTIFP_SURVIVORS, COMMON_BITS_PERC_THRS, MIN_ANTIDECOY_ITERS, COMMON_BITS_PERC_THRS_MIN, MAX_ANTIDECOY_ITERS
+from .settings import AntidecoysSettings
 
-class BidirectionalPathFinder:
+class PathFinder:
 
     class FindClosest:
 
@@ -30,20 +30,10 @@ class BidirectionalPathFinder:
             if morph_dist < current_dist:
                 self.closest = morph.copy()
 
-    class FindTopClosest:
-
-        def __init__(self, threshold):
-            self.top_closest = []
-            self.threshold = threshold
-
-        def __call__(self, morph):
-            if morph.dist_to_target < self.threshold:
-                self.top_closest.append(morph.smiles)
-
     class AntiFpSortCallback(SortMorphsCallback):
 
         def __init__(self, antifp_scores):
-            super(BidirectionalPathFinder.AntiFpSortCallback, self).__init__()
+            super(PathFinder.AntiFpSortCallback, self).__init__()
             self.minimum_common_bits_perc = 1.0
             self.maximum_common_bits_perc = 0.0
             self.antifp_scores = antifp_scores
@@ -59,18 +49,24 @@ class BidirectionalPathFinder:
                 self.maximum_common_bits_perc = maximum
             return perc_a < perc_b
 
-    def __init__(self, source, target, verbose=True, antidecoys_filter=None, paths_antifingerprint=None, antifingerprint=None):
+    def __init__(
+            self
+            , source
+            , target
+            , verbose=True
+            , settings=AntidecoysSettings()
+            , antifingerprint=None
+    ):
         self.source = source
         self.target = target
-        self.antidecoys_filter = antidecoys_filter
-        self.paths_antifingerprint = paths_antifingerprint
         self.verbose = verbose
+        self.settings = settings
 
         self.source_target = ETree.create(source=source, target=target)
-        self.source_target.thread_count = MAX_THREADS
+        self.source_target.thread_count = self.settings.max_threads
 
         self.target_source = ETree.create(source=target, target=source)
-        self.target_source.thread_count = MAX_THREADS
+        self.target_source.thread_count = self.settings.max_threads
 
         self.source_target_min = self.FindClosest()
         self.target_source_min = self.FindClosest()
@@ -88,18 +84,32 @@ class BidirectionalPathFinder:
             self._antifp_sort_callback = self.AntiFpSortCallback(antifp_scores=self._antifp_scores)
             self.antifingerprint = antifingerprint
 
-        if self._antifp_sort_callback:
+        if self.antifingerprint:
             self._iteration = [
                 GenerateMorphsOper()
-                , FilterMorphsOper(FilterMorphsOper.SYNTHESIS | FilterMorphsOper.WEIGHT | FilterMorphsOper.DUPLICATES | FilterMorphsOper.HISTORIC_DESCENDENTS | FilterMorphsOper.MAX_DERIVATIONS, self.verbose)
+                , FilterMorphsOper(
+                    FilterMorphsOper.SYNTHESIS
+                    | FilterMorphsOper.WEIGHT
+                    | FilterMorphsOper.DUPLICATES
+                    | FilterMorphsOper.HISTORIC_DESCENDENTS
+                    | FilterMorphsOper.MAX_DERIVATIONS
+                    , self.verbose
+                )
                 , CleanMorphsOper()
-                , GatherAntiFPScores(self._antifp_scores, self.antifingerprint)
+                , GatherAntiFPScores(
+                    self._antifp_scores
+                    , self.antifingerprint
+                    , self.settings
+                )
                 , SortMorphsOper(callback=self._antifp_sort_callback)
-                , TopScoringFilter(self._antifp_scores, COMMON_BITS_PERC_THRS_MIN, MAX_ANTIFP_SURVIVORS)
+                , TopScoringFilter(
+                    self._antifp_scores
+                    , self.settings.common_bits_max_thrs
+                    , self.settings.min_accepted
+                )
                 , CleanMorphsOper()
                 , SortMorphsOper()
                 , FilterMorphsOper(FilterMorphsOper.PROBABILITY, self.verbose)
-                , self.antidecoys_filter
                 , ExtendTreeOper()
                 , PruneTreeOper()
             ]
@@ -115,87 +125,20 @@ class BidirectionalPathFinder:
         self.path = []
         self.connecting_molecule = None
 
-    def _find_path(self, tree, connecting_mol):
-        path = []
-        current = tree.fetchMol(connecting_mol)
-        path.append(current.getSMILES())
-        while current != '':
-            current = current.getParentSMILES()
-            if current:
-                current = tree.fetchMol(current)
-                path.append(current.getSMILES())
-        path.reverse()
-        return path
-
-    @staticmethod
-    def find_top_parent(tree, smile, iters):
-        counter = 0
-        next_smile = smile
-        previous_smile = smile
-        while counter < iters:
-            current = tree.fetchMol(next_smile)
-            next_smile = current.getParentSMILES()
-            if not next_smile:
-                return previous_smile
-            previous_smile = current.getSMILES()
-            counter += 1
-        return previous_smile
-
-    def _rollback_path(self, tree, start_mol, rollback_max_iters):
-        top_smile = self.find_top_parent(tree, start_mol, rollback_max_iters)
-        tree.deleteSubtree(top_smile)
-        assert not tree.hasMol(start_mol)
-
-    def update_target(self, tree, target):
-        if target != tree.params['source']:
-            tree.params = {
-                'target' : target
-            }
-
-    @staticmethod
-    def fetch_top_closest(tree, threshold=RESET_CLOSEST_THRESHOLD):
-        find_top_closest = BidirectionalPathFinder.FindTopClosest(threshold)
-        tree.traverse(find_top_closest)
-        return find_top_closest.top_closest
-        # return [x.smiles for x in tree.leaves if x.dist_to_target < threshold]
-
-    def _rollback_closest(self, tree, rollback_max_iters):
-        for x in self.fetch_top_closest(tree):
-            if tree.hasMol(x):
-                self._rollback_path(tree, start_mol=x, rollback_max_iters=rollback_max_iters)
-
-    def reset(self, connecting_molecule=None, max_iters_rollback=ROLLBACK_MAX_ITERS, max_iters_rollback_closest=ROLLBACK_MAX_ITERS_ON_CLOSEST):
-        if not connecting_molecule:
-            assert self.connecting_molecule
-            connecting_molecule = self.connecting_molecule
-        self._rollback_path(tree=self.source_target, start_mol=connecting_molecule, rollback_max_iters=max_iters_rollback)
-        self._rollback_path(tree=self.target_source, start_mol=connecting_molecule, rollback_max_iters=max_iters_rollback)
-
-        self._rollback_closest(tree=self.source_target, rollback_max_iters=max_iters_rollback_closest)
-        self._rollback_closest(tree=self.target_source, rollback_max_iters=max_iters_rollback_closest)
-
-        self.update_target(tree=self.source_target, target=self.target)
-        self.update_target(tree=self.target_source, target=self.source)
-        self.source_target_min = self.FindClosest()
-        self.target_source_min = self.FindClosest()
-
-        self.path = []
-        self.connecting_molecule = None
-
     def __call__(self):
         counter = 0
         connecting_molecule = None
-        search_failed = False
+        max_iters_reached = False
         antidecoys_off = False
         while True:
             counter+=1
-            if counter > MAX_ITERS_PER_PATH:
-                search_failed = True
+            if counter > self.settings.max_iters_per_path:
+                max_iters_reached = True
                 break
-            if counter > MAX_ANTIDECOY_ITERS:
-                print("Antidecoys turned off (MAX_ANTIDECOY_ITERS).")
+            if not antidecoys_off and self.antifingerprint and counter > self.settings.max_iters:
+                print("Maximum number of iterations with antidecoys reached ({0}).".format(self.settings.max_iters))
                 antidecoys_off = True
-            print('Iteration {0}:'.format(counter))
+            print('## Iteration {0} ##'.format(counter))
             for oper in self._iteration:
                 if self.verbose:
                     print('Execution times ({0}):'.format(type(oper).__name__))
@@ -226,12 +169,12 @@ class BidirectionalPathFinder:
                     scores = source_target_mins + target_source_mins
                     mean_score = mean(scores)
                     print("Mean antidecoys score: {0}".format(mean_score))
-                    if mean_score < COMMON_BITS_PERC_THRS:
+                    if not antidecoys_off and self.antifingerprint and mean_score < self.settings.common_bits_mean_thrs:
                         antidecoys_off = True
-                        print("Antidecoys turned off (COMMON_BITS_PERC_THRS).")
+                        print("Mean antidecoys score threshold reached ({0}).".format(self.settings.common_bits_mean_thrs))
 
-            if antidecoys_off and counter >= MIN_ANTIDECOY_ITERS:
-                print("Setting up algorithm for normal search...")
+            if antidecoys_off and self.antifingerprint and counter >= self.settings.min_iters:
+                print("Antidecoys turned off. Setting up algorithm for normal search...")
                 self._iteration = [
                     GenerateMorphsOper()
                     , SortMorphsOper()
@@ -247,35 +190,26 @@ class BidirectionalPathFinder:
             print('\ttarget -> source: {0}'.format(len(self.target_source.leaves)))
 
             if self.verbose:
-                print('Traversal times:')
-
-                source_target_time = timeit(lambda : self.source_target.traverse(self.source_target_min))
-                print('\tsource -> target: {0}'.format(source_target_time))
-                target_source_time = timeit(lambda : self.target_source.traverse(self.target_source_min))
-                print('\ttarget -> source: {0}'.format(target_source_time))
-
-                print('\ttotal execution time: {0}'.format(source_target_time + target_source_time))
-
                 print('Current Targets:')
                 print('\tsource to target:', self.source_target.params['target'])
                 print('\ttarget to source:', self.target_source.params['target'])
-            else:
-                self.source_target.traverse(self.source_target_min)
-                self.target_source.traverse(self.target_source_min)
+
+            self.source_target.traverse(self.source_target_min)
+            self.target_source.traverse(self.target_source_min)
 
             source_target_min_dist = self.source_target_min.closest.getDistToTarget()
             target_source_min_dist = self.target_source_min.closest.getDistToTarget()
             print('Current Minima:')
             print('\tsource to target:', self.source_target_min.closest.getSMILES(), source_target_min_dist)
             print('\ttarget to source:', self.target_source_min.closest.getSMILES(), target_source_min_dist)
-            if min(source_target_min_dist, target_source_min_dist) < ANTIDECOYS_DISTANCE_SWITCH:
+            if not antidecoys_off and min(source_target_min_dist, target_source_min_dist) < self.settings.distance_thrs:
                 antidecoys_off = True
-                print("Antidecoys turned off (ANTIDECOYS_DISTANCE_SWITCH).")
+                print("Antidecoys turned off. Trees are sufficinetly close ({0}).".format(self.settings.distance_thrs))
 
-            self.update_target(self.source_target, self.target_source_min.closest.getSMILES())
-            self.target_source_min = self.FindClosest()
-            self.update_target(self.target_source, self.source_target_min.closest.getSMILES())
-            self.source_target_min = self.FindClosest()
+            update_target(self.source_target, self.target_source_min.closest.getSMILES())
+            # self.target_source_min = self.FindClosest()
+            update_target(self.target_source, self.source_target_min.closest.getSMILES())
+            # self.source_target_min = self.FindClosest()
 
             if self.verbose:
                 print('New Targets:')
@@ -297,30 +231,17 @@ class BidirectionalPathFinder:
                 assert self.target_source.hasMol(connecting_molecule)
                 assert self.source_target.hasMol(connecting_molecule)
             if connecting_molecule:
-                source_target_path = self._find_path(self.source_target, connecting_molecule)
-                target_source_path = self._find_path(self.target_source, connecting_molecule)
+                source_target_path = find_path(self.source_target, connecting_molecule)
+                target_source_path = find_path(self.target_source, connecting_molecule)
                 assert source_target_path.pop(-1) == connecting_molecule
                 target_source_path.reverse()
                 source_target_path.extend(target_source_path)
                 self.path = source_target_path
 
             if self.path:
-                path_valid = True
-                common_perc = None
-                if self.paths_antifingerprint:
-                    path_valid, common_perc = evaluate_path(self.path, self.paths_antifingerprint)
-                if not path_valid:
-                    print('Path will be removed due to antidecoys (% in common {0}): {1}'.format(common_perc, self.path))
-                    print('Rolling back...')
+                break
 
-                    self.reset(connecting_molecule)
-                    connecting_molecule = None
-
-                    continue
-                else:
-                    break
-
-        if not search_failed:
+        if not max_iters_reached:
             print('Path found:', self.path)
             self.connecting_molecule = connecting_molecule
             return self.path

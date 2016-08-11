@@ -1,81 +1,51 @@
-def init():
-    import sys
+import os
 
-    # fetch this module
-    THIS_MODULE = sys.modules[__name__]
+from molpher import random
 
-    if not hasattr(THIS_MODULE, 'INITIALIZED'):
-        import os
+from rdkit import RDConfig
+from rdkit.Chem import ChemicalFeatures
+from rdkit.Chem.Pharm2D.SigFactory import SigFactory
 
-        from molpher import random
 
-        from rdkit import RDConfig
-        from rdkit.Chem import ChemicalFeatures
-        from rdkit.Chem.Pharm2D.SigFactory import SigFactory
+class AntidecoysSettings:
 
-        # set seed to a fixed value (None or False for a random seed)
-        THIS_MODULE.SEED = None
+    def __init__(
+            self
+            , seed = None # random seed for molpher, if it needs to be constant
+            , storage_dir = os.path.abspath('antidecoys_data') # path to the directory with the results
+            , max_threads = 4 # maximum number of threads to use in parallel computations
+            , fg_bins = ((0, 2), (2, 5), (5, 8)) # distance bins in the pharmacophore fingerprint
+            , fg_min_points = 2 # min number of features encoded in the pharmacophore fingerprint
+            , fg_max_points = 3 # max number of features encoded in the pharmacophore fingerprint
+            , min_accepted = 500 # minimum number of morphs the filter will accept on every iteration
+            , common_bits_max_thrs = 0.75 # maximum common bits percentage the filter will accept on every iteration
+            , common_bits_mean_thrs = 0.75 # if for the mols selected by the filter the mean common bits percentage falls below this value, antidecoys are turned off
+            , min_iters = 10 # minimum number of iterations where antidecoys are optimized
+            , max_iters = 50 # maximum number of iterations where antidecoys are optimized
+            , distance_thrs = 0.4 # turn antidecoys filter off when the distance between two closest molecules from each tree gets below this value
+            , max_iters_per_path = 100  # maximum number of iterations to spend looking for a path
+            , max_paths = 50
+    ):
+        self.seed = seed
+        if self.seed not in (False, None):
+            random.set_random_seed(self.seed)
+        self.storage_dir = storage_dir
+        self.max_threads = max_threads
+        self.fg_bins = fg_bins
+        self.fg_min_points = fg_min_points
+        self.fg_max_points = fg_max_points
+        self.min_accepted = min_accepted
+        self.common_bits_max_thrs = common_bits_max_thrs
+        self.common_bits_mean_thrs = common_bits_mean_thrs
+        self.min_iters = min_iters
+        self.max_iters = max_iters
+        self.distance_thrs = distance_thrs
+        self.max_iters_per_path = max_iters_per_path
+        self.max_paths = max_paths
 
-        # dir for stored data
-        THIS_MODULE.STORAGE_DIR = os.path.abspath('data')
-
-        # number of threads to use
-        THIS_MODULE.MAX_THREADS = 4
-
-        # setup pharmacophore fingerprints
-        THIS_MODULE.FG_BINS = [(0, 2), (2, 5), (5, 8)] # distance bins
-        THIS_MODULE.FG_MIN_POINTS = 2 # min number of features
-        THIS_MODULE.FG_MAX_POINTS = 3 # max number of features
-
-        # top farthest molecules from antidecoys to select
-        THIS_MODULE.MAX_ANTIFP_SURVIVORS = 500
-
-        # threshold for the mean bits in common percentage
-        THIS_MODULE.COMMON_BITS_PERC_THRS = 0.75
-
-        # maximum acceptable common bits percentage in accapted morphs
-        THIS_MODULE.COMMON_BITS_PERC_THRS_MIN = 0.75
-
-        # minimum number of iterations where antidecoys are optimized
-        THIS_MODULE.MIN_ANTIDECOY_ITERS = 10
-        THIS_MODULE.MAX_ANTIDECOY_ITERS = 50
-
-        # paths containing molecules within this distance from target will be rolled back ROLLBACK_MAX_ITERS_ON_CLOSEST iterations during reset
-        THIS_MODULE.RESET_CLOSEST_THRESHOLD = 0.5
-
-        # maximum number of iterations to roll back an unsuitable path
-        THIS_MODULE.ROLLBACK_MAX_ITERS = 5
-
-        # maximum number of iterations to roll back when removing the closest molecules
-        THIS_MODULE.ROLLBACK_MAX_ITERS_ON_CLOSEST = 1
-
-        # number of iterations to wait before the antidecoys filter is applied
-        THIS_MODULE.WAIT_FOR_ANTIDECOYS = 0
-
-        # turn antidecoys filter off when the distance between two closest molecules between the two trees gets below this value
-        THIS_MODULE.ANTIDECOYS_DISTANCE_SWITCH = 0.4
-
-        # maximum number of paths to find
-        THIS_MODULE.PATHS_TO_FIND = 50
-
-        # maximum iterations to spend on one path in seconds
-        THIS_MODULE.MAX_ITERS_PER_PATH = 100
-
-        if THIS_MODULE.SEED not in (None, False):
-            random.set_random_seed(THIS_MODULE.SEED)
-
-        # important stuff for the pharmacophore fingerprints
-        THIS_MODULE.FDEF_FILE = os.path.join(RDConfig.RDDataDir, 'BaseFeatures.fdef') # get basic feature definitions
-        THIS_MODULE.FEATURE_FACTORY = ChemicalFeatures.BuildFeatureFactory(THIS_MODULE.FDEF_FILE) # make feature factory
-        sig_fac = SigFactory(THIS_MODULE.FEATURE_FACTORY, minPointCount=THIS_MODULE.FG_MIN_POINTS, maxPointCount=THIS_MODULE.FG_MAX_POINTS, trianglePruneBins=False)  # make signature factory
-        sig_fac.SetBins(THIS_MODULE.FG_BINS)
-        sig_fac.Init()
-        THIS_MODULE.SIG_FAC = sig_fac
-
-        THIS_MODULE._initialized = True
-        setattr(THIS_MODULE, 'INITIALIZED', True)
-    elif not THIS_MODULE._initialized:
-        delattr(THIS_MODULE, 'INITIALIZED')
-        init()
-
-init()
+        # stuff for the pharmacophore fingerprints
+        self._fdef_file = os.path.join(RDConfig.RDDataDir, 'BaseFeatures.fdef') # get basic feature definitions
+        self._feature_factory = ChemicalFeatures.BuildFeatureFactory(self._fdef_file) # make feature factory
+        self.signature_factory = SigFactory(self._feature_factory, minPointCount=self.fg_min_points, maxPointCount=self.fg_max_points, trianglePruneBins=False)  # make signature factory
+        self.signature_factory.SetBins(self.fg_bins) # set the distance bins
+        self.signature_factory.Init()
