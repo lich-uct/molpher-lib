@@ -190,13 +190,8 @@ class TestPythonAPI(unittest.TestCase):
                 previous = morph.dist_to_target
         print([x.dist_to_target for x in tree.candidates])
 
-        class MySort(SortMorphsCallback):
-
-            def __call__(self, a, b):
-                return a.getDistToTarget() > b.getDistToTarget()
-
-        my_callback = MySort()
-        my_sort = SortMorphsOper(tree, my_callback) # x(tree, MySort()) gives a segfault
+        my_callback = lambda a, b : a.getDistToTarget() > b.getDistToTarget()
+        my_sort = SortMorphsOper(tree, my_callback)
         my_sort()
 
         previous = None

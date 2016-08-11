@@ -16,12 +16,32 @@
 
 import molpher.swig_wrappers.core
 from molpher.core.operations.TreeOperation import TreeOperation
+from molpher.core.operations.callbacks import SortMorphsCallback
+from molpher.core.MolpherMol import MolpherMol
 
 
 class SortMorphsOper(molpher.swig_wrappers.core.SortMorphsOper, TreeOperation):
 
-    def __init__(self, tree=None, callback=molpher.swig_wrappers.core.DefaultSortCallback()):
-        if tree:
-            super(SortMorphsOper, self).__init__(tree, callback)
+    class SortCallback(SortMorphsCallback):
+
+        def __init__(self, callback):
+            super(SortMorphsOper.SortCallback, self).__init__()
+            self._callback = callback
+
+        def __call__(self, a, b):
+            a.__class__ = MolpherMol
+            b.__class__ = MolpherMol
+            return self._callback(a, b)
+
+
+    def __init__(self, tree=None, callback=None):
+        self._callback = None
+        if not callback:
+            self._callback = molpher.swig_wrappers.core.DefaultSortCallback()
         else:
-            super(SortMorphsOper, self).__init__(callback)
+            self._callback = self.SortCallback(callback)
+
+        if tree:
+            super(SortMorphsOper, self).__init__(tree, self._callback)
+        else:
+            super(SortMorphsOper, self).__init__(self._callback)
