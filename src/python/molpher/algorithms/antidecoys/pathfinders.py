@@ -207,9 +207,9 @@ class PathFinder:
                 print("Antidecoys turned off. Trees are sufficinetly close ({0}).".format(self.settings.distance_thrs))
 
             update_target(self.source_target, self.target_source_min.closest.getSMILES())
-            # self.target_source_min = self.FindClosest()
+            self.target_source_min = self.FindClosest()
             update_target(self.target_source, self.source_target_min.closest.getSMILES())
-            # self.source_target_min = self.FindClosest()
+            self.source_target_min = self.FindClosest()
 
             if self.verbose:
                 print('New Targets:')

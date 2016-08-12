@@ -94,9 +94,11 @@ class BidirectionalPathFinder:
             self.source_target.params = {
                 'target' : self.target_source_min.closest.getSMILES()
             }
+            self.target_source_min = self.FindClosest()
             self.target_source.params = {
                 'target' : self.source_target_min.closest.getSMILES()
             }
+            self.target_source_min = self.FindClosest()
 
             if self.verbose:
                 print('New Targets:')
