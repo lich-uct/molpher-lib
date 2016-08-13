@@ -1,7 +1,7 @@
 import os
 import pickle
 
-from molpher.algorithms.commons import timeit
+from molpher.algorithms.functions import timeit
 from .utils import compute_anti_fp
 from .pathfinder import PathFinder
 

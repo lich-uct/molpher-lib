@@ -1,6 +1,6 @@
 from statistics import mean
 
-from molpher.algorithms.commons import timeit, find_path
+from molpher.algorithms.functions import timeit, find_path
 from molpher.algorithms.operations import FindClosest
 from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import ExtendTreeOper
@@ -115,6 +115,7 @@ class PathFinder:
         connecting_molecule = None
         max_iters_reached = False
         antidecoys_off = False
+        normal_search = False
         while True:
             counter+=1
             if counter > self.settings.max_iters:
@@ -158,8 +159,9 @@ class PathFinder:
                         antidecoys_off = True
                         print("Mean antidecoys score threshold reached ({0}).".format(self.settings.common_bits_mean_thrs))
 
-            if antidecoys_off and self.antifingerprint and counter >= self.settings.antidecoys_min_iters:
+            if antidecoys_off and not normal_search and counter >= self.settings.antidecoys_min_iters:
                 print("Antidecoys turned off. Setting up algorithm for normal search...")
+                normal_search = True
                 self._iteration = [
                     GenerateMorphsOper()
                     , SortMorphsOper()

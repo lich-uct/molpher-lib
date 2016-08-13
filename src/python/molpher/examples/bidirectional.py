@@ -3,7 +3,7 @@ import os
 import sys
 
 from molpher.algorithms.bidirectional.run import run
-from molpher.algorithms.pathfinder_settings import PathfinderSettings
+from molpher.algorithms.settings import Settings
 
 
 def main(args):
@@ -15,7 +15,7 @@ def main(args):
     else:
         storage_dir = 'bidirectional_data'
 
-    settings = PathfinderSettings(
+    settings = Settings(
         cocaine
         , procaine
         , storage_dir

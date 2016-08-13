@@ -3,7 +3,7 @@ import os
 import multiprocessing
 
 
-class PathfinderSettings:
+class Settings:
 
     def __init__(
             self

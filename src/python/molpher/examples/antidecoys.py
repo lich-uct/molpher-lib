@@ -14,7 +14,7 @@ def main(args):
         source=cocaine
         , target=procaine
         , storage_dir=storage_dir
-        , max_threads=1
+        , max_threads=4
     )
 
     run(

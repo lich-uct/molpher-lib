@@ -1,4 +1,4 @@
-from molpher.algorithms.commons import find_path
+from molpher.algorithms.functions import find_path
 from molpher.algorithms.operations import FindClosest
 from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import *

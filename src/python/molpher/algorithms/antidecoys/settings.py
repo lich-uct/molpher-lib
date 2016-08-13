@@ -4,10 +4,10 @@ from rdkit import RDConfig
 from rdkit.Chem import ChemicalFeatures
 from rdkit.Chem.Pharm2D.SigFactory import SigFactory
 
-from molpher.algorithms.pathfinder_settings import PathfinderSettings
+from molpher.algorithms.settings import Settings
 
 
-class AntidecoysSettings(PathfinderSettings):
+class AntidecoysSettings(Settings):
 
     def __init__(
             self
