@@ -1,6 +1,7 @@
 from statistics import mean
 
 from molpher.algorithms.commons import timeit, find_path
+from molpher.algorithms.operations import FindClosest
 from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import ExtendTreeOper
 from molpher.core.operations import FilterMorphsOper
@@ -14,20 +15,6 @@ from .utils import update_target
 from .custom_opers import TopScoringFilter, GatherAntiFPScores
 
 class PathFinder:
-
-    class FindClosest:
-
-        def __init__(self):
-            self.closest = None
-
-        def __call__(self, morph):
-            if not self.closest:
-                self.closest = morph.copy()
-                return
-            current_dist = self.closest.getDistToTarget()
-            morph_dist = morph.getDistToTarget()
-            if morph_dist < current_dist:
-                self.closest = morph.copy()
 
     class AntiFpSortCallback(SortMorphsCallback):
 
@@ -66,8 +53,8 @@ class PathFinder:
         self.source_target.thread_count = self.settings.max_threads
         self.target_source.thread_count = self.settings.max_threads
 
-        self.source_target_min = self.FindClosest()
-        self.target_source_min = self.FindClosest()
+        self.source_target_min = FindClosest()
+        self.target_source_min = FindClosest()
 
         if self.verbose:
             print("Tree Parameters:")
@@ -205,9 +192,9 @@ class PathFinder:
                 print("Antidecoys turned off. Trees are sufficinetly close ({0}).".format(self.settings.distance_thrs))
 
             update_target(self.source_target, self.target_source_min.closest.getSMILES())
-            self.target_source_min = self.FindClosest()
+            self.target_source_min = FindClosest()
             update_target(self.target_source, self.source_target_min.closest.getSMILES())
-            self.source_target_min = self.FindClosest()
+            self.source_target_min = FindClosest()
 
             if self.verbose:
                 print('New Targets:')

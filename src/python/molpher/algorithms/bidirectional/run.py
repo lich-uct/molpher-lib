@@ -6,15 +6,10 @@ from .pathfinder import BidirectionalPathFinder
 
 
 def run(
-        source
-        , target
-        , storage_dir
-        , verbose=False
+        settings
         , paths_to_find=1
 ):
-    paths_path = os.path.join(storage_dir, 'paths.pickle')
-    if not os.path.exists(storage_dir):
-        os.mkdir(storage_dir)
+    paths_path = os.path.join(settings.storage_dir, 'paths.pickle')
 
     paths = []
     if os.path.exists(paths_path):
@@ -23,7 +18,7 @@ def run(
         pickled_paths.close()
     for i in range(paths_to_find):
         # find a path
-        pathfinder = BidirectionalPathFinder(source, target, verbose=verbose)
+        pathfinder = BidirectionalPathFinder(settings)
         pathfinder()
         paths.append(pathfinder.path)
 
@@ -31,3 +26,5 @@ def run(
         pickled_paths = open(paths_path, mode='wb')
         pickle.dump(paths, pickled_paths)
         pickled_paths.close()
+
+    return paths

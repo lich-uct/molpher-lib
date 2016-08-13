@@ -1,33 +1,26 @@
+from molpher.algorithms.commons import find_path
+from molpher.algorithms.operations import FindClosest
 from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import *
 from .utils import timeit
 
 class BidirectionalPathFinder:
 
-    class FindClosest:
+    def __init__(self, settings):
+        self.verbose = settings.verbose
 
-        def __init__(self):
-            self.closest = None
+        self.source_target = ETree.create(source=settings.source, target=settings.target)
+        self.target_source = ETree.create(source=settings.target, target=settings.source)
 
-        def __call__(self, morph):
-            if not self.closest:
-                self.closest = morph.copy()
-                return
-            current_dist = self.closest.getDistToTarget()
-            morph_dist = morph.getDistToTarget()
-            if morph_dist < current_dist:
-                self.closest = morph.copy()
+        if settings.tree_params:
+            self.source_target.params = settings.tree_params
+            self.target_source.params = settings.tree_params
 
-    def __init__(self, source, target, max_threads=4, verbose=True):
-        self.verbose = verbose
+        self.source_target.thread_count = settings.max_threads
+        self.target_source.thread_count = settings.max_threads
 
-        self.source_target = ETree.create(source=source, target=target)
-        self.source_target.thread_count = max_threads
-        self.source_target_min = self.FindClosest()
-
-        self.target_source = ETree.create(source=target, target=source)
-        self.target_source.thread_count = max_threads
-        self.target_source_min = self.FindClosest()
+        self.source_target_min = FindClosest()
+        self.target_source_min = FindClosest()
 
         self.ITERATION = [
             GenerateMorphsOper()
@@ -37,18 +30,6 @@ class BidirectionalPathFinder:
             , PruneTreeOper()
         ]
         self.path = []
-
-    def _find_path(self, tree, connecting_mol):
-        path = []
-        current = tree.fetchMol(connecting_mol)
-        path.append(current.getSMILES())
-        while current != '':
-            current = current.getParentSMILES()
-            if current:
-                current = tree.fetchMol(current)
-                path.append(current.getSMILES())
-        path.reverse()
-        return path
 
     def __call__(self):
         counter = 0
@@ -94,11 +75,11 @@ class BidirectionalPathFinder:
             self.source_target.params = {
                 'target' : self.target_source_min.closest.getSMILES()
             }
-            self.target_source_min = self.FindClosest()
+            self.target_source_min = FindClosest()
             self.target_source.params = {
                 'target' : self.source_target_min.closest.getSMILES()
             }
-            self.target_source_min = self.FindClosest()
+            self.target_source_min = FindClosest()
 
             if self.verbose:
                 print('New Targets:')
@@ -122,8 +103,8 @@ class BidirectionalPathFinder:
                 assert self.source_target.hasMol(connecting_molecule)
                 break
 
-        source_target_path = self._find_path(self.source_target, connecting_molecule)
-        target_source_path = self._find_path(self.target_source, connecting_molecule)
+        source_target_path = find_path(self.source_target, connecting_molecule)
+        target_source_path = find_path(self.target_source, connecting_molecule)
         assert source_target_path.pop(-1) == connecting_molecule
         target_source_path.reverse()
         source_target_path.extend(target_source_path)

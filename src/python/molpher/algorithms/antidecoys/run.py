@@ -47,3 +47,5 @@ def run(settings, paths_count):
         pickled_file = open(paths_path, mode='wb')
         pickle.dump(paths, pickled_file)
         pickled_file.close()
+
+    return paths
