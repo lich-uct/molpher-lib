@@ -1,24 +1,16 @@
 import os
 import pickle
 
-from .settings import AntidecoysSettings
-from .utils import timeit, compute_anti_fp
-from .pathfinders import PathFinder
+from molpher.algorithms.commons import timeit
+from .utils import compute_anti_fp
+from .pathfinder import PathFinder
 
-def run(
-        source
-        , target
-        , verbose=True
-        , settings=AntidecoysSettings()
-):
+def run(settings, paths_count):
     storage_dir = settings.storage_dir
-    if not os.path.exists(storage_dir):
-        os.mkdir(storage_dir)
     antifp_path = os.path.join(storage_dir, 'antifingerprint.pickle')
     paths_path = os.path.join(storage_dir, 'paths.pickle')
 
     paths = []
-    paths_antifp = None
     antifp = None
     if os.path.exists(paths_path):
         pickled_file = open(paths_path, mode='rb')
@@ -30,13 +22,10 @@ def run(
         pickled_file.close()
 
     pathfinder = PathFinder(
-        source
-        , target
-        , verbose=verbose
+        settings
         , antifingerprint=antifp
-        , settings=settings
     )
-    for i in range(settings.max_paths):
+    for i in range(paths_count):
         # find a path
         exec_time = timeit(pathfinder)
         paths.append(pathfinder.path)
@@ -46,11 +35,9 @@ def run(
         if pathfinder.path:
             antifp = compute_anti_fp(pathfinder.path, settings.signature_factory, antifp)
         pathfinder = PathFinder(
-            source
-            , target
-            , verbose=verbose
-            , settings=settings
-            , antifingerprint=antifp)
+            settings
+            , antifingerprint=antifp
+        )
 
         # pickle the results for future use
         if antifp:

@@ -1,5 +1,6 @@
 from statistics import mean
 
+from molpher.algorithms.commons import timeit, find_path
 from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import ExtendTreeOper
 from molpher.core.operations import FilterMorphsOper
@@ -9,10 +10,8 @@ from molpher.core.operations import SortMorphsOper
 from molpher.core.operations import CleanMorphsOper
 from molpher.core.operations.callbacks import SortMorphsCallback
 
-from .utils import timeit, update_target, find_path
+from .utils import update_target
 from .custom_opers import TopScoringFilter, GatherAntiFPScores
-
-from .settings import AntidecoysSettings
 
 class PathFinder:
 
@@ -51,21 +50,20 @@ class PathFinder:
 
     def __init__(
             self
-            , source
-            , target
-            , verbose=True
-            , settings=AntidecoysSettings()
+            , settings
             , antifingerprint=None
     ):
-        self.source = source
-        self.target = target
-        self.verbose = verbose
+        self.source = settings.source
+        self.target = settings.target
+        self.verbose = settings.verbose
         self.settings = settings
 
-        self.source_target = ETree.create(source=source, target=target)
+        self.source_target = ETree.create(source=self.source, target=self.target)
+        self.target_source = ETree.create(source=self.target, target=self.source)
+        if settings.tree_params:
+            self.source_target.params = settings.tree_params
+            self.target_source.params = settings.tree_params
         self.source_target.thread_count = self.settings.max_threads
-
-        self.target_source = ETree.create(source=target, target=source)
         self.target_source.thread_count = self.settings.max_threads
 
         self.source_target_min = self.FindClosest()
@@ -132,11 +130,11 @@ class PathFinder:
         antidecoys_off = False
         while True:
             counter+=1
-            if counter > self.settings.max_iters_per_path:
+            if counter > self.settings.max_iters:
                 max_iters_reached = True
                 break
-            if not antidecoys_off and self.antifingerprint and counter > self.settings.max_iters:
-                print("Maximum number of iterations with antidecoys reached ({0}).".format(self.settings.max_iters))
+            if not antidecoys_off and self.antifingerprint and counter > self.settings.antidecoys_max_iters:
+                print("Maximum number of iterations with antidecoys reached ({0}).".format(self.settings.antidecoys_max_iters))
                 antidecoys_off = True
             print('## Iteration {0} ##'.format(counter))
             for oper in self._iteration:
@@ -173,7 +171,7 @@ class PathFinder:
                         antidecoys_off = True
                         print("Mean antidecoys score threshold reached ({0}).".format(self.settings.common_bits_mean_thrs))
 
-            if antidecoys_off and self.antifingerprint and counter >= self.settings.min_iters:
+            if antidecoys_off and self.antifingerprint and counter >= self.settings.antidecoys_min_iters:
                 print("Antidecoys turned off. Setting up algorithm for normal search...")
                 self._iteration = [
                     GenerateMorphsOper()
@@ -202,7 +200,7 @@ class PathFinder:
             print('Current Minima:')
             print('\tsource to target:', self.source_target_min.closest.getSMILES(), source_target_min_dist)
             print('\ttarget to source:', self.target_source_min.closest.getSMILES(), target_source_min_dist)
-            if not antidecoys_off and min(source_target_min_dist, target_source_min_dist) < self.settings.distance_thrs:
+            if self.antifingerprint and not antidecoys_off and min(source_target_min_dist, target_source_min_dist) < self.settings.distance_thrs:
                 antidecoys_off = True
                 print("Antidecoys turned off. Trees are sufficinetly close ({0}).".format(self.settings.distance_thrs))
 

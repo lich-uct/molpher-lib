@@ -10,14 +10,16 @@ def main(args):
     if len(args) == 2:
         storage_dir = args[1]
 
-    settings = AntidecoysSettings()
-    settings.storage_dir = storage_dir
+    settings = AntidecoysSettings(
+        source=cocaine
+        , target=procaine
+        , storage_dir=storage_dir
+        , max_threads=1
+    )
 
     run(
-        cocaine
-        , procaine
-        , verbose=False
-        , settings=settings
+        settings
+        , paths_count=50
     )
 
 if __name__ == "__main__":
