@@ -1,16 +1,29 @@
-from molpher.algorithms.functions import find_path
+from molpher.algorithms.functions import find_path, timeit
 from molpher.algorithms.operations import FindClosest
 from molpher.core.ExplorationTree import ExplorationTree as ETree
 from molpher.core.operations import *
-from .utils import timeit
 
 class BidirectionalPathFinder:
+    """
+    :param settings: search settings
+    :type settings: `Settings`
+
+    Implements a search where two trees are used to explore against each other.
+    After every iteration the targets of the trees are updated so that the closest molecule
+    from one tree becomes a target in the other.
+
+    This search might be quicker and the morphs on the resulting paths are more balanced
+    in terms of similarity to both source and the target.
+    """
 
     def __init__(self, settings):
         self.verbose = settings.verbose
+        """`True` if verbose output was requested"""
 
         self.source_target = ETree.create(source=settings.source, target=settings.target)
+        """:class:`~molpher.core.ExplorationTree.ExplorationTree` from source to target"""
         self.target_source = ETree.create(source=settings.target, target=settings.source)
+        """:class:`~molpher.core.ExplorationTree.ExplorationTree` from target to source"""
 
         if settings.tree_params:
             self.source_target.params = settings.tree_params
@@ -20,24 +33,34 @@ class BidirectionalPathFinder:
         self.target_source.thread_count = settings.max_threads
 
         self.source_target_min = FindClosest()
+        """`FindClosest` holding the current minimum in the 'source to target' tree."""
         self.target_source_min = FindClosest()
+        """`FindClosest` holding the current minimum in the 'target to source' tree."""
 
-        self.ITERATION = [
+        self._iteration = [
             GenerateMorphsOper()
             , SortMorphsOper()
             , FilterMorphsOper()
             , ExtendTreeOper()
             , PruneTreeOper()
         ]
+
         self.path = []
+        """a list of SMILES strings representing the found path (defaults to an empty `list`)"""
 
     def __call__(self):
+        """
+        Execute the search and return the path.
+
+        :return: a list of SMILES strings representing the found path (defaults to an empty `list`)
+        """
+
         counter = 0
         connecting_molecule = None
         while True:
             counter+=1
             print('Iteration {0}:'.format(counter))
-            for oper in self.ITERATION:
+            for oper in self._iteration:
                 if self.verbose:
                     print('Execution times ({0}):'.format(type(oper).__name__))
 

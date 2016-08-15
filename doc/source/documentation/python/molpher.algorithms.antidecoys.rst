@@ -19,6 +19,7 @@ molpher.algorithms.antidecoys.pathfinder module
     :members:
     :undoc-members:
     :show-inheritance:
+    :special-members:
 
 molpher.algorithms.antidecoys.run module
 ----------------------------------------

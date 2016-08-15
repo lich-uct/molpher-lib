@@ -9,6 +9,14 @@ def run(
         settings
         , paths_to_find=1
 ):
+    """
+    Run the search.
+
+    :param settings: `Settings` instance
+    :param paths_to_find: number of paths to find with the algorithm
+    :return: a path as a `list` of SMILES strings
+    """
+
     paths_path = os.path.join(settings.storage_dir, 'paths.pickle')
 
     paths = []

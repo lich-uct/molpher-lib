@@ -5,6 +5,12 @@ from molpher.algorithms.classic.pathfinder import ClassicPathFinder
 
 
 def run(settings):
+    """
+    Run a search with the given settings and return the path found.
+
+    :param settings: `Settings` instance
+    :return: path as a `list` of `str`
+    """
 
     pathfinder = ClassicPathFinder(settings)
     pathfinder()

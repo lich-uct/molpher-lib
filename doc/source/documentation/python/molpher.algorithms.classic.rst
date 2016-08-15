@@ -11,6 +11,7 @@ molpher.algorithms.classic.pathfinder module
     :members:
     :undoc-members:
     :show-inheritance:
+    :special-members:
 
 molpher.algorithms.classic.run module
 -------------------------------------
@@ -19,15 +20,6 @@ molpher.algorithms.classic.run module
     :members:
     :undoc-members:
     :show-inheritance:
-
-molpher.algorithms.classic.utils module
----------------------------------------
-
-.. automodule:: molpher.algorithms.classic.utils
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------

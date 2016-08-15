@@ -14,15 +14,42 @@ from molpher.core.operations.callbacks import SortMorphsCallback
 from .utils import update_target
 from .custom_opers import TopScoringFilter, GatherAntiFPScores
 
-class PathFinder:
+class AntidecoysPathFinder:
+    """
+    :param settings: exploration settings and parameters
+    :type settings: `AntidecoysSettings`
+    :param antifingerprint: the anti-fingerprint to use (optional)
+    :type antifingerprint: :class:`rdkit.cDataStructs.SparseBitVector`
+
+    Implements an algorithm that avoids specific areas of chemical space using an anti-fingerprint,
+    a 2D pharmacophore fingerprint that describes undesirable pharmacophore features and their spacial relationships.
+
+    If no :samp:`antifingerprint` is specified, the search defaults to the :mod:`~molpher.algorithms.bidirectional` algorithm.
+
+    """
 
     class AntiFpSortCallback(SortMorphsCallback):
+        """
+        :param antifp_scores: SMILES to anti-fingerprint similarity map (for each molecule in `candidates`)
+        :type antifp_scores: `dict`
+
+        This callback is used to sort `candidates` with regard
+        to their similarity to the anti-fingerprint. Molecules
+        less similar to the anti-fingerprint are ranked higher
+        than more similar ones.
+
+        """
 
         def __init__(self, antifp_scores):
-            super(PathFinder.AntiFpSortCallback, self).__init__()
+            super(AntidecoysPathFinder.AntiFpSortCallback, self).__init__()
             self.minimum_common_bits_perc = 1.0
+            """minimum percentage of bits that one
+            `candidate morph <candidate morphs>` has in common with the anti-fingerprint"""
             self.maximum_common_bits_perc = 0.0
+            """maximum percentage of bits that one
+            `candidate morph <candidate morphs>` has in common with the anti-fingerprint"""
             self.antifp_scores = antifp_scores
+            """SMILES to anti-fingerprint similarity map (for each molecule in `candidates`)"""
 
         def __call__(self, a, b):
             perc_a = self.antifp_scores[a.getSMILES()]
@@ -41,12 +68,18 @@ class PathFinder:
             , antifingerprint=None
     ):
         self.source = settings.source
+        """SMILES of the source"""
         self.target = settings.target
+        """SMILES of the target"""
         self.verbose = settings.verbose
+        """use verbose output"""
         self.settings = settings
+        """`AntidecoysSettings` object used to initialize this instance"""
 
         self.source_target = ETree.create(source=self.source, target=self.target)
+        """tree searching from source to target"""
         self.target_source = ETree.create(source=self.target, target=self.source)
+        """tree searching from target to source"""
         if settings.tree_params:
             self.source_target.params = settings.tree_params
             self.target_source.params = settings.tree_params
@@ -54,7 +87,9 @@ class PathFinder:
         self.target_source.thread_count = self.settings.max_threads
 
         self.source_target_min = FindClosest()
+        """`FindClosest` holding the current minimum in the 'source to target' tree"""
         self.target_source_min = FindClosest()
+        """`FindClosest` holding the current minimum in the 'target to source' tree"""
 
         if self.verbose:
             print("Tree Parameters:")
@@ -64,6 +99,7 @@ class PathFinder:
         self._antifp_scores = None
         self._antifp_sort_callback = None
         self.antifingerprint = None
+        """the anti-fingerprint"""
         if antifingerprint:
             self._antifp_scores = dict()
             self._antifp_sort_callback = self.AntiFpSortCallback(antifp_scores=self._antifp_scores)
@@ -108,9 +144,17 @@ class PathFinder:
             ]
         self._iteration = [x for x in self._iteration if x]
         self.path = []
+        """a list of SMILES strings representing the found path (defaults to an empty `list`)"""
         self.connecting_molecule = None
+        """SMILES string of a molecule that connects the two trees"""
 
     def __call__(self):
+        """
+        Execute the search
+
+        :return: `list` of SMILES strings representing the path found
+        """
+
         counter = 0
         connecting_molecule = None
         max_iters_reached = False

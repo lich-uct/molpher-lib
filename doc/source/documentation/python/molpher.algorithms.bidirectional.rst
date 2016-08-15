@@ -11,6 +11,7 @@ molpher.algorithms.bidirectional.pathfinder module
     :members:
     :undoc-members:
     :show-inheritance:
+    :special-members:
 
 molpher.algorithms.bidirectional.run module
 -------------------------------------------
@@ -19,15 +20,6 @@ molpher.algorithms.bidirectional.run module
     :members:
     :undoc-members:
     :show-inheritance:
-
-molpher.algorithms.bidirectional.utils module
----------------------------------------------
-
-.. automodule:: molpher.algorithms.bidirectional.utils
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------

@@ -3,7 +3,7 @@ import pickle
 
 from molpher.algorithms.functions import timeit
 from .utils import compute_anti_fp
-from .pathfinder import PathFinder
+from .pathfinder import AntidecoysPathFinder
 
 def run(settings, paths_count):
     storage_dir = settings.storage_dir
@@ -21,7 +21,7 @@ def run(settings, paths_count):
         antifp = pickle.load(pickled_file)
         pickled_file.close()
 
-    pathfinder = PathFinder(
+    pathfinder = AntidecoysPathFinder(
         settings
         , antifingerprint=antifp
     )
@@ -34,7 +34,7 @@ def run(settings, paths_count):
 
         if pathfinder.path:
             antifp = compute_anti_fp(pathfinder.path, settings.signature_factory, antifp)
-        pathfinder = PathFinder(
+        pathfinder = AntidecoysPathFinder(
             settings
             , antifingerprint=antifp
         )
