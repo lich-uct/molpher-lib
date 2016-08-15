@@ -2,7 +2,7 @@ molpher package
 ===============
 
 The main Python package. All features of the library
-are available from here.
+are located here.
 
 Subpackages
 -----------
@@ -11,6 +11,7 @@ Subpackages
     :maxdepth: 3
 
     molpher.core
+    molpher.algorithms
     molpher.swig_wrappers
     molpher.examples
 

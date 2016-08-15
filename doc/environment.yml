@@ -1,3 +1,4 @@
+name: molpher-lib-docs
 channels:
 - rdkit
 - defaults
@@ -7,6 +8,7 @@ dependencies:
 - numpy=1.11.1=py35_0
 - openssl=1.0.2h=1
 - pip=8.1.2=py35_0
+- psutil=4.3.0=py35_0
 - python=3.5.1=0
 - boost=1.56.0=py35_3
 - rdkit=2016.03.2=np111py35_1
