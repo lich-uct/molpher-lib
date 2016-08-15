@@ -60,6 +60,14 @@ molpher.core.operations.TraverseOper module
     :undoc-members:
     :show-inheritance:
 
+molpher.core.operations.CleanMorphsOper module
+----------------------------------------------
+
+.. automodule:: molpher.core.operations.CleanMorphsOper
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 molpher.core.operations.TreeOperation module
 --------------------------------------------
 

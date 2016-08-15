@@ -20,36 +20,7 @@ from molpher.core.ExplorationData import ExplorationData
 from molpher.core.MolpherMol import MolpherMol
 from molpher.core._utils import shorten_repr
 from molpher.core.operations import TraverseOper
-from molpher.core.operations.callbacks import TraverseCallback
-
-
-class Callback(TraverseCallback):
-    """
-    :param callback: the callable to call every time a molecule is encountered during traversal
-    :type callback: any callable object with one required parameter
-
-    Basic callback class used to traverse the tree with the `ExplorationTree.traverse()` method.
-
-    It registers a callable and calls it every time a :term:`morph` is processed.
-
-    """
-
-    def __init__(self, callback):
-        super(Callback, self).__init__()
-        self._callback = callback
-
-    def __call__(self, morph):
-        """
-        This method is called by the C++ code. It
-        just calls the registered callback for a :term:`morph`
-
-        :param morph: morph in the currently processed tree
-        :type morph: `molpher.swig_wrappers.core.MolpherMol`
-        """
-
-        morph.__class__ = MolpherMol
-        self._callback(morph.tree.fetchMol(
-            morph.smiles))  # needs to be done this way (SEGFAULT otherwise, the input parameter seems to be destroyed by SWIG after the call)
+from molpher.core.operations.TraverseOper import Callback
 
 
 class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):

@@ -3,7 +3,7 @@
 Tutorial
 ========
 
-This section gives a comprehensive overview of both the
+This section gives a (hopefully) comprehensive overview of both the
 morphing algorithm itself as well as the
 software features currently available
 By writing and commenting on an example Python script (located in the `examples` package
@@ -614,6 +614,7 @@ A few operations are already defined in the library:
     - :py:class:`~operations.ExtendTreeOper.ExtendTreeOper`
     - :py:class:`~operations.PruneTreeOper.PruneTreeOper`
     - :py:class:`~operations.TraverseOper.TraverseOper`
+    - :py:class:`~operations.CleanMorphsOper.CleanMorphsOper`
 
 They are all dervied from :class:`~molpher.swig_wrappers.core.TreeOperation` and contain
 the full set of operations performed on a tree in

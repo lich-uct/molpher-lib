@@ -209,6 +209,12 @@ class TestPythonAPI(unittest.TestCase):
         tree.runOperation(clean_stuff)
         self.assertEquals(len(tree.candidates), selected)
 
+        tree.extend()
+
+        callback = lambda x : print(x.smiles, x.dist_to_target)
+        oper = TraverseOper(callback=callback)
+        tree.runOperation(oper)
+
     def testMorphing(self):
         def callback(morph):
             callback.morphs_in_tree += 1

@@ -1,5 +1,5 @@
 """
-Just holds a reference to `TraverseCallback`
+Holds references to `TraverseCallback` and `SortMorphsCallback`.
 """
 
 # Copyright (c) 2016 Martin Sicho
