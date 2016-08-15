@@ -9,12 +9,17 @@ def main(args):
     storage_dir = None
     if len(args) == 2:
         storage_dir = args[1]
+    else:
+        storage_dir = 'antidecoys_data'
 
     settings = AntidecoysSettings(
         source=cocaine
         , target=procaine
         , storage_dir=storage_dir
         , max_threads=4
+        , min_accepted=500
+        , antidecoys_max_iters=30
+        , distance_thrs=0.3
     )
 
     run(
