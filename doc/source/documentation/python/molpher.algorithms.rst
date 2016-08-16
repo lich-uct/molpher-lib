@@ -1,6 +1,13 @@
 molpher.algorithms package
 ==========================
 
+The `algorithms` package contains implementations of
+complete exploration algorithms. Each algorithm is
+implemented within its own subpackage. All subpackages
+contain a :samp:`run` module that contains the :samp:`run()`
+function which can be used to set up and initiate a search
+(or multiple searches).
+
 Subpackages
 -----------
 

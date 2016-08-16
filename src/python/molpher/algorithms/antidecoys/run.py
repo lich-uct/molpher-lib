@@ -6,6 +6,13 @@ from .utils import compute_anti_fp
 from .pathfinder import AntidecoysPathFinder
 
 def run(settings, paths_count):
+    """
+
+    :param settings: instance of `AntidecoysSettings` specifying search parameters
+    :param paths_count: number of paths to generate
+    :return: a `list` of lists of SMILES strings (each path is represented by a list of SMILES strings)
+    """
+
     storage_dir = settings.storage_dir
     antifp_path = os.path.join(storage_dir, 'antifingerprint.pickle')
     paths_path = os.path.join(storage_dir, 'paths.pickle')

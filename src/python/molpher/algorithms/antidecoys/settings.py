@@ -8,6 +8,11 @@ from molpher.algorithms.settings import Settings
 
 
 class AntidecoysSettings(Settings):
+    """
+    A specialized class that holds the settings
+    for the anti-decoys algorithm.
+
+    """
 
     def __init__(
             self
@@ -38,14 +43,41 @@ class AntidecoysSettings(Settings):
             , verbose
         )
         self.fg_bins = fg_bins
+        """
+        distance bins in the pharmacophore fingerprint (as described `here <http://www.rdkit.org/docs/GettingStartedInPython.html#d-pharmacophore-fingerprints>`_)
+        """
         self.fg_min_points = fg_min_points
+        """
+        min number of features encoded in the pharmacophore fingerprint (as described `here <http://www.rdkit.org/docs/GettingStartedInPython.html#d-pharmacophore-fingerprints>`_)
+        """
         self.fg_max_points = fg_max_points
+        """
+        max number of features encoded in the pharmacophore fingerprint (as described `here <http://www.rdkit.org/docs/GettingStartedInPython.html#d-pharmacophore-fingerprints>`_)
+        """
         self.min_accepted = min_accepted
+        """
+        minimum number of morphs the antidecoys filter will accept on every iteration
+        """
         self.common_bits_max_thrs = common_bits_max_thrs
+        """
+        maximum percentage of shared bits between a structure and the anti-fingerprint that the filter will accept on every iteration
+        """
         self.common_bits_mean_thrs = common_bits_mean_thrs
+        """
+        if for the structures that survived the filter the mean common bits percentage falls below this value, antidecoys will be turned off
+        """
         self.antidecoys_min_iters = antidecoys_min_iters
+        """
+        minimum number of iterations that will use the antidecoys filter
+        """
         self.antidecoys_max_iters = antidecoys_max_iters
+        """
+        maximum number of iterations that will use the antidecoys filter
+        """
         self.distance_thrs = distance_thrs
+        """
+        turn antidecoys filter off when the distance between two closest molecules from each tree gets below this value
+        """
 
         # stuff for the pharmacophore fingerprints
         self._fdef_file = os.path.join(RDConfig.RDDataDir, 'BaseFeatures.fdef') # get basic feature definitions

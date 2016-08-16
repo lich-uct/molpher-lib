@@ -9,10 +9,10 @@ from molpher.core.operations import GenerateMorphsOper
 from molpher.core.operations import PruneTreeOper
 from molpher.core.operations import SortMorphsOper
 from molpher.core.operations import CleanMorphsOper
-from molpher.core.operations.callbacks import SortMorphsCallback
 
 from .utils import update_target
-from .custom_opers import TopScoringFilter, GatherAntiFPScores
+from .custom_opers import AntidecoysFilter, GatherAntiFPScores, AntiFpSortCallback
+
 
 class AntidecoysPathFinder:
     """
@@ -21,46 +21,17 @@ class AntidecoysPathFinder:
     :param antifingerprint: the anti-fingerprint to use (optional)
     :type antifingerprint: :class:`rdkit.cDataStructs.SparseBitVector`
 
-    Implements an algorithm that avoids specific areas of chemical space using an anti-fingerprint,
-    a 2D pharmacophore fingerprint that describes undesirable pharmacophore features and their spacial relationships.
+    Implements a modified version of the bidirectional algorithm. The algorithm tries to avoid
+    some already sampled areas of chemical space by using an 'anti-fingerprint',
+    a 2D pharmacophore fingerprint that describes previously explored pharmacophore features and their geometric relationships.
 
-    If no :samp:`antifingerprint` is specified, the search defaults to the :mod:`~molpher.algorithms.bidirectional` algorithm.
+    The `RDKit <http://www.rdkit.org/docs/RDKit_Book.html#representation-of-pharmacophore-fingerprints>`_
+    implementation of pharmacophore fingerprints is used. Therefore, it is necessary to have RDKit installed
+    to use this class and this module.
+
+    If no :samp:`antifingerprint` is specified, the search defaults to an ordinary :mod:`~molpher.algorithms.bidirectional` algorithm.
 
     """
-
-    class AntiFpSortCallback(SortMorphsCallback):
-        """
-        :param antifp_scores: SMILES to anti-fingerprint similarity map (for each molecule in `candidates`)
-        :type antifp_scores: `dict`
-
-        This callback is used to sort `candidates` with regard
-        to their similarity to the anti-fingerprint. Molecules
-        less similar to the anti-fingerprint are ranked higher
-        than more similar ones.
-
-        """
-
-        def __init__(self, antifp_scores):
-            super(AntidecoysPathFinder.AntiFpSortCallback, self).__init__()
-            self.minimum_common_bits_perc = 1.0
-            """minimum percentage of bits that one
-            `candidate morph <candidate morphs>` has in common with the anti-fingerprint"""
-            self.maximum_common_bits_perc = 0.0
-            """maximum percentage of bits that one
-            `candidate morph <candidate morphs>` has in common with the anti-fingerprint"""
-            self.antifp_scores = antifp_scores
-            """SMILES to anti-fingerprint similarity map (for each molecule in `candidates`)"""
-
-        def __call__(self, a, b):
-            perc_a = self.antifp_scores[a.getSMILES()]
-            perc_b = self.antifp_scores[b.getSMILES()]
-            minimum = min(perc_a, perc_b, self.minimum_common_bits_perc)
-            maximum = max(perc_a, perc_b, self.minimum_common_bits_perc)
-            if minimum < self.minimum_common_bits_perc:
-                self.minimum_common_bits_perc = minimum
-            if maximum > self.maximum_common_bits_perc:
-                self.maximum_common_bits_perc = maximum
-            return perc_a < perc_b
 
     def __init__(
             self
@@ -102,7 +73,7 @@ class AntidecoysPathFinder:
         """the anti-fingerprint"""
         if antifingerprint:
             self._antifp_scores = dict()
-            self._antifp_sort_callback = self.AntiFpSortCallback(antifp_scores=self._antifp_scores)
+            self._antifp_sort_callback = AntiFpSortCallback(antifp_scores=self._antifp_scores)
             self.antifingerprint = antifingerprint
 
         if self.antifingerprint:
@@ -123,7 +94,7 @@ class AntidecoysPathFinder:
                     , self.settings
                 )
                 , SortMorphsOper(callback=self._antifp_sort_callback)
-                , TopScoringFilter(
+                , AntidecoysFilter(
                     self._antifp_scores
                     , self.settings.common_bits_max_thrs
                     , self.settings.min_accepted
@@ -186,7 +157,7 @@ class AntidecoysPathFinder:
                     print("Generated morphs:")
                     print('\tsource -> target: {0}'.format(len(self.source_target.candidates)))
                     print('\ttarget -> source: {0}'.format(len(self.target_source.candidates)))
-                if oper.__class__ == TopScoringFilter:
+                if oper.__class__ == AntidecoysFilter:
                     print("Top 30 morphs (antidecoys):")
                     source_target_mask = self.source_target.candidates_mask
                     target_source_mask = self.target_source.candidates_mask
