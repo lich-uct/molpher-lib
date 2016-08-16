@@ -1,5 +1,5 @@
 """
-Complete morphing example create from the tutorial code.
+Complete morphing example created from the tutorial code.
 
 """
 

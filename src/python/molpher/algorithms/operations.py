@@ -1,5 +1,5 @@
 """
-Custom operations and callbacks shared between the algorithms.
+Custom operations and callbacks shared between algorithms.
 
 """
 

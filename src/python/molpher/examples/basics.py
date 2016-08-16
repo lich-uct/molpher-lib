@@ -196,7 +196,7 @@ def main():
             print('Descendents: ', morph.getDescendants())
 
     callback = MyCallback() # initialize a callback
-    traverse = TraverseOper(callback) # attach it to a tree traversal operation
+    traverse = TraverseOper(callback=callback) # attach it to a tree traversal operation
     tree.runOperation(traverse) # run the operation
 
     print()

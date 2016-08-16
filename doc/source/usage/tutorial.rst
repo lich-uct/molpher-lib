@@ -15,10 +15,13 @@ you to take a look at the `source-code-docs` if you want to know more about the 
 or more advanced topics.
 
 ..  note:: We do not provide usage examples or a description of the C++ API in this tutorial,
-        but the Python interface actually follows the C++ implementation very closely
+        but the Python interface follows the C++ implementation very closely
         and the classes from the `core` package are in fact derived from the proxy
         classes generated automatically by `SWIG <http://www.swig.org/>`_ when the C++ API is
         wrapped for Python.
+
+If you run into an issue with the examples, have a question or suggestion, please,
+consider submitting to the `issue tracker <https://github.com/lich-uct/molpher-lib/issues>`_.
 
 .. contents:: Table of Contents
 
@@ -117,10 +120,10 @@ molecule that is created.
     because the current implementation does not account for stereochemistry and treats all enantiomers
     as the same molecule. You might want to keep this in mind when working with the library.
 
-..  note:: Besides the information about our source and target, we can also see that a data file was loaded successfully.
-    That means the :mod:`molpher` package was initialized successfully and is ready for use. The data file itself is
+..  note:: In addition to the information about our source and target, we can also see that a data file was loaded successfully.
+    That means the :mod:`molpher` package was initialized and is ready for use. The data file itself is
     used to compute the synthetic feasibility scores for the generated morphs
-    (can be read from any molecule by reading its `sascore` attribute).
+    (this can be read from any molecule via the `sascore` attribute).
 
 The `ExplorationTree.params` dictionary does not just store the
 source and target, but also houses other `morphing parameters`. Let's take a look:
@@ -260,7 +263,7 @@ Output:
 
 The code in :numref:`generate-morphs` first tells the tree to return its current leaves.
 As we only have one molecule in the tree (our cocaine :term:`source molecule`),
-the :attr:`molpher.core.ExplorationTree.ExplorationTree.leaves` member
+the :attr:`~molpher.core.ExplorationTree.ExplorationTree.leaves` member
 only contains one element. We can verify that it is indeed our cocaine by asking
 the underlying :py:class:`~MolpherMol.MolpherMol` instance for its SMILES
 using the `smiles` attribute.
@@ -671,7 +674,7 @@ as needed:
             print('Descendents: ', morph.getDescendants())
 
     callback = MyCallback() # initialize a callback
-    traverse = TraverseOper(callback) # attach it to a tree traversal operation
+    traverse = TraverseOper(callback=callback) # attach it to a tree traversal operation
     tree.runOperation(traverse) # run the operation
 
 Output:
@@ -900,26 +903,17 @@ Output:
     }
     [('CN1C2CCC1C(C(=O)OCN)C(OC(=O)C1=CC=CC=C1)C2', 0.7777777777777778), ('CCN1C2CCC1C(C(=O)OC)C(OC(=O)C1=CC=CC=C1)C2', 0.7936507936507937), ('CN1C2CCC1C(C(=O)ON)C(OC(=O)C1=CC=CC=C1)C2', 0.8064516129032258)]
 
-Example Exploration Algorithm Implementations
----------------------------------------------
+Implementing a Chemical Space Exploration Algorithm
+---------------------------------------------------
 
-Now we wrap up this tutorial with two simple chemical space exploration implementations
-(see :numref:`complete-example`
-and :numref:`bidirectional-example`).
-
-..  _simple:
-
-Using the Tutorial to Implement a Search Algorithm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In the tutorial we showed how to implement
-one step of a simple algorithm that searches
-for a path in :term:`chemical space` between *cocaine* and *procaine*.
+Previously, we showed how to implement
+one step of a simple exploration algorithm.
 Transforming the code into a full exploration algorithm is pretty much straightforward:
 
-..  literalinclude:: ../../../src/python/molpher/examples/experiment.py
+..  literalinclude:: ../../../src/python/molpher/examples/basics_alg.py
     :language: python
-    :caption: Example implementation of a pathfinding algorithm.
+    :caption: Example implementation of a pathfinding algorithm that searches
+        for a path in :term:`chemical space` between *cocaine* and *procaine*.
     :name: complete-example
     :linenos:
 
@@ -975,78 +969,12 @@ Output:
 
 The above implementation is nothing more than just the tutorial code bits inside a loop.
 The loop checks if a path was found at each iteration.
-If the path is found, it backtracks through the tree
-and prints out a sequence of molecules lying on the path.
-
-..  _bidirectional:
-
-Implementing a Bidirectional Search Algorithm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The second example we have here is a little bit more elaborate,
-but implements a very simple idea. Instead of one exploration tree,
-we build two trees that each search for a path to the closest molecule in the other:
-
-..  literalinclude:: ../../../src/python/molpher/examples/bidirectional.py
-    :language: python
-    :caption: Example implementation of a bidirectional pathfinding algorithm.
-    :name: bidirectional-example
-    :linenos:
-
-Output (only the final print of the path is shown):
-
-..  code-block:: python
-
-    [
-        'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C',
-        'CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C',
-        'CCC1C(COC)C(OC(=O)C2=CC=CC=C2)CCN1C',
-        'CCC1C(COC)C(OC(=O)C2=CC=CC=C2)CCN1CC',
-        'CCN1CCC(OC(=O)C2=CC=CC=C2)C(COC)C1C',
-        'CCN1CC(OC(=O)C2=CC=CC=C2)C(COC)C1C',
-        'CCN1CC(OC(=O)C2=CC=CC=C2)C(CO)C1C',
-        'CCC1C(C)N(CC)CC1OC(=O)C1=CC=CC=C1',
-        'CCC1C(C)C(OC(=O)C2=CC=CC=C2)CN1CC',
-        'CCC1CC(OC(=O)C2=CC=CC=C2)CN1CC',
-        'CCC1C(OC(=O)C2=CC=CC=C2)CN1CC',
-        'CCC1C(OC(=O)C2=CC=C(N)C=C2)CN1CC',
-        'CCN1CC(OC(=O)C2=CC=C(N)C=C2)C1C',
-        'CCN(CC)CCOC(=O)C1=CC=C(N)C=C1'
-    ]
-    Total Execution Time: 153964.77300000002 # in milliseconds
-
-This bidirectional algorithm uses the built-in operations to facilitate the search,
-but does one extra procedure after
-an iteration is completed -- it changes the target molecules of the trees.
-When the new leaves are connected both trees are traversed and molecules
-closest to the current target are identified in each. The closest molecule from one tree is then
-set as the new target for the tree searching in the opposite direction and vice versa.
-
-In :numref:`bidirectional-example` we also use the `time.clock` function to measure the execution
-times of each potentially time-consuming operation.
-
-Implementing the Original Molpher Algorithm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-We can, of course, also implement the original exploration algorithm from the :term:`Molpher`
-program:
-
-..  literalinclude:: ../../../src/python/molpher/examples/classic.py
-    :language: python
-    :caption: The classic algorithm implemented in the :term:`Molpher` program.
-    :name: classic-example
-    :linenos:
-
-The code above implements a simple *ClassicPathFinder* class that just
-runs some of the default operations defined in the library on a single tree.
-Because those operations are based on the original code, no change or configuration is needed.
+If it was found, we backtrack through the tree
+and print out a sequence of molecules on the path.
 
 Summary
 -------
 
-If you have read the tutorial all the way to here, you now probably have a decent idea on what the library does
-and how to use it. If you have any suggestions on how to improve it or bug reports, please send them to
-sichom@vscht.cz or create an issue on the issue tracker. All help on the project is much appreciated.
-
-..  todo:: link to issue tracker
-
+If you read the tutorial all the way to here, you now probably have a decent idea on what the library does
+and how to use it. If you have any suggestions on how to improve it or bug reports, please submit them to
+the `issue tracker <https://github.com/lich-uct/molpher-lib/issues>`_. Any help on the project is much appreciated.
