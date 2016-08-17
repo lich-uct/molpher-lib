@@ -91,7 +91,7 @@ Glossary
         Software developed as a collaboration between the `SIRET Research Group <http://siret.ms.mff.cuni.cz>`_
         (`Faculty of Mathematics and Physics, Charles University in Prague, <http://www.mff.cuni.cz>`_),
         `Laboratory of Informatics and Chemistry <http://ich.vscht.cz>`_ (`UCT Prague <http://www.vscht.cz>`_)
-        and `CZ-OPENSCREEN <http://www.openscreen.cz>`_. The main goal of the project
+        and `CZ-OPENSCREEN <http://www.openscreen.cz>`_ [2]_. The main goal of the project
         is to implement an effective tool for :term:`chemical space` exploration with :term:`molecular morphing`.
         Molpher itself is a standalone program and is available from `GitHub <https://github.com/siret/Molpher>`_.
 

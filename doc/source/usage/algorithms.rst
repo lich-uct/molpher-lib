@@ -11,10 +11,40 @@ which contains some generally useful modules
 Classic (Original) Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is the algorithm published along with the :term:`Molpher`
-program [1]_.
+This is the algorithm published with the :term:`Molpher`
+program [1]_. It is the most basic algorithm
+that can be implemented and a lot of fundamental concepts of
+Molpher-lib are based on it. The other algorithms presented in this part of the documentation
+are modifications or extensions of the original. It is, therefore,
+recommended to read this section before moving on to the following ones.
 
-.. todo:: Explain the algorithm and show pictures.
+The classic algorithm uses a single tree rooted at the `source molecule` (M\ :sub:`S`).
+Using predefined `chemical operators`, it generates a new generation of structures from the leaves of this tree
+at every iteration (see :numref:`morphing`).
+The new list of candidates is then sorted (using the
+:class:`~molpher.core.operations.SortMorphsOper.SortMorphsOper` operation)
+in ascending order according to their structural distance
+from the `target molecule` (M\ :sub:`T`).
+Finally, the new structures are filtered with the
+:class:`~molpher.core.operations.FilterMorphsOper.FilterMorphsOper`
+operation and survivors are attached to their parents in the tree.
+This is repeated until the target molecule is generated and appended to the tree.
+
+As the computation proceeds, some tree branches are also pruned
+(see :class:`~molpher.core.operations.PruneTreeOper.PruneTreeOper`). This is
+necessary to prevent exponential growth of the tree by removing paths
+that are not getting closer to the `target molecule`.
+
+If you wish to know more about the steps involved
+in this algorithm, a detailed description can be found in [1]_.
+
+..      figure:: morphing.png
+        :scale: 100%
+        :name: morphing
+
+        Schematic depiction of the original algorithm published by Hoksza et al. [1]_.
+        New `morphs <morph>` are generated with the `chemical operators` until the target
+        molecule is found.
 
 The classic algorithm is available through the `molpher.algorithms.classic` package
 and can be used as follows:
@@ -53,11 +83,56 @@ which represents the resulting path into `storage_dir`.
 Bidirectional Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The second example we have here is a little bit more elaborate,
-but implements a very simple idea. Instead of one exploration tree,
-we build two trees that each search for a path to the closest molecule in the other:
+The second algorithm included in the library is the bidirectional algorithm.
+The goal is the same as in the classic approach -- to find
+a path from the `source molecule` to the `target molecule`. However,
+in this approach we use two trees (**A** and **B**) at once to get from M\ :sub:`S` to M\ :sub:`T`
+(see :numref:`bidirectional-fig`). One is set up to search for a path from
+M\ :sub:`S` to M\ :sub:`T` while the other searches in the opposite direction,
+that is from M\ :sub:`T` to M\ :sub:`S`.
 
-.. todo:: Explain the algorithm and show pictures.
+After every complete iteration of the original algorithm in both trees
+(after the new structures are connected)
+the `target molecule` in each tree is replaced by the closest
+molecule to the current target from the opposite tree. This process is depicted
+in :numref:`bidirectional-fig` where m\ :sub:`TA` is found to be
+the closest molecule in tree **B** and, thus, becomes the new target of **A**.
+Similarly, molecule m\ :sub:`TB` is the closest molecule to the current target
+of **A** and, therefore, becomes the new target of **B**. This causes that
+with each iteration the target of each tree becomes closer and closer.
+The algorithm ends when any of the two trees finds its target
+(the `connecting_molecule`).
+This structure is guaranteed to exist in both trees and is used
+to backtrack through them and generate the final path from M\ :sub:`S` to M\ :sub:`T`.
+
+..      figure:: bidirectional.png
+        :scale: 100%
+        :name: bidirectional-fig
+
+        Schematic depiction of the bidirectional algorithm. Two trees (**A** and **B**) are built
+        at the same time with the `target <target molecule>`
+        for each tree (m\ :sub:`TA` for **A** and m\ :sub:`TB` for **B**) being adjusted dynamically during runtime.
+
+This algorithm should have some advantages over the classic one.
+The biggest is probably the fact that the space
+between M\ :sub:`S` and M\ :sub:`T` is explored in a more
+uniform way. The classic algorithm can often converge
+quickly to an area very close to M\ :sub:`T`, but
+it usually takes a few more iterations before it finds the actual
+structure of M\ :sub:`T`. This results in a disproportionate
+number of molecules on the path being highly similar to M\ :sub:`T`.
+This is not the case for the bidirectional search where
+by the time the two trees get very close there
+is already a lot of similar molecules between them
+and it is much easier to find a connecting structure.
+
+The bidirectional
+approach might also be able to converge quicker,
+because with each iteration the target gets closer and closer for each
+tree and this significantly reduces the search space.
+
+The following script shows how this algorithm can be used to generate
+paths:
 
 ..  literalinclude:: ../../../src/python/molpher/examples/bidirectional.py
         :language: python
@@ -65,37 +140,10 @@ we build two trees that each search for a path to the closest molecule in the ot
         :name: bidirectional-example
         :linenos:
 
-Output (only the final print of the path is shown):
-
-..  code-block:: python
-
-    [
-        'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C',
-        'CCC1C(C(=O)OC)C(OC(=O)C2=CC=CC=C2)CCN1C',
-        'CCC1C(COC)C(OC(=O)C2=CC=CC=C2)CCN1C',
-        'CCC1C(COC)C(OC(=O)C2=CC=CC=C2)CCN1CC',
-        'CCN1CCC(OC(=O)C2=CC=CC=C2)C(COC)C1C',
-        'CCN1CC(OC(=O)C2=CC=CC=C2)C(COC)C1C',
-        'CCN1CC(OC(=O)C2=CC=CC=C2)C(CO)C1C',
-        'CCC1C(C)N(CC)CC1OC(=O)C1=CC=CC=C1',
-        'CCC1C(C)C(OC(=O)C2=CC=CC=C2)CN1CC',
-        'CCC1CC(OC(=O)C2=CC=CC=C2)CN1CC',
-        'CCC1C(OC(=O)C2=CC=CC=C2)CN1CC',
-        'CCC1C(OC(=O)C2=CC=C(N)C=C2)CN1CC',
-        'CCN1CC(OC(=O)C2=CC=C(N)C=C2)C1C',
-        'CCN(CC)CCOC(=O)C1=CC=C(N)C=C1'
-    ]
-    Total Execution Time: 153964.77300000002 # in milliseconds
-
-This bidirectional algorithm uses the built-in operations to facilitate the search,
-but does one extra procedure after
-an iteration is completed -- it changes the target molecules of the trees.
-When the new leaves are connected both trees are traversed and molecules
-closest to the current target are identified in each. The closest molecule from one tree is then
-set as the new target for the tree searching in the opposite direction and vice versa.
-
-In :numref:`bidirectional-example` we also use the `time.clock` function to measure the execution
-times of each potentially time-consuming operation.
+The code above is almost identical to the example above (see :numref:`classic-example`).
+It follows the same principles and the `Settings` class is also the same. The only difference
+is that the run method is imported from `molpher.algorithms.bidirectional`
+rather than `molpher.algorithms.classic`.
 
 Antidecoys Algorithm
 ~~~~~~~~~~~~~~~~~~~~
