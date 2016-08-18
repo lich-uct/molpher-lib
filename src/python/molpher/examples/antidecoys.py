@@ -17,6 +17,7 @@ def main(args):
         , target=procaine
         , storage_dir=storage_dir
         , max_threads=4
+        , common_bits_max_thrs = 0.75
         , min_accepted=500
         , antidecoys_max_iters=30
         , distance_thrs=0.3

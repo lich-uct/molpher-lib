@@ -136,7 +136,7 @@ paths:
 
 ..  literalinclude:: ../../../src/python/molpher/examples/bidirectional.py
         :language: python
-        :caption: Example implementation of a bidirectional pathfinding algorithm.
+        :caption: Usage example of the bidirectional pathfinding algorithm.
         :name: bidirectional-example
         :linenos:
 
@@ -145,9 +145,92 @@ It follows the same principles and the `Settings` class is also the same. The on
 is that the run method is imported from `molpher.algorithms.bidirectional`
 rather than `molpher.algorithms.classic`.
 
-Antidecoys Algorithm
-~~~~~~~~~~~~~~~~~~~~
+Anti-decoys Algorithm
+~~~~~~~~~~~~~~~~~~~~~
 
-.. todo:: Explain the algorithm and show pictures.
+The 'anti-decoys algorithm' is an extension of the bidirectional one
+and it tries to solve a problem that the algorithms above have in common.
+This problem is obvious when Molpher-lib is used to generate a focused library
+of compounds by pooling together structures from multiple exploration runs.
 
-Stuff...
+Even though the algorithms above are not deterministic, there is
+still a significant amount of overlap between the structures from
+multiple runs. This is due to the fact that in the cases above the algorithm
+is minimizing the distance between the `source molecule` and the `target molecule`
+which is important to actually be able to find a path, but is a problem
+when our aim is to generate a diverse library of structures because
+shorter paths will be preferred and, thus,
+contain highly similar compounds.
+
+This unwanted behaviour is illustrated in :numref:`antidecoys-fig`
+where the generated paths (dashed lines) between multiple compounds (shown in red)
+are seen to traverse a very limited area of chemical space (compounds
+marked with blue dots). However, it might still be possible to discover
+interesting structures if the algorithm took a little 'detour'
+and generated a path that is a bit longer, but contains some
+previously 'unseen' structures (shown as blue circles with question marks).
+
+In the anti-decoys approach, this problem is eliminated by generating an 'anti-fingerprint'.
+It is a 2D phramacophore fingerprint
+(`implemented in RDKit <http://www.rdkit.org/docs/GettingStartedInPython.html#d-pharmacophore-fingerprints>`_)
+that contains information about all known and previously generated compounds. Because each
+bit in a pharmacophore fingerprint encodes information about geometric relationship of certain pharmacophore
+features in the structure, it is possible to cumulatively construct the anti-fingerprint by doing logical
+:samp:`or` over the fingerprints of previously discovered structures (see :numref:`antidecoys-fig`). Therefore,
+by minimizing the similarity to the anti-fingerprint and at the same time
+minimizing the structural distance from the target, the unexplored areas
+can be prioritized over those that were already sampled before.
+
+..      figure:: antidecoys.png
+        :scale: 100%
+        :name: antidecoys-fig
+
+        Schematic depiction of the problem the anti-decoys algorithm tries to solve. The
+        paths generated between active molecules (dashed lines connecting the red circles)
+        are limited to an area of chemical space occupied by highly similar
+        structures, the decoys (shown in blue). The algorithm analyses the
+        decoys and uses this information to avoid them in future explorations
+        using an anti-fingerprint that is computed as a logical :samp:`or`
+        over all known fingerprints.
+
+The antidecoys algorithm can be used as follows:
+
+..  literalinclude:: ../../../src/python/molpher/examples/antidecoys.py
+            :language: python
+            :caption: Usage example of the antidecoys algorithm.
+            :name: antidecoys-example
+            :linenos:
+
+This example is a little different from the ones before
+and there is a little bit more customization involved.
+
+The antidecoys algorithm uses a customized settings class called `AntidecoysSettings`.
+In general, this class specifies important thresholds for the anti-fingerprint similarity
+and how strict the algorithm will be when filtering morphs. See the
+documentation of `AntidecoysSettings` to know more about this class and
+the additional parameters.
+
+The :samp:`run()` function is also a bit different here. Because it is
+assumed that multiple paths will be generated, we also need to specify
+how many of them to find.
+
+Summary
+~~~~~~~
+
+In this section, the implementations of various chemical space exploration algorithms
+were described. They are all based on the original algorithm implemented in `Molpher`,
+but the algorithms that can be implemented with the library do not have to be
+built on this basis. There are many ways to implement chemical space exploration
+using a library such as this one. For
+example, we are currently working on an implementation that will be independent
+of the `target molecule` and could be used to evolve compounds more freely
+with constraints imposed only by the user. Soon, we will also implement
+a way of preventing parts of the `source molecule` from being modified,
+which could be very useful in lead optimization. We are also planning to give users
+the option to define their own chemical operators, which will give an entirely new
+meaning to the generated paths. There are many ways in which this library could
+be useful in drug discovery, so if you have any
+suggestions or would like to actively participate on the project, it
+would be much appreciated. Make sure to visit the official
+`GitHub <https://github.com/lich-uct/molpher-lib>`_ repository
+for more information.
