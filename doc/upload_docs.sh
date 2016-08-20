@@ -16,10 +16,9 @@ git clone `git config --get remote.origin.url` $TMPREPO
 
 cd $TMPREPO
 git checkout gh-pages
-cp $BASE_DIR/homepage/* $TMPREPO
+cp -r $BASE_DIR/homepage/* .
 python render.py
-rm -f *.py
-rm -f *.template
+rm -f *.py *.pyc *.template
 mkdir -p "v$VERSION/"
 cp -r $HTML_DIR/* "v$VERSION/"
 touch .nojekyll

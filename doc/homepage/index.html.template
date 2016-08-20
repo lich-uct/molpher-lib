@@ -20,7 +20,7 @@
 			</p>
 
 			<p>
-				On this simple web page, we will try to explain what molecular morphing is, how it can be used in <em>de novo</em> drug design and we will hint at some advanages Molpher-lib has over the original Molpher. There is also a page dedicated to some quick usage <a href="examples.html">examples</a> as well as an extensive <a href="#docs">documentation</a> (see below).
+				On this simple web page, we will try to explain what molecular morphing is, how it can be used in <em>de novo</em> drug design and we will hint at some advanages Molpher-lib has over the original Molpher. There is also a page dedicated to some quick usage <a href="examples.html">examples</a> as well as an extensive <a href="#docs">documentation</a>.
 			</p>
 
 		</div>
@@ -37,14 +37,29 @@
 			{% endcall %}
 
 			<p>
-				The original Molpher software was programmed to find a set of modifications needed to transform one molecular structure into another. Therefore, it can generate a set of 'hybrid' structures that combine the structural features of two input molecules, very much like <a href="https://en.wikipedia.org/wiki/Morphing">morphing</a> in computer graphics.
+				The original Molpher software was programmed to find a set of modifications needed to transform one molecular structure into another. Therefore, it can generate a set of 'hybrid' structures that combine the structural features of two input molecules; very much like <a href="https://en.wikipedia.org/wiki/Morphing">morphing</a> in computer graphics.
 			</p>
 
 			<p>
-				It can be used to sample areas of chemical space that are biologically relevant and create a diverse set of novel potentially active compounds that can be analyzed further or used as a basis for conventional
-				<a href="https://en.wikipedia.org/wiki/Virtual_screening">virutal screening</a>.
+				One possible application of such algorithm is sampling unknown chemical space  'around' molecules with confirmed biological activity (see figure below). Here, Molpher (or Molpher-lib) can be used to generate a focused virtual library of hybrid structures that are derived from known active molecules. Such library could, for example, be used in a <a href="https://en.wikipedia.org/wiki/Virtual_screening">virutal screening</a> campaign that might yield new ligands with new chemotypes.
 			</p>
 
+			{% call figure('images/drug_space.png')%}
+			Schematic depiction of a focused chemical space exploration experiment using molecular morphing. Multiple paths are generated between every pair of known active molecules (lines connecting the big diamonds, one example path is highlighted in red). Every path consists of intermediate (hybrid) structures (morphs, shown as small diamonds) that combine structural features of the pair that they connect. It is also possible (and generally a good idea) to impose constraints on the search space (denoted by the thick black lines enclosing the explored area). This will prevent the algorithm from generating structures with undesirable properties.
+			{% endcall %}
+
+		</div>
+
+		<div class="section">
+			<h3>Advantages of Molpher-lib over Molpher</h3>
+
+			<p>
+				advantages and stuff
+			</p>
+
+			<p>
+				future directions and new functionality
+			</p>
 		</div>
 
 		<div class="section" id="docs">
