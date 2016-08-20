@@ -19,11 +19,15 @@ import unittest
 
 from pkg_resources import resource_filename
 
+from molpher import random
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
 from molpher.core.operations import *
+from molpher.core.operations.callbacks import SortMorphsCallback
 from molpher.core.selectors import *
 from molpher.core import ExplorationData
+
+random.set_random_seed(42)
 
 class TestPythonAPI(unittest.TestCase):
     
@@ -174,6 +178,42 @@ class TestPythonAPI(unittest.TestCase):
         tree.runOperation(fl)
         for leaf1, leaf2, leaf3 in zip(sorted(fl.leaves), sorted(fl.tree.leaves), sorted(tree.leaves)):
             self.assertTrue(leaf1.smiles == leaf2.smiles == leaf3.smiles)
+
+        tree.generateMorphs()
+        tree.sortMorphs()
+        previous = None
+        for morph in tree.candidates:
+            if previous:
+                self.assertTrue(morph.dist_to_target >= previous)
+                previous = morph.dist_to_target
+            else:
+                previous = morph.dist_to_target
+        print([x.dist_to_target for x in tree.candidates])
+
+        my_callback = lambda a, b : a.getDistToTarget() > b.getDistToTarget()
+        my_sort = SortMorphsOper(tree, my_callback)
+        my_sort()
+
+        previous = None
+        for morph in tree.candidates:
+            if previous:
+                self.assertTrue(morph.dist_to_target <= previous)
+                previous = morph.dist_to_target
+            else:
+                previous = morph.dist_to_target
+        print([x.dist_to_target for x in tree.candidates])
+
+        tree.filterMorphs()
+        selected = sum(tree.candidates_mask)
+        clean_stuff = CleanMorphsOper()
+        tree.runOperation(clean_stuff)
+        self.assertEquals(len(tree.candidates), selected)
+
+        tree.extend()
+
+        callback = lambda x : print(x.smiles, x.dist_to_target)
+        oper = TraverseOper(callback=callback)
+        tree.runOperation(oper)
 
     def testMorphing(self):
         def callback(morph):

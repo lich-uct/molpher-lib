@@ -13,4 +13,6 @@ A set of classes that can be used to operate on an :term:`exploration tree`.
     ExtendTreeOper_doc
     PruneTreeOper_doc
     TraverseOper_doc
+    CleanMorphsOper_doc
     TraverseCallback_doc
+    SortMorphsCallback_doc

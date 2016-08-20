@@ -12,10 +12,10 @@ molpher.examples.basics module
     :undoc-members:
     :show-inheritance:
 
-molpher.examples.experiment module
+molpher.examples.basics_alg module
 ----------------------------------
 
-.. automodule:: molpher.examples.experiment
+.. automodule:: molpher.examples.basics_alg
     :members:
     :undoc-members:
     :show-inheritance:

@@ -16,7 +16,52 @@
 
 import molpher.swig_wrappers.core
 from molpher.core.operations.TreeOperation import TreeOperation
+from molpher.core.operations.callbacks import SortMorphsCallback
+from molpher.core.MolpherMol import MolpherMol
 
 
 class SortMorphsOper(molpher.swig_wrappers.core.SortMorphsOper, TreeOperation):
-    pass
+    """
+    :param tree: a tree to run this operation on (optional)
+    :type tree: :class:`~molpher.core.ExplorationTree.ExplorationTree` instance
+    :param callback: callable to call every time two molecules need to be compared (optional)
+    :type callback: any callable object with two positional arguments and a single `bool` return value
+
+    This operation sorts the `candidates` list of an :class:`~molpher.core.ExplorationTree.ExplorationTree` using a given callback function.
+    If no callback function is specified, candidates are sorted in ascending order according to `dist_to_target`.
+
+    """
+
+    class SortCallback(SortMorphsCallback):
+        """
+        :param callback: callable to call every time two molecules need to be compared
+        :type callback: any callable object with two positional arguments and a single `bool` return value
+
+        Customized callback that calls any supplied
+        callable as a callback of `SortMorphsOper`
+        and injects instances of `molpher.core.MolpherMol`
+        rather than :class:`molpher.swig_wrappers.core.MolpherMol`.
+
+        """
+
+        def __init__(self, callback):
+            super(SortMorphsOper.SortCallback, self).__init__()
+            self._callback = callback
+
+        def __call__(self, a, b):
+            a.__class__ = MolpherMol
+            b.__class__ = MolpherMol
+            return self._callback(a, b)
+
+
+    def __init__(self, tree=None, callback=None):
+        self._callback = None
+        if not callback:
+            self._callback = molpher.swig_wrappers.core.DefaultSortCallback()
+        else:
+            self._callback = self.SortCallback(callback)
+
+        if tree:
+            super(SortMorphsOper, self).__init__(tree, self._callback)
+        else:
+            super(SortMorphsOper, self).__init__(self._callback)

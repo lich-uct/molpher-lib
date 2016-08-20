@@ -37,6 +37,7 @@
 #include "operations/ExtendTreeOper.hpp"
 #include "operations/PruneTreeOper.hpp"
 #include "operations/TraverseOper.hpp"
+#include "operations/CleanMorphsOper.hpp"
 
 class ExplorationTree::ExplorationTreeImpl
 {
@@ -49,6 +50,7 @@ class ExplorationTree::ExplorationTreeImpl
     friend class ExtendTreeOper::ExtendTreeOperImpl;
     friend class PruneTreeOper::PruneTreeOperImpl;
     friend class TraverseOper::TraverseOperImpl;
+    friend class CleanMorphsOper::CleanMorphsOperImpl;
 
     private:
         

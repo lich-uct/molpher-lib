@@ -25,14 +25,14 @@
 #include "TreeOperationImpl.hpp"
 #include "core/API/ExplorationTreeImpl.h"
 
-SortMorphsOper::SortMorphsOper(std::shared_ptr<ExplorationTree> expTree) : 
-pimpl(new SortMorphsOper::SortMorphsOperImpl(expTree))
+SortMorphsOper::SortMorphsOper(std::shared_ptr<ExplorationTree> expTree, SortMorphsCallback &sort_callback) :
+pimpl(new SortMorphsOper::SortMorphsOperImpl(expTree, sort_callback))
 {
      setTreeOperPimpl(pimpl);
 }
 
-SortMorphsOper::SortMorphsOper() :
-pimpl(new SortMorphsOper::SortMorphsOperImpl())
+SortMorphsOper::SortMorphsOper(SortMorphsCallback &sort_callback) :
+pimpl(new SortMorphsOper::SortMorphsOperImpl(sort_callback))
 {
     setTreeOperPimpl(pimpl);
 }
@@ -41,20 +41,51 @@ void SortMorphsOper::operator()() {
     (*pimpl)();
 }
 
-SortMorphsOper::SortMorphsOperImpl::SortMorphsOperImpl(std::shared_ptr<ExplorationTree> expTree) :
-TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
-{
-    // no action
-}
-
-SortMorphsOper::SortMorphsOperImpl::SortMorphsOperImpl() :
+SortMorphsOper::SortMorphsOperImpl::SortMorphsOperImpl(SortMorphsCallback &sort_callback) :
 TreeOperation::TreeOperationImpl::TreeOperationImpl()
+, callback(sort_callback)
 {
     // no action
 }
 
 bool SortMorphsOper::SortMorphsOperImpl::CompareMorphs::operator()(
-        const std::shared_ptr<MolpherMol> &a, const std::shared_ptr<MolpherMol> &b) const {
+        std::shared_ptr<MolpherMol> a, std::shared_ptr<MolpherMol> b) const {
+    return mCallback(a, b);
+}
+
+SortMorphsOper::SortMorphsOperImpl::CompareMorphs::CompareMorphs(SortMorphsCallback &callback) :
+mCallback(callback)
+{
+    // no action
+}
+
+void SortMorphsOper::SortMorphsOperImpl::operator()() {
+    auto tree = getTree();
+    if (tree) {
+        auto tree_pimpl = tree->pimpl;
+        tbb::task_scheduler_init scheduler;
+        if (tree_pimpl->threadCnt > 0) {
+            scheduler.terminate();
+            scheduler.initialize(tree_pimpl->threadCnt);
+        }
+
+        CompareMorphs compareMorphs(callback);
+        tbb::parallel_sort(tree_pimpl->candidates.begin(), tree_pimpl->candidates.end(), compareMorphs);
+    } else {
+        throw std::runtime_error("Cannot sort morphs. No tree attached to this instance.");
+    }
+}
+
+SortMorphsOper::SortMorphsOperImpl::SortMorphsOperImpl(std::shared_ptr<ExplorationTree> expTree,
+                                                       SortMorphsCallback &sort_callback) :
+TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
+, callback(sort_callback)
+{
+    // no action
+}
+
+bool DefaultSortCallback::operator()(std::shared_ptr<MolpherMol> morph_1,
+                                                                     std::shared_ptr<MolpherMol> morph_2) const {
     /* Morphs are rated according to their proximity to the connecting line
      between their closest decoy and the target (i.e. sum of both distances is
      minimal on the connecting line between decoy and target). When sums for
@@ -65,14 +96,14 @@ bool SortMorphsOper::SortMorphsOperImpl::CompareMorphs::operator()(
      algorithm when majority of morphs lie on the connecting line between
      decoy closest to the target and the target itself. */
 
-    double aSum = a->getDistToTarget();
-    double bSum = b->getDistToTarget();
+    double aSum = morph_1->getDistToTarget();
+    double bSum = morph_2->getDistToTarget();
 
     bool approximatelyEqual = (
             fabs(aSum - bSum) <= (32 * DBL_EPSILON * fmax(fabs(aSum), fabs(bSum))));
 
     if (approximatelyEqual) {
-        return a->getDistToTarget() < b->getDistToTarget();
+        return morph_1->getDistToTarget() < morph_2->getDistToTarget();
     } else {
         return aSum < bSum;
     }
@@ -104,20 +135,8 @@ bool SortMorphsOper::SortMorphsOperImpl::CompareMorphs::operator()(
     }*/
 }
 
-void SortMorphsOper::SortMorphsOperImpl::operator()() {
-    auto tree = getTree();
-    if (tree) {
-        auto tree_pimpl = tree->pimpl;
-        tbb::task_scheduler_init scheduler;
-        if (tree_pimpl->threadCnt > 0) {
-            scheduler.terminate();
-            scheduler.initialize(tree_pimpl->threadCnt);
-        }
-
-        CompareMorphs compareMorphs;
-        tbb::parallel_sort(tree_pimpl->candidates.begin(), tree_pimpl->candidates.end(), compareMorphs);
-    } else {
-        throw std::runtime_error("Cannot sort morphs. No tree attached to this instance.");
-    }
+DefaultSortCallback::DefaultSortCallback() :
+SortMorphsCallback()
+{
+    // no action
 }
-

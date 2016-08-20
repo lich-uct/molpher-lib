@@ -330,7 +330,8 @@ std::vector<bool> ExplorationTree::ExplorationTreeImpl::getCandidateMorphsMask()
 }
 
 void ExplorationTree::ExplorationTreeImpl::sortMorphs(std::shared_ptr<ExplorationTree> tree) {
-    SortMorphsOper sort;
+    DefaultSortCallback callback;
+    SortMorphsOper sort(callback);
     runOperation(sort, tree);
 }
 

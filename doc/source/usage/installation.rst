@@ -175,16 +175,15 @@ This documentation is generated using the :file:`build_docs.sh`
 script under the :file:`doc/` directory. However, in order to successfully build the documentation
 you will need a few packages in your Python environment:
 
-..  literalinclude:: ../../../doc/requirements.txt
+..  literalinclude:: ../../../environment.yml
     :language: none
-    :caption: The requirements file for the environment used to build the documentation.
+    :caption: The conda environment file used to build the documentation and test the library.
 
-You can easily install all these packages with *pip*:
+You can easily install all these packages like so:
 
 ..  code-block:: bash
 
-    cd ${REPOSITORY_ROOT}/doc/
-    pip install -r requirements.txt
+    conda env create -n molpher-lib-docs -f environment.yml
 
 Also, make sure you initialized the Python package (built the *molpher_build_SWIG_Python* target as described above)
 prior to generating the documentation so that Sphinx can successfully import the *molpher* package.

@@ -26,13 +26,18 @@ class SortMorphsOper::SortMorphsOperImpl : public TreeOperation::TreeOperationIm
 
 private:
     class CompareMorphs {
+    private:
+        SortMorphsCallback& mCallback;
     public:
-        bool operator()(const std::shared_ptr<MolpherMol> &a, const std::shared_ptr<MolpherMol> &b) const;
+        CompareMorphs(SortMorphsCallback &callback);
+        bool operator()(std::shared_ptr<MolpherMol> a, std::shared_ptr<MolpherMol> b) const;
     };
+
+    SortMorphsCallback& callback;
     
 public:
-    SortMorphsOperImpl(std::shared_ptr<ExplorationTree> expTree);
-    SortMorphsOperImpl();
+    SortMorphsOperImpl(std::shared_ptr<ExplorationTree> expTree, SortMorphsCallback &sort_callback);
+    SortMorphsOperImpl(SortMorphsCallback &sort_callback);
     virtual void operator()();
 };
 

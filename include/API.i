@@ -30,9 +30,11 @@
 #include "operations/ExtendTreeOper.hpp"
 #include "operations/PruneTreeOper.hpp"
 #include "operations/TraverseOper.hpp"
+#include "operations/CleanMorphsOper.hpp"
 
 // callbacks
 #include "operations/callbacks/TraverseCallback.hpp"
+#include "operations/callbacks/SortMorphsCallback.hpp"
 
 // selectors
 #include "selectors/chemoper_selectors.h"

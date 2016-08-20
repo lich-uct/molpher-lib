@@ -22,3 +22,4 @@ from molpher.core.operations.ExtendTreeOper import ExtendTreeOper
 from molpher.core.operations.PruneTreeOper import PruneTreeOper
 from molpher.core.operations.TraverseOper import TraverseOper
 from molpher.core.operations.GenerateMorphsOper import GenerateMorphsOper
+from molpher.core.operations.CleanMorphsOper import CleanMorphsOper

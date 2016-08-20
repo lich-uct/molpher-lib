@@ -17,3 +17,6 @@
 
 %ignore TraverseCallback::TraverseCallbackImpl;
 %include "TraverseCallback.hpp"
+
+%ignore SortMorphsCallback::SortMorphsCallbackImpl;
+%include "SortMorphsCallback.hpp"

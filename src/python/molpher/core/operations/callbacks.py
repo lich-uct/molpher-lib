@@ -1,5 +1,5 @@
 """
-Just holds a reference to `TraverseCallback`
+Holds references to `TraverseCallback` and `SortMorphsCallback`.
 """
 
 # Copyright (c) 2016 Martin Sicho
@@ -17,4 +17,4 @@ Just holds a reference to `TraverseCallback`
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from molpher.swig_wrappers.core import TraverseCallback
+from molpher.swig_wrappers.core import TraverseCallback, SortMorphsCallback
