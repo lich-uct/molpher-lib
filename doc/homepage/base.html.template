@@ -40,7 +40,7 @@
 </div>
 
 {% block navigation %}
-	navigation (no content)
+{% include 'navigation.html.template'%}
 {% endblock %}
 
 {% block body %}

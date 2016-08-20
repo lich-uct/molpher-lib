@@ -1,0 +1,18 @@
+<li class="{% if active == 'index' %}active{% endif %}"><a href="index.html">About</a></li>
+<li class="{% if active == 'examples' %}active{% endif %}"><a href="examples.html">Examples</a></li>
+<li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+        <li>
+            <a class="collapsible-header">Documentation<i class="mdi-navigation-arrow-drop-down"></i></a>
+            <div class="collapsible-body">
+                <ul>
+                    {% for version in versions %}
+                    <li>
+                        <a href="./{{ version }}/">{{ version }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </li>
+    </ul>
+</li>

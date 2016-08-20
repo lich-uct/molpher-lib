@@ -17,7 +17,7 @@ git clone `git config --get remote.origin.url` $TMPREPO
 cd $TMPREPO
 git checkout gh-pages
 cp $BASE_DIR/homepage/* $TMPREPO
-python index.py
+python render.py
 rm -f *.py
 rm -f *.template
 mkdir -p "v$VERSION/"

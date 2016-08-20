@@ -1,0 +1,13 @@
+<nav>
+    <div class="nav-wrapper">
+        <span class="brand-logo center">molpher-lib</span>
+
+        <ul id="slide-out" class="side-nav">
+            {% include 'links_side.html.template'%}
+        </ul>
+        <ul class="right hide-on-med-and-down">
+            {% include 'links_top.html.template'%}
+        </ul>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+    </div>
+</nav>

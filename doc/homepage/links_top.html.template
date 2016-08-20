@@ -1,0 +1,10 @@
+<li class="{% if active == 'index' %}active{% endif %}"><a href="index.html">About</a></li>
+<li class="{% if active == 'examples' %}active{% endif %}"><a href="examples.html">Examples</a></li>
+<li><a class="dropdown-button" href="." data-activates="dropdown1">Documentation<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+<ul id='dropdown1' class='dropdown-content'>
+    {% for version in versions %}
+    <li>
+        <a href="./{{ version }}/">{{ version }}</a>
+    </li>
+    {% endfor %}
+</ul>
