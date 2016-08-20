@@ -1,4 +1,4 @@
-<nav>
+<nav class="flow-text">
     <div class="nav-wrapper">
         <span class="brand-logo center">molpher-lib</span>
 

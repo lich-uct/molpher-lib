@@ -1,0 +1,14 @@
+{% macro figure(image_url) -%}
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-image">
+                <img src="{{ image_url }}">
+            </div>
+            <div class="card-content">
+                <p>{{ caller() }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{%- endmacro %}

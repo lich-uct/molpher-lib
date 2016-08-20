@@ -1,31 +1,33 @@
 {% extends "base.html.template" %}
 
+{% block append_head %}
+<title>Examples</title>
+{% endblock %}
+
 {% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col s12">
+<div class="row">
+    <div class="col s12">
 
-            <h2 class="right-align">Molecular Morphing with Molpher-lib</h2>
-            <div class="divider"></div>
+        <h2 class="right-align">Usage Examples</h2>
+        <div class="divider"></div>
 
-            <div class="section">
+        <div class="section">
 
-                <p>
-                    Stuff...
-                </p>
-
-            </div>
-
-            <div class="section">
-                <h3>Simplest Example</h3>
-
-                <p>
-                    Stuff...
-                </p>
-
-            </div>
+            <p>
+                Stuff...
+            </p>
 
         </div>
+
+        <div class="section">
+            <h3>Simplest Example</h3>
+
+            <p>
+                Stuff...
+            </p>
+
+        </div>
+
     </div>
 </div>
 {% endblock %}

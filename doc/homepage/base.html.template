@@ -19,6 +19,10 @@
 		ga('create', 'UA-42887541-2', 'auto');
 		ga('send', 'pageview');
 	</script>
+
+	{% block append_head %}
+		{# empty #}
+	{% endblock %}
 </head>
 
 <body>
@@ -43,9 +47,11 @@
 {% include 'navigation.html.template'%}
 {% endblock %}
 
+<div class="container flow-text">
 {% block body %}
 	body (no content)
 {% endblock %}
+</div>
 
 <!-- Layout JS -->
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"
