@@ -175,9 +175,9 @@ This documentation is generated using the :file:`build_docs.sh`
 script under the :file:`doc/` directory. However, in order to successfully build the documentation
 you will need a few packages in your Python environment:
 
-..  literalinclude:: ../../../doc/environment.yml
+..  literalinclude:: ../../../environment.yml
     :language: none
-    :caption: The environment file that describes conda environment that should be used to build the documentation.
+    :caption: The conda environment file used to build the documentation and test the library.
 
 You can easily install all these packages like so:
 
