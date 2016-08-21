@@ -32,6 +32,11 @@ nav ul a
   border-left: 2px solid #039be5;
 }
 
+p code.hljs, .card-content code.hljs {
+  display: inline;
+  padding: 2px;
+}
+
 /* fork me banner http://edull24.github.io/fork-me-on-github/ */
 
 .fork-me-wrapper {

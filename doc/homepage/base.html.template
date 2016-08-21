@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
 	<link rel="stylesheet" href="style.css">
 
 	<!-- Google Analytics JS -->
@@ -62,6 +63,9 @@
         crossorigin="anonymous"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 
+<!-- highlight.js -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
 <script>
 	$('.button-collapse').sideNav({
 				menuWidth: 300, // Default is 240
@@ -74,6 +78,11 @@
 	});
 	$(document).ready(function(){
 		$('.table-of-contents').pushpin({ top: $('.table-of-contents').offset().top });
+	});
+	$(document).ready(function() {
+		$('code').each(function(i, block) {
+			hljs.highlightBlock(block);
+		});
 	});
 </script>
 

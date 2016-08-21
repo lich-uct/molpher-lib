@@ -20,7 +20,7 @@ def timeit(func):
     return 1000 * time.clock() - milliseconds
 
 
-def find_path(tree, end_mol):
+def find_path(tree, end_mol=None):
     """
     Backtracks the tree starting from :samp:`end_mol`
     and returns a list of SMILES strings representing
@@ -28,11 +28,14 @@ def find_path(tree, end_mol):
 
     :param tree: a tree to backtrack through
     :type tree: instance of :class:`~molpher.core.ExplorationTree.ExplorationTree`
-    :param end_mol: SMILES of the last molecule in the requested path
+    :param end_mol: SMILES of the last molecule in the requested path (target molecule by default)
     :type end_mol: `str`
     :return: list of SMILES of molecules on the path
     :rtype: `list` of `str`
     """
+
+    if not end_mol:
+        end_mol = tree.params['target']
 
     path = []
     current = tree.fetchMol(end_mol)

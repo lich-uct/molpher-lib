@@ -18,7 +18,7 @@ cd $TMPREPO
 git checkout gh-pages
 cp -r $BASE_DIR/homepage/* .
 python render.py
-rm -f *.py *.pyc *.template
+rm -rf *.py *.pyc *.template
 mkdir -p "v$VERSION/"
 cp -r $HTML_DIR/* "v$VERSION/"
 ln -sf "v$VERSION/" latest

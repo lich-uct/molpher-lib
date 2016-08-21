@@ -1,4 +1,5 @@
 {% extends "base.html.template" %}
+{% from 'code.html.template' import code %}
 
 {% block append_head %}
 <title>Examples</title>
@@ -6,28 +7,86 @@
 
 {% block body %}
 <div class="row">
-    <div class="col s12">
 
-        <h2 class="right-align">Usage Examples</h2>
-        <div class="divider"></div>
 
+    <h2 class="right-align">Usage Examples</h2>
+    <div class="divider"></div>
+
+    <div class="col s12 m9">
         <div class="section">
 
             <p>
-                Stuff...
+                This page features some of the use cases that one might be interested in when using the library. This is by no means a complete list and much more can be done with the library. Please, refer to the <a href="index.html#docs">documentation</a> , if you would like to know more.
             </p>
 
         </div>
 
-        <div class="section">
-            <h3>Simplest Example</h3>
+        <div class="section scrollspy" id="path_classic">
+            <h3>Finding a Path</h3>
 
             <p>
-                Stuff...
+                Probably the most straightforward use case is to generate a chemical space path using one of the <a href="latest/usage/algorithms.html">algorithms</a> implemented in the library. The code below will initiate a search from cocaine to procaine and write the resulting path to the output directory:
+            </p>
+
+            {% call code('code_examples/path_classic.py')%}
+                This simple code example illustrates how to generate a path between two molecules (source and target) using the original implementation of molecular morphing.
+            {% endcall %}
+
+
+        </div>
+
+        <div class="section scrollspy" id="path_custom">
+            <h3>Implementing a Morphing Algorithm</h3>
+
+            <p>
+                If we want to have more control over what actually happens during the exploration process, we can use the exploration tree API to implement our own algorithm:
+            </p>
+
+            {% call code('code_examples/custom_alg.py')%}
+            Sample code using the exploration tree API to implement the original algorithm from <a href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">Molpher</a>.
+            {% endcall %}
+
+            <p>
+                This algorithm is basically the implementation of the previous one. The tree is a data structure which keeps track of all possible paths that one might be interested in. We can extend, remove and prune paths (branches of the tree) by performing certain <a href="latest/usage/tutorial.html#operations">operations</a>. In the code example above, we used the shortcut methods available on the tree, but the built-in operations are all separate callable classes defined under <code class="python">molpher.core.operations</code>. Their behaviour can be adjusted using various settings, but it is also possible to define new operations end use them in a unified manner (see <a href="#custom_oper">Defining Operations</a>).
             </p>
 
         </div>
 
+        <div class="section scrollspy" id="custom_oper">
+            <h3>Defining Operations</h3>
+
+            <p>
+                All operations that are already implemented in the library are available from the <code class="python">molpher.core.operations</code> package. All of them share the same interface and can be performed on a tree using its <code class="python">runOperation()</code> method (see the code example below). New operations can be easily implemented by inherirting from the <code class="python">TreeOperation()</code> base class and implementing its <code class="python">__call__()</code> method:
+            </p>
+
+            {% call code('code_examples/custom_oper.py')%}
+            Example algorithm that uses a customized operation (<code class="python">NitorgenFilter</code>) to discard molecules that do not contain nitrogen.
+            {% endcall %}
+
+            <p>
+                Our customized operation in the example above does not really do much. It just discards generated structures that do not have nitrogen in their structures. However, a more elaborate filtering scheme could also be implemented in this manner.
+            </p>
+
+        </div>
+
+        <div class="section scrollspy" id="misc">
+            <h3>More Examples</h3>
+
+            <p>
+                We have shown some common use cases of Molpher-lib. However, there is much more. For example, the library also provides means of traversing the molecules in the tree (or its subtree) or serializing tree snapshots at any point. You can refer to the <a href="latest/usage/tutorial.html">tutorial</a> if you want a more complete overview of the software.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col hide-on-small-only m3">
+        <ul class="section table-of-contents">
+            <li><a href="#path_classic">Finding a Path</a></li>
+            <li><a href="#path_custom">Implementing&nbsp;an&nbsp;Algorithm</a></li>
+            <li><a href="#custom_oper">Defining&nbsp;Operations</a></li>
+            <li><a href="#misc">More&nbsp;Examples</a></li>
+        </ul>
     </div>
 </div>
 {% endblock %}
