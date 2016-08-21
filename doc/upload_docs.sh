@@ -21,6 +21,7 @@ python render.py
 rm -f *.py *.pyc *.template
 mkdir -p "v$VERSION/"
 cp -r $HTML_DIR/* "v$VERSION/"
+ln -sf "v$VERSION/" latest
 touch .nojekyll
 
 git add -A

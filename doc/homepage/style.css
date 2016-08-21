@@ -28,6 +28,10 @@ nav ul a
   padding: 10px;
 }
 
+.table-of-contents a.active, .table-of-contents a:hover {
+  border-left: 2px solid #039be5;
+}
+
 /* fork me banner http://edull24.github.io/fork-me-on-github/ */
 
 .fork-me-wrapper {

@@ -7,12 +7,12 @@
 
 {% block body %}
 <div class="row">
-	<div class="col s12">
 
-		<h2 class="right-align">About</h2>
-		<div class="divider"></div>
+	<h2 class="right-align">About</h2>
+	<div class="divider"></div>
 
-		<div class="section">
+	<div class="col s12 m9">
+		<div id="introduction" class="section scrollspy">
 
 			<p>
 				Molpher-lib is based on the program <a href="https://github.com/siret/molpher">Molpher</a> which implements systematic <a href="https://en.wikipedia.org/wiki/Chemical_space">chemical space</a> exploration using a method called <a href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">molecular morphing</a>.
@@ -25,7 +25,7 @@
 
 		</div>
 
-		<div class="section">
+		<div id="morphing" class="section scrollspy">
 			<h3>Molecular Morphing</h3>
 
 			<p>
@@ -50,19 +50,38 @@
 
 		</div>
 
-		<div class="section">
+		<div id="advantages" class="section scrollspy">
 			<h3>Advantages of Molpher-lib over Molpher</h3>
 
 			<p>
-				advantages and stuff
+				The motivation to develop Molpher-lib was mainly driven by various shortcomings of Molpher:
 			</p>
 
+			<ol>
+				<li>It was developed as a standalone user-oriented software with no easy programmatic access to its features in mind.</li>
+				<li>It only includes one exploration algorithm implementation with only very limited possibilities for customization.</li>
+				<li>It only supports C++ programming language which makes experimenting with new exploration strategies difficult and interfacing with software in other languages very cumbersome.</li>
+				<li>The software architecture is not modular enough which makes extending the C++ codebase a lengthy and difficult task.</li>
+			</ol>
+
 			<p>
-				future directions and new functionality
+				These problems were eliminated in Molpher-lib as follows:
+			</p>
+
+			<ol>
+				<li>The focus of Molpher-lib is to bring a powerful extensible framework to developers, rather than to non-technical users. Therefore, the GUI was stripped from the program and what was once a backend server was turned into a C++ library with powerful API.</li>
+				<li>The API of the library does not only offer options to adjust search settings, but also allows most of the essential parts of the algorithm to be overridden by the caller (see <a href="latest/usage/tutorial.html#tree-operations">tree operations</a>). This makes Molpher-lib a highly customizable framework and <a href="latest/usage/algorithms.html">various exploration algorithms</a> can be easily implemented.
+				</li>
+				<li>The whole C++ interface is exposed to Python and the library comes with a convenient Python package that also offers additional functionality and <a href="latest/usage/algorithms.html">algorithm implementations</a>. This makes the library much more compatible with a lot of popular scientific packages and makes interfacing with them very easy.</li>
+				<li>Molpher-lib uses highly modular software architecture that divides its functionality in small independent chunks. This makes modification, replacement and integration of new functionality much easier than before.</li>
+			</ol>
+
+			<p>
+				Thanks to all of the above the library has prerequisites to become a comprehensive and flexible <em>de novo</em> drug design framework. In the future, Molpher-lib will not only offer molecular morphing functionality, but will also include features that will allow for arbitrary evolution of molecular structures. This will be particularly useful in lead optimization and to quickly test new ideas in computer-aided drug design.
 			</p>
 		</div>
 
-		<div class="section" id="docs">
+		<div class="section scrollspy" id="docs">
 			<h3>Documentation</h3>
 			<p>
 				At the moment the highest stable version of the library is <b>{{ newest }}</b>.
@@ -80,5 +99,15 @@
 		</div>
 
 	</div>
+
+	<div class="col hide-on-small-only m3">
+		<ul class="section table-of-contents">
+			<li><a href="#introduction">About</a></li>
+			<li><a href="#morphing">Molecular Morphing</a></li>
+			<li><a href="#advantages">Molpher-lib:&nbsp;Advantages</a></li>
+			<li><a href="#docs">Documentation</a></li>
+		</ul>
+	</div>
+
 </div>
 {% endblock %}

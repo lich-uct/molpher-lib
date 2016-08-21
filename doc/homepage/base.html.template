@@ -47,7 +47,7 @@
 {% include 'navigation.html.template'%}
 {% endblock %}
 
-<div class="container flow-text">
+<div class="container">
 {% block body %}
 	body (no content)
 {% endblock %}
@@ -60,7 +60,7 @@
 <!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
         integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
         crossorigin="anonymous"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 
 <script>
 	$('.button-collapse').sideNav({
@@ -69,6 +69,12 @@
 				closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
 			}
 	);
+	$(document).ready(function(){
+		$('.scrollspy').scrollSpy();
+	});
+	$(document).ready(function(){
+		$('.table-of-contents').pushpin({ top: $('.table-of-contents').offset().top });
+	});
 </script>
 
 </body>

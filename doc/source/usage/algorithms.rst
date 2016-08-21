@@ -1,5 +1,5 @@
-Example Exploration Algorithm Implementations
----------------------------------------------
+Exploration Algorithms Implementations
+--------------------------------------
 
 The library also provides complete implementations of a few
 exploration algorithms (located in :mod:`molpher.algorithms`). This section briefly describes these algorithms
