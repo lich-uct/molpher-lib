@@ -45,7 +45,7 @@
 			</p>
 
 			{% call figure('images/drug_space.png')%}
-			Schematic depiction of a focused chemical space exploration experiment using molecular morphing. Multiple paths are generated between every pair of known active molecules (lines connecting the big diamonds, one example path is highlighted in red). Every path consists of intermediate (hybrid) structures (morphs, shown as small diamonds) that combine structural features of the pair that they connect. It is also possible (and generally a good idea) to impose constraints on the search space (denoted by the thick black lines enclosing the explored area). This will prevent the algorithm from generating structures with undesirable properties.
+			Schematic depiction of a focused chemical space exploration experiment using molecular morphing. Multiple paths are generated between every pair of known active molecules (lines connecting the big diamonds, one example path is highlighted in red). Every path consists of intermediate (hybrid) structures (morphs, shown as small diamonds) that combine structural features of the pair that they connect. It is also possible (and generally a good idea) to impose constraints on the search space that will prevent the algorithm from generating structures with undesirable properties (represented by the thick black lines enclosing the explored area).
 			{% endcall %}
 
 		</div>

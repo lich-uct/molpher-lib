@@ -47,7 +47,7 @@
             {% endcall %}
 
             <p>
-                This algorithm is basically the implementation of the previous one. The tree is a data structure which keeps track of all possible paths that one might be interested in. We can extend, remove and prune paths (branches of the tree) by performing certain <a href="latest/usage/tutorial.html#operations">operations</a>. In the code example above, we used the shortcut methods available on the tree, but the built-in operations are all separate callable classes defined under <code class="python">molpher.core.operations</code>. Their behaviour can be adjusted using various settings, but it is also possible to define new operations end use them in a unified manner (see <a href="#custom_oper">Defining Operations</a>).
+                This algorithm is basically an implementation of the one in the previous example. The tree is a data structure which keeps track of all possible paths that one might be interested in. We can extend the tree, remove certain molecules or paths and do many other things by performing <a href="latest/usage/tutorial.html#operations">operations</a>. In the code example above, we used the shortcut methods available on the tree instance, but the built-in operations are all defined as separate callable classes under <code class="python">molpher.core.operations</code>. Their behaviour can be adjusted using various settings, but it is also possible to define new operations end use them in a unified manner (see <a href="#custom_oper">Defining Operations</a>).
             </p>
 
         </div>
@@ -56,7 +56,7 @@
             <h3>Defining Operations</h3>
 
             <p>
-                All operations that are already implemented in the library are available from the <code class="python">molpher.core.operations</code> package. All of them share the same interface and can be performed on a tree using its <code class="python">runOperation()</code> method (see the code example below). New operations can be easily implemented by inherirting from the <code class="python">TreeOperation()</code> base class and implementing its <code class="python">__call__()</code> method:
+                All operations that are already implemented in the library are available from the <code class="python">molpher.core.operations</code> package. All of them share the same interface and can be performed on a tree using its <code class="python">runOperation()</code> method (see the code example below). New operations can be easily implemented by inherirting from the <code class="python">TreeOperation()</code> base class and implementing its <code class="python">__call__()</code> method. In the example below, we show a simple filtering operation implementation:
             </p>
 
             {% call code('code_examples/custom_oper.py')%}
@@ -64,7 +64,11 @@
             {% endcall %}
 
             <p>
-                Our customized operation in the example above does not really do much. It just discards generated structures that do not have nitrogen in their structures. However, a more elaborate filtering scheme could also be implemented in this manner.
+                Every tree contains an array that masks the list of candidates
+                that are currently evaluated (populated by GenerateMorphsOper).
+                This mask is used to mark structures that should be removed from
+                the list of candidates upon extending the tree or when
+                CleanMorphsOper is called. Tree operations can be used to manipulate this mask and affect what molecules are accepted as the next generation in the evolution. Our customized operation in the example above does not really do much. It just discards generated structures that do not contain nitrogen. However, a more elaborate filtering scheme could also be implemented in this manner.
             </p>
 
         </div>
@@ -73,7 +77,7 @@
             <h3>More Examples</h3>
 
             <p>
-                We have shown some common use cases of Molpher-lib. However, there is much more. For example, the library also provides means of traversing the molecules in the tree (or its subtree) or serializing tree snapshots at any point. You can refer to the <a href="latest/usage/tutorial.html">tutorial</a> if you want a more complete overview of the software.
+                We have shown some common use cases of Molpher-lib. However, there is much more. For example, the library also provides means of traversing the molecules in the tree (or its subtree) or serializing tree snapshots at any point. You might want to head to the <a href="latest/usage/tutorial.html">tutorial</a> if you want a more complete overview of the software.
             </p>
 
         </div>

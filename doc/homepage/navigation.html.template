@@ -1,8 +1,8 @@
-<nav class="flow-text">
+<nav>
     <div class="nav-wrapper">
         <span class="brand-logo center">molpher-lib</span>
 
-        <ul id="slide-out" class="side-nav">
+        <ul id="slide-out" class="side-nav hide-on-large-only">
             {% include 'links_side.html.template'%}
         </ul>
         <ul class="right hide-on-med-and-down">

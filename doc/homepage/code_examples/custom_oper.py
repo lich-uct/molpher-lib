@@ -8,6 +8,13 @@ procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 class NitorgenFilter(TreeOperation):
 
     def __call__(self):
+        """
+        This method can only be called when a tree is attached to the operation
+        (can be specified in the constructor, with the setTree() method or simply
+        by writing to the 'tree' attribute of the instance). When the runOperation()
+        method is executed, the tree is automatically added.
+        """
+
         new_mask = [ 'N' in x.smiles for x in self.tree.candidates ]
         self.tree.candidates_mask = new_mask
 
@@ -17,8 +24,8 @@ iteration = [
     , SortMorphsOper()
     , FilterMorphsOper() # the default filter
     , CleanMorphsOper() # discards morphs that were previously filtered out
-    , NitorgenFilter() # customized filter
-    , ExtendTreeOper()
+    , NitorgenFilter() # our customized filter
+    , ExtendTreeOper() # connect the remaining structures to the tree
     , PruneTreeOper()
 ]
 
@@ -31,5 +38,3 @@ while not tree.path_found:
         tree.runOperation(oper)
 
 print("Path found: ", find_path(tree))
-
-

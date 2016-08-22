@@ -16,6 +16,10 @@ nav ul a
 	color: black;
 }
 
+.side-nav {
+  left: 0;
+}
+
 .collection a.collection-item {
 	color: #039be5;
 }
