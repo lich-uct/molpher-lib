@@ -1,29 +1,54 @@
 # Molpher-lib
 
-This C++/Python library is based on the program [Molpher](https://github.com/siret/molpher) and implements systematic [chemical space](https://en.wikipedia.org/wiki/Chemical_space) exploration via a method called [molecular morphing](http://www.ncbi.nlm.nih.gov/pubmed/24655571). The method uses stochastic optimization to search for a 'path' in chemical space that connects two molecules by the means of small structural changes. It can be used to sample areas of chemical space that are biologically relevant and create a diverse set of novel potentially active compounds that can be analyzed further or used as a basis for conventional [virtual screening](https://en.wikipedia.org/wiki/Virtual_screening).
+This C++/Python library is a [chemical space](https://en.wikipedia.org/wiki/Chemical_space) exploration software. It is based on the [Molpher](https://github.com/siret/molpher) program which implements a chemical space exploration method called [molecular morphing](http://www.ncbi.nlm.nih.gov/pubmed/24655571). The method uses stochastic optimization to traverse chemical space between two molecules. It can be used to sample unexplored areas that might contain new bioactive compounds. The purpose of the library is to make molecular morphing more accessible and flexible and to provide good basis for further experimentation in this area. See the [official website](https://lich-uct.github.io/molpher-lib/) for additional information and usage examples.
 
-The purpose of the library is to make molecular morphing easily accessible to a wider range of developers. Because the current architecture of Molpher is fairly rigid and, in some cases, rather tightly coupled, it is not very developer-friendly. Furthermore, it requires anyone who wishes to even slightly modify the algorithm to delve deeply into its internals and recompile the whole backend code, which has a lot of dependencies. 
+The library is actively developed and a lot of new features are planned for the future. The long-term goal is to make Molpher-lib a universal and easy-to-use *de novo* drug design framework with possibilities that go beyond molecular morphing. If this seems interesting to you, you can take a look at the [documentation](https://lich-uct.github.io/molpher-lib/) to get an idea of what the library is capable of at the moment. Ideas, comments or feature requests are more than welcome and can be submitted to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues). You can also [subscribe](https://github.com/lich-uct/molpher-lib/commits/master.atom) to the RSS feed for updates.
 
- The main focus during the development is on:
-
-1. reducing the codebase to only the most essential parts and removing unnecessary dependencies and functionality that is not important for developers (only the most essential backend code was kept),
-2. refactoring the code so that as many features as possible can be easily exposed via an API,
-3. exposing the API of the library to a high-level programming language (such as Python) for ease of use.
-
-An extensive documentation with a tutorial for all versions of the library is available [here](https://lich-uct.github.io/molpher-lib/).
+At the moment, the library is only intended for use on 64-bit Linux systems. However, development for other platforms is also a priority. If you manage to compile the library on a different platform, consider making a pull request or comment on the [issue tracker](https://github.com/lich-uct/molpher-lib/issues). Any help is much appreciated.
 
 ## Installation
 
 ### Installation with Anaconda
 
-At the moment the library is only built for the 64-bit Linux platform and distributed in the form of [conda packages hosted on Anaconda Cloud](https://anaconda.org/lich/molpher-lib). This is probably the easiest and preferred way to install the library and the associated Python package.
-
-All you need to do is just either get the full [Anaconda](https://www.continuum.io/downloads) distribution or its lightweight variant, [Miniconda](http://conda.pydata.org/miniconda.html). It is essentially a Python distribution, package manager and virtual environment in one and makes setting up a development environment for your project very easy. After installing Anaconda/Miniconda all you need to do is to run the following in the Linux terminal:
+Molpher-lib is distributed as a [conda package](https://anaconda.org/lich/molpher-lib). At the moment, this is a preferred way to install and use the library. All you need to do is just either get the full [Anaconda](https://www.continuum.io/downloads) distribution or its lightweight variant, [Miniconda](http://conda.pydata.org/miniconda.html). It is essentially a Python distribution, package manager and virtual environment in one and makes setting up a development environment for your project very easy. After installing Anaconda/Miniconda you can run the following in the Linux terminal:
 
 ```bash
 conda install -c lich molpher-lib
 ```
 
-This will automatically download the latest version of the library and the corresponding Python package and install everything in the currently active environment (for more information on environments and the `conda` command see [Conda Test Drive](http://conda.pydata.org/docs/test-drive.html).
+This will automatically download the latest version of the library and install everything to the currently active environment (for more information on environments and the `conda` command see [Conda Test Drive](http://conda.pydata.org/docs/test-drive.html)).
 
-And that's it! Now you can take a look at the [documentation](https://lich-uct.github.io/molpher-lib/) and do some molecular morphing.
+### Installation from Source
+
+Installing from source is a little bit more elaborate because Molpher-lib contains a lot of C++ code that needs to be compiled first. This process is described [here](https://lich-uct.github.io/molpher-lib/) in detail, but in the simplest case the following should work:
+
+```bash
+git clone https://github.com/lich-uct/molpher-lib.git
+ROOT_DIR=`pwd`/molpher-lib
+cd $ROOT_DIR/deps
+./build_deps.sh --all # this might take a while, but you can bypass this if you already have Boost and RDKit compiled somewhere (see https://lich-uct.github.io/molpher-lib/)
+cd $ROOT_DIR
+mkdir build # the name of the directory does not matter here
+cd build
+cmake ..
+make molpher_install_python
+cd $ROOT_DIR
+python setup.py test # not necessary, but ensures that everything is set up correctly
+```
+
+The code above will build and install the library (and the python package) to `$ROOT_DIR/dist`. This is the default value for the `CMAKE_INSTALL_PREFIX` variable and it can be changed doing `cmake .. -DCMAKE_INSTALL_PREFIX=custom/install/directory/` instead of just plain `cmake ..` in the example above. This folder can reside anywhere on the system provided that the following variables are set accordingly:
+
+```bash
+export PYTHONPATH=$CMAKE_INSTALL_PREFIX/lib/pythonX.Y/site-packages # replace X.Y with your Python version
+export LD_LIBRARY_PATH=$CMAKE_INSTALL_PREFIX/lib
+```
+
+The `molpher` package should then be importable from Python.
+
+If you want to use the Python package right after the build, you can do so by just adding the `$ROOT_DIR/src/python` folder to PYTHONPATH like so:
+
+```bash
+export PYTHONPATH=$ROOT_DIR/src/python
+```
+
+The process described above was only tested on Debian 8.5 so experience on other Linux flavors may be different. If you run into problems, report them to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues) and hopefully someone will be able to help.
