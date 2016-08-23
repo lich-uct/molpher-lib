@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
+import os, sys
 import unittest
 
 from pkg_resources import resource_filename
@@ -23,7 +23,6 @@ from molpher import random
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
 from molpher.core.operations import *
-from molpher.core.operations.callbacks import SortMorphsCallback
 from molpher.core.selectors import *
 from molpher.core import ExplorationData
 
@@ -211,7 +210,7 @@ class TestPythonAPI(unittest.TestCase):
 
         tree.extend()
 
-        callback = lambda x : print(x.smiles, x.dist_to_target)
+        callback = lambda x : sys.stdout.write(x.smiles + ' : ' + str(x.dist_to_target) + '\n')
         oper = TraverseOper(callback=callback)
         tree.runOperation(oper)
 
