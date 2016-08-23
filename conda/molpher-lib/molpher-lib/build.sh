@@ -10,13 +10,13 @@ cmake $BASE_DIR -DINSTALL_TBB=OFF
 
 # build and install the C++ library
 make -j $JOBS molpher_install
-make -j $JOBS molpher_build_SWIG_Python # needs to be done so that SAScore.dat is included with the package
 
 # install the C++ library to the build environment
 cp -r $BASE_DIR/dist/. $PREFIX
 
 # build the bindings and install the Python package to the build environment
 cd $BASE_DIR
+cp res/SAScore.dat src/python/molpher/swig_wrappers/
 $PYTHON setup.py install
 
 # clean up

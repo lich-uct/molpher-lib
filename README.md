@@ -1,6 +1,6 @@
 # Molpher-lib
 
-This C++/Python library is a [chemical space](https://en.wikipedia.org/wiki/Chemical_space) exploration software. It is based on the [Molpher](https://github.com/siret/molpher) program which implements a chemical space exploration method called [molecular morphing](http://www.ncbi.nlm.nih.gov/pubmed/24655571). The method uses stochastic optimization to traverse chemical space between two molecules. It can be used to sample unexplored areas that might contain new bioactive compounds. The purpose of the library is to make molecular morphing more accessible and flexible and to provide good basis for further experimentation in this area. See the [official website](https://lich-uct.github.io/molpher-lib/) for additional information and usage examples.
+This C++/Python library is a [chemical space](https://en.wikipedia.org/wiki/Chemical_space) exploration software. It is based on the [Molpher](https://github.com/siret/molpher) program which implements a method called [molecular morphing](http://www.ncbi.nlm.nih.gov/pubmed/24655571). This method uses stochastic optimization to traverse chemical space between two molecules. It can be used to sample unexplored areas that might contain new bioactive compounds with increased probability. The purpose of the library is to make molecular morphing more accessible and flexible and to provide good basis for further experimentation in this area. See the [official website](https://lich-uct.github.io/molpher-lib/) for additional information and usage examples.
 
 The library is actively developed and a lot of new features are planned for the future. The long-term goal is to make Molpher-lib a universal and easy-to-use *de novo* drug design framework with possibilities that go beyond molecular morphing. If this seems interesting to you, you can take a look at the [documentation](https://lich-uct.github.io/molpher-lib/) to get an idea of what the library is capable of at the moment. Ideas, comments or feature requests are more than welcome and can be submitted to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues). You can also [subscribe](https://github.com/lich-uct/molpher-lib/commits/master.atom) to the RSS feed for updates.
 
@@ -10,7 +10,7 @@ At the moment, the library is only intended for use on 64-bit Linux systems. How
 
 ### Installation with Anaconda
 
-Molpher-lib is distributed as a [conda package](https://anaconda.org/lich/molpher-lib). At the moment, this is a preferred way to install and use the library. All you need to do is just either get the full [Anaconda](https://www.continuum.io/downloads) distribution or its lightweight variant, [Miniconda](http://conda.pydata.org/miniconda.html). It is essentially a Python distribution, package manager and virtual environment in one and makes setting up a development environment for your project very easy. After installing Anaconda/Miniconda you can run the following in the Linux terminal:
+Molpher-lib is distributed as a [conda package](https://anaconda.org/lich/molpher-lib). At the moment, this is the preferred way to install and use the library. All you need to do is just either get the full [Anaconda](https://www.continuum.io/downloads) distribution or its lightweight variant, [Miniconda](http://conda.pydata.org/miniconda.html). It is essentially a Python distribution, package manager and virtual environment in one and makes setting up a development environment for your project very easy. After installing Anaconda/Miniconda you can run the following in the Linux terminal:
 
 ```bash
 conda install -c lich molpher-lib
@@ -32,11 +32,13 @@ mkdir build # the name of the directory does not matter here
 cd build
 cmake ..
 make molpher_install_python
+
+# optionally the python package can be tested:
 cd $ROOT_DIR
-python setup.py test # not necessary, but ensures that everything is set up correctly
+python setup.py test
 ```
 
-The code above will build and install the library (and the python package) to `$ROOT_DIR/dist`. This is the default value for the `CMAKE_INSTALL_PREFIX` variable and it can be changed doing `cmake .. -DCMAKE_INSTALL_PREFIX=custom/install/directory/` instead of just plain `cmake ..` in the example above. This folder can reside anywhere on the system provided that the following variables are set accordingly:
+The make target above builds the library and installs everything  to `$ROOT_DIR/dist`. This is the default value for the `CMAKE_INSTALL_PREFIX` variable and it can be changed doing `cmake .. -DCMAKE_INSTALL_PREFIX=custom/install/directory/` instead of just plain `cmake ..`. This folder can be anywhere on the user's system provided that the following variables are set during runtime:
 
 ```bash
 export PYTHONPATH=$CMAKE_INSTALL_PREFIX/lib/pythonX.Y/site-packages # replace X.Y with your Python version
@@ -51,4 +53,4 @@ If you want to use the Python package right after the build, you can do so by ju
 export PYTHONPATH=$ROOT_DIR/src/python
 ```
 
-The process described above was only tested on Debian 8.5 so experience on other Linux flavors may be different. If you run into problems, report them to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues) and hopefully someone will be able to help.
+This installation process was only tested on Debian 8.5 so experience on other Linux flavors may be different. If you run into problems, report them to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues) and hopefully someone will be able to help.
