@@ -45,7 +45,7 @@ export PYTHONPATH=$CMAKE_INSTALL_PREFIX/lib/pythonX.Y/site-packages # replace X.
 export LD_LIBRARY_PATH=$CMAKE_INSTALL_PREFIX/lib
 ```
 
-The `molpher` package should then be importable from Python.
+The `molpher` package should now be importable from Python.
 
 If you want to use the Python package right after the build, you can do so by just adding the `$ROOT_DIR/src/python` folder to PYTHONPATH like so:
 
