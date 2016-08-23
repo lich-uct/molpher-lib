@@ -146,14 +146,14 @@ build_tbb()
     tar --extract --gzip --file=tbb.tar.gz
     mv tbb42_*oss tbb
 
-    #cd tbb
+    # cd tbb
     # just use make - it will take care of all
-    #make compiler=gcc arc=ia64 runtime=gcc
+    # make compiler=gcc arc=ia64 runtime=gcc
 
-    ##rm -r -f ./build/windows_ia32_gcc_mingw_debug
-    ##rm -f ./build/windows_ia32_gcc_mingw_release/*.o
-    ##rm -f ./build/windows_ia32_gcc_mingw_release/*.d
-    cd ..
+    # rm -r -f ./build/windows_ia32_gcc_mingw_debug
+    # rm -f ./build/windows_ia32_gcc_mingw_release/*.o
+    # rm -f ./build/windows_ia32_gcc_mingw_release/*.d
+    # cd ..
 }
 
 build_boost()
