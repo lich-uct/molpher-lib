@@ -219,13 +219,13 @@ set(ENV{PYTHONPATH} ${PYTHON_INSTALL_PREFIX} ENV{PYTHONPATH})
 add_custom_command(
         OUTPUT ${PYTHON_PACKAGE_DIR}/SAScore.dat ${PYTHON_PACKAGE_DIR}/*.so
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py build_ext
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}
         COMMAND ${CMAKE_COMMAND} -E make_directory ${PYTHON_INSTALL_PREFIX}
         COMMAND ${CMAKE_COMMAND} -E env PYTHONPATH=$ENV{PYTHONPATH} ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py install --prefix ${CMAKE_INSTALL_PREFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}
         DEPENDS ${MOLPHER_INSTALL_TARGET}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
-add_custom_target(molpher_build_SWIG_Python
+add_custom_target(molpher_install_python
         DEPENDS ${PYTHON_PACKAGE_DIR}/*.so # for some reason this works, but the library files are not cleaned
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Built SWIG wrappers for Python...")

@@ -12,7 +12,8 @@ of complete pathfinding algorithms and moved the algorithms from the tutorial to
 (it now includes the classic, bidirectional and antidecoys algorithm)
 - it is now possible to change how morphs are sorted with a callback (`SortMorphsCallback`)
 - new operation was added that will remove morphs from the list of candidates according to the information in candidates mask (`CleanMorphsOper`)
-- created a separate cmake project for tests
+- a separate cmake project is available to build tests
+- renamed the molpher_install_SWIG_Python to molpher_install_python
 
 ## Fixes
 - prevented the extend operation from incrementing the distance
