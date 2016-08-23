@@ -15,9 +15,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import sys
 
 VERSION = None
 BUILD_NUMBER = None
+PYTHON_VERSION_MAJOR = sys.version_info.major
+PYTHON_VERSION_MINOR = sys.version_info.minor
+PYTHON_VERSION = '{0}.{1}'.format(PYTHON_VERSION_MAJOR, PYTHON_VERSION_MINOR)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -30,3 +34,4 @@ BUILD_NUMBER = load_versionfile(os.path.join(BASE_DIR, "BUILD.TXT"))
 
 print('Version: ', VERSION)
 print('Build: ', BUILD_NUMBER)
+print('Python Version: ', BUILD_NUMBER)

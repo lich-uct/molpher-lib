@@ -211,9 +211,16 @@ if(NOT PYTHON_EXECUTABLE)
     message(WARNING "PYTHON_EXECUTABLE not set. Using system defaults.")
     set(PYTHON_EXECUTABLE "python")
 endif()
+execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import sys;info = sys.version_info;sys.stdout.write('{0}.{1}'.format(info.major, info.minor))" OUTPUT_VARIABLE PYTHON_VERSION)
+set(PYTHON_INSTALL_PREFIX
+        "${CMAKE_INSTALL_PREFIX}/lib/python${PYTHON_VERSION}/site-packages" CACHE PATH "python package install directory" FORCE
+        )
+set(ENV{PYTHONPATH} ${PYTHON_INSTALL_PREFIX} ENV{PYTHONPATH})
 add_custom_command(
         OUTPUT ${PYTHON_PACKAGE_DIR}/SAScore.dat ${PYTHON_PACKAGE_DIR}/*.so
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py build_ext
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${PYTHON_INSTALL_PREFIX}
+        COMMAND ${CMAKE_COMMAND} -E env PYTHONPATH=$ENV{PYTHONPATH} ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py install --prefix ${CMAKE_INSTALL_PREFIX}
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}
         DEPENDS ${MOLPHER_INSTALL_TARGET}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
