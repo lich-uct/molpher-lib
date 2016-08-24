@@ -1,6 +1,7 @@
 name: molpher-lib-docs
 channels:
 - rdkit
+- omnia
 - defaults
 dependencies:
 - bzip2=1.0.6=3
@@ -19,6 +20,7 @@ dependencies:
 - wheel=0.29.0=py35_0
 - xz=5.0.5=1
 - zlib=1.2.8=3
+- doxygen
 - pip:
   - alabaster==0.7.7
   - babel==2.3.3
