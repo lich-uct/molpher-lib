@@ -1,0 +1,665 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.1.1.2.1.1. molpher.algorithms.antidecoys package &mdash; Molpher-lib 0.0.0b1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Molpher-lib 0.0.0b1 documentation" href="../../index.html"/>
+        <link rel="up" title="1.1.1.2. molpher.algorithms package" href="molpher.algorithms.html"/>
+        <link rel="next" title="1.1.1.2.1.2. molpher.algorithms.bidirectional package" href="molpher.algorithms.bidirectional.html"/>
+        <link rel="prev" title="1.1.1.2. molpher.algorithms package" href="molpher.algorithms.html"/>
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Molpher-lib: a C++/Python Library For Systematic Chemical Space Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Source Code Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">1. Python</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="molpher.html">1.1. molpher package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="molpher.html#subpackages">1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="molpher.html#module-molpher">1.1.2. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cplusplus/index.html">2. C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Molpher-lib</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Source Code Documentation</a> &raquo;</li>
+      
+          <li><a href="modules.html">1. Python</a> &raquo;</li>
+      
+          <li><a href="molpher.html">1.1. molpher package</a> &raquo;</li>
+      
+          <li><a href="molpher.algorithms.html">1.1.1.2. molpher.algorithms package</a> &raquo;</li>
+      
+    <li>1.1.1.2.1.1. molpher.algorithms.antidecoys package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="molpher-algorithms-antidecoys-package">
+<h1>1.1.1.2.1.1. molpher.algorithms.antidecoys package<a class="headerlink" href="#molpher-algorithms-antidecoys-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>1.1.1.2.1.1.1. Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-molpher.algorithms.antidecoys.custom_opers">
+<span id="molpher-algorithms-antidecoys-custom-opers-module"></span><h2>1.1.1.2.1.1.2. molpher.algorithms.antidecoys.custom_opers module<a class="headerlink" href="#module-molpher.algorithms.antidecoys.custom_opers" title="Permalink to this headline">¶</a></h2>
+<p>Custom operations and callbacks used in
+<a class="reference internal" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder" title="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder"><code class="xref any py py-class docutils literal"><span class="pre">AntidecoysPathFinder</span></code></a>.</p>
+<dl class="class">
+<dt id="molpher.algorithms.antidecoys.custom_opers.AntiFpSortCallback">
+<em class="property">class </em><code class="descclassname">molpher.algorithms.antidecoys.custom_opers.</code><code class="descname">AntiFpSortCallback</code><span class="sig-paren">(</span><em>antifp_scores</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/custom_opers.html#AntiFpSortCallback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.AntiFpSortCallback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="operations/SortMorphsCallback_doc.html#molpher.swig_wrappers.core.SortMorphsCallback" title="molpher.swig_wrappers.core.SortMorphsCallback"><code class="xref py py-class docutils literal"><span class="pre">molpher.swig_wrappers.core.SortMorphsCallback</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>antifp_scores</strong> (<a class="reference external" href="https://docs.python.org/3.5/reference/expressions.html#dict" title="(in Python v3.5)"><code class="docutils literal"><span class="pre">Dictionary</span> <span class="pre">displays</span></code></a>) &#8211; SMILES to anti-fingerprint similarity map (for each molecule in <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a>)</td>
+</tr>
+</tbody>
+</table>
+<p>This callback is used to sort <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a> with regard
+to their similarity to the anti-fingerprint. Molecules
+less similar to the anti-fingerprint are ranked higher
+than more similar ones.</p>
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.custom_opers.AntiFpSortCallback.antifp_scores">
+<code class="descname">antifp_scores</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.AntiFpSortCallback.antifp_scores" title="Permalink to this definition">¶</a></dt>
+<dd><p>SMILES to anti-fingerprint score map (for each molecule in <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.custom_opers.AntiFpSortCallback.maximum_common_bits_perc">
+<code class="descname">maximum_common_bits_perc</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.AntiFpSortCallback.maximum_common_bits_perc" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum percentage of bits that one
+<a class="reference internal" href="../../glossary.html#term-candidate-morphs"><code class="xref any std std-term docutils literal"><span class="pre">candidate</span> <span class="pre">morph</span></code></a> has in common with the anti-fingerprint</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.custom_opers.AntiFpSortCallback.minimum_common_bits_perc">
+<code class="descname">minimum_common_bits_perc</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.AntiFpSortCallback.minimum_common_bits_perc" title="Permalink to this definition">¶</a></dt>
+<dd><p>minimum percentage of bits that one
+<a class="reference internal" href="../../glossary.html#term-candidate-morphs"><code class="xref any std std-term docutils literal"><span class="pre">candidate</span> <span class="pre">morph</span></code></a> has in common with the anti-fingerprint</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="molpher.algorithms.antidecoys.custom_opers.AntidecoysFilter">
+<em class="property">class </em><code class="descclassname">molpher.algorithms.antidecoys.custom_opers.</code><code class="descname">AntidecoysFilter</code><span class="sig-paren">(</span><em>scores</em>, <em>common_bits_thrs</em>, <em>minimum_accept</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/custom_opers.html#AntidecoysFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.AntidecoysFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="molpher.core.operations.html#molpher.core.operations.TreeOperation.TreeOperation" title="molpher.core.operations.TreeOperation.TreeOperation"><code class="xref py py-class docutils literal"><span class="pre">molpher.core.operations.TreeOperation.TreeOperation</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scores</strong> &#8211; a <a class="reference external" href="https://docs.python.org/3.5/reference/expressions.html#dict" title="(in Python v3.5)"><code class="docutils literal"><span class="pre">Dictionary</span> <span class="pre">displays</span></code></a> mapping a SMILES string of a molecule in <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a> to the corresponding score value</li>
+<li><strong>common_bits_thrs</strong> &#8211; maximum percentage of bits in common with the anti-fingerprint allowed in the</li>
+<li><strong>minimum_accept</strong> &#8211; always accept at least this many top scoring molecules</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A filtering <a class="reference internal" href="../../glossary.html#term-tree-operation"><code class="xref any std std-term docutils literal"><span class="pre">tree</span> <span class="pre">operation</span></code></a> which filters
+the morphs in <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a> based
+on <code class="samp docutils literal"><span class="pre">common_bits_thrs</span></code>. All morphs with
+anti-fingerprint score bigger than
+<code class="samp docutils literal"><span class="pre">common_bits_thrs</span></code> are rejected. However,
+at least <code class="samp docutils literal"><span class="pre">minimum_accept</span></code> best morphs
+survives.</p>
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.custom_opers.AntidecoysFilter.common_bits_thrs">
+<code class="descname">common_bits_thrs</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.AntidecoysFilter.common_bits_thrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum percentage of bits in common with the anti-fingerprint allowed in the</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.custom_opers.AntidecoysFilter.minimum_accept">
+<code class="descname">minimum_accept</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.AntidecoysFilter.minimum_accept" title="Permalink to this definition">¶</a></dt>
+<dd><p>always accept at least this many top scoring molecules</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.custom_opers.AntidecoysFilter.scores">
+<code class="descname">scores</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.AntidecoysFilter.scores" title="Permalink to this definition">¶</a></dt>
+<dd><p>a <a class="reference external" href="https://docs.python.org/3.5/reference/expressions.html#dict" title="(in Python v3.5)"><code class="docutils literal"><span class="pre">Dictionary</span> <span class="pre">displays</span></code></a> mapping a SMILES string of a molecule in <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a> to the corresponding score value</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="molpher.algorithms.antidecoys.custom_opers.GatherAntiFPScores">
+<em class="property">class </em><code class="descclassname">molpher.algorithms.antidecoys.custom_opers.</code><code class="descname">GatherAntiFPScores</code><span class="sig-paren">(</span><em>out</em>, <em>anti_fp</em>, <em>settings</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/custom_opers.html#GatherAntiFPScores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.GatherAntiFPScores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="molpher.core.operations.html#molpher.core.operations.TreeOperation.TreeOperation" title="molpher.core.operations.TreeOperation.TreeOperation"><code class="xref py py-class docutils literal"><span class="pre">molpher.core.operations.TreeOperation.TreeOperation</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>out</strong> &#8211; a dictionary to save the results to</li>
+<li><strong>anti_fp</strong> &#8211; the anti-fingerprint</li>
+<li><strong>settings</strong> &#8211; <a class="reference internal" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings" title="molpher.algorithms.antidecoys.settings.AntidecoysSettings"><code class="xref any py py-class docutils literal"><span class="pre">AntidecoysSettings</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <a class="reference internal" href="../../glossary.html#term-tree-operation"><code class="xref any std std-term docutils literal"><span class="pre">tree</span> <span class="pre">operation</span></code></a> which computes the anti-fingerprint scores using the
+given settings and anti-fingerprint. For every
+molecule in <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">candidates</span></code></a> the similarity
+to the anti-fingerprint is computed and
+saved as a score into the supplied dictionary.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#molpher.algorithms.antidecoys.utils.compute_antifp_scores" title="molpher.algorithms.antidecoys.utils.compute_antifp_scores"><code class="xref any py py-func docutils literal"><span class="pre">compute_antifp_scores</span></code></a></p>
+</div>
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.custom_opers.GatherAntiFPScores.antitfp">
+<code class="descname">antitfp</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.GatherAntiFPScores.antitfp" title="Permalink to this definition">¶</a></dt>
+<dd><p>the anti-fingerprint</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.custom_opers.GatherAntiFPScores.out">
+<code class="descname">out</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.GatherAntiFPScores.out" title="Permalink to this definition">¶</a></dt>
+<dd><p>output dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.custom_opers.GatherAntiFPScores.settings">
+<code class="descname">settings</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.custom_opers.GatherAntiFPScores.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings" title="molpher.algorithms.antidecoys.settings.AntidecoysSettings"><code class="xref any py py-class docutils literal"><span class="pre">AntidecoysSettings</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-molpher.algorithms.antidecoys.pathfinder">
+<span id="molpher-algorithms-antidecoys-pathfinder-module"></span><h2>1.1.1.2.1.1.3. molpher.algorithms.antidecoys.pathfinder module<a class="headerlink" href="#module-molpher.algorithms.antidecoys.pathfinder" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder">
+<em class="property">class </em><code class="descclassname">molpher.algorithms.antidecoys.pathfinder.</code><code class="descname">AntidecoysPathFinder</code><span class="sig-paren">(</span><em>settings</em>, <em>antifingerprint=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/pathfinder.html#AntidecoysPathFinder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>settings</strong> (<a class="reference internal" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings" title="molpher.algorithms.antidecoys.settings.AntidecoysSettings"><code class="xref any py py-class docutils literal"><span class="pre">AntidecoysSettings</span></code></a>) &#8211; exploration settings and parameters</li>
+<li><strong>antifingerprint</strong> (<code class="xref py py-class docutils literal"><span class="pre">rdkit.cDataStructs.SparseBitVector</span></code>) &#8211; the anti-fingerprint to use (optional)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Implements a modified version of the bidirectional algorithm. The algorithm tries to avoid
+some already sampled areas of chemical space by using an &#8216;anti-fingerprint&#8217;,
+a 2D pharmacophore fingerprint that describes previously explored pharmacophore features and their geometric relationships.</p>
+<p>The <a class="reference external" href="http://www.rdkit.org/docs/RDKit_Book.html#representation-of-pharmacophore-fingerprints">RDKit</a>
+implementation of pharmacophore fingerprints is used. Therefore, it is necessary to have RDKit installed
+to use this class and this module.</p>
+<p>If no <code class="samp docutils literal"><span class="pre">antifingerprint</span></code> is specified, the search defaults to an ordinary <a class="reference internal" href="molpher.algorithms.bidirectional.html#module-molpher.algorithms.bidirectional" title="molpher.algorithms.bidirectional"><code class="xref py py-mod docutils literal"><span class="pre">bidirectional</span></code></a> algorithm.</p>
+<dl class="method">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/pathfinder.html#AntidecoysPathFinder.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the search</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/glossary.html#term-list" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">list</span></code></a> of SMILES strings representing the path found</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.__dict__">
+<code class="descname">__dict__</code><em class="property"> = mappingproxy({'__init__': &lt;function AntidecoysPathFinder.__init__ at 0x7f39d5bdfea0&gt;, '__module__': 'molpher.algorithms.antidecoys.pathfinder', '__doc__': &quot;\n    :param settings: exploration settings and parameters\n    :type settings: `AntidecoysSettings`\n    :param antifingerprint: the anti-fingerprint to use (optional)\n    :type antifingerprint: :class:`rdkit.cDataStructs.SparseBitVector`\n\n    Implements a modified version of the bidirectional algorithm. The algorithm tries to avoid\n    some already sampled areas of chemical space by using an 'anti-fingerprint',\n    a 2D pharmacophore fingerprint that describes previously explored pharmacophore features and their geometric relationships.\n\n    The `RDKit &lt;http://www.rdkit.org/docs/RDKit_Book.html#representation-of-pharmacophore-fingerprints&gt;`_\n    implementation of pharmacophore fingerprints is used. Therefore, it is necessary to have RDKit installed\n    to use this class and this module.\n\n    If no :samp:`antifingerprint` is specified, the search defaults to an ordinary :mod:`~molpher.algorithms.bidirectional` algorithm.\n\n    &quot;, '__call__': &lt;function AntidecoysPathFinder.__call__ at 0x7f39d5bdff28&gt;, '__dict__': &lt;attribute '__dict__' of 'AntidecoysPathFinder' objects&gt;, '__weakref__': &lt;attribute '__weakref__' of 'AntidecoysPathFinder' objects&gt;})</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.__dict__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>settings</em>, <em>antifingerprint=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/pathfinder.html#AntidecoysPathFinder.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.__module__">
+<code class="descname">__module__</code><em class="property"> = 'molpher.algorithms.antidecoys.pathfinder'</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.antifingerprint">
+<code class="descname">antifingerprint</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.antifingerprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>the anti-fingerprint</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.connecting_molecule">
+<code class="descname">connecting_molecule</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.connecting_molecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>SMILES string of a molecule that connects the two trees</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.path">
+<code class="descname">path</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list of SMILES strings representing the found path (defaults to an empty <a class="reference external" href="https://docs.python.org/3.5/glossary.html#term-list" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">list</span></code></a>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.settings">
+<code class="descname">settings</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings" title="molpher.algorithms.antidecoys.settings.AntidecoysSettings"><code class="xref any py py-class docutils literal"><span class="pre">AntidecoysSettings</span></code></a> object used to initialize this instance</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.source">
+<code class="descname">source</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>SMILES of the source</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.source_target">
+<code class="descname">source_target</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.source_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>tree searching from source to target</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.source_target_min">
+<code class="descname">source_target_min</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.source_target_min" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="molpher.algorithms.html#molpher.algorithms.operations.FindClosest" title="molpher.algorithms.operations.FindClosest"><code class="xref any py py-class docutils literal"><span class="pre">FindClosest</span></code></a> holding the current minimum in the &#8216;source to target&#8217; tree</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.target">
+<code class="descname">target</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>SMILES of the target</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.target_source">
+<code class="descname">target_source</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.target_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>tree searching from target to source</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.target_source_min">
+<code class="descname">target_source_min</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.target_source_min" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="molpher.algorithms.html#molpher.algorithms.operations.FindClosest" title="molpher.algorithms.operations.FindClosest"><code class="xref any py py-class docutils literal"><span class="pre">FindClosest</span></code></a> holding the current minimum in the &#8216;target to source&#8217; tree</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.verbose">
+<code class="descname">verbose</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.verbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>use verbose output</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-molpher.algorithms.antidecoys.run">
+<span id="molpher-algorithms-antidecoys-run-module"></span><h2>1.1.1.2.1.1.4. molpher.algorithms.antidecoys.run module<a class="headerlink" href="#module-molpher.algorithms.antidecoys.run" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="molpher.algorithms.antidecoys.run.run">
+<code class="descclassname">molpher.algorithms.antidecoys.run.</code><code class="descname">run</code><span class="sig-paren">(</span><em>settings</em>, <em>paths_count</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/run.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.run.run" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>settings</strong> &#8211; instance of <a class="reference internal" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings" title="molpher.algorithms.antidecoys.settings.AntidecoysSettings"><code class="xref any py py-class docutils literal"><span class="pre">AntidecoysSettings</span></code></a> specifying search parameters</li>
+<li><strong>paths_count</strong> &#8211; number of paths to generate</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a <a class="reference external" href="https://docs.python.org/3.5/glossary.html#term-list" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">list</span></code></a> of lists of SMILES strings (each path is represented by a list of SMILES strings)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-molpher.algorithms.antidecoys.settings">
+<span id="molpher-algorithms-antidecoys-settings-module"></span><h2>1.1.1.2.1.1.5. molpher.algorithms.antidecoys.settings module<a class="headerlink" href="#module-molpher.algorithms.antidecoys.settings" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="molpher.algorithms.antidecoys.settings.AntidecoysSettings">
+<em class="property">class </em><code class="descclassname">molpher.algorithms.antidecoys.settings.</code><code class="descname">AntidecoysSettings</code><span class="sig-paren">(</span><em>source</em>, <em>target</em>, <em>storage_dir='/home/sichom/projects/molpher-lib/doc/antidecoys_data'</em>, <em>max_threads=None</em>, <em>tree_params=None</em>, <em>max_iters=100</em>, <em>verbose=False</em>, <em>fg_bins=((0</em>, <em>2)</em>, <em>(2</em>, <em>5)</em>, <em>(5</em>, <em>8))</em>, <em>fg_min_points=2</em>, <em>fg_max_points=3</em>, <em>min_accepted=1000</em>, <em>common_bits_max_thrs=0.75</em>, <em>common_bits_mean_thrs=0.5</em>, <em>antidecoys_min_iters=10</em>, <em>antidecoys_max_iters=50</em>, <em>distance_thrs=0.2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/settings.html#AntidecoysSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="molpher.algorithms.html#molpher.algorithms.settings.Settings" title="molpher.algorithms.settings.Settings"><code class="xref py py-class docutils literal"><span class="pre">molpher.algorithms.settings.Settings</span></code></a></p>
+<p>A specialized class that holds the settings
+for the anti-decoys algorithm.</p>
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.settings.AntidecoysSettings.antidecoys_max_iters">
+<code class="descname">antidecoys_max_iters</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings.antidecoys_max_iters" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum number of iterations that will use the antidecoys filter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.settings.AntidecoysSettings.antidecoys_min_iters">
+<code class="descname">antidecoys_min_iters</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings.antidecoys_min_iters" title="Permalink to this definition">¶</a></dt>
+<dd><p>minimum number of iterations that will use the antidecoys filter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.settings.AntidecoysSettings.common_bits_max_thrs">
+<code class="descname">common_bits_max_thrs</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings.common_bits_max_thrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum percentage of shared bits between a structure and the anti-fingerprint that the filter will accept on every iteration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.settings.AntidecoysSettings.common_bits_mean_thrs">
+<code class="descname">common_bits_mean_thrs</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings.common_bits_mean_thrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>if for the structures that survived the filter the mean common bits percentage falls below this value, antidecoys will be turned off</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.settings.AntidecoysSettings.distance_thrs">
+<code class="descname">distance_thrs</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings.distance_thrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>turn antidecoys filter off when the distance between two closest molecules from each tree gets below this value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.settings.AntidecoysSettings.fg_bins">
+<code class="descname">fg_bins</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings.fg_bins" title="Permalink to this definition">¶</a></dt>
+<dd><p>distance bins in the pharmacophore fingerprint (as described <a class="reference external" href="http://www.rdkit.org/docs/GettingStartedInPython.html#d-pharmacophore-fingerprints">here</a>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.settings.AntidecoysSettings.fg_max_points">
+<code class="descname">fg_max_points</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings.fg_max_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>max number of features encoded in the pharmacophore fingerprint (as described <a class="reference external" href="http://www.rdkit.org/docs/GettingStartedInPython.html#d-pharmacophore-fingerprints">here</a>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.settings.AntidecoysSettings.fg_min_points">
+<code class="descname">fg_min_points</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings.fg_min_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>min number of features encoded in the pharmacophore fingerprint (as described <a class="reference external" href="http://www.rdkit.org/docs/GettingStartedInPython.html#d-pharmacophore-fingerprints">here</a>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.antidecoys.settings.AntidecoysSettings.min_accepted">
+<code class="descname">min_accepted</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings.min_accepted" title="Permalink to this definition">¶</a></dt>
+<dd><p>minimum number of morphs the antidecoys filter will accept on every iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-molpher.algorithms.antidecoys.utils">
+<span id="molpher-algorithms-antidecoys-utils-module"></span><h2>1.1.1.2.1.1.6. molpher.algorithms.antidecoys.utils module<a class="headerlink" href="#module-molpher.algorithms.antidecoys.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="molpher.algorithms.antidecoys.utils.compute_anti_fp">
+<code class="descclassname">molpher.algorithms.antidecoys.utils.</code><code class="descname">compute_anti_fp</code><span class="sig-paren">(</span><em>mols_smiles</em>, <em>sig_fac</em>, <em>antifp_old=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/utils.html#compute_anti_fp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.utils.compute_anti_fp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes an anti-fingerprint from the given molecules.</p>
+<p>It is possible to specify an existing anti-fingerprint
+for an update. In this case, the returned fingerprint
+will be the result of doing a bitwise <code class="samp docutils literal"><span class="pre">or</span></code> between
+the old fingerprint and the one generated from the
+supplied structures.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mols_smiles</strong> &#8211; SMILES of the molecules to generate the anti-fingerprint from</li>
+<li><strong>sig_fac</strong> &#8211; RDKit&#8217;s signature factory used in the 2D pharmacophore fingerprint computation</li>
+<li><strong>antifp_old</strong> &#8211; an old anti-fingerprint to update</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">new or updated anti-fingerprint</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="molpher.algorithms.antidecoys.utils.compute_antifp_scores">
+<code class="descclassname">molpher.algorithms.antidecoys.utils.</code><code class="descname">compute_antifp_scores</code><span class="sig-paren">(</span><em>mols</em>, <em>anti_fp</em>, <em>settings</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/utils.html#compute_antifp_scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.utils.compute_antifp_scores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes (in parallel) the anti-fingerprint scores
+for the given molecules.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mols</strong> &#8211; molecules as a list of SMILES strings</li>
+<li><strong>anti_fp</strong> &#8211; the anti-fingerprint</li>
+<li><strong>settings</strong> &#8211; <a class="reference internal" href="#molpher.algorithms.antidecoys.settings.AntidecoysSettings" title="molpher.algorithms.antidecoys.settings.AntidecoysSettings"><code class="xref any py py-class docutils literal"><span class="pre">AntidecoysSettings</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a <a class="reference external" href="https://docs.python.org/3.5/reference/expressions.html#dict" title="(in Python v3.5)"><code class="docutils literal"><span class="pre">Dictionary</span> <span class="pre">displays</span></code></a> mapping SMILES of the given molecules to the anti-fingerprint scores</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="molpher.algorithms.antidecoys.utils.update_target">
+<code class="descclassname">molpher.algorithms.antidecoys.utils.</code><code class="descname">update_target</code><span class="sig-paren">(</span><em>tree</em>, <em>target</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/antidecoys/utils.html#update_target"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.antidecoys.utils.update_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the tree&#8217;s target molecule.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tree</strong> (<a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree" title="molpher.core.ExplorationTree.ExplorationTree"><code class="xref py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a>) &#8211; an <a class="reference internal" href="../../glossary.html#term-exploration-tree"><code class="xref any std std-term docutils literal"><span class="pre">exploration</span> <span class="pre">tree</span></code></a></li>
+<li><strong>target</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">str</span></code></a>) &#8211; SMILES string of the new target</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-molpher.algorithms.antidecoys">
+<span id="module-contents"></span><h2>1.1.1.2.1.1.7. Module contents<a class="headerlink" href="#module-molpher.algorithms.antidecoys" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="molpher.algorithms.bidirectional.html" class="btn btn-neutral float-right" title="1.1.1.2.1.2. molpher.algorithms.bidirectional package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="molpher.algorithms.html" class="btn btn-neutral" title="1.1.1.2. molpher.algorithms package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0.0b1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

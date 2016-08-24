@@ -16,12 +16,29 @@ nav ul a
 	color: black;
 }
 
+.side-nav {
+  left: 0;
+}
+
 .collection a.collection-item {
 	color: #039be5;
 }
 
 .z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
     box-shadow: 0 1px 5px 0 rgba(0,0,0,0.20),0 1px 7px 0 rgba(0,0,0,0.25);
+}
+
+.card-image img {
+  padding: 10px;
+}
+
+.table-of-contents a.active, .table-of-contents a:hover {
+  border-left: 2px solid #039be5;
+}
+
+p code.hljs, .card-content code.hljs {
+  display: inline;
+  padding: 2px;
 }
 
 /* fork me banner http://edull24.github.io/fork-me-on-github/ */

@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Installation &mdash; Molpher-lib 0.0.0b1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Molpher-lib 0.0.0b1 documentation" href="../index.html"/>
+        <link rel="up" title="Using the library" href="index.html"/>
+        <link rel="next" title="2. Tutorial" href="tutorial.html"/>
+        <link rel="prev" title="Using the library" href="index.html"/>
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Molpher-lib: a C++/Python Library For Systematic Chemical Space Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Using the library</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-with-anaconda">1.1. Installation with Anaconda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-and-installing-from-source-linux">1.2. Building and Installing from Source &#8211; Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">1.2.1. Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-library">1.2.2. Building the Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-conda-packages">1.2.3. Building Conda Packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-documentation">1.2.4. Building the Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">2. Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms.html">3. Exploration Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Molpher-lib</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Using the library</a> &raquo;</li>
+      
+    <li>1. Installation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>1. Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Below are two currently available methods of installation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As of yet, the library is only available for the Linux platform and will only run
+on 64-bit systems. However, other platforms will probably be supported in the future as well.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The library has only been tested on a few Debian-based systems so far. Therefore, it might not work properly
+on other Linux distributions.</p>
+</div>
+<div class="section" id="installation-with-anaconda">
+<h2>1.1. Installation with Anaconda<a class="headerlink" href="#installation-with-anaconda" title="Permalink to this headline">¶</a></h2>
+<p>This is probably the easiest and preferred way to install the library and the associated Python package.
+All you need to do is either get the full <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a> distribution
+or its lightweight variant, <a class="reference external" href="http://conda.pydata.org/miniconda.html">Miniconda</a>.</p>
+<p>Anaconda/Miniconda is essentially a Python distribution, package manager and virtual environment in one and makes setting up
+a development environment for your project very easy.
+After installing Anaconda/Miniconda you need to run the following
+to install the package:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install -c lich molpher-lib
+</pre></div>
+</div>
+<p>This will automatically install the latest non-development version of the library
+in the currently active environment (for more information on environments and the
+<strong class="command">conda</strong> command see <a class="reference external" href="http://conda.pydata.org/docs/test-drive.html">Conda Test Drive</a>).</p>
+</div>
+<div class="section" id="building-and-installing-from-source-linux">
+<h2>1.2. Building and Installing from Source &#8211; Linux<a class="headerlink" href="#building-and-installing-from-source-linux" title="Permalink to this headline">¶</a></h2>
+<p>If you want to build the source code yourself,
+you will have to use <strong class="command">cmake</strong>. This section
+describes how to do that on the Linux platform. If you want to build the library on
+a different platform, this section might provide useful information as well. However,
+you might need to make some adjustments to the underlying <code class="file docutils literal"><span class="pre">CMakeLists.txt</span></code> file
+and build and link the dependencies yourself.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you manage to successfully build the library on a platform other than Linux,
+please, consider making a pull request and contributing your code to the <a class="reference external" href="https://github.com/lich-uct/molpher-lib.git">official GitHub
+repository</a>.</p>
+</div>
+<p>You can get the source code with the following command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/lich-uct/molpher-lib.git
+</pre></div>
+</div>
+<div class="section" id="prerequisites">
+<h3>1.2.1. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>Before you start building, there are a few requirements that need to be satisfied:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>build-essential</em> &#8211; You will need this package in order to be able to build software on most Linux platforms. It contains a compiler and other tools important for the build.</p>
+</li>
+<li><p class="first"><em>swig</em> &#8211; It is used to generate the Python wrapping code (we are using version 3.0.10 at the moment).</p>
+<blockquote>
+<div><p>SWIG is only required if you made changes to the interface (header files under <code class="file docutils literal"><span class="pre">include/</span></code>) and want to configure cmake
+with the <strong class="command">-DRUN_SWIG=ON</strong> option (see the description of the <em>molpher_build_SWIG_Python</em> target in the section below).
+If this option is turned on, SWIG will be invoked by make upon build with the <strong class="command">swig3.0</strong>
+command so make sure the SWIG executable is available in the working environment.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>setuptools</em> &#8211; This Python package is needed to install the associated Python code.</p>
+</li>
+<li><p class="first"><em>python{version}-dev</em> &#8211; You will need this package to build Python bindings for your Python <em>version</em>.</p>
+<blockquote>
+<div><p>If you get &#8216;Missing Python.h&#8217; compiler errors, you probably do not have this package installed.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>dependencies</em> &#8211; Molpher-lib depends on three third-party libraries:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>boost</em> (1.50.0)</li>
+<li><em>rdkit</em> (2014.03.1)</li>
+<li><em>tbb</em> (4.2)</li>
+</ul>
+<p>You can build the individual dependencies yourself and place them in the <code class="file docutils literal"><span class="pre">deps/</span></code> folder
+in the repository root. For each dependency, there should be a folder of the same name under <code class="file docutils literal"><span class="pre">deps/</span></code>
+(for example, the path to the <em>tbb</em> files would be <code class="file docutils literal"><span class="pre">deps/tbb/</span></code>). The cmake build script will automatically
+identify and prioritize dependencies in this directory. However, there is a build script (<code class="file docutils literal"><span class="pre">deps/build_deps.sh</span></code>)
+which can download and build the libraries automatically. Therefore, it should be sufficient to do:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>./build_deps.sh --all
+</pre></div>
+</div>
+<p>You can also install the libraries on
+your system using a package manager or other means. In that case, cmake will automatically try to find them and
+link them during the build. Please, note that the build system is configured so that only static
+libraries of <em>boost</em> and <em>rdkit</em> are recognized. If you wish to link dynamically, you will need to modify
+the <code class="file docutils literal"><span class="pre">CMakeLists.txt</span></code> file accordingly.</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="building-the-library">
+<h3>1.2.2. Building the Library<a class="headerlink" href="#building-the-library" title="Permalink to this headline">¶</a></h3>
+<p>When the above requirements are met, you can start building. First, you need to initialize the cmake project
+from a build directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir <span class="si">${</span><span class="nv">REPOSITORY_ROOT</span><span class="si">}</span>/cmake_dir/ <span class="c1"># create a subdirectory in the root of the repository</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">REPOSITORY_ROOT</span><span class="si">}</span>/cmake_dir/
+cmake .. <span class="c1"># initialize the project</span>
+</pre></div>
+</div>
+<p>At this point, cmake checks the dependencies and generates the main makefile which defines three important targets:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first"><em>molpher</em> &#8211; This is the main target. It builds the C++ source code of the library and creates all necessary binary files. All targets mentioned below depend on this target.</p>
+</li>
+<li><p class="first"><em>molpher_install</em> &#8211; This target will install the library in the given location.</p>
+<blockquote>
+<div><p>By default, this location is the <code class="file docutils literal"><span class="pre">dist/</span></code> folder in the repository root.
+This can be changed when the cmake project is initialized by setting
+<a class="reference external" href="https://cmake.org/cmake/help/v3.5/variable/CMAKE_INSTALL_PREFIX.html">CMAKE_INSTALL_PREFIX</a>.
+Also by default, the TBB library is installed along with the molpher-lib files, because it
+is also a runtime dependency. If you do not want this behaviour you can instruct
+cmake to omit the installation of TBB with the <strong class="command">-DINSTALL_TBB=OFF</strong> option.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>molpher_install_python</em> &#8211; This will install the Python package and the C++ extensions using the generated SWIG wrapper code.</p>
+<blockquote>
+<div><p>By default, the primary Python distribution on the system is used. You can specify a different executable
+by specifying the path with <strong class="command">-DPYTHON_EXECUTABLE</strong>
+when you run cmake.</p>
+<p>If you want to update the SWIG wrapping code before this target is run, you can instruct cmake to do so with
+the <strong class="command">-DRUN_SWIG=ON</strong> option.</p>
+<p>When this target finishes, all required files should be in place and you should be able to
+import the <em>molpher</em> Python package located under <code class="file docutils literal"><span class="pre">src/python/</span></code>. Just add this directory to your <span class="target" id="index-0"></span><a class="reference external" href="https://docs.python.org/3.5/using/cmdline.html#envvar-PYTHONPATH" title="(in Python v3.5)"><code class="xref std std-envvar docutils literal"><span class="pre">PYTHONPATH</span></code></a> variable
+and it should work.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You can also use the package created under <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal"><span class="pre">CMAKE_INSTALL_PREFIX</span></code>. In this case, you need to have the following variables set up:</p>
+<div class="last highlight-bash"><div class="highlight"><pre><span></span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$CMAKE_INSTALL_PREFIX</span>/lib/pythonX.Y/site-packages <span class="c1"># replace X.Y with your Python version</span>
+<span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$CMAKE_INSTALL_PREFIX</span>/lib
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p>The build of a given configuration is initialized from the cmake project directory as:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>make <span class="nv">$CONFIG</span> <span class="c1"># CONFIG is a configurations&#39; name</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-conda-packages">
+<h3>1.2.3. Building Conda Packages<a class="headerlink" href="#building-conda-packages" title="Permalink to this headline">¶</a></h3>
+<p>If you want to build your own conda packages, you can use a
+python script located in <code class="file docutils literal"><span class="pre">conda/</span></code> subdirectory of the repository root:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="si">${</span><span class="nv">REPOSITORY_ROOT</span><span class="si">}</span>/conda
+python build_conda.py
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">You will need <a class="reference external" href="https://github.com/conda/conda-build">conda-build</a> and the  <em>jinja2</em> Python library to do that.</p>
+</div>
+<p>You can install the built packages as follows:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install --use-local molpher-lib
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-documentation">
+<h3>1.2.4. Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h3>
+<p>This documentation is generated using the <code class="file docutils literal"><span class="pre">build_docs.sh</span></code>
+script under the <code class="file docutils literal"><span class="pre">doc/</span></code> directory. However, in order to successfully build the documentation
+you will need a few packages in your Python environment:</p>
+<div class="literal-block-wrapper container" id="the-conda-environment-file-used-to-build-the-documentation-and-test-the-library">
+<div class="code-block-caption"><span class="caption-number">Listing 1.1 </span><span class="caption-text">The conda environment file used to build the documentation and test the library.</span><a class="headerlink" href="#the-conda-environment-file-used-to-build-the-documentation-and-test-the-library" title="Permalink to this code">¶</a></div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>name: molpher-lib-docs
+channels:
+- rdkit
+- omnia
+- defaults
+dependencies:
+- bzip2=1.0.6=3
+- mkl=11.3.3=0
+- numpy=1.11.1=py35_0
+- openssl=1.0.2h=1
+- pip=8.1.2=py35_0
+- psutil=4.3.0=py35_0
+- python=3.5.1=0
+- boost=1.56.0=py35_3
+- rdkit=2016.03.2=np111py35_1
+- readline=6.2=2
+- setuptools=23.0.0=py35_0
+- sqlite=3.13.0=0
+- tk=8.5.18=0
+- wheel=0.29.0=py35_0
+- xz=5.0.5=1
+- zlib=1.2.8=3
+- doxygen
+- pip:
+  - alabaster==0.7.7
+  - babel==2.3.3
+  - breathe==4.2.0
+  - docutils==0.12
+  - imagesize==0.7.0
+  - jinja2==2.8
+  - markupsafe==0.23
+  - pygments==2.1.3
+  - pytz==2016.3
+  - six==1.10.0
+  - snowballstemmer==1.2.1
+  - sphinx==1.4.1
+  - sphinx-rtd-theme==0.1.9
+</pre></div>
+</div>
+</div>
+<p>You can easily install all these packages like so:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda env create -n molpher-lib-docs -f environment.yml
+</pre></div>
+</div>
+<p>Also, make sure you initialized the Python package (built the <em>molpher_install_python</em> target as described above)
+prior to generating the documentation so that Sphinx can successfully import the <em>molpher</em> package.</p>
+<p>To update the GitHub pages with the current version of the documentation, you can simply
+run the <code class="file docutils literal"><span class="pre">build_docs.sh</span></code> with the <code class="docutils literal"><span class="pre">`--upload`</span></code> option:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>build_docs.sh --upload
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need write access to the repository and an SSH key attached to your account to be able to upload
+the documentation.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="2. Tutorial" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Using the library" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.0b1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

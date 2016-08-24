@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.1.1.3.1.1.1.4.5. FilterMorphsOper &mdash; Molpher-lib 0.0.0b1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Molpher-lib 0.0.0b1 documentation" href="../../../index.html"/>
+        <link rel="up" title="1.1.1.3.1.1.1.4. Tree Operation Classes" href="classes.html"/>
+        <link rel="next" title="1.1.1.3.1.1.1.4.6. ExtendTreeOper" href="ExtendTreeOper_doc.html"/>
+        <link rel="prev" title="1.1.1.3.1.1.1.4.4. SortMorphsOper" href="SortMorphsOper_doc.html"/>
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Molpher-lib: a C++/Python Library For Systematic Chemical Space Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Source Code Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">1. Python</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../molpher.html">1.1. molpher package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../molpher.html#subpackages">1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../molpher.html#module-molpher">1.1.2. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cplusplus/index.html">2. C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Molpher-lib</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Source Code Documentation</a> &raquo;</li>
+      
+          <li><a href="../modules.html">1. Python</a> &raquo;</li>
+      
+          <li><a href="../molpher.html">1.1. molpher package</a> &raquo;</li>
+      
+          <li><a href="../molpher.swig_wrappers.html">1.1.1.3. molpher.swig_wrappers package</a> &raquo;</li>
+      
+          <li><a href="../molpher.swig_wrappers.core.html">1.1.1.3.1.1. molpher.swig_wrappers.core module</a> &raquo;</li>
+      
+          <li><a href="classes.html">1.1.1.3.1.1.1.4. Tree Operation Classes</a> &raquo;</li>
+      
+    <li>1.1.1.3.1.1.1.4.5. FilterMorphsOper</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="filtermorphsoper">
+<h1>1.1.1.3.1.1.1.4.5. FilterMorphsOper<a class="headerlink" href="#filtermorphsoper" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="molpher.swig_wrappers.core.FilterMorphsOper">
+<em class="property">class </em><code class="descclassname">molpher.swig_wrappers.core.</code><code class="descname">FilterMorphsOper</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/molpher/swig_wrappers/core.html#FilterMorphsOper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.FilterMorphsOper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="TreeOperation_doc.html#molpher.swig_wrappers.core.TreeOperation" title="molpher.swig_wrappers.core.TreeOperation"><code class="xref py py-class docutils literal"><span class="pre">molpher.swig_wrappers.core.TreeOperation</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>*args</strong> &#8211; constructor takes either no arguments at all or the following positional arguments (in that order):</li>
+<li><strong>tree</strong> &#8211; the tree to operate on (optional)</li>
+<li><strong>filters</strong> &#8211; the union of filtering options to use (optional, see the descriptions below for more information)</li>
+<li><strong>verbose</strong> &#8211; toggles if a verbose output is required (optional, defaults to <a class="reference external" href="https://docs.python.org/3.5/library/constants.html#False" title="(in Python v3.5)"><code class="xref any docutils literal"><span class="pre">False</span></code></a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This operation can filter the <a class="reference internal" href="../../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> in an <a class="reference internal" href="../../../glossary.html#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a>
+according to a given set of filtering options that it implements. The current set of
+available filters is in the table below. For more detailed information on each filter
+see the member descriptions of this class.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.filterMorphs" title="molpher.swig_wrappers.core.ExplorationTree.filterMorphs"><code class="xref any py py-meth docutils literal"><span class="pre">ExplorationTree.filterMorphs()</span></code></a> and <a class="reference internal" href="../molpher.core.html#module-molpher.core.ExplorationData" title="molpher.core.ExplorationData"><code class="xref any py py-mod docutils literal"><span class="pre">molpher.core.ExplorationData</span></code></a></p>
+</div>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-number">Table 1.12 </span><span class="caption-text">Filtering options and their descriptions.</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#molpher.swig_wrappers.core.FilterMorphsOper.PROBABILITY" title="molpher.swig_wrappers.core.FilterMorphsOper.PROBABILITY"><code class="xref any py py-attr docutils literal"><span class="pre">PROBABILITY</span></code></a></td>
+<td>Filter the <a class="reference internal" href="../../../glossary.html#term-candidate-morphs"><code class="xref any std std-term docutils literal"><span class="pre">candidate</span> <span class="pre">morphs</span></code></a> according to probability based on their position in <a class="reference internal" href="../molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">ExplorationTree.candidates</span></code></a>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#molpher.swig_wrappers.core.FilterMorphsOper.WEIGHT" title="molpher.swig_wrappers.core.FilterMorphsOper.WEIGHT"><code class="xref any py py-attr docutils literal"><span class="pre">WEIGHT</span></code></a></td>
+<td>Remove molecules that do not satisfy the weight constraints.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#molpher.swig_wrappers.core.FilterMorphsOper.SYNTHESIS" title="molpher.swig_wrappers.core.FilterMorphsOper.SYNTHESIS"><code class="xref any py py-attr docutils literal"><span class="pre">SYNTHESIS</span></code></a></td>
+<td>The inbuilt synthetic feasibility filter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#molpher.swig_wrappers.core.FilterMorphsOper.MAX_DERIVATIONS" title="molpher.swig_wrappers.core.FilterMorphsOper.MAX_DERIVATIONS"><code class="xref any py py-attr docutils literal"><span class="pre">MAX_DERIVATIONS</span></code></a></td>
+<td>Maximum number of morphs derived from one molecule.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#molpher.swig_wrappers.core.FilterMorphsOper.DUPLICATES" title="molpher.swig_wrappers.core.FilterMorphsOper.DUPLICATES"><code class="xref any py py-attr docutils literal"><span class="pre">DUPLICATES</span></code></a></td>
+<td>Remove candidates that are already in the tree (always on).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#molpher.swig_wrappers.core.FilterMorphsOper.HISTORIC_DESCENDENTS" title="molpher.swig_wrappers.core.FilterMorphsOper.HISTORIC_DESCENDENTS"><code class="xref any py py-attr docutils literal"><span class="pre">HISTORIC_DESCENDENTS</span></code></a></td>
+<td>Remove candidates that have already been tried by their parents.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#molpher.swig_wrappers.core.FilterMorphsOper.ALL" title="molpher.swig_wrappers.core.FilterMorphsOper.ALL"><code class="xref any py py-attr docutils literal"><span class="pre">ALL</span></code></a></td>
+<td>Use all of the above filters.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="molpher.swig_wrappers.core.FilterMorphsOper.PROBABILITY">
+<code class="descname">PROBABILITY</code><em class="property"> = 1</em><a class="headerlink" href="#molpher.swig_wrappers.core.FilterMorphsOper.PROBABILITY" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the number of derived morphs for a molecule exceeds <a class="reference internal" href="../molpher.core.html#molpher.core.ExplorationData.ExplorationData.accept_min" title="molpher.core.ExplorationData.ExplorationData.accept_min"><code class="xref any py py-attr docutils literal"><span class="pre">ExplorationData.accept_min</span></code></a>,
+then the probability of accepting every extra molecule is determined
+according to the following formula:
+<span class="math">\(\frac{0.25 - (idx - morphs_{min})}{4(morphs_{all} - morphs_{min})}\)</span>, where <span class="math">\(morphs_{min}\)</span>
+is the <a class="reference internal" href="../molpher.core.html#molpher.core.ExplorationData.ExplorationData.accept_min" title="molpher.core.ExplorationData.ExplorationData.accept_min"><code class="xref any py py-attr docutils literal"><span class="pre">ExplorationData.accept_min</span></code></a> parameter, <span class="math">\(morphs_{all}\)</span> is the current
+number of molecules in the <a class="reference internal" href="../../../glossary.html#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a> and <span class="math">\(idx\)</span> is the position of the given <a class="reference internal" href="../../../glossary.html#term-morph"><span class="xref std std-term">morph</span></a>
+in <a class="reference internal" href="../molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">ExplorationTree.candidates</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.swig_wrappers.core.FilterMorphsOper.WEIGHT">
+<code class="descname">WEIGHT</code><em class="property"> = 2</em><a class="headerlink" href="#molpher.swig_wrappers.core.FilterMorphsOper.WEIGHT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses the <a class="reference internal" href="../molpher.core.html#molpher.core.ExplorationData.ExplorationData.weight_min" title="molpher.core.ExplorationData.ExplorationData.weight_min"><code class="xref any py py-attr docutils literal"><span class="pre">ExplorationData.weight_min</span></code></a> and <a class="reference internal" href="../molpher.core.html#molpher.core.ExplorationData.ExplorationData.weight_max" title="molpher.core.ExplorationData.ExplorationData.weight_max"><code class="xref any py py-attr docutils literal"><span class="pre">ExplorationData.weight_max</span></code></a> options
+to remove <a class="reference internal" href="../../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> that do not satisfy the weight constraints.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.swig_wrappers.core.FilterMorphsOper.SYNTHESIS">
+<code class="descname">SYNTHESIS</code><em class="property"> = 4</em><a class="headerlink" href="#molpher.swig_wrappers.core.FilterMorphsOper.SYNTHESIS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.swig_wrappers.core.FilterMorphsOper.MAX_DERIVATIONS">
+<code class="descname">MAX_DERIVATIONS</code><em class="property"> = 8</em><a class="headerlink" href="#molpher.swig_wrappers.core.FilterMorphsOper.MAX_DERIVATIONS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Each <a class="reference internal" href="../ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree" title="molpher.swig_wrappers.core.ExplorationTree"><code class="xref any py py-class docutils literal"><span class="pre">ExplorationTree</span></code></a> instance keeps track of the number of morphs generated from each
+molecule in the tree. If there are <a class="reference internal" href="../../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> in <a class="reference internal" href="../molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal"><span class="pre">ExplorationTree.candidates</span></code></a>
+such that more than <a class="reference internal" href="../molpher.core.html#molpher.core.ExplorationData.ExplorationData.max_morphs_total" title="molpher.core.ExplorationData.ExplorationData.max_morphs_total"><code class="xref any py py-attr docutils literal"><span class="pre">ExplorationData.max_morphs_total</span></code></a> number of morphs would be derived from
+the given molecule, then these <a class="reference internal" href="../../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> will be filtered out.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.swig_wrappers.core.FilterMorphsOper.DUPLICATES">
+<code class="descname">DUPLICATES</code><em class="property"> = 16</em><a class="headerlink" href="#molpher.swig_wrappers.core.FilterMorphsOper.DUPLICATES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all duplicate morphs (same canonical SMILES representation
+as a molecule already present in the tree).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This filter is always turned on and can&#8217;t be disabled at the moment.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.swig_wrappers.core.FilterMorphsOper.HISTORIC_DESCENDENTS">
+<code class="descname">HISTORIC_DESCENDENTS</code><em class="property"> = 32</em><a class="headerlink" href="#molpher.swig_wrappers.core.FilterMorphsOper.HISTORIC_DESCENDENTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>The tree also keeps track of all molecules previously derived from any molecule in the tree.
+This filter removes <a class="reference internal" href="../../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> that have already been previously derived from their parent molecule.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.swig_wrappers.core.FilterMorphsOper.ALL">
+<code class="descname">ALL</code><em class="property"> = 63</em><a class="headerlink" href="#molpher.swig_wrappers.core.FilterMorphsOper.ALL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use all of the filters mentioned above.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ExtendTreeOper_doc.html" class="btn btn-neutral float-right" title="1.1.1.3.1.1.1.4.6. ExtendTreeOper" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SortMorphsOper_doc.html" class="btn btn-neutral" title="1.1.1.3.1.1.1.4.4. SortMorphsOper" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.0.0b1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

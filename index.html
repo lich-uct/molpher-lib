@@ -2,11 +2,13 @@
 <head>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
 	<link rel="stylesheet" href="style.css">
 
 	<!-- Google Analytics JS -->
@@ -19,6 +21,10 @@
 		ga('create', 'UA-42887541-2', 'auto');
 		ga('send', 'pageview');
 	</script>
+
+	
+<title>About</title>
+
 </head>
 
 <body>
@@ -41,137 +47,229 @@
 
 
 <nav>
-	<div class="nav-wrapper">
-		<span class="brand-logo center">molpher-lib</span>
+    <div class="nav-wrapper">
+        <span class="brand-logo center">molpher-lib</span>
 
-		<ul id="slide-out" class="side-nav">
-			<li class="active"><a href=".">About</a></li>
-			<li class="no-padding">
-				<ul class="collapsible collapsible-accordion">
-					<li>
-						<a class="collapsible-header">Documentation<i class="mdi-navigation-arrow-drop-down"></i></a>
-						<div class="collapsible-body">
-							<ul>
-								
-									<li>
-										<a href="./v0.0.0b1dev0/">v0.0.0b1dev0</a>
-									</li>
-								
-									<li>
-										<a href="./v0.0.0b0/">v0.0.0b0</a>
-									</li>
-								
-									<li>
-										<a href="./v0.0.0a3/">v0.0.0a3</a>
-									</li>
-								
-									<li>
-										<a href="./v0.0.0a3dev0/">v0.0.0a3dev0</a>
-									</li>
-								
-							</ul>
-						</div>
-					</li>
-				</ul>
-			</li>
-		</ul>
-		<ul class="right hide-on-med-and-down">
-			<li class="active"><a href=".">About</a></li>
-			<li><a class="dropdown-button" href="." data-activates="dropdown1">Documentation<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-			<ul id='dropdown1' class='dropdown-content'>
-				
-					<li>
-						<a href="./v0.0.0b1dev0/">v0.0.0b1dev0</a>
-					</li>
-				
-					<li>
-						<a href="./v0.0.0b0/">v0.0.0b0</a>
-					</li>
-				
-					<li>
-						<a href="./v0.0.0a3/">v0.0.0a3</a>
-					</li>
-				
-					<li>
-						<a href="./v0.0.0a3dev0/">v0.0.0a3dev0</a>
-					</li>
-				
-			</ul>
-		</ul>
-		<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-	</div>
+        <ul id="slide-out" class="side-nav hide-on-large-only">
+            <li class="active"><a href="index.html">About</a></li>
+<li class=""><a href="examples.html">Examples</a></li>
+<li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+        <li>
+            <a class="collapsible-header">Documentation<i class="mdi-navigation-arrow-drop-down"></i></a>
+            <div class="collapsible-body">
+                <ul>
+                    
+                    <li>
+                        <a href="./v0.0.0b1/">v0.0.0b1</a>
+                    </li>
+                    
+                    <li>
+                        <a href="./v0.0.0b1dev0/">v0.0.0b1dev0</a>
+                    </li>
+                    
+                    <li>
+                        <a href="./v0.0.0b0/">v0.0.0b0</a>
+                    </li>
+                    
+                    <li>
+                        <a href="./v0.0.0a3/">v0.0.0a3</a>
+                    </li>
+                    
+                    <li>
+                        <a href="./v0.0.0a3dev0/">v0.0.0a3dev0</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </li>
+    </ul>
+</li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+            <li class="active"><a href="index.html">About</a></li>
+<li class=""><a href="examples.html">Examples</a></li>
+<li><a class="dropdown-button" href="." data-activates="dropdown1">Documentation<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+<ul id='dropdown1' class='dropdown-content'>
+    
+    <li>
+        <a href="./v0.0.0b1/">v0.0.0b1</a>
+    </li>
+    
+    <li>
+        <a href="./v0.0.0b1dev0/">v0.0.0b1dev0</a>
+    </li>
+    
+    <li>
+        <a href="./v0.0.0b0/">v0.0.0b0</a>
+    </li>
+    
+    <li>
+        <a href="./v0.0.0a3/">v0.0.0a3</a>
+    </li>
+    
+    <li>
+        <a href="./v0.0.0a3dev0/">v0.0.0a3dev0</a>
+    </li>
+    
+</ul>
+        </ul>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+    </div>
 </nav>
 
 
-
 <div class="container">
-	<div class="row">
-		<div class="col s12">
 
-			<h2 class="right-align">About</h2>
-			<div class="divider"></div>
+<div class="row">
 
-			<div class="section">
+	<h2 class="right-align">About</h2>
+	<div class="divider"></div>
 
-				<p>
-					This C++/Python library is based on the program <a href="https://github.com/siret/molpher">Molpher</a> and implements systematic <a href="https://en.wikipedia.org/wiki/Chemical_space">chemical space</a> exploration via a method called <a href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">molecular morphing</a>. The method uses stochastic optimization to search for a 'path' in chemical space that connects two molecules by the means of small structural changes. It can be used to sample areas of chemical space that are biologically relevant and create a diverse set of novel potentially active compounds that can be analyzed further or used as a basis for conventional
-					<a href="https://en.wikipedia.org/wiki/Virtual_screening">virutal screening</a>.
-				</p>
+	<div class="col s12 m9">
+		<div id="introduction" class="section scrollspy">
 
-				<p>
-					The purpose of the library is to make molecular morphing easily accessible to a wider range of developers. Because the current architecture of Molpher is fairly rigid and, in some cases, rather tightly coupled, it is not very developer-friendly. Furthermore, it requires anyone who wishes to even slightly modify the algorithm to delve deeply into its internals and recompile the whole backend code, which has a lot of dependencies.
-				</p>
+			<p>
+				Molpher-lib is based on the program <a href="https://github.com/siret/molpher">Molpher</a> which implements systematic <a href="https://en.wikipedia.org/wiki/Chemical_space">chemical space</a> exploration using a method called <a href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">molecular morphing</a>.
+				Its purpose is not only to make molecular morphing easily accessible to a wider audience, but it also strives for becoming a powerful, transparent and easy-to-use <em>de novo</em> drug design tool.
+			</p>
 
-				<p>
-					The main focus during the development is on:
-				</p>
-
-				<ol>
-					<li>reducing the codebase to only the most essential parts and removing unnecessary dependencies and functionality that is not important for developers (only the most essential backend code was kept),
-					</li>
-					<li>refactoring the code so that as many features as possible can be easily
-						exposed via an API,</li>
-					<li>exposing the API of the library to a high-level programming language (such as Python) for ease of use.</li>
-				</ol>
-
-			</div>
-
-			<div class="section">
-				<h3>Documentation</h3>
-				<p>
-					At the moment the highest version of the library is v0.0.0b1dev0.
-					The documentation for each version is available through the links below:
-				</p>
-
-
-				<div class="collection">
-					
-						<a href="./v0.0.0b1dev0/" class="collection-item">v0.0.0b1dev0</a>
-					
-						<a href="./v0.0.0b0/" class="collection-item">v0.0.0b0</a>
-					
-						<a href="./v0.0.0a3/" class="collection-item">v0.0.0a3</a>
-					
-						<a href="./v0.0.0a3dev0/" class="collection-item">v0.0.0a3dev0</a>
-					
-				</div>
-
-
-			</div>
+			<p>
+				On this simple web page, we will try to explain what molecular morphing is, how it can be used in <em>de novo</em> drug design and we will hint at some advanages Molpher-lib has over the original Molpher. There is also a page dedicated to some quick usage <a href="examples.html">examples</a> as well as an extensive <a href="#docs">documentation</a>.
+			</p>
 
 		</div>
-	</div>
+
+		<div id="morphing" class="section scrollspy">
+			<h3>Molecular Morphing</h3>
+
+			<p>
+				Molecular morphing is an atom-based <em>de novo</em> drug design method that uses stochastic optimization to search for a 'path' in chemical space. The so called path is a set of molecular structures that result from application of small structural modifications of the molecular structure of an input molecule. An example of such a path can be seen in the figure below.
+			</p>
+
+			<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-image">
+                <img src="images/path_example.svg">
+            </div>
+            <div class="card-content">
+                <p>
+			Example of a path generated by Molpher using some basic structural modifications. The modifications are shown as codes below the arrows (RA = remove atom, RB = remove bond, BR = bond reroute, MA = mutate atom).
+			</p>
+            </div>
+        </div>
+    </div>
 </div>
 
+			<p>
+				The original Molpher software was programmed to find a set of modifications needed to transform one molecular structure into another. Therefore, it can generate a set of 'hybrid' structures that combine the structural features of two input molecules; very much like <a href="https://en.wikipedia.org/wiki/Morphing">morphing</a> in computer graphics.
+			</p>
+
+			<p>
+				One possible application of such algorithm is sampling unknown chemical space  'around' molecules with confirmed biological activity (see figure below). Here, Molpher (or Molpher-lib) can be used to generate a focused virtual library of hybrid structures that are derived from known active molecules. Such library could, for example, be used in a <a href="https://en.wikipedia.org/wiki/Virtual_screening">virutal screening</a> campaign that might yield new ligands with new chemotypes.
+			</p>
+
+			<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-image">
+                <img src="images/drug_space.png">
+            </div>
+            <div class="card-content">
+                <p>
+			Schematic depiction of a focused chemical space exploration experiment using molecular morphing. Multiple paths are generated between every pair of known active molecules (lines connecting the big diamonds, one example path is highlighted in red). Every path consists of intermediate (hybrid) structures (morphs, shown as small diamonds) that combine structural features of the pair that they connect. It is also possible (and generally a good idea) to impose constraints on the search space that will prevent the algorithm from generating structures with undesirable properties (represented by the thick black lines enclosing the explored area).
+			</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+		</div>
+
+		<div id="advantages" class="section scrollspy">
+			<h3>Advantages of Molpher-lib over Molpher</h3>
+
+			<p>
+				The motivation to develop Molpher-lib was mainly driven by various shortcomings of Molpher:
+			</p>
+
+			<ol>
+				<li>It was developed as a standalone user-oriented software with no easy programmatic access to its features in mind.</li>
+				<li>It only includes one exploration algorithm implementation with only very limited possibilities for customization.</li>
+				<li>It only supports C++ programming language which makes experimenting with new exploration strategies difficult and interfacing with software in other languages very cumbersome.</li>
+				<li>The software architecture is not modular enough which makes extending the C++ codebase a lengthy and difficult task.</li>
+			</ol>
+
+			<p>
+				These problems were eliminated in Molpher-lib as follows:
+			</p>
+
+			<ol>
+				<li>The focus of Molpher-lib is to bring a powerful extensible framework to developers, rather than to non-technical users. Therefore, the GUI was stripped from the program and what was once a backend server was turned into a C++ library with powerful API.</li>
+				<li>The API of the library does not only offer options to adjust search settings, but also allows most of the essential parts of the algorithm to be overridden by the caller (see <a href="latest/usage/tutorial.html#tree-operations">tree operations</a>). This makes Molpher-lib a highly customizable framework and <a href="latest/usage/algorithms.html">various exploration algorithms</a> can be easily implemented.
+				</li>
+				<li>The whole C++ interface is exposed to Python and the library comes with a convenient Python package that also offers additional functionality and <a href="latest/usage/algorithms.html">algorithm implementations</a>. This makes the library much more compatible with a lot of popular scientific packages and makes interfacing with them very easy.</li>
+				<li>Molpher-lib uses highly modular software architecture that divides its functionality in small independent chunks. This makes modification, replacement and integration of new functionality much easier than before.</li>
+			</ol>
+
+			<p>
+				Thanks to all of the above the library has prerequisites to become a comprehensive and flexible <em>de novo</em> drug design framework. In the future, Molpher-lib will not only offer molecular morphing functionality, but will also include features that will allow for arbitrary evolution of molecular structures. This will be particularly useful in lead optimization and to quickly test new ideas in computer-aided drug design.
+			</p>
+		</div>
+
+		<div class="section scrollspy" id="docs">
+			<h3>Documentation</h3>
+			<p>
+				At the moment the highest stable version of the library is <b>v0.0.0b1</b>.
+				The documentation for each version is available through the links below:
+			</p>
+
+
+			<div class="collection">
+				
+				<a href="./v0.0.0b1/" class="collection-item">v0.0.0b1</a>
+				
+				<a href="./v0.0.0b1dev0/" class="collection-item">v0.0.0b1dev0</a>
+				
+				<a href="./v0.0.0b0/" class="collection-item">v0.0.0b0</a>
+				
+				<a href="./v0.0.0a3/" class="collection-item">v0.0.0a3</a>
+				
+				<a href="./v0.0.0a3dev0/" class="collection-item">v0.0.0a3dev0</a>
+				
+			</div>
+
+
+		</div>
+
+	</div>
+
+	<div class="col hide-on-small-only m3">
+		<ul class="section table-of-contents">
+			<li><a href="#introduction">About</a></li>
+			<li><a href="#morphing">Molecular Morphing</a></li>
+			<li><a href="#advantages">Molpher-lib:&nbsp;Advantages</a></li>
+			<li><a href="#docs">Documentation</a></li>
+		</ul>
+	</div>
+
+</div>
+
+</div>
 
 <!-- Layout JS -->
-<script src="https://code.jquery.com/jquery-2.2.1.min.js"
-		integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+<script
+		src="https://code.jquery.com/jquery-3.1.0.min.js"
+		integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
 		crossorigin="anonymous"></script>
 <!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
         integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
         crossorigin="anonymous"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+<!-- highlight.js -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
 
 <script>
 	$('.button-collapse').sideNav({
@@ -180,6 +278,17 @@
 				closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
 			}
 	);
+	$(document).ready(function(){
+		$('.scrollspy').scrollSpy();
+	});
+	$(document).ready(function(){
+		$('.table-of-contents').pushpin({ top: $('.table-of-contents').offset().top });
+	});
+	$(document).ready(function() {
+		$('code').each(function(i, block) {
+			hljs.highlightBlock(block);
+		});
+	});
 </script>
 
 </body>

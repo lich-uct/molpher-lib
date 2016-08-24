@@ -1,0 +1,355 @@
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+	<link rel="stylesheet" href="style.css">
+
+	<!-- Google Analytics JS -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+	</script>
+
+	
+<title>Examples</title>
+
+</head>
+
+<body>
+
+<div class="fork-me-wrapper hide-on-large-only">
+	<div class="fork-me">
+		<a class="fork-me-link" href="https://github.com/lich-uct/molpher-lib">
+			<span class="fork-me-text">Fork Me On GitHub</span>
+		</a>
+	</div>
+</div>
+
+<div class="fork-me-wrapper fork-me-left hide-on-med-and-down">
+	<div class="fork-me">
+		<a class="fork-me-link" href="https://github.com/lich-uct/molpher-lib">
+			<span class="fork-me-text">Fork Me On GitHub</span>
+		</a>
+	</div>
+</div>
+
+
+<nav>
+    <div class="nav-wrapper">
+        <span class="brand-logo center">molpher-lib</span>
+
+        <ul id="slide-out" class="side-nav hide-on-large-only">
+            <li class=""><a href="index.html">About</a></li>
+<li class="active"><a href="examples.html">Examples</a></li>
+<li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+        <li>
+            <a class="collapsible-header">Documentation<i class="mdi-navigation-arrow-drop-down"></i></a>
+            <div class="collapsible-body">
+                <ul>
+                    
+                    <li>
+                        <a href="./v0.0.0b1/">v0.0.0b1</a>
+                    </li>
+                    
+                    <li>
+                        <a href="./v0.0.0b1dev0/">v0.0.0b1dev0</a>
+                    </li>
+                    
+                    <li>
+                        <a href="./v0.0.0b0/">v0.0.0b0</a>
+                    </li>
+                    
+                    <li>
+                        <a href="./v0.0.0a3/">v0.0.0a3</a>
+                    </li>
+                    
+                    <li>
+                        <a href="./v0.0.0a3dev0/">v0.0.0a3dev0</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </li>
+    </ul>
+</li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+            <li class=""><a href="index.html">About</a></li>
+<li class="active"><a href="examples.html">Examples</a></li>
+<li><a class="dropdown-button" href="." data-activates="dropdown1">Documentation<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+<ul id='dropdown1' class='dropdown-content'>
+    
+    <li>
+        <a href="./v0.0.0b1/">v0.0.0b1</a>
+    </li>
+    
+    <li>
+        <a href="./v0.0.0b1dev0/">v0.0.0b1dev0</a>
+    </li>
+    
+    <li>
+        <a href="./v0.0.0b0/">v0.0.0b0</a>
+    </li>
+    
+    <li>
+        <a href="./v0.0.0a3/">v0.0.0a3</a>
+    </li>
+    
+    <li>
+        <a href="./v0.0.0a3dev0/">v0.0.0a3dev0</a>
+    </li>
+    
+</ul>
+        </ul>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+    </div>
+</nav>
+
+
+<div class="container">
+
+<div class="row">
+
+
+    <h2 class="right-align">Usage Examples</h2>
+    <div class="divider"></div>
+
+    <div class="col s12 m9">
+        <div class="section">
+
+            <p>
+                This page features some of the use cases that one might be interested in when using the library. This is by no means a complete list and much more can be done with the library. Please, refer to the <a href="index.html#docs">documentation</a> , if you would like to know more.
+            </p>
+
+        </div>
+
+        <div class="section scrollspy" id="path_classic">
+            <h3>Finding a Path</h3>
+
+            <p>
+                Probably the most straightforward use case is to generate a chemical space path using one of the <a href="latest/usage/algorithms.html">algorithms</a> implemented in the library. The code below will initiate a search from cocaine to procaine and write the resulting path to the output directory:
+            </p>
+
+            <div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-image">
+                <pre><code class="python">from molpher.algorithms.classic.run import run
+from molpher.algorithms.settings import Settings
+
+# our source and target molecules
+cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
+procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
+
+# directory where the path will be stored (as a pickled list)
+storage_dir = 'data'
+
+# initialize the exploration settings
+settings = Settings(
+    source=cocaine
+    , target=procaine
+    , storage_dir=storage_dir
+    , max_threads=4
+)
+
+run(settings)</code></pre>
+            </div>
+            <div class="card-content">
+                
+                This simple code example illustrates how to generate a path between two molecules (source and target) using the original implementation of molecular morphing.
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+
+        <div class="section scrollspy" id="path_custom">
+            <h3>Implementing a Morphing Algorithm</h3>
+
+            <p>
+                If we want to have more control over what actually happens during the exploration process, we can use the exploration tree API to implement our own algorithm:
+            </p>
+
+            <div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-image">
+                <pre><code class="python">from molpher.core import ExplorationTree as ETree
+from molpher.algorithms.functions import find_path
+
+cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
+procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
+
+tree = ETree.create(source=cocaine, target=procaine) # create the tree
+counter = 0
+while not tree.path_found:
+    counter+=1
+    print("Iteration", counter)
+    tree.generateMorphs() # generate the first generation of morphs
+    tree.sortMorphs() # sort morphs according to their distance to target (ascending)
+    tree.filterMorphs() # remove molecules that do not meet certain criteria
+    tree.extend() # connect the remaining molecules to the exploration tree
+    tree.prune() # remove branches of the tree that do not converge
+
+print("Path found: ", find_path(tree))</code></pre>
+            </div>
+            <div class="card-content">
+                
+            Sample code using the exploration tree API to implement the original algorithm from <a href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">Molpher</a>.
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+            <p>
+                This algorithm is basically an implementation of the one in the previous example. The tree is a data structure which keeps track of all possible paths that one might be interested in. We can extend the tree, remove certain molecules or paths and do many other things by performing <a href="latest/usage/tutorial.html#operations">operations</a>. In the code example above, we used the shortcut methods available on the tree instance, but the built-in operations are all defined as separate callable classes under <code class="python">molpher.core.operations</code>. Their behaviour can be adjusted using various settings, but it is also possible to define new operations end use them in a unified manner (see <a href="#custom_oper">Defining Operations</a>).
+            </p>
+
+        </div>
+
+        <div class="section scrollspy" id="custom_oper">
+            <h3>Defining Operations</h3>
+
+            <p>
+                All operations that are already implemented in the library are available from the <code class="python">molpher.core.operations</code> package. All of them share the same interface and can be performed on a tree using its <code class="python">runOperation()</code> method (see the code example below). New operations can be easily implemented by inherirting from the <code class="python">TreeOperation()</code> base class and implementing its <code class="python">__call__()</code> method. In the example below, we show a simple filtering operation implementation:
+            </p>
+
+            <div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-image">
+                <pre><code class="python">from molpher.algorithms.functions import find_path
+from molpher.core import ExplorationTree as ETree
+from molpher.core.operations import *
+
+cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
+procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
+
+class NitorgenFilter(TreeOperation):
+
+    def __call__(self):
+        """
+        This method can only be called when a tree is attached to the operation
+        (can be specified in the constructor, with the setTree() method or simply
+        by writing to the 'tree' attribute of the instance). When the runOperation()
+        method is executed, the tree is automatically added.
+        """
+
+        new_mask = [ 'N' in x.smiles for x in self.tree.candidates ]
+        self.tree.candidates_mask = new_mask
+
+
+iteration = [
+    GenerateMorphsOper()
+    , SortMorphsOper()
+    , FilterMorphsOper() # the default filter
+    , CleanMorphsOper() # discards morphs that were previously filtered out
+    , NitorgenFilter() # our customized filter
+    , ExtendTreeOper() # connect the remaining structures to the tree
+    , PruneTreeOper()
+]
+
+tree = ETree.create(source=cocaine, target=procaine)
+counter = 0
+while not tree.path_found:
+    counter+=1
+    print("Iteration", counter)
+    for oper in iteration:
+        tree.runOperation(oper)
+
+print("Path found: ", find_path(tree))</code></pre>
+            </div>
+            <div class="card-content">
+                
+            Example algorithm that uses a customized operation (<code class="python">NitorgenFilter</code>) to discard molecules that do not contain nitrogen.
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+            <p>
+                Every tree contains an array that masks the list of candidates
+                that are currently evaluated (populated by GenerateMorphsOper).
+                This mask is used to mark structures that should be removed from
+                the list of candidates upon extending the tree or when
+                CleanMorphsOper is called. Tree operations can be used to manipulate this mask and affect what molecules are accepted as the next generation in the evolution. Our customized operation in the example above does not really do much. It just discards generated structures that do not contain nitrogen. However, a more elaborate filtering scheme could also be implemented in this manner.
+            </p>
+
+        </div>
+
+        <div class="section scrollspy" id="misc">
+            <h3>More Examples</h3>
+
+            <p>
+                We have shown some common use cases of Molpher-lib. However, there is much more. For example, the library also provides means of traversing the molecules in the tree (or its subtree) or serializing tree snapshots at any point. You might want to head to the <a href="latest/usage/tutorial.html">tutorial</a> if you want a more complete overview of the software.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col hide-on-small-only m3">
+        <ul class="section table-of-contents">
+            <li><a href="#path_classic">Finding a Path</a></li>
+            <li><a href="#path_custom">Implementing&nbsp;an&nbsp;Algorithm</a></li>
+            <li><a href="#custom_oper">Defining&nbsp;Operations</a></li>
+            <li><a href="#misc">More&nbsp;Examples</a></li>
+        </ul>
+    </div>
+</div>
+
+</div>
+
+<!-- Layout JS -->
+<script
+		src="https://code.jquery.com/jquery-3.1.0.min.js"
+		integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+		crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
+        integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
+        crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+<!-- highlight.js -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script>
+	$('.button-collapse').sideNav({
+				menuWidth: 300, // Default is 240
+				edge: 'left', // Choose the horizontal origin
+				closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+			}
+	);
+	$(document).ready(function(){
+		$('.scrollspy').scrollSpy();
+	});
+	$(document).ready(function(){
+		$('.table-of-contents').pushpin({ top: $('.table-of-contents').offset().top });
+	});
+	$(document).ready(function() {
+		$('code').each(function(i, block) {
+			hljs.highlightBlock(block);
+		});
+	});
+</script>
+
+</body>
+</html>
