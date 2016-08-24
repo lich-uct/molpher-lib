@@ -32,7 +32,7 @@ def prepare_versions():
     current_version = 'v' + os.environ['VERSION']
     versions = [ x for x in os.listdir(".") if x.startswith("v")]
     if current_version in versions:
-        sys.stderr("WARNING: Docs for this version already built. Removing the old files...\n")
+        sys.stderr.write("WARNING: Docs for this version already built. Removing the old files...\n")
         shutil.rmtree(current_version)
     else:
         versions.append(current_version)
