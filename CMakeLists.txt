@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(molpher_lib)
 set(CMAKE_VERBOSE_MAKEFILE ON)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/" "${CMAKE_SOURCE_DIR}/tests/cmake/Modules/")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/bin)
 
 # versioning
 file(STRINGS "BUILD.TXT" BUILD_NUMBER LIMIT_COUNT 1)
@@ -235,3 +236,24 @@ set(BUILD_PREFIX
         "${CMAKE_SOURCE_DIR}/build" CACHE PATH "build prefix" FORCE
         )
 set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${BUILD_PREFIX}")
+
+# Build the tests binary
+
+## Find the testing library
+find_package(CppUnit REQUIRED)
+include_directories(${CPPUNIT_INCLUDE_DIR})
+set(TEST_LIBS ${TEST_LIBS} ${CPPUNIT_LIBRARIES})
+
+## compile
+set(TEST_SRC tests/minimal_test)
+add_executable(
+        minimal_test
+        ${TEST_SRC}/MinimalTest.cpp
+        ${TEST_SRC}/MinimalTest.hpp
+        ${TEST_SRC}/MinimalTestRunner.cpp
+)
+target_link_libraries(
+        minimal_test
+        molpher
+        ${TEST_LIBS}
+)

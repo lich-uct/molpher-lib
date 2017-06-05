@@ -4,7 +4,7 @@ dist/
 bin/
 /deps/*
 !/deps/*.sh
-/.idea/
+.idea/
 
 ## C++
 
