@@ -237,7 +237,7 @@ set(BUILD_PREFIX
         )
 set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${BUILD_PREFIX}")
 
-# Build the tests binary
+# Build the tests binary TODO: add this to the CHANGELOG and note it in the insatalltion docs
 
 ## Find the testing library
 find_package(CppUnit REQUIRED)
