@@ -1,7 +1,7 @@
 ## Project
 build/
-/dist/
-/libs/
+dist/
+bin/
 /deps/*
 !/deps/*.sh
 /.idea/
