@@ -34,10 +34,10 @@ private:
 
 public:  
     MolpherMol();
-    MolpherMol(const std::string& smiles, const std::string& formula, const std::string& parentSmile,
+    MolpherMol(const std::string& string_repr, const std::string& formula, const std::string& parentSmile,
                 const unsigned& oper, const double& dist, const double& distToClosestDecoy,
                 const double& weight, const double& sascore);
-    MolpherMol(const std::string& smiles);
+    MolpherMol(const std::string& string_repr);
     MolpherMol(const MolpherMol& other);
     ~MolpherMol();
     

@@ -34,14 +34,14 @@ private:
     MolpherMolData data;
 
 public:
-    MolpherMolImpl(const std::string& SMILES);
+    MolpherMolImpl(const std::string& string_repr);
     MolpherMolImpl(const MolpherMolData& data);
     MolpherMolImpl(const MolpherMolImpl& other);
     MolpherMolImpl();
     
     std::unique_ptr<MolpherMolImpl> copy() const;
 
-    void setSMILES(const std::string& smiles);
+    void initialize_smiles(const std::string &smiles);
 };
 
 #endif	/* MOLPHERMOLIMPL_HPP */

@@ -72,10 +72,10 @@ public:
 class MinimalTest : public CPPUNIT_NS::TestFixture {
     CPPUNIT_TEST_SUITE(MinimalTest);
 
-//FIXME: add all necessary tests back when the fixed_atom feature is ready
-//    CPPUNIT_TEST(testMolpherMol);
-//    CPPUNIT_TEST(testTree);
-//    CPPUNIT_TEST(testExplorationData);
+    //TODO: add all necessary tests back when the fixed_atom feature is ready
+    CPPUNIT_TEST(testMolpherMol);
+    CPPUNIT_TEST(testTree);
+    CPPUNIT_TEST(testExplorationData);
     CPPUNIT_TEST(testRDKit);
 
     CPPUNIT_TEST_SUITE_END();

@@ -25,11 +25,10 @@
 
 #include "data_structs/MolpherMol.hpp"
 #include "MolpherMolImpl.hpp"
-#include "data_structs/ExplorationTree.hpp"
 #include "core/misc/inout.h"
 
 MolpherMol::MolpherMol(
-    const std::string& smiles
+    const std::string& string_repr
     , const std::string& formula
     , const std::string& parentSmile
     , const unsigned& oper
@@ -38,7 +37,7 @@ MolpherMol::MolpherMol(
     , const double& weight
     , const double& sascore)
     :
-    pimpl(new MolpherMol::MolpherMolImpl(smiles))
+    pimpl(new MolpherMol::MolpherMolImpl(string_repr))
 {
     pimpl->data.formula = formula;
     pimpl->data.parentSmile = parentSmile;
@@ -48,7 +47,7 @@ MolpherMol::MolpherMol(
     pimpl->data.sascore = sascore;
 }
 
-MolpherMol::MolpherMol(const std::string& smiles) : pimpl(new MolpherMol::MolpherMolImpl(smiles)) {
+MolpherMol::MolpherMol(const std::string& string_repr) : pimpl(new MolpherMol::MolpherMolImpl(string_repr)) {
     // no action
 }
 
@@ -80,8 +79,8 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl() {
     // no action
 }
 
-MolpherMol::MolpherMolImpl::MolpherMolImpl(const std::string& smiles) {
-    this->setSMILES(smiles);
+MolpherMol::MolpherMolImpl::MolpherMolImpl(const std::string& string_repr) {
+    this->initialize_smiles(string_repr);
 }
 
 MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMolData& data) : data(data) {
@@ -92,7 +91,7 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMol::MolpherMolImpl& oth
     // no action
 }
 
-void MolpherMol::MolpherMolImpl::setSMILES(const std::string& smiles) {
+void MolpherMol::MolpherMolImpl::initialize_smiles(const std::string &smiles) {
     bool is_owned = (bool) tree;
     if (!is_owned) {
         RDKit::RWMol* mol = nullptr;
@@ -237,7 +236,7 @@ void MolpherMol::setSAScore(double score) {
 }
 
 void MolpherMol::setSMILES(const std::string& smiles) {
-    pimpl->setSMILES(smiles);
+    pimpl->initialize_smiles(smiles);
 }
 
 void MolpherMol::setParentSMILES(const std::string& smiles) {
