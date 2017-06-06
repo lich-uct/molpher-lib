@@ -1,0 +1,186 @@
+4914
+  -OEChem-06051710382D
+
+ 37 37  0     0  0  0  0  0  0999 V2000
+    3.7320    0.4050    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000    0.4050    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5981    2.9050    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -4.0950    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5981    1.9050    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4641    3.4050    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320    3.4050    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320    1.4050    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4641    4.4050    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320    4.4050    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -0.0950    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -1.0950    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000   -1.5950    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320   -1.5950    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -3.0950    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000   -2.5950    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320   -2.5950    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.8101    1.3224    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.2087    2.0127    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.6762    2.8224    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.0747    3.5127    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.1215    3.5127    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.5200    2.8224    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.5200    1.9876    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.1215    1.2973    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.0841    4.4050    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    5.4641    5.0250    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.8441    4.4050    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.3520    4.4050    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320    5.0250    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.1120    4.4050    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.4631   -1.2850    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.2690   -1.2850    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.4631   -2.9050    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.2690   -2.9050    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.3291   -4.4050    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.4030   -4.4050    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  8  1  0  0  0  0
+  1 11  1  0  0  0  0
+  2 11  2  0  0  0  0
+  3  5  1  0  0  0  0
+  3  6  1  0  0  0  0
+  3  7  1  0  0  0  0
+  4 15  1  0  0  0  0
+  4 36  1  0  0  0  0
+  4 37  1  0  0  0  0
+  5  8  1  0  0  0  0
+  5 18  1  0  0  0  0
+  5 19  1  0  0  0  0
+  6  9  1  0  0  0  0
+  6 20  1  0  0  0  0
+  6 21  1  0  0  0  0
+  7 10  1  0  0  0  0
+  7 22  1  0  0  0  0
+  7 23  1  0  0  0  0
+  8 24  1  0  0  0  0
+  8 25  1  0  0  0  0
+  9 26  1  0  0  0  0
+  9 27  1  0  0  0  0
+  9 28  1  0  0  0  0
+ 10 29  1  0  0  0  0
+ 10 30  1  0  0  0  0
+ 10 31  1  0  0  0  0
+ 11 12  1  0  0  0  0
+ 12 13  2  0  0  0  0
+ 12 14  1  0  0  0  0
+ 13 16  1  0  0  0  0
+ 13 32  1  0  0  0  0
+ 14 17  2  0  0  0  0
+ 14 33  1  0  0  0  0
+ 15 16  2  0  0  0  0
+ 15 17  1  0  0  0  0
+ 16 34  1  0  0  0  0
+ 17 35  1  0  0  0  0
+M  END
+> <PUBCHEM_COMPOUND_CID>
+4914
+
+> <PUBCHEM_COMPOUND_CANONICALIZED>
+1
+
+> <PUBCHEM_CACTVS_COMPLEXITY>
+222
+
+> <PUBCHEM_CACTVS_HBOND_ACCEPTOR>
+4
+
+> <PUBCHEM_CACTVS_HBOND_DONOR>
+1
+
+> <PUBCHEM_CACTVS_ROTATABLE_BOND>
+7
+
+> <PUBCHEM_CACTVS_SUBSKEYS>
+AAADceBzMAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAABAAAAHgAQAAAADAjhmAYyyINABACIAiTSSACCAAAkAgAIiAEIbMgKJjKAtZmDMQBk0AGY6YeY2SGeCAAAAAAAAAAQAAAAAAAAAAAAAAAAAA==
+
+> <PUBCHEM_IUPAC_OPENEYE_NAME>
+2-(diethylamino)ethyl 4-aminobenzoate
+
+> <PUBCHEM_IUPAC_CAS_NAME>
+4-aminobenzoic acid 2-(diethylamino)ethyl ester
+
+> <PUBCHEM_IUPAC_NAME>
+2-(diethylamino)ethyl 4-aminobenzoate
+
+> <PUBCHEM_IUPAC_SYSTEMATIC_NAME>
+2-(diethylamino)ethyl 4-azanylbenzoate
+
+> <PUBCHEM_IUPAC_TRADITIONAL_NAME>
+4-aminobenzoic acid 2-(diethylamino)ethyl ester
+
+> <PUBCHEM_IUPAC_INCHI>
+InChI=1S/C13H20N2O2/c1-3-15(4-2)9-10-17-13(16)11-5-7-12(14)8-6-11/h5-8H,3-4,9-10,14H2,1-2H3
+
+> <PUBCHEM_IUPAC_INCHIKEY>
+MFDFERRIHVXMIY-UHFFFAOYSA-N
+
+> <PUBCHEM_XLOGP3>
+1.9
+
+> <PUBCHEM_EXACT_MASS>
+236.152
+
+> <PUBCHEM_MOLECULAR_FORMULA>
+C13H20N2O2
+
+> <PUBCHEM_MOLECULAR_WEIGHT>
+236.315
+
+> <PUBCHEM_OPENEYE_CAN_SMILES>
+CCN(CC)CCOC(=O)C1=CC=C(C=C1)N
+
+> <PUBCHEM_OPENEYE_ISO_SMILES>
+CCN(CC)CCOC(=O)C1=CC=C(C=C1)N
+
+> <PUBCHEM_CACTVS_TPSA>
+55.6
+
+> <PUBCHEM_MONOISOTOPIC_WEIGHT>
+236.152
+
+> <PUBCHEM_TOTAL_CHARGE>
+0
+
+> <PUBCHEM_HEAVY_ATOM_COUNT>
+17
+
+> <PUBCHEM_ATOM_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ATOM_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_DEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_BOND_UDEF_STEREO_COUNT>
+0
+
+> <PUBCHEM_ISOTOPIC_ATOM_COUNT>
+0
+
+> <PUBCHEM_COMPONENT_COUNT>
+1
+
+> <PUBCHEM_CACTVS_TAUTO_COUNT>
+4
+
+> <PUBCHEM_COORDINATE_TYPE>
+1
+5
+255
+
+> <PUBCHEM_BONDANNOTATIONS>
+12  13  8
+12  14  8
+13  16  8
+14  17  8
+15  16  8
+15  17  8
+
+$$$$
