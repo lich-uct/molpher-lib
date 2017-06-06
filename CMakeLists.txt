@@ -239,19 +239,23 @@ set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${BUILD_PREF
 
 # Build the tests binary TODO: add this to the CHANGELOG and note it in the insatalltion docs
 
-## Find the testing library
-find_package(CppUnit REQUIRED)
-include_directories(${CPPUNIT_INCLUDE_DIR})
-set(TEST_LIBS ${TEST_LIBS} ${CPPUNIT_LIBRARIES})
-
-## compile
+## target
 set(TEST_SRC tests/minimal_test)
+set(TEST_HELPERS tests/helpers)
 add_executable(
         minimal_test
         ${TEST_SRC}/MinimalTest.cpp
         ${TEST_SRC}/MinimalTest.hpp
         ${TEST_SRC}/MinimalTestRunner.cpp
+        ${TEST_HELPERS}/io/stdout.hpp
+        ${TEST_HELPERS}/io/stdout.cpp
 )
+target_include_directories(minimal_test PUBLIC tests/helpers/)
+
+## Find the testing library
+find_package(CppUnit REQUIRED)
+target_include_directories(minimal_test PUBLIC ${CPPUNIT_INCLUDE_DIR})
+set(TEST_LIBS ${TEST_LIBS} ${CPPUNIT_LIBRARIES})
 target_link_libraries(
         minimal_test
         molpher

@@ -16,8 +16,14 @@
  */
 
 #include <stdexcept>
+#include <GraphMol/RWMol.h>
+#include <GraphMol/FileParsers/MolSupplier.h>
+#include <GraphMol/SmilesParse/SmilesWrite.h>
+#include <GraphMol/SmilesParse/SmilesParse.h>
+#include <GraphMol/MolOps.h>
 
 #include "MinimalTest.hpp"
+#include "io/stdout.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(MinimalTest);
 
@@ -254,5 +260,27 @@ void MinimalTest::testTree() {
         std::cout << "Path found: " + NumberToStr(tree_from_file->isPathFound()) << std::endl;
         tree_from_file->prune();
     }
+}
+
+void MinimalTest::testRDKit() {
+    //TODO: remove this from tests when the fixed_atom feature is ready
+
+    RDKit::ROMol* mol = RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next();
+    print_mol_info(mol);
+
+//    RDKit::RWMol* morphed_mol = RDKit::SmilesToMol(RDKit::MolToSmiles(*mol));
+    RDKit::RWMol morphed_mol(*mol);
+    RDKit::MolOps::Kekulize(morphed_mol);
+    print_mol_info((RDKit::ROMol*) &morphed_mol);
+
+//    morphed_mol.removeAtom((uint) 0);
+//    print_mol_info((RDKit::ROMol*) &morphed_mol);
+
+    uint bindingAtomIdx = 3;
+    RDKit::Atom* bindingAtom = morphed_mol.getAtomWithIdx(bindingAtomIdx);
+    RDKit::Atom addedAtom = *(morphed_mol.getAtomWithIdx(bindingAtomIdx));
+    uint newAtomIdx = morphed_mol.addAtom(&addedAtom);
+    morphed_mol.addBond(bindingAtom->getIdx(), newAtomIdx, RDKit::Bond::SINGLE);
+    print_mol_info((RDKit::ROMol*) &morphed_mol);
 }
 
