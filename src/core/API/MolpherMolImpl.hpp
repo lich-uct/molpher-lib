@@ -32,6 +32,7 @@ class MolpherMol::MolpherMolImpl {
 private:
     std::shared_ptr<ExplorationTree> tree;
     MolpherMolData data;
+    std::unique_ptr<RDKit::ROMol> rd_mol;
 
 public:
     MolpherMolImpl(const std::string& string_repr);
@@ -40,8 +41,8 @@ public:
     MolpherMolImpl();
     
     std::unique_ptr<MolpherMolImpl> copy() const;
-
-    void initialize_smiles(const std::string &smiles);
+    void initialize(const std::string &string_repr);
+    void initialize(std::unique_ptr<RDKit::RWMol> mol);
 };
 
 #endif	/* MOLPHERMOLIMPL_HPP */

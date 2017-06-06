@@ -22,6 +22,7 @@
 #include <GraphMol/SmilesParse/SmilesWrite.h>
 #include <GraphMol/MolOps.h>
 #include <RDGeneral/BadFileException.h>
+#include <boost/algorithm/string/predicate.hpp>
 
 #include "data_structs/MolpherMol.hpp"
 #include "MolpherMolImpl.hpp"
@@ -80,7 +81,7 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl() {
 }
 
 MolpherMol::MolpherMolImpl::MolpherMolImpl(const std::string& string_repr) {
-    this->initialize_smiles(string_repr);
+    this->initialize(string_repr);
 }
 
 MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMolData& data) : data(data) {
@@ -91,42 +92,55 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMol::MolpherMolImpl& oth
     // no action
 }
 
-void MolpherMol::MolpherMolImpl::initialize_smiles(const std::string &smiles) {
+void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
+    try {
+        RDKit::MolOps::Kekulize(*mol);
+    } catch (const ValueErrorException &exc) {
+        SynchCerr("Cannot kekulize input molecule.");
+        throw exc;
+    }
+
+    data.SMILES = RDKit::MolToSmiles(*mol);
+    data.formula = RDKit::Descriptors::calcMolFormula(*mol);
+    rd_mol = std::move(mol);
+}
+
+void MolpherMol::MolpherMolImpl::initialize(const std::string &string_repr) {
     bool is_owned = (bool) tree;
     if (!is_owned) {
-        RDKit::RWMol* mol = nullptr;
+        if (string_repr.empty()) {
+            SynchCerr("Creating a molecule with an empty SMILES string.");
+            data.SMILES = "";
+            return;
+        }
+
+        std::unique_ptr<RDKit::RWMol> mol;
         try {
-            if (smiles.empty()) {
-                SynchCerr("Creating a molecule with an empty SMILES string.");
-                data.SMILES = "";
-                return;
+            if (boost::algorithm::ends_with(string_repr, ".sdf")) {
+                RDKit::ROMol* mol_ro = RDKit::SDMolSupplier(string_repr).next();
+                mol.reset(new RDKit::RWMol(*mol_ro));
+                delete mol_ro;
+            } else if (string_repr.find("\n") != std::string::npos) {
+                std::istream* istr = new std::istringstream(string_repr);
+                RDKit::ROMol* mol_ro = RDKit::SDMolSupplier(istr).next();
+                mol.reset(new RDKit::RWMol(*mol_ro));
+                delete mol_ro;
+            } else {
+                mol.reset(RDKit::SmilesToMol(string_repr));
             }
-            mol = RDKit::SmilesToMol(smiles);
         } catch (RDKit::SmilesParseException &exp) {
-            SynchCerr("Error parsing supplied SMILES: \"" + smiles + "\"");
+            SynchCerr("Error parsing supplied SMILES: \"" + string_repr + "\"");
             SynchCerr(exp.what());
-            delete mol;
             throw exp;
         }
 
-        try {
-            RDKit::MolOps::Kekulize(*mol);
-        } catch (const ValueErrorException &exc) {
-            SynchCerr("Cannot kekulize input molecule.");
-            delete mol;
-            throw exc;
-        }
-
-        data.SMILES = RDKit::MolToSmiles(*mol);
-        data.formula = RDKit::Descriptors::calcMolFormula(*mol);
-
-        delete mol;
+        initialize(std::move(mol));
     } else {
         throw std::runtime_error("Molecule is already associated with a tree. "
             "The SMILES string cannot be changed at the moment.");
     }
 
-//    SynchCout("Parsed molecule " + smiles + " >> " + data.SMILES);
+//    SynchCout("Parsed molecule " + string_repr + " >> " + data.SMILES);
 }
 
 const std::string& MolpherMol::getSMILES() const {
@@ -236,7 +250,7 @@ void MolpherMol::setSAScore(double score) {
 }
 
 void MolpherMol::setSMILES(const std::string& smiles) {
-    pimpl->initialize_smiles(smiles);
+    pimpl->initialize(smiles);
 }
 
 void MolpherMol::setParentSMILES(const std::string& smiles) {

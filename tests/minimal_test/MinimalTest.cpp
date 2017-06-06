@@ -84,6 +84,24 @@ void MinimalTest::testMolpherMol() {
                 0.0, 3.1);
     CPPUNIT_ASSERT_EQUAL(OP_MUTATE_ATOM, static_cast<ChemOperSelector>(complete.getParentOper()));
     CPPUNIT_ASSERT_EQUAL(std::string("NC(=O)C"), complete.getParentSMILES());
+
+    // test initialization from SDF
+    std::cout << "Testing SDF molecule loader..." << std::endl;
+    RDKit::RWMol* mol_rdkit = new RDKit::RWMol(*(RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next()));
+    RDKit::MolOps::Kekulize(*mol_rdkit);
+    MolpherMol sdf_derived(test_dir + "Structure2D_CID_4914.sdf");
+    std::cout << RDKit::MolToSmiles(*mol_rdkit) + " vs. " + sdf_derived.getSMILES() << std::endl;
+    CPPUNIT_ASSERT_EQUAL(RDKit::MolToSmiles(*mol_rdkit), sdf_derived.getSMILES());
+
+    std::ifstream t(test_dir + "Structure2D_CID_4914.sdf");
+    std::string file_string(
+            (std::istreambuf_iterator<char>(t)),
+            std::istreambuf_iterator<char>());
+    MolpherMol stream_derived(file_string);
+    std::cout << RDKit::MolToSmiles(*mol_rdkit) + " vs. " + stream_derived.getSMILES() << std::endl;
+    CPPUNIT_ASSERT_EQUAL(RDKit::MolToSmiles(*mol_rdkit), stream_derived.getSMILES());
+
+    delete mol_rdkit;
 }
 
 void MinimalTest::testExplorationData() {
@@ -282,5 +300,7 @@ void MinimalTest::testRDKit() {
     uint newAtomIdx = morphed_mol.addAtom(&addedAtom);
     morphed_mol.addBond(bindingAtom->getIdx(), newAtomIdx, RDKit::Bond::SINGLE);
     print_mol_info((RDKit::ROMol*) &morphed_mol);
+
+    delete mol;
 }
 
