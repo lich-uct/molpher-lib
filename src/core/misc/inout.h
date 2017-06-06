@@ -30,10 +30,10 @@
 //#include "data_structs/MolpherMolecule.h"
 
 void SynchCout(const std::string &s);
-void SynchCerr(const std::string &s, const std::string prefix = "WARNIG: ");
+void SynchCerr(const std::string &s, const std::string prefix = "WARNING: ");
 
 void Cout(const std::string &s);
-void Cerr(const std::string &s, const std::string prefix = "WARNIG: ");
+void Cerr(const std::string &s, const std::string prefix = "WARNING: ");
 
 template<typename Number>
 std::string parseNumber(Number num) {
