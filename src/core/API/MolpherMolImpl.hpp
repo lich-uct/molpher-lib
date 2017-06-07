@@ -41,6 +41,8 @@ public:
     MolpherMolImpl();
     
     std::unique_ptr<MolpherMolImpl> copy() const;
+
+	// TODO: make these private
     void initialize(const std::string &string_repr);
     void initialize(std::unique_ptr<RDKit::RWMol> mol);
 };
