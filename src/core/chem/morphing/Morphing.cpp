@@ -98,8 +98,8 @@ void GenerateMorphs(
     std::vector<MolpherMol> &decoys,
     tbb::task_group_context &tbbCtx ,
     void *callerState,
-    void (*deliver)(std::shared_ptr<MolpherMol>, void *) )
-{
+    void (*deliver)(std::shared_ptr<MolpherMol>, void *)
+) {
     RDKit::RWMol *mol = NULL;
     try {
         mol = RDKit::SmilesToMol(candidate.getSMILES());
@@ -179,8 +179,9 @@ void GenerateMorphs(
         sanitizeFailureCount = 0;
         morphingFailureCount = 0;
         try {
-            MorphingData data(*mol, *targetMol, chemOperSelectors);
-            
+			// TODO: incorporate this under the MolpherMol class -> MolpherMol instances generate their own morphs
+
+			MorphingData data(*mol, *targetMol, chemOperSelectors);
             CalculateMorphs calculateMorphs(
                 data, strategies, opers, newMols, smiles, formulas, weights, sascores,
                 kekulizeFailureCount, sanitizeFailureCount, morphingFailureCount);
