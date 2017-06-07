@@ -27,7 +27,7 @@
 
 class MolpherMol::MolpherMolImpl {
     
-    friend class MolpherMol;
+    friend class MolpherMol; // TODO: this should not be necassary -> change architecture
     
 private:
     std::shared_ptr<ExplorationTree> tree;
@@ -42,9 +42,17 @@ public:
     
     std::unique_ptr<MolpherMolImpl> copy() const;
 
-	// TODO: make these private
     void initialize(const std::string &string_repr);
     void initialize(std::unique_ptr<RDKit::RWMol> mol);
+
+	std::unique_ptr<ConcurrentMolVector> morph(
+			const std::vector<ChemOperSelector>& operators
+			, int cntMorphs
+			, int threadCnt
+			, FingerprintSelector fingerprintSelector
+			, SimCoeffSelector simCoeffSelector
+			, const MolpherMol& target
+	);
 };
 
 #endif	/* MOLPHERMOLIMPL_HPP */

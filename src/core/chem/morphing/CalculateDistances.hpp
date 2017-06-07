@@ -41,10 +41,7 @@ public:
         RDKit::RWMol **newMols,
         SimCoefCalculator &scCalc,
         Fingerprint *targetFp,
-        std::vector<Fingerprint *> &decoysFp,
-        double *distToTarget,
-        double *distToClosestDecoy,
-        int nextDecoy
+        double *distToTarget
         );
 
     void operator()(const tbb::blocked_range<int> &r) const;
@@ -53,13 +50,6 @@ public:
     RDKit::RWMol **mNewMols;
     SimCoefCalculator &mScCalc;
     Fingerprint *mTargetFp;
-    std::vector<Fingerprint *> &mDecoysFp;
 
     double *mDistToTarget;
-    double *mDistToClosestDecoy;
-    
-    /**
-     * Determine next decoy to visit.
-     */
-    int mNextDecoy;
 };

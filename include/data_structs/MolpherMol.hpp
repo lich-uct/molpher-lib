@@ -21,7 +21,10 @@
 #include <string>
 #include <memory>
 #include <set>
+#include <vector>
 
+#include "selectors/fingerprint_selectors.h"
+#include "selectors/simcoeff_selectors.h"
 #include "selectors/chemoper_selectors.h"
 
 class ExplorationTree; // forward declaration to resolve circular dependency
@@ -43,7 +46,16 @@ public:
     
     MolpherMol& operator=(const MolpherMol&);
     std::shared_ptr<MolpherMol> copy() const;
-    
+
+    std::vector<std::shared_ptr<MolpherMol> > morph(
+            const std::vector<ChemOperSelector>& operators
+			, int cntMorphs
+			, int threadCnt
+            , FingerprintSelector fingerprintSelector
+            , SimCoeffSelector simCoeffSelector
+            , const MolpherMol& target
+    );
+
     // getters
     const std::string& getSMILES() const;
     double getDistToTarget() const;

@@ -3493,14 +3493,15 @@ namespace Swig {
 #define SWIGTYPE_p_std__shared_ptrT_MolpherMol_t swig_types[37]
 #define SWIGTYPE_p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t swig_types[38]
 #define SWIGTYPE_p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t swig_types[39]
-#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[40]
-#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[41]
-#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t swig_types[42]
-#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[43]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[44]
-#define SWIGTYPE_p_value_type swig_types[45]
-static swig_type_info *swig_types[47];
-static swig_module_info swig_module = {swig_types, 46, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t swig_types[40]
+#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[41]
+#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[42]
+#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t swig_types[43]
+#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[44]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[45]
+#define SWIGTYPE_p_value_type swig_types[46]
+static swig_type_info *swig_types[48];
+static swig_module_info swig_module = {swig_types, 47, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -19661,6 +19662,121 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MolpherMol_morph(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  FingerprintSelector arg5 ;
+  SimCoeffSelector arg6 ;
+  MolpherMol *arg7 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< MolpherMol > tempshared1 ;
+  std::shared_ptr< MolpherMol > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  void *argp7 = 0 ;
+  int res7 = 0 ;
+  std::shared_ptr< MolpherMol const > tempshared7 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
+  PyObject * obj5 = 0 ;
+  PyObject * obj6 = 0 ;
+  std::vector< std::shared_ptr< MolpherMol >,std::allocator< std::shared_ptr< MolpherMol > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOOO:MolpherMol_morph",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_morph" "', argument " "1"" of type '" "MolpherMol *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MolpherMol_morph" "', argument " "2"" of type '" "std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMol_morph" "', argument " "2"" of type '" "std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > * >(argp2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MolpherMol_morph" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "MolpherMol_morph" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(obj4, &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "MolpherMol_morph" "', argument " "5"" of type '" "FingerprintSelector""'");
+  } 
+  arg5 = static_cast< FingerprintSelector >(val5);
+  ecode6 = SWIG_AsVal_int(obj5, &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "MolpherMol_morph" "', argument " "6"" of type '" "SimCoeffSelector""'");
+  } 
+  arg6 = static_cast< SimCoeffSelector >(val6);
+  {
+    int newmem = 0;
+    res7 = SWIG_ConvertPtrAndOwn(obj6, &argp7, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t,  0 , &newmem);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "MolpherMol_morph" "', argument " "7"" of type '" "MolpherMol const &""'"); 
+    }
+    if (!argp7) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMol_morph" "', argument " "7"" of type '" "MolpherMol const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared7 = *reinterpret_cast< std::shared_ptr< const MolpherMol > * >(argp7);
+      delete reinterpret_cast< std::shared_ptr< const MolpherMol > * >(argp7);
+      arg7 = const_cast< MolpherMol * >(tempshared7.get());
+    } else {
+      arg7 = const_cast< MolpherMol * >(reinterpret_cast< std::shared_ptr< const MolpherMol > * >(argp7)->get());
+    }
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (arg1)->morph((std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > const &)*arg2,arg3,arg4,arg5,arg6,(MolpherMol const &)*arg7);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< std::shared_ptr< MolpherMol >,std::allocator< std::shared_ptr< MolpherMol > > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MolpherMol_getSMILES(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *arg1 = (MolpherMol *) 0 ;
@@ -29516,6 +29632,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_MolpherMol", _wrap_new_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"delete_MolpherMol", _wrap_delete_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_copy", _wrap_MolpherMol_copy, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_morph", _wrap_MolpherMol_morph, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getSMILES", _wrap_MolpherMol_getSMILES, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getDistToTarget", _wrap_MolpherMol_getDistToTarget, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getTree", _wrap_MolpherMol_getTree, METH_VARARGS, NULL},
@@ -29759,6 +29876,7 @@ static swig_type_info _swigt__p_std__shared_ptrT_ExplorationTree_t = {"_p_std__s
 static swig_type_info _swigt__p_std__shared_ptrT_MolpherMol_t = {"_p_std__shared_ptrT_MolpherMol_t", "std::shared_ptr< MolpherMol > *|std::vector< std::shared_ptr< MolpherMol > >::value_type *|std::map< std::string,std::shared_ptr< MolpherMol > >::mapped_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t = {"_p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t", "std::shared_ptr< std::shared_ptr< std::map< std::string,std::shared_ptr< MolpherMol > > > > *|std::shared_ptr< std::shared_ptr< std::map< std::string,std::shared_ptr< MolpherMol >,std::less< std::string >,std::allocator< std::pair< std::string const,std::shared_ptr< MolpherMol > > > > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t = {"_p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t", "std::shared_ptr< std::shared_ptr< std::vector< std::shared_ptr< MolpherMol > > > > *|std::shared_ptr< std::shared_ptr< std::vector< std::shared_ptr< MolpherMol >,std::allocator< std::shared_ptr< MolpherMol > > > > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t = {"_p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t", "std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > *|std::vector< enum ChemOperSelector,std::allocator< enum ChemOperSelector > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t = {"_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t", "std::vector< MolpherMol,std::allocator< MolpherMol > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t = {"_p_std__vectorT_bool_std__allocatorT_bool_t_t", "std::vector< bool,std::allocator< bool > > *|std::vector< bool > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t = {"_p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t", "std::vector< std::shared_ptr< MolpherMol > > *|std::vector< std::shared_ptr< MolpherMol >,std::allocator< std::shared_ptr< MolpherMol > > > *", 0, 0, (void*)0, 0};
@@ -29807,6 +29925,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__shared_ptrT_MolpherMol_t,
   &_swigt__p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t,
   &_swigt__p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t,
+  &_swigt__p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t,
   &_swigt__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t,
   &_swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t,
   &_swigt__p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t,
@@ -29855,6 +29974,7 @@ static swig_cast_info _swigc__p_std__shared_ptrT_ExplorationTree_t[] = {  {&_swi
 static swig_cast_info _swigc__p_std__shared_ptrT_MolpherMol_t[] = {  {&_swigt__p_std__shared_ptrT_MolpherMol_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t[] = {  {&_swigt__p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t[] = {  {&_swigt__p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t[] = {  {&_swigt__p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t[] = {  {&_swigt__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_bool_std__allocatorT_bool_t_t[] = {  {&_swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t[] = {  {&_swigt__p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -29903,6 +30023,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__shared_ptrT_MolpherMol_t,
   _swigc__p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t,
   _swigc__p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t,
+  _swigc__p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t,
   _swigc__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t,
   _swigc__p_std__vectorT_bool_std__allocatorT_bool_t_t,
   _swigc__p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t,

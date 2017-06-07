@@ -21,27 +21,28 @@
 
 #include "core/misc/global_types.h"
 #include "TreeOperationImpl.hpp"
+#include "operations/GenerateMorphsOper.hpp"
+
+class CollectMorphs
+{
+public:
+    CollectMorphs(ConcurrentMolVector &morphs, std::shared_ptr<ExplorationTree> tree, bool set_ownership);
+    CollectMorphs(ConcurrentMolVector &morphs, bool set_ownership);
+    void operator()(std::shared_ptr<MolpherMol> morph);
+    unsigned int WithdrawCollectAttemptCount();
+    static void MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor);
+
+private:
+    ConcurrentSmileSet mDuplicateChecker;
+    ConcurrentMolVector &mMorphs;
+    std::shared_ptr<ExplorationTree> mTree;
+    bool mSetTreeOwnership;
+    tbb::atomic<unsigned int> mCollectAttemptCount;
+};
 
 class GenerateMorphsOper::GenerateMorphsOperImpl : public TreeOperation::TreeOperationImpl {
 
 private:
-    
-    class CollectMorphs
-    {
-    public:
-        CollectMorphs(ConcurrentMolVector &morphs, std::shared_ptr<ExplorationTree> tree, bool set_ownership);
-        void operator()(std::shared_ptr<MolpherMol> morph);
-        unsigned int WithdrawCollectAttemptCount();
-        static void MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor);
-
-    private:
-        ConcurrentSmileSet mDuplicateChecker;
-        ConcurrentMolVector &mMorphs;
-        std::shared_ptr<ExplorationTree> mTree;
-        bool mSetTreeOwnership;
-        tbb::atomic<unsigned int> mCollectAttemptCount;
-    };
-    
     bool mSetTreeOwnershipForMorphs;
     
 public:

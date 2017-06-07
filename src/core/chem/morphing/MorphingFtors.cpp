@@ -117,18 +117,12 @@ CalculateDistances::CalculateDistances(
     RDKit::RWMol **newMols,
     SimCoefCalculator &scCalc,
     Fingerprint *targetFp,
-    std::vector<Fingerprint *> &decoysFp,
-    double *distToTarget,
-    double *distToClosestDecoy,
-    int nextDecoy
+    double *distToTarget
     ) :
     mNewMols(newMols),
     mScCalc(scCalc),
     mTargetFp(targetFp),
-    mDecoysFp(decoysFp),
-    mDistToTarget(distToTarget),
-    mDistToClosestDecoy(distToClosestDecoy),
-    mNextDecoy(nextDecoy)
+    mDistToTarget(distToTarget)
 {
     // no-op
 }
@@ -136,7 +130,7 @@ CalculateDistances::CalculateDistances(
 void CalculateDistances::operator()(const tbb::blocked_range<int> &r) const
 {
     Fingerprint *fp;
-    double dist, minDist;
+//    double dist, minDist;
 
     for (int i = r.begin(); i != r.end(); ++i) {
         if (mNewMols[i]) {
@@ -144,17 +138,17 @@ void CalculateDistances::operator()(const tbb::blocked_range<int> &r) const
             mDistToTarget[i] = mScCalc.ConvertToDistance(
                 mScCalc.GetSimCoef(mTargetFp, fp));
 
-            dist = 0;
-            // Calculate distance to the current decoy (mLastDecoy)
-            if (mNextDecoy == -1 || mNextDecoy >= mDecoysFp.size() ) {
-                // no calculation need, all the decoys are behind us 
-                dist = 0;
-            } else {
-                // calculate distance to the next decoy for visit
-                dist = mScCalc.ConvertToDistance(
-                    mScCalc.GetSimCoef(mDecoysFp[mNextDecoy], fp));                
-            }
-            mDistToClosestDecoy[i] = dist;
+//            dist = 0;
+//            // Calculate distance to the current decoy (mLastDecoy)
+//            if (mNextDecoy == -1 || mNextDecoy >= mDecoysFp.size() ) {
+//                // no calculation need, all the decoys are behind us
+//                dist = 0;
+//            } else {
+//                // calculate distance to the next decoy for visit
+//                dist = mScCalc.ConvertToDistance(
+//                    mScCalc.GetSimCoef(mDecoysFp[mNextDecoy], fp));
+//            }
+//            mDistToClosestDecoy[i] = dist;
             
             delete fp;
         }
@@ -170,7 +164,6 @@ ReturnResults::ReturnResults(
     double *weights,
     double *sascore, // added for SAScore
     double *distToTarget,
-    double *distToClosestDecoy,
     void *callerState,
     void (*deliver)(std::shared_ptr<MolpherMol>, void *)
     ) :
@@ -182,7 +175,6 @@ ReturnResults::ReturnResults(
     mWeights(weights),
     mSascore(sascore), // added for SAScore
     mDistToTarget(distToTarget),
-    mDistToClosestDecoy(distToClosestDecoy),
     mCallerState(callerState),
     mDeliver(deliver)
 {
@@ -198,8 +190,9 @@ void ReturnResults::operator()(const tbb::blocked_range<int> &r) const
     
     for (int i = r.begin(); i != r.end(); ++i) {
         if (mNewMols[i]) {
+            // TODO: initialize MolpherMol directly from the RDKit RWMol pointer (through the initialize method of its pimpl)
             auto result = std::make_shared<MolpherMol>(mSmiles[i], mFormulas[i], mParentSmile,
-                mOpers[i], mDistToTarget[i], mDistToClosestDecoy[i],
+                mOpers[i], mDistToTarget[i], 0 /*remove this (obsolete)*/,
                 mWeights[i], mSascore[i]);
             
             /* Advance decoy functionality

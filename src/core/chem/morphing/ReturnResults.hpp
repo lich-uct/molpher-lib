@@ -46,7 +46,6 @@ public:
         double *weights,
         double *sascores,
         double *distToTarget,
-        double *distToClosestDecoy,
         void *callerState,
         void (*deliver)(std::shared_ptr<MolpherMol>, void *)
         );
@@ -62,7 +61,6 @@ private:
     double *mWeights;
     double *mSascore;
     double *mDistToTarget;
-    double *mDistToClosestDecoy;
 
     void *mCallerState;
     void (*mDeliver)(std::shared_ptr<MolpherMol>, void *);

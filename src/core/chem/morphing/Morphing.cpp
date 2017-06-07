@@ -52,8 +52,8 @@
 #define REPORT_RECOVERY(x)
 #endif
 
-static void InitStrategies(
-    std::vector<ChemOperSelector> &chemOperSelectors,
+void InitStrategies(
+    const std::vector<ChemOperSelector> &chemOperSelectors,
     std::vector<MorphingStrategy *> &strategies)
 {
     for (int i = 0; i < chemOperSelectors.size(); ++i) {
@@ -95,7 +95,7 @@ void GenerateMorphs(
     SimCoeffSelector simCoeffSelector,
     std::vector<ChemOperSelector> &chemOperSelectors,
     MolpherMol&target,
-    std::vector<MolpherMol> &decoys,
+    std::vector<MolpherMol> &decoys, // TODO: remove this (obsolete)
     tbb::task_group_context &tbbCtx ,
     void *callerState,
     void (*deliver)(std::shared_ptr<MolpherMol>, void *)
@@ -179,8 +179,6 @@ void GenerateMorphs(
         sanitizeFailureCount = 0;
         morphingFailureCount = 0;
         try {
-			// TODO: incorporate this under the MolpherMol class -> MolpherMol instances generate their own morphs
-
 			MorphingData data(*mol, *targetMol, chemOperSelectors);
             CalculateMorphs calculateMorphs(
                 data, strategies, opers, newMols, smiles, formulas, weights, sascores,
@@ -211,8 +209,7 @@ void GenerateMorphs(
     // compute distances
     // we need to announce the decoy which we want to use    
     if (!tbbCtx.is_group_execution_cancelled()) {
-        CalculateDistances calculateDistances(newMols, scCalc, targetFp,
-            decoysFp, distToTarget, distToClosestDecoy, 0/*candidate.nextDecoy*/);
+        CalculateDistances calculateDistances(newMols, scCalc, targetFp, distToTarget);
         tbb::parallel_for(tbb::blocked_range<int>(0, morphAttempts),
             calculateDistances, tbb::auto_partitioner(), tbbCtx);
     }
@@ -222,7 +219,7 @@ void GenerateMorphs(
         std::string parent = candidate.getSMILES();
         ReturnResults returnResults(
             newMols, smiles, formulas, parent, opers, weights, sascores,
-            distToTarget, distToClosestDecoy, callerState, deliver);
+            distToTarget, callerState, deliver);
         tbb::parallel_for(tbb::blocked_range<int>(0, morphAttempts),
             returnResults, tbb::auto_partitioner(), tbbCtx);
     }

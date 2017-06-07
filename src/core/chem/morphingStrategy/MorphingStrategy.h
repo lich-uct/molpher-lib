@@ -29,3 +29,7 @@ public:
     virtual void Morph(MorphingData &data, RDKit::RWMol **nMol) = 0;
     virtual ChemOperSelector GetSelector() = 0;
 };
+
+void InitStrategies(
+		const std::vector<ChemOperSelector> &chemOperSelectors,
+		std::vector<MorphingStrategy *> &strategies);

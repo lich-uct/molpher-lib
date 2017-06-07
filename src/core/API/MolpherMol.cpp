@@ -23,10 +23,16 @@
 #include <GraphMol/MolOps.h>
 #include <RDGeneral/BadFileException.h>
 #include <boost/algorithm/string/predicate.hpp>
+#include <tbb/task_scheduler_init.h>
+#include <tbb/partitioner.h>
+#include <tbb/parallel_for.h>
+#include <core/chem/morphing/ReturnResults.hpp>
 
-#include "data_structs/MolpherMol.hpp"
 #include "MolpherMolImpl.hpp"
 #include "core/misc/inout.h"
+#include "core/API/operations/GenerateMorphsOperImpl.hpp"
+#include "core/chem/morphing/CalculateMorphs.hpp"
+#include "core/chem/morphing/CalculateDistances.hpp"
 
 MolpherMol::MolpherMol(
     const std::string& string_repr
@@ -159,6 +165,109 @@ std::unique_ptr<MolpherMol::MolpherMolImpl> MolpherMol::MolpherMolImpl::copy() c
     return std::unique_ptr<MolpherMol::MolpherMolImpl>(new MolpherMol::MolpherMolImpl(*this));
 }
 
+std::unique_ptr<ConcurrentMolVector>
+MolpherMol::MolpherMolImpl::morph(const std::vector<ChemOperSelector> &operators, int cntMorphs, int threadCnt,
+                                  FingerprintSelector fingerprintSelector, SimCoeffSelector simCoeffSelector,
+                                  const MolpherMol &target) {
+    tbb::task_group_context tbbCtx;
+    tbb::task_scheduler_init scheduler;
+    scheduler.terminate();
+    scheduler.initialize(threadCnt);
+
+    std::unique_ptr<ConcurrentMolVector> candidates(new ConcurrentMolVector());
+    candidates->reserve(candidates->size() + cntMorphs);
+    CollectMorphs collectMorphs(*candidates, false);
+
+    RDKit::ROMol* targetMol = target.pimpl->rd_mol.get();
+    SimCoefCalculator scCalc(simCoeffSelector , fingerprintSelector, rd_mol.get(), targetMol);
+    Fingerprint* targetFp = scCalc.GetFingerprint(targetMol);
+
+    std::vector<MorphingStrategy *> strategies;
+    InitStrategies(operators, strategies);
+
+    RDKit::RWMol **newMols = new RDKit::RWMol *[cntMorphs];
+    std::memset(newMols, 0, sizeof(RDKit::RWMol *) * cntMorphs);
+    ChemOperSelector *opers = new ChemOperSelector [cntMorphs];
+    std::string *smiles = new std::string [cntMorphs];
+    std::string *formulas = new std::string [cntMorphs];
+    double *weights = new double [cntMorphs];
+    double *sascores = new double [cntMorphs]; // added for SAScore
+    double *distToTarget = new double [cntMorphs];
+
+    // compute new morphs and smiles
+    if (!tbbCtx.is_group_execution_cancelled()) {
+        tbb::atomic<unsigned int> kekulizeFailureCount;
+        tbb::atomic<unsigned int> sanitizeFailureCount;
+        tbb::atomic<unsigned int> morphingFailureCount;
+        kekulizeFailureCount = 0;
+        sanitizeFailureCount = 0;
+        morphingFailureCount = 0;
+        try {
+            MorphingData data(*rd_mol, *targetMol, operators);
+            CalculateMorphs calculateMorphs(
+                    data, strategies, opers, newMols, smiles, formulas, weights, sascores,
+                    kekulizeFailureCount, sanitizeFailureCount, morphingFailureCount);
+
+            tbb::parallel_for(tbb::blocked_range<int>(0, cntMorphs),
+                              calculateMorphs, tbb::auto_partitioner(), tbbCtx);
+        } catch (const std::exception &exc) {
+//            REPORT_RECOVERY("Recovered from morphing data construction failure.");
+        }
+        if (kekulizeFailureCount > 0) {
+            std::stringstream report;
+            report << "Recovered from " << kekulizeFailureCount << " kekulization failures.";
+//            REPORT_RECOVERY(report.str());
+        }
+        if (sanitizeFailureCount > 0) {
+            std::stringstream report;
+            report << "Recovered from " << sanitizeFailureCount << " sanitization failures.";
+//            REPORT_RECOVERY(report.str());
+        }
+        if (morphingFailureCount > 0) {
+            std::stringstream report;
+            report << "Recovered from " << morphingFailureCount << " morphing failures.";
+//            REPORT_RECOVERY(report.str());
+        }
+    }
+
+    // compute distances
+    // we need to announce the decoy which we want to use
+    if (!tbbCtx.is_group_execution_cancelled()) {
+        CalculateDistances calculateDistances(newMols, scCalc, targetFp, distToTarget);
+        tbb::parallel_for(tbb::blocked_range<int>(0, cntMorphs),
+                          calculateDistances, tbb::auto_partitioner(), tbbCtx);
+    }
+
+    // return results
+    if (!tbbCtx.is_group_execution_cancelled()) {
+        std::string parent = data.SMILES;
+        ReturnResults returnResults(
+                newMols, smiles, formulas, parent, opers, weights, sascores,
+                distToTarget, &collectMorphs, CollectMorphs::MorphCollector);
+        tbb::parallel_for(tbb::blocked_range<int>(0, cntMorphs),
+                          returnResults, tbb::auto_partitioner(), tbbCtx);
+    }
+
+    // clean up
+    for (int i = 0; i < cntMorphs; ++i) {
+        delete newMols[i];
+    }
+    delete[] newMols;
+    delete[] opers;
+    delete[] smiles;
+    delete[] formulas;
+    delete[] weights;
+    delete[] sascores;
+
+    delete targetFp;
+
+    for (int i = 0; i < strategies.size(); ++i) {
+        delete strategies[i];
+    }
+
+    return std::move(candidates);
+}
+
 void MolpherMol::addToDescendants(const std::string& smiles) {
     pimpl->data.descendants.insert(smiles);
 }
@@ -282,5 +391,17 @@ void MolpherMol::removeFromTree() {
             tree->deleteSubtree(smiles, false);
         }
     }
+}
+
+std::vector<std::shared_ptr<MolpherMol> >
+MolpherMol::morph(const std::vector<ChemOperSelector> &operators, int cntMorphs, int threadCnt,
+				  FingerprintSelector fingerprintSelector, SimCoeffSelector simCoeffSelector,
+				  const MolpherMol &target) {
+    MolVector ret;
+    std::unique_ptr<ConcurrentMolVector> candidates(pimpl->morph(operators, cntMorphs, threadCnt, fingerprintSelector, simCoeffSelector, target));
+    for (auto morph : *candidates) {
+        ret.push_back(morph);
+    }
+    return ret;
 }
 

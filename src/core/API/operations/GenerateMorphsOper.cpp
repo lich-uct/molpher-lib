@@ -57,13 +57,13 @@ TreeOperation::TreeOperationImpl::TreeOperationImpl()
     // no action
 }
 
-void GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor) {
+void CollectMorphs::MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor) {
     CollectMorphs *collect =
             (CollectMorphs *) functor;
     (*collect)(morph);
 }
 
-GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::CollectMorphs(
+CollectMorphs::CollectMorphs(
     ConcurrentMolVector &morphs
     , std::shared_ptr<ExplorationTree> tree
     , bool set_ownership) 
@@ -75,11 +75,22 @@ mSetTreeOwnership(set_ownership)
     mCollectAttemptCount = 0;
 }
 
-void GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::operator()(std::shared_ptr<MolpherMol> morph) {
+CollectMorphs::CollectMorphs(
+		ConcurrentMolVector &morphs
+		, bool set_ownership)
+		:
+		mMorphs(morphs),
+		mTree(nullptr),
+		mSetTreeOwnership(set_ownership)
+{
+	mCollectAttemptCount = 0;
+}
+
+void CollectMorphs::operator()(std::shared_ptr<MolpherMol> morph) {
     ++mCollectAttemptCount; // atomic
     ConcurrentSmileSet::const_accessor dummy;
     if (mDuplicateChecker.insert(dummy, morph->getSMILES())) {
-        if (mSetTreeOwnership) {
+        if (mTree && mSetTreeOwnership) {
             morph->setOwner(mTree);
         }
         mMorphs.push_back(morph);
@@ -88,7 +99,7 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::operator()(std::
     }
 }
 
-unsigned int GenerateMorphsOper::GenerateMorphsOperImpl::CollectMorphs::WithdrawCollectAttemptCount() {
+unsigned int CollectMorphs::WithdrawCollectAttemptCount() {
     unsigned int ret = mCollectAttemptCount;
     mCollectAttemptCount = 0;
     return ret;
@@ -111,6 +122,7 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::operator()() {
         tree_pimpl->candidates.clear();
         CollectMorphs collectMorphs(tree_pimpl->candidates, tree, mSetTreeOwnershipForMorphs);
         for (auto leaf : leaves) {
+            // TODO:  use the MolpherMol instances themselves to generate candidates
             unsigned int morphAttempts = tree_pimpl->params.cntMorphs;
             if (leaf->getDistToTarget() < tree_pimpl->params.distToTargetDepthSwitch) {
                 morphAttempts = tree_pimpl->params.cntMorphsInDepth;

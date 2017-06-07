@@ -28,7 +28,7 @@
 MorphingData::MorphingData(
     RDKit::ROMol &molecule,
     RDKit::ROMol &target,
-    std::vector<ChemOperSelector> &operators
+    const std::vector<ChemOperSelector> &operators
     ) :
     mol(molecule),
     operators(operators)

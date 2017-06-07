@@ -102,6 +102,25 @@ void MinimalTest::testMolpherMol() {
     CPPUNIT_ASSERT_EQUAL(RDKit::MolToSmiles(*mol_rdkit), stream_derived.getSMILES());
 
     delete mol_rdkit;
+
+	// test morphing via molecule instance
+	std::cout << "Testing morphing a single molecule instance" << std::endl;
+	std::vector<ChemOperSelector> opers;
+	opers.push_back(OP_ADD_ATOM);
+	opers.push_back(OP_REMOVE_ATOM);
+	auto mols = stream_derived.morph(
+			opers
+			, 200
+			, 2
+			, FP_MORGAN
+			, SC_TANIMOTO
+			, mol
+	);
+	std::cout << "Morphs generated (from: " << stream_derived.getSMILES() << "): " << mols.size() << std::endl;
+    for (auto morph : mols) {
+        std::cout << morph->getSMILES() << std::endl;
+    }
+
 }
 
 void MinimalTest::testExplorationData() {
