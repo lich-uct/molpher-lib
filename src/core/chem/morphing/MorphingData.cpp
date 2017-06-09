@@ -19,6 +19,7 @@
 
 #include <GraphMol/RDKitBase.h>
 #include <GraphMol/QueryOps.h>
+#include <GraphMol/SmilesParse/SmilesParse.h>
 
 #include "core/misc/SynchRand.h"
 #include "selectors/chemoper_selectors.h"
@@ -65,6 +66,52 @@ MorphingData::MorphingData(
     }
 }
 
+MorphingData::MorphingData(
+        RDKit::ROMol &molecule
+        , const std::vector<ChemOperSelector> &operators
+        , const std::set<int>& fixed_atom_ids
+)
+        : mol(molecule)
+        , operators(operators)
+        , fixed_atom_ids(fixed_atom_ids)
+{
+
+    RDKit::ROMol* target_dummy = RDKit::SmilesToMol("NCC(S)COC(F)C(Cl)C(Br)C(I)C(=O)C");
+    GetAtomTypesFromMol(*target_dummy, atoms);
+
+    for (int i = 0; i < operators.size(); ++i) {
+        switch (operators[i]) {
+            case OP_ADD_ATOM:
+                InitAddAtom();
+                break;
+            case OP_REMOVE_ATOM:
+                InitRemoveAtom();
+                break;
+            case OP_ADD_BOND:
+                InitAddBond();
+                break;
+            case OP_REMOVE_BOND:
+                InitRemoveBond();
+                break;
+            case OP_MUTATE_ATOM:
+                InitMutateAtom();
+                break;
+            case OP_INTERLAY_ATOM:
+                InitInterlayAtom();
+                break;
+            case OP_BOND_REROUTE:
+                InitBondReroute();
+                break;
+            case OP_BOND_CONTRACTION:
+                InitBondContraction();
+                break;
+        }
+    }
+
+    delete target_dummy;
+}
+
+
 MorphingData::~MorphingData()
 {
     // no-op
@@ -73,7 +120,7 @@ MorphingData::~MorphingData()
 void MorphingData::InitAddAtom()
 {
     int bondOrder = 1;
-    GetPossibleBondingAtoms(mol, bondOrder, addAtomCandidates);
+    GetPossibleBondingAtoms(mol, bondOrder, fixed_atom_ids, addAtomCandidates);
 }
 
 void MorphingData::InitAddBond()
@@ -122,7 +169,7 @@ void MorphingData::InitMutateAtom()
     for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
         atom = *iter;
         std::vector<MolpherAtom> sub;
-        for (MolpherAtomIdx idx = 0; idx < atoms.size(); ++idx) {
+        for (AtomIdx idx = 0; idx < atoms.size(); ++idx) {
             if ((atom->getAtomicNum() != atoms[idx].atomicNum) &&
                     (atom->getExplicitValence() <= GetMaxBondsMod(atoms[idx]))) {
                 sub.push_back(atoms[idx]);
@@ -139,7 +186,7 @@ void MorphingData::InitRemoveAtom()
     RDKit::ROMol::AtomIterator iter;
     for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
         atom = *iter;
-        if (RDKit::queryAtomHeavyAtomDegree(atom) == 1) {
+        if (RDKit::queryAtomHeavyAtomDegree(atom) == 1 && fixed_atom_ids.find(atom->getIdx()) == fixed_atom_ids.end()) {
             removeAtomCandidates.push_back(atom->getIdx());
         }
     }
@@ -162,7 +209,7 @@ void MorphingData::InitInterlayAtom()
 {
     RDKit::Bond *bond;
     RDKit::ROMol::BondIterator iter;
-    for (MolpherAtomIdx idx = 0; idx < atoms.size(); ++idx) {
+    for (AtomIdx idx = 0; idx < atoms.size(); ++idx) {
         for (iter = mol.beginBonds(); iter != mol.endBonds(); iter++) {
             bond = *iter;
             // the aromatic bonds are reduced to single and double bonds

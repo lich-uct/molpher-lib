@@ -28,6 +28,7 @@
 #define MORPHING_REPORTING 1
 #endif
 
+// TODO: get rid of this function and handle all morphing through MolpherMol instances
 void GenerateMorphs(
     MolpherMol &candidate,
     unsigned int morphAttempts,

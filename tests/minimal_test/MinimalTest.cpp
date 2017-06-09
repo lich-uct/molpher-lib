@@ -24,6 +24,7 @@
 
 #include "MinimalTest.hpp"
 #include "io/stdout.hpp"
+#include "mol_helpers.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(MinimalTest);
 
@@ -79,9 +80,10 @@ void MinimalTest::testMolpherMol() {
     CPPUNIT_ASSERT_EQUAL((unsigned) 0, empty.getItersWithoutDistImprovement());
     
     // test the complete constructor
+    std::set<int> dummy;
     MolpherMol complete("CC(=O)C", "C3O", "NC(=O)C",
                 OP_MUTATE_ATOM, 0.5, 0.0,
-                0.0, 3.1);
+                0.0, 3.1, dummy);
     CPPUNIT_ASSERT_EQUAL(OP_MUTATE_ATOM, static_cast<ChemOperSelector>(complete.getParentOper()));
     CPPUNIT_ASSERT_EQUAL(std::string("NC(=O)C"), complete.getParentSMILES());
 
@@ -116,11 +118,21 @@ void MinimalTest::testMolpherMol() {
 			, SC_TANIMOTO
 			, mol
 	);
-	std::cout << "Morphs generated (from: " << stream_derived.getSMILES() << "): " << mols.size() << std::endl;
-    for (auto morph : mols) {
-        std::cout << morph->getSMILES() << std::endl;
-    }
+	print_morphs(stream_derived, mols);
 
+    // test morphing with fixed atoms
+    MolpherMol fixed_atoms(test_dir + "cymene.sdf");
+    mols = fixed_atoms.morph(opers, 100, 2);
+    print_morphs(fixed_atoms, mols);
+	for (auto morph : mols) {
+		CPPUNIT_ASSERT(match_substr(fixed_atoms.getSMILES(), "c1ccccc1"));
+	}
+    for (auto morph : mols) {
+        auto generation_2 = morph->morph(opers, 100, 2);
+		for (auto morph_ : generation_2) {
+			CPPUNIT_ASSERT(match_substr(fixed_atoms.getSMILES(), "c1ccccc1"));
+		}
+    }
 }
 
 void MinimalTest::testExplorationData() {

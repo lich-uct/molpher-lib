@@ -33,8 +33,6 @@ typedef ExplicitBitVect Fingerprint;
 typedef unsigned int AtomIdx;
 typedef unsigned int BondIdx;
 
-typedef unsigned int MolpherAtomIdx;
-
 typedef tbb::concurrent_hash_map<std::string, std::shared_ptr<MolpherMol>> TreeMap;
 typedef tbb::concurrent_hash_map<std::string, unsigned int> MorphDerivationMap;
 typedef tbb::concurrent_hash_map<std::string, bool /*dummy*/> ConcurrentSmileSet;

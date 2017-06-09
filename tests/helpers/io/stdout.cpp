@@ -16,3 +16,12 @@ void print_mol_info(RDKit::ROMol *mol) {
         std::cout << atom_idx << " - " + atom->getSymbol() << ": degree: " << atom->getDegree() << ", implicit Hs:" << atom->getNumImplicitHs() << std::endl;
     }
 }
+
+void print_morphs(const MolpherMol& parent, const std::vector<std::shared_ptr<MolpherMol>>& mols) {
+    std::cout << "Morphs generated with fixed atoms (from: " << parent.getSMILES() << "): " << mols.size() << std::endl;
+    for (auto morph : mols) {
+        std::cout << morph->getSMILES() << std::endl;
+    }
+}
+
+

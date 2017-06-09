@@ -19,6 +19,7 @@
 
 #include <GraphMol/RDKitBase.h>
 #include <GraphMol/QueryOps.h>
+#include <GraphMol/SmilesParse/SmilesWrite.h>
 
 #include "core/misc/SynchRand.h"
 #include "core/chem/ChemicalAuxiliary.h"
@@ -41,6 +42,10 @@ void OpRemoveAtom::Morph(MorphingData &data, RDKit::RWMol **nMol)
     AtomIdx atomIdx = data.removeAtomCandidates[randPos];
 
     newMol->removeAtom(atomIdx);
+    tbb::concurrent_hash_map<std::string,int>::accessor ac;
+    data.removed_atoms.insert(ac, RDKit::MolToSmiles(*newMol));
+    ac->second = atomIdx;
+    ac.release();
 }
 
 ChemOperSelector OpRemoveAtom::GetSelector()

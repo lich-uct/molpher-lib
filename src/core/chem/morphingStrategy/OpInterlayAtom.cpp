@@ -31,7 +31,7 @@ void OpInterlayAtom::Morph(MorphingData &data, RDKit::RWMol **nMol)
     RDKit::RWMol *newMol = *nMol;
 
     RDKit::Atom atom;
-    MolpherAtomIdx idx = GetRandomAtom(data.atoms, atom);
+    AtomIdx idx = GetRandomAtom(data.atoms, atom);
 
     if (data.interlayAtomCandidates.find(idx) == data.interlayAtomCandidates.end()) {
         delete newMol;

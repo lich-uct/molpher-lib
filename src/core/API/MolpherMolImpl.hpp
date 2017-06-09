@@ -33,11 +33,23 @@ private:
     std::shared_ptr<ExplorationTree> tree;
     MolpherMolData data;
     std::unique_ptr<RDKit::ROMol> rd_mol;
+	std::set<int> fixed_atoms;
 
 public:
     MolpherMolImpl(const std::string& string_repr);
     MolpherMolImpl(const MolpherMolData& data);
     MolpherMolImpl(const MolpherMolImpl& other);
+	MolpherMolImpl(
+			const RDKit::RWMol& rd_mol
+			, const std::string& formula
+			, const std::string& parentSmile
+			, const unsigned& oper
+			, const double& dist
+			, const double& distToClosestDecoy
+			, const double& weight
+			, const double& sascore
+			, const std::set<int>& fixed_atoms
+	);
     MolpherMolImpl();
     
     std::unique_ptr<MolpherMolImpl> copy() const;
@@ -52,6 +64,11 @@ public:
 			, FingerprintSelector fingerprintSelector
 			, SimCoeffSelector simCoeffSelector
 			, const MolpherMol& target
+	);
+	std::unique_ptr<ConcurrentMolVector> morph(
+			const std::vector<ChemOperSelector>& operators
+			, int cntMorphs
+			, int threadCnt
 	);
 };
 

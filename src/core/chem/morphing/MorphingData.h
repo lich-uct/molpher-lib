@@ -33,6 +33,11 @@ public:
         RDKit::ROMol &target,
         const std::vector<ChemOperSelector> &operators
         );
+    MorphingData(
+            RDKit::ROMol &molecule,
+            const std::vector<ChemOperSelector> &operators,
+            const std::set<int>& fixed_atom_ids
+    );
     ~MorphingData();
 
 protected:
@@ -49,6 +54,8 @@ public:
     RDKit::ROMol &mol;
     std::vector<MolpherAtom> atoms;
     std::vector<ChemOperSelector> operators;
+    std::set<int> fixed_atom_ids;
+    tbb::concurrent_hash_map<std::string, int> removed_atoms;
 
     typedef struct {
         BondIdx bondIdx;
@@ -60,7 +67,7 @@ public:
     std::vector<std::pair<AtomIdx, AtomIdx> > addBondCandidates;
     std::vector<BondIdx> removeBondCandidates;
     std::vector<std::vector<MolpherAtom> > mutateAtomCandidates;
-    std::map<MolpherAtomIdx, std::vector<BondIdx> > interlayAtomCandidates;
+    std::map<AtomIdx, std::vector<BondIdx> > interlayAtomCandidates;
     std::vector<RerouteCandidates> bondRerouteCandidates;
     std::vector<BondIdx> bondContractionCandidates;
 };

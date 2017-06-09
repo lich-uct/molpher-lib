@@ -839,8 +839,8 @@ class MolpherMol(_object):
     def copy(self):
         return _core.MolpherMol_copy(self)
 
-    def morph(self, operators, cntMorphs, threadCnt, fingerprintSelector, simCoeffSelector, target):
-        return _core.MolpherMol_morph(self, operators, cntMorphs, threadCnt, fingerprintSelector, simCoeffSelector, target)
+    def morph(self, *args):
+        return _core.MolpherMol_morph(self, *args)
 
     def getSMILES(self):
         return _core.MolpherMol_getSMILES(self)

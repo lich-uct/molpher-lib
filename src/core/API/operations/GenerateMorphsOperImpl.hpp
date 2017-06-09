@@ -27,7 +27,7 @@ class CollectMorphs
 {
 public:
     CollectMorphs(ConcurrentMolVector &morphs, std::shared_ptr<ExplorationTree> tree, bool set_ownership);
-    CollectMorphs(ConcurrentMolVector &morphs, bool set_ownership);
+    CollectMorphs(ConcurrentMolVector &morphs, bool set_ownership); // TODO: remove the set_ownership parameter
     void operator()(std::shared_ptr<MolpherMol> morph);
     unsigned int WithdrawCollectAttemptCount();
     static void MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor);

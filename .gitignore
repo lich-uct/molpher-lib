@@ -5,6 +5,7 @@ bin/
 /deps/*
 !/deps/*.sh
 .idea/
+cmake-build-debug/
 
 ## C++
 

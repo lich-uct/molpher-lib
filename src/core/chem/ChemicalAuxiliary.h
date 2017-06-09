@@ -29,7 +29,7 @@ void SetFormalCharge(int charge, RDKit::RWMol &mol);
 
 void GetAtomTypesFromMol(RDKit::ROMol &mol, std::vector<MolpherAtom> &atoms);
 
-MolpherAtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom);
+AtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom);
 
 RDKit::Bond *GetRandomNonSingleBond(RDKit::Atom &atom);
 
@@ -52,7 +52,7 @@ int GetMaxBondsMod(RDKit::Atom &atom);
 int CntFreeBonds(RDKit::Atom &atom);
 
 void GetPossibleBondingAtoms(
-    RDKit::ROMol &mol, int bondOrder, std::vector<AtomIdx> &bondingAtoms);
+    RDKit::ROMol &mol, int bondOrder, const std::set<int>& fixed_ids, std::vector<AtomIdx> &bondingAtoms);
 
 void GetAtomsNotInRing(RDKit::ROMol &mol, std::vector<RDKit::Atom *> &atomsNIR);
 

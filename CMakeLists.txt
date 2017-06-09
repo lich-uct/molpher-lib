@@ -249,7 +249,7 @@ add_executable(
         ${TEST_SRC}/MinimalTestRunner.cpp
         ${TEST_HELPERS}/io/stdout.hpp
         ${TEST_HELPERS}/io/stdout.cpp
-)
+        tests/helpers/mol_helpers.hpp tests/helpers/mol_helpers.cpp)
 target_include_directories(minimal_test PUBLIC tests/helpers/)
 
 ## Find the testing library

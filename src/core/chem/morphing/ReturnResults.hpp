@@ -49,6 +49,19 @@ public:
         void *callerState,
         void (*deliver)(std::shared_ptr<MolpherMol>, void *)
         );
+    ReturnResults(
+            RDKit::RWMol **newMols,
+            std::string *smiles,
+            std::string *formulas,
+            std::string &parentSmile,
+            ChemOperSelector *opers,
+            double *weights,
+            double *sascores,
+            const std::set<int>& fixed_atoms,
+            const tbb::concurrent_hash_map<std::string, int>& removed_atoms,
+            void *callerState,
+            void (*deliver)(std::shared_ptr<MolpherMol>, void *)
+    );
 
     void operator()(const tbb::blocked_range<int> &r) const;
 
@@ -60,6 +73,8 @@ private:
     ChemOperSelector *mOpers;
     double *mWeights;
     double *mSascore;
+    const std::set<int> fixed_atoms;
+    std::map<std::string, int> removed_indices;
     double *mDistToTarget;
 
     void *mCallerState;

@@ -19269,6 +19269,7 @@ SWIGINTERN PyObject *_wrap_new_MolpherMol__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
   double *arg6 = 0 ;
   double *arg7 = 0 ;
   double *arg8 = 0 ;
+  std::set< int,std::less< int >,std::allocator< int > > *arg9 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   int res2 = SWIG_OLDOBJ ;
   int res3 = SWIG_OLDOBJ ;
@@ -19287,6 +19288,7 @@ SWIGINTERN PyObject *_wrap_new_MolpherMol__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
   double temp8 ;
   double val8 ;
   int ecode8 = 0 ;
+  int res9 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
@@ -19295,9 +19297,10 @@ SWIGINTERN PyObject *_wrap_new_MolpherMol__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
   PyObject * obj5 = 0 ;
   PyObject * obj6 = 0 ;
   PyObject * obj7 = 0 ;
+  PyObject * obj8 = 0 ;
   MolpherMol *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOOOOOO:new_MolpherMol",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6,&obj7)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOOOOO:new_MolpherMol",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6,&obj7,&obj8)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(obj0, &ptr);
@@ -19362,10 +19365,21 @@ SWIGINTERN PyObject *_wrap_new_MolpherMol__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
   temp8 = static_cast< double >(val8);
   arg8 = &temp8;
   {
+    std::set< int,std::less< int >,std::allocator< int > > *ptr = (std::set< int,std::less< int >,std::allocator< int > > *)0;
+    res9 = swig::asptr(obj8, &ptr);
+    if (!SWIG_IsOK(res9)) {
+      SWIG_exception_fail(SWIG_ArgError(res9), "in method '" "new_MolpherMol" "', argument " "9"" of type '" "std::set< int,std::less< int >,std::allocator< int > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MolpherMol" "', argument " "9"" of type '" "std::set< int,std::less< int >,std::allocator< int > > const &""'"); 
+    }
+    arg9 = ptr;
+  }
+  {
     try {
       {
         SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (MolpherMol *)new MolpherMol((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(unsigned int const &)*arg4,(double const &)*arg5,(double const &)*arg6,(double const &)*arg7,(double const &)*arg8);
+        result = (MolpherMol *)new MolpherMol((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(unsigned int const &)*arg4,(double const &)*arg5,(double const &)*arg6,(double const &)*arg7,(double const &)*arg8,(std::set< int,std::less< int >,std::allocator< int > > const &)*arg9);
         SWIG_PYTHON_THREAD_END_ALLOW;
       } 
     }
@@ -19380,11 +19394,13 @@ SWIGINTERN PyObject *_wrap_new_MolpherMol__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
   if (SWIG_IsNewObj(res1)) delete arg1;
   if (SWIG_IsNewObj(res2)) delete arg2;
   if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res9)) delete arg9;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
   if (SWIG_IsNewObj(res2)) delete arg2;
   if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res9)) delete arg9;
   return NULL;
 }
 
@@ -19483,14 +19499,14 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_MolpherMol(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[9] = {
+  PyObject *argv[10] = {
     0
   };
   Py_ssize_t ii;
   
   if (!PyTuple_Check(args)) SWIG_fail;
   argc = args ? PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 8) && (ii < argc); ii++) {
+  for (ii = 0; (ii < 9) && (ii < argc); ii++) {
     argv[ii] = PyTuple_GET_ITEM(args,ii);
   }
   if (argc == 0) {
@@ -19512,7 +19528,7 @@ SWIGINTERN PyObject *_wrap_new_MolpherMol(PyObject *self, PyObject *args) {
       return _wrap_new_MolpherMol__SWIG_2(self, args);
     }
   }
-  if (argc == 8) {
+  if (argc == 9) {
     int _v;
     int res = SWIG_AsPtr_std_string(argv[0], (std::string**)(0));
     _v = SWIG_CheckState(res);
@@ -19548,7 +19564,11 @@ SWIGINTERN PyObject *_wrap_new_MolpherMol(PyObject *self, PyObject *args) {
                     _v = SWIG_CheckState(res);
                   }
                   if (_v) {
-                    return _wrap_new_MolpherMol__SWIG_1(self, args);
+                    int res = swig::asptr(argv[8], (std::set< int,std::less< int >,std::allocator< int > >**)(0));
+                    _v = SWIG_CheckState(res);
+                    if (_v) {
+                      return _wrap_new_MolpherMol__SWIG_1(self, args);
+                    }
                   }
                 }
               }
@@ -19563,7 +19583,7 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_MolpherMol'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    MolpherMol::MolpherMol()\n"
-    "    MolpherMol::MolpherMol(std::string const &,std::string const &,std::string const &,unsigned int const &,double const &,double const &,double const &,double const &)\n"
+    "    MolpherMol::MolpherMol(std::string const &,std::string const &,std::string const &,unsigned int const &,double const &,double const &,double const &,double const &,std::set< int,std::less< int >,std::allocator< int > > const &)\n"
     "    MolpherMol::MolpherMol(std::string const &)\n"
     "    MolpherMol::MolpherMol(MolpherMol const &)\n");
   return 0;
@@ -19662,7 +19682,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MolpherMol_morph(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MolpherMol_morph__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *arg1 = (MolpherMol *) 0 ;
   std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > *arg2 = 0 ;
@@ -19774,6 +19794,167 @@ SWIGINTERN PyObject *_wrap_MolpherMol_morph(PyObject *SWIGUNUSEDPARM(self), PyOb
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_morph__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< MolpherMol > tempshared1 ;
+  std::shared_ptr< MolpherMol > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  std::vector< std::shared_ptr< MolpherMol >,std::allocator< std::shared_ptr< MolpherMol > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:MolpherMol_morph",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_morph" "', argument " "1"" of type '" "MolpherMol *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MolpherMol_morph" "', argument " "2"" of type '" "std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMol_morph" "', argument " "2"" of type '" "std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > * >(argp2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MolpherMol_morph" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(obj3, &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "MolpherMol_morph" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (arg1)->morph((std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > const &)*arg2,arg3,arg4);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< std::shared_ptr< MolpherMol >,std::allocator< std::shared_ptr< MolpherMol > > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_morph(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[8] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 7) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 4) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        {
+          int res = SWIG_AsVal_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          {
+            int res = SWIG_AsVal_int(argv[3], NULL);
+            _v = SWIG_CheckState(res);
+          }
+          if (_v) {
+            return _wrap_MolpherMol_morph__SWIG_1(self, args);
+          }
+        }
+      }
+    }
+  }
+  if (argc == 7) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_std__vectorT_ChemOperSelector_std__allocatorT_ChemOperSelector_t_t, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        {
+          int res = SWIG_AsVal_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          {
+            int res = SWIG_AsVal_int(argv[3], NULL);
+            _v = SWIG_CheckState(res);
+          }
+          if (_v) {
+            {
+              int res = SWIG_AsVal_int(argv[4], NULL);
+              _v = SWIG_CheckState(res);
+            }
+            if (_v) {
+              {
+                int res = SWIG_AsVal_int(argv[5], NULL);
+                _v = SWIG_CheckState(res);
+              }
+              if (_v) {
+                int res = SWIG_ConvertPtr(argv[6], 0, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0);
+                _v = SWIG_CheckState(res);
+                if (_v) {
+                  return _wrap_MolpherMol_morph__SWIG_0(self, args);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MolpherMol_morph'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    MolpherMol::morph(std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > const &,int,int,FingerprintSelector,SimCoeffSelector,MolpherMol const &)\n"
+    "    MolpherMol::morph(std::vector< ChemOperSelector,std::allocator< ChemOperSelector > > const &,int,int)\n");
+  return 0;
 }
 
 

@@ -42,6 +42,16 @@ std::string parseNumber(Number num) {
     return ss.str();
 }
 
+template<typename Out> // https://stackoverflow.com/a/236803
+void split(const std::string &s, char delim, Out result) {
+    std::stringstream ss;
+    ss.str(s);
+    std::string item;
+    while (std::getline(ss, item, delim)) {
+        *(result++) = item;
+    }
+}
+
 void WriteRWMolsToSDF(const std::string &file,
     std::vector<RDKit::RWMol *> &mols);
 void ReadRWMolsFromSDF(const std::string &file,

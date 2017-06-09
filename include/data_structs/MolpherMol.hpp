@@ -28,6 +28,9 @@
 #include "selectors/chemoper_selectors.h"
 
 class ExplorationTree; // forward declaration to resolve circular dependency
+namespace RDKit {
+	class RWMol;
+}
 
 class MolpherMol {
     
@@ -39,9 +42,19 @@ public:
     MolpherMol();
     MolpherMol(const std::string& string_repr, const std::string& formula, const std::string& parentSmile,
                 const unsigned& oper, const double& dist, const double& distToClosestDecoy,
-                const double& weight, const double& sascore);
+                const double& weight, const double& sascore, const std::set<int>& fixed_atoms);
     MolpherMol(const std::string& string_repr);
     MolpherMol(const MolpherMol& other);
+	MolpherMol(RDKit::RWMol* rd_mol
+			, const std::string& formula
+			, const std::string& parentSmile
+			, const unsigned& oper
+			, const double& dist
+			, const double& distToClosestDecoy
+			, const double& weight
+			, const double& sascore
+			, const std::set<int>& fixed_atoms
+	);
     ~MolpherMol();
     
     MolpherMol& operator=(const MolpherMol&);
@@ -55,6 +68,11 @@ public:
             , SimCoeffSelector simCoeffSelector
             , const MolpherMol& target
     );
+	std::vector<std::shared_ptr<MolpherMol> > morph(
+			const std::vector<ChemOperSelector>& operators
+			, int cntMorphs
+			, int threadCnt
+	);
 
     // getters
     const std::string& getSMILES() const;

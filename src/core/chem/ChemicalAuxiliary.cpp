@@ -62,7 +62,7 @@ void GetAtomTypesFromMol(RDKit::ROMol &mol, std::vector<MolpherAtom> &atoms)
     }
 }
 
-MolpherAtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom)
+AtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom)
 {
     int idx = SynchRand::GetRandomNumber(atoms.size() - 1);
 
@@ -70,7 +70,7 @@ MolpherAtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom 
     atom.setFormalCharge(atoms[idx].formalCharge);
     atom.setMass(atoms[idx].mass);
 
-    return idx;
+    return (AtomIdx) idx;
 }
 
 RDKit::Bond *GetRandomNonSingleBond(RDKit::Atom &atom)
@@ -195,7 +195,7 @@ int CntFreeBonds(RDKit::Atom &atom)
 }
 
 void GetPossibleBondingAtoms(
-    RDKit::ROMol &mol, int bondOrder, std::vector<AtomIdx> &bondingAtoms)
+        RDKit::ROMol &mol, int bondOrder, const std::set<int>& fixed_ids, std::vector<AtomIdx> &bondingAtoms)
 {
     RDKit::Atom *atom;
     RDKit::ROMol::AtomIterator iter;
@@ -203,7 +203,7 @@ void GetPossibleBondingAtoms(
         atom = *iter;
         int cntFreeBonds = CntFreeBonds(*atom);
 
-        if (cntFreeBonds >= bondOrder) {
+        if (cntFreeBonds >= bondOrder && fixed_ids.find(atom->getIdx()) == fixed_ids.end()) {
             bondingAtoms.push_back(atom->getIdx());
         }
     }

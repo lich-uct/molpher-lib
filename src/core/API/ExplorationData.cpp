@@ -38,6 +38,7 @@ void MolpherMolToMolData(const MolpherMol& mol, MolpherMolData& data) {
 }
 
 MolpherMol* MolDataToMolpherMol(const MolpherMolData& data) {
+    std::set<int> dummy;
     MolpherMol* mol = new MolpherMol(
             data.SMILES
             , data.formula
@@ -47,6 +48,7 @@ MolpherMol* MolDataToMolpherMol(const MolpherMolData& data) {
             , data.distToTarget // dummy
             , data.molecularWeight
             , data.sascore
+            , dummy
             );
     mol->setDescendants(data.historicDescendants);
     mol->setHistoricDescendants(data.historicDescendants);

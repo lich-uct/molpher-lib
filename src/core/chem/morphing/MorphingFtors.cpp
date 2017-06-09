@@ -181,6 +181,38 @@ ReturnResults::ReturnResults(
     // no-op
 }
 
+ReturnResults::ReturnResults(
+        RDKit::RWMol **newMols,
+        std::string *smiles,
+        std::string *formulas,
+        std::string &parentSmile,
+        ChemOperSelector *opers,
+        double *weights,
+        double *sascore, // added for SAScore
+        const std::set<int>& fixed_atoms,
+        const tbb::concurrent_hash_map<std::string, int>& removed_atoms,
+        void *callerState,
+        void (*deliver)(std::shared_ptr<MolpherMol>, void *)
+) :
+        mNewMols(newMols),
+        mSmiles(smiles),
+        mFormulas(formulas),
+        mParentSmile(parentSmile),
+        mOpers(opers),
+        mWeights(weights),
+        mSascore(sascore), // added for SAScore
+        fixed_atoms(fixed_atoms),
+        mDistToTarget(nullptr),
+        mCallerState(callerState),
+        mDeliver(deliver)
+{
+    for (auto item : removed_atoms) {
+        removed_indices.insert(
+                std::make_pair(item.first, item.second)
+        );
+    }
+}
+
 void ReturnResults::operator()(const tbb::blocked_range<int> &r) const
 {
     // calculate value of the nextDecoy for molecules
@@ -190,10 +222,38 @@ void ReturnResults::operator()(const tbb::blocked_range<int> &r) const
     
     for (int i = r.begin(); i != r.end(); ++i) {
         if (mNewMols[i]) {
-            // TODO: initialize MolpherMol directly from the RDKit RWMol pointer (through the initialize method of its pimpl)
-            auto result = std::make_shared<MolpherMol>(mSmiles[i], mFormulas[i], mParentSmile,
-                mOpers[i], mDistToTarget[i], 0 /*remove this (obsolete)*/,
-                mWeights[i], mSascore[i]);
+            ChemOperSelector parent_oper = mOpers[i];
+            RDKit::RWMol* result_mol = mNewMols[i];
+
+            std::set<int> fixed_atoms_new;
+            switch (parent_oper) {
+                case OP_ADD_ATOM:
+                    fixed_atoms_new = fixed_atoms;
+                    break;
+                case OP_REMOVE_ATOM:
+                    if (removed_indices.size() > 0) {
+                        int removed_idx = removed_indices.find(RDKit::MolToSmiles(*result_mol))->second;
+                        for (auto index : fixed_atoms) {
+                            if (index > removed_idx) {
+                                fixed_atoms_new.insert(index - 1);
+                            } else {
+                                fixed_atoms_new.insert(index);
+                            }
+                        }
+                    }
+                    break;
+            }
+
+            auto result = std::make_shared<MolpherMol>();
+            if (mDistToTarget) {
+                result = std::make_shared<MolpherMol>(result_mol, mFormulas[i], mParentSmile,
+                                                           mOpers[i], mDistToTarget[i], 0 /*TODO: remove this (obsolete)*/,
+                                                           mWeights[i], mSascore[i], fixed_atoms_new);
+            } else {
+                result = std::make_shared<MolpherMol>(result_mol, mFormulas[i], mParentSmile,
+                                                           mOpers[i], -1.0, 0 /*TODO: remove this (obsolete)*/,
+                                                           mWeights[i], mSascore[i], fixed_atoms_new);
+            }
             
             /* Advance decoy functionality
             // are we close enough ?            
