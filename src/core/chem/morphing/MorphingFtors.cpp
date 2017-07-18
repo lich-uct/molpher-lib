@@ -95,7 +95,11 @@ void CalculateMorphs::operator()(const tbb::blocked_range<int> &r) const
                 mSmiles[i] = RDKit::MolToSmiles(*(mNewMols[i]));
                 mFormulas[i] = RDKit::Descriptors::calcMolFormula(*(mNewMols[i]));
                 mWeights[i] = RDKit::Descriptors::calcExactMW(*(mNewMols[i]));
-                mSascore[i] = SAScore::getInstance()->getScore(*(mNewMols[i])); // added for SAScore
+
+				if( !mNewMols[i]->getRingInfo()->isInitialized() ) {
+					RDKit::MolOps::findSSSR(*mNewMols[i]); // required when calculating fingerprints
+				}
+				mSascore[i] = SAScore::getInstance()->getScore(*(mNewMols[i])); // added for SAScore
             } catch (const ValueErrorException &exc) {
                 ++mKekulizeFailureCount; // atomic
                 delete mNewMols[i];

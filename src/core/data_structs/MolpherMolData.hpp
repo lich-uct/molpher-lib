@@ -22,6 +22,7 @@
 #include <set>
 #include <cfloat>
 
+#include <boost/serialization/serialization.hpp>
 #include <boost/serialization/set.hpp>
 #include <boost/serialization/tracking.hpp>
 #include <boost/serialization/level.hpp>

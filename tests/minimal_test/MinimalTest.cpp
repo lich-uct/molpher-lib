@@ -28,7 +28,7 @@
 CPPUNIT_TEST_SUITE_REGISTRATION(MinimalTest);
 
 MinimalTest::MinimalTest() :
-test_dir("../test_files/")
+test_dir("tests/test_files/")
 {
     // no action
 }
@@ -38,7 +38,7 @@ MinimalTest::~MinimalTest() {
 }
 
 void MinimalTest::setUp() {
-    load_data_from("../../res/SAScore.dat");
+    load_data_from("res/SAScore.dat");
 }
 
 void MinimalTest::tearDown() {

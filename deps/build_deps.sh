@@ -20,8 +20,8 @@ set -e
 
 # Dependency links
 TBB_LINK=http://www.threadingbuildingblocks.org/sites/default/files/software_releases/linux/tbb42_20130725oss_lin.tgz
-BOOST_LINK=https://sourceforge.net/projects/boost/files/boost/1.50.0/boost_1_50_0.tar.gz/download
-RDKIT_LINK=https://sourceforge.net/projects/rdkit/files/rdkit/Q1_2014/RDKit_2014_03_1.tgz/download
+BOOST_LINK=https://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz/download
+RDKIT_LINK=https://github.com/rdkit/rdkit/archive/Release_2017_03_3.tar.gz
 
 # Dependency compilation flags
 want_help=0
@@ -194,7 +194,7 @@ build_boost()
 
     # build boost
     ./bootstrap.sh gcc --without-icu
-    ./b2 variant=release link=static runtime-link=shared threading=multi toolset=gcc cxxflags=\"-fPIC\" --without-chrono --without-exception --without-graph --without-graph_parallel --without-iostreams --without-locale --without-math --without-mpi --without-python --without-random --without-test --without-timer --without-wave
+    ./b2 variant=release link=static,shared runtime-link=shared threading=multi toolset=gcc cxxflags=\"-fPIC\" --without-chrono --without-exception --without-graph --without-graph_parallel --without-iostreams --without-locale --without-math --without-mpi --without-python --without-random --without-test --without-timer --without-wave
 
     rm -r -f ./bin.v2
     cd ..
@@ -216,10 +216,10 @@ build_rdkit()
     fi
 
     # changing the name of the package
-    count=`ls -1 RDKit_201*.tgz 2>/dev/null | wc -l`
+    count=`ls -1 RDKit_20*.tar.gz 2>/dev/null | wc -l`
     if [ $count -ge 1 ]
     then
-        mv RDKit_201*.tgz rdkit.tar.gz
+        mv RDKit_20*.tar.gz rdkit.tar.gz
     fi
 
     # download if doesn't exist
@@ -230,7 +230,7 @@ build_rdkit()
 
     echo "Unpacking..."
     tar --extract --gzip --file=rdkit.tar.gz
-    mv RDKit_201* rdkit
+    mv rdkit-Release_20* rdkit
     cd rdkit
     cmd=cmd
     # prepare script to build RDKit

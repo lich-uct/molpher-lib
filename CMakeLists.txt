@@ -10,7 +10,7 @@ file(STRINGS "VERSION.TXT" VERSION_NUMBER LIMIT_COUNT 1)
 string(REGEX MATCH "^[0-9]+\\.[0-9]+" VERSION_NUMBER_SO "${VERSION_NUMBER}")
 
 # Tool Flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -w")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wno-deprecated-declarations")
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 set(CMAKE_INSTALL_RPATH "$ORIGIN/")
 
@@ -54,8 +54,8 @@ set(LIBS ${LIBS} ${Threads_LIBRARIES})
 add_definitions(${Threads_DEFINITIONS})
 
 ## Boost
-set(Boost_USE_STATIC_LIBS ON)
-set(Boost_USE_STATIC_RUNTIME ON)
+#set(Boost_USE_STATIC_LIBS ON)
+#set(Boost_USE_STATIC_RUNTIME ON)
 set(Boost_USE_MULTITHREADED ON)
 find_package(
         Boost REQUIRED
@@ -79,7 +79,7 @@ add_definitions(${Boost_DEFINITIONS})
 add_definitions("-DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB")
 
 ## RDKit
-set(RDKIT_LINK_STATIC ON)
+#set(RDKIT_LINK_STATIC ON)
 find_package(RDKit REQUIRED)
 if(NOT RDKIT_FOUND)
     message(FATAL_ERROR "RDKit library not found")
@@ -145,9 +145,6 @@ set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${CMAKE_INST
 # install TBB
 
 ## create the TBB installation target
-#set(TBB_LIBRARIES_LS ${TBB_LIBRARIES})
-#list(GET TBB_LIBRARIES 0 SOME_TBB_LIB)
-#get_filename_component(TBB_LIB_DIR ${SOME_TBB_LIB} DIRECTORY CACHE)
 foreach(lib ${TBB_LIBRARIES})
     list(APPEND TBB_LIBRARIES_PATTERNS "${lib}.*")
 endforeach()
@@ -163,7 +160,7 @@ add_custom_command(
         COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/ # FIXME: older versions do not support copying of multiple files (http://stackoverflow.com/questions/14368919/cmake-custom-command-copy-multiple-files?rq=1)
 )
 
-set(TBB_TARGET "tbb_install")
+set(TBB_TARGET "tbb_install") # TODO: add installation targets for boost and rdkit as well
 add_custom_target(
         ${TBB_TARGET}
         DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/libtbb*.so ${CMAKE_INSTALL_PREFIX}/include/tbb/*.h
@@ -175,7 +172,7 @@ add_custom_target(
 ## add target for installation of the library
 set(MOLPHER_INSTALL_TARGET "molpher_install")
 set(MOLPHER_INSTALL_TARGET_DEPENDS "molpher")
-option(INSTALL_TBB "Install TBB with the library" ON)
+option(INSTALL_TBB "Install TBB with the library" ON) # TODO: add options for boost and rdkit too
 if (INSTALL_TBB)
     message(WARNING "TBB will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_TBB=OFF to disable.")
     set(MOLPHER_INSTALL_TARGET_DEPENDS ${MOLPHER_INSTALL_TARGET_DEPENDS} ${TBB_TARGET})
@@ -194,6 +191,32 @@ install(
         FILES_MATCHING
         PATTERN "*.h"
         PATTERN "*.hpp"
+)
+install(
+        DIRECTORY ${CMAKE_SOURCE_DIR}/deps/rdkit/Code/
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/include/rdkit
+        FILES_MATCHING
+        PATTERN "*.h"
+        PATTERN "*.hpp"
+)
+install(
+        DIRECTORY ${CMAKE_SOURCE_DIR}/deps/boost/boost/
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/include/boost
+        FILES_MATCHING
+        PATTERN "*.h"
+        PATTERN "*.hpp"
+)
+install(
+        DIRECTORY ${CMAKE_SOURCE_DIR}/deps/boost/stage/lib/
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/
+        FILES_MATCHING
+        PATTERN "*.so*"
+)
+install(
+        DIRECTORY ${CMAKE_SOURCE_DIR}/deps/rdkit/lib/
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/
+        FILES_MATCHING
+        PATTERN "*.so*"
 )
 install(
         TARGETS molpher
@@ -231,13 +254,12 @@ add_custom_target(molpher_install_python
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Built SWIG wrappers for Python...")
 
-## add build directory to clean
-set(BUILD_PREFIX
-        "${CMAKE_SOURCE_DIR}/build" CACHE PATH "build prefix" FORCE
+set(DIST_PREFIX
+        "${CMAKE_SOURCE_DIR}/dist" CACHE PATH "build prefix" FORCE
         )
-set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${BUILD_PREFIX}")
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${DIST_PREFIX}")
 
-# Build the tests binary TODO: add this to the CHANGELOG and note it in the insatalltion docs
+# Build the tests binary
 
 ## target
 set(TEST_SRC tests/minimal_test)

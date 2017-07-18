@@ -68,7 +68,7 @@ MolpherAtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom 
 
     atom.setAtomicNum(atoms[idx].atomicNum);
     atom.setFormalCharge(atoms[idx].formalCharge);
-    atom.setMass(atoms[idx].mass);
+//    atom.setMass(atoms[idx].mass); // removed in new version of rdkit (mass determined from atomic number)
 
     return idx;
 }
@@ -241,7 +241,7 @@ void CopyMol(RDKit::ROMol &mol, RDKit::RWMol &copy)
         atom = mol.getAtomWithIdx(i);
         RDKit::Atom newAtom(atom->getAtomicNum());
         newAtom.setFormalCharge(atom->getFormalCharge());
-        newAtom.setMass(atom->getMass());
+//        newAtom.setMass(atom->getMass()); // removed from rdkit (see above)
         copy.addAtom(&newAtom);
     }
 
