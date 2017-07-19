@@ -312,7 +312,7 @@ void MinimalTest::testTree() {
 }
 
 void MinimalTest::testRDKit() {
-    //TODO: remove this from tests when the fixed_atom feature is ready
+    //TODO: remove this function from tests when the fixed_atom feature is ready
 
     RDKit::ROMol* mol = RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next();
     print_mol_info(mol);

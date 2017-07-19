@@ -174,7 +174,7 @@ add_custom_command(
         OUTPUT
         ${CMAKE_INSTALL_PREFIX}/lib/libboost*.so
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${Boost_LIBRARIES} ${Boost_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/ # FIXME: older versions do not support copying of multiple files (http://stackoverflow.com/questions/14368919/cmake-custom-command-copy-multiple-files?rq=1)
+        COMMAND ${CMAKE_COMMAND} -E copy ${Boost_LIBRARIES} ${Boost_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/
 )
 
 set(Boost_TARGET "boost_install")
@@ -199,7 +199,7 @@ add_custom_command(
         OUTPUT
         ${CMAKE_INSTALL_PREFIX}/lib/libRDKit*.so
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${RDKIT_LIBRARIES} ${RDKIT_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/ # FIXME: older versions do not support copying of multiple files (http://stackoverflow.com/questions/14368919/cmake-custom-command-copy-multiple-files?rq=1)
+        COMMAND ${CMAKE_COMMAND} -E copy ${RDKIT_LIBRARIES} ${RDKIT_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/
 )
 
 set(RDKIT_TARGET "rdkit_install")
@@ -224,7 +224,7 @@ add_custom_command(
         OUTPUT
         ${CMAKE_INSTALL_PREFIX}/lib/libtbb*.so
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/ # FIXME: older versions do not support copying of multiple files (http://stackoverflow.com/questions/14368919/cmake-custom-command-copy-multiple-files?rq=1)
+        COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/
 )
 set(TBB_TARGET "tbb_install")
 add_custom_target(
