@@ -206,7 +206,7 @@ class TestPythonAPI(unittest.TestCase):
         selected = sum(tree.candidates_mask)
         clean_stuff = CleanMorphsOper()
         tree.runOperation(clean_stuff)
-        self.assertEquals(len(tree.candidates), selected)
+        self.assertEqual(len(tree.candidates), selected)
 
         tree.extend()
 
