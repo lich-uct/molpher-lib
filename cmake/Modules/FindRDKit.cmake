@@ -56,7 +56,7 @@ else()
     endif()
 
     if(NOT RDKIT_LIBRARIES)
-        find_library(FILEPARSERS_LIB NAMES "FileParsers${LIB_SUFFIX}"
+        find_library(GRAPHMOL_LIB NAMES "RDKitGraphMol${LIB_SUFFIX}"
                 PATHS
                 ${RDBASE}/lib
                 $ENV{RDKIT_LIB_DIR}
@@ -68,46 +68,53 @@ else()
                 ~/rdkit/lib
                 $ENV{LD_LIBRARY_PATH}
                 )
-        if(FILEPARSERS_LIB)
-            GET_FILENAME_COMPONENT(RDKIT_LIBRARY_DIR ${FILEPARSERS_LIB} PATH)
+        if(GRAPHMOL_LIB)
+            GET_FILENAME_COMPONENT(RDKIT_LIBRARY_DIR ${GRAPHMOL_LIB} PATH)
             message(STATUS "Found RDKit libraries at ${RDKIT_LIBRARY_DIR}")
-            unset(FILEPARSERS_LIB CACHE)
+            unset(GRAPHMOL_LIB CACHE)
 
             foreach(name
-
-                    FileParsers
-                    SmilesParse
-                    Depictor
-                    GraphMol
-                    RDGeometryLib
-                    RDGeneral
-
-                    DistGeomHelpers
-                    MolAlign
-                    Alignment
-                    FragCatalog
-                    MolCatalog
-                    Catalogs
-                    ChemReactions
-                    Descriptors
-                    DistGeometry
-                    Fingerprints
-                    Subgraphs
-                    ForceFieldHelpers
-                    ChemTransforms
-                    MolChemicalFeatures
-                    SubstructMatch
-                    PartialCharges
-                    ShapeHelpers
-                    MolTransforms
-                    SLNParse
-                    ForceField
-                    DataStructs
-                    Optimizer
-                    EigenSolvers
-                    ChemicalFeatures
-                    SimDivPickers
-                    hc
+                    RDKitAlignment
+                    RDKitDescriptors
+                    RDKitFMCS
+                    RDKitMMPA
+                    RDKitOptimizer
+                    RDKitSLNParse
+                    RDKitCatalogs
+                    RDKitDistGeometry
+                    RDKitForceFieldHelpers
+                    RDKitMolAlign
+                    RDKitPartialCharges
+                    RDKitSmilesParse
+                    RDKitChemicalFeatures
+                    RDKitDistGeomHelpers
+                    RDKitForceField
+                    RDKitMolCatalog
+                    RDKitRDGeneral
+                    RDKitStructChecker
+                    RDKitChemReactions
+                    RDKitEigenSolvers
+                    RDKitFragCatalog
+                    RDKitMolChemicalFeatures
+                    RDKitRDGeometryLib
+                    RDKitSubgraphs
+                    RDKitChemTransforms
+                    RDKitFileParsers
+                    RDKitGraphMol
+                    RDKitMolDraw2D
+                    RDKitReducedGraphs
+                    RDKitSubstructMatch
+                    RDKitDataStructs
+                    RDKitFilterCatalog
+                    RDKithc
+                    RDKitMolHash
+                    RDKitShapeHelpers
+                    RDKitTrajectory
+                    RDKitDepictor
+                    RDKitFingerprints
+                    RDKitInfoTheory
+                    RDKitMolTransforms
+                    RDKitSimDivPickers
                     )
                 find_library(${name}_LIB NAMES "${name}${LIB_SUFFIX}"
                         HINTS ${RDKIT_LIBRARY_DIR})
@@ -116,7 +123,7 @@ else()
 
         endif()
         if(RDKIT_LIBRARIES)
-            message(STATUS "Found RDKit library files at ${RDKIT_LIBRARIES}")
+            message(STATUS "Found the following RDKit library files: ${RDKIT_LIBRARIES}")
         endif()
     endif()
 
