@@ -26,9 +26,11 @@
 #include "selectors/fingerprint_selectors.h"
 #include "selectors/simcoeff_selectors.h"
 #include "selectors/chemoper_selectors.h"
+#include "data_structs/MolpherAtom.hpp"
 
 class ExplorationTree; // forward declaration to resolve circular dependency
 namespace RDKit {
+	class ROMol;
 	class RWMol;
 }
 
@@ -45,7 +47,7 @@ public:
                 const double& weight, const double& sascore, const std::set<int>& fixed_atoms);
     MolpherMol(const std::string& string_repr);
     MolpherMol(const MolpherMol& other);
-	MolpherMol(RDKit::RWMol* rd_mol
+	MolpherMol(RDKit::ROMol* rd_mol
 			, const std::string& formula
 			, const std::string& parentSmile
 			, const unsigned& oper
@@ -55,24 +57,20 @@ public:
 			, const double& sascore
 			, const std::set<int>& fixed_atoms
 	);
+	MolpherMol(RDKit::ROMol* rd_mol); // creates a copy
+	MolpherMol(RDKit::RWMol*& rd_mol); // takes ownership and nulls the pointer
     ~MolpherMol();
     
     MolpherMol& operator=(const MolpherMol&);
     std::shared_ptr<MolpherMol> copy() const;
+	RDKit::RWMol* asRDMol() const; // returns a copy
 
-    std::vector<std::shared_ptr<MolpherMol> > morph(
-            const std::vector<ChemOperSelector>& operators
-			, int cntMorphs
-			, int threadCnt
-            , FingerprintSelector fingerprintSelector
-            , SimCoeffSelector simCoeffSelector
-            , const MolpherMol& target
-    );
-	std::vector<std::shared_ptr<MolpherMol> > morph(
-			const std::vector<ChemOperSelector>& operators
-			, int cntMorphs
-			, int threadCnt
-	);
+	// locking
+	void lockAtom(int idx, int mask);
+	std::shared_ptr<MolpherAtom> getAtom(int idx) const;
+	const std::vector<std::shared_ptr<MolpherAtom>>& getAtoms() const;
+	int getAtomCount() const;
+
 
     // getters
     const std::string& getSMILES() const;

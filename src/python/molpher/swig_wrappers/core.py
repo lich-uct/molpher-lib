@@ -839,8 +839,20 @@ class MolpherMol(_object):
     def copy(self):
         return _core.MolpherMol_copy(self)
 
-    def morph(self, *args):
-        return _core.MolpherMol_morph(self, *args)
+    def asRDMol(self):
+        return _core.MolpherMol_asRDMol(self)
+
+    def lockAtom(self, idx, mask):
+        return _core.MolpherMol_lockAtom(self, idx, mask)
+
+    def getAtom(self, idx):
+        return _core.MolpherMol_getAtom(self, idx)
+
+    def getAtoms(self):
+        return _core.MolpherMol_getAtoms(self)
+
+    def getAtomCount(self):
+        return _core.MolpherMol_getAtomCount(self)
 
     def getSMILES(self):
         return _core.MolpherMol_getSMILES(self)

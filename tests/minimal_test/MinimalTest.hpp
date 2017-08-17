@@ -31,6 +31,8 @@
 #include "selectors/fingerprint_selectors.h"
 #include "selectors/simcoeff_selectors.h"
 
+#include "morphing/AtomLibrary.hpp"
+
 template<typename Number>
 std::string NumberToStr(Number num) {
     std::stringstream ss;
@@ -72,12 +74,15 @@ public:
 class MinimalTest : public CPPUNIT_NS::TestFixture {
     CPPUNIT_TEST_SUITE(MinimalTest);
 
-    CPPUNIT_TEST(testMolpherMol);
-    CPPUNIT_TEST(testTree);
-    CPPUNIT_TEST(testExplorationData);
-    CPPUNIT_TEST(testRDKit);
+		CPPUNIT_TEST(testAtom);
+		CPPUNIT_TEST(testAtomLibrary);
+		CPPUNIT_TEST(testMolpherMol);
+		CPPUNIT_TEST(testAddAtomOperator);
+		CPPUNIT_TEST(testTree);
+		CPPUNIT_TEST(testExplorationData);
+		CPPUNIT_TEST(testRDKit);
 
-    CPPUNIT_TEST_SUITE_END();
+	CPPUNIT_TEST_SUITE_END();
 
 public:
     MinimalTest();
@@ -87,8 +92,11 @@ public:
 
 private:
     const std::string test_dir;
-    
+
+    void testAtom();
+    void testAtomLibrary();
     void testMolpherMol();
+    void testAddAtomOperator();
     void testTree();
     void testExplorationData();
     void testRDKit();

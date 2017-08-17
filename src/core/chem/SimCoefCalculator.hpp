@@ -46,7 +46,7 @@ protected:
 
 private:
     bool mExtended;
-    std::map<AtomicNum, unsigned short> mAtomTypesToIdx;
+    std::map<unsigned int, int> mAtomTypesToIdx;
     SimCoefStrategy *mScStrategy;
     FingerprintStrategy *mFpStrategy;
 };

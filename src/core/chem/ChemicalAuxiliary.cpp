@@ -48,9 +48,9 @@ void GetAtomTypesFromMol(RDKit::ROMol &mol, std::vector<MolpherAtom> &atoms)
 
         bool found = false;
         for (int i = 0; i < atoms.size(); ++i) {
-            if (atom->getAtomicNum() == atoms[i].atomicNum &&
-                    atom->getFormalCharge() == atoms[i].formalCharge &&
-                    atom->getMass() == atoms[i].mass) {
+            if (atom->getAtomicNum() == atoms[i].getAtomicNum() &&
+                    atom->getFormalCharge() == atoms[i].getFormalCharge() &&
+                    atom->getMass() == atoms[i].getMass()) {
                 found = true;
                 break;
             }
@@ -66,8 +66,8 @@ AtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom)
 {
     int idx = SynchRand::GetRandomNumber(atoms.size() - 1);
 
-    atom.setAtomicNum(atoms[idx].atomicNum);
-    atom.setFormalCharge(atoms[idx].formalCharge);
+    atom.setAtomicNum(atoms[idx].getAtomicNum());
+    atom.setFormalCharge(atoms[idx].getFormalCharge());
 //    atom.setMass(atoms[idx].mass); // removed in new version of rdkit (mass determined from atomic number)
 
     return (AtomIdx) idx;
@@ -163,7 +163,7 @@ unsigned int CntFreeOxygens(RDKit::Atom &atom)
     return count;
 }
 
-int GetMaxBondsMod(AtomicNum atomicNum)
+int GetMaxBondsMod(unsigned int atomicNum)
 {
     return RDKit::PeriodicTable::getTable()->getDefaultValence(atomicNum);
 }
@@ -171,9 +171,9 @@ int GetMaxBondsMod(AtomicNum atomicNum)
 int GetMaxBondsMod(MolpherAtom &atom)
 {
     int defaultValence =
-        RDKit::PeriodicTable::getTable()->getDefaultValence(atom.atomicNum);
+        RDKit::PeriodicTable::getTable()->getDefaultValence(atom.getAtomicNum());
 
-    int result = defaultValence + atom.formalCharge;
+    int result = defaultValence + atom.getFormalCharge();
 
     return result;
 }

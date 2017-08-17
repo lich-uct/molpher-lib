@@ -20,19 +20,13 @@
 #include <GraphMol/Descriptors/MolDescriptors.h>
 #include <GraphMol/SmilesParse/SmilesParse.h>
 #include <GraphMol/SmilesParse/SmilesWrite.h>
-#include <GraphMol/MolOps.h>
 #include <RDGeneral/BadFileException.h>
 #include <boost/algorithm/string/predicate.hpp>
-#include <tbb/task_scheduler_init.h>
-#include <tbb/partitioner.h>
-#include <tbb/parallel_for.h>
 #include <core/chem/morphing/ReturnResults.hpp>
 
 #include "MolpherMolImpl.hpp"
+#include "MolpherAtomImpl.hpp"
 #include "core/misc/inout.h"
-#include "core/API/operations/GenerateMorphsOperImpl.hpp"
-#include "core/chem/morphing/CalculateMorphs.hpp"
-#include "core/chem/morphing/CalculateDistances.hpp"
 
 MolpherMol::MolpherMol(
     const std::string& string_repr
@@ -53,7 +47,7 @@ MolpherMol::MolpherMol(
     pimpl->data.distToTarget = dist;
     pimpl->data.molecularWeight = weight;
     pimpl->data.sascore = sascore;
-    pimpl->fixed_atoms = fixed_atoms;
+//    pimpl->fixed_atoms = fixed_atoms;
 }
 
 MolpherMol::MolpherMol(const std::string& string_repr) : pimpl(new MolpherMol::MolpherMolImpl(string_repr)) {
@@ -69,7 +63,7 @@ MolpherMol::MolpherMol(const MolpherMol& other) : pimpl(std::move(other.pimpl->c
 }
 
 MolpherMol::MolpherMol(
-        RDKit::RWMol* rd_mol
+        RDKit::ROMol* rd_mol
         , const std::string& formula
         , const std::string& parentSmile
         , const unsigned& oper
@@ -94,6 +88,18 @@ MolpherMol::MolpherMol(
     // no action
 }
 
+MolpherMol::MolpherMol(RDKit::ROMol *rd_mol)
+: pimpl(new MolpherMol::MolpherMolImpl(std::move(std::unique_ptr<RDKit::RWMol>(new RDKit::RWMol(*rd_mol)))))
+{
+    // no action
+}
+
+MolpherMol::MolpherMol(RDKit::RWMol *&rd_mol)
+: pimpl(new MolpherMol::MolpherMolImpl(std::move(std::unique_ptr<RDKit::RWMol>(rd_mol))))
+{
+    rd_mol = nullptr;
+}
+
 std::shared_ptr<ExplorationTree> MolpherMol::getTree() {
     return pimpl->tree;
 }
@@ -106,6 +112,7 @@ MolpherMol::~MolpherMol() = default;
 
 MolpherMol& MolpherMol::operator=(const MolpherMol& other) {
     pimpl = std::move(other.pimpl->copy());
+    return *this;
 }
 
 // pimpl
@@ -122,12 +129,18 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMolData& data) : data(da
     // no action
 }
 
-MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMol::MolpherMolImpl& other) : data(other.data), tree(other.tree) {
+MolpherMol::MolpherMolImpl::MolpherMolImpl(const MolpherMol::MolpherMolImpl& other)
+:
+data(other.data)
+, tree(other.tree)
+, rd_mol(new RDKit::RWMol(*other.rd_mol))
+, atoms(other.atoms)
+{
     // no action
 }
 
 MolpherMol::MolpherMolImpl::MolpherMolImpl(
-        const RDKit::RWMol &rd_mol
+        const RDKit::ROMol &rd_mol
         , const std::string& formula
         , const std::string& parentSmile
         , const unsigned& oper
@@ -143,7 +156,7 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl(
     data.distToTarget = dist;
     data.molecularWeight = weight;
     data.sascore = sascore;
-    this->fixed_atoms = fixed_atoms;
+//    this->fixed_atoms = fixed_atoms;
 
     std::unique_ptr<RDKit::RWMol> new_mol(new RDKit::RWMol(rd_mol));
     this->initialize(std::move(new_mol));
@@ -160,13 +173,20 @@ void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
         throw exc;
     }
 
+    RDKit::ROMol::AtomIterator iter;
+    for (iter = mol->beginAtoms(); iter != mol->endAtoms(); iter++) {
+        RDKit::Atom* atom = *iter;
+        atoms.push_back(std::make_shared<MolpherAtom>(atom));
+    }
+
     RDKit::STR_VECT prop_names = mol->getPropList();
-    if (std::find(prop_names.begin(), prop_names.end(), "MOLPHER_FIXED") != prop_names.end()) {
-        std::string fixed_positions = mol->getProp<std::string>("MOLPHER_FIXED");
+    if (std::find(prop_names.begin(), prop_names.end(), "MOLPHER_NO_ADDITION") != prop_names.end()) {
+        std::string fixed_positions = mol->getProp<std::string>("MOLPHER_NO_ADDITION");
         std::vector<std::string> indices;
         split(fixed_positions, ',', std::back_inserter(indices));
         for (auto idx : indices) {
-            fixed_atoms.insert(std::stoi(idx) - 1);
+            int int_idx = std::stoi(idx) - 1;
+            atoms[int_idx]->setLockingMask(MolpherAtom::NO_ADDITION | atoms[int_idx]->getLockingMask());
         }
     }
 
@@ -229,195 +249,8 @@ std::unique_ptr<MolpherMol::MolpherMolImpl> MolpherMol::MolpherMolImpl::copy() c
     return std::unique_ptr<MolpherMol::MolpherMolImpl>(new MolpherMol::MolpherMolImpl(*this));
 }
 
-std::unique_ptr<ConcurrentMolVector>
-MolpherMol::MolpherMolImpl::morph(const std::vector<ChemOperSelector> &operators, int cntMorphs, int threadCnt,
-                                  FingerprintSelector fingerprintSelector, SimCoeffSelector simCoeffSelector,
-                                  const MolpherMol &target) {
-    tbb::task_group_context tbbCtx;
-    tbb::task_scheduler_init scheduler;
-    scheduler.terminate();
-    scheduler.initialize(threadCnt);
-
-    std::unique_ptr<ConcurrentMolVector> candidates(new ConcurrentMolVector());
-    candidates->reserve(candidates->size() + cntMorphs);
-    CollectMorphs collectMorphs(*candidates, false);
-
-    RDKit::ROMol* targetMol = target.pimpl->rd_mol.get();
-    SimCoefCalculator scCalc(simCoeffSelector , fingerprintSelector, rd_mol.get(), targetMol);
-    Fingerprint* targetFp = scCalc.GetFingerprint(targetMol);
-
-    std::vector<MorphingStrategy *> strategies;
-    InitStrategies(operators, strategies);
-
-    RDKit::RWMol **newMols = new RDKit::RWMol *[cntMorphs];
-    std::memset(newMols, 0, sizeof(RDKit::RWMol *) * cntMorphs);
-    ChemOperSelector *opers = new ChemOperSelector [cntMorphs];
-    std::string *smiles = new std::string [cntMorphs];
-    std::string *formulas = new std::string [cntMorphs];
-    double *weights = new double [cntMorphs];
-    double *sascores = new double [cntMorphs]; // added for SAScore
-    double *distToTarget = new double [cntMorphs];
-
-    // compute new morphs and smiles
-    if (!tbbCtx.is_group_execution_cancelled()) {
-        tbb::atomic<unsigned int> kekulizeFailureCount;
-        tbb::atomic<unsigned int> sanitizeFailureCount;
-        tbb::atomic<unsigned int> morphingFailureCount;
-        kekulizeFailureCount = 0;
-        sanitizeFailureCount = 0;
-        morphingFailureCount = 0;
-        try {
-            MorphingData data(*rd_mol, *targetMol, operators);
-            CalculateMorphs calculateMorphs(
-                    data, strategies, opers, newMols, smiles, formulas, weights, sascores,
-                    kekulizeFailureCount, sanitizeFailureCount, morphingFailureCount);
-
-            tbb::parallel_for(tbb::blocked_range<int>(0, cntMorphs),
-                              calculateMorphs, tbb::auto_partitioner(), tbbCtx);
-        } catch (const std::exception &exc) {
-//            REPORT_RECOVERY("Recovered from morphing data construction failure.");
-        }
-        if (kekulizeFailureCount > 0) {
-            std::stringstream report;
-            report << "Recovered from " << kekulizeFailureCount << " kekulization failures.";
-//            REPORT_RECOVERY(report.str());
-        }
-        if (sanitizeFailureCount > 0) {
-            std::stringstream report;
-            report << "Recovered from " << sanitizeFailureCount << " sanitization failures.";
-//            REPORT_RECOVERY(report.str());
-        }
-        if (morphingFailureCount > 0) {
-            std::stringstream report;
-            report << "Recovered from " << morphingFailureCount << " morphing failures.";
-//            REPORT_RECOVERY(report.str());
-        }
-    }
-
-    // compute distances
-    // we need to announce the decoy which we want to use
-    if (!tbbCtx.is_group_execution_cancelled()) {
-        CalculateDistances calculateDistances(newMols, scCalc, targetFp, distToTarget);
-        tbb::parallel_for(tbb::blocked_range<int>(0, cntMorphs),
-                          calculateDistances, tbb::auto_partitioner(), tbbCtx);
-    }
-
-    // return results
-    if (!tbbCtx.is_group_execution_cancelled()) {
-        std::string parent = data.SMILES;
-        ReturnResults returnResults(
-                newMols, smiles, formulas, parent, opers, weights, sascores,
-                distToTarget, &collectMorphs, CollectMorphs::MorphCollector);
-        tbb::parallel_for(tbb::blocked_range<int>(0, cntMorphs),
-                          returnResults, tbb::auto_partitioner(), tbbCtx);
-    }
-
-    // clean up
-    for (int i = 0; i < cntMorphs; ++i) {
-        delete newMols[i];
-    }
-    delete[] newMols;
-    delete[] opers;
-    delete[] smiles;
-    delete[] formulas;
-    delete[] weights;
-    delete[] sascores;
-
-    delete targetFp;
-
-    for (int i = 0; i < strategies.size(); ++i) {
-        delete strategies[i];
-    }
-
-    return std::move(candidates);
-}
-
-std::unique_ptr<ConcurrentMolVector>
-MolpherMol::MolpherMolImpl::morph(const std::vector<ChemOperSelector> &operators, int cntMorphs, int threadCnt) {
-    tbb::task_group_context tbbCtx;
-    tbb::task_scheduler_init scheduler;
-    scheduler.terminate();
-    scheduler.initialize(threadCnt);
-
-    std::unique_ptr<ConcurrentMolVector> candidates(new ConcurrentMolVector());
-    candidates->reserve(candidates->size() + cntMorphs);
-    CollectMorphs collectMorphs(*candidates, false);
-
-    std::vector<MorphingStrategy *> strategies;
-    InitStrategies(operators, strategies);
-
-    RDKit::RWMol **newMols = new RDKit::RWMol *[cntMorphs];
-    ChemOperSelector *opers = new ChemOperSelector [cntMorphs];
-    std::memset(newMols, 0, sizeof(RDKit::RWMol *) * cntMorphs);
-    std::string *smiles = new std::string [cntMorphs];
-    std::string *formulas = new std::string [cntMorphs];
-    double *weights = new double [cntMorphs];
-    double *sascores = new double [cntMorphs]; // added for SAScore
-
-    // compute new morphs and smiles
-    MorphingData morphing_data(*rd_mol, operators, fixed_atoms);
-    if (!tbbCtx.is_group_execution_cancelled()) {
-        tbb::atomic<unsigned int> kekulizeFailureCount;
-        tbb::atomic<unsigned int> sanitizeFailureCount;
-        tbb::atomic<unsigned int> morphingFailureCount;
-        kekulizeFailureCount = 0;
-        sanitizeFailureCount = 0;
-        morphingFailureCount = 0;
-        try {
-            CalculateMorphs calculateMorphs(
-                    morphing_data, strategies, opers, newMols, smiles, formulas, weights, sascores,
-                    kekulizeFailureCount, sanitizeFailureCount, morphingFailureCount);
-
-            tbb::parallel_for(tbb::blocked_range<int>(0, cntMorphs),
-                              calculateMorphs, tbb::auto_partitioner(), tbbCtx);
-        } catch (const std::exception &exc) {
-//            REPORT_RECOVERY("Recovered from morphing data construction failure.");
-        }
-        if (kekulizeFailureCount > 0) {
-            std::stringstream report;
-            report << "Recovered from " << kekulizeFailureCount << " kekulization failures.";
-//            REPORT_RECOVERY(report.str());
-        }
-        if (sanitizeFailureCount > 0) {
-            std::stringstream report;
-            report << "Recovered from " << sanitizeFailureCount << " sanitization failures.";
-//            REPORT_RECOVERY(report.str());
-        }
-        if (morphingFailureCount > 0) {
-            std::stringstream report;
-            report << "Recovered from " << morphingFailureCount << " morphing failures.";
-//            REPORT_RECOVERY(report.str());
-        }
-    }
-
-    // return results
-    if (!tbbCtx.is_group_execution_cancelled()) {
-        std::string parent = data.SMILES;
-        ReturnResults returnResults(
-                newMols, smiles, formulas, parent, opers, weights, sascores,
-                fixed_atoms,
-                morphing_data.removed_atoms,
-                &collectMorphs, CollectMorphs::MorphCollector);
-        tbb::parallel_for(tbb::blocked_range<int>(0, cntMorphs),
-                          returnResults, tbb::auto_partitioner(), tbbCtx);
-    }
-
-    // clean up
-    for (int i = 0; i < cntMorphs; ++i) {
-        delete newMols[i];
-    }
-    delete[] newMols;
-    delete[] opers;
-    delete[] smiles;
-    delete[] formulas;
-    delete[] weights;
-    delete[] sascores;
-
-    for (int i = 0; i < strategies.size(); ++i) {
-        delete strategies[i];
-    }
-
-    return std::move(candidates);
+MolpherMol::MolpherMolImpl::MolpherMolImpl(std::unique_ptr<RDKit::RWMol> mol) {
+    initialize(std::move(mol));
 }
 
 void MolpherMol::addToDescendants(const std::string& smiles) {
@@ -545,24 +378,22 @@ void MolpherMol::removeFromTree() {
     }
 }
 
-std::vector<std::shared_ptr<MolpherMol> >
-MolpherMol::morph(const std::vector<ChemOperSelector> &operators, int cntMorphs, int threadCnt,
-				  FingerprintSelector fingerprintSelector, SimCoeffSelector simCoeffSelector,
-				  const MolpherMol &target) {
-    MolVector ret;
-    std::unique_ptr<ConcurrentMolVector> candidates(pimpl->morph(operators, cntMorphs, threadCnt, fingerprintSelector, simCoeffSelector, target));
-    for (auto morph : *candidates) {
-        ret.push_back(morph);
-    }
-    return ret;
+RDKit::RWMol* MolpherMol::asRDMol() const {
+    return new RDKit::RWMol(*(pimpl->rd_mol));
 }
 
-std::vector<std::shared_ptr<MolpherMol> >
-MolpherMol::morph(const std::vector<ChemOperSelector> &operators, int cntMorphs, int threadCnt) {
-    MolVector ret;
-    std::unique_ptr<ConcurrentMolVector> candidates(pimpl->morph(operators, cntMorphs, threadCnt));
-    for (auto morph : *candidates) {
-        ret.push_back(morph);
-    }
-    return ret;
+void MolpherMol::lockAtom(int idx, int mask) {
+    getAtom(idx)->setLockingMask(mask);
+}
+
+std::shared_ptr<MolpherAtom> MolpherMol::getAtom(int idx) const {
+    return pimpl->atoms[idx];
+}
+
+const std::vector<std::shared_ptr<MolpherAtom>> &MolpherMol::getAtoms() const {
+    return pimpl->atoms;
+}
+
+int MolpherMol::getAtomCount() const {
+	return pimpl->atoms.size();
 }

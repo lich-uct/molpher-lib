@@ -24,4 +24,8 @@ void print_morphs(const MolpherMol& parent, const std::vector<std::shared_ptr<Mo
     }
 }
 
+void print(const std::string &text) {
+    std::cout << text << std::endl;
+}
+
 

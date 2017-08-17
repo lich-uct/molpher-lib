@@ -21,10 +21,12 @@
 #include <GraphMol/SmilesParse/SmilesWrite.h>
 #include <GraphMol/SmilesParse/SmilesParse.h>
 #include <GraphMol/MolOps.h>
+#include <random_seed.hpp>
+#include <morphing/operators/AddAtom.hpp>
+#include <mol_helpers.hpp>
 
 #include "MinimalTest.hpp"
 #include "io/stdout.hpp"
-#include "mol_helpers.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(MinimalTest);
 
@@ -40,6 +42,7 @@ MinimalTest::~MinimalTest() {
 
 void MinimalTest::setUp() {
     load_data_from("res/SAScore.dat");
+    set_random_seed(42);
 }
 
 void MinimalTest::tearDown() {
@@ -88,11 +91,9 @@ void MinimalTest::testMolpherMol() {
     CPPUNIT_ASSERT_EQUAL(std::string("NC(=O)C"), complete.getParentSMILES());
 
     // test initialization from SDF
-    std::cout << "Testing SDF molecule loader..." << std::endl;
     RDKit::RWMol* mol_rdkit = new RDKit::RWMol(*(RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next()));
     RDKit::MolOps::Kekulize(*mol_rdkit);
     MolpherMol sdf_derived(test_dir + "Structure2D_CID_4914.sdf");
-    std::cout << RDKit::MolToSmiles(*mol_rdkit) + " vs. " + sdf_derived.getSMILES() << std::endl;
     CPPUNIT_ASSERT_EQUAL(RDKit::MolToSmiles(*mol_rdkit), sdf_derived.getSMILES());
 
     std::ifstream t(test_dir + "Structure2D_CID_4914.sdf");
@@ -100,39 +101,238 @@ void MinimalTest::testMolpherMol() {
             (std::istreambuf_iterator<char>(t)),
             std::istreambuf_iterator<char>());
     MolpherMol stream_derived(file_string);
-    std::cout << RDKit::MolToSmiles(*mol_rdkit) + " vs. " + stream_derived.getSMILES() << std::endl;
     CPPUNIT_ASSERT_EQUAL(RDKit::MolToSmiles(*mol_rdkit), stream_derived.getSMILES());
 
     delete mol_rdkit;
 
-	// test morphing via molecule instance
-	std::cout << "Testing morphing a single molecule instance" << std::endl;
-	std::vector<ChemOperSelector> opers;
-	opers.push_back(OP_ADD_ATOM);
-	opers.push_back(OP_REMOVE_ATOM);
-	auto mols = stream_derived.morph(
-			opers
-			, 200
-			, 2
-			, FP_MORGAN
-			, SC_TANIMOTO
-			, mol
-	);
-	print_morphs(stream_derived, mols);
+    // atom access and locking features
+    RDKit::ROMol* mol_rdro = RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next();
+    RDKit::RWMol* mol_rdrw = new RDKit::RWMol(*mol_rdro);
+    MolpherMol mol_mphr_ro(mol_rdro);
+    MolpherMol mol_mphr_rw(mol_rdrw);
+    CPPUNIT_ASSERT(!mol_rdrw);
 
-    // test morphing with fixed atoms
-    MolpherMol fixed_atoms(test_dir + "cymene.sdf");
-    mols = fixed_atoms.morph(opers, 100, 2);
-    print_morphs(fixed_atoms, mols);
-	for (auto morph : mols) {
-		CPPUNIT_ASSERT(match_substr(fixed_atoms.getSMILES(), "c1ccccc1"));
-	}
-    for (auto morph : mols) {
-        auto generation_2 = morph->morph(opers, 100, 2);
-		for (auto morph_ : generation_2) {
-			CPPUNIT_ASSERT(match_substr(fixed_atoms.getSMILES(), "c1ccccc1"));
-		}
+    int idx = 0;
+    RDKit::RWMol* mol_rd_copy = mol_mphr_rw.asRDMol();
+    for (auto atom : mol_mphr_rw.getAtoms()) {
+        CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), mol_rd_copy->getAtomWithIdx(idx)->getSymbol());
+        CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), mol_mphr_ro.getAtom(idx)->getSymbol());
+        CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), mol_rdro->getAtomWithIdx(idx)->getSymbol());
+
+        CPPUNIT_ASSERT_EQUAL(atom->getLockingMask(), mol_mphr_ro.getAtom(idx)->getLockingMask());
+        CPPUNIT_ASSERT(atom->getLockingMask() == MolpherAtom::UNLOCKED);
+
+        idx++;
     }
+
+    mol_mphr_rw.lockAtom(5, MolpherAtom::NO_MUTATION | MolpherAtom::KEEP_NEIGHBORS);
+    mol_mphr_rw.getAtom(6)->setLockingMask(MolpherAtom::NO_ADDITION);
+    idx = 0;
+    for (auto atom : mol_mphr_rw.getAtoms()) {
+        if (idx == 5) {
+            CPPUNIT_ASSERT(atom->getLockingMask() == (MolpherAtom::NO_MUTATION | MolpherAtom::KEEP_NEIGHBORS));
+        }
+        if (idx == 6) {
+            CPPUNIT_ASSERT(atom->getLockingMask() == MolpherAtom::NO_ADDITION);
+        }
+        idx++;
+    }
+    CPPUNIT_ASSERT(mol_mphr_rw.getAtom(6)->getLockingMask() == MolpherAtom::NO_ADDITION);
+    CPPUNIT_ASSERT(mol_mphr_rw.getAtom(5)->getLockingMask() == (MolpherAtom::NO_MUTATION | MolpherAtom::KEEP_NEIGHBORS));
+
+
+    MolpherMol ethanol_no_add(test_dir + "ethanol.sdf");
+    std::set<int> locked_indices{1,2};
+    std::vector<std::pair<int, std::shared_ptr<MolpherAtom>>> locked_atoms;
+    idx = 0;
+    for (auto atom : ethanol_no_add.getAtoms()) {
+        if (atom->isLocked()) {
+            locked_atoms.push_back(std::pair<int, std::shared_ptr<MolpherAtom>>(idx, atom));
+        }
+        idx++;
+    }
+    for (auto locked_atom : locked_atoms) {
+        CPPUNIT_ASSERT_EQUAL(locked_atom.second->getSymbol(), std::string("C"));
+        CPPUNIT_ASSERT(locked_indices.find(locked_atom.first) != locked_indices.end());
+    }
+
+	// test morphing via molecule instance
+//	std::cout << "Testing morphing a single molecule instance" << std::endl;
+//	std::vector<ChemOperSelector> opers;
+//	opers.push_back(OP_ADD_ATOM);
+//	opers.push_back(OP_REMOVE_ATOM);
+//	auto mols = stream_derived.morph(
+//			opers
+//			, 200
+//			, 2
+//			, FP_MORGAN
+//			, SC_TANIMOTO
+//			, mol
+//	);
+//	print_morphs(stream_derived, mols);
+//
+//    // test morphing with fixed atoms
+//    MolpherMol fixed_atoms(test_dir + "cymene.sdf");
+//    mols = fixed_atoms.morph(opers, 100, 2);
+//    print_morphs(fixed_atoms, mols);
+//	for (auto morph : mols) {
+//		CPPUNIT_ASSERT(match_substr(fixed_atoms.getSMILES(), "c1ccccc1"));
+//	}
+//    for (auto morph : mols) {
+//        auto generation_2 = morph->morph(opers, 100, 2);
+//		for (auto morph_ : generation_2) {
+//			CPPUNIT_ASSERT(match_substr(fixed_atoms.getSMILES(), "c1ccccc1"));
+//		}
+//    }
+}
+
+void MinimalTest::testAtom() {
+    MolpherAtom carbon = MolpherAtom("C");
+    MolpherAtom oxygen = MolpherAtom("O");
+    CPPUNIT_ASSERT_EQUAL(carbon.getFormalCharge(), 0);
+    CPPUNIT_ASSERT_EQUAL(oxygen.getFormalCharge(), 0);
+    oxygen.setFormalCharge(-1);
+    carbon.setFormalCharge(+1);
+    CPPUNIT_ASSERT_EQUAL(carbon.getFormalCharge(), +1);
+    CPPUNIT_ASSERT_EQUAL(oxygen.getFormalCharge(), -1);
+
+    // locking features
+    oxygen.setLockingMask(MolpherAtom::NO_ADDITION | MolpherAtom::NO_MUTATION);
+    CPPUNIT_ASSERT(oxygen.isLocked());
+    CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & oxygen.getLockingMask());
+    CPPUNIT_ASSERT(MolpherAtom::NO_MUTATION & oxygen.getLockingMask());
+    CPPUNIT_ASSERT(!(MolpherAtom::UNLOCKED & oxygen.getLockingMask()));
+    CPPUNIT_ASSERT(!(MolpherAtom::KEEP_NEIGHBORS & oxygen.getLockingMask()));
+
+    // copying
+    MolpherAtom oxygen_copy = MolpherAtom(oxygen);
+    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getFormalCharge(), oxygen.getFormalCharge());
+    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getSymbol(), oxygen.getSymbol());
+    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getMass(), oxygen.getMass());
+    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getAtomicNum(), oxygen.getAtomicNum());
+    CPPUNIT_ASSERT(oxygen_copy.isLocked());
+    CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & oxygen_copy.getLockingMask());
+    CPPUNIT_ASSERT(MolpherAtom::NO_MUTATION & oxygen_copy.getLockingMask());
+    CPPUNIT_ASSERT(!(MolpherAtom::UNLOCKED & oxygen_copy.getLockingMask()));
+    CPPUNIT_ASSERT(!(MolpherAtom::KEEP_NEIGHBORS & oxygen_copy.getLockingMask()));
+    oxygen_copy = carbon;
+    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getFormalCharge(), carbon.getFormalCharge());
+    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getSymbol(), carbon.getSymbol());
+    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getMass(), carbon.getMass());
+    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getAtomicNum(), carbon.getAtomicNum());
+    CPPUNIT_ASSERT(!carbon.isLocked());
+    CPPUNIT_ASSERT(!(MolpherAtom::NO_ADDITION & oxygen_copy.getLockingMask()));
+    CPPUNIT_ASSERT(!(MolpherAtom::NO_MUTATION & oxygen_copy.getLockingMask()));
+    CPPUNIT_ASSERT(!(MolpherAtom::UNLOCKED & oxygen_copy.getLockingMask()));
+    CPPUNIT_ASSERT(!(MolpherAtom::KEEP_NEIGHBORS & oxygen_copy.getLockingMask()));
+
+}
+
+void MinimalTest::testAtomLibrary() {
+    const AtomLibrary& default_lib = AtomLibrary::getDefaultLibrary();
+
+    print("Default library: ");
+    for (auto atom : default_lib.getAtoms()) {
+        RDKit::Atom* rd_atom = atom->asRDAtom();
+        print(atom->getSymbol() + ", formal charge: " + std::to_string(atom->getFormalCharge()));
+        CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), rd_atom->getSymbol());
+        CPPUNIT_ASSERT_EQUAL(atom->getMass(), rd_atom->getMass());
+        CPPUNIT_ASSERT_EQUAL(atom->getAtomicNum(), (unsigned) rd_atom->getAtomicNum());
+        CPPUNIT_ASSERT_EQUAL(atom->getFormalCharge(), rd_atom->getFormalCharge());
+    }
+
+    // changing the default library
+    auto locked_nitrogen = std::make_shared<MolpherAtom>(MolpherAtom("N"));
+    locked_nitrogen->setLockingMask(MolpherAtom::NO_ADDITION);
+    AtomLibrary new_lib((std::vector<std::shared_ptr<MolpherAtom>>(
+            {
+                    std::make_shared<MolpherAtom>(MolpherAtom("C"))
+                    , std::make_shared<MolpherAtom>(MolpherAtom("O"))
+                    , std::make_shared<MolpherAtom>(MolpherAtom("S"))
+                    , locked_nitrogen
+            }))
+    );
+    print("New library: ");
+    AtomLibrary::setDefaultLibrary(new_lib);
+    for (auto atom : default_lib.getAtoms()) {
+        RDKit::Atom* rd_atom = atom->asRDAtom();
+        print(atom->getSymbol() + ", formal charge: " + std::to_string(atom->getFormalCharge()));
+        CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), rd_atom->getSymbol());
+        CPPUNIT_ASSERT_EQUAL(atom->getMass(), rd_atom->getMass());
+        CPPUNIT_ASSERT_EQUAL(atom->getAtomicNum(), (unsigned) rd_atom->getAtomicNum());
+        CPPUNIT_ASSERT_EQUAL(atom->getFormalCharge(), rd_atom->getFormalCharge());
+        if (atom->getSymbol() == "N") {
+            CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & atom->getLockingMask());
+            CPPUNIT_ASSERT(atom->isLocked());
+        }
+    }
+
+    // getting a random atom
+    print("Choosing random atoms: ");
+    MolpherAtom rand_atom = default_lib.getRandomAtom();
+    while (!rand_atom.isLocked()) {
+        print(rand_atom.getSymbol());
+        rand_atom = default_lib.getRandomAtom();
+    }
+    print("Locked atom found: " + rand_atom.getSymbol());
+    CPPUNIT_ASSERT_EQUAL(rand_atom.getSymbol(), locked_nitrogen->getSymbol());
+    CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & locked_nitrogen->getLockingMask());
+    CPPUNIT_ASSERT(rand_atom.isLocked());
+}
+
+void MinimalTest::testAddAtomOperator() {
+    std::shared_ptr<MolpherMol> cymene_no_add(new MolpherMol(test_dir + "cymene.sdf"));
+
+    AddAtom op_add;
+    op_add.setOriginal(cymene_no_add);
+    const std::vector<unsigned int> open_atom_indices = op_add.getOpenIndices();
+	std::vector<std::shared_ptr<MolpherAtom>> open_atoms = op_add.getOpenAtoms();
+	int counter = 0;
+	for (auto idx : open_atom_indices) {
+		MolpherAtom* atom_orig = cymene_no_add->getAtom(idx).get();
+		MolpherAtom* atom_ret = open_atoms[counter].get();
+		CPPUNIT_ASSERT_EQUAL(atom_orig, atom_ret);
+		counter++;
+	}
+
+    // first gen
+	auto first_morph = op_add.morph();
+    print(first_morph->getSMILES());
+	int idx = 0;
+	for (auto atom : cymene_no_add->getAtoms()) {
+		CPPUNIT_ASSERT_EQUAL(first_morph->getAtom(idx)->getLockingMask(), atom->getLockingMask());
+		idx++;
+	}
+	counter = 200;
+    while (counter != 0) {
+        CPPUNIT_ASSERT(match_substr(op_add.morph()->getSMILES(), "c1ccccc1"));
+        counter--;
+    }
+
+    // second gen
+	op_add.setOriginal(first_morph);
+    counter = 200;
+    while (counter != 0) {
+        CPPUNIT_ASSERT(match_substr(op_add.morph()->getSMILES(), "c1ccccc1"));
+        counter--;
+    }
+
+	// custom library
+	AtomLibrary custom_lib((std::vector<std::shared_ptr<MolpherAtom>>(
+			{
+					std::make_shared<MolpherAtom>(MolpherAtom("O"))
+					, std::make_shared<MolpherAtom>(MolpherAtom("S"))
+			}))
+	);
+	op_add = AddAtom(custom_lib);
+	op_add.setOriginal(cymene_no_add);
+	counter = 200;
+	while (counter != 0) {
+		auto morph = op_add.morph();
+		CPPUNIT_ASSERT(match_substr(morph->getSMILES(), "c1ccccc1"));
+		CPPUNIT_ASSERT(morph->getSMILES().find("S") != std::string::npos || morph->getSMILES().find("O") != std::string::npos);
+		counter--;
+	}
 }
 
 void MinimalTest::testExplorationData() {

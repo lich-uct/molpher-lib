@@ -27,20 +27,23 @@
 
 class MolpherMol::MolpherMolImpl {
     
-    friend class MolpherMol; // TODO: this should not be necassary -> change architecture
+    friend class MolpherMol;
     
 private:
     std::shared_ptr<ExplorationTree> tree;
     MolpherMolData data;
     std::unique_ptr<RDKit::ROMol> rd_mol;
-	std::set<int> fixed_atoms;
+	std::vector<std::shared_ptr<MolpherAtom>> atoms;
+
+	void initialize(const std::string &string_repr);
+	void initialize(std::unique_ptr<RDKit::RWMol> mol);
 
 public:
     MolpherMolImpl(const std::string& string_repr);
     MolpherMolImpl(const MolpherMolData& data);
     MolpherMolImpl(const MolpherMolImpl& other);
 	MolpherMolImpl(
-			const RDKit::RWMol& rd_mol
+			const RDKit::ROMol& rd_mol
 			, const std::string& formula
 			, const std::string& parentSmile
 			, const unsigned& oper
@@ -50,26 +53,10 @@ public:
 			, const double& sascore
 			, const std::set<int>& fixed_atoms
 	);
+	MolpherMolImpl(std::unique_ptr<RDKit::RWMol> mol);
     MolpherMolImpl();
     
     std::unique_ptr<MolpherMolImpl> copy() const;
-
-    void initialize(const std::string &string_repr);
-    void initialize(std::unique_ptr<RDKit::RWMol> mol);
-
-	std::unique_ptr<ConcurrentMolVector> morph(
-			const std::vector<ChemOperSelector>& operators
-			, int cntMorphs
-			, int threadCnt
-			, FingerprintSelector fingerprintSelector
-			, SimCoeffSelector simCoeffSelector
-			, const MolpherMol& target
-	);
-	std::unique_ptr<ConcurrentMolVector> morph(
-			const std::vector<ChemOperSelector>& operators
-			, int cntMorphs
-			, int threadCnt
-	);
 };
 
 #endif	/* MOLPHERMOLIMPL_HPP */

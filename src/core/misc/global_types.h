@@ -25,13 +25,13 @@
 #include <DataStructs/ExplicitBitVect.h>
 #include <GraphMol/Atom.h>
 
-#include "core/data_structs/MolpherAtom.h"
 #include "core/data_structs/MolpherMolData.hpp"
 #include "data_structs/MolpherMol.hpp"
 
 typedef ExplicitBitVect Fingerprint;
 typedef unsigned int AtomIdx;
 typedef unsigned int BondIdx;
+typedef int AtomicNum;
 
 typedef tbb::concurrent_hash_map<std::string, std::shared_ptr<MolpherMol>> TreeMap;
 typedef tbb::concurrent_hash_map<std::string, unsigned int> MorphDerivationMap;

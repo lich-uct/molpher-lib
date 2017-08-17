@@ -43,7 +43,7 @@ void IncreaseBondOrder(RDKit::Bond &bond);
 
 unsigned int CntFreeOxygens(RDKit::Atom &atom);
 
-int GetMaxBondsMod(AtomicNum atomicNum);
+int GetMaxBondsMod(unsigned int atomicNum);
 
 int GetMaxBondsMod(MolpherAtom &atom);
 

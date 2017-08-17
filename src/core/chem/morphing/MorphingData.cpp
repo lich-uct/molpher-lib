@@ -170,7 +170,7 @@ void MorphingData::InitMutateAtom()
         atom = *iter;
         std::vector<MolpherAtom> sub;
         for (AtomIdx idx = 0; idx < atoms.size(); ++idx) {
-            if ((atom->getAtomicNum() != atoms[idx].atomicNum) &&
+            if ((atom->getAtomicNum() != atoms[idx].getAtomicNum()) &&
                     (atom->getExplicitValence() <= GetMaxBondsMod(atoms[idx]))) {
                 sub.push_back(atoms[idx]);
             }
