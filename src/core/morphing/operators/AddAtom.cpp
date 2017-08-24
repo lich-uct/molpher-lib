@@ -38,7 +38,7 @@ AddAtom::AddAtom(const AtomLibrary &atom_library) :
 MorphingOperator()
 , pimpl(new AddAtomImpl(atom_library))
 {
-	// no action
+	setMorphingOperatorPimpl(pimpl);
 }
 
 AddAtom::AddAtomImpl::AddAtomImpl() :

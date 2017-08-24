@@ -12,7 +12,6 @@ std::unique_ptr<AtomLibrary> AtomLibrary::AtomLibraryImpl::default_lib(
 				, std::make_shared<MolpherAtom>(MolpherAtom("O"))
 				, std::make_shared<MolpherAtom>(MolpherAtom("S"))
 				, std::make_shared<MolpherAtom>(MolpherAtom("N"))
-				, std::make_shared<MolpherAtom>(MolpherAtom("N", +1))
 				, std::make_shared<MolpherAtom>(MolpherAtom("F"))
 				, std::make_shared<MolpherAtom>(MolpherAtom("Cl"))
 				, std::make_shared<MolpherAtom>(MolpherAtom("Br"))
@@ -56,6 +55,7 @@ std::vector<std::shared_ptr<MolpherAtom>> AtomLibrary::getAtoms() const {
 }
 
 AtomLibrary::AtomLibraryImpl::AtomLibraryImpl(const std::vector<std::shared_ptr<MolpherAtom>>& atoms) {
+	// FIXME: check for an empty atom list and raise exception
 	this->atoms.clear();
 	for (auto atom : atoms) {
 		this->atoms.push_back(std::make_shared<MolpherAtom>(*atom));

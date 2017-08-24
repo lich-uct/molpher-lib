@@ -479,6 +479,232 @@ class StringVector(_object):
 StringVector_swigregister = _core.StringVector_swigregister
 StringVector_swigregister(StringVector)
 
+class IntVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, IntVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, IntVector, name)
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _core.IntVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _core.IntVector___nonzero__(self)
+
+    def __bool__(self):
+        return _core.IntVector___bool__(self)
+
+    def __len__(self):
+        return _core.IntVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _core.IntVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _core.IntVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _core.IntVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _core.IntVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _core.IntVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _core.IntVector___setitem__(self, *args)
+
+    def pop(self):
+        return _core.IntVector_pop(self)
+
+    def append(self, x):
+        return _core.IntVector_append(self, x)
+
+    def empty(self):
+        return _core.IntVector_empty(self)
+
+    def size(self):
+        return _core.IntVector_size(self)
+
+    def swap(self, v):
+        return _core.IntVector_swap(self, v)
+
+    def begin(self):
+        return _core.IntVector_begin(self)
+
+    def end(self):
+        return _core.IntVector_end(self)
+
+    def rbegin(self):
+        return _core.IntVector_rbegin(self)
+
+    def rend(self):
+        return _core.IntVector_rend(self)
+
+    def clear(self):
+        return _core.IntVector_clear(self)
+
+    def get_allocator(self):
+        return _core.IntVector_get_allocator(self)
+
+    def pop_back(self):
+        return _core.IntVector_pop_back(self)
+
+    def erase(self, *args):
+        return _core.IntVector_erase(self, *args)
+
+    def __init__(self, *args):
+        this = _core.new_IntVector(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def push_back(self, x):
+        return _core.IntVector_push_back(self, x)
+
+    def front(self):
+        return _core.IntVector_front(self)
+
+    def back(self):
+        return _core.IntVector_back(self)
+
+    def assign(self, n, x):
+        return _core.IntVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _core.IntVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _core.IntVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _core.IntVector_reserve(self, n)
+
+    def capacity(self):
+        return _core.IntVector_capacity(self)
+    __swig_destroy__ = _core.delete_IntVector
+    __del__ = lambda self: None
+IntVector_swigregister = _core.IntVector_swigregister
+IntVector_swigregister(IntVector)
+
+class UIntVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, UIntVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, UIntVector, name)
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _core.UIntVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _core.UIntVector___nonzero__(self)
+
+    def __bool__(self):
+        return _core.UIntVector___bool__(self)
+
+    def __len__(self):
+        return _core.UIntVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _core.UIntVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _core.UIntVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _core.UIntVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _core.UIntVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _core.UIntVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _core.UIntVector___setitem__(self, *args)
+
+    def pop(self):
+        return _core.UIntVector_pop(self)
+
+    def append(self, x):
+        return _core.UIntVector_append(self, x)
+
+    def empty(self):
+        return _core.UIntVector_empty(self)
+
+    def size(self):
+        return _core.UIntVector_size(self)
+
+    def swap(self, v):
+        return _core.UIntVector_swap(self, v)
+
+    def begin(self):
+        return _core.UIntVector_begin(self)
+
+    def end(self):
+        return _core.UIntVector_end(self)
+
+    def rbegin(self):
+        return _core.UIntVector_rbegin(self)
+
+    def rend(self):
+        return _core.UIntVector_rend(self)
+
+    def clear(self):
+        return _core.UIntVector_clear(self)
+
+    def get_allocator(self):
+        return _core.UIntVector_get_allocator(self)
+
+    def pop_back(self):
+        return _core.UIntVector_pop_back(self)
+
+    def erase(self, *args):
+        return _core.UIntVector_erase(self, *args)
+
+    def __init__(self, *args):
+        this = _core.new_UIntVector(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def push_back(self, x):
+        return _core.UIntVector_push_back(self, x)
+
+    def front(self):
+        return _core.UIntVector_front(self)
+
+    def back(self):
+        return _core.UIntVector_back(self)
+
+    def assign(self, n, x):
+        return _core.UIntVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _core.UIntVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _core.UIntVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _core.UIntVector_reserve(self, n)
+
+    def capacity(self):
+        return _core.UIntVector_capacity(self)
+    __swig_destroy__ = _core.delete_UIntVector
+    __del__ = lambda self: None
+UIntVector_swigregister = _core.UIntVector_swigregister
+UIntVector_swigregister(UIntVector)
+
 class BoolVector(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, BoolVector, name, value)
@@ -820,6 +1046,166 @@ class MolpherMolMap(_object):
 MolpherMolMap_swigregister = _core.MolpherMolMap_swigregister
 MolpherMolMap_swigregister(MolpherMolMap)
 
+class MolpherAtomVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MolpherAtomVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, MolpherAtomVector, name)
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _core.MolpherAtomVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _core.MolpherAtomVector___nonzero__(self)
+
+    def __bool__(self):
+        return _core.MolpherAtomVector___bool__(self)
+
+    def __len__(self):
+        return _core.MolpherAtomVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _core.MolpherAtomVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _core.MolpherAtomVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _core.MolpherAtomVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _core.MolpherAtomVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _core.MolpherAtomVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _core.MolpherAtomVector___setitem__(self, *args)
+
+    def pop(self):
+        return _core.MolpherAtomVector_pop(self)
+
+    def append(self, x):
+        return _core.MolpherAtomVector_append(self, x)
+
+    def empty(self):
+        return _core.MolpherAtomVector_empty(self)
+
+    def size(self):
+        return _core.MolpherAtomVector_size(self)
+
+    def swap(self, v):
+        return _core.MolpherAtomVector_swap(self, v)
+
+    def begin(self):
+        return _core.MolpherAtomVector_begin(self)
+
+    def end(self):
+        return _core.MolpherAtomVector_end(self)
+
+    def rbegin(self):
+        return _core.MolpherAtomVector_rbegin(self)
+
+    def rend(self):
+        return _core.MolpherAtomVector_rend(self)
+
+    def clear(self):
+        return _core.MolpherAtomVector_clear(self)
+
+    def get_allocator(self):
+        return _core.MolpherAtomVector_get_allocator(self)
+
+    def pop_back(self):
+        return _core.MolpherAtomVector_pop_back(self)
+
+    def erase(self, *args):
+        return _core.MolpherAtomVector_erase(self, *args)
+
+    def __init__(self, *args):
+        this = _core.new_MolpherAtomVector(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def push_back(self, x):
+        return _core.MolpherAtomVector_push_back(self, x)
+
+    def front(self):
+        return _core.MolpherAtomVector_front(self)
+
+    def back(self):
+        return _core.MolpherAtomVector_back(self)
+
+    def assign(self, n, x):
+        return _core.MolpherAtomVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _core.MolpherAtomVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _core.MolpherAtomVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _core.MolpherAtomVector_reserve(self, n)
+
+    def capacity(self):
+        return _core.MolpherAtomVector_capacity(self)
+    __swig_destroy__ = _core.delete_MolpherAtomVector
+    __del__ = lambda self: None
+MolpherAtomVector_swigregister = _core.MolpherAtomVector_swigregister
+MolpherAtomVector_swigregister(MolpherAtomVector)
+
+class MolpherAtom(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MolpherAtom, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, MolpherAtom, name)
+    __repr__ = _swig_repr
+    UNLOCKED = _core.MolpherAtom_UNLOCKED
+    NO_MUTATION = _core.MolpherAtom_NO_MUTATION
+    NO_ADDITION = _core.MolpherAtom_NO_ADDITION
+    KEEP_NEIGHBORS = _core.MolpherAtom_KEEP_NEIGHBORS
+    FULL_LOCK = _core.MolpherAtom_FULL_LOCK
+
+    def __init__(self, *args):
+        this = _core.new_MolpherAtom(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _core.delete_MolpherAtom
+    __del__ = lambda self: None
+
+    def isLocked(self):
+        return _core.MolpherAtom_isLocked(self)
+
+    def getLockingMask(self):
+        return _core.MolpherAtom_getLockingMask(self)
+
+    def getAtomicNum(self):
+        return _core.MolpherAtom_getAtomicNum(self)
+
+    def getMass(self):
+        return _core.MolpherAtom_getMass(self)
+
+    def getFormalCharge(self):
+        return _core.MolpherAtom_getFormalCharge(self)
+
+    def getSymbol(self):
+        return _core.MolpherAtom_getSymbol(self)
+
+    def setLockingMask(self, mask):
+        return _core.MolpherAtom_setLockingMask(self, mask)
+
+    def setFormalCharge(self, charge):
+        return _core.MolpherAtom_setFormalCharge(self, charge)
+MolpherAtom_swigregister = _core.MolpherAtom_swigregister
+MolpherAtom_swigregister(MolpherAtom)
+
 class MolpherMol(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, MolpherMol, name, value)
@@ -838,9 +1224,6 @@ class MolpherMol(_object):
 
     def copy(self):
         return _core.MolpherMol_copy(self)
-
-    def asRDMol(self):
-        return _core.MolpherMol_asRDMol(self)
 
     def lockAtom(self, idx, mask):
         return _core.MolpherMol_lockAtom(self, idx, mask)
@@ -1598,6 +1981,115 @@ SimCoeffLongDesc = _core.SimCoeffLongDesc
 def SimCoeffParse(name):
     return _core.SimCoeffParse(name)
 SimCoeffParse = _core.SimCoeffParse
+class AtomLibrary(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, AtomLibrary, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, AtomLibrary, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        this = _core.new_AtomLibrary(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _core.delete_AtomLibrary
+    __del__ = lambda self: None
+    if _newclass:
+        getDefaultLibrary = staticmethod(_core.AtomLibrary_getDefaultLibrary)
+    else:
+        getDefaultLibrary = _core.AtomLibrary_getDefaultLibrary
+    if _newclass:
+        setDefaultLibrary = staticmethod(_core.AtomLibrary_setDefaultLibrary)
+    else:
+        setDefaultLibrary = _core.AtomLibrary_setDefaultLibrary
+
+    def getRandomAtom(self):
+        return _core.AtomLibrary_getRandomAtom(self)
+
+    def getAtoms(self):
+        return _core.AtomLibrary_getAtoms(self)
+AtomLibrary_swigregister = _core.AtomLibrary_swigregister
+AtomLibrary_swigregister(AtomLibrary)
+
+def AtomLibrary_getDefaultLibrary():
+    return _core.AtomLibrary_getDefaultLibrary()
+AtomLibrary_getDefaultLibrary = _core.AtomLibrary_getDefaultLibrary
+
+def AtomLibrary_setDefaultLibrary(new_default):
+    return _core.AtomLibrary_setDefaultLibrary(new_default)
+AtomLibrary_setDefaultLibrary = _core.AtomLibrary_setDefaultLibrary
+
+class MorphingOperator(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MorphingOperator, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, MorphingOperator, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        if self.__class__ == MorphingOperator:
+            _self = None
+        else:
+            _self = self
+        this = _core.new_MorphingOperator(_self, )
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _core.delete_MorphingOperator
+    __del__ = lambda self: None
+
+    def getOriginal(self):
+        return _core.MorphingOperator_getOriginal(self)
+
+    def setOriginal(self, arg0):
+        return _core.MorphingOperator_setOriginal(self, arg0)
+
+    def morph(self):
+        return _core.MorphingOperator_morph(self)
+    def __disown__(self):
+        self.this.disown()
+        _core.disown_MorphingOperator(self)
+        return weakref_proxy(self)
+MorphingOperator_swigregister = _core.MorphingOperator_swigregister
+MorphingOperator_swigregister(MorphingOperator)
+
+class AddAtom(MorphingOperator):
+    __swig_setmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, AddAtom, name, value)
+    __swig_getmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, AddAtom, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        this = _core.new_AddAtom(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def setOriginal(self, mol):
+        return _core.AddAtom_setOriginal(self, mol)
+
+    def morph(self):
+        return _core.AddAtom_morph(self)
+
+    def getOpenIndices(self):
+        return _core.AddAtom_getOpenIndices(self)
+
+    def getOpenAtoms(self):
+        return _core.AddAtom_getOpenAtoms(self)
+    __swig_destroy__ = _core.delete_AddAtom
+    __del__ = lambda self: None
+AddAtom_swigregister = _core.AddAtom_swigregister
+AddAtom_swigregister(AddAtom)
+
 # This file is compatible with both classic and new-style classes.
 
 

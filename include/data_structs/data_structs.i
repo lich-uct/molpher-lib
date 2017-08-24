@@ -15,8 +15,16 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// MolpherAtom wrapper
+%ignore MolpherAtom::operator=(const MolpherAtom&);
+%ignore MolpherAtom::asRDAtom() const;
+%ignore MolpherAtom::MolpherAtom(RDKit::Atom* atom);
+%include "MolpherAtom.hpp"
+
 // MoplherMol wrapper
 %ignore MolpherMol::operator=(const MolpherMol&);
+%ignore MolpherMol::MolpherMol(RDKit::ROMol* rd_mol);
+%ignore MolpherMol::MolpherMol(RDKit::RWMol*& rd_mol);
 %ignore MolpherMol::MolpherMol(RDKit::RWMol* rd_mol
                     			, const std::string& formula
                     			, const std::string& parentSmile
@@ -27,6 +35,7 @@
                     			, const double& sascore
                     			, const std::set<int>& fixed_atoms
                     	);
+%ignore MolpherMol::asRDMol() const;
 %catches(std::runtime_error) MolpherMol::setOwner(std::shared_ptr<ExplorationTree> tree);
 %catches(std::runtime_error) MolpherMol::setSMILES(const std::string& smiles);
 %catches(std::runtime_error) MolpherMol::setParentSMILES(const std::string& smiles);

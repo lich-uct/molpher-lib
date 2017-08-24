@@ -18,34 +18,35 @@ import warnings
 
 import molpher.swig_wrappers.core as wrappers
 import molpher.core.ExplorationTree
+from molpher.core.MolpherAtom import MolpherAtom
 from molpher.core._utils import shorten_repr
 
 
 class MolpherMol(wrappers.MolpherMol):
     """
-    :param smiles: smiles of the molecule that is to be created
-    :type smiles: `str`
+    :param str_repr: smiles of the molecule that is to be created or a path to an SDF file (only the first molecule is read)
+    :type str_repr: `str`
     :param other: another instance, the new instance will be its copy (tree ownership is not transferred onto the copy)
     :type other: `molpher.swig_wrappers.core.MolpherMol` or its derived class
 
-    This a specialized version of the `molpher.swig_wrappers.core.MolpherMol` proxy class.
+    This is a specialized version of the `molpher.swig_wrappers.core.MolpherMol` proxy class.
     It implements some additional functionality for ease of use from Python.
 
     .. seealso:: `molpher.swig_wrappers.core.MolpherMol`
 
     """
 
-    def __init__(self, smiles=None, other=None):
-        if smiles and other:
+    def __init__(self, str_repr=None, other=None):
+        if str_repr and other:
             warnings.warn(
                 "Both SMILES string and another MolpherMol instance specified. Using another instance to initialize..."
                 , RuntimeWarning
             )
         if other and isinstance(other, wrappers.MolpherMol):
             super(MolpherMol, self).__init__(other)
-        elif smiles and type(smiles) == str:
-            super(MolpherMol, self).__init__(smiles)
-        elif not smiles and not other:
+        elif str_repr and type(str_repr) == str:
+            super(MolpherMol, self).__init__(str_repr)
+        elif not str_repr and not other:
             super(MolpherMol, self).__init__()
         else:
             raise AttributeError('Invalid argumetns supplied to the constructor.')
@@ -68,6 +69,18 @@ class MolpherMol(wrappers.MolpherMol):
         copy = super(MolpherMol, self).copy()
         copy.__class__ = MolpherMol
         return copy
+
+    @property
+    def atoms(self):
+        """
+        Atoms of this molecule represented as MolpherAtom instances.
+
+        :return: `tuple`
+        """
+        atoms = self.getAtoms()
+        for x in atoms:
+            x.__class__ = MolpherAtom
+        return atoms
 
     @property
     def tree(self):

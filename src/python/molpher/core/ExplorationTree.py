@@ -60,7 +60,7 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         :param source: SMILES of the source molecule or a molecule directly (uses a copy not the instance itself)
         :type source: `str` or :class:`~molpher.core.MolpherMol.MolpherMol`
         :param target: SMILES of the target molecule
-        :type target: `str`
+        :type target: `str` or :class:`~molpher.core.MolpherMol.MolpherMol`
         :param callback_class: the class to use when making a callback using the :meth:`traverse` method
         :type callback_class: any class derived from `Callback`
 

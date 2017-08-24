@@ -19,6 +19,7 @@
 %feature("director") TreeOperation;
 %feature("director") TraverseCallback;
 %feature("director") SortMorphsCallback;
+%feature("director") MorphingOperator;
 %feature("director:except") {
     if ($error != NULL) {
         throw Swig::DirectorMethodException();

@@ -49,6 +49,48 @@ void MinimalTest::tearDown() {
     // no action
 }
 
+void MinimalTest::testAtom() {
+	MolpherAtom carbon = MolpherAtom("C");
+	MolpherAtom oxygen = MolpherAtom("O");
+	CPPUNIT_ASSERT_EQUAL(carbon.getFormalCharge(), 0);
+	CPPUNIT_ASSERT_EQUAL(oxygen.getFormalCharge(), 0);
+	oxygen.setFormalCharge(-1);
+	carbon.setFormalCharge(+1);
+	CPPUNIT_ASSERT_EQUAL(carbon.getFormalCharge(), +1);
+	CPPUNIT_ASSERT_EQUAL(oxygen.getFormalCharge(), -1);
+
+	// locking features
+	oxygen.setLockingMask(MolpherAtom::NO_ADDITION | MolpherAtom::NO_MUTATION);
+	CPPUNIT_ASSERT(oxygen.isLocked());
+	CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & oxygen.getLockingMask());
+	CPPUNIT_ASSERT(MolpherAtom::NO_MUTATION & oxygen.getLockingMask());
+	CPPUNIT_ASSERT(!(MolpherAtom::UNLOCKED & oxygen.getLockingMask()));
+	CPPUNIT_ASSERT(!(MolpherAtom::KEEP_NEIGHBORS & oxygen.getLockingMask()));
+
+	// copying
+	MolpherAtom oxygen_copy = MolpherAtom(oxygen);
+	CPPUNIT_ASSERT_EQUAL(oxygen_copy.getFormalCharge(), oxygen.getFormalCharge());
+	CPPUNIT_ASSERT_EQUAL(oxygen_copy.getSymbol(), oxygen.getSymbol());
+	CPPUNIT_ASSERT_EQUAL(oxygen_copy.getMass(), oxygen.getMass());
+	CPPUNIT_ASSERT_EQUAL(oxygen_copy.getAtomicNum(), oxygen.getAtomicNum());
+	CPPUNIT_ASSERT(oxygen_copy.isLocked());
+	CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & oxygen_copy.getLockingMask());
+	CPPUNIT_ASSERT(MolpherAtom::NO_MUTATION & oxygen_copy.getLockingMask());
+	CPPUNIT_ASSERT(!(MolpherAtom::UNLOCKED & oxygen_copy.getLockingMask()));
+	CPPUNIT_ASSERT(!(MolpherAtom::KEEP_NEIGHBORS & oxygen_copy.getLockingMask()));
+	oxygen_copy = carbon;
+	CPPUNIT_ASSERT_EQUAL(oxygen_copy.getFormalCharge(), carbon.getFormalCharge());
+	CPPUNIT_ASSERT_EQUAL(oxygen_copy.getSymbol(), carbon.getSymbol());
+	CPPUNIT_ASSERT_EQUAL(oxygen_copy.getMass(), carbon.getMass());
+	CPPUNIT_ASSERT_EQUAL(oxygen_copy.getAtomicNum(), carbon.getAtomicNum());
+	CPPUNIT_ASSERT(!carbon.isLocked());
+	CPPUNIT_ASSERT(!(MolpherAtom::NO_ADDITION & oxygen_copy.getLockingMask()));
+	CPPUNIT_ASSERT(!(MolpherAtom::NO_MUTATION & oxygen_copy.getLockingMask()));
+	CPPUNIT_ASSERT(!(MolpherAtom::UNLOCKED & oxygen_copy.getLockingMask()));
+	CPPUNIT_ASSERT(!(MolpherAtom::KEEP_NEIGHBORS & oxygen_copy.getLockingMask()));
+
+}
+
 void MinimalTest::testMolpherMol() {
     // test the simple constructor
     MolpherMol mol("CCO");
@@ -184,48 +226,6 @@ void MinimalTest::testMolpherMol() {
 //			CPPUNIT_ASSERT(match_substr(fixed_atoms.getSMILES(), "c1ccccc1"));
 //		}
 //    }
-}
-
-void MinimalTest::testAtom() {
-    MolpherAtom carbon = MolpherAtom("C");
-    MolpherAtom oxygen = MolpherAtom("O");
-    CPPUNIT_ASSERT_EQUAL(carbon.getFormalCharge(), 0);
-    CPPUNIT_ASSERT_EQUAL(oxygen.getFormalCharge(), 0);
-    oxygen.setFormalCharge(-1);
-    carbon.setFormalCharge(+1);
-    CPPUNIT_ASSERT_EQUAL(carbon.getFormalCharge(), +1);
-    CPPUNIT_ASSERT_EQUAL(oxygen.getFormalCharge(), -1);
-
-    // locking features
-    oxygen.setLockingMask(MolpherAtom::NO_ADDITION | MolpherAtom::NO_MUTATION);
-    CPPUNIT_ASSERT(oxygen.isLocked());
-    CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & oxygen.getLockingMask());
-    CPPUNIT_ASSERT(MolpherAtom::NO_MUTATION & oxygen.getLockingMask());
-    CPPUNIT_ASSERT(!(MolpherAtom::UNLOCKED & oxygen.getLockingMask()));
-    CPPUNIT_ASSERT(!(MolpherAtom::KEEP_NEIGHBORS & oxygen.getLockingMask()));
-
-    // copying
-    MolpherAtom oxygen_copy = MolpherAtom(oxygen);
-    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getFormalCharge(), oxygen.getFormalCharge());
-    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getSymbol(), oxygen.getSymbol());
-    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getMass(), oxygen.getMass());
-    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getAtomicNum(), oxygen.getAtomicNum());
-    CPPUNIT_ASSERT(oxygen_copy.isLocked());
-    CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & oxygen_copy.getLockingMask());
-    CPPUNIT_ASSERT(MolpherAtom::NO_MUTATION & oxygen_copy.getLockingMask());
-    CPPUNIT_ASSERT(!(MolpherAtom::UNLOCKED & oxygen_copy.getLockingMask()));
-    CPPUNIT_ASSERT(!(MolpherAtom::KEEP_NEIGHBORS & oxygen_copy.getLockingMask()));
-    oxygen_copy = carbon;
-    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getFormalCharge(), carbon.getFormalCharge());
-    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getSymbol(), carbon.getSymbol());
-    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getMass(), carbon.getMass());
-    CPPUNIT_ASSERT_EQUAL(oxygen_copy.getAtomicNum(), carbon.getAtomicNum());
-    CPPUNIT_ASSERT(!carbon.isLocked());
-    CPPUNIT_ASSERT(!(MolpherAtom::NO_ADDITION & oxygen_copy.getLockingMask()));
-    CPPUNIT_ASSERT(!(MolpherAtom::NO_MUTATION & oxygen_copy.getLockingMask()));
-    CPPUNIT_ASSERT(!(MolpherAtom::UNLOCKED & oxygen_copy.getLockingMask()));
-    CPPUNIT_ASSERT(!(MolpherAtom::KEEP_NEIGHBORS & oxygen_copy.getLockingMask()));
-
 }
 
 void MinimalTest::testAtomLibrary() {

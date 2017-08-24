@@ -22,22 +22,50 @@ from pkg_resources import resource_filename
 from molpher import random
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
+from molpher.core.MolpherAtom import MolpherAtom
+from molpher.core.morphing.AtomLibrary import AtomLibrary
+from molpher.core.morphing.operators.AddAtom import AddAtom
 from molpher.core.operations import *
 from molpher.core.selectors import *
 from molpher.core import ExplorationData
 
-random.set_random_seed(42)
-
 class TestPythonAPI(unittest.TestCase):
     
     def setUp(self):
+        random.set_random_seed(42)
         self.test_source = 'CCO'
         self.test_target = 'C1=COC=C1'
         self.test_dir = os.path.abspath(resource_filename('molpher.core.tests', 'test_files/'))
         self.test_template_path = os.path.join(self.test_dir, 'test-template.xml')
+        self.cymene_locked = os.path.join(self.test_dir, 'cymene.sdf')
 
     def tearDown(self):
         pass
+
+    def testMolpherAtom(self):
+        carbon = MolpherAtom("C")
+        oxygen = MolpherAtom("O", -1)
+        self.assertEqual(carbon.formal_charge, 0)
+        carbon.formal_charge = 1
+        self.assertEqual(carbon.formal_charge, 1)
+
+        self.assertFalse(oxygen.is_locked or carbon.is_locked)
+
+        oxygen.locking_mask = MolpherAtom.FULL_LOCK
+        self.assertTrue(oxygen.is_locked)
+        self.assertTrue(oxygen.lock_info['FULL_LOCK'])
+        self.assertTrue(bool(oxygen.locking_mask & MolpherAtom.NO_ADDITION))
+        self.assertTrue(bool(oxygen.locking_mask & MolpherAtom.KEEP_NEIGHBORS))
+        self.assertTrue(bool(oxygen.locking_mask & MolpherAtom.NO_MUTATION))
+        self.assertTrue(oxygen.lock_info['UNLOCKED'] == False)
+
+        carbon.locking_mask = MolpherAtom.NO_MUTATION
+        self.assertTrue(carbon.is_locked)
+        self.assertFalse(carbon.lock_info['FULL_LOCK'])
+        self.assertFalse(bool(carbon.locking_mask & MolpherAtom.NO_ADDITION))
+        self.assertFalse(bool(carbon.locking_mask & MolpherAtom.KEEP_NEIGHBORS))
+        self.assertTrue(bool(carbon.locking_mask & MolpherAtom.NO_MUTATION))
+        self.assertTrue(carbon.lock_info['UNLOCKED'] == False)
 
     def testMolpherMol(self):
         mol = MolpherMol(self.test_target)
@@ -59,13 +87,52 @@ class TestPythonAPI(unittest.TestCase):
             tree.fetchMol(mol.smiles).smiles = x
         self.assertRaises(RuntimeError, assign, 'CCO')
 
+        # atom locking stuff
+        mol_locked = MolpherMol(self.cymene_locked)
+        open_positions = (0, 2, 3, 9)
+        for idx, atom in enumerate(mol_locked.atoms):
+            if not atom.is_locked:
+                self.assertIn(idx, open_positions)
+            else:
+                self.assertTrue(atom.lock_info['NO_ADDITION'])
+                self.assertFalse(atom.lock_info['UNLOCKED'])
+                self.assertFalse(atom.lock_info['FULL_LOCK'])
+
+    def testAtomLibrary(self):
+        smbls = ["O", "S"]
+        my_lib = AtomLibrary(smbls)
+        for x in my_lib.atoms:
+            self.assertIn(x.symbol, smbls)
+
+        default_lib = AtomLibrary.getDefaultLibrary()
+        self.assertIn("C", [x.symbol for x in default_lib.atoms])
+        AtomLibrary.setDefaultLibrary(my_lib)
+        for x in default_lib.atoms:
+            self.assertIn(x.symbol, smbls)
+
+        for x in range(200):
+            self.assertIn(default_lib.getRandomAtom().symbol, smbls)
+
+    def testAddAtomOperator(self):
+        cymene_no_add = MolpherMol(self.cymene_locked)
+
+        add_atom = AddAtom()
+        self.assertIsNone(add_atom.getOriginal())
+        add_atom.setOriginal(cymene_no_add)
+        self.assertIsInstance(add_atom.getOriginal(), MolpherMol)
+        for x in range(200):
+            mol = add_atom.morph()
+            self.assertIsInstance(mol, MolpherMol)
+        for x in add_atom.getOpenAtoms():
+            self.assertIsInstance(x, MolpherAtom)
+
     def testExplorationData(self):
         params = ExplorationData(
             source=self.test_source
             , target=self.test_target
         )
 
-        params.operators = set((OP_ADD_BOND, 'OP_REMOVE_BOND'))
+        params.operators = (OP_ADD_BOND, 'OP_REMOVE_BOND',)
         self.assertEqual(params.operators, ('OP_ADD_BOND', 'OP_REMOVE_BOND'))
 
         params.fingerprint = FP_EXT_ATOM_PAIRS
