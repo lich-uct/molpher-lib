@@ -1168,8 +1168,13 @@ class MolpherAtom(_object):
     UNLOCKED = _core.MolpherAtom_UNLOCKED
     NO_MUTATION = _core.MolpherAtom_NO_MUTATION
     NO_ADDITION = _core.MolpherAtom_NO_ADDITION
+    NO_REMOVAL = _core.MolpherAtom_NO_REMOVAL
     KEEP_NEIGHBORS = _core.MolpherAtom_KEEP_NEIGHBORS
     FULL_LOCK = _core.MolpherAtom_FULL_LOCK
+    if _newclass:
+        lockToString = staticmethod(_core.MolpherAtom_lockToString)
+    else:
+        lockToString = _core.MolpherAtom_lockToString
 
     def __init__(self, *args):
         this = _core.new_MolpherAtom(*args)
@@ -1205,6 +1210,12 @@ class MolpherAtom(_object):
         return _core.MolpherAtom_setFormalCharge(self, charge)
 MolpherAtom_swigregister = _core.MolpherAtom_swigregister
 MolpherAtom_swigregister(MolpherAtom)
+cvar = _core.cvar
+MolpherAtom.atom_locks = _core.cvar.MolpherAtom_atom_locks
+
+def MolpherAtom_lockToString(lock):
+    return _core.MolpherAtom_lockToString(lock)
+MolpherAtom_lockToString = _core.MolpherAtom_lockToString
 
 class MolpherMol(_object):
     __swig_setmethods__ = {}
@@ -2089,6 +2100,40 @@ class AddAtom(MorphingOperator):
     __del__ = lambda self: None
 AddAtom_swigregister = _core.AddAtom_swigregister
 AddAtom_swigregister(AddAtom)
+
+class RemoveAtom(MorphingOperator):
+    __swig_setmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, RemoveAtom, name, value)
+    __swig_getmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, RemoveAtom, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        this = _core.new_RemoveAtom()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def setOriginal(self, mol):
+        return _core.RemoveAtom_setOriginal(self, mol)
+
+    def morph(self):
+        return _core.RemoveAtom_morph(self)
+
+    def getMarkedIndices(self):
+        return _core.RemoveAtom_getMarkedIndices(self)
+
+    def getMarkedAtoms(self):
+        return _core.RemoveAtom_getMarkedAtoms(self)
+    __swig_destroy__ = _core.delete_RemoveAtom
+    __del__ = lambda self: None
+RemoveAtom_swigregister = _core.RemoveAtom_swigregister
+RemoveAtom_swigregister(RemoveAtom)
 
 # This file is compatible with both classic and new-style classes.
 

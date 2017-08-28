@@ -24,6 +24,8 @@
 #include <random_seed.hpp>
 #include <morphing/operators/AddAtom.hpp>
 #include <mol_helpers.hpp>
+#include <morphing/operators/RemoveAtom.hpp>
+#include <GraphMol/Substruct/SubstructMatch.h>
 
 #include "MinimalTest.hpp"
 #include "io/stdout.hpp"
@@ -297,7 +299,6 @@ void MinimalTest::testAddAtomOperator() {
 
     // first gen
 	auto first_morph = op_add.morph();
-    print(first_morph->getSMILES());
 	int idx = 0;
 	for (auto atom : cymene_no_add->getAtoms()) {
 		CPPUNIT_ASSERT_EQUAL(first_morph->getAtom(idx)->getLockingMask(), atom->getLockingMask());
@@ -332,6 +333,43 @@ void MinimalTest::testAddAtomOperator() {
 		CPPUNIT_ASSERT(match_substr(morph->getSMILES(), "c1ccccc1"));
 		CPPUNIT_ASSERT(morph->getSMILES().find("S") != std::string::npos || morph->getSMILES().find("O") != std::string::npos);
 		counter--;
+	}
+}
+
+void MinimalTest::testRemoveAtomOperator() {
+	std::shared_ptr<MolpherMol> dimethylaniline(new MolpherMol(test_dir + "dimethylaniline.sdf"));
+
+	CPPUNIT_ASSERT_EQUAL(dimethylaniline->getAtom(3)->getLockingMask(), MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::NO_REMOVAL);
+	CPPUNIT_ASSERT_EQUAL(dimethylaniline->getAtom(8)->getLockingMask(), (int) MolpherAtom::UNLOCKED);
+
+	RemoveAtom op_remove;
+	op_remove.setOriginal(dimethylaniline);
+	for (int i = 0; i != 10; i++) {
+		CPPUNIT_ASSERT_EQUAL(std::string("CC1=C(N)C=CC=C1"), op_remove.morph()->getSMILES());
+	}
+
+	auto morph = op_remove.morph();
+	op_remove.setOriginal(morph);
+	CPPUNIT_ASSERT(op_remove.getMarkedIndices().empty());
+	CPPUNIT_ASSERT(op_remove.getMarkedAtoms().empty());
+	for (int i = 0; i != 10; i++) {
+		CPPUNIT_ASSERT(!op_remove.morph());
+	}
+
+	std::shared_ptr<MolpherMol> dimethylphenylformamide(new MolpherMol(test_dir + "dimethylphenylformamide.sdf"));
+	op_remove.setOriginal(dimethylphenylformamide);
+	for (int i = 0; i != 10; i++) {
+		morph = op_remove.morph();
+		if (!morph) {
+			op_remove.setOriginal(dimethylphenylformamide);
+		} else {
+			std::string smiles = morph->getSMILES();
+			RDKit::ROMol *mol1 = RDKit::SmilesToMol(smiles);
+			RDKit::RWMol *patt = RDKit::SmartsToMol("CcccC");
+			RDKit::MatchVectType res;
+			CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
+			op_remove.setOriginal(morph);
+		}
 	}
 }
 

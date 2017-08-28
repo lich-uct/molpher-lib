@@ -23,9 +23,9 @@
 #include <RDGeneral/BadFileException.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <core/chem/morphing/ReturnResults.hpp>
+#include <core/misc/utils.hpp>
 
 #include "MolpherMolImpl.hpp"
-#include "MolpherAtomImpl.hpp"
 #include "core/misc/inout.h"
 
 MolpherMol::MolpherMol(
@@ -179,14 +179,9 @@ void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
         atoms.push_back(std::make_shared<MolpherAtom>(atom));
     }
 
-    RDKit::STR_VECT prop_names = mol->getPropList();
-    if (std::find(prop_names.begin(), prop_names.end(), "MOLPHER_NO_ADDITION") != prop_names.end()) {
-        std::string fixed_positions = mol->getProp<std::string>("MOLPHER_NO_ADDITION");
-        std::vector<std::string> indices;
-        split(fixed_positions, ',', std::back_inserter(indices));
-        for (auto idx : indices) {
-            int int_idx = std::stoi(idx) - 1;
-            atoms[int_idx]->setLockingMask(MolpherAtom::NO_ADDITION | atoms[int_idx]->getLockingMask());
+    if (!mol->getPropList().empty()) {
+        for (auto& item : parse_atom_locks(*mol)) {
+            atoms[item.first]->setLockingMask(item.second);
         }
     }
 

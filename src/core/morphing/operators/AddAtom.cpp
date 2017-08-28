@@ -50,11 +50,12 @@ MorphingOperatorImpl()
 }
 
 void AddAtom::AddAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
+	// FIXME: check for validity of the pointer
 	original = mol_orig;
 	original_rdkit.reset(original->asRDMol());
 	RDKit::ROMol& mol = *original_rdkit;
-
 	open_atoms.clear();
+
 	RDKit::Atom *atom;
 	RDKit::ROMol::AtomIterator iter;
 	for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
@@ -82,7 +83,7 @@ std::shared_ptr<MolpherMol> AddAtom::AddAtomImpl::morph() {
 		AtomIdx bindingAtomIdx = open_atoms[SynchRand::GetRandomNumber(open_atoms.size() - 1)];
 		RDKit::Atom *bindingAtom = newMol->getAtomWithIdx(bindingAtomIdx);
 
-		AtomIdx newAtomIdx = newMol->addAtom(atom); // newMol takes ownership of the released pointer
+		AtomIdx newAtomIdx = newMol->addAtom(atom);
 
 		if (HasNonSingleBond(*bindingAtom) && (SynchRand::GetRandomNumber(0, 1) > 0)) {
 			RDKit::Bond *bond = GetRandomNonSingleBond(*bindingAtom);

@@ -5,6 +5,7 @@
 #ifndef MOLPHER_LIB_MOLPHERATOMIMPL_HPP
 #define MOLPHER_LIB_MOLPHERATOMIMPL_HPP
 
+#include <map>
 #include "data_structs/MolpherAtom.hpp"
 
 class MolpherAtom::MolpherAtomImpl {
@@ -17,6 +18,8 @@ private:
 	int formal_charge;
 	double mass;
 	int locking_mask;
+
+	static const std::map<MolpherAtom::LockingMask, std::string> locks_map;
 
 public:
 	MolpherAtomImpl(RDKit::Atom* rd_atom);

@@ -6,6 +6,24 @@
 
 #include "GraphMol/Atom.h"
 
+const std::vector<MolpherAtom::LockingMask> MolpherAtom::atom_locks = {
+UNLOCKED
+, NO_MUTATION
+, NO_ADDITION
+, NO_REMOVAL
+, KEEP_NEIGHBORS
+, FULL_LOCK
+};
+
+const std::map<MolpherAtom::LockingMask, std::string> MolpherAtom::MolpherAtomImpl::locks_map = {
+{MolpherAtom::UNLOCKED,"UNLOCKED"}
+, {MolpherAtom::NO_ADDITION,"NO_ADDITION"}
+, {MolpherAtom::NO_REMOVAL,"NO_REMOVAL"}
+, {MolpherAtom::NO_MUTATION,"NO_MUTATION"}
+, {MolpherAtom::KEEP_NEIGHBORS,"KEEP_NEIGHBORS"}
+, {MolpherAtom::FULL_LOCK,"FULL_LOCK"}
+};
+
 MolpherAtom::MolpherAtomImpl::MolpherAtomImpl(RDKit::Atom *rd_atom)
 :
 atomic_num((unsigned int) rd_atom->getAtomicNum())
@@ -87,4 +105,8 @@ MolpherAtom &MolpherAtom::operator=(const MolpherAtom& other) {
 	this->setFormalCharge(other.getFormalCharge());
 	this->setLockingMask(other.getLockingMask());
 	return *this;
+}
+
+std::string MolpherAtom::lockToString(int lock) {
+	return MolpherAtomImpl::locks_map.find((LockingMask) lock)->second;
 }

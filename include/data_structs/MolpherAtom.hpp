@@ -6,6 +6,7 @@
 #define MOLPHER_LIB_MOLPHERATOM_HPP
 
 #include <memory>
+#include <boost/serialization/vector.hpp>
 
 namespace RDKit {
 	class Atom;
@@ -21,9 +22,13 @@ public:
 		UNLOCKED = 0
 		, NO_MUTATION = 1<<1
 		, NO_ADDITION = 1<<2
-		, KEEP_NEIGHBORS = 1<<3
-		, FULL_LOCK = NO_MUTATION | NO_ADDITION | KEEP_NEIGHBORS
+		, NO_REMOVAL = 1<<3
+		, KEEP_NEIGHBORS = 1<<4
+		, FULL_LOCK = NO_MUTATION | NO_ADDITION | NO_REMOVAL | KEEP_NEIGHBORS
 	};
+
+	static const std::vector<LockingMask> atom_locks;
+	static std::string lockToString(int lock);
 
 	MolpherAtom(RDKit::Atom* atom);
 	MolpherAtom(std::string symbol);

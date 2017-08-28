@@ -19,3 +19,4 @@
 %include "MorphingOperator.hpp";
 
 %include "AddAtom.hpp";
+%include "RemoveAtom.hpp";
