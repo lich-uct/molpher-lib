@@ -14,7 +14,7 @@ public:
 
 	std::shared_ptr<MolpherMol> getOriginal();
 	virtual void setOriginal(std::shared_ptr<MolpherMol>) = 0;
-	virtual std::shared_ptr<MolpherMol> morph() = 0;
+	virtual std::shared_ptr<MolpherMol> morph() = 0; // FIXME: make this a const method to guarantee thread safety
 
 protected:
 	class MorphingOperatorImpl;
