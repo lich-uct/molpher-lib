@@ -23,6 +23,7 @@
 #include <GraphMol/MolOps.h>
 #include <random_seed.hpp>
 #include <morphing/operators/AddAtom.hpp>
+#include <morphing/Molpher.hpp>
 #include <mol_helpers.hpp>
 #include <morphing/operators/RemoveAtom.hpp>
 #include <GraphMol/Substruct/SubstructMatch.h>
@@ -371,6 +372,28 @@ void MinimalTest::testRemoveAtomOperator() {
 			op_remove.setOriginal(morph);
 		}
 	}
+}
+
+void MinimalTest::testMolpher() {
+	AddAtom* add_atom(new AddAtom());
+	RemoveAtom* remove_atom(new RemoveAtom());
+	std::vector<MorphingOperator*> opers = {
+			add_atom
+			, remove_atom
+	};
+	std::shared_ptr<MolpherMol> dimethylphenylformamide(new MolpherMol(test_dir + "dimethylphenylformamide.sdf"));
+
+	Molpher molpher(dimethylphenylformamide, opers, 2, 200);
+	molpher();
+	for (auto morph : molpher.getMorphs()) {
+		RDKit::ROMol *mol1 = RDKit::SmilesToMol(morph->getSMILES());
+		RDKit::RWMol *patt = RDKit::SmartsToMol("CcccC");
+		RDKit::RWMol *patt2 = RDKit::SmartsToMol("c1ccccc1");
+		RDKit::MatchVectType res;
+		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
+		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt2 , res ));
+	}
+	CPPUNIT_ASSERT(molpher.getMorphs().empty());
 }
 
 void MinimalTest::testExplorationData() {
