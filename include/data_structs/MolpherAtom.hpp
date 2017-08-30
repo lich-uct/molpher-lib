@@ -6,7 +6,7 @@
 #define MOLPHER_LIB_MOLPHERATOM_HPP
 
 #include <memory>
-#include <boost/serialization/vector.hpp>
+#include <vector>
 
 namespace RDKit {
 	class Atom;
