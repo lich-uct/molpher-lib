@@ -10,9 +10,7 @@ pimpl(new MorphingOperatorImpl())
 	// no action
 }
 
-MorphingOperator::~MorphingOperator() {
-	// no action
-}
+MorphingOperator::~MorphingOperator() = default;
 
 std::shared_ptr<MolpherMol> MorphingOperator::getOriginal() {
 	return pimpl->getOriginal();

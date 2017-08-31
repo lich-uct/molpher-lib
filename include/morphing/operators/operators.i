@@ -16,7 +16,7 @@
  */
 
 %ignore MorphingOperator::MorphingOperatorImpl;
-%include "MorphingOperator.hpp";
 
+%include "MorphingOperator.hpp";
 %include "AddAtom.hpp";
 %include "RemoveAtom.hpp";

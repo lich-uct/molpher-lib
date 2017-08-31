@@ -32,9 +32,7 @@ pimpl(new TreeOperation::TreeOperationImpl())
     // no action
 }
 
-TreeOperation::~TreeOperation() {
-    // no action
-}
+TreeOperation::~TreeOperation() = default;
 
 std::shared_ptr<ExplorationTree> TreeOperation::getTree() {
     return pimpl->getTree();

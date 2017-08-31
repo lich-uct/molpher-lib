@@ -18,3 +18,4 @@
 // AtomLibrary wrapper
 %ignore AtomLibrary::operator=(const AtomLibrary&);
 %include "AtomLibrary.hpp"
+%include "Molpher.hpp"

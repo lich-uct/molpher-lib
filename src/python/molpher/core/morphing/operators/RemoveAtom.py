@@ -18,32 +18,31 @@ from molpher.core import MolpherMol
 from molpher.core.MolpherAtom import MolpherAtom
 from molpher.core._utils import shorten_repr
 
-class AddAtom(wrappers.AddAtom):
+class RemoveAtom(wrappers.RemoveAtom):
     """
-
-    This a specialized version of the `molpher.swig_wrappers.core.morphing.operators.AddAtom` proxy class.
+    This a specialized version of the `molpher.swig_wrappers.core.morphing.operators.RemoveAtom` proxy class.
     It implements some additional functionality for ease of use from Python.
 
-    .. seealso:: `molpher.swig_wrappers.core.AddAtom`
+    .. seealso:: `molpher.swig_wrappers.core.RemoveAtom`
 
     """
 
     def __repr__(self):
         return shorten_repr(self.__class__, self)
 
-    def getOpenAtoms(self):
-        ret = super(AddAtom, self).getOpenAtoms()
+    def getMarkedAtoms(self):
+        ret = super(RemoveAtom, self).getMarkedAtoms()
         for x in ret:
             x.__class__ = MolpherAtom
         return ret
 
     def morph(self):
-        ret = super(AddAtom, self).morph()
+        ret = super(RemoveAtom, self).morph()
         ret.__class__ = MolpherMol
         return ret
 
     def getOriginal(self):
-        ret = super(AddAtom, self).getOriginal()
+        ret = super(RemoveAtom, self).getOriginal()
         if ret:
             ret.__class__ = MolpherMol
         return ret

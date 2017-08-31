@@ -24,7 +24,9 @@ from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
 from molpher.core.MolpherAtom import MolpherAtom
 from molpher.core.morphing.AtomLibrary import AtomLibrary
+from molpher.core.morphing.Molpher import Molpher
 from molpher.core.morphing.operators.AddAtom import AddAtom
+from molpher.core.morphing.operators.RemoveAtom import RemoveAtom
 from molpher.core.operations import *
 from molpher.core.selectors import *
 from molpher.core import ExplorationData
@@ -38,6 +40,7 @@ class TestPythonAPI(unittest.TestCase):
         self.test_dir = os.path.abspath(resource_filename('molpher.core.tests', 'test_files/'))
         self.test_template_path = os.path.join(self.test_dir, 'test-template.xml')
         self.cymene_locked = os.path.join(self.test_dir, 'cymene.sdf')
+        self.ethanol_locked = os.path.join(self.test_dir, 'ethanol.sdf')
 
     def tearDown(self):
         pass
@@ -125,6 +128,21 @@ class TestPythonAPI(unittest.TestCase):
             self.assertIsInstance(mol, MolpherMol)
         for x in add_atom.getOpenAtoms():
             self.assertIsInstance(x, MolpherAtom)
+
+    def testMolpher(self):
+        cymene = MolpherMol(self.cymene_locked)
+
+        operators = [AddAtom(), RemoveAtom()]
+        molpher = Molpher(cymene, operators)
+        molpher()
+        morphs = molpher.getMorphs()
+        self.assertTrue(morphs)
+        self.assertFalse(molpher.getMorphs())
+
+        morphs = []
+        while len(morphs) < 50:
+            morphs.append(molpher.next())
+        self.assertEqual(50, len(morphs))
 
     def testExplorationData(self):
         params = ExplorationData(
