@@ -359,19 +359,25 @@ void MinimalTest::testRemoveAtomOperator() {
 
 	std::shared_ptr<MolpherMol> dimethylphenylformamide(new MolpherMol(test_dir + "dimethylphenylformamide.sdf"));
 	op_remove.setOriginal(dimethylphenylformamide);
+	CPPUNIT_ASSERT_EQUAL(dimethylphenylformamide.get(), op_remove.getOriginal().get());
+	RDKit::ROMol *mol1 = nullptr;
+	RDKit::RWMol *patt = nullptr;
 	for (int i = 0; i != 10; i++) {
 		morph = op_remove.morph();
 		if (!morph) {
 			op_remove.setOriginal(dimethylphenylformamide);
 		} else {
 			std::string smiles = morph->getSMILES();
-			RDKit::ROMol *mol1 = RDKit::SmilesToMol(smiles);
-			RDKit::RWMol *patt = RDKit::SmartsToMol("CcccC");
+			mol1 = RDKit::SmilesToMol(smiles);
+			patt = RDKit::SmartsToMol("CcccC");
 			RDKit::MatchVectType res;
 			CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
 			op_remove.setOriginal(morph);
 		}
 	}
+
+	delete mol1;
+	delete patt;
 }
 
 void MinimalTest::testMolpher() {
@@ -383,17 +389,39 @@ void MinimalTest::testMolpher() {
 	};
 	std::shared_ptr<MolpherMol> dimethylphenylformamide(new MolpherMol(test_dir + "dimethylphenylformamide.sdf"));
 
-	Molpher molpher(dimethylphenylformamide, opers, 2, 200);
+	Molpher molpher(dimethylphenylformamide, opers, 0, 200);
 	molpher();
+	RDKit::ROMol *mol1 = nullptr;
+	RDKit::RWMol *patt = nullptr;
+	RDKit::RWMol *patt2 = nullptr;
 	for (auto morph : molpher.getMorphs()) {
-		RDKit::ROMol *mol1 = RDKit::SmilesToMol(morph->getSMILES());
-		RDKit::RWMol *patt = RDKit::SmartsToMol("CcccC");
-		RDKit::RWMol *patt2 = RDKit::SmartsToMol("c1ccccc1");
+		mol1 = RDKit::SmilesToMol(morph->getSMILES());
+		patt = RDKit::SmartsToMol("CcccC");
+		patt2 = RDKit::SmartsToMol("c1ccccc1");
 		RDKit::MatchVectType res;
 		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
 		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt2 , res ));
 	}
 	CPPUNIT_ASSERT(molpher.getMorphs().empty());
+	CPPUNIT_ASSERT_EQUAL(dimethylphenylformamide.get(), molpher.getOriginal().get());
+
+	std::shared_ptr<MolpherMol> cymene(new MolpherMol(test_dir + "cymene.sdf"));
+	molpher.reset(cymene);
+	CPPUNIT_ASSERT_EQUAL(cymene.get(), molpher.getOriginal().get());
+	molpher();
+	for (auto morph : molpher.getMorphs()) {
+		print(morph->getSMILES());
+		mol1 = RDKit::SmilesToMol(morph->getSMILES());
+		patt = RDKit::SmartsToMol("CcccC");
+		patt2 = RDKit::SmartsToMol("c1ccccc1");
+		RDKit::MatchVectType res;
+		CPPUNIT_ASSERT(!RDKit::SubstructMatch( *mol1 , *patt , res ));
+		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt2 , res ));
+	}
+
+	delete mol1;
+	delete patt;
+	delete patt2;
 }
 
 void MinimalTest::testExplorationData() {
@@ -570,29 +598,5 @@ void MinimalTest::testTree() {
         std::cout << "Path found: " + NumberToStr(tree_from_file->isPathFound()) << std::endl;
         tree_from_file->prune();
     }
-}
-
-void MinimalTest::testRDKit() {
-    //TODO: remove this function from tests when the fixed_atom feature is ready
-
-    RDKit::ROMol* mol = RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next();
-    print_mol_info(mol);
-
-//    RDKit::RWMol* morphed_mol = RDKit::SmilesToMol(RDKit::MolToSmiles(*mol));
-    RDKit::RWMol morphed_mol(*mol);
-    RDKit::MolOps::Kekulize(morphed_mol);
-    print_mol_info((RDKit::ROMol*) &morphed_mol);
-
-//    morphed_mol.removeAtom((uint) 0);
-//    print_mol_info((RDKit::ROMol*) &morphed_mol);
-
-    uint bindingAtomIdx = 3;
-    RDKit::Atom* bindingAtom = morphed_mol.getAtomWithIdx(bindingAtomIdx);
-    RDKit::Atom addedAtom = *(morphed_mol.getAtomWithIdx(bindingAtomIdx));
-    uint newAtomIdx = morphed_mol.addAtom(&addedAtom);
-    morphed_mol.addBond(bindingAtom->getIdx(), newAtomIdx, RDKit::Bond::SINGLE);
-    print_mol_info((RDKit::ROMol*) &morphed_mol);
-
-    delete mol;
 }
 

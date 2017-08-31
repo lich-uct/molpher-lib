@@ -78,8 +78,10 @@ std::shared_ptr<MolpherMol> Molpher::MolpherImpl::getOriginal() {
 
 void Molpher::MolpherImpl::reset(std::shared_ptr<MolpherMol> original) {
 	this->original = original;
-	for (auto& oper : operators) {
-		oper->setOriginal(original);
+	for (auto oper : operators) {
+		oper->setOriginal(this->original);
 	}
 	morphs.clear();
+	failures = 0;
+	empty_mols = 0;
 }
