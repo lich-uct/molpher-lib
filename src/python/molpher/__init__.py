@@ -38,6 +38,6 @@ def load_SAScore(path):
    print("Loading data from:", path)
    wrappers.load_data_from(path)
 
-print("Initializing Molpher...")
+print("Initializing Molpher-lib...")
 load_SAScore(resource_filename('molpher.swig_wrappers', 'SAScore.dat'))
-print("Molpher initialized.")
+print("Molpher-lib initialized.")
