@@ -70,10 +70,12 @@ class MolpherAtom(wrappers.MolpherAtom):
 
     @property
     def lock_info(self):
+        # FIXME the C++ code should support access to the list of available flags
         return {
             'UNLOCKED' : not self.is_locked
             , 'NO_MUTATION' : bool(self.locking_mask & MolpherAtom.NO_MUTATION)
             , 'NO_ADDITION' : bool(self.locking_mask & MolpherAtom.NO_ADDITION)
+            , 'NO_REMOVAL' : bool(self.locking_mask & MolpherAtom.NO_REMOVAL)
             , 'KEEP_NEIGHBORS' : bool(self.locking_mask & MolpherAtom.KEEP_NEIGHBORS)
             , 'FULL_LOCK' : bool((self.locking_mask & MolpherAtom.FULL_LOCK) == MolpherAtom.FULL_LOCK)
         }
