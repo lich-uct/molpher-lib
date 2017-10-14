@@ -82,6 +82,11 @@ class MolpherMol(wrappers.MolpherMol):
             x.__class__ = MolpherAtom
         return atoms
 
+    def getAtom(self, idx):
+        ret = super(MolpherMol, self).getAtom(idx)
+        ret.__class__ = MolpherAtom
+        return ret
+
     @property
     def tree(self):
         """
