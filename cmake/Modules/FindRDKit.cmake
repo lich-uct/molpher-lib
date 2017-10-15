@@ -73,6 +73,7 @@ else()
             message(STATUS "Found RDKit libraries at ${RDKIT_LIBRARY_DIR}")
             unset(GRAPHMOL_LIB CACHE)
 
+            # TODO: add all libraries in the directory without having to name them
             foreach(name
                     RDKitAlignment
                     RDKitDescriptors
@@ -121,9 +122,6 @@ else()
                 set(RDKIT_LIBRARIES ${RDKIT_LIBRARIES} ${${name}_LIB})
             endforeach()
 
-        endif()
-        if(RDKIT_LIBRARIES)
-            message(STATUS "Found the following RDKit library files: ${RDKIT_LIBRARIES}")
         endif()
     endif()
 
