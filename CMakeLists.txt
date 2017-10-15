@@ -1,8 +1,9 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.9)
 project(molpher_lib)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/" "${CMAKE_SOURCE_DIR}/tests/cmake/Modules/")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/dist/bin)
+message("Build type: ${CMAKE_BUILD_TYPE}")
 
 # versioning
 file(STRINGS "BUILD.TXT" BUILD_NUMBER LIMIT_COUNT 1)
@@ -12,7 +13,7 @@ string(REGEX MATCH "^[0-9]+\\.[0-9]+" VERSION_NUMBER_SO "${VERSION_NUMBER}")
 # Tool Flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wno-deprecated-declarations")
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
-set(CMAKE_INSTALL_RPATH "$ORIGIN/")
+set(CMAKE_INSTALL_RPATH "$ORIGIN/.")
 
 # Dependencies
 
@@ -21,22 +22,49 @@ set(DEPS_DIR "deps")
 set(
         CMAKE_INCLUDE_PATH
 
-        $ENV{CPATH}
-        $ENV{CPATH}/rdkit/
         ${DEPS_DIR}/boost/
         ${DEPS_DIR}/rdkit/Code/
         ${DEPS_DIR}/tbb/include/
-        ${CMAKE_INCLUDE_PATH}
 )
 set(
         CMAKE_LIBRARY_PATH
 
-        $ENV{LD_LIBRARY_PATH}
         ${DEPS_DIR}/boost/stage/lib/
         ${DEPS_DIR}/rdkit/lib/
         ${DEPS_DIR}/tbb/lib/intel64/gcc4.4/
-        ${CMAKE_LIBRARY_PATH}
 )
+if (${ENV_PREFIX})
+    set(
+            CMAKE_INCLUDE_PATH
+
+            ${CMAKE_INCLUDE_PATH}
+            ${ENV_PREFIX}/include/
+            ${ENV_PREFIX}/include/rdkit/
+    )
+    set(
+            CMAKE_LIBRARY_PATH
+
+            ${CMAKE_LIBRARY_PATH}
+            ${ENV_PREFIX}/lib/
+    )
+endif ()
+if ($ENV{CONDA_PREFIX})
+    set(
+            CMAKE_INCLUDE_PATH
+
+            ${CMAKE_INCLUDE_PATH}
+            $ENV{CONDA_PREFIX}/include/
+            $ENV{CONDA_PREFIX}/include/rdkit/
+    )
+    set(
+            CMAKE_LIBRARY_PATH
+
+            ${CMAKE_LIBRARY_PATH}
+            $ENV{CONDA_PREFIX}/lib/
+    )
+endif ()
+message("CMAKE_INCLUDE_PATH=${CMAKE_INCLUDE_PATH}")
+message("CMAKE_LIBRARY_PATH=${CMAKE_LIBRARY_PATH}")
 
 ## Threads
 find_package(Threads REQUIRED)
@@ -76,7 +104,7 @@ add_definitions("-DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB")
 #set(RDKIT_LINK_STATIC ON)
 find_package(RDKit REQUIRED)
 if(NOT RDKIT_FOUND)
-    message(FATAL_ERROR "RDKit library not found")
+    message(FATAL_ERROR "RDKit library or include files not found")
 endif()
 include_directories(${RDKIT_INCLUDE_DIR})
 set(LIBS ${LIBS} ${RDKIT_LIBRARIES})
@@ -86,6 +114,10 @@ add_definitions(${RDKIT_DEFINITIONS})
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(TBB_USE_DEBUG_BUILD ON)
 endif()
+if (CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(TBB_USE_DEBUG_BUILD OFF)
+endif()
+message(TBB_USE_DEBUG_BUILD="${TBB_USE_DEBUG_BUILD}")
 find_package(TBB REQUIRED)
 if(NOT TBB_FOUND)
     message(FATAL_ERROR "TBB library not found")
@@ -114,6 +146,7 @@ set_target_properties(
             VERSION "${VERSION_NUMBER}_${BUILD_NUMBER}"
             SOVERSION "${VERSION_NUMBER_SO}"
 )
+message("Linked libraries to the main target: ${LIBS}")
 target_link_libraries(molpher ${LIBS})
 
 ## update the SWIG wrapping code if requested
@@ -135,6 +168,7 @@ set(TEST_SRC tests/minimal_test)
 set(TEST_HELPERS tests/helpers)
 add_executable(
         minimal_test
+        EXCLUDE_FROM_ALL
         ${TEST_SRC}/MinimalTest.cpp
         ${TEST_SRC}/MinimalTest.hpp
         ${TEST_SRC}/MinimalTestRunner.cpp
