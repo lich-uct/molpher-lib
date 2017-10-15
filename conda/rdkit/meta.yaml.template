@@ -1,0 +1,17 @@
+package:
+  name: {{ target }}
+  version: {{ rdkit_version }}
+
+source:
+  path: .
+
+build:
+  script_env:
+    - BASE_DIR
+  run:
+    - {{ boost_spec }}
+
+about:
+  license : Copyright (c) 2006-2015 Rational Discovery LLC, Greg Landrum, and Julie Penzotti
+  license_file: {{ license_file }}
+  summary: "The RDKit library dependencies for Molpher-lib."

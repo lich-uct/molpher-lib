@@ -1,0 +1,15 @@
+package:
+  name: {{ target }}
+  version: {{ boost_version }}
+
+source:
+  path: .
+
+build:
+  script_env:
+    - BASE_DIR
+
+about:
+  license : Boost-1.0
+  license_file: {{ license_file }}
+  summary: "The Boost library dependencies for Molpher-lib."
