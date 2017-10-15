@@ -20,8 +20,8 @@ set -e
 
 # Dependency links
 TBB_LINK=http://www.threadingbuildingblocks.org/sites/default/files/software_releases/linux/tbb42_20130725oss_lin.tgz
-BOOST_LINK=https://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz/download
-RDKIT_LINK=https://github.com/rdkit/rdkit/archive/Release_2017_03_3.tar.gz
+BOOST_LINK=https://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.gz/download
+RDKIT_LINK=https://github.com/rdkit/rdkit/archive/Release_2017_09_1.tar.gz
 
 # Dependency compilation flags
 want_help=0
