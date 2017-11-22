@@ -6,8 +6,6 @@ source:
   path: .
 
 build:
-  number: 0
-  string: {{ tbb_build_string }}
   script_env:
     - BASE_DIR
 

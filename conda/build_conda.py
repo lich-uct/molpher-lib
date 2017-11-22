@@ -24,8 +24,8 @@ import imp
 BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
 version = imp.load_source('module.name', os.path.join(BASE_DIR, 'version.py'))
 BUILD_ALL_PYTHON = False
-TARGETS = ["tbb", "boost", "rdkit", "molpher-lib"]
-PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5', '3.6'] if BUILD_ALL_PYTHON else ['3.6']
+TARGETS = ["molpher_tbb", "molpher_boost", "molpher_rdkit", "molpher-lib"]
+PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5', '3.6'] if BUILD_ALL_PYTHON else ['2', '3']
 VERSION = version.VERSION
 BUILD_NUMBER = version.BUILD_NUMBER
 LICENSE_FILE_NAME = "LICENSE"
@@ -37,9 +37,9 @@ BOOST_VERSION = "1.63"
 RDKIT_VERSION = "2017.09.1"
 
 LICENSES_DICT = {
-    "tbb" : TBB_LICENSE_FILE
-    , "boost" : BOOST_LICENSE_FILE
-    , "rdkit" : RDKIT_LICENSE_FILE
+    "molpher_tbb" : TBB_LICENSE_FILE
+    , "molpher_boost" : BOOST_LICENSE_FILE
+    , "molpher_rdkit" : RDKIT_LICENSE_FILE
 }
 
 # remove previously generated files
@@ -66,12 +66,11 @@ for target in TARGETS:
                 , build_string="py{0}_{1}".format(python_version.replace('.', ''), BUILD_NUMBER)
                 , python_spec="python {0}*".format(python_version)
                 , tbb_version=TBB_VERSION
-                , tbb_spec = "tbb {0} ndebug_0".format(TBB_VERSION)
-                , tbb_build_string = "ndebug_0"
+                , tbb_spec = "{1} {0}".format(TBB_VERSION, TARGETS[0])
                 , boost_version=BOOST_VERSION
-                , boost_spec = "boost {0}*".format(BOOST_VERSION)
+                , boost_spec = "{1} {0}*".format(BOOST_VERSION, TARGETS[1])
                 , rdkit_version=RDKIT_VERSION
-                , rdkit_spec = "rdkit {0}".format(RDKIT_VERSION)
+                , rdkit_spec = "{1} {0}".format(RDKIT_VERSION, TARGETS[2])
             ))
 
         os.chdir(os.path.join(PACKAGE_DIR, "../"))
