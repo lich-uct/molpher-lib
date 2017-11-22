@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.9)
 project(molpher_lib)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/" "${CMAKE_SOURCE_DIR}/tests/cmake/Modules/")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/dist/bin)
 message("Build type: ${CMAKE_BUILD_TYPE}")
 
 # versioning
@@ -146,7 +145,7 @@ set_target_properties(
             VERSION "${VERSION_NUMBER}_${BUILD_NUMBER}"
             SOVERSION "${VERSION_NUMBER_SO}"
 )
-message("Linked libraries to the main target: ${LIBS}")
+message("Libraries linked to the target molpher: ${LIBS}")
 target_link_libraries(molpher ${LIBS})
 
 ## update the SWIG wrapping code if requested
