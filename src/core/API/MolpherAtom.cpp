@@ -12,6 +12,7 @@ UNLOCKED
 , NO_ADDITION
 , NO_REMOVAL
 , KEEP_NEIGHBORS
+, KEEP_NEIGHBORS_AND_BONDS
 , FULL_LOCK
 };
 
@@ -21,6 +22,7 @@ const std::map<MolpherAtom::LockingMask, std::string> MolpherAtom::MolpherAtomIm
 , {MolpherAtom::NO_REMOVAL,"NO_REMOVAL"}
 , {MolpherAtom::NO_MUTATION,"NO_MUTATION"}
 , {MolpherAtom::KEEP_NEIGHBORS,"KEEP_NEIGHBORS"}
+, {MolpherAtom::KEEP_NEIGHBORS_AND_BONDS,"KEEP_NEIGHBORS_AND_BONDS"}
 , {MolpherAtom::FULL_LOCK,"FULL_LOCK"}
 };
 
@@ -108,5 +110,16 @@ MolpherAtom &MolpherAtom::operator=(const MolpherAtom& other) {
 }
 
 std::string MolpherAtom::lockToString(int lock) {
+	// TODO: throw an exception if the lock is not found
 	return MolpherAtomImpl::locks_map.find((LockingMask) lock)->second;
+}
+
+std::vector<std::string> MolpherAtom::lockingMaskToString(int mask) {
+	std::vector<std::string> ret;
+	for (LockingMask lock : atom_locks) {
+		if (lock & mask && lock != FULL_LOCK) {
+			ret.push_back(lockToString(lock));
+		}
+	}
+	return ret;
 }

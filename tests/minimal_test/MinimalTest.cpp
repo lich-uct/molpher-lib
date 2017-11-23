@@ -27,6 +27,7 @@
 #include <mol_helpers.hpp>
 #include <morphing/operators/RemoveAtom.hpp>
 #include <GraphMol/Substruct/SubstructMatch.h>
+#include <morphing/operators/AddBond.hpp>
 
 #include "MinimalTest.hpp"
 #include "io/stdout.hpp"
@@ -378,6 +379,22 @@ void MinimalTest::testRemoveAtomOperator() {
 
 	delete mol1;
 	delete patt;
+}
+
+void MinimalTest::testAddBondOperator() {
+	std::shared_ptr<MolpherMol> propanol(new MolpherMol(test_dir + "propanol.sdf"));
+
+	CPPUNIT_ASSERT_EQUAL(propanol->getAtom(1)->getLockingMask(), (int) MolpherAtom::KEEP_NEIGHBORS_AND_BONDS);
+
+	AddBond op_add_bond;
+	op_add_bond.setOriginal(propanol);
+
+	auto morph = op_add_bond.morph();
+	for (int i = 0; i != 10; i++) {
+		print(op_add_bond.morph()->getSMILES());
+	}
+
+	// TODO: add more code
 }
 
 void MinimalTest::testMolpher() {

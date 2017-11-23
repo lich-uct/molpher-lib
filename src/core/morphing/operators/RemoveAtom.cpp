@@ -93,23 +93,7 @@ std::shared_ptr<MolpherMol> RemoveAtom::RemoveAtomImpl::morph() {
 		newMol->removeAtom(removedIdx);
 
 		std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
-		bool after_removed = false;
-		for (int orig_idx = 0; orig_idx != original->getAtomCount(); orig_idx++) {
-			if (removedIdx == orig_idx) {
-				after_removed = true;
-				continue;
-			}
-
-			int new_mol_idx = orig_idx;
-			if (after_removed) {
-				new_mol_idx = orig_idx - 1;
-			}
-
-			auto orig_atom = original->getAtom(orig_idx);
-			if (orig_atom->isLocked()) {
-				ret->getAtom(new_mol_idx)->setLockingMask(orig_atom->getLockingMask());
-			}
-		}
+		writeOriginalLockInfo(ret, removedIdx);
 
 		return ret;
 	} else {

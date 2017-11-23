@@ -29357,6 +29357,39 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MolpherAtom_lockingMaskToString(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherAtom_lockingMaskToString",&obj0)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "MolpherAtom_lockingMaskToString" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = MolpherAtom::lockingMaskToString(arg1);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< std::string,std::allocator< std::string > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_MolpherAtom__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string arg1 ;
@@ -42071,6 +42104,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_MorphingOperatorVector", _wrap_delete_MorphingOperatorVector, METH_VARARGS, NULL},
 	 { (char *)"MorphingOperatorVector_swigregister", MorphingOperatorVector_swigregister, METH_VARARGS, NULL},
 	 { (char *)"MolpherAtom_lockToString", _wrap_MolpherAtom_lockToString, METH_VARARGS, NULL},
+	 { (char *)"MolpherAtom_lockingMaskToString", _wrap_MolpherAtom_lockingMaskToString, METH_VARARGS, NULL},
 	 { (char *)"new_MolpherAtom", _wrap_new_MolpherAtom, METH_VARARGS, NULL},
 	 { (char *)"delete_MolpherAtom", _wrap_delete_MolpherAtom, METH_VARARGS, NULL},
 	 { (char *)"MolpherAtom_isLocked", _wrap_MolpherAtom_isLocked, METH_VARARGS, NULL},
@@ -43291,6 +43325,7 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "MolpherAtom_NO_ADDITION",SWIG_From_int(static_cast< int >(MolpherAtom::NO_ADDITION)));
   SWIG_Python_SetConstant(d, "MolpherAtom_NO_REMOVAL",SWIG_From_int(static_cast< int >(MolpherAtom::NO_REMOVAL)));
   SWIG_Python_SetConstant(d, "MolpherAtom_KEEP_NEIGHBORS",SWIG_From_int(static_cast< int >(MolpherAtom::KEEP_NEIGHBORS)));
+  SWIG_Python_SetConstant(d, "MolpherAtom_KEEP_NEIGHBORS_AND_BONDS",SWIG_From_int(static_cast< int >(MolpherAtom::KEEP_NEIGHBORS_AND_BONDS)));
   SWIG_Python_SetConstant(d, "MolpherAtom_FULL_LOCK",SWIG_From_int(static_cast< int >(MolpherAtom::FULL_LOCK)));
   PyDict_SetItemString(md,(char*)"cvar", SWIG_globals());
   SWIG_addvarlink(SWIG_globals(),(char*)"MolpherAtom_atom_locks",Swig_var_MolpherAtom_atom_locks_get, Swig_var_MolpherAtom_atom_locks_set);

@@ -24,6 +24,15 @@ void print_morphs(const MolpherMol& parent, const std::vector<std::shared_ptr<Mo
     }
 }
 
+void print_locks(const MolpherMol& mol) {
+    for (auto atom : mol.getAtoms()) {
+        print(atom->getSymbol());
+        for (auto lock : MolpherAtom::lockingMaskToString(atom->getLockingMask())) {
+            print(lock);
+        }
+    }
+}
+
 void print(const std::string &text) {
     std::cout << text << std::endl;
 }

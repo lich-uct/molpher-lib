@@ -95,12 +95,7 @@ std::shared_ptr<MolpherMol> AddAtom::AddAtomImpl::morph() {
 		bindingAtom->calcImplicitValence();
 
 		std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
-		for (int orig_idx = 0; orig_idx != original->getAtomCount(); orig_idx++) {
-			auto orig_atom = original->getAtom(orig_idx);
-			if (orig_atom->isLocked()) {
-				ret->getAtom(orig_idx)->setLockingMask(orig_atom->getLockingMask());
-			}
-		}
+		writeOriginalLockInfo(ret);
 
 		delete atom;
 

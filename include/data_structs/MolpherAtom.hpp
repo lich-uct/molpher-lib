@@ -24,11 +24,13 @@ public:
 		, NO_ADDITION = 1<<2
 		, NO_REMOVAL = 1<<3
 		, KEEP_NEIGHBORS = 1<<4
-		, FULL_LOCK = NO_MUTATION | NO_ADDITION | NO_REMOVAL | KEEP_NEIGHBORS
+		, KEEP_NEIGHBORS_AND_BONDS = 1<<5
+		, FULL_LOCK = NO_MUTATION | NO_ADDITION | NO_REMOVAL | KEEP_NEIGHBORS | KEEP_NEIGHBORS_AND_BONDS
 	};
 
 	static const std::vector<LockingMask> atom_locks;
 	static std::string lockToString(int lock);
+	static std::vector<std::string> lockingMaskToString(int mask);
 
 	MolpherAtom(RDKit::Atom* atom);
 	MolpherAtom(std::string symbol);

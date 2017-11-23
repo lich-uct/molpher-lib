@@ -1283,11 +1283,16 @@ class MolpherAtom(_object):
     NO_ADDITION = _core.MolpherAtom_NO_ADDITION
     NO_REMOVAL = _core.MolpherAtom_NO_REMOVAL
     KEEP_NEIGHBORS = _core.MolpherAtom_KEEP_NEIGHBORS
+    KEEP_NEIGHBORS_AND_BONDS = _core.MolpherAtom_KEEP_NEIGHBORS_AND_BONDS
     FULL_LOCK = _core.MolpherAtom_FULL_LOCK
     if _newclass:
         lockToString = staticmethod(_core.MolpherAtom_lockToString)
     else:
         lockToString = _core.MolpherAtom_lockToString
+    if _newclass:
+        lockingMaskToString = staticmethod(_core.MolpherAtom_lockingMaskToString)
+    else:
+        lockingMaskToString = _core.MolpherAtom_lockingMaskToString
 
     def __init__(self, *args):
         this = _core.new_MolpherAtom(*args)
@@ -1329,6 +1334,10 @@ MolpherAtom.atom_locks = _core.cvar.MolpherAtom_atom_locks
 def MolpherAtom_lockToString(lock):
     return _core.MolpherAtom_lockToString(lock)
 MolpherAtom_lockToString = _core.MolpherAtom_lockToString
+
+def MolpherAtom_lockingMaskToString(mask):
+    return _core.MolpherAtom_lockingMaskToString(mask)
+MolpherAtom_lockingMaskToString = _core.MolpherAtom_lockingMaskToString
 
 class MolpherMol(_object):
     __swig_setmethods__ = {}
