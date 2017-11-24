@@ -85,7 +85,10 @@ std::shared_ptr<MolpherMol> AddAtom::AddAtomImpl::morph() {
 
 		AtomIdx newAtomIdx = newMol->addAtom(atom);
 
-		if (HasNonSingleBond(*bindingAtom) && (SynchRand::GetRandomNumber(0, 1) > 0)) {
+		if (HasNonSingleBond(*bindingAtom)
+			&& !(original->getAtom(bindingAtomIdx)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS_AND_BONDS)
+			&& (SynchRand::GetRandomNumber(0, 1) > 0)
+				) {
 			RDKit::Bond *bond = GetRandomNonSingleBond(*bindingAtom);
 			DecreaseBondOrder(*bond);
 		}
