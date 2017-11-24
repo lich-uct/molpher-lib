@@ -33,6 +33,10 @@ std::shared_ptr<MolpherMol> AddBond::morph() {
 	return pimpl->morph();
 }
 
+const std::vector<std::pair<unsigned int, unsigned int>> &AddBond::getOpenBonds() {
+	return pimpl->getOpenBonds();
+}
+
 void AddBond::AddBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
 		original = mol_orig;
@@ -110,4 +114,8 @@ std::shared_ptr<MolpherMol> AddBond::AddBondImpl::morph() {
 	writeOriginalLockInfo(ret);
 
 	return ret;
+}
+
+const std::vector<std::pair<AtomIdx, AtomIdx>>& AddBond::AddBondImpl::getOpenBonds() {
+	return open_bonds;
 }

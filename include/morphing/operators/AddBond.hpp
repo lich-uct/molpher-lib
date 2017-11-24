@@ -14,6 +14,8 @@ public:
 	virtual void setOriginal(std::shared_ptr<MolpherMol> mol);
 	virtual std::shared_ptr<MolpherMol> morph();
 
+	const std::vector<std::pair<unsigned int, unsigned int>>& getOpenBonds();
+
 private:
 	class AddBondImpl;
 	std::shared_ptr<AddBondImpl> pimpl;

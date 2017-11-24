@@ -383,18 +383,33 @@ void MinimalTest::testRemoveAtomOperator() {
 
 void MinimalTest::testAddBondOperator() {
 	std::shared_ptr<MolpherMol> propanol(new MolpherMol(test_dir + "propanol.sdf"));
-
-	CPPUNIT_ASSERT_EQUAL(propanol->getAtom(1)->getLockingMask(), (int) MolpherAtom::KEEP_NEIGHBORS_AND_BONDS);
+	unsigned int locked_idx = 2;
+	CPPUNIT_ASSERT_EQUAL(propanol->getAtom(locked_idx)->getLockingMask(), (int) MolpherAtom::KEEP_NEIGHBORS_AND_BONDS);
 
 	AddBond op_add_bond;
 	op_add_bond.setOriginal(propanol);
-
-	auto morph = op_add_bond.morph();
-	for (int i = 0; i != 10; i++) {
-		print(op_add_bond.morph()->getSMILES());
+	for (auto bond : op_add_bond.getOpenBonds()) {
+		CPPUNIT_ASSERT(bond.first != locked_idx && bond.second != locked_idx);
 	}
 
-	// TODO: add more code
+	RDKit::ROMol* propanol_rd = propanol->asRDMol();
+	for (int i = 0; i != 10; i++) {
+		auto morph = op_add_bond.morph();
+		print(morph->getSMILES());
+		RDKit::ROMol* morph_rd = morph->asRDMol();
+
+		for (int atom_idx = 0; atom_idx != propanol->getAtomCount(); atom_idx++) {
+			CPPUNIT_ASSERT_EQUAL(propanol->getAtom(atom_idx)->getLockingMask(), morph->getAtom(atom_idx)->getLockingMask());
+			if (atom_idx == locked_idx) {
+				CPPUNIT_ASSERT_EQUAL(propanol_rd->getAtomWithIdx(atom_idx)->getNumImplicitHs(), morph_rd->getAtomWithIdx(atom_idx)->getNumImplicitHs());
+			}
+		}
+		delete morph_rd;
+
+		AddBond op_add_bond2;
+		op_add_bond2.setOriginal(morph);
+	}
+	delete propanol_rd;
 }
 
 void MinimalTest::testMolpher() {

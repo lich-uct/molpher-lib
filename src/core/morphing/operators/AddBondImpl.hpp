@@ -20,6 +20,8 @@ public:
 	void setOriginal(std::shared_ptr<MolpherMol> mol);
 	std::shared_ptr<MolpherMol> morph();
 
+	const std::vector<std::pair<AtomIdx, AtomIdx>>& getOpenBonds();
+
 };
 
 #endif //MOLPHER_LIB_ADDBONDIMPL_HPP

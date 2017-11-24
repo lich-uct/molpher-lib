@@ -19,12 +19,13 @@ private:
 
 public:
 	enum LockingMask {
-		UNLOCKED = 0
-		, NO_MUTATION = 1<<1
-		, NO_ADDITION = 1<<2
-		, NO_REMOVAL = 1<<3
-		, KEEP_NEIGHBORS = 1<<4
-		, KEEP_NEIGHBORS_AND_BONDS = 1<<5
+		UNLOCKED = 0 // everything goes (the default option)
+		, NO_MUTATION = 1<<1 // always the same element
+		, NO_ADDITION = 1<<2 // no atoms can be added
+		, NO_REMOVAL = 1<<3 // atom cannot be removed
+		, KEEP_NEIGHBORS = 1<<4 // the neighboring atoms must remain (bond type can change)
+		, KEEP_NEIGHBORS_AND_BONDS = 1<<5 // the neighboring atoms must remain (bond type cannot change)
+		//, KEEP_BONDS = 1 << 6 // keep existing bonds as they are (neighbors can change, but not the bond order) TODO: implement
 		, FULL_LOCK = NO_MUTATION | NO_ADDITION | NO_REMOVAL | KEEP_NEIGHBORS | KEEP_NEIGHBORS_AND_BONDS
 	};
 

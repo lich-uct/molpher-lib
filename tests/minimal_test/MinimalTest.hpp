@@ -75,15 +75,15 @@ class MinimalTest : public CPPUNIT_NS::TestFixture {
     CPPUNIT_TEST_SUITE(MinimalTest);
 
 		// TODO: uncomment when doen with testing AddBond operator
-//		CPPUNIT_TEST(testAtom);
-//		CPPUNIT_TEST(testAtomLibrary);
-//		CPPUNIT_TEST(testMolpherMol);
-//		CPPUNIT_TEST(testAddAtomOperator);
-//		CPPUNIT_TEST(testRemoveAtomOperator);
+		CPPUNIT_TEST(testAtom);
+		CPPUNIT_TEST(testAtomLibrary);
+		CPPUNIT_TEST(testMolpherMol);
+		CPPUNIT_TEST(testAddAtomOperator);
+		CPPUNIT_TEST(testRemoveAtomOperator);
 		CPPUNIT_TEST(testAddBondOperator);
-//		CPPUNIT_TEST(testMolpher);
-//		CPPUNIT_TEST(testTree);
-//		CPPUNIT_TEST(testExplorationData);
+		CPPUNIT_TEST(testMolpher);
+		CPPUNIT_TEST(testTree);
+		CPPUNIT_TEST(testExplorationData);
 
 	CPPUNIT_TEST_SUITE_END();
 
