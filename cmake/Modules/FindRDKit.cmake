@@ -73,49 +73,54 @@ else()
             message(STATUS "Found RDKit libraries at ${RDKIT_LIBRARY_DIR}")
             unset(GRAPHMOL_LIB CACHE)
 
-            # TODO: add all libraries in the directory without having to name them
             foreach(name
-                    RDKitAlignment
-                    RDKitDescriptors
-                    RDKitFMCS
-                    RDKitMMPA
-                    RDKitOptimizer
-                    RDKitSLNParse
-                    RDKitCatalogs
-                    RDKitDistGeometry
-                    RDKitForceFieldHelpers
-                    RDKitMolAlign
-                    RDKitPartialCharges
+                    RDKitFileParsers
                     RDKitSmilesParse
-                    RDKitChemicalFeatures
-                    RDKitDistGeomHelpers
-                    RDKitForceField
-                    RDKitMolCatalog
-                    RDKitRDGeneral
-                    RDKitStructChecker
-                    RDKitChemReactions
-                    RDKitEigenSolvers
-                    RDKitFragCatalog
-                    RDKitMolChemicalFeatures
-                    RDKitRDGeometryLib
-                    RDKitSubgraphs
+                    RDKitCatalogs
+                    RDKitFilterCatalog
+                    RDKitDataStructs
+                    RDKitPartialCharges
+                    RDKitDescriptors
+                    RDKitFingerprints
                     RDKitChemTransforms
+                    RDKitChemReactions
+                    RDKitDepictor
+                    RDKitRDGeometryLib
+                    RDKitRDGeneral
+                    RDKitSubstructMatch
+                    RDKitSubgraphs
+                    RDKitMolDraw2D
                     RDKitFileParsers
                     RDKitGraphMol
-                    RDKitMolDraw2D
-                    RDKitReducedGraphs
-                    RDKitSubstructMatch
-                    RDKitDataStructs
-                    RDKitFilterCatalog
-                    RDKithc
-                    RDKitMolHash
-                    RDKitShapeHelpers
-                    RDKitTrajectory
-                    RDKitDepictor
-                    RDKitFingerprints
-                    RDKitInfoTheory
+                    RDKitDistGeometry
+                    RDKitDistGeomHelpers
+                    RDKitMolAlign
+                    RDKitOptimizer
+                    RDKitRDGeometryLib
+                    RDKitForceField
+                    RDKitForceFieldHelpers
+                    RDKitAlignment
+                    RDKitForceField
+                    RDKitForceFieldHelpers
                     RDKitMolTransforms
-                    RDKitSimDivPickers
+                    RDKitEigenSolvers
+
+                    # other libs (not linked atm)
+#                    RDKitFMCS
+#                    RDKitMMPA
+#                    RDKitSLNParse
+#                    RDKitChemicalFeatures
+#                    RDKitMolCatalog
+#                    RDKitStructChecker
+#                    RDKitFragCatalog
+#                    RDKitMolChemicalFeatures
+#                    RDKitReducedGraphs
+#                    RDKithc
+#                    RDKitMolHash
+#                    RDKitShapeHelpers
+#                    RDKitTrajectory
+#                    RDKitInfoTheory
+#                    RDKitSimDivPickers
                     )
                 find_library(${name}_LIB NAMES "${name}${LIB_SUFFIX}"
                         HINTS ${RDKIT_LIBRARY_DIR})

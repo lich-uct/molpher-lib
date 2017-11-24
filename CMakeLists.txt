@@ -81,15 +81,15 @@ set(Boost_USE_MULTITHREADED ON)
 find_package(
         Boost REQUIRED
 
-        date_time
+#        date_time
         filesystem
-        program_options
-        regex
-        wserialization
+#        program_options
+#        regex
+#        wserialization
         serialization
-        signals
+#        signals
         thread
-        system
+#        system
 )
 if(NOT Boost_FOUND)
     message(FATAL_ERROR "Boost library not found")
