@@ -28,6 +28,7 @@
 #include <morphing/operators/RemoveAtom.hpp>
 #include <GraphMol/Substruct/SubstructMatch.h>
 #include <morphing/operators/AddBond.hpp>
+#include <morphing/operators/RemoveBond.hpp>
 
 #include "MinimalTest.hpp"
 #include "io/stdout.hpp"
@@ -405,14 +406,41 @@ void MinimalTest::testAddBondOperator() {
 			}
 		}
 		delete morph_rd;
-
-		AddBond op_add_bond2;
-		op_add_bond2.setOriginal(morph);
 	}
 	delete propanol_rd;
 }
 
+void MinimalTest::testRemoveBondOperator() {
+	std::shared_ptr<MolpherMol> test_mol(new MolpherMol(test_dir + "remove_bond_test_mol.sdf"));
+
+	RemoveBond op_remove_bond;
+	op_remove_bond.setOriginal(test_mol);
+
+	RDKit::ROMol* test_mol_rd = test_mol->asRDMol();
+	RDKit::ROMol *mol1 = nullptr;
+	RDKit::RWMol *patt = nullptr;
+	for (int i = 0; i != 20; i++) {
+		auto morph = op_remove_bond.morph();
+		if (morph == nullptr) break;
+		print(morph->getSMILES());
+		RDKit::ROMol* morph_rd = morph->asRDMol();
+
+		std::string smiles = morph->getSMILES();
+		mol1 = RDKit::SmilesToMol(smiles);
+		patt = RDKit::SmartsToMol("c1ccccc1");
+		RDKit::MatchVectType res;
+		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
+//		op_remove_bond.setOriginal(morph);
+		delete morph_rd;
+	}
+
+	delete mol1;
+	delete patt;
+	delete test_mol_rd;
+}
+
 void MinimalTest::testMolpher() {
+	// TODO: test with all operators
 	AddAtom* add_atom(new AddAtom());
 	RemoveAtom* remove_atom(new RemoveAtom());
 	std::vector<MorphingOperator*> opers = {
