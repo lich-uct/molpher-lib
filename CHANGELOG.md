@@ -13,6 +13,7 @@ Previous version: 0.0.0b1
     - AddBond operator class was added that adheres to this interface
     - RemoveBond operator class was added that adheres to this interface
     - MutateAtom operator class was added that adheres to this interface
+    - InterlayAtom operator class was added that adheres to this interface
 
 ## Fixes
 - number of linked dependencies was reduced (unused libraries are not linked now)

@@ -58,9 +58,7 @@ void MutateAtom::MutateAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 //			SynchCout(atom.getSymbol());
 //			std::cout << atom_rd->getExplicitValence() << std::endl;
 
-			if (
-					(atom.getLockingMask() & MolpherAtom::NO_MUTATION)
-					) {
+			if (atom.getLockingMask() & MolpherAtom::NO_MUTATION) {
 				replacements.push_back(atom_replacements);
 				continue;
 			}
@@ -112,7 +110,7 @@ std::shared_ptr<MolpherMol> MutateAtom::MutateAtomImpl::morph() {
 
 		if(replacements[randPos].size() == 0) {
 			delete newMol;
-//			SynchCerr("Given atom cannot be mutated. Skipping...");
+			SynchCerr("Given atom cannot be mutated. Skipping...");
 			return nullptr;
 		}
 

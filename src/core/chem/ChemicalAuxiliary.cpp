@@ -73,6 +73,17 @@ AtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom)
     return (AtomIdx) idx;
 }
 
+AtomIdx GetRandomAtom(const std::vector<std::shared_ptr<MolpherAtom>> &atoms, RDKit::Atom &atom)
+{
+    int idx = SynchRand::GetRandomNumber(atoms.size() - 1);
+
+    atom.setAtomicNum(atoms[idx]->getAtomicNum());
+    atom.setFormalCharge(atoms[idx]->getFormalCharge());
+//    atom.setMass(atoms[idx].mass); // removed in new version of rdkit (mass determined from atomic number)
+
+    return (AtomIdx) idx;
+}
+
 RDKit::Bond *GetRandomNonSingleBond(RDKit::Atom &atom)
 {
     std::vector<RDKit::Bond *> candidates;

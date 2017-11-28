@@ -31,6 +31,8 @@ void GetAtomTypesFromMol(RDKit::ROMol &mol, std::vector<MolpherAtom> &atoms);
 
 AtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom);
 
+AtomIdx GetRandomAtom(const std::vector<std::shared_ptr<MolpherAtom>> &atoms, RDKit::Atom &atom);
+
 RDKit::Bond *GetRandomNonSingleBond(RDKit::Atom &atom);
 
 bool HasNonSingleBond(RDKit::Atom &atom);

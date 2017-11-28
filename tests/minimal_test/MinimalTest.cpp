@@ -30,6 +30,7 @@
 #include <morphing/operators/AddBond.hpp>
 #include <morphing/operators/RemoveBond.hpp>
 #include <morphing/operators/MutateAtom.hpp>
+#include <morphing/operators/InterlayAtom.hpp>
 
 #include "MinimalTest.hpp"
 #include "io/stdout.hpp"
@@ -445,7 +446,7 @@ void MinimalTest::testMutateAtomOperator() {
 
 	MutateAtom op_mutate;
 	op_mutate.setOriginal(alanine);
-	// TODO: check if proper atoms are locked (add one more, more complex, test molecule)
+	// TODO: expand this test
 
 	RDKit::ROMol* test_mol_rd = alanine->asRDMol();
 	RDKit::ROMol *mol1 = nullptr;
@@ -461,6 +462,35 @@ void MinimalTest::testMutateAtomOperator() {
 		RDKit::MatchVectType res;
 		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
 //		op_remove_bond.setOriginal(morph);
+		delete morph_rd;
+	}
+
+	delete mol1;
+	delete patt;
+	delete test_mol_rd;
+}
+
+void MinimalTest::testInterlayAtomOperator() {
+	std::shared_ptr<MolpherMol> isopropylphenol(new MolpherMol(test_dir + "isopropylphenol.sdf"));
+
+	InterlayAtom op_interlay;
+	op_interlay.setOriginal(isopropylphenol);
+	// TODO: expand this test
+
+	RDKit::ROMol* test_mol_rd = isopropylphenol->asRDMol();
+	RDKit::ROMol *mol1 = nullptr;
+	RDKit::RWMol *patt = nullptr;
+	for (int i = 0; i != 30; i++) {
+		auto morph = op_interlay.morph();
+		if (morph == nullptr) continue;
+		print(morph->getSMILES());
+		RDKit::ROMol* morph_rd = morph->asRDMol();
+
+		mol1 = RDKit::SmilesToMol(morph->getSMILES());
+		patt = RDKit::SmartsToMol("C(C)C");
+		RDKit::MatchVectType res;
+		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
+//		op_interlay.setOriginal(morph);
 		delete morph_rd;
 	}
 
