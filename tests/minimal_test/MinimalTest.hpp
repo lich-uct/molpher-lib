@@ -81,6 +81,7 @@ class MinimalTest : public CPPUNIT_NS::TestFixture {
 		CPPUNIT_TEST(testRemoveAtomOperator);
 		CPPUNIT_TEST(testAddBondOperator);
 		CPPUNIT_TEST(testRemoveBondOperator);
+		CPPUNIT_TEST(testMutateAtomOperator);
 		CPPUNIT_TEST(testMolpher);
 		CPPUNIT_TEST(testTree);
 		CPPUNIT_TEST(testExplorationData);
@@ -103,6 +104,7 @@ private:
 	void testRemoveAtomOperator();
 	void testAddBondOperator();
 	void testRemoveBondOperator();
+	void testMutateAtomOperator();
 	void testMolpher();
     void testTree();
     void testExplorationData();

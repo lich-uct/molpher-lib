@@ -29,6 +29,7 @@
 #include <GraphMol/Substruct/SubstructMatch.h>
 #include <morphing/operators/AddBond.hpp>
 #include <morphing/operators/RemoveBond.hpp>
+#include <morphing/operators/MutateAtom.hpp>
 
 #include "MinimalTest.hpp"
 #include "io/stdout.hpp"
@@ -428,6 +429,35 @@ void MinimalTest::testRemoveBondOperator() {
 		std::string smiles = morph->getSMILES();
 		mol1 = RDKit::SmilesToMol(smiles);
 		patt = RDKit::SmartsToMol("c1ccccc1");
+		RDKit::MatchVectType res;
+		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
+//		op_remove_bond.setOriginal(morph);
+		delete morph_rd;
+	}
+
+	delete mol1;
+	delete patt;
+	delete test_mol_rd;
+}
+
+void MinimalTest::testMutateAtomOperator() {
+	std::shared_ptr<MolpherMol> alanine(new MolpherMol(test_dir + "alanine.sdf"));
+
+	MutateAtom op_mutate;
+	op_mutate.setOriginal(alanine);
+	// TODO: check if proper atoms are locked (add one more, more complex, test molecule)
+
+	RDKit::ROMol* test_mol_rd = alanine->asRDMol();
+	RDKit::ROMol *mol1 = nullptr;
+	RDKit::RWMol *patt = nullptr;
+	for (int i = 0; i != 50; i++) {
+		auto morph = op_mutate.morph();
+		if (morph == nullptr) continue;
+		print(morph->getSMILES());
+		RDKit::ROMol* morph_rd = morph->asRDMol();
+
+		mol1 = RDKit::SmilesToMol(morph->getSMILES());
+		patt = RDKit::SmartsToMol("C(=O)");
 		RDKit::MatchVectType res;
 		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
 //		op_remove_bond.setOriginal(morph);
