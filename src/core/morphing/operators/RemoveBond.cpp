@@ -63,9 +63,9 @@ void RemoveBond::RemoveBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 			if ((RDKit::queryBondOrder(bond) > 1) || RDKit::queryIsBondInRing(bond)) {
 				open_bonds_rd.push_back(bond->getIdx());
 				open_bonds.push_back(
-						std::make_pair<AtomIdx, AtomIdx>(
-								(AtomIdx) begin_atm
-								, (AtomIdx) end_atm
+						std::make_pair(
+								begin_atm
+								, end_atm
 						)
 				);
 			}

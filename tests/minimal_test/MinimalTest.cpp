@@ -31,6 +31,7 @@
 #include <morphing/operators/RemoveBond.hpp>
 #include <morphing/operators/MutateAtom.hpp>
 #include <morphing/operators/InterlayAtom.hpp>
+#include <morphing/operators/ContractBond.hpp>
 
 #include "MinimalTest.hpp"
 #include "io/stdout.hpp"
@@ -496,6 +497,40 @@ void MinimalTest::testInterlayAtomOperator() {
 
 	delete mol1;
 	delete patt;
+	delete test_mol_rd;
+}
+
+void MinimalTest::testContractBondOperator() {
+	std::shared_ptr<MolpherMol> test_mol(new MolpherMol(test_dir + "contract_bond_test_mol.sdf"));
+
+	ContractBond op_contract;
+	op_contract.setOriginal(test_mol);
+	// TODO: expand this test (add a molecule with a double bond)
+
+	RDKit::ROMol* test_mol_rd = test_mol->asRDMol();
+	for (int i = 0; i != 20; i++) {
+		auto morph = op_contract.morph();
+		if (morph == nullptr) continue;
+		print(morph->getSMILES());
+
+		CPPUNIT_ASSERT(morph->getSMILES() == "CCCC1CC(N)CC1C(=O)O" || morph->getSMILES() == "CCCC1CC(C(=O)O)CC1N");
+	}
+
+	print("lock test");
+	auto morph = op_contract.morph();
+	for (auto atm : morph->getAtoms()) {
+		std::cout << atm->getSymbol() << ": " << atm->getLockingMask() << std::endl;
+	}
+	print(morph->getSMILES());
+	op_contract.setOriginal(morph);
+	morph = op_contract.morph();
+	print(morph->getSMILES());
+	CPPUNIT_ASSERT ("CCCC1C(N)CC1C(=O)O" == morph->getSMILES());
+
+	op_contract.setOriginal(morph);
+	morph = op_contract.morph();
+	CPPUNIT_ASSERT(morph == nullptr);
+
 	delete test_mol_rd;
 }
 
