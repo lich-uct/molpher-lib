@@ -15,6 +15,7 @@ Previous version: 0.0.0b1
     - MutateAtom operator class was added that adheres to this interface
     - InterlayAtom operator class was added that adheres to this interface
     - ContractBond (originally BondContraction) operator class was added that adheres to this interface
+    - TODO: add RerouteBond after fix
 
 ## Fixes
 - number of linked dependencies was reduced (unused libraries are not linked now)
