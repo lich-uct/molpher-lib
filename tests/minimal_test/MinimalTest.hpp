@@ -74,19 +74,20 @@ public:
 class MinimalTest : public CPPUNIT_NS::TestFixture {
     CPPUNIT_TEST_SUITE(MinimalTest);
 
-		CPPUNIT_TEST(testAtom);
-		CPPUNIT_TEST(testAtomLibrary);
-		CPPUNIT_TEST(testMolpherMol);
-		CPPUNIT_TEST(testAddAtomOperator);
-		CPPUNIT_TEST(testRemoveAtomOperator);
-		CPPUNIT_TEST(testAddBondOperator);
-		CPPUNIT_TEST(testRemoveBondOperator);
-		CPPUNIT_TEST(testMutateAtomOperator);
-		CPPUNIT_TEST(testInterlayAtomOperator);
-		CPPUNIT_TEST(testContractBondOperator);
-		CPPUNIT_TEST(testMolpher);
-		CPPUNIT_TEST(testTree);
-		CPPUNIT_TEST(testExplorationData);
+//		CPPUNIT_TEST(testAtom);
+//		CPPUNIT_TEST(testAtomLibrary);
+//		CPPUNIT_TEST(testMolpherMol);
+//		CPPUNIT_TEST(testAddAtomOperator);
+//		CPPUNIT_TEST(testRemoveAtomOperator);
+//		CPPUNIT_TEST(testAddBondOperator);
+//		CPPUNIT_TEST(testRemoveBondOperator);
+//		CPPUNIT_TEST(testMutateAtomOperator);
+//		CPPUNIT_TEST(testInterlayAtomOperator);
+//		CPPUNIT_TEST(testContractBondOperator);
+		CPPUNIT_TEST(testRerouteBondOperator);
+//		CPPUNIT_TEST(testMolpher);
+//		CPPUNIT_TEST(testTree);
+//		CPPUNIT_TEST(testExplorationData);
 
 	CPPUNIT_TEST_SUITE_END();
 
@@ -109,6 +110,7 @@ private:
 	void testMutateAtomOperator();
 	void testInterlayAtomOperator();
 	void testContractBondOperator();
+	void testRerouteBondOperator();
 	void testMolpher();
     void testTree();
     void testExplorationData();

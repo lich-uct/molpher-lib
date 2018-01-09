@@ -32,6 +32,7 @@
 #include <morphing/operators/MutateAtom.hpp>
 #include <morphing/operators/InterlayAtom.hpp>
 #include <morphing/operators/ContractBond.hpp>
+#include <morphing/operators/RerouteBond.hpp>
 
 #include "MinimalTest.hpp"
 #include "io/stdout.hpp"
@@ -532,6 +533,33 @@ void MinimalTest::testContractBondOperator() {
 	CPPUNIT_ASSERT(morph == nullptr);
 
 	delete test_mol_rd;
+}
+
+void MinimalTest::testRerouteBondOperator() {
+	std::shared_ptr<MolpherMol> test_mol(new MolpherMol(test_dir + "reroute_test.sdf"));
+
+	RerouteBond op_reroute;
+	op_reroute.setOriginal(test_mol);
+
+	RDKit::ROMol *mol1 = nullptr;
+	RDKit::RWMol *patt = nullptr;
+	for (int i = 0; i != 20; i++) {
+		auto morph = op_reroute.morph();
+		if (morph == nullptr) continue;
+		print(morph->getSMILES());
+
+		RDKit::ROMol* morph_rd = morph->asRDMol();
+
+		mol1 = RDKit::SmilesToMol(morph->getSMILES());
+		patt = RDKit::SmartsToMol("C(F)C(O)C(C)Cl");
+		RDKit::MatchVectType res;
+		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
+		op_reroute.setOriginal(morph);
+		delete morph_rd;
+	}
+
+	delete mol1;
+	delete patt;
 }
 
 void MinimalTest::testMolpher() {
