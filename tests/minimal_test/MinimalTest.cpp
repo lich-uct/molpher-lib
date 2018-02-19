@@ -145,14 +145,14 @@ void MinimalTest::testMolpherMol() {
     RDKit::RWMol* mol_rdkit = new RDKit::RWMol(*(RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next()));
     RDKit::MolOps::Kekulize(*mol_rdkit);
     MolpherMol sdf_derived(test_dir + "Structure2D_CID_4914.sdf");
-    CPPUNIT_ASSERT_EQUAL(RDKit::MolToSmiles(*mol_rdkit), sdf_derived.getSMILES());
+    CPPUNIT_ASSERT_EQUAL(std::string("CCN(CC)CCOC(=O)c1ccc(N)cc1"), sdf_derived.getSMILES());
 
     std::ifstream t(test_dir + "Structure2D_CID_4914.sdf");
     std::string file_string(
             (std::istreambuf_iterator<char>(t)),
             std::istreambuf_iterator<char>());
     MolpherMol stream_derived(file_string);
-    CPPUNIT_ASSERT_EQUAL(RDKit::MolToSmiles(*mol_rdkit), stream_derived.getSMILES());
+    CPPUNIT_ASSERT_EQUAL(std::string("CCN(CC)CCOC(=O)c1ccc(N)cc1"), stream_derived.getSMILES());
 
     delete mol_rdkit;
 
@@ -291,6 +291,7 @@ void MinimalTest::testAtomLibrary() {
 
 void MinimalTest::testAddAtomOperator() {
     std::shared_ptr<MolpherMol> cymene_no_add(new MolpherMol(test_dir + "cymene.sdf"));
+	print("original\n" + cymene_no_add->getSMILES() + "\n");
 
     AddAtom op_add;
     op_add.setOriginal(cymene_no_add);
@@ -351,8 +352,9 @@ void MinimalTest::testRemoveAtomOperator() {
 
 	RemoveAtom op_remove;
 	op_remove.setOriginal(dimethylaniline);
+	print("original\n" + dimethylaniline->getSMILES() + "\n");
 	for (int i = 0; i != 10; i++) {
-		CPPUNIT_ASSERT_EQUAL(std::string("CC1=C(N)C=CC=C1"), op_remove.morph()->getSMILES());
+		CPPUNIT_ASSERT_EQUAL(std::string("Cc1ccccc1N"), op_remove.morph()->getSMILES());
 	}
 
 	auto morph = op_remove.morph();
@@ -393,6 +395,7 @@ void MinimalTest::testAddBondOperator() {
 
 	AddBond op_add_bond;
 	op_add_bond.setOriginal(propanol);
+	print("original\n" + propanol->getSMILES() + "\n");
 	for (auto bond : op_add_bond.getOpenBonds()) {
 		CPPUNIT_ASSERT(bond.first != locked_idx && bond.second != locked_idx);
 	}
@@ -416,6 +419,7 @@ void MinimalTest::testAddBondOperator() {
 
 void MinimalTest::testRemoveBondOperator() {
 	std::shared_ptr<MolpherMol> test_mol(new MolpherMol(test_dir + "remove_bond_test_mol.sdf"));
+	print("original\n" + test_mol->getSMILES() + "\n");
 
 	RemoveBond op_remove_bond;
 	op_remove_bond.setOriginal(test_mol);
@@ -445,6 +449,7 @@ void MinimalTest::testRemoveBondOperator() {
 
 void MinimalTest::testMutateAtomOperator() {
 	std::shared_ptr<MolpherMol> alanine(new MolpherMol(test_dir + "alanine.sdf"));
+	print("original\n" + alanine->getSMILES() + "\n");
 
 	MutateAtom op_mutate;
 	op_mutate.setOriginal(alanine);
@@ -474,6 +479,7 @@ void MinimalTest::testMutateAtomOperator() {
 
 void MinimalTest::testInterlayAtomOperator() {
 	std::shared_ptr<MolpherMol> isopropylphenol(new MolpherMol(test_dir + "isopropylphenol.sdf"));
+	print("original\n" + isopropylphenol->getSMILES() + "\n");
 
 	InterlayAtom op_interlay;
 	op_interlay.setOriginal(isopropylphenol);
@@ -482,7 +488,7 @@ void MinimalTest::testInterlayAtomOperator() {
 	RDKit::ROMol* test_mol_rd = isopropylphenol->asRDMol();
 	RDKit::ROMol *mol1 = nullptr;
 	RDKit::RWMol *patt = nullptr;
-	for (int i = 0; i != 30; i++) {
+	for (int i = 0; i != 50; i++) {
 		auto morph = op_interlay.morph();
 		if (morph == nullptr) continue;
 		print(morph->getSMILES());
@@ -503,13 +509,14 @@ void MinimalTest::testInterlayAtomOperator() {
 
 void MinimalTest::testContractBondOperator() {
 	std::shared_ptr<MolpherMol> test_mol(new MolpherMol(test_dir + "contract_bond_test_mol.sdf"));
+	print("original\n" + test_mol->getSMILES() + "\n");
 
 	ContractBond op_contract;
 	op_contract.setOriginal(test_mol);
 	// TODO: expand this test (add a molecule with a double bond)
 
 	RDKit::ROMol* test_mol_rd = test_mol->asRDMol();
-	for (int i = 0; i != 20; i++) {
+	for (int i = 0; i != 50; i++) {
 		auto morph = op_contract.morph();
 		if (morph == nullptr) continue;
 		print(morph->getSMILES());
@@ -537,13 +544,14 @@ void MinimalTest::testContractBondOperator() {
 
 void MinimalTest::testRerouteBondOperator() {
 	std::shared_ptr<MolpherMol> test_mol(new MolpherMol(test_dir + "reroute_test.sdf"));
+	print("original\n" + test_mol->getSMILES() + "\n");
 
 	RerouteBond op_reroute;
 	op_reroute.setOriginal(test_mol);
 
 	RDKit::ROMol *mol1 = nullptr;
 	RDKit::RWMol *patt = nullptr;
-	for (int i = 0; i != 20; i++) {
+	for (int i = 0; i != 50; i++) {
 		auto morph = op_reroute.morph();
 		if (morph == nullptr) continue;
 		print(morph->getSMILES());

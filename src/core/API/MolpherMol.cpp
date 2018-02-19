@@ -167,7 +167,7 @@ void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
         if( !mol->getRingInfo()->isInitialized() ) {
             RDKit::MolOps::findSSSR(*mol);
         }
-        RDKit::MolOps::Kekulize(*mol);
+        RDKit::MolOps::sanitizeMol(*mol);
     } catch (const ValueErrorException &exc) {
         SynchCerr("Cannot kekulize input molecule.");
         throw exc;
