@@ -43,37 +43,40 @@ MorphingOperatorImpl()
 }
 
 void RemoveAtom::RemoveAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
-	// FIXME: check for validity of the pointer
-	original = mol_orig;
-	original_rdkit.reset(original->asRDMol());
-	RDKit::ROMol& mol = *original_rdkit;
-	marked_atoms.clear();
+	if (mol_orig) {
+		original = mol_orig;
+		original_rdkit.reset(original->asRDMol());
+		RDKit::ROMol& mol = *original_rdkit;
+		marked_atoms.clear();
 
-	// Find boundary atoms.
-	RDKit::Atom *atom;
-	RDKit::Atom *neighbor;
-	RDKit::ROMol::AtomIterator iter;
-	for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
-		atom = *iter;
+		// Find boundary atoms.
+		RDKit::Atom *atom;
+		RDKit::Atom *neighbor;
+		RDKit::ROMol::AtomIterator iter;
+		for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
+			atom = *iter;
 
-		bool kept_by_neighbor = false;
-		RDKit::ROMol::ADJ_ITER beg, end;
-		boost::tie(beg, end) = mol.getAtomNeighbors(atom);
-		while (beg != end) {
-			neighbor = mol[*beg].get();
-			int locking_mask = original->getAtom(neighbor->getIdx())->getLockingMask();
-			if (MolpherAtom::KEEP_NEIGHBORS & locking_mask) {
-				kept_by_neighbor = true;
-				break;
+//		bool kept_by_neighbor = false;
+//		RDKit::ROMol::ADJ_ITER beg, end;
+//		boost::tie(beg, end) = mol.getAtomNeighbors(atom);
+//		while (beg != end) {
+//			neighbor = mol[*beg].get();
+//			int locking_mask = original->getAtom(neighbor->getIdx())->getLockingMask();
+//			if (MolpherAtom::KEEP_NEIGHBORS & locking_mask) {
+//				kept_by_neighbor = true;
+//				break;
+//			}
+//			++beg;
+//		}
+
+			if (RDKit::queryAtomHeavyAtomDegree(atom) == 1
+				//			&& !kept_by_neighbor
+				&& !((MolpherAtom::NO_REMOVAL) & original->getAtom(atom->getIdx())->getLockingMask())) {
+				marked_atoms.push_back(atom->getIdx());
 			}
-			++beg;
 		}
-
-		if (RDKit::queryAtomHeavyAtomDegree(atom) == 1
-			&& !kept_by_neighbor
-			&& !((MolpherAtom::NO_REMOVAL) & original->getAtom(atom->getIdx())->getLockingMask())) {
-			marked_atoms.push_back(atom->getIdx());
-		}
+	} else {
+		std::runtime_error("Invalid reference for original molecule.");
 	}
 }
 

@@ -1284,6 +1284,7 @@ class MolpherAtom(_object):
     NO_REMOVAL = _core.MolpherAtom_NO_REMOVAL
     KEEP_NEIGHBORS = _core.MolpherAtom_KEEP_NEIGHBORS
     KEEP_NEIGHBORS_AND_BONDS = _core.MolpherAtom_KEEP_NEIGHBORS_AND_BONDS
+    KEEP_BONDS = _core.MolpherAtom_KEEP_BONDS
     FULL_LOCK = _core.MolpherAtom_FULL_LOCK
     if _newclass:
         lockToString = staticmethod(_core.MolpherAtom_lockToString)
@@ -1366,6 +1367,9 @@ class MolpherMol(_object):
 
     def getAtoms(self):
         return _core.MolpherMol_getAtoms(self)
+
+    def getNeighbors(self, idx):
+        return _core.MolpherMol_getNeighbors(self, idx)
 
     def getAtomCount(self):
         return _core.MolpherMol_getAtomCount(self)

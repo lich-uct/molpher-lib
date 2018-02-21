@@ -54,9 +54,14 @@ void RemoveBond::RemoveBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 			AtomIdx end_atm = bond->getEndAtom()->getIdx();
 
 			if (
-					(original->getAtom(begin_atm)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS_AND_BONDS)
-				|| (original->getAtom(end_atm)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS_AND_BONDS)
+					(original->getAtom(begin_atm)->getLockingMask() & MolpherAtom::KEEP_BONDS)
+				|| (original->getAtom(end_atm)->getLockingMask() & MolpherAtom::KEEP_BONDS)
 					) {
+				continue;
+			}
+			if (RDKit::queryIsBondInRing(bond) &&
+					((original->getAtom(begin_atm)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS)
+				|| (original->getAtom(end_atm)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS))) {
 				continue;
 			}
 

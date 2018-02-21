@@ -13,6 +13,7 @@ UNLOCKED
 , NO_REMOVAL
 , KEEP_NEIGHBORS
 , KEEP_NEIGHBORS_AND_BONDS
+, KEEP_BONDS
 , FULL_LOCK
 };
 
@@ -23,6 +24,7 @@ const std::map<MolpherAtom::LockingMask, std::string> MolpherAtom::MolpherAtomIm
 , {MolpherAtom::NO_MUTATION,"NO_MUTATION"}
 , {MolpherAtom::KEEP_NEIGHBORS,"KEEP_NEIGHBORS"}
 , {MolpherAtom::KEEP_NEIGHBORS_AND_BONDS,"KEEP_NEIGHBORS_AND_BONDS"}
+, {MolpherAtom::KEEP_BONDS,"KEEP_BONDS"}
 , {MolpherAtom::FULL_LOCK,"FULL_LOCK"}
 };
 
@@ -52,6 +54,13 @@ int MolpherAtom::getLockingMask() const {
 }
 
 void MolpherAtom::setLockingMask(int mask) {
+	if (mask & KEEP_NEIGHBORS_AND_BONDS) {
+		mask = mask | KEEP_BONDS;
+		mask = mask | KEEP_NEIGHBORS;
+	}
+	if (mask & (KEEP_BONDS | KEEP_NEIGHBORS)) {
+		mask = mask | NO_REMOVAL; // TODO: does this make sense, should keeping neighbors/bonds imply not removing the atom itself?
+	}
 	pimpl->locking_mask = mask;
 }
 

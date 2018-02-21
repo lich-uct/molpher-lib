@@ -69,6 +69,7 @@ public:
 	void lockAtom(int idx, int mask);
 	std::shared_ptr<MolpherAtom> getAtom(int idx) const; // FIXME: this should raise an exception if the index is out of range
 	const std::vector<std::shared_ptr<MolpherAtom>>& getAtoms() const;
+	const std::vector<std::shared_ptr<MolpherAtom>> getNeighbors(int idx) const;
 	int getAtomCount() const;
 
 

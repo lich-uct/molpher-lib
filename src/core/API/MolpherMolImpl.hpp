@@ -55,7 +55,10 @@ public:
 	);
 	MolpherMolImpl(std::unique_ptr<RDKit::RWMol> mol);
     MolpherMolImpl();
-    
+
+	void lockAtom(int idx, int mask);
+	std::shared_ptr<MolpherAtom> getAtom(int idx);
+	std::vector<std::shared_ptr<MolpherAtom>> getNeighbors(int idx);
     std::unique_ptr<MolpherMolImpl> copy() const;
 };
 

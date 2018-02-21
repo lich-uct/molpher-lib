@@ -30,7 +30,7 @@ void MorphCalculator::operator()(const tbb::blocked_range<int> &r) const {
 		try {
 			new_mol = strategy->morph();
 		} catch (const std::exception &exc) {
-			SynchCerr(exc.what());
+			SynchCerr("Morphing failure due to an error: " + std::string(exc.what()));
 			++mMorphingFailureCount; // atomic
 			return;
 		}
@@ -38,6 +38,7 @@ void MorphCalculator::operator()(const tbb::blocked_range<int> &r) const {
 		if (new_mol) {
 			morphs.push_back(new_mol);
 		} else {
+			SynchCerr("Morphing failure: morphing method returned empty molecule");
 			++mMorphEmptyCount;
 		}
 	}

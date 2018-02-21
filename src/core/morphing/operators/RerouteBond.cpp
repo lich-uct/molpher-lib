@@ -57,7 +57,7 @@ void RerouteBond::RerouteBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_o
 			bond = *iter;
 			int begin_lock = original->getAtom(bond->getBeginAtom()->getIdx())->getLockingMask();
 			int end_lock = original->getAtom(bond->getEndAtom()->getIdx())->getLockingMask();
-			int mask = MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::KEEP_NEIGHBORS_AND_BONDS;
+			int mask = MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::KEEP_BONDS;
 			if ((begin_lock & mask) || (end_lock & mask)) {
 				continue;
 			}
@@ -91,6 +91,11 @@ void RerouteBond::RerouteBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_o
 						}
 						if (atom1->getIdx() == bondAtoms[1]->getIdx()) {
 							// if we returned to the bond being rerouted
+							continue;
+						}
+
+						// do not add candidates with locked atom additions (the bond should not be rerouted to those because that would create an additional bond on the new neighbor (new bond end atom), which is not allowed)
+						if (original->getAtom(atom1->getIdx())->getLockingMask() & MolpherAtom::NO_ADDITION) {
 							continue;
 						}
 

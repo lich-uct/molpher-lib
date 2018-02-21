@@ -49,8 +49,9 @@ void AddBond::AddBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 		RDKit::ROMol::AtomIterator iter;
 		for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
 			atom = *iter;
-			if (original->getAtom(atom->getIdx())->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS_AND_BONDS) {
-				// pass if the bonds should not be modified
+			if (original->getAtom(atom->getIdx())->getLockingMask() & (MolpherAtom::KEEP_BONDS | MolpherAtom::NO_ADDITION)) {
+				// FIXME: differentiate properly between keeping bonds and additions (if only bonds are locked, creating a single bond between atoms that are not yet connected should be possible, changing bond order between two atoms that have NO_ADDITION flag should also be possible)
+				// pass if the bonds should not be modified or no additions are allowed
 				continue;
 			}
 

@@ -63,27 +63,27 @@ void MutateAtom::MutateAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 				continue;
 			}
 
-			RDKit::ROMol::OEDGE_ITER beg,end;
-			boost::tie(beg,end) = mol.getAtomBonds(atom_rd);
-			bool locked_by_neighbor = false;
-			while(beg!=end){
-				const RDKit::BOND_SPTR bond = (mol)[*beg];
-
-				AtomIdx other_idx = bond->getOtherAtomIdx(atom_rd->getIdx());
-				if (
-						(original->getAtom(other_idx)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS)
-						|| (original->getAtom(other_idx)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS_AND_BONDS)
-						) {
-					locked_by_neighbor = true;
-					break;
-				}
-
-				++beg;
-			}
-			if (locked_by_neighbor) {
-				replacements.push_back(atom_replacements);
-				continue;
-			}
+//			RDKit::ROMol::OEDGE_ITER beg,end;
+//			boost::tie(beg,end) = mol.getAtomBonds(atom_rd);
+//			bool locked_by_neighbor = false;
+//			while(beg!=end){
+//				const RDKit::BOND_SPTR bond = (mol)[*beg];
+//
+//				AtomIdx other_idx = bond->getOtherAtomIdx(atom_rd->getIdx());
+//				if (
+//						(original->getAtom(other_idx)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS)
+//						|| (original->getAtom(other_idx)->getLockingMask() & MolpherAtom::KEEP_BONDS)
+//						) {
+//					locked_by_neighbor = true;
+//					break;
+//				}
+//
+//				++beg;
+//			}
+//			if (locked_by_neighbor) {
+//				replacements.push_back(atom_replacements);
+//				continue;
+//			}
 
 			for (AtomIdx idx = 0; idx < atoms.size(); ++idx) {
 				if ((atom_rd->getAtomicNum() != atoms[idx]->getAtomicNum()) &&

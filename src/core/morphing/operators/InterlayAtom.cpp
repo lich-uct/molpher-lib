@@ -59,9 +59,9 @@ void InterlayAtom::InterlayAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol
 				AtomIdx end_idx = bond->getEndAtomIdx();
 				if (
 					(original->getAtom(begin_idx)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS)
-					|| (original->getAtom(begin_idx)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS_AND_BONDS)
+					|| (original->getAtom(begin_idx)->getLockingMask() & MolpherAtom::KEEP_BONDS)
 					|| (original->getAtom(end_idx)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS)
-					|| (original->getAtom(end_idx)->getLockingMask() & MolpherAtom::KEEP_NEIGHBORS_AND_BONDS)
+					|| (original->getAtom(end_idx)->getLockingMask() & MolpherAtom::KEEP_BONDS)
 				) {
 					continue;
 				}

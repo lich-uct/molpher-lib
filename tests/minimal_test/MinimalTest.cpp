@@ -145,14 +145,14 @@ void MinimalTest::testMolpherMol() {
     RDKit::RWMol* mol_rdkit = new RDKit::RWMol(*(RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next()));
     RDKit::MolOps::Kekulize(*mol_rdkit);
     MolpherMol sdf_derived(test_dir + "Structure2D_CID_4914.sdf");
-    CPPUNIT_ASSERT_EQUAL(std::string("CCN(CC)CCOC(=O)c1ccc(N)cc1"), sdf_derived.getSMILES());
+    CPPUNIT_ASSERT_EQUAL(std::string("CCN(CC)CCOC(=O)C1=CC=C(N)C=C1"), sdf_derived.getSMILES());
 
     std::ifstream t(test_dir + "Structure2D_CID_4914.sdf");
     std::string file_string(
             (std::istreambuf_iterator<char>(t)),
             std::istreambuf_iterator<char>());
     MolpherMol stream_derived(file_string);
-    CPPUNIT_ASSERT_EQUAL(std::string("CCN(CC)CCOC(=O)c1ccc(N)cc1"), stream_derived.getSMILES());
+    CPPUNIT_ASSERT_EQUAL(std::string("CCN(CC)CCOC(=O)C1=CC=C(N)C=C1"), stream_derived.getSMILES());
 
     delete mol_rdkit;
 
@@ -181,7 +181,7 @@ void MinimalTest::testMolpherMol() {
     idx = 0;
     for (auto atom : mol_mphr_rw.getAtoms()) {
         if (idx == 5) {
-            CPPUNIT_ASSERT(atom->getLockingMask() == (MolpherAtom::NO_MUTATION | MolpherAtom::KEEP_NEIGHBORS));
+            CPPUNIT_ASSERT(atom->getLockingMask() == (MolpherAtom::NO_MUTATION | MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::NO_REMOVAL));
         }
         if (idx == 6) {
             CPPUNIT_ASSERT(atom->getLockingMask() == MolpherAtom::NO_ADDITION);
@@ -189,7 +189,7 @@ void MinimalTest::testMolpherMol() {
         idx++;
     }
     CPPUNIT_ASSERT(mol_mphr_rw.getAtom(6)->getLockingMask() == MolpherAtom::NO_ADDITION);
-    CPPUNIT_ASSERT(mol_mphr_rw.getAtom(5)->getLockingMask() == (MolpherAtom::NO_MUTATION | MolpherAtom::KEEP_NEIGHBORS));
+    CPPUNIT_ASSERT(mol_mphr_rw.getAtom(5)->getLockingMask() == (MolpherAtom::NO_MUTATION | MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::NO_REMOVAL));
 
 
     MolpherMol ethanol_no_add(test_dir + "ethanol.sdf");
@@ -292,6 +292,7 @@ void MinimalTest::testAtomLibrary() {
 void MinimalTest::testAddAtomOperator() {
     std::shared_ptr<MolpherMol> cymene_no_add(new MolpherMol(test_dir + "cymene.sdf"));
 	print("original\n" + cymene_no_add->getSMILES() + "\n");
+	print_lock_info(cymene_no_add);
 
     AddAtom op_add;
     op_add.setOriginal(cymene_no_add);
@@ -346,6 +347,8 @@ void MinimalTest::testAddAtomOperator() {
 
 void MinimalTest::testRemoveAtomOperator() {
 	std::shared_ptr<MolpherMol> dimethylaniline(new MolpherMol(test_dir + "dimethylaniline.sdf"));
+	print("original\n" + dimethylaniline->getSMILES() + "\n");
+	print_lock_info(dimethylaniline);
 
 	CPPUNIT_ASSERT_EQUAL(dimethylaniline->getAtom(3)->getLockingMask(), MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::NO_REMOVAL);
 	CPPUNIT_ASSERT_EQUAL(dimethylaniline->getAtom(8)->getLockingMask(), (int) MolpherAtom::UNLOCKED);
@@ -354,7 +357,7 @@ void MinimalTest::testRemoveAtomOperator() {
 	op_remove.setOriginal(dimethylaniline);
 	print("original\n" + dimethylaniline->getSMILES() + "\n");
 	for (int i = 0; i != 10; i++) {
-		CPPUNIT_ASSERT_EQUAL(std::string("Cc1ccccc1N"), op_remove.morph()->getSMILES());
+		CPPUNIT_ASSERT_EQUAL(std::string("CC1=C(N)C=CC=C1"), op_remove.morph()->getSMILES());
 	}
 
 	auto morph = op_remove.morph();
@@ -390,8 +393,11 @@ void MinimalTest::testRemoveAtomOperator() {
 
 void MinimalTest::testAddBondOperator() {
 	std::shared_ptr<MolpherMol> propanol(new MolpherMol(test_dir + "propanol.sdf"));
+	print("original\n" + propanol->getSMILES() + "\n");
+	print_lock_info(propanol);
+
 	unsigned int locked_idx = 2;
-	CPPUNIT_ASSERT_EQUAL(propanol->getAtom(locked_idx)->getLockingMask(), (int) MolpherAtom::KEEP_NEIGHBORS_AND_BONDS);
+	CPPUNIT_ASSERT_EQUAL(propanol->getAtom(locked_idx)->getLockingMask(), (int) (MolpherAtom::KEEP_NEIGHBORS_AND_BONDS | MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::KEEP_BONDS | MolpherAtom::NO_REMOVAL));
 
 	AddBond op_add_bond;
 	op_add_bond.setOriginal(propanol);
@@ -420,6 +426,7 @@ void MinimalTest::testAddBondOperator() {
 void MinimalTest::testRemoveBondOperator() {
 	std::shared_ptr<MolpherMol> test_mol(new MolpherMol(test_dir + "remove_bond_test_mol.sdf"));
 	print("original\n" + test_mol->getSMILES() + "\n");
+	print_lock_info(test_mol);
 
 	RemoveBond op_remove_bond;
 	op_remove_bond.setOriginal(test_mol);
@@ -450,6 +457,7 @@ void MinimalTest::testRemoveBondOperator() {
 void MinimalTest::testMutateAtomOperator() {
 	std::shared_ptr<MolpherMol> alanine(new MolpherMol(test_dir + "alanine.sdf"));
 	print("original\n" + alanine->getSMILES() + "\n");
+	print_lock_info(alanine);
 
 	MutateAtom op_mutate;
 	op_mutate.setOriginal(alanine);
@@ -480,6 +488,7 @@ void MinimalTest::testMutateAtomOperator() {
 void MinimalTest::testInterlayAtomOperator() {
 	std::shared_ptr<MolpherMol> isopropylphenol(new MolpherMol(test_dir + "isopropylphenol.sdf"));
 	print("original\n" + isopropylphenol->getSMILES() + "\n");
+	print_lock_info(isopropylphenol);
 
 	InterlayAtom op_interlay;
 	op_interlay.setOriginal(isopropylphenol);
@@ -510,6 +519,7 @@ void MinimalTest::testInterlayAtomOperator() {
 void MinimalTest::testContractBondOperator() {
 	std::shared_ptr<MolpherMol> test_mol(new MolpherMol(test_dir + "contract_bond_test_mol.sdf"));
 	print("original\n" + test_mol->getSMILES() + "\n");
+	print_lock_info(test_mol);
 
 	ContractBond op_contract;
 	op_contract.setOriginal(test_mol);
@@ -545,6 +555,7 @@ void MinimalTest::testContractBondOperator() {
 void MinimalTest::testRerouteBondOperator() {
 	std::shared_ptr<MolpherMol> test_mol(new MolpherMol(test_dir + "reroute_test.sdf"));
 	print("original\n" + test_mol->getSMILES() + "\n");
+	print_lock_info(test_mol);
 
 	RerouteBond op_reroute;
 	op_reroute.setOriginal(test_mol);
@@ -571,48 +582,55 @@ void MinimalTest::testRerouteBondOperator() {
 }
 
 void MinimalTest::testMolpher() {
-	// TODO: test with all operators
-	AddAtom* add_atom(new AddAtom());
-	RemoveAtom* remove_atom(new RemoveAtom());
+	// TODO: complete this test
+//	AddAtom* add_atom(new AddAtom());
+//	RemoveAtom* remove_atom(new RemoveAtom());
 	std::vector<MorphingOperator*> opers = {
-			add_atom
-			, remove_atom
+			new AddAtom()
+			, new RemoveAtom()
+			, new AddBond()
+			, new RemoveBond()
+			, new MutateAtom()
+			, new InterlayAtom()
+			, new ContractBond()
+			, new RerouteBond()
 	};
-	std::shared_ptr<MolpherMol> dimethylphenylformamide(new MolpherMol(test_dir + "dimethylphenylformamide.sdf"));
+	std::shared_ptr<MolpherMol> dimethylphenylformamide(new MolpherMol(test_dir + "dimethylphenylformamide_complex_locking.sdf"));
 
 	Molpher molpher(dimethylphenylformamide, opers, 0, 200);
 	molpher();
-	RDKit::ROMol *mol1 = nullptr;
-	RDKit::RWMol *patt = nullptr;
-	RDKit::RWMol *patt2 = nullptr;
-	for (auto morph : molpher.getMorphs()) {
-		mol1 = RDKit::SmilesToMol(morph->getSMILES());
-		patt = RDKit::SmartsToMol("CcccC");
-		patt2 = RDKit::SmartsToMol("c1ccccc1");
-		RDKit::MatchVectType res;
-		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
-		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt2 , res ));
-	}
-	CPPUNIT_ASSERT(molpher.getMorphs().empty());
-	CPPUNIT_ASSERT_EQUAL(dimethylphenylformamide.get(), molpher.getOriginal().get());
-
-	std::shared_ptr<MolpherMol> cymene(new MolpherMol(test_dir + "cymene.sdf"));
-	molpher.reset(cymene);
-	CPPUNIT_ASSERT_EQUAL(cymene.get(), molpher.getOriginal().get());
-	molpher();
+//	RDKit::ROMol *mol1 = nullptr;
+//	RDKit::RWMol *patt = nullptr;
+//	RDKit::RWMol *patt2 = nullptr;
 	for (auto morph : molpher.getMorphs()) {
 		print(morph->getSMILES());
-		mol1 = RDKit::SmilesToMol(morph->getSMILES());
-		patt = RDKit::SmartsToMol("CcccC");
-		patt2 = RDKit::SmartsToMol("c1ccccc1");
-		RDKit::MatchVectType res;
-		CPPUNIT_ASSERT(!RDKit::SubstructMatch( *mol1 , *patt , res ));
-		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt2 , res ));
+//		mol1 = RDKit::SmilesToMol(morph->getSMILES());
+//		patt = RDKit::SmartsToMol("CcccC");
+//		patt2 = RDKit::SmartsToMol("c1ccccc1");
+//		RDKit::MatchVectType res;
+//		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
+//		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt2 , res ));
 	}
-
-	delete mol1;
-	delete patt;
-	delete patt2;
+//	CPPUNIT_ASSERT(molpher.getMorphs().empty());
+//	CPPUNIT_ASSERT_EQUAL(dimethylphenylformamide.get(), molpher.getOriginal().get());
+//
+//	std::shared_ptr<MolpherMol> cymene(new MolpherMol(test_dir + "cymene.sdf"));
+//	molpher.reset(cymene);
+//	CPPUNIT_ASSERT_EQUAL(cymene.get(), molpher.getOriginal().get());
+//	molpher();
+//	for (auto morph : molpher.getMorphs()) {
+//		print(morph->getSMILES());
+//		mol1 = RDKit::SmilesToMol(morph->getSMILES());
+//		patt = RDKit::SmartsToMol("CcccC");
+//		patt2 = RDKit::SmartsToMol("c1ccccc1");
+//		RDKit::MatchVectType res;
+//		CPPUNIT_ASSERT(!RDKit::SubstructMatch( *mol1 , *patt , res ));
+//		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt2 , res ));
+//	}
+//
+//	delete mol1;
+//	delete patt;
+//	delete patt2;
 }
 
 void MinimalTest::testExplorationData() {

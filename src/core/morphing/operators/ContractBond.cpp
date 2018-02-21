@@ -83,24 +83,24 @@ void ContractBond::ContractBondImpl::tryToOpenBond(RDKit::Bond *bond, bool swap)
 			no_removal = true;
 		}
 
-		bool kept_by_neighbor = false;
+//		bool kept_by_neighbor = false;
+//		if (!no_removal) {
+//			RDKit::Atom *neighbor;
+//			RDKit::ROMol::ADJ_ITER beg, end;
+//			boost::tie(beg, end) = mol.getAtomNeighbors(atomToRemove);
+//			while (beg != end) {
+//				neighbor = mol[*beg].get();
+//				MolpherAtom::LockingMask locking_mask = (MolpherAtom::LockingMask) original->getAtom(neighbor->getIdx())->getLockingMask();
+//				if (MolpherAtom::KEEP_NEIGHBORS & locking_mask) {
+//					kept_by_neighbor = true;
+//					break;
+//				}
+//				++beg;
+//			}
+//		}
+
+
 		if (!no_removal) {
-			RDKit::Atom *neighbor;
-			RDKit::ROMol::ADJ_ITER beg, end;
-			boost::tie(beg, end) = mol.getAtomNeighbors(atomToRemove);
-			while (beg != end) {
-				neighbor = mol[*beg].get();
-				MolpherAtom::LockingMask locking_mask = (MolpherAtom::LockingMask) original->getAtom(neighbor->getIdx())->getLockingMask();
-				if (MolpherAtom::KEEP_NEIGHBORS & locking_mask) {
-					kept_by_neighbor = true;
-					break;
-				}
-				++beg;
-			}
-		}
-
-
-		if (!no_removal && !kept_by_neighbor) {
 			open_bonds_rd.push_back(bond->getIdx());
 			open_bonds.push_back(std::make_pair(atomToStayIdx, atomToRemoveIdx));
 		}

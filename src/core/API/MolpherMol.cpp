@@ -167,27 +167,44 @@ void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
         if( !mol->getRingInfo()->isInitialized() ) {
             RDKit::MolOps::findSSSR(*mol);
         }
-        RDKit::MolOps::sanitizeMol(*mol);
-    } catch (const ValueErrorException &exc) {
-        SynchCerr("Cannot kekulize input molecule.");
+        unsigned int failed = 0;
+        RDKit::MolOps::sanitizeMol(
+                *mol
+                , failed
+                , RDKit::MolOps::SANITIZE_CLEANUP
+                | RDKit::MolOps::SANITIZE_PROPERTIES
+                | RDKit::MolOps::SANITIZE_SYMMRINGS
+                | RDKit::MolOps::SANITIZE_KEKULIZE
+                | RDKit::MolOps::SANITIZE_FINDRADICALS
+                | RDKit::MolOps::SANITIZE_SETHYBRIDIZATION
+                | RDKit::MolOps::SANITIZE_CLEANUPCHIRALITY
+                | RDKit::MolOps::SANITIZE_ADJUSTHS
+        );
+    } catch (const RDKit::MolSanitizeException &exc) {
+        SynchCerr("Molecule failed to initialize due to sanitization errors.", "ERROR:");
         throw exc;
     }
+//    catch (const ValueErrorException &exc) {
+//        SynchCerr("Cannot kekulize input molecule.");
+//        throw exc;
+//    }
+
+    rd_mol = std::move(mol); // take ownership of the instance
 
     RDKit::ROMol::AtomIterator iter;
-    for (iter = mol->beginAtoms(); iter != mol->endAtoms(); iter++) {
+    for (iter = rd_mol->beginAtoms(); iter != rd_mol->endAtoms(); iter++) {
         RDKit::Atom* atom = *iter;
         atoms.push_back(std::make_shared<MolpherAtom>(atom));
     }
 
-    if (!mol->getPropList().empty()) {
-        for (auto& item : parse_atom_locks(*mol)) {
-            atoms[item.first]->setLockingMask(item.second);
+    if (!rd_mol->getPropList().empty()) {
+        for (auto& item : parse_atom_locks(*rd_mol)) {
+            lockAtom(item.first, item.second);
         }
     }
 
-    data.SMILES = RDKit::MolToSmiles(*mol);
-    data.formula = RDKit::Descriptors::calcMolFormula(*mol);
-    rd_mol = std::move(mol);
+    data.SMILES = RDKit::MolToSmiles(*rd_mol);
+    data.formula = RDKit::Descriptors::calcMolFormula(*rd_mol);
 }
 
 void MolpherMol::MolpherMolImpl::initialize(const std::string &string_repr) {
@@ -246,6 +263,40 @@ std::unique_ptr<MolpherMol::MolpherMolImpl> MolpherMol::MolpherMolImpl::copy() c
 
 MolpherMol::MolpherMolImpl::MolpherMolImpl(std::unique_ptr<RDKit::RWMol> mol) {
     initialize(std::move(mol));
+}
+
+void MolpherMol::MolpherMolImpl::lockAtom(int idx, int mask) {
+    std::shared_ptr<MolpherAtom> atom = getAtom(idx);
+    atom->setLockingMask(mask);
+    mask = atom->getLockingMask();
+
+    if (mask & (MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::KEEP_BONDS)) {
+        for (auto ngh : getNeighbors(idx)) {
+            if (mask & MolpherAtom::KEEP_NEIGHBORS) {
+                ngh->setLockingMask(ngh->getLockingMask() | MolpherAtom::NO_MUTATION | MolpherAtom::NO_REMOVAL);
+            }
+            if (mask & MolpherAtom::KEEP_BONDS) {
+                ngh->setLockingMask(ngh->getLockingMask() | MolpherAtom::NO_REMOVAL);
+            }
+        }
+    }
+}
+
+std::shared_ptr<MolpherAtom> MolpherMol::MolpherMolImpl::getAtom(int idx) {
+    return atoms[idx];
+}
+
+std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::MolpherMolImpl::getNeighbors(int idx) {
+    RDKit::ROMol& mol = *rd_mol;
+    std::vector<std::shared_ptr<MolpherAtom>> neighbors;
+    RDKit::ROMol::ADJ_ITER beg, end;
+    boost::tie(beg, end) = mol.getAtomNeighbors(mol.getAtomWithIdx(idx));
+    while (beg != end) {
+        RDKit::Atom *neighbor = mol[*beg].get();
+        neighbors.push_back(getAtom(neighbor->getIdx()));
+        ++beg;
+    }
+    return neighbors;
 }
 
 void MolpherMol::addToDescendants(const std::string& smiles) {
@@ -378,11 +429,11 @@ RDKit::RWMol* MolpherMol::asRDMol() const {
 }
 
 void MolpherMol::lockAtom(int idx, int mask) {
-    getAtom(idx)->setLockingMask(mask);
+    pimpl->lockAtom(idx, mask);
 }
 
 std::shared_ptr<MolpherAtom> MolpherMol::getAtom(int idx) const {
-    return pimpl->atoms[idx];
+    return pimpl->getAtom(idx);
 }
 
 const std::vector<std::shared_ptr<MolpherAtom>> &MolpherMol::getAtoms() const {
@@ -391,4 +442,8 @@ const std::vector<std::shared_ptr<MolpherAtom>> &MolpherMol::getAtoms() const {
 
 int MolpherMol::getAtomCount() const {
 	return pimpl->atoms.size();
+}
+
+const std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::getNeighbors(int idx) const {
+    return pimpl->getNeighbors(idx);
 }

@@ -30809,6 +30809,60 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MolpherMol_getNeighbors(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< MolpherMol const > tempshared1 ;
+  std::shared_ptr< MolpherMol const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MolpherMol_getNeighbors",&obj0,&obj1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_getNeighbors" "', argument " "1"" of type '" "MolpherMol const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr< const MolpherMol > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr< const MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr< const MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MolpherMol_getNeighbors" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = ((MolpherMol const *)arg1)->getNeighbors(arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MolpherMol_getAtomCount(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *arg1 = (MolpherMol *) 0 ;
@@ -42122,6 +42176,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MolpherMol_lockAtom", _wrap_MolpherMol_lockAtom, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getAtom", _wrap_MolpherMol_getAtom, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getAtoms", _wrap_MolpherMol_getAtoms, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_getNeighbors", _wrap_MolpherMol_getNeighbors, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getAtomCount", _wrap_MolpherMol_getAtomCount, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getSMILES", _wrap_MolpherMol_getSMILES, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getDistToTarget", _wrap_MolpherMol_getDistToTarget, METH_VARARGS, NULL},
@@ -43326,6 +43381,7 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "MolpherAtom_NO_REMOVAL",SWIG_From_int(static_cast< int >(MolpherAtom::NO_REMOVAL)));
   SWIG_Python_SetConstant(d, "MolpherAtom_KEEP_NEIGHBORS",SWIG_From_int(static_cast< int >(MolpherAtom::KEEP_NEIGHBORS)));
   SWIG_Python_SetConstant(d, "MolpherAtom_KEEP_NEIGHBORS_AND_BONDS",SWIG_From_int(static_cast< int >(MolpherAtom::KEEP_NEIGHBORS_AND_BONDS)));
+  SWIG_Python_SetConstant(d, "MolpherAtom_KEEP_BONDS",SWIG_From_int(static_cast< int >(MolpherAtom::KEEP_BONDS)));
   SWIG_Python_SetConstant(d, "MolpherAtom_FULL_LOCK",SWIG_From_int(static_cast< int >(MolpherAtom::FULL_LOCK)));
   PyDict_SetItemString(md,(char*)"cvar", SWIG_globals());
   SWIG_addvarlink(SWIG_globals(),(char*)"MolpherAtom_atom_locks",Swig_var_MolpherAtom_atom_locks_get, Swig_var_MolpherAtom_atom_locks_set);
