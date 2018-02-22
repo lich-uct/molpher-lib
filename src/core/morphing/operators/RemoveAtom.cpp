@@ -86,7 +86,7 @@ std::shared_ptr<MolpherMol> RemoveAtom::RemoveAtomImpl::morph() {
 
 		if (marked_atoms.size() == 0) {
 			delete newMol;
-			SynchCerr("No atoms marked for removal. Skipping...");
+			SynchCerr("No atoms marked for removal.  Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 

@@ -87,7 +87,7 @@ std::shared_ptr<MolpherMol> RemoveBond::RemoveBondImpl::morph() {
 
 	if (open_bonds_rd.size() == 0) {
 		delete newMol;
-		SynchCerr("No open atom pairs for bond addition. Skipping...");
+		SynchCerr("No open atom pairs for bond removal.  Skipping: " + original->getSMILES());
 		return nullptr;
 	}
 

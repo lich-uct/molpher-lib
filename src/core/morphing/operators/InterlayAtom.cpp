@@ -86,12 +86,12 @@ std::shared_ptr<MolpherMol> InterlayAtom::InterlayAtomImpl::morph() {
 
 		if (interlay_candidates.find(idx) == interlay_candidates.end()) {
 			delete newMol;
-//			SynchCerr("Given bond cannot be interlayed with the selected atom. Skipping...");
+			SynchCerr("Given bond cannot be interlayed with the selected atom (" + atom.getSymbol() + "). Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 		if (interlay_candidates[idx].size() == 0) {
 			delete newMol;
-			SynchCerr("No bond to interlay. Skipping...");
+			SynchCerr("No bond to interlay.  Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 

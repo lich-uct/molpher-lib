@@ -156,6 +156,7 @@ std::shared_ptr<MolpherMol> RerouteBond::RerouteBondImpl::morph() {
 
 	if (candidates.size() == 0) {
 		delete newMol;
+		SynchCerr("No candidates for bond reroute identified. Skipping: " + original->getSMILES());
 		return nullptr;
 	}
 	int randPos = SynchRand::GetRandomNumber(candidates.size() - 1);

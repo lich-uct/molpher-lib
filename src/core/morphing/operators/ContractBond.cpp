@@ -112,7 +112,7 @@ std::shared_ptr<MolpherMol> ContractBond::ContractBondImpl::morph() {
 
 	if (open_bonds_rd.size() == 0) {
 		delete newMol;
-		SynchCerr("No bonds open for contraction. Skipping...");
+		SynchCerr("No bonds open for contraction. Skipping: " + original->getSMILES());
 		return nullptr;
 	}
 

@@ -76,7 +76,7 @@ std::shared_ptr<MolpherMol> AddAtom::AddAtomImpl::morph() {
 
 		if (open_atoms.size() == 0) {
 			delete newMol;
-			SynchCerr("No open atoms for addition. Skipping...");
+			SynchCerr("No open atoms for addition. Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 

@@ -110,7 +110,7 @@ std::shared_ptr<MolpherMol> MutateAtom::MutateAtomImpl::morph() {
 
 		if(replacements[randPos].size() == 0) {
 			delete newMol;
-			SynchCerr("Given atom cannot be mutated. Skipping...");
+			SynchCerr("Given atom cannot be mutated.  Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 
