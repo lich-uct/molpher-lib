@@ -33,7 +33,8 @@
 %include <stl.i>
 %include <std_set.i>
 %include <std_map.i>
-%include <std_shared_ptr.i>;
+%include <std_shared_ptr.i>
+%include <std_pair.i>
 //%include "std_unique_ptr.i"
 
 %{

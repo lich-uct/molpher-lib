@@ -705,6 +705,119 @@ class UIntVector(_object):
 UIntVector_swigregister = _core.UIntVector_swigregister
 UIntVector_swigregister(UIntVector)
 
+class UIntVectorPairVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, UIntVectorPairVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, UIntVectorPairVector, name)
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _core.UIntVectorPairVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _core.UIntVectorPairVector___nonzero__(self)
+
+    def __bool__(self):
+        return _core.UIntVectorPairVector___bool__(self)
+
+    def __len__(self):
+        return _core.UIntVectorPairVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _core.UIntVectorPairVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _core.UIntVectorPairVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _core.UIntVectorPairVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _core.UIntVectorPairVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _core.UIntVectorPairVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _core.UIntVectorPairVector___setitem__(self, *args)
+
+    def pop(self):
+        return _core.UIntVectorPairVector_pop(self)
+
+    def append(self, x):
+        return _core.UIntVectorPairVector_append(self, x)
+
+    def empty(self):
+        return _core.UIntVectorPairVector_empty(self)
+
+    def size(self):
+        return _core.UIntVectorPairVector_size(self)
+
+    def swap(self, v):
+        return _core.UIntVectorPairVector_swap(self, v)
+
+    def begin(self):
+        return _core.UIntVectorPairVector_begin(self)
+
+    def end(self):
+        return _core.UIntVectorPairVector_end(self)
+
+    def rbegin(self):
+        return _core.UIntVectorPairVector_rbegin(self)
+
+    def rend(self):
+        return _core.UIntVectorPairVector_rend(self)
+
+    def clear(self):
+        return _core.UIntVectorPairVector_clear(self)
+
+    def get_allocator(self):
+        return _core.UIntVectorPairVector_get_allocator(self)
+
+    def pop_back(self):
+        return _core.UIntVectorPairVector_pop_back(self)
+
+    def erase(self, *args):
+        return _core.UIntVectorPairVector_erase(self, *args)
+
+    def __init__(self, *args):
+        this = _core.new_UIntVectorPairVector(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def push_back(self, x):
+        return _core.UIntVectorPairVector_push_back(self, x)
+
+    def front(self):
+        return _core.UIntVectorPairVector_front(self)
+
+    def back(self):
+        return _core.UIntVectorPairVector_back(self)
+
+    def assign(self, n, x):
+        return _core.UIntVectorPairVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _core.UIntVectorPairVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _core.UIntVectorPairVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _core.UIntVectorPairVector_reserve(self, n)
+
+    def capacity(self):
+        return _core.UIntVectorPairVector_capacity(self)
+    __swig_destroy__ = _core.delete_UIntVectorPairVector
+    __del__ = lambda self: None
+UIntVectorPairVector_swigregister = _core.UIntVectorPairVector_swigregister
+UIntVectorPairVector_swigregister(UIntVectorPairVector)
+
 class BoolVector(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, BoolVector, name, value)
@@ -2290,6 +2403,183 @@ class RemoveAtom(MorphingOperator):
     __del__ = lambda self: None
 RemoveAtom_swigregister = _core.RemoveAtom_swigregister
 RemoveAtom_swigregister(RemoveAtom)
+
+class MutateAtom(MorphingOperator):
+    __swig_setmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MutateAtom, name, value)
+    __swig_getmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, MutateAtom, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        this = _core.new_MutateAtom(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def setOriginal(self, mol):
+        return _core.MutateAtom_setOriginal(self, mol)
+
+    def morph(self):
+        return _core.MutateAtom_morph(self)
+    __swig_destroy__ = _core.delete_MutateAtom
+    __del__ = lambda self: None
+MutateAtom_swigregister = _core.MutateAtom_swigregister
+MutateAtom_swigregister(MutateAtom)
+
+class AddBond(MorphingOperator):
+    __swig_setmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, AddBond, name, value)
+    __swig_getmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, AddBond, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        this = _core.new_AddBond()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def setOriginal(self, mol):
+        return _core.AddBond_setOriginal(self, mol)
+
+    def morph(self):
+        return _core.AddBond_morph(self)
+
+    def getOpenBonds(self):
+        return _core.AddBond_getOpenBonds(self)
+    __swig_destroy__ = _core.delete_AddBond
+    __del__ = lambda self: None
+AddBond_swigregister = _core.AddBond_swigregister
+AddBond_swigregister(AddBond)
+
+class RemoveBond(MorphingOperator):
+    __swig_setmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, RemoveBond, name, value)
+    __swig_getmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, RemoveBond, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        this = _core.new_RemoveBond()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def setOriginal(self, mol):
+        return _core.RemoveBond_setOriginal(self, mol)
+
+    def morph(self):
+        return _core.RemoveBond_morph(self)
+
+    def getOpenBonds(self):
+        return _core.RemoveBond_getOpenBonds(self)
+    __swig_destroy__ = _core.delete_RemoveBond
+    __del__ = lambda self: None
+RemoveBond_swigregister = _core.RemoveBond_swigregister
+RemoveBond_swigregister(RemoveBond)
+
+class ContractBond(MorphingOperator):
+    __swig_setmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, ContractBond, name, value)
+    __swig_getmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, ContractBond, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        this = _core.new_ContractBond()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def setOriginal(self, mol):
+        return _core.ContractBond_setOriginal(self, mol)
+
+    def morph(self):
+        return _core.ContractBond_morph(self)
+
+    def getOpenBonds(self):
+        return _core.ContractBond_getOpenBonds(self)
+    __swig_destroy__ = _core.delete_ContractBond
+    __del__ = lambda self: None
+ContractBond_swigregister = _core.ContractBond_swigregister
+ContractBond_swigregister(ContractBond)
+
+class InterlayAtom(MorphingOperator):
+    __swig_setmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, InterlayAtom, name, value)
+    __swig_getmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, InterlayAtom, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        this = _core.new_InterlayAtom(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def setOriginal(self, mol):
+        return _core.InterlayAtom_setOriginal(self, mol)
+
+    def morph(self):
+        return _core.InterlayAtom_morph(self)
+    __swig_destroy__ = _core.delete_InterlayAtom
+    __del__ = lambda self: None
+InterlayAtom_swigregister = _core.InterlayAtom_swigregister
+InterlayAtom_swigregister(InterlayAtom)
+
+class RerouteBond(MorphingOperator):
+    __swig_setmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, RerouteBond, name, value)
+    __swig_getmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, RerouteBond, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        this = _core.new_RerouteBond()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def setOriginal(self, mol):
+        return _core.RerouteBond_setOriginal(self, mol)
+
+    def morph(self):
+        return _core.RerouteBond_morph(self)
+    __swig_destroy__ = _core.delete_RerouteBond
+    __del__ = lambda self: None
+RerouteBond_swigregister = _core.RerouteBond_swigregister
+RerouteBond_swigregister(RerouteBond)
 
 # This file is compatible with both classic and new-style classes.
 

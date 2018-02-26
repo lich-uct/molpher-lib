@@ -20,3 +20,9 @@
 %include "MorphingOperator.hpp";
 %include "AddAtom.hpp";
 %include "RemoveAtom.hpp";
+%include "MutateAtom.hpp";
+%include "AddBond.hpp";
+%include "RemoveBond.hpp";
+%include "ContractBond.hpp";
+%include "InterlayAtom.hpp";
+%include "RerouteBond.hpp";

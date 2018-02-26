@@ -46,6 +46,12 @@
 #include "morphing/operators/MorphingOperator.hpp"
 #include "morphing/operators/AddAtom.hpp"
 #include "morphing/operators/RemoveAtom.hpp"
+#include "morphing/operators/MutateAtom.hpp"
+#include "morphing/operators/AddBond.hpp"
+#include "morphing/operators/RemoveBond.hpp"
+#include "morphing/operators/ContractBond.hpp"
+#include "morphing/operators/InterlayAtom.hpp"
+#include "morphing/operators/RerouteBond.hpp"
 #include "morphing/AtomLibrary.hpp"
 #include "morphing/Molpher.hpp"
 %}
@@ -55,6 +61,7 @@
 %template(StringVector) std::vector<std::string>;
 %template(IntVector) std::vector<int>;
 %template(UIntVector) std::vector<unsigned int>;
+%template(UIntVectorPairVector) std::vector<std::pair<unsigned int, unsigned int>>;
 %template(BoolVector) std::vector<bool>;
 %template(MolpherMolVector) std::vector<std::shared_ptr<MolpherMol> >;
 %template(MolpherMolMap) std::map<std::string, std::shared_ptr<MolpherMol> >;
