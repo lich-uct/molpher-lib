@@ -283,10 +283,17 @@ void MolpherMol::MolpherMolImpl::lockAtom(int idx, int mask) {
 }
 
 std::shared_ptr<MolpherAtom> MolpherMol::MolpherMolImpl::getAtom(int idx) {
+    if (idx < 0 || idx >= atoms.size()) {
+        std::runtime_error("No such atom. Index out of range: " + std::to_string(idx));
+    }
     return atoms[idx];
 }
 
 std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::MolpherMolImpl::getNeighbors(int idx) {
+    if (idx < 0 || idx >= atoms.size()) {
+        std::runtime_error("No such atom. Index out of range: " + std::to_string(idx));
+    }
+
     RDKit::ROMol& mol = *rd_mol;
     std::vector<std::shared_ptr<MolpherAtom>> neighbors;
     RDKit::ROMol::ADJ_ITER beg, end;
