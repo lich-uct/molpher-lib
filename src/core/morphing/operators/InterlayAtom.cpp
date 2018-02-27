@@ -73,7 +73,7 @@ void InterlayAtom::InterlayAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol
 			}
 		}
 	} else {
-		std::runtime_error("Invalid reference for original molecule.");
+		throw std::runtime_error("Invalid reference to original molecule.");
 	}
 }
 

@@ -50,21 +50,24 @@ MorphingOperatorImpl()
 }
 
 void AddAtom::AddAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
-	// FIXME: check for validity of the pointer
-	original = mol_orig;
-	original_rdkit.reset(original->asRDMol());
-	RDKit::ROMol& mol = *original_rdkit;
-	open_atoms.clear();
+	if (mol_orig) {
+		original = mol_orig;
+		original_rdkit.reset(original->asRDMol());
+		RDKit::ROMol& mol = *original_rdkit;
+		open_atoms.clear();
 
-	RDKit::Atom *atom;
-	RDKit::ROMol::AtomIterator iter;
-	for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
-		atom = *iter;
-		int free_bonds = atom->getImplicitValence();
+		RDKit::Atom *atom;
+		RDKit::ROMol::AtomIterator iter;
+		for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
+			atom = *iter;
+			int free_bonds = atom->getImplicitValence();
 
-		if (free_bonds >= 1 && !(MolpherAtom::NO_ADDITION & original->getAtom(atom->getIdx())->getLockingMask())) {
-			open_atoms.push_back(atom->getIdx());
+			if (free_bonds >= 1 && !(MolpherAtom::NO_ADDITION & original->getAtom(atom->getIdx())->getLockingMask())) {
+				open_atoms.push_back(atom->getIdx());
+			}
 		}
+	} else {
+		throw std::runtime_error("Invalid reference to original molecule.");
 	}
 }
 
@@ -104,7 +107,7 @@ std::shared_ptr<MolpherMol> AddAtom::AddAtomImpl::morph() {
 
 		return ret;
 	} else {
-		throw std::runtime_error("No starting molecule set. Set the original molecule to morph first.");
+		throw std::runtime_error("No starting molecule set. Set the original structure first.");
 	}
 }
 

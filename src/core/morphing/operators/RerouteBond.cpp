@@ -147,7 +147,7 @@ void RerouteBond::RerouteBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_o
 			this->candidates.push_back(rc);
 		}
 	} else {
-		std::runtime_error("Invalid reference for original molecule.");
+		throw std::runtime_error("Invalid reference to original molecule.");
 	}
 }
 

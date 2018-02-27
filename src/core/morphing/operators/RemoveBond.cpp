@@ -78,32 +78,37 @@ void RemoveBond::RemoveBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 
 		assert(open_bonds_rd.size() == open_bonds.size());
 	} else {
-		std::runtime_error("Invalid reference to original molecule.");
+		throw std::runtime_error("Invalid reference to original molecule.");
 	}
 }
 
 std::shared_ptr<MolpherMol> RemoveBond::RemoveBondImpl::morph() {
-	RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+	if (original_rdkit) {
+		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
 
-	if (open_bonds_rd.size() == 0) {
-		delete newMol;
-		SynchCerr("No open atom pairs for bond removal.  Skipping: " + original->getSMILES());
-		return nullptr;
+		if (open_bonds_rd.size() == 0) {
+			delete newMol;
+			SynchCerr("No open atom pairs for bond removal.  Skipping: " + original->getSMILES());
+			return nullptr;
+		}
+
+		int randPos = SynchRand::GetRandomNumber(open_bonds_rd.size() - 1);
+		RDKit::Bond *bond = newMol->getBondWithIdx(open_bonds_rd[randPos]);
+
+		if (RDKit::queryIsBondInRing(bond)) {
+			newMol->removeBond(bond->getBeginAtomIdx(), bond->getEndAtomIdx());
+		} else {
+			DecreaseBondOrder(*bond);
+		}
+
+		std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
+		writeOriginalLockInfo(ret);
+
+		return ret;
 	}
-
-	int randPos = SynchRand::GetRandomNumber(open_bonds_rd.size() - 1);
-	RDKit::Bond *bond = newMol->getBondWithIdx(open_bonds_rd[randPos]);
-
-	if (RDKit::queryIsBondInRing(bond)) {
-		newMol->removeBond(bond->getBeginAtomIdx(), bond->getEndAtomIdx());
-	} else {
-		DecreaseBondOrder(*bond);
+	else {
+		throw std::runtime_error("No starting molecule set. Set the original structure first.");
 	}
-
-	std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
-	writeOriginalLockInfo(ret);
-
-	return ret;
 }
 
 const std::vector<std::pair<AtomIdx, AtomIdx>>& RemoveBond::RemoveBondImpl::getOpenBonds() {

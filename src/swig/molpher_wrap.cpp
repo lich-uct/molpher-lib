@@ -43954,11 +43954,16 @@ SWIGINTERN PyObject *_wrap_AddAtom_setOriginal(PyObject *SWIGUNUSEDPARM(self), P
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setOriginal(arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setOriginal(arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -43987,11 +43992,16 @@ SWIGINTERN PyObject *_wrap_AddAtom_morph(PyObject *SWIGUNUSEDPARM(self), PyObjec
   arg1 = reinterpret_cast< AddAtom * >(argp1);
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (arg1)->morph();
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (arg1)->morph();
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -44164,11 +44174,16 @@ SWIGINTERN PyObject *_wrap_RemoveAtom_setOriginal(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setOriginal(arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setOriginal(arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -44197,11 +44212,16 @@ SWIGINTERN PyObject *_wrap_RemoveAtom_morph(PyObject *SWIGUNUSEDPARM(self), PyOb
   arg1 = reinterpret_cast< RemoveAtom * >(argp1);
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (arg1)->morph();
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (arg1)->morph();
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -44443,11 +44463,16 @@ SWIGINTERN PyObject *_wrap_MutateAtom_setOriginal(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setOriginal(arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setOriginal(arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -44476,11 +44501,16 @@ SWIGINTERN PyObject *_wrap_MutateAtom_morph(PyObject *SWIGUNUSEDPARM(self), PyOb
   arg1 = reinterpret_cast< MutateAtom * >(argp1);
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (arg1)->morph();
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (arg1)->morph();
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -44587,11 +44617,16 @@ SWIGINTERN PyObject *_wrap_AddBond_setOriginal(PyObject *SWIGUNUSEDPARM(self), P
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setOriginal(arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setOriginal(arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -44620,11 +44655,16 @@ SWIGINTERN PyObject *_wrap_AddBond_morph(PyObject *SWIGUNUSEDPARM(self), PyObjec
   arg1 = reinterpret_cast< AddBond * >(argp1);
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (arg1)->morph();
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (arg1)->morph();
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -44764,11 +44804,16 @@ SWIGINTERN PyObject *_wrap_RemoveBond_setOriginal(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setOriginal(arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setOriginal(arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -44797,11 +44842,16 @@ SWIGINTERN PyObject *_wrap_RemoveBond_morph(PyObject *SWIGUNUSEDPARM(self), PyOb
   arg1 = reinterpret_cast< RemoveBond * >(argp1);
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (arg1)->morph();
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (arg1)->morph();
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -44941,11 +44991,16 @@ SWIGINTERN PyObject *_wrap_ContractBond_setOriginal(PyObject *SWIGUNUSEDPARM(sel
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setOriginal(arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setOriginal(arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -44974,11 +45029,16 @@ SWIGINTERN PyObject *_wrap_ContractBond_morph(PyObject *SWIGUNUSEDPARM(self), Py
   arg1 = reinterpret_cast< ContractBond * >(argp1);
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (arg1)->morph();
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (arg1)->morph();
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -45187,11 +45247,16 @@ SWIGINTERN PyObject *_wrap_InterlayAtom_setOriginal(PyObject *SWIGUNUSEDPARM(sel
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setOriginal(arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setOriginal(arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -45220,11 +45285,16 @@ SWIGINTERN PyObject *_wrap_InterlayAtom_morph(PyObject *SWIGUNUSEDPARM(self), Py
   arg1 = reinterpret_cast< InterlayAtom * >(argp1);
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (arg1)->morph();
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (arg1)->morph();
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -45331,11 +45401,16 @@ SWIGINTERN PyObject *_wrap_RerouteBond_setOriginal(PyObject *SWIGUNUSEDPARM(self
   }
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        (arg1)->setOriginal(arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          (arg1)->setOriginal(arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 
@@ -45364,11 +45439,16 @@ SWIGINTERN PyObject *_wrap_RerouteBond_morph(PyObject *SWIGUNUSEDPARM(self), PyO
   arg1 = reinterpret_cast< RerouteBond * >(argp1);
   {
     try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (arg1)->morph();
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (arg1)->morph();
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::runtime_error &_e) {
+        SWIG_exception_fail(SWIG_RuntimeError, (&_e)->what());
+      }
     }
     catch (Swig::DirectorException &e) {
       SWIG_fail; 

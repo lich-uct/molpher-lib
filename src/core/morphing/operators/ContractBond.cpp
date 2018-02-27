@@ -52,7 +52,7 @@ void ContractBond::ContractBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol
 
 		assert(open_bonds_rd.size() == open_bonds.size());
 	} else {
-		std::runtime_error("Invalid reference to original molecule.");
+		throw std::runtime_error("Invalid reference to original molecule.");
 	}
 }
 

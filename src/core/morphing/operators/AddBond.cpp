@@ -88,33 +88,37 @@ void AddBond::AddBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 			open_bonds.erase(open_bonds.begin() + ixRemove[i]);
 		}
 	} else {
-		std::runtime_error("Invalid reference for original molecule.");
+		throw std::runtime_error("Invalid reference to original molecule.");
 	}
 }
 
 std::shared_ptr<MolpherMol> AddBond::AddBondImpl::morph() {
-	RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+	if (original_rdkit) {
+		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
 
-	if (open_bonds.size() == 0) {
-		delete newMol;
-		SynchCerr("No open atom pairs for bond addition. Skipping: " + original->getSMILES());
-		return nullptr;
-	}
+		if (open_bonds.size() == 0) {
+			delete newMol;
+			SynchCerr("No open atom pairs for bond addition. Skipping: " + original->getSMILES());
+			return nullptr;
+		}
 
-	int randPos = SynchRand::GetRandomNumber(open_bonds.size() - 1);
-	AtomIdx idx1 = open_bonds[randPos].first;
-	AtomIdx idx2 = open_bonds[randPos].second;
-	RDKit::Bond *bond = newMol->getBondBetweenAtoms(idx1, idx2);
-	if (!bond) {
-		newMol->addBond(idx1, idx2, RDKit::Bond::SINGLE);
+		int randPos = SynchRand::GetRandomNumber(open_bonds.size() - 1);
+		AtomIdx idx1 = open_bonds[randPos].first;
+		AtomIdx idx2 = open_bonds[randPos].second;
+		RDKit::Bond *bond = newMol->getBondBetweenAtoms(idx1, idx2);
+		if (!bond) {
+			newMol->addBond(idx1, idx2, RDKit::Bond::SINGLE);
+		} else {
+			IncreaseBondOrder(*bond);
+		}
+
+		std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
+		writeOriginalLockInfo(ret);
+
+		return ret;
 	} else {
-		IncreaseBondOrder(*bond);
+		throw std::runtime_error("No starting molecule set. Set the original structure first.");
 	}
-
-	std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
-	writeOriginalLockInfo(ret);
-
-	return ret;
 }
 
 const std::vector<std::pair<AtomIdx, AtomIdx>>& AddBond::AddBondImpl::getOpenBonds() {

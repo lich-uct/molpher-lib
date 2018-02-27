@@ -98,7 +98,7 @@ void MutateAtom::MutateAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 
 		assert(replacements.size() == original->getAtomCount());
 	} else {
-		std::runtime_error("Invalid reference for original molecule.");
+		throw std::runtime_error("Invalid reference to original molecule.");
 	}
 }
 
