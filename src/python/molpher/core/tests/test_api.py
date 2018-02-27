@@ -27,6 +27,7 @@ from molpher.core.morphing.AtomLibrary import AtomLibrary
 from molpher.core.morphing.Molpher import Molpher
 from molpher.core.morphing.operators.AddAtom import AddAtom
 from molpher.core.morphing.operators.RemoveAtom import RemoveAtom
+from molpher.core.morphing.operators.AddBond import AddBond
 from molpher.core.operations import *
 from molpher.core.selectors import *
 from molpher.core import ExplorationData
@@ -41,6 +42,7 @@ class TestPythonAPI(unittest.TestCase):
         self.test_template_path = os.path.join(self.test_dir, 'test-template.xml')
         self.cymene_locked = os.path.join(self.test_dir, 'cymene.sdf')
         self.ethanol_locked = os.path.join(self.test_dir, 'ethanol.sdf')
+        self.propanol = os.path.join(self.test_dir, 'propanol.sdf')
 
     def tearDown(self):
         pass
@@ -116,18 +118,43 @@ class TestPythonAPI(unittest.TestCase):
         for x in range(200):
             self.assertIn(default_lib.getRandomAtom().symbol, smbls)
 
+    def assertOperatorValid(self, operator):
+        self.assertIsNone(operator.getOriginal())
+        mol = MolpherMol(self.propanol)
+        operator.setOriginal(mol)
+        orig = operator.getOriginal()
+        self.assertIsNotNone(orig)
+        self.assertIsInstance(orig, MolpherMol)
+        self.assertEqual(orig.getSMILES(), mol.getSMILES())
+
+
     def testAddAtomOperator(self):
         cymene_no_add = MolpherMol(self.cymene_locked)
 
         add_atom = AddAtom()
-        self.assertIsNone(add_atom.getOriginal())
+        self.assertOperatorValid(add_atom)
+
         add_atom.setOriginal(cymene_no_add)
-        self.assertIsInstance(add_atom.getOriginal(), MolpherMol)
         for x in range(200):
             mol = add_atom.morph()
             self.assertIsInstance(mol, MolpherMol)
         for x in add_atom.getOpenAtoms():
             self.assertIsInstance(x, MolpherAtom)
+
+    def testAddBondOperator(self):
+        propanol = MolpherMol(self.propanol)
+
+        add_bond = AddBond()
+        self.assertOperatorValid(add_bond)
+
+        add_bond.setOriginal(propanol)
+        open_bonds = add_bond.getOpenBonds()
+        self.assertIsInstance(open_bonds, tuple)
+        for x in range(5):
+            mol = add_bond.morph()
+            if mol:
+                print(mol.smiles)
+                add_bond.setOriginal(mol)
 
     def testMolpher(self):
         cymene = MolpherMol(self.cymene_locked)

@@ -39,7 +39,8 @@ class AddAtom(wrappers.AddAtom):
 
     def morph(self):
         ret = super(AddAtom, self).morph()
-        ret.__class__ = MolpherMol
+        if ret:
+            ret.__class__ = MolpherMol
         return ret
 
     def getOriginal(self):
