@@ -26,6 +26,7 @@ from molpher.core.MolpherAtom import MolpherAtom
 from molpher.core.morphing.AtomLibrary import AtomLibrary
 from molpher.core.morphing.Molpher import Molpher
 from molpher.core.morphing.operators.AddAtom import AddAtom
+from molpher.core.morphing.operators.MutateAtom import MutateAtom
 from molpher.core.morphing.operators.RemoveAtom import RemoveAtom
 from molpher.core.morphing.operators.AddBond import AddBond
 from molpher.core.morphing.operators.RemoveBond import RemoveBond
@@ -45,6 +46,7 @@ class TestPythonAPI(unittest.TestCase):
         self.ethanol_locked = os.path.join(self.test_dir, 'ethanol.sdf')
         self.propanol = os.path.join(self.test_dir, 'propanol.sdf')
         self.remove_bond_test_mol = os.path.join(self.test_dir, 'remove_bond_test_mol.sdf')
+        self.alanine = os.path.join(self.test_dir, 'alanine.sdf')
 
     def tearDown(self):
         pass
@@ -163,6 +165,9 @@ class TestPythonAPI(unittest.TestCase):
         remove_bond.setOriginal(test_mol)
         open_bonds = remove_bond.getOpenBonds()
         self.assertIsInstance(open_bonds, tuple)
+
+    def testMutateAtomOperator(self):
+        self.assertOperatorValid(MutateAtom(), MolpherMol(self.alanine))
 
     def testMolpher(self):
         cymene = MolpherMol(self.cymene_locked)
