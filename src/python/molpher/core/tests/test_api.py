@@ -26,6 +26,7 @@ from molpher.core.MolpherAtom import MolpherAtom
 from molpher.core.morphing.AtomLibrary import AtomLibrary
 from molpher.core.morphing.Molpher import Molpher
 from molpher.core.morphing.operators.AddAtom import AddAtom
+from molpher.core.morphing.operators.InterlayAtom import InterlayAtom
 from molpher.core.morphing.operators.MutateAtom import MutateAtom
 from molpher.core.morphing.operators.RemoveAtom import RemoveAtom
 from molpher.core.morphing.operators.AddBond import AddBond
@@ -47,6 +48,7 @@ class TestPythonAPI(unittest.TestCase):
         self.propanol = os.path.join(self.test_dir, 'propanol.sdf')
         self.remove_bond_test_mol = os.path.join(self.test_dir, 'remove_bond_test_mol.sdf')
         self.alanine = os.path.join(self.test_dir, 'alanine.sdf')
+        self.isopropylphenol = os.path.join(self.test_dir, 'isopropylphenol.sdf')
 
     def tearDown(self):
         pass
@@ -114,13 +116,17 @@ class TestPythonAPI(unittest.TestCase):
             self.assertIn(x.symbol, smbls)
 
         default_lib = AtomLibrary.getDefaultLibrary()
+        old_atoms = default_lib.atoms
         self.assertIn("C", [x.symbol for x in default_lib.atoms])
+
         AtomLibrary.setDefaultLibrary(my_lib)
         for x in default_lib.atoms:
             self.assertIn(x.symbol, smbls)
 
         for x in range(200):
             self.assertIn(default_lib.getRandomAtom().symbol, smbls)
+
+        AtomLibrary.setDefaultLibrary(AtomLibrary(old_atoms)) # put everything back to default
 
     def assertOperatorValid(self, operator, test_mol, gens = 10):
         print("Testing operator:", operator)
@@ -167,7 +173,10 @@ class TestPythonAPI(unittest.TestCase):
         self.assertIsInstance(open_bonds, tuple)
 
     def testMutateAtomOperator(self):
-        self.assertOperatorValid(MutateAtom(), MolpherMol(self.alanine))
+        self.assertOperatorValid(MutateAtom(), MolpherMol(self.isopropylphenol))
+
+    def testInterlayAtomOperator(self):
+        self.assertOperatorValid(InterlayAtom(), MolpherMol(self.isopropylphenol))
 
     def testMolpher(self):
         cymene = MolpherMol(self.cymene_locked)
