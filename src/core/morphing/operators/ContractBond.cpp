@@ -108,73 +108,77 @@ void ContractBond::ContractBondImpl::tryToOpenBond(RDKit::Bond *bond, bool swap)
 }
 
 std::shared_ptr<MolpherMol> ContractBond::ContractBondImpl::morph() {
-	RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+	if (original_rdkit) {
+		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
 
-	if (open_bonds_rd.size() == 0) {
-		delete newMol;
-		SynchCerr("No bonds open for contraction. Skipping: " + original->getSMILES());
-		return nullptr;
-	}
+		if (open_bonds_rd.size() == 0) {
+			delete newMol;
+			SynchCerr("No bonds open for contraction. Skipping: " + original->getSMILES());
+			return nullptr;
+		}
 
-	int randPos = SynchRand::GetRandomNumber(open_bonds.size() - 1);
-	RDKit::Bond *bond = newMol->getBondWithIdx(open_bonds_rd[randPos]);
-	RDKit::Atom *atomToRemove = nullptr;
-	RDKit::Atom *atomToStay = nullptr;
-	AtomIdx atomToStayIdx = open_bonds[randPos].first;
-	AtomIdx atomToRemoveIdx = open_bonds[randPos].second;
-	if (bond->getBeginAtomIdx() == atomToStayIdx) {
-		atomToStay = bond->getBeginAtom();
-		atomToRemove = bond->getEndAtom();
+		int randPos = SynchRand::GetRandomNumber(open_bonds.size() - 1);
+		RDKit::Bond *bond = newMol->getBondWithIdx(open_bonds_rd[randPos]);
+		RDKit::Atom *atomToRemove = nullptr;
+		RDKit::Atom *atomToStay = nullptr;
+		AtomIdx atomToStayIdx = open_bonds[randPos].first;
+		AtomIdx atomToRemoveIdx = open_bonds[randPos].second;
+		if (bond->getBeginAtomIdx() == atomToStayIdx) {
+			atomToStay = bond->getBeginAtom();
+			atomToRemove = bond->getEndAtom();
+		} else {
+			atomToStay = bond->getEndAtom();
+			atomToRemove = bond->getBeginAtom();
+		}
+
+
+		std::vector<RDKit::Bond *> bondsToRemove;
+		RDKit::Bond *bondToChange;
+		RDKit::ROMol::OEDGE_ITER beg, end;
+		boost::tie(beg, end) = newMol->getAtomBonds(atomToRemove);
+		while (beg != end) {
+			bondToChange = (*original_rdkit)[*beg++].get();
+			if (bondToChange->getIdx() == bond->getIdx()) {
+				continue;
+			}
+			if (bondToChange->getBeginAtomIdx() == atomToRemove->getIdx()) {
+				if (!newMol->getBondBetweenAtoms(
+						atomToStay->getIdx(), bondToChange->getEndAtomIdx()) &&
+					!newMol->getBondBetweenAtoms(
+							bondToChange->getEndAtomIdx(), atomToStay->getIdx())) {
+					newMol->addBond(atomToStay->getIdx(),
+									bondToChange->getEndAtomIdx(), bondToChange->getBondType());
+				}
+				bondsToRemove.push_back(bondToChange);
+			}
+			if (bondToChange->getEndAtomIdx() == atomToRemove->getIdx()) {
+				if (!newMol->getBondBetweenAtoms(
+						bondToChange->getBeginAtomIdx(), atomToStay->getIdx()) &&
+					!newMol->getBondBetweenAtoms(
+							atomToStay->getIdx(), bondToChange->getBeginAtomIdx())) {
+					newMol->addBond(bondToChange->getBeginAtomIdx(),
+									atomToStay->getIdx(), bondToChange->getBondType());
+				}
+				bondsToRemove.push_back(bondToChange);
+			}
+		}
+
+
+		for (int i = 0; i < bondsToRemove.size(); ++i) {
+			newMol->removeBond(
+					bondsToRemove[i]->getBeginAtomIdx()
+					, bondsToRemove[i]->getEndAtomIdx()
+			);
+		}
+		newMol->removeAtom(atomToRemove);
+
+		std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
+		writeOriginalLockInfo(ret, atomToRemoveIdx);
+
+		return ret;
 	} else {
-		atomToStay = bond->getEndAtom();
-		atomToRemove = bond->getBeginAtom();
+		throw std::runtime_error("No starting molecule set. Set the original structure first.");
 	}
-
-
-	std::vector<RDKit::Bond *> bondsToRemove;
-	RDKit::Bond *bondToChange;
-	RDKit::ROMol::OEDGE_ITER beg, end;
-	boost::tie(beg, end) = newMol->getAtomBonds(atomToRemove);
-	while (beg != end) {
-		bondToChange = (*original_rdkit)[*beg++].get();
-		if (bondToChange->getIdx() == bond->getIdx()) {
-			continue;
-		}
-		if (bondToChange->getBeginAtomIdx() == atomToRemove->getIdx()) {
-			if (!newMol->getBondBetweenAtoms(
-					atomToStay->getIdx(), bondToChange->getEndAtomIdx()) &&
-				!newMol->getBondBetweenAtoms(
-						bondToChange->getEndAtomIdx(), atomToStay->getIdx())) {
-				newMol->addBond(atomToStay->getIdx(),
-								bondToChange->getEndAtomIdx(), bondToChange->getBondType());
-			}
-			bondsToRemove.push_back(bondToChange);
-		}
-		if (bondToChange->getEndAtomIdx() == atomToRemove->getIdx()) {
-			if (!newMol->getBondBetweenAtoms(
-					bondToChange->getBeginAtomIdx(), atomToStay->getIdx()) &&
-				!newMol->getBondBetweenAtoms(
-						atomToStay->getIdx(), bondToChange->getBeginAtomIdx())) {
-				newMol->addBond(bondToChange->getBeginAtomIdx(),
-								atomToStay->getIdx(), bondToChange->getBondType());
-			}
-			bondsToRemove.push_back(bondToChange);
-		}
-	}
-
-
-	for (int i = 0; i < bondsToRemove.size(); ++i) {
-		newMol->removeBond(
-				bondsToRemove[i]->getBeginAtomIdx()
-				, bondsToRemove[i]->getEndAtomIdx()
-		);
-	}
-	newMol->removeAtom(atomToRemove);
-
-	std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
-	writeOriginalLockInfo(ret, atomToRemoveIdx);
-
-	return ret;
 }
 
 const std::vector<std::pair<AtomIdx, AtomIdx>>& ContractBond::ContractBondImpl::getOpenBonds() {
