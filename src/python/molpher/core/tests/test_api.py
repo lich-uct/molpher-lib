@@ -32,6 +32,7 @@ from molpher.core.morphing.operators.MutateAtom import MutateAtom
 from molpher.core.morphing.operators.RemoveAtom import RemoveAtom
 from molpher.core.morphing.operators.AddBond import AddBond
 from molpher.core.morphing.operators.RemoveBond import RemoveBond
+from molpher.core.morphing.operators.RerouteBond import RerouteBond
 from molpher.core.operations import *
 from molpher.core.selectors import *
 from molpher.core import ExplorationData
@@ -51,6 +52,7 @@ class TestPythonAPI(unittest.TestCase):
         self.alanine = os.path.join(self.test_dir, 'alanine.sdf')
         self.isopropylphenol = os.path.join(self.test_dir, 'isopropylphenol.sdf')
         self.contract_bond_test_mol = os.path.join(self.test_dir, 'contract_bond_test_mol.sdf')
+        self.reroute_test_mol = os.path.join(self.test_dir, 'reroute_test_mol.sdf')
 
     def tearDown(self):
         pass
@@ -180,8 +182,11 @@ class TestPythonAPI(unittest.TestCase):
     def testInterlayAtomOperator(self):
         self.assertOperatorValid(InterlayAtom(), MolpherMol(self.isopropylphenol))
 
-    def testContractBondOperator(self):
+    def testRerouteBondOperator(self):
         self.assertOperatorValid(ContractBond(), MolpherMol(self.contract_bond_test_mol))
+
+    def testContractBondOperator(self):
+        self.assertOperatorValid(RerouteBond(), MolpherMol(self.reroute_test_mol))
 
     def testMolpher(self):
         cymene = MolpherMol(self.cymene_locked)

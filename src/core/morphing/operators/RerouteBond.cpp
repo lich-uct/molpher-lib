@@ -152,36 +152,40 @@ void RerouteBond::RerouteBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_o
 }
 
 std::shared_ptr<MolpherMol> RerouteBond::RerouteBondImpl::morph() {
-	RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+	if (original_rdkit) {
+		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
 
-	if (candidates.size() == 0) {
-		delete newMol;
-		SynchCerr("No candidates for bond reroute identified. Skipping: " + original->getSMILES());
-		return nullptr;
+		if (candidates.size() == 0) {
+			delete newMol;
+			SynchCerr("No candidates for bond reroute identified. Skipping: " + original->getSMILES());
+			return nullptr;
+		}
+		int randPos = SynchRand::GetRandomNumber(candidates.size() - 1);
+		RDKit::Bond *bond = newMol->getBondWithIdx(candidates[randPos].bondIdx);
+		int randSide = SynchRand::GetRandomNumber(0, 1);
+		if (candidates[randPos].candidates[randSide].size() == 0) {
+			randSide = 1 - randSide;
+		}
+
+		int randPos2 =
+				SynchRand::GetRandomNumber(
+						candidates[randPos].candidates[randSide].size() - 1);
+
+		AtomIdx beginAtomIdx =
+				(randSide == 0) ? bond->getBeginAtomIdx() : bond->getEndAtomIdx();
+		AtomIdx endAtomIdx =
+				candidates[randPos].candidates[randSide][randPos2];
+		AtomIdx remBeginAtom = bond->getBeginAtomIdx();
+		AtomIdx remEndAtom = bond->getEndAtomIdx();
+
+		newMol->addBond(beginAtomIdx, endAtomIdx, bond->getBondType());
+		newMol->removeBond(remBeginAtom, remEndAtom);
+
+		std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
+		writeOriginalLockInfo(ret);
+
+		return ret;
+	} else {
+		throw std::runtime_error("No starting molecule set. Set the original structure first.");
 	}
-	int randPos = SynchRand::GetRandomNumber(candidates.size() - 1);
-	RDKit::Bond *bond = newMol->getBondWithIdx(candidates[randPos].bondIdx);
-	int randSide = SynchRand::GetRandomNumber(0, 1);
-	if (candidates[randPos].candidates[randSide].size() == 0) {
-		randSide = 1 - randSide;
-	}
-
-	int randPos2 =
-			SynchRand::GetRandomNumber(
-					candidates[randPos].candidates[randSide].size() - 1);
-
-	AtomIdx beginAtomIdx =
-			(randSide == 0) ? bond->getBeginAtomIdx() : bond->getEndAtomIdx();
-	AtomIdx endAtomIdx =
-			candidates[randPos].candidates[randSide][randPos2];
-	AtomIdx remBeginAtom = bond->getBeginAtomIdx();
-	AtomIdx remEndAtom = bond->getEndAtomIdx();
-
-	newMol->addBond(beginAtomIdx, endAtomIdx, bond->getBondType());
-	newMol->removeBond(remBeginAtom, remEndAtom);
-
-	std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
-	writeOriginalLockInfo(ret);
-
-	return ret;
 }
