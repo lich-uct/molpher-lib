@@ -14,7 +14,31 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from molpher.core.ExplorationTree import ExplorationTree
-from molpher.core.ExplorationData import ExplorationData
-from molpher.core.MolpherMol import MolpherMol
-from molpher.core.MolpherAtom import MolpherAtom
+import molpher
+from abc import ABCMeta, abstractmethod
+from molpher.core._utils import shorten_repr
+
+
+class MorphingOperator(molpher.swig_wrappers.core.MorphingOperator):
+    """
+    Abstract base class derived from the `molpher.swig_wrappers.core.MorphingOperator`
+    proxy class.
+
+    """
+
+    __metaclass__ = ABCMeta
+
+    def __init__(self):
+        super(MorphingOperator, self).__init__()
+        self.original = self.getOriginal()
+
+    def __repr__(self):
+        return shorten_repr(MorphingOperator, self)
+
+    @abstractmethod
+    def setOriginal(self, mol):
+        pass
+
+    @abstractmethod
+    def morph(self):
+        pass

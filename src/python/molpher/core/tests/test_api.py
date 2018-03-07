@@ -22,20 +22,13 @@ from pkg_resources import resource_filename
 from molpher import random
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
-from molpher.core.MolpherAtom import MolpherAtom
-from molpher.core.morphing.AtomLibrary import AtomLibrary
-from molpher.core.morphing.Molpher import Molpher
-from molpher.core.morphing.operators.AddAtom import AddAtom
-from molpher.core.morphing.operators.ContractBond import ContractBond
-from molpher.core.morphing.operators.InterlayAtom import InterlayAtom
-from molpher.core.morphing.operators.MutateAtom import MutateAtom
-from molpher.core.morphing.operators.RemoveAtom import RemoveAtom
-from molpher.core.morphing.operators.AddBond import AddBond
-from molpher.core.morphing.operators.RemoveBond import RemoveBond
-from molpher.core.morphing.operators.RerouteBond import RerouteBond
+from molpher.core import ExplorationData
+from molpher.core import MolpherAtom
+from molpher.core.morphing import AtomLibrary
+from molpher.core.morphing import Molpher
+from molpher.core.morphing.operators import *
 from molpher.core.operations import *
 from molpher.core.selectors import *
-from molpher.core import ExplorationData
 
 class TestPythonAPI(unittest.TestCase):
     
@@ -202,6 +195,23 @@ class TestPythonAPI(unittest.TestCase):
         while len(morphs) < 50:
             morphs.append(molpher.next())
         self.assertEqual(50, len(morphs))
+
+    def testMorphingOperator(self):
+        class Identity(MorphingOperator):
+
+            def setOriginal(self, mol):
+                self.original = mol
+
+            def morph(self):
+                return self.original.copy()
+
+        cymene = MolpherMol(self.cymene_locked)
+
+        operators = [Identity()]
+        molpher = Molpher(cymene, operators)
+        molpher()
+        for morph in molpher.getMorphs():
+            self.assertEqual(morph.smiles, cymene.smiles)
 
     def testExplorationData(self):
         params = ExplorationData(

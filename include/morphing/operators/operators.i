@@ -13,10 +13,9 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
 %ignore MorphingOperator::MorphingOperatorImpl;
-
 %include "MorphingOperator.hpp";
 
 %catches(std::runtime_error) AddAtom::setOriginal(std::shared_ptr<MolpherMol> mol);
