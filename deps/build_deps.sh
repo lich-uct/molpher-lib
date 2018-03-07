@@ -194,7 +194,7 @@ build_boost()
 
     # build boost
     ./bootstrap.sh gcc --without-icu
-    ./b2 variant=release link=static,shared runtime-link=shared threading=multi toolset=gcc cxxflags=\"-fPIC\" --without-chrono --without-exception --without-graph --without-graph_parallel --without-iostreams --without-locale --without-math --without-mpi --without-python --without-random --without-test --without-timer --without-wave
+    ./b2 variant=release link=shared runtime-link=shared threading=multi toolset=gcc cxxflags=\"-fPIC\" --without-chrono --without-exception --without-graph --without-graph_parallel --without-iostreams --without-locale --without-math --without-mpi --without-python --without-random --without-test --without-timer --without-wave --without-date_time --without-program_options --without-signals --without-system
 
     rm -r -f ./bin.v2
     cd ..
@@ -238,7 +238,7 @@ build_rdkit()
     echo "LD_LIBRARY_PATH=`pwd`/lib:`pwd`/../boost/stage/lib" >> $cmd
     echo "mkdir build" >> $cmd
     echo "cd build" >> $cmd
-    echo "cmake -G \"Unix Makefiles\" -D RDK_BUILD_PYTHON_WRAPPERS= -D BOOST_ROOT=../boost -D RDK_INSTALL_STATIC_LIBS=ON -D Boost_USE_STATIC_LIBS=ON .." >> $cmd
+    echo "cmake -G \"Unix Makefiles\" -D RDK_BUILD_PYTHON_WRAPPERS= -D BOOST_ROOT=../boost -D RDK_INSTALL_STATIC_LIBS=OFF -D Boost_USE_STATIC_LIBS=OFF .." >> $cmd
     echo "make -j 4" >> $cmd
     echo "make install" >> $cmd
     echo "cd .." >> $cmd

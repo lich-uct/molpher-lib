@@ -12,7 +12,7 @@ string(REGEX MATCH "^[0-9]+\\.[0-9]+" VERSION_NUMBER_SO "${VERSION_NUMBER}")
 # Tool Flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wno-deprecated-declarations")
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
-set(CMAKE_INSTALL_RPATH "$ORIGIN/.")
+set(CMAKE_INSTALL_RPATH "$ORIGIN/molpher-lib/.")
 
 # Dependencies
 
@@ -200,20 +200,21 @@ foreach(lib ${Boost_LIBRARIES})
 endforeach()
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/include/boost/*
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${Boost_INCLUDE_DIRS}/boost/ ${CMAKE_INSTALL_PREFIX}/include/boost
+        ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/boost/*
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${Boost_INCLUDE_DIRS}/boost/ ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/boost
 )
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/lib/libboost*.so
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${Boost_LIBRARIES} ${Boost_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/
+        ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libboost*.so
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
+        COMMAND ${CMAKE_COMMAND} -E copy ${Boost_LIBRARIES} ${Boost_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
 )
 
 set(Boost_TARGET "boost_install")
 add_custom_target(
         ${Boost_TARGET}
-        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/libboost*.so ${CMAKE_INSTALL_PREFIX}/include/boost/*
+        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libboost*.so ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/boost/*
         COMMENT "Installed Boost."
 )
 
@@ -225,20 +226,21 @@ foreach(lib ${RDKIT_LIBRARIES})
 endforeach()
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/include/rdkit/*
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${RDKIT_INCLUDE_DIR} ${CMAKE_INSTALL_PREFIX}/include/rdkit
+        ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/rdkit/*
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${RDKIT_INCLUDE_DIR} ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/rdkit
 )
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/lib/libRDKit*.so
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${RDKIT_LIBRARIES} ${RDKIT_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/
+        ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libRDKit*.so
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
+        COMMAND ${CMAKE_COMMAND} -E copy ${RDKIT_LIBRARIES} ${RDKIT_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
 )
 
 set(RDKIT_TARGET "rdkit_install")
 add_custom_target(
         ${RDKIT_TARGET}
-        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/libRDKit*.so ${CMAKE_INSTALL_PREFIX}/include/rdkit/*
+        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libRDKit*.so ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/rdkit/*
         COMMENT "Installed RDKit."
 )
 
@@ -250,19 +252,20 @@ foreach(lib ${TBB_LIBRARIES})
 endforeach()
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/include/tbb/*.h
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${TBB_INCLUDE_DIRS}/tbb/ ${CMAKE_INSTALL_PREFIX}/include/tbb
+        ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/tbb/*.h
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${TBB_INCLUDE_DIRS}/tbb/ ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/tbb
 )
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/lib/libtbb*.so
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/
+        ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libtbb*.so
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
+        COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
 )
 set(TBB_TARGET "tbb_install")
 add_custom_target(
         ${TBB_TARGET}
-        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/libtbb*.so ${CMAKE_INSTALL_PREFIX}/include/tbb/*.h
+        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libtbb*.so ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/tbb/*.h
         COMMENT "Installed TBB."
 )
 
@@ -271,7 +274,7 @@ add_custom_target(
 ## set molpher library components to install
 install(
         DIRECTORY ${CMAKE_SOURCE_DIR}/include/
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/include/molpher
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/
         FILES_MATCHING
         PATTERN "*.h"
         PATTERN "*.hpp"

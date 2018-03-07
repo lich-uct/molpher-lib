@@ -20,7 +20,7 @@ from version import VERSION, BUILD_NUMBER
 
 molpher_cpp_module = Extension('molpher.swig_wrappers._core',
                            sources=[os.path.abspath('src/swig/molpher_wrap.cpp')],
-                           include_dirs = [os.path.abspath('include/')],
+                           include_dirs = [os.path.abspath('dist/include/molpher-lib/')],
                            library_dirs=[os.path.abspath('dist/lib/')],
                            libraries=['molpher'],
                            # runtime_library_dirs=[os.path.abspath('dist/lib/')],
