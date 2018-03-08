@@ -35,9 +35,9 @@ def load_SAScore(path):
    :return: :py:obj:`None`
    """
 
-   print("Loading data from:", path)
+   # print("Loading data from:", path)
    wrappers.load_data_from(path)
 
-print("Initializing Molpher-lib...")
+# print("Initializing Molpher-lib...")
 load_SAScore(resource_filename('molpher.swig_wrappers', 'SAScore.dat'))
-print("Molpher-lib initialized.")
+# print("Molpher-lib initialized.")
