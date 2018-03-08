@@ -20,6 +20,9 @@
 #include <GraphMol/Descriptors/MolDescriptors.h>
 #include <GraphMol/SmilesParse/SmilesParse.h>
 #include <GraphMol/SmilesParse/SmilesWrite.h>
+#include <GraphMol/FileParsers/FileParsers.h>
+#include <GraphMol/GraphMol.h>
+#include <GraphMol/MolOps.h>
 #include <RDGeneral/BadFileException.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <core/chem/morphing/ReturnResults.hpp>
@@ -306,6 +309,10 @@ std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::MolpherMolImpl::getNeighbo
     return neighbors;
 }
 
+std::string MolpherMol::MolpherMolImpl::asMolBlock() const {
+    return RDKit::MolToMolBlock(*rd_mol, true, -1, false, false);
+}
+
 void MolpherMol::addToDescendants(const std::string& smiles) {
     pimpl->data.descendants.insert(smiles);
 }
@@ -453,4 +460,8 @@ int MolpherMol::getAtomCount() const {
 
 const std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::getNeighbors(int idx) const {
     return pimpl->getNeighbors(idx);
+}
+
+std::string MolpherMol::asMolBlock() const {
+	return pimpl->asMolBlock();
 }

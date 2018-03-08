@@ -60,6 +60,8 @@ public:
 	std::shared_ptr<MolpherAtom> getAtom(int idx);
 	std::vector<std::shared_ptr<MolpherAtom>> getNeighbors(int idx);
     std::unique_ptr<MolpherMolImpl> copy() const;
+
+	std::string asMolBlock() const;
 };
 
 #endif	/* MOLPHERMOLIMPL_HPP */

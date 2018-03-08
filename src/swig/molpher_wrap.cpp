@@ -33157,6 +33157,51 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MolpherMol_asMolBlock(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< MolpherMol const > tempshared1 ;
+  std::shared_ptr< MolpherMol const > *smartarg1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_asMolBlock",&obj0)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_asMolBlock" "', argument " "1"" of type '" "MolpherMol const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr< const MolpherMol > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr< const MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr< const MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = ((MolpherMol const *)arg1)->asMolBlock();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MolpherMol_lockAtom(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *arg1 = (MolpherMol *) 0 ;
@@ -45900,6 +45945,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_MolpherMol", _wrap_new_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"delete_MolpherMol", _wrap_delete_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_copy", _wrap_MolpherMol_copy, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_asMolBlock", _wrap_MolpherMol_asMolBlock, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_lockAtom", _wrap_MolpherMol_lockAtom, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getAtom", _wrap_MolpherMol_getAtom, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getAtoms", _wrap_MolpherMol_getAtoms, METH_VARARGS, NULL},

@@ -1472,6 +1472,9 @@ class MolpherMol(_object):
     def copy(self):
         return _core.MolpherMol_copy(self)
 
+    def asMolBlock(self):
+        return _core.MolpherMol_asMolBlock(self)
+
     def lockAtom(self, idx, mask):
         return _core.MolpherMol_lockAtom(self, idx, mask)
 

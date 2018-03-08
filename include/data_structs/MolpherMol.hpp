@@ -64,6 +64,7 @@ public:
     MolpherMol& operator=(const MolpherMol&);
     std::shared_ptr<MolpherMol> copy() const;
 	RDKit::RWMol* asRDMol() const; // returns a copy
+	std::string asMolBlock() const;
 
 	// locking
 	void lockAtom(int idx, int mask);
