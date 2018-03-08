@@ -77,5 +77,7 @@ class MolpherAtom(wrappers.MolpherAtom):
             , 'NO_ADDITION' : bool(self.locking_mask & MolpherAtom.NO_ADDITION)
             , 'NO_REMOVAL' : bool(self.locking_mask & MolpherAtom.NO_REMOVAL)
             , 'KEEP_NEIGHBORS' : bool(self.locking_mask & MolpherAtom.KEEP_NEIGHBORS)
+            , 'KEEP_NEIGHBORS_AND_BONDS' : bool(self.locking_mask & MolpherAtom.KEEP_NEIGHBORS_AND_BONDS)
+            , 'KEEP_BONDS' : bool(self.locking_mask & MolpherAtom.KEEP_BONDS)
             , 'FULL_LOCK' : bool((self.locking_mask & MolpherAtom.FULL_LOCK) == MolpherAtom.FULL_LOCK)
         }
