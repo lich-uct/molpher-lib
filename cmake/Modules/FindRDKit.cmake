@@ -48,6 +48,7 @@ else()
                     /usr/local/rdkit/include
                     /usr/local/rdkit/Code
                     ~/rdkit/Code
+                    ${CMAKE_PREFIX_PATH}/include/rdkit
                     )
         endif()
         if(RDKIT_INCLUDE_DIR)
@@ -67,6 +68,7 @@ else()
                 /usr/local/rdkit/lib
                 ~/rdkit/lib
                 $ENV{LD_LIBRARY_PATH}
+                ${CMAKE_PREFIX_PATH}/lib/
                 )
         if(GRAPHMOL_LIB)
             GET_FILENAME_COMPONENT(RDKIT_LIBRARY_DIR ${GRAPHMOL_LIB} PATH)
@@ -126,6 +128,7 @@ else()
                         HINTS ${RDKIT_LIBRARY_DIR})
                 set(RDKIT_LIBRARIES ${RDKIT_LIBRARIES} ${${name}_LIB})
             endforeach()
+            message(STATUS "RDKit libraries found: ${RDKIT_LIBRARIES}")
 
         endif()
     endif()

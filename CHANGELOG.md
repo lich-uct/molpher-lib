@@ -6,7 +6,8 @@ Previous version: 0.0.0b1
 - implemented a basic pathfinder for quick customized searches (`molpher.algorithms.pathfinders.BasicPathfinder`)
 - some dependencies were updated (RDKit to v2017.09.1, Boost to v1.63)
 - all dependencies are now linked dynamically and packaged separately during the conda build
-- the tests binary is now included in the main CMakeLists file
+- conda environment libraries can now be used to build the project (if the CONDA_PREFIX environment variable is set)
+- the unit tests binary is now included in the main CMakeLists file and it can also be installed with the project
 - the MorphingOperator interface was implemented 
     - AddAtom operator class was added that adheres to this interface
     - RemoveAtom operator class was added that adheres to this interface

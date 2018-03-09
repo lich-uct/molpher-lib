@@ -11,57 +11,38 @@ string(REGEX MATCH "^[0-9]+\\.[0-9]+" VERSION_NUMBER_SO "${VERSION_NUMBER}")
 
 # Tool Flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wno-deprecated-declarations")
+add_definitions("-D_GLIBCXX_USE_CXX11_ABI=0")
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
-set(CMAKE_INSTALL_RPATH "$ORIGIN/molpher-lib/.")
+set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib/.")
 
 # Dependencies
 
 ## search paths
-set(DEPS_DIR "deps")
-set(
-        CMAKE_INCLUDE_PATH
+set(CONDA_PREFIX $ENV{CONDA_PREFIX})
+if(CONDA_PREFIX)
+    set(
+            CMAKE_PREFIX_PATH
 
-        ${DEPS_DIR}/boost/
-        ${DEPS_DIR}/rdkit/Code/
-        ${DEPS_DIR}/tbb/include/
-)
-set(
-        CMAKE_LIBRARY_PATH
-
-        ${DEPS_DIR}/boost/stage/lib/
-        ${DEPS_DIR}/rdkit/lib/
-        ${DEPS_DIR}/tbb/lib/intel64/gcc4.4/
-)
-if (${ENV_PREFIX})
+            $ENV{CONDA_PREFIX}
+    )
+else()
+    set(DEPS_DIR "deps")
     set(
             CMAKE_INCLUDE_PATH
 
-            ${CMAKE_INCLUDE_PATH}
-            ${ENV_PREFIX}/include/
-            ${ENV_PREFIX}/include/rdkit/
+            ${DEPS_DIR}/boost/
+            ${DEPS_DIR}/rdkit/Code/
+            ${DEPS_DIR}/tbb/include/
     )
     set(
             CMAKE_LIBRARY_PATH
 
-            ${CMAKE_LIBRARY_PATH}
-            ${ENV_PREFIX}/lib/
+            ${DEPS_DIR}/boost/stage/lib/
+            ${DEPS_DIR}/rdkit/lib/
+            ${DEPS_DIR}/tbb/lib/intel64/gcc4.4/
     )
-endif ()
-if ($ENV{CONDA_PREFIX})
-    set(
-            CMAKE_INCLUDE_PATH
-
-            ${CMAKE_INCLUDE_PATH}
-            $ENV{CONDA_PREFIX}/include/
-            $ENV{CONDA_PREFIX}/include/rdkit/
-    )
-    set(
-            CMAKE_LIBRARY_PATH
-
-            ${CMAKE_LIBRARY_PATH}
-            $ENV{CONDA_PREFIX}/lib/
-    )
-endif ()
+endif()
+message("CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}")
 message("CMAKE_INCLUDE_PATH=${CMAKE_INCLUDE_PATH}")
 message("CMAKE_LIBRARY_PATH=${CMAKE_LIBRARY_PATH}")
 
@@ -98,6 +79,8 @@ include_directories(${Boost_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${Boost_LIBRARIES})
 add_definitions(${Boost_DEFINITIONS})
 add_definitions("-DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB")
+message("Boost include directories: ${Boost_INCLUDE_DIRS}")
+message("Boost libraries found: ${Boost_LIBRARIES}")
 
 ## RDKit
 #set(RDKIT_LINK_STATIC ON)
@@ -124,10 +107,14 @@ endif()
 include_directories(${TBB_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${TBB_LIBRARIES})
 add_definitions(${TBB_DEFINITIONS})
+message(STATUS "Found TBB include directory: ${TBB_INCLUDE_DIRS}")
+message(STATUS "Found TBB libraries at ${TBB_LIBRARIES}")
 
 ## CPPUNIT
 find_package(CppUnit)
 set(TEST_LIBS ${TEST_LIBS} ${CPPUNIT_LIBRARIES})
+message(STATUS "Found CPPUnit include directory: ${CPPUNIT_INCLUDE_DIR}")
+message(STATUS "Found CPPUnit libraries at ${CPPUNIT_LIBRARIES}")
 
 # Include Directories
 include_directories(
@@ -152,14 +139,14 @@ target_link_libraries(molpher ${LIBS})
 set(PYTHON_PACKAGE_DIR ${CMAKE_SOURCE_DIR}/src/python/molpher/swig_wrappers)
 option(RUN_SWIG "Run SWIG" OFF)
 if(RUN_SWIG)
-    message(WARNING "SWIG wrapping code will be updated")
+    message(STATUS "SWIG wrapping code will be updated")
     add_custom_command(
             TARGET molpher
             PRE_BUILD
             COMMAND swig3.0 -python -I${CMAKE_SOURCE_DIR}/include/ -Wall -c++ -outdir ${PYTHON_PACKAGE_DIR} -o ${CMAKE_SOURCE_DIR}/src/swig/molpher_wrap.cpp ${CMAKE_SOURCE_DIR}/include/molpher.i
     )
 else()
-    message(WARNING "SWIG wrapping code will NOT be updated. Use the -DRUN_SWIG=ON to update.")
+    message(STATUS "SWIG wrapping code will NOT be updated. Use the -DRUN_SWIG=ON to update.")
 endif()
 
 # Build the tests binary
@@ -185,7 +172,7 @@ target_link_libraries(
 # Setup installation directory (${CMAKE_SOURCE_DIR}/dist/ if not requested otherwise)
 set(INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/dist/" CACHE PATH "The root of the library installation")
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-    message(WARNING "CMAKE_INSTALL_PREFIX not set. Setting install path to: ${INSTALL_PREFIX}")
+    message(STATUS "CMAKE_INSTALL_PREFIX not set. Setting install path to: ${INSTALL_PREFIX}")
     SET(CMAKE_INSTALL_PREFIX
             "${INSTALL_PREFIX}" CACHE PATH "install prefix" FORCE
             )
@@ -200,21 +187,21 @@ foreach(lib ${Boost_LIBRARIES})
 endforeach()
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/boost/*
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${Boost_INCLUDE_DIRS}/boost/ ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/boost
+        ${CMAKE_INSTALL_PREFIX}/include/boost/*
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${Boost_INCLUDE_DIRS}/boost/ ${CMAKE_INSTALL_PREFIX}/include/boost
 )
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libboost*.so
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${Boost_LIBRARIES} ${Boost_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
+        ${CMAKE_INSTALL_PREFIX}/lib/libboost*.so
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
+        COMMAND ${CMAKE_COMMAND} -E copy ${Boost_LIBRARIES} ${Boost_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/
 )
 
 set(Boost_TARGET "boost_install")
 add_custom_target(
         ${Boost_TARGET}
-        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libboost*.so ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/boost/*
+        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/libboost*.so ${CMAKE_INSTALL_PREFIX}/include/boost/*
         COMMENT "Installed Boost."
 )
 
@@ -226,21 +213,21 @@ foreach(lib ${RDKIT_LIBRARIES})
 endforeach()
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/rdkit/*
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${RDKIT_INCLUDE_DIR} ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/rdkit
+        ${CMAKE_INSTALL_PREFIX}/include/rdkit/*
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${RDKIT_INCLUDE_DIR} ${CMAKE_INSTALL_PREFIX}/include/rdkit
 )
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libRDKit*.so
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${RDKIT_LIBRARIES} ${RDKIT_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
+        ${CMAKE_INSTALL_PREFIX}/lib/libRDKit*.so
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
+        COMMAND ${CMAKE_COMMAND} -E copy ${RDKIT_LIBRARIES} ${RDKIT_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/
 )
 
 set(RDKIT_TARGET "rdkit_install")
 add_custom_target(
         ${RDKIT_TARGET}
-        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libRDKit*.so ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/rdkit/*
+        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/libRDKit*.so ${CMAKE_INSTALL_PREFIX}/include/rdkit/*
         COMMENT "Installed RDKit."
 )
 
@@ -252,22 +239,52 @@ foreach(lib ${TBB_LIBRARIES})
 endforeach()
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/tbb/*.h
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${TBB_INCLUDE_DIRS}/tbb/ ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/tbb
+        ${CMAKE_INSTALL_PREFIX}/include/tbb/*.h
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${TBB_INCLUDE_DIRS}/tbb/ ${CMAKE_INSTALL_PREFIX}/include/tbb
 )
 add_custom_command(
         OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libtbb*.so
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/
+        ${CMAKE_INSTALL_PREFIX}/lib/libtbb*.so
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
+        COMMAND ${CMAKE_COMMAND} -E copy ${TBB_LIBRARIES} ${TBB_LIBRARIES_PATTERNS} ${CMAKE_INSTALL_PREFIX}/lib/
 )
 set(TBB_TARGET "tbb_install")
 add_custom_target(
         ${TBB_TARGET}
-        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/molpher-lib/libtbb*.so ${CMAKE_INSTALL_PREFIX}/include/molpher-lib/tbb/*.h
+        DEPENDS ${CMAKE_INSTALL_PREFIX}/lib/libtbb*.so ${CMAKE_INSTALL_PREFIX}/include/tbb/*.h
         COMMENT "Installed TBB."
 )
+
+# Install unit test binary
+
+## create the unit test installation target
+get_filename_component(TEST_LIBS_DIR ${TEST_LIBS} DIRECTORY)
+FILE(GLOB TEST_LIBS_NAMES "${TEST_LIBS_DIR}/libcppunit*")
+add_custom_command(
+        OUTPUT
+        ${CMAKE_INSTALL_PREFIX}/include/cppunit/*
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CPPUNIT_INCLUDE_DIR}/cppunit/ ${CMAKE_INSTALL_PREFIX}/include/cppunit
+)
+add_custom_command(
+        OUTPUT
+        ${CMAKE_INSTALL_PREFIX}/lib/libcppunit*
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
+        COMMAND ${CMAKE_COMMAND} -E copy ${TEST_LIBS_NAMES} ${CMAKE_INSTALL_PREFIX}/lib/
+)
+add_custom_command(
+        OUTPUT
+        ${CMAKE_INSTALL_PREFIX}/bin/minimal_test
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/bin/
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:minimal_test> ${CMAKE_INSTALL_PREFIX}/bin/
+)
+add_custom_target(
+        minimal_test_install
+        DEPENDS minimal_test molpher_install ${CMAKE_INSTALL_PREFIX}/lib/libcppunit* ${CMAKE_INSTALL_PREFIX}/include/cppunit/* ${CMAKE_INSTALL_PREFIX}/bin/minimal_test
+        COMMENT "Installed minimal_test."
+)
+
 
 # Install Molpher
 
@@ -295,24 +312,24 @@ set(MOLPHER_INSTALL_TARGET_DEPENDS "molpher")
 # TODO: make the definition of the options below more automatic
 option(INSTALL_TBB "Install TBB with the library" ON)
 if (INSTALL_TBB)
-    message(WARNING "TBB will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_TBB=OFF to disable.")
+    message(STATUS "TBB will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_TBB=OFF to disable.")
     set(MOLPHER_INSTALL_TARGET_DEPENDS ${MOLPHER_INSTALL_TARGET_DEPENDS} ${TBB_TARGET})
 else()
-    message(WARNING "The TBB runtime dependency will NOT be installed with the library. Use -DINSTALL_TBB=ON to enable.")
+    message(STATUS "The TBB runtime dependency will NOT be installed with the library. Use -DINSTALL_TBB=ON to enable.")
 endif()
 option(INSTALL_Boost "Install Boost with the library" ON)
 if (INSTALL_Boost)
-    message(WARNING "Boost will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_Boost=OFF to disable.")
+    message(STATUS "Boost will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_Boost=OFF to disable.")
     set(MOLPHER_INSTALL_TARGET_DEPENDS ${MOLPHER_INSTALL_TARGET_DEPENDS} ${Boost_TARGET})
 else()
-    message(WARNING "The Boost runtime dependency will NOT be installed with the library. Use -DINSTALL_Boost=ON to enable.")
+    message(STATUS "The Boost runtime dependency will NOT be installed with the library. Use -DINSTALL_Boost=ON to enable.")
 endif()
 option(INSTALL_RDKit "Install RDKit with the library" ON)
 if (INSTALL_RDKit)
-    message(WARNING "RDKit will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_RDKit=OFF to disable.")
+    message(STATUS "RDKit will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_RDKit=OFF to disable.")
     set(MOLPHER_INSTALL_TARGET_DEPENDS ${MOLPHER_INSTALL_TARGET_DEPENDS} ${RDKIT_TARGET})
 else()
-    message(WARNING "The RDKit runtime dependency will NOT be installed with the library. Use -DINSTALL_RDKit=ON to enable.")
+    message(STATUS "The RDKit runtime dependency will NOT be installed with the library. Use -DINSTALL_RDKit=ON to enable.")
 endif()
 
 ## add installation target
@@ -331,7 +348,7 @@ set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${DIST_PREFI
 
 ## add target for the binaries and resource files
 if(NOT PYTHON_EXECUTABLE)
-    message(WARNING "PYTHON_EXECUTABLE not set. Using system defaults.")
+    message(STATUS "PYTHON_EXECUTABLE not set. Using system defaults.")
     set(PYTHON_EXECUTABLE "python")
 endif()
 execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import sys;info = sys.version_info;sys.stdout.write('{0}.{1}'.format(info.major, info.minor))" OUTPUT_VARIABLE PYTHON_VERSION)

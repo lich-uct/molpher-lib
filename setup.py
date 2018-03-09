@@ -24,7 +24,7 @@ molpher_cpp_module = Extension('molpher.swig_wrappers._core',
                            library_dirs=[os.path.abspath('dist/lib/')],
                            libraries=['molpher'],
                            # runtime_library_dirs=[os.path.abspath('dist/lib/')],
-                           extra_compile_args=['-std=c++11'],
+                           extra_compile_args=['-std=c++11', '-D_GLIBCXX_USE_CXX11_ABI=0'],
                            language='c++'
                            )
 
