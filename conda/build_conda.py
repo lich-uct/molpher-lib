@@ -98,3 +98,6 @@ for target in TARGETS:
         # the dependencies are only built once
         if target in TARGETS[:-1]:
             break
+
+os.chdir(BASE_DIR)
+subprocess.call("conda env export -f environment_build.yml", env=os.environ, shell=True)

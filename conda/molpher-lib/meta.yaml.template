@@ -16,13 +16,12 @@ requirements:
   build:
     - {{ python_spec }}
     - boost
-    - boost-cpp
     - rdkit
     - tbb
+    - cmake
   run:
     - {{ python_spec }}
     - boost
-    - boost-cpp
     - rdkit
     - tbb
 #    - {{ tbb_spec }}

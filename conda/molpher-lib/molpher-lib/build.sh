@@ -6,7 +6,7 @@ JOBS=`grep -c ^processor /proc/cpuinfo`
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 echo "Building molpher-lib binaries in: `pwd`"
-cmake $BASE_DIR -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DINSTALL_TBB=OFF -DINSTALL_RDKit=OFF -DINSTALL_Boost=OFF
+cmake $BASE_DIR -DCMAKE_BUILD_TYPE=Release -DINCLUDE_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$PREFIX -DINSTALL_TBB=OFF -DINSTALL_RDKit=OFF -DINSTALL_Boost=OFF
 
 # build and install the C++ library
 make -j $JOBS molpher_install

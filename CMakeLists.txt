@@ -79,8 +79,8 @@ include_directories(${Boost_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${Boost_LIBRARIES})
 add_definitions(${Boost_DEFINITIONS})
 add_definitions("-DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB")
-message("Boost include directories: ${Boost_INCLUDE_DIRS}")
-message("Boost libraries found: ${Boost_LIBRARIES}")
+message(STATUS "Boost include directories: ${Boost_INCLUDE_DIRS}")
+message(STATUS "Boost libraries found: ${Boost_LIBRARIES}")
 
 ## RDKit
 #set(RDKIT_LINK_STATIC ON)
@@ -136,7 +136,7 @@ set_target_properties(
             VERSION "${VERSION_NUMBER}_${BUILD_NUMBER}"
             SOVERSION "${VERSION_NUMBER_SO}"
 )
-message("Libraries linked to the target molpher: ${LIBS}")
+message(STATUS "Libraries linked to the target molpher: ${LIBS}")
 target_link_libraries(molpher ${LIBS})
 
 ## update the SWIG wrapping code if requested
