@@ -18,13 +18,25 @@ from setuptools import setup, Extension, find_packages
 import os
 from version import VERSION, BUILD_NUMBER
 
+prefix_include_dir = os.path.join(os.environ.get('PREFIX'), 'include/molpher-lib/') if os.environ.get('PREFIX') else None
+conda_prefix_include_dir = os.path.join(os.environ.get('CONDA_PREFIX'), 'include/molpher-lib/') if os.environ.get('CONDA_PREFIX') else None
+
+include_dirs = [
+    os.path.abspath('dist/include/molpher-lib/')
+]
+if prefix_include_dir:
+    include_dirs += [prefix_include_dir]
+if conda_prefix_include_dir:
+    include_dirs += [conda_prefix_include_dir]
+
 molpher_cpp_module = Extension('molpher.swig_wrappers._core',
                            sources=[os.path.abspath('src/swig/molpher_wrap.cpp')],
-                           include_dirs = [os.path.abspath('dist/include/molpher-lib/')],
+                           include_dirs = include_dirs,
                            library_dirs=[os.path.abspath('dist/lib/')],
                            libraries=['molpher'],
                            # runtime_library_dirs=[os.path.abspath('dist/lib/')],
-                           extra_compile_args=['-std=c++11', '-D_GLIBCXX_USE_CXX11_ABI=0'],
+                           define_macros=[("_GLIBCXX_USE_CXX11_ABI", "0")],
+                           extra_compile_args=['-std=c++11'],
                            language='c++'
                            )
 

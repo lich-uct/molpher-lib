@@ -111,10 +111,14 @@ message(STATUS "Found TBB include directory: ${TBB_INCLUDE_DIRS}")
 message(STATUS "Found TBB libraries at ${TBB_LIBRARIES}")
 
 ## CPPUNIT
-find_package(CppUnit)
-set(TEST_LIBS ${TEST_LIBS} ${CPPUNIT_LIBRARIES})
-message(STATUS "Found CPPUnit include directory: ${CPPUNIT_INCLUDE_DIR}")
-message(STATUS "Found CPPUnit libraries at ${CPPUNIT_LIBRARIES}")
+if(INCLUDE_TESTS)
+    find_package(CppUnit)
+endif()
+if (CPPUNIT_LIBRARIES)
+    set(TEST_LIBS ${TEST_LIBS} ${CPPUNIT_LIBRARIES})
+    message(STATUS "Found CPPUnit include directory: ${CPPUNIT_INCLUDE_DIR}")
+    message(STATUS "Found CPPUnit libraries at ${CPPUNIT_LIBRARIES}")
+endif ()
 
 # Include Directories
 include_directories(
@@ -150,24 +154,26 @@ else()
 endif()
 
 # Build the tests binary
-set(TEST_SRC tests/minimal_test)
-set(TEST_HELPERS tests/helpers)
-add_executable(
-        minimal_test
-        EXCLUDE_FROM_ALL
-        ${TEST_SRC}/MinimalTest.cpp
-        ${TEST_SRC}/MinimalTest.hpp
-        ${TEST_SRC}/MinimalTestRunner.cpp
-        ${TEST_HELPERS}/io/stdout.hpp
-        ${TEST_HELPERS}/io/stdout.cpp
-        tests/helpers/mol_helpers.hpp tests/helpers/mol_helpers.cpp)
-target_include_directories(minimal_test PUBLIC ${CPPUNIT_INCLUDE_DIR})
-target_include_directories(minimal_test PUBLIC tests/helpers/)
-target_link_libraries(
-        minimal_test
-        molpher
-        ${TEST_LIBS}
-)
+if (CPPUNIT_LIBRARIES)
+    set(TEST_SRC tests/minimal_test)
+    set(TEST_HELPERS tests/helpers)
+    add_executable(
+            minimal_test
+            EXCLUDE_FROM_ALL
+            ${TEST_SRC}/MinimalTest.cpp
+            ${TEST_SRC}/MinimalTest.hpp
+            ${TEST_SRC}/MinimalTestRunner.cpp
+            ${TEST_HELPERS}/io/stdout.hpp
+            ${TEST_HELPERS}/io/stdout.cpp
+            tests/helpers/mol_helpers.hpp tests/helpers/mol_helpers.cpp)
+    target_include_directories(minimal_test PUBLIC ${CPPUNIT_INCLUDE_DIR})
+    target_include_directories(minimal_test PUBLIC tests/helpers/)
+    target_link_libraries(
+            minimal_test
+            molpher
+            ${TEST_LIBS}
+    )
+endif()
 
 # Setup installation directory (${CMAKE_SOURCE_DIR}/dist/ if not requested otherwise)
 set(INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/dist/" CACHE PATH "The root of the library installation")
@@ -256,35 +262,36 @@ add_custom_target(
         COMMENT "Installed TBB."
 )
 
-# Install unit test binary
+# Install unit tests if Cppunit available
 
-## create the unit test installation target
-get_filename_component(TEST_LIBS_DIR ${TEST_LIBS} DIRECTORY)
-FILE(GLOB TEST_LIBS_NAMES "${TEST_LIBS_DIR}/libcppunit*")
-add_custom_command(
-        OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/include/cppunit/*
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CPPUNIT_INCLUDE_DIR}/cppunit/ ${CMAKE_INSTALL_PREFIX}/include/cppunit
-)
-add_custom_command(
-        OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/lib/libcppunit*
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${TEST_LIBS_NAMES} ${CMAKE_INSTALL_PREFIX}/lib/
-)
-add_custom_command(
-        OUTPUT
-        ${CMAKE_INSTALL_PREFIX}/bin/minimal_test
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/bin/
-        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:minimal_test> ${CMAKE_INSTALL_PREFIX}/bin/
-)
-add_custom_target(
-        minimal_test_install
-        DEPENDS minimal_test molpher_install ${CMAKE_INSTALL_PREFIX}/lib/libcppunit* ${CMAKE_INSTALL_PREFIX}/include/cppunit/* ${CMAKE_INSTALL_PREFIX}/bin/minimal_test
-        COMMENT "Installed minimal_test."
-)
-
+if (CPPUNIT_LIBRARIES)
+    ## create the unit test installation target
+    get_filename_component(TEST_LIBS_DIR ${TEST_LIBS} DIRECTORY)
+    FILE(GLOB TEST_LIBS_NAMES "${TEST_LIBS_DIR}/libcppunit*")
+    add_custom_command(
+            OUTPUT
+            ${CMAKE_INSTALL_PREFIX}/include/cppunit/*
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/include/
+            COMMAND ${CMAKE_COMMAND} -E copy_directory ${CPPUNIT_INCLUDE_DIR}/cppunit/ ${CMAKE_INSTALL_PREFIX}/include/cppunit
+    )
+    add_custom_command(
+            OUTPUT
+            ${CMAKE_INSTALL_PREFIX}/lib/libcppunit*
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/
+            COMMAND ${CMAKE_COMMAND} -E copy ${TEST_LIBS_NAMES} ${CMAKE_INSTALL_PREFIX}/lib/
+    )
+    add_custom_command(
+            OUTPUT
+            ${CMAKE_INSTALL_PREFIX}/bin/minimal_test
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/bin/
+            COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:minimal_test> ${CMAKE_INSTALL_PREFIX}/bin/
+    )
+    add_custom_target(
+            minimal_test_install
+            DEPENDS minimal_test molpher_install ${CMAKE_INSTALL_PREFIX}/lib/libcppunit* ${CMAKE_INSTALL_PREFIX}/include/cppunit/* ${CMAKE_INSTALL_PREFIX}/bin/minimal_test
+            COMMENT "Installed minimal_test."
+    )
+endif()
 
 # Install Molpher
 

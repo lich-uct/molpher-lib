@@ -15,11 +15,19 @@ build:
 requirements:
   build:
     - {{ python_spec }}
+    - boost
+    - boost-cpp
+    - rdkit
+    - tbb
   run:
     - {{ python_spec }}
-    - {{ tbb_spec }}
-    - {{ boost_spec }}
-    - {{ rdkit_spec }}
+    - boost
+    - boost-cpp
+    - rdkit
+    - tbb
+#    - {{ tbb_spec }}
+#    - {{ boost_spec }}
+#    - {{ rdkit_spec }}
 
 about:
   license : GPL-3.0
