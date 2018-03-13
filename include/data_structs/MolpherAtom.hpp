@@ -29,7 +29,7 @@ public:
 		, FULL_LOCK = NO_MUTATION | NO_ADDITION | NO_REMOVAL | KEEP_NEIGHBORS | KEEP_NEIGHBORS_AND_BONDS | KEEP_BONDS
 	};
 
-	static const std::vector<LockingMask> atom_locks;
+	static const std::vector<LockingMask> atom_locks; // FIXME: make this readable on the Python side and expose the LockingMask enum
 	static std::string lockToString(int lock);
 	static std::vector<std::string> lockingMaskToString(int mask);
 

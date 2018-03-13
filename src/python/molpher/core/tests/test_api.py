@@ -16,8 +16,10 @@
 
 import os, sys
 import unittest
+from io import StringIO
 
 from pkg_resources import resource_filename
+from rdkit import Chem
 
 from molpher import random
 from molpher.core import ExplorationTree
@@ -105,6 +107,20 @@ class TestPythonAPI(unittest.TestCase):
                 self.assertTrue(atom.lock_info['NO_ADDITION'])
                 self.assertFalse(atom.lock_info['UNLOCKED'])
                 self.assertFalse(atom.lock_info['FULL_LOCK'])
+
+        # test RDKit conversion and locking information transfer
+        rd_mol = mol_locked.asRDMol()
+        output = StringIO()
+        writer = Chem.SDWriter(output)
+        writer.write(rd_mol)
+        writer.close()
+        temp_path = os.path.join(self.test_dir, "cymene_tmp.sdf")
+        with open(temp_path, "w") as tempfile:
+            tempfile.write(output.getvalue())
+        new_cymene = MolpherMol(temp_path)
+        os.remove(temp_path)
+        for atm_old, atm_new in zip(mol_locked.atoms, new_cymene.atoms):
+            self.assertTrue(atm_old.locking_mask == atm_new.locking_mask)
 
     def testAtomLibrary(self):
         smbls = ["O", "S"]

@@ -21,6 +21,9 @@ import molpher.core.ExplorationTree
 from molpher.core.MolpherAtom import MolpherAtom
 from molpher.core._utils import shorten_repr
 
+from rdkit import Chem
+from rdkit.Chem import AllChem
+
 
 class MolpherMol(wrappers.MolpherMol):
     """
@@ -69,6 +72,26 @@ class MolpherMol(wrappers.MolpherMol):
         copy = super(MolpherMol, self).copy()
         copy.__class__ = MolpherMol
         return copy
+
+    def asRDMol(self, include_locks = True):
+        ret = Chem.MolFromMolBlock(self.asMolBlock()) # FIXME: probably not the best way to do this
+        AllChem.Compute2DCoords(ret)
+
+        if include_locks:
+            locks_map = dict()
+            for idx, atm in enumerate(self.atoms):
+                if atm.is_locked:
+                    lock_info = atm.lock_info
+                    for key in lock_info:
+                        if key != 'UNLOCKED' and lock_info[key]:
+                            if key not in locks_map:
+                                locks_map[key] = []
+                            locks_map[key].append(str(idx+1))
+
+            for key in locks_map:
+                ret.SetProp("MOLPHER_{0}".format(key), ",".join(locks_map[key]))
+
+        return ret
 
     @property
     def atoms(self):
