@@ -38,7 +38,7 @@ void SAScore::loadData() {
 }
 
 void SAScore::loadData(const std::string& path) {
-    std::cout << "loading SAScore.dat ... ";
+//    std::cout << "loading SAScore.dat ... ";
     
     SAScore* inst = getInstance();
     std::ifstream myfile;
@@ -64,7 +64,7 @@ void SAScore::loadData(const std::string& path) {
     }
 
     myfile.close();
-    std::cout << "done" << std::endl;
+//    std::cout << "done" << std::endl;
     return;
 }
 
