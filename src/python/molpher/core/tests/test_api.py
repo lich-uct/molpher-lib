@@ -16,7 +16,7 @@
 
 import os, sys
 import unittest
-from io import StringIO
+from io import StringIO, BytesIO
 
 from pkg_resources import resource_filename
 from rdkit import Chem
@@ -111,10 +111,14 @@ class TestPythonAPI(unittest.TestCase):
         # test RDKit conversion and locking information transfer
         rd_mol = mol_locked.asRDMol()
         output = StringIO()
+        if sys.version_info[0] < 3:
+            output = BytesIO()
+        else:
+            output = StringIO()
         writer = Chem.SDWriter(output)
         writer.write(rd_mol)
         writer.close()
-        temp_path = os.path.join(self.test_dir, "cymene_tmp.sdf")
+        temp_path = self.test_dir + "/cymene_tmp.sdf"
         with open(temp_path, "w") as tempfile:
             tempfile.write(output.getvalue())
         new_cymene = MolpherMol(temp_path)
