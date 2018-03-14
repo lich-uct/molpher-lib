@@ -110,7 +110,7 @@ class TestPythonAPI(unittest.TestCase):
 
         # test RDKit conversion and locking information transfer
         rd_mol = mol_locked.asRDMol()
-        output = StringIO()
+        output = None
         if sys.version_info[0] < 3:
             output = BytesIO()
         else:
