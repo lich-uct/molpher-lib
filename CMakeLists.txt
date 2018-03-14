@@ -350,6 +350,8 @@ set(DIST_PREFIX
         "${CMAKE_SOURCE_DIR}/dist" CACHE PATH "dist prefix" FORCE
         )
 set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${DIST_PREFIX}")
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${CMAKE_SOURCE_DIR}/build")
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${CMAKE_SOURCE_DIR}/src/python/molpher.egg-info")
 
 # Build the SWIG wrappers for Python
 
@@ -364,15 +366,16 @@ set(PYTHON_INSTALL_PREFIX
         )
 set(ENV{PYTHONPATH} ${PYTHON_INSTALL_PREFIX} ENV{PYTHONPATH})
 add_custom_command(
-        OUTPUT ${PYTHON_PACKAGE_DIR}/SAScore.dat ${PYTHON_PACKAGE_DIR}/*.so
+        OUTPUT
+        ${PYTHON_PACKAGE_DIR}/SAScore.dat
+        ${PYTHON_PACKAGE_DIR}/*.so
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py build_ext --library-dirs=${CMAKE_INSTALL_PREFIX}/lib/ --rpath=${CMAKE_INSTALL_PREFIX}/lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}/SAScore.dat
         COMMAND ${CMAKE_COMMAND} -E make_directory ${PYTHON_INSTALL_PREFIX}
         COMMAND ${CMAKE_COMMAND} -E env PYTHONPATH=$ENV{PYTHONPATH} ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py install --prefix ${CMAKE_INSTALL_PREFIX}
-        DEPENDS ${MOLPHER_INSTALL_TARGET}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
 add_custom_target(molpher_install_python
-        DEPENDS ${PYTHON_PACKAGE_DIR}/*.so # for some reason this works, but the library files are not cleaned
+        DEPENDS ${MOLPHER_INSTALL_TARGET} ${PYTHON_PACKAGE_DIR}/*.so # this works, but the library files are not cleaned for some reason...
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        COMMENT "Built SWIG wrappers for Python...")
+        COMMENT "Built and installed SWIG wrapper module for Python...")
