@@ -13,7 +13,7 @@ make -j $JOBS molpher_install
 
 # build the bindings and install the Python package to the build environment
 cd $BASE_DIR
-cp res/SAScore.dat src/python/molpher/swig_wrappers/
+#cp res/SAScore.dat src/python/molpher/swig_wrappers/
 $PYTHON setup.py install
 
 # clean up

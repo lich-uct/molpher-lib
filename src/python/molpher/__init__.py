@@ -24,6 +24,13 @@ from pkg_resources import resource_filename
 
 import molpher.swig_wrappers.core as wrappers
 
+import os
+
+_SHARED_FOLDER = os.path.join(
+   os.path.abspath(os.path.dirname(__file__)) # this module directory
+   , '../../../../../usr/share/molpher-lib' # path to the share directory with resources
+)
+
 def load_SAScore(path):
    """
    Loads the data file used for the computation of the syntetic feasibility scores.
@@ -36,8 +43,13 @@ def load_SAScore(path):
    """
 
    # print("Loading data from:", path)
+   if not os.path.exists(path):
+      raise Exception("No SAScore data file not found at location:", path)
    wrappers.load_data_from(path)
 
 # print("Initializing Molpher-lib...")
-load_SAScore(resource_filename('molpher.swig_wrappers', 'SAScore.dat'))
+try:
+   load_SAScore(resource_filename('molpher.swig_wrappers', 'SAScore.dat'))
+except Exception as exp:
+   load_SAScore(os.path.join(_SHARED_FOLDER, 'SAScore.dat'))
 # print("Molpher-lib initialized.")

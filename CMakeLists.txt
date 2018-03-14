@@ -310,7 +310,7 @@ install(
 )
 install(
         DIRECTORY ${CMAKE_SOURCE_DIR}/res/
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/share/molpher
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/usr/share/molpher-lib
 )
 
 ## check for selected dependencies
@@ -370,7 +370,7 @@ add_custom_command(
         ${PYTHON_PACKAGE_DIR}/SAScore.dat
         ${PYTHON_PACKAGE_DIR}/*.so
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py build_ext --library-dirs=${CMAKE_INSTALL_PREFIX}/lib/ --rpath=${CMAKE_INSTALL_PREFIX}/lib/
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}/SAScore.dat
+#        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}/SAScore.dat
         COMMAND ${CMAKE_COMMAND} -E make_directory ${PYTHON_INSTALL_PREFIX}
         COMMAND ${CMAKE_COMMAND} -E env PYTHONPATH=$ENV{PYTHONPATH} ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py install --prefix ${CMAKE_INSTALL_PREFIX}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
