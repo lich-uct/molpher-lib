@@ -32516,6 +32516,49 @@ SWIGINTERN PyObject *MolpherAtom_swigregister(PyObject *SWIGUNUSEDPARM(self), Py
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_MolpherMol_fromMolBlock(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  std::shared_ptr< MolpherMol > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MolpherMol_fromMolBlock",&obj0)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_fromMolBlock" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMol_fromMolBlock" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = MolpherMol::fromMolBlock((std::string const &)*arg1);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    std::shared_ptr<  MolpherMol > *smartresult = result ? new std::shared_ptr<  MolpherMol >(result) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_MolpherMol__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *result = 0 ;
@@ -45942,6 +45985,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MolpherAtom_setLockingMask", _wrap_MolpherAtom_setLockingMask, METH_VARARGS, NULL},
 	 { (char *)"MolpherAtom_setFormalCharge", _wrap_MolpherAtom_setFormalCharge, METH_VARARGS, NULL},
 	 { (char *)"MolpherAtom_swigregister", MolpherAtom_swigregister, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_fromMolBlock", _wrap_MolpherMol_fromMolBlock, METH_VARARGS, NULL},
 	 { (char *)"new_MolpherMol", _wrap_new_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"delete_MolpherMol", _wrap_delete_MolpherMol, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_copy", _wrap_MolpherMol_copy, METH_VARARGS, NULL},

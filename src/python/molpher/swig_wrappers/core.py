@@ -1459,6 +1459,10 @@ class MolpherMol(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, MolpherMol, name)
     __repr__ = _swig_repr
+    if _newclass:
+        fromMolBlock = staticmethod(_core.MolpherMol_fromMolBlock)
+    else:
+        fromMolBlock = _core.MolpherMol_fromMolBlock
 
     def __init__(self, *args):
         this = _core.new_MolpherMol(*args)
@@ -1575,6 +1579,10 @@ class MolpherMol(_object):
         return _core.MolpherMol_removeFromTree(self)
 MolpherMol_swigregister = _core.MolpherMol_swigregister
 MolpherMol_swigregister(MolpherMol)
+
+def MolpherMol_fromMolBlock(mol_block):
+    return _core.MolpherMol_fromMolBlock(mol_block)
+MolpherMol_fromMolBlock = _core.MolpherMol_fromMolBlock
 
 class ExplorationData(_object):
     __swig_setmethods__ = {}

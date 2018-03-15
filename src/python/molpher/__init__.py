@@ -28,8 +28,14 @@ import os
 
 _SHARED_FOLDER = os.path.join(
    os.path.abspath(os.path.dirname(__file__)) # this module directory
-   , '../../../../../usr/share/molpher-lib' # path to the share directory with resources
+   , '../../../../../share/molpher-lib' # path to the share directory with resources
 )
+
+_SA_SEARCH_PATHS = [
+   os.path.join(_SHARED_FOLDER, 'SAScore.dat')
+   , resource_filename('molpher.swig_wrappers', 'SAScore.dat')
+   , os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../../res/SAScore.dat')
+]
 
 def load_SAScore(path):
    """
@@ -46,10 +52,16 @@ def load_SAScore(path):
    if not os.path.exists(path):
       raise Exception("No SAScore data file not found at location:", path)
    wrappers.load_data_from(path)
+   return True
 
 # print("Initializing Molpher-lib...")
-try:
-   load_SAScore(resource_filename('molpher.swig_wrappers', 'SAScore.dat'))
-except Exception as exp:
-   load_SAScore(os.path.join(_SHARED_FOLDER, 'SAScore.dat'))
+file_found = False
+for path in _SA_SEARCH_PATHS:
+   try:
+      file_found = load_SAScore(path)
+      break
+   except Exception as exp:
+      continue
+
+if not file_found: raise Exception("No SAScore data file found. Locations tried:", _SA_SEARCH_PATHS)
 # print("Molpher-lib initialized.")

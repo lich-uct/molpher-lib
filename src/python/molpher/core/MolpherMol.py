@@ -41,24 +41,40 @@ class MolpherMol(wrappers.MolpherMol):
 
     def __init__(self, str_repr=None, other=None):
         if str_repr and other:
-            warnings.warn(
-                "Both SMILES string and another MolpherMol instance specified. Using another instance to initialize..."
-                , RuntimeWarning
-            )
+            raise Exception("Can't specify both string representation and other instance to initialize.")
+
         if other and isinstance(other, wrappers.MolpherMol):
             super(MolpherMol, self).__init__(other)
+        elif other and isinstance(other, Chem.Mol):
+            # FIXME: probably not the best implementation of this -> should probably be handled through a SWIG typemap
+            other_mmol = MolpherMol.fromMolBlock(Chem.MolToMolBlock(other))
+            placed_locks = other.GetPropsAsDict()
+            for key in placed_locks:
+                lock_name = key.replace("MOLPHER_", "")
+                locked_indices = [int(idx)-1 for idx in placed_locks[key].split(',')]
+                for idx in locked_indices:
+                    atom = other_mmol.atoms[idx]
+                    atom.locking_mask = atom.locking_mask | getattr(MolpherAtom, lock_name)
+
+            super(MolpherMol, self).__init__(other_mmol)
         elif str_repr and type(str_repr) == str:
             super(MolpherMol, self).__init__(str_repr)
         elif not str_repr and not other:
             super(MolpherMol, self).__init__()
         else:
-            raise AttributeError('Invalid argumetns supplied to the constructor.')
+            raise AttributeError('Invalid arguments supplied to the constructor.')
 
     def __repr__(self):
         return shorten_repr(MolpherMol, self)
 
     def __lt__(self, other):
         return self.smiles < other.smiles
+
+    @staticmethod
+    def fromMolBlock(block):
+        ret = wrappers.MolpherMol.fromMolBlock(block)
+        ret.__class__ = MolpherMol
+        return ret
 
     def copy(self):
         """
@@ -74,7 +90,8 @@ class MolpherMol(wrappers.MolpherMol):
         return copy
 
     def asRDMol(self, include_locks = True):
-        ret = Chem.MolFromMolBlock(self.asMolBlock()) # FIXME: probably not the best way to do this
+        # FIXME: probably not the best implementation of this method -> should probably be handled through a SWIG typemap
+        ret = Chem.MolFromMolBlock(self.asMolBlock())
         AllChem.Compute2DCoords(ret)
 
         if include_locks:

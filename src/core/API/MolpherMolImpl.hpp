@@ -39,6 +39,8 @@ private:
 	void initialize(std::unique_ptr<RDKit::RWMol> mol);
 
 public:
+	static std::shared_ptr<MolpherMol> fromMolBlock(const std::string& mol_block);
+
     MolpherMolImpl(const std::string& string_repr);
     MolpherMolImpl(const MolpherMolData& data);
     MolpherMolImpl(const MolpherMolImpl& other);

@@ -310,7 +310,7 @@ install(
 )
 install(
         DIRECTORY ${CMAKE_SOURCE_DIR}/res/
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/usr/share/molpher-lib
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/share/molpher-lib
 )
 
 ## check for selected dependencies

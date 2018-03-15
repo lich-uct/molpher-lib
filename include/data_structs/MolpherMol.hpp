@@ -40,7 +40,9 @@ private:
     class MolpherMolImpl;
     std::unique_ptr<MolpherMolImpl> pimpl;
 
-public:  
+public:
+	static std::shared_ptr<MolpherMol> fromMolBlock(const std::string& mol_block);
+
     MolpherMol();
     MolpherMol(const std::string& string_repr, const std::string& formula, const std::string& parentSmile,
                 const unsigned& oper, const double& dist, const double& distToClosestDecoy,

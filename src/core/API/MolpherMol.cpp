@@ -97,7 +97,7 @@ MolpherMol::MolpherMol(RDKit::ROMol *rd_mol)
     // no action
 }
 
-MolpherMol::MolpherMol(RDKit::RWMol *&rd_mol)
+MolpherMol::MolpherMol(RDKit::RWMol* &rd_mol)
 : pimpl(new MolpherMol::MolpherMolImpl(std::move(std::unique_ptr<RDKit::RWMol>(rd_mol))))
 {
     rd_mol = nullptr;
@@ -313,6 +313,11 @@ std::string MolpherMol::MolpherMolImpl::asMolBlock() const {
     return RDKit::MolToMolBlock(*rd_mol, true, -1, false, false);
 }
 
+std::shared_ptr<MolpherMol> MolpherMol::MolpherMolImpl::fromMolBlock(const std::string &mol_block) {
+    RDKit::RWMol* mol = RDKit::MolBlockToMol(mol_block, false, false, false);
+    return std::shared_ptr<MolpherMol>(new MolpherMol(mol));
+}
+
 void MolpherMol::addToDescendants(const std::string& smiles) {
     pimpl->data.descendants.insert(smiles);
 }
@@ -464,4 +469,8 @@ const std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::getNeighbors(int idx
 
 std::string MolpherMol::asMolBlock() const {
 	return pimpl->asMolBlock();
+}
+
+std::shared_ptr<MolpherMol> MolpherMol::fromMolBlock(const std::string &mol_block) {
+    return MolpherMolImpl::fromMolBlock(mol_block);
 }

@@ -126,6 +126,11 @@ class TestPythonAPI(unittest.TestCase):
         for atm_old, atm_new in zip(mol_locked.atoms, new_cymene.atoms):
             self.assertTrue(atm_old.locking_mask == atm_new.locking_mask)
 
+        # test init from RDKit
+        mol_from_rdkit = MolpherMol(other=rd_mol)
+        for atm_old, atm_new in zip(mol_locked.atoms, mol_from_rdkit.atoms):
+            self.assertTrue(atm_old.locking_mask == atm_new.locking_mask)
+
     def testAtomLibrary(self):
         smbls = ["O", "S"]
         my_lib = AtomLibrary(smbls)
