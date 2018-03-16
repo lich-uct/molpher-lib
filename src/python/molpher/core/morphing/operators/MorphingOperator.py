@@ -37,7 +37,8 @@ class MorphingOperator(molpher.swig_wrappers.core.MorphingOperator):
 
     @abstractmethod
     def setOriginal(self, mol):
-        pass
+        self.original = mol
+        self.original.__class__ = molpher.core.MolpherMol
 
     @abstractmethod
     def morph(self):

@@ -225,7 +225,8 @@ class TestPythonAPI(unittest.TestCase):
         class Identity(MorphingOperator):
 
             def setOriginal(self, mol):
-                self.original = mol
+                super(Identity, self).setOriginal(mol)
+                assert mol.smiles
 
             def morph(self):
                 return self.original.copy()
