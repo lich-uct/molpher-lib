@@ -24,24 +24,14 @@ import imp
 BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
 version = imp.load_source('module.name', os.path.join(BASE_DIR, 'version.py'))
 BUILD_ALL_PYTHON = False
-# TARGETS = ["molpher_tbb", "molpher_boost", "molpher_rdkit", "molpher-lib"]
 TARGETS = ["molpher-lib"]
+CONDA_FLAGS = {
+    "molpher-lib" : "-c conda-forge -c rdkit --croot /tmp/conda-bld/"
+}
 PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5', '3.6'] if BUILD_ALL_PYTHON else ['3', '2']
 VERSION = version.VERSION
 BUILD_NUMBER = version.BUILD_NUMBER
 LICENSE_FILE_NAME = "LICENSE"
-# TBB_LICENSE_FILE = "deps/tbb/COPYING"
-# BOOST_LICENSE_FILE = "deps/boost/LICENSE_1_0.txt"
-# RDKIT_LICENSE_FILE = "deps/rdkit/license.txt"
-# TBB_VERSION = "4.2"
-# BOOST_VERSION = "1.63"
-# RDKIT_VERSION = "2017.09.1"
-
-# LICENSES_DICT = {
-#     "molpher_tbb" : TBB_LICENSE_FILE
-#     , "molpher_boost" : BOOST_LICENSE_FILE
-#     , "molpher_rdkit" : RDKIT_LICENSE_FILE
-# }
 
 # remove previously generated files
 shutil.rmtree(os.path.join(BASE_DIR, 'build'), ignore_errors=True)
@@ -66,24 +56,13 @@ for target in TARGETS:
                 , license_file=LICENSE_FILE_NAME
                 , build_string="py{0}_{1}".format(python_version.replace('.', ''), BUILD_NUMBER)
                 , python_spec="python {0}*".format(python_version)
-                # , tbb_version=TBB_VERSION
-                # , tbb_spec = "{1} {0}".format(TBB_VERSION, TARGETS[0])
-                # , boost_version=BOOST_VERSION
-                # , boost_spec = "{1} {0}*".format(BOOST_VERSION, TARGETS[1])
-                # , rdkit_version=RDKIT_VERSION
-                # , rdkit_spec = "{1} {0}".format(RDKIT_VERSION, TARGETS[2])
             ))
 
         os.chdir(os.path.join(PACKAGE_DIR, "../"))
         os.environ['BASE_DIR'] = BASE_DIR
         print(os.environ['PATH'])
-        if target in TARGETS[:-1]:
-            # do not set Python version for tbb
-            # copyfile(os.path.join(BASE_DIR, LICENSES_DICT[target]), os.path.join(PACKAGE_DIR, LICENSE_FILE_NAME))
-            ret = subprocess.call("conda build {0} --croot /tmp/conda-bld/".format(target), env=os.environ, shell=True)
-        else:
-            copyfile(os.path.join(BASE_DIR, "LICENSE.md"), os.path.join(PACKAGE_DIR, LICENSE_FILE_NAME))
-            ret = subprocess.call("conda build -c lich -c conda-forge -c rdkit {0} --python {1} --croot /tmp/conda-bld/".format(target, python_version), env=os.environ, shell=True)
+        copyfile(os.path.join(BASE_DIR, "LICENSE.md"), os.path.join(PACKAGE_DIR, LICENSE_FILE_NAME))
+        ret = subprocess.call("conda build {0} --python {1} {2}".format(target, python_version, CONDA_FLAGS[target]), env=os.environ, shell=True)
 
         # return non-zero if something went wrong
         if ret != 0:

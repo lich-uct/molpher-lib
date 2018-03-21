@@ -4,10 +4,10 @@ Previous version: 0.0.0b1
 
 ## Changes
 - implemented a basic pathfinder for quick customized searches (`molpher.algorithms.pathfinders.BasicPathfinder`)
-- some dependencies were updated (the code should work fine with RDKit v2017.09.3 and Boost v1.66)
+- some dependencies were updated (the code should work fine with RDKit 2017.09.3, Boost 1.66 and TBB 2018_20171205 releases)
 - all dependencies are now linked dynamically 
 - conda environment libraries can now be used to manually build the project using the `CONDA_PREFIX` environment variable
-- conda packages now depend on tbb, rdkit and boost libraries from anaconda repositories both during build time and runtime
+- conda packages now depend on tbb, rdkit and boost libraries from anaconda repositories both during build time and runtime (all dependencies can now simply be obtained from the conda-forge channel)
 - the unit tests binary is now included in the `CMakeLists.txt` file and it can also be installed with the project
 - the `MorphingOperator` interface was implemented and tested in both Python and C++
     - `AddAtom` operator class was added that adheres to this interface

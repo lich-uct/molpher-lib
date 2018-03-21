@@ -1,8 +1,8 @@
 name: molpher-lib_build
 channels:
-  - lich
   - conda-forge
   - rdkit
+  - lich
   - defaults
 dependencies:
   - boost=1.66.0=py36_1
@@ -40,6 +40,7 @@ dependencies:
   - setuptools=38.5.2=py36_0
   - six=1.11.0=py36_1
   - sqlite=3.20.1=2
+  - tbb=2018_20171205=0
   - tk=8.6.7=0
   - wheel=0.30.0=py36_2
   - xz=5.2.3=0
@@ -51,5 +52,4 @@ dependencies:
   - markupsafe=1.0=py36hd9260cd_1
   - mkl=2018.0.1=h19d6760_4
   - numpy=1.14.1=py36ha266831_2
-  - tbb=4.2=0
 prefix: /home/sichom/software/miniconda/envs/molpher-lib_build
