@@ -61,18 +61,26 @@
 %template(StringVector) std::vector<std::string>;
 %template(IntVector) std::vector<int>;
 %template(UIntVector) std::vector<unsigned int>;
-%template(UIntVectorPairVector) std::vector<std::pair<unsigned int, unsigned int>>;
+%template(UIntVectorPairVector) std::vector<std::pair<unsigned int, unsigned int> >;
 %template(BoolVector) std::vector<bool>;
 %template(MolpherMolVector) std::vector<std::shared_ptr<MolpherMol> >;
 %template(MolpherMolMap) std::map<std::string, std::shared_ptr<MolpherMol> >;
 %template(MolpherAtomVector) std::vector<std::shared_ptr<MolpherAtom> >;
-%template(MorphingOperatorVector) std::vector<MorphingOperator* >;
+%template(MorphingOperatorVector) std::vector<std::shared_ptr<MorphingOperator> >;
 
 %shared_ptr(ExplorationTree);
 %shared_ptr(MolpherMol);
 %shared_ptr(MolpherAtom);
 %shared_ptr(ExplorationData);
-//%shared_ptr(MorphingOperator);
+%shared_ptr(MorphingOperator);
+%shared_ptr(AddAtom);
+%shared_ptr(RemoveAtom);
+%shared_ptr(MutateAtom);
+%shared_ptr(AddBond);
+%shared_ptr(RemoveBond);
+%shared_ptr(ContractBond);
+%shared_ptr(InterlayAtom);
+%shared_ptr(RerouteBond);
 %shared_ptr(std::shared_ptr<std::map<std::string, std::shared_ptr<MolpherMol> > >);
 %shared_ptr(std::shared_ptr<std::vector<std::shared_ptr<MolpherMol> > >);
 

@@ -587,15 +587,15 @@ void MinimalTest::testMolpher() {
 	// TODO: complete this test
 //	AddAtom* add_atom(new AddAtom());
 //	RemoveAtom* remove_atom(new RemoveAtom());
-	std::vector<MorphingOperator*> opers = {
-			new AddAtom()
-			, new RemoveAtom()
-			, new AddBond()
-			, new RemoveBond()
-			, new MutateAtom()
-			, new InterlayAtom()
-			, new ContractBond()
-			, new RerouteBond()
+	std::vector<std::shared_ptr<MorphingOperator>> opers = {
+			std::make_shared<AddAtom>()
+			, std::make_shared<RemoveAtom>()
+			, std::make_shared<AddBond>()
+			, std::make_shared<RemoveBond>()
+			, std::make_shared<MutateAtom>()
+			, std::make_shared<InterlayAtom>()
+			, std::make_shared<ContractBond>()
+			, std::make_shared<RerouteBond>()
 	};
 	std::shared_ptr<MolpherMol> dimethylphenylformamide(new MolpherMol(test_dir + "dimethylphenylformamide_complex_locking.sdf"));
 	print("original\n" + dimethylphenylformamide->getSMILES() + "\n");

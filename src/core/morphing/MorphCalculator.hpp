@@ -14,7 +14,7 @@
 class MorphCalculator {
 public:
 	MorphCalculator(
-			std::vector<MorphingOperator*>& operators,
+			std::vector<std::shared_ptr<MorphingOperator> >& operators,
 			ConcurrentMolVector& morphs,
 			tbb::atomic<unsigned int>& failures,
 			tbb::atomic<unsigned int>& empty_mols
@@ -23,7 +23,7 @@ public:
 	void operator()(const tbb::blocked_range<int> &r) const;
 
 private:
-	std::vector<MorphingOperator*>& operators;
+	std::vector<std::shared_ptr<MorphingOperator> >& operators;
 	ConcurrentMolVector& morphs;
 	tbb::atomic<unsigned int>& mMorphingFailureCount;
 	tbb::atomic<unsigned int>& mMorphEmptyCount;

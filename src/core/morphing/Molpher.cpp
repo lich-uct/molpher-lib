@@ -6,7 +6,7 @@
 #include <tbb/task_scheduler_init.h>
 #include "MolpherImpl.hpp"
 
-Molpher::Molpher(std::shared_ptr<MolpherMol> mol, const std::vector<MorphingOperator*> &operators, unsigned int threads,
+Molpher::Molpher(std::shared_ptr<MolpherMol> mol, const std::vector<std::shared_ptr<MorphingOperator> > &operators, unsigned int threads,
 				 unsigned int attempts)
 :
 pimpl(new MolpherImpl(mol, operators, threads, attempts))
@@ -34,7 +34,7 @@ Molpher::~Molpher() = default;
 
 // implementation
 
-Molpher::MolpherImpl::MolpherImpl(std::shared_ptr<MolpherMol> mol, const std::vector<MorphingOperator*> &operators,
+Molpher::MolpherImpl::MolpherImpl(std::shared_ptr<MolpherMol> mol, const std::vector<std::shared_ptr<MorphingOperator> > &operators,
 								  unsigned int threads, unsigned int attempts)
 :
 original(mol)

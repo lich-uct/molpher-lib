@@ -11,7 +11,7 @@
 
 class Molpher::MolpherImpl {
 private:
-	std::vector<MorphingOperator*> operators;
+	std::vector<std::shared_ptr<MorphingOperator> > operators;
 	MorphCalculator calc;
 	std::shared_ptr<MolpherMol> original;
 	unsigned int threads;
@@ -21,7 +21,7 @@ private:
 	tbb::atomic<unsigned int> failures;
 	tbb::atomic<unsigned int> empty_mols;
 public:
-	MolpherImpl(std::shared_ptr<MolpherMol> mol, const std::vector<MorphingOperator*>& operators, unsigned int threads, unsigned int attempts);
+	MolpherImpl(std::shared_ptr<MolpherMol> mol, const std::vector<std::shared_ptr<MorphingOperator> >& operators, unsigned int threads, unsigned int attempts);
 
 	void operator()();
 	std::vector<std::shared_ptr<MolpherMol> > getMorphs();

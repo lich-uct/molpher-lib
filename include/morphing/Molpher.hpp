@@ -16,8 +16,12 @@ private:
 	std::unique_ptr<MolpherImpl> pimpl;
 
 public:
-	// FIXME:  the operators should be passed as shared pointers to prevent possible damage when this is used from Python
-	Molpher(std::shared_ptr<MolpherMol> mol, const std::vector<MorphingOperator*>& operators, unsigned int threads, unsigned int attempts);
+	Molpher(
+			std::shared_ptr<MolpherMol> mol
+			, const std::vector<std::shared_ptr<MorphingOperator> >& operators
+			, unsigned int threads
+			, unsigned int attempts
+	);
 	~Molpher();
 
 	void operator()();

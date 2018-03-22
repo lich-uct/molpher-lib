@@ -34,8 +34,7 @@ class Molpher(wrappers.Molpher):
         return shorten_repr(self.__class__, self)
 
     def __init__(self, molecule, operators, threads=0, attempts=30, max_iters=None):
-        self.operators = list(operators) # FIXME: this is here to keep this list's data in memory (the references in C may become invalid if the operators are destroyed in Python) -> this can be removed once operators are passed around as shared pointers
-        super(Molpher, self).__init__(molecule, self.operators, threads, attempts)
+        super(Molpher, self).__init__(molecule, operators, threads, attempts)
         self._iter_morphs_cache = []
         self._iter_counter = 0
         self.max_iters = max_iters
