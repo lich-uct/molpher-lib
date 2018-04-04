@@ -22,10 +22,7 @@
 
 #include "operations/FindLeavesOper.hpp"
 #include "FindLeavesOperImpl.hpp"
-#include "tbb/concurrent_hash_map.h"
-#include "core/API/MolpherMolImpl.hpp"
 #include "core/API/ExplorationTreeImpl.h"
-#include "core/misc/global_types.h"
 
 FindLeavesOper::FindLeavesOper(bool increment_iters_without_dist_improve) : 
 pimpl(new FindLeavesOper::FindLeavesOperImpl(increment_iters_without_dist_improve))

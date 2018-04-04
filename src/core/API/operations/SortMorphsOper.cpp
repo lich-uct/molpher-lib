@@ -22,7 +22,6 @@
 
 #include "operations/SortMorphsOper.hpp"
 #include "SortMorphsOperImpl.hpp"
-#include "TreeOperationImpl.hpp"
 #include "core/API/ExplorationTreeImpl.h"
 
 SortMorphsOper::SortMorphsOper(std::shared_ptr<ExplorationTree> expTree, SortMorphsCallback &sort_callback) :

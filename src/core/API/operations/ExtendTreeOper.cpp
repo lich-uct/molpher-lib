@@ -25,7 +25,6 @@
 #include "operations/ExtendTreeOper.hpp"
 #include "core/API/ExplorationTreeImpl.h"
 #include "ExtendTreeOperImpl.hpp"
-#include "TreeOperationImpl.hpp"
 
 ExtendTreeOper::ExtendTreeOper(std::shared_ptr<ExplorationTree> expTree) : 
 pimpl(new ExtendTreeOper::ExtendTreeOperImpl(expTree))
