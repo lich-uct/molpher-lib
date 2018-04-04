@@ -33,6 +33,10 @@ MutateAtom::MutateAtom(const AtomLibrary &atom_library) :
 	setMorphingOperatorPimpl(pimpl);
 }
 
+std::string MutateAtom::getName() const {
+	return ChemOperLongDesc(OP_MUTATE_ATOM);
+}
+
 MutateAtom::MutateAtomImpl::MutateAtomImpl() :
 		MorphingOperatorImpl()
 		, original_rdkit(nullptr)
@@ -104,13 +108,13 @@ void MutateAtom::MutateAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 
 std::shared_ptr<MolpherMol> MutateAtom::MutateAtomImpl::morph() {
 	if (original_rdkit) {
-		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+		RDKit::RWMol *newMol = original->asRDMol();
 
 		int randPos = SynchRand::GetRandomNumber(newMol->getNumAtoms() - 1);
 
 		if(replacements[randPos].size() == 0) {
 			delete newMol;
-			SynchCerr("Given atom cannot be mutated.  Skipping: " + original->getSMILES());
+//			SynchCerr("Given atom cannot be mutated.  Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 

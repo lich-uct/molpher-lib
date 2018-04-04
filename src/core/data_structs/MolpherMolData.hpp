@@ -35,7 +35,7 @@ struct MolpherMolData
     std::string SMILES;
     std::string formula;
     double molecularWeight;
-    unsigned parentOper;
+    std::string parentOper;
     std::string parentSmile;
     
     /**
@@ -67,7 +67,7 @@ struct MolpherMolData
     friend class boost::serialization::access;
 
     MolpherMolData() :
-            parentOper(0),
+            parentOper(""),
             distToTarget(DBL_MAX),
             molecularWeight(0.0),
             sascore(0.0),
@@ -78,7 +78,7 @@ struct MolpherMolData
     
     MolpherMolData(const std::string& smiles) :
     SMILES(smiles),
-    parentOper(0),
+    parentOper(""),
     distToTarget(DBL_MAX),
     molecularWeight(0.0),
     sascore(0.0),

@@ -34,6 +34,10 @@ const std::vector<std::pair<unsigned int, unsigned int>> &ContractBond::getOpenB
 	return pimpl->getOpenBonds();
 }
 
+std::string ContractBond::getName() const {
+	return ChemOperLongDesc(OP_BOND_CONTRACTION);
+}
+
 void ContractBond::ContractBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
 		original = mol_orig;
@@ -113,7 +117,7 @@ std::shared_ptr<MolpherMol> ContractBond::ContractBondImpl::morph() {
 
 		if (open_bonds_rd.size() == 0) {
 			delete newMol;
-			SynchCerr("No bonds open for contraction. Skipping: " + original->getSMILES());
+//			SynchCerr("No bonds open for contraction. Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 

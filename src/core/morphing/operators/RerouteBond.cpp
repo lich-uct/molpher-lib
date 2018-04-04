@@ -38,6 +38,10 @@ std::shared_ptr<MolpherMol> RerouteBond::morph() {
 	return pimpl->morph();
 }
 
+std::string RerouteBond::getName() const {
+	return ChemOperLongDesc(OP_BOND_REROUTE);
+}
+
 void RerouteBond::RerouteBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
 		original = mol_orig;
@@ -157,7 +161,7 @@ std::shared_ptr<MolpherMol> RerouteBond::RerouteBondImpl::morph() {
 
 		if (candidates.size() == 0) {
 			delete newMol;
-			SynchCerr("No candidates for bond reroute identified. Skipping: " + original->getSMILES());
+//			SynchCerr("No candidates for bond reroute identified. Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 		int randPos = SynchRand::GetRandomNumber(candidates.size() - 1);

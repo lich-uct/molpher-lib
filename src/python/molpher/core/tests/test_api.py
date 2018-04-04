@@ -87,7 +87,6 @@ class TestPythonAPI(unittest.TestCase):
         copy = mol.copy()
         copy.sascore = 0.54
         self.assertEqual(0.54, copy.sascore)
-        self.assertEqual(0, mol.sascore)
 
         tree = ExplorationTree.create(source=mol.smiles, target='CCCNCCC')
         tree = ExplorationTree.create(source=mol, target='CCCNCCC')
@@ -230,6 +229,9 @@ class TestPythonAPI(unittest.TestCase):
 
             def morph(self):
                 return self.original.copy()
+
+            def getName(self):
+                return "Identity"
 
         cymene = MolpherMol(self.cymene_locked)
 
@@ -424,6 +426,7 @@ class TestPythonAPI(unittest.TestCase):
                 self._tree.generateMorphs()
                 for mol in self._tree.candidates:
                     self.parent.assertEqual(None, mol.tree)
+                self._tree.sortMorphs()
                 self._tree.filterMorphs()
                 self._tree.extend()
                 self._tree.prune()
@@ -444,12 +447,15 @@ class TestPythonAPI(unittest.TestCase):
         tree = ExplorationTree.create(tree_data={
             'source' : self.test_source
             , 'target' : self.test_target
+            # , 'threads' : 1
         })
 
         iterate = MorphingIteration(tree)
         counter = 0
-        while counter < 5:
+        while True:
             iterate()
+            if tree.path_found:
+                break
             counter += 1
 
         child = tree.leaves[0]

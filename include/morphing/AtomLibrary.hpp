@@ -5,7 +5,7 @@
 #ifndef MOLPHER_LIB_ATOMLIBRARY_HPP
 #define MOLPHER_LIB_ATOMLIBRARY_HPP
 
-#include "data_structs/MolpherAtom.hpp"
+#include "data_structs/MolpherMol.hpp"
 #include <vector>
 
 class AtomLibrary {
@@ -16,6 +16,7 @@ private:
 
 public:
 	AtomLibrary(const std::vector<std::shared_ptr<MolpherAtom>>& atoms);
+	AtomLibrary(const MolpherMol& mol);
 	AtomLibrary(const AtomLibrary& other);
 	~AtomLibrary();
 

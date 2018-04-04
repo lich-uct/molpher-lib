@@ -15,6 +15,7 @@ private:
 
 public:
 	AtomLibraryImpl(const std::vector<std::shared_ptr<MolpherAtom>>& atoms);
+	AtomLibraryImpl(const MolpherMol& mol);
 
 	static const AtomLibrary& getDefaultLibrary();
 	static void setDefaultLibrary(const AtomLibrary& new_default);

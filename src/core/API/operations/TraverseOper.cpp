@@ -20,9 +20,7 @@
 
 #include "operations/TraverseOper.hpp"
 #include "TraverseOperImpl.hpp"
-#include "data_structs/ExplorationTree.hpp"
 #include "core/API/ExplorationTreeImpl.h"
-#include "TreeOperationImpl.hpp"
 
 TraverseOper::TraverseOper(std::shared_ptr<ExplorationTree> expTree, TraverseCallback& callback) : 
 pimpl(new TraverseOper::TraverseOperImpl(expTree, callback)) 
@@ -133,7 +131,7 @@ void TraverseOper::TraverseOperImpl::operator()() {
         }
         ConcurrentSmileVector queue;
         if (!root) {
-            root = tree->fetchMol(tree_pimpl->source.getSMILES());
+            root = tree->fetchMol(tree_pimpl->source->getSMILES());
         }
         queue.push_back(root->getSMILES());
 

@@ -43,7 +43,8 @@ std::string NumberToStr(Number num) {
 void printCandidates(std::shared_ptr<ExplorationTree> tree) {
     int counter = 1;
     auto mask = tree->getCandidateMorphsMask();
-    for (auto candidate : tree->getCandidateMorphs()) {
+    std::shared_ptr<MolpherMol> closest;
+	for (auto candidate : tree->getCandidateMorphs()) {
         bool mask_val = mask[counter - 1];
         std::cout 
                 << NumberToStr(counter++) + ": " 
@@ -51,7 +52,15 @@ void printCandidates(std::shared_ptr<ExplorationTree> tree) {
                 << NumberToStr(candidate->getDistToTarget()) 
                 << "(" + NumberToStr(mask_val) + ")"
                 << std::endl;
+		if (closest) {
+			if (closest->getDistToTarget() > candidate->getDistToTarget()) {
+				closest = candidate;
+			}
+		} else {
+			closest = candidate;
+		}
     }
+	std::cout << "Closest candidate: " + closest->getSMILES() + " -- " + NumberToStr(closest->getDistToTarget()) << std::endl;
 }
 
 class PrintMols : public TraverseCallback {

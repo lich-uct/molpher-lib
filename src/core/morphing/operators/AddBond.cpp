@@ -37,6 +37,10 @@ const std::vector<std::pair<unsigned int, unsigned int>> &AddBond::getOpenBonds(
 	return pimpl->getOpenBonds();
 }
 
+std::string AddBond::getName() const {
+	return ChemOperLongDesc(OP_ADD_BOND);
+}
+
 void AddBond::AddBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
 		original = mol_orig;
@@ -98,7 +102,7 @@ std::shared_ptr<MolpherMol> AddBond::AddBondImpl::morph() {
 
 		if (open_bonds.size() == 0) {
 			delete newMol;
-			SynchCerr("No open atom pairs for bond addition. Skipping: " + original->getSMILES());
+//			SynchCerr("No open atom pairs for bond addition. Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 

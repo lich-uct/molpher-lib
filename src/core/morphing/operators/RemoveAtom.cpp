@@ -33,6 +33,10 @@ std::vector<std::shared_ptr<MolpherAtom>> RemoveAtom::getMarkedAtoms() {
 	return pimpl->getMarkedAtoms();
 }
 
+std::string RemoveAtom::getName() const {
+	return ChemOperLongDesc(OP_REMOVE_ATOM);
+}
+
 // implementation
 
 RemoveAtom::RemoveAtomImpl::RemoveAtomImpl() :
@@ -86,7 +90,7 @@ std::shared_ptr<MolpherMol> RemoveAtom::RemoveAtomImpl::morph() {
 
 		if (marked_atoms.size() == 0) {
 			delete newMol;
-			SynchCerr("No atoms marked for removal.  Skipping: " + original->getSMILES());
+//			SynchCerr("No atoms marked for removal.  Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 

@@ -251,11 +251,11 @@ void ReturnResults::operator()(const tbb::blocked_range<int> &r) const
             auto result = std::make_shared<MolpherMol>();
             if (mDistToTarget) {
                 result = std::make_shared<MolpherMol>(result_mol, mFormulas[i], mParentSmile,
-                                                           mOpers[i], mDistToTarget[i], 0 /*TODO: remove this (obsolete)*/,
+                                                           ChemOperLongDesc(mOpers[i]), mDistToTarget[i], 0 /*TODO: remove this (obsolete)*/,
                                                            mWeights[i], mSascore[i], fixed_atoms_new);
             } else {
                 result = std::make_shared<MolpherMol>(result_mol, mFormulas[i], mParentSmile,
-                                                           mOpers[i], -1.0, 0 /*TODO: remove this (obsolete)*/,
+                                                      ChemOperLongDesc(mOpers[i]), -1.0, 0 /*TODO: remove this (obsolete)*/,
                                                            mWeights[i], mSascore[i], fixed_atoms_new);
             }
             

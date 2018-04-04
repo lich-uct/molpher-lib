@@ -19,18 +19,40 @@
 #ifndef GENERATEMORPHSOPERIMPL_HPP
 #define	GENERATEMORPHSOPERIMPL_HPP
 
+#include <morphing/MorphCollector.hpp>
+#include <core/chem/SimCoefCalculator.hpp>
 #include "core/misc/global_types.h"
 #include "TreeOperationImpl.hpp"
 #include "operations/GenerateMorphsOper.hpp"
 
-class CollectMorphs
+class CollectMorphs : public MorphCollector
 {
 public:
-    CollectMorphs(ConcurrentMolVector &morphs, std::shared_ptr<ExplorationTree> tree, bool set_ownership);
-    CollectMorphs(ConcurrentMolVector &morphs, bool set_ownership); // TODO: remove the set_ownership parameter
-    void operator()(std::shared_ptr<MolpherMol> morph);
+    CollectMorphs(
+			ConcurrentMolVector &morphs
+			, std::shared_ptr<ExplorationTree> tree
+			, bool set_ownership
+	);
+    CollectMorphs(
+			ConcurrentMolVector &morphs
+	);
+	CollectMorphs(
+			ConcurrentMolVector &morphs
+			, std::shared_ptr<ExplorationTree> tree
+			, bool set_ownership
+			, std::shared_ptr<MolpherMol> target
+			, FingerprintSelector
+			, SimCoeffSelector
+	);
+	CollectMorphs(
+			ConcurrentMolVector &morphs
+			, std::shared_ptr<MolpherMol> target
+			, FingerprintSelector
+			, SimCoeffSelector
+	);
+    void operator()(std::shared_ptr<MolpherMol> morph, std::shared_ptr<MorphingOperator> operator_);
     unsigned int WithdrawCollectAttemptCount();
-    static void MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor);
+//    static void MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor);
 
 private:
     ConcurrentSmileSet mDuplicateChecker;
@@ -38,6 +60,11 @@ private:
     std::shared_ptr<ExplorationTree> mTree;
     bool mSetTreeOwnership;
     tbb::atomic<unsigned int> mCollectAttemptCount;
+	FingerprintSelector fing_select;
+	SimCoeffSelector sim_select;
+	std::shared_ptr<MolpherMol> target;
+	SimCoefCalculator mScCalc;
+	std::unique_ptr<Fingerprint> mTargetFp;
 };
 
 class GenerateMorphsOper::GenerateMorphsOperImpl : public TreeOperation::TreeOperationImpl {

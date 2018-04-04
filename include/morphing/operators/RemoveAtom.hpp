@@ -14,6 +14,7 @@ public:
 
 	virtual void setOriginal(std::shared_ptr<MolpherMol> mol);
 	virtual std::shared_ptr<MolpherMol> morph();
+	virtual std::string getName() const;
 
 	const std::vector<unsigned int>& getMarkedIndices();
 	std::vector<std::shared_ptr<MolpherAtom>> getMarkedAtoms();

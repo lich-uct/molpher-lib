@@ -23,6 +23,7 @@
 
 #include <tbb/concurrent_hash_map.h>
 #include <tbb/concurrent_vector.h>
+#include <morphing/operators/MorphingOperator.hpp>
 
 #include "core/misc/global_types.h"
 
@@ -82,7 +83,8 @@ class ExplorationTree::ExplorationTreeImpl
          * new morphs.
          * @see ChemOperSelector
          */
-        std::set<int> chemOpers;
+        std::set<int> chemOperSelectors; // TODO: this should not be necessary in the future (all operators should be handled directly as instances)
+        std::vector<std::shared_ptr<MorphingOperator>> chemOpers;
 
         /**
          * Parameters for morphing algorithm.
@@ -92,12 +94,12 @@ class ExplorationTree::ExplorationTreeImpl
         /**
          * Source molecule.
          */
-        MolpherMol source;
+        std::shared_ptr<MolpherMol> source;
 
         /**
          * Target molecule.
          */
-        MolpherMol target;
+        std::shared_ptr<MolpherMol> target;
 
     //    typedef tbb::concurrent_vector<std::string> PrunedVector;
 

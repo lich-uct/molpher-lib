@@ -19,13 +19,15 @@
 #include <tbb/task_scheduler_init.h>
 #include <tbb/partitioner.h>
 #include <tbb/parallel_for.h>
-
-#include "core/chem/morphing/Morphing.hpp"
+#include <morphing/operators/MorphingOperator.hpp>
+#include <morphing/Molpher.hpp>
+#include <core/misc/SAScore.h>
+#include <core/misc/inout.h>
+#include <GraphMol/SmilesParse/SmilesParse.h>
 
 #include "operations/GenerateMorphsOper.hpp"
 #include "GenerateMorphsOperImpl.hpp"
 #include "core/API/ExplorationTreeImpl.h"
-#include "core/misc/inout.h"
 
 GenerateMorphsOper::GenerateMorphsOper(std::shared_ptr<ExplorationTree> expTree, bool set_tree_ownership) : 
 pimpl(new GenerateMorphsOper::GenerateMorphsOperImpl(expTree, set_tree_ownership)) 
@@ -57,10 +59,36 @@ TreeOperation::TreeOperationImpl::TreeOperationImpl()
     // no action
 }
 
-void CollectMorphs::MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor) {
-    CollectMorphs *collect =
-            (CollectMorphs *) functor;
-    (*collect)(morph);
+//void CollectMorphs::MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor) {
+//    CollectMorphs *collect =
+//            (CollectMorphs *) functor;
+//    (*collect)(morph);
+//}
+
+CollectMorphs::CollectMorphs(
+	ConcurrentMolVector &morphs
+	, std::shared_ptr<ExplorationTree> tree
+	, bool set_ownership
+	, std::shared_ptr<MolpherMol> target
+	, FingerprintSelector fing_sel
+	, SimCoeffSelector sim_sel)
+:
+MorphCollector()
+	, mMorphs(morphs)
+	, mTree(tree)
+	, mSetTreeOwnership(set_ownership)
+	, target(target)
+	, sim_select(sim_sel)
+	, fing_select(fing_sel)
+	, mScCalc(sim_sel, fing_sel)
+	, mTargetFp(nullptr)
+{
+	mCollectAttemptCount = 0;
+	if (target) {
+		auto target_rd = target->asRDMol();
+		mTargetFp.reset(mScCalc.GetFingerprint(target_rd));
+		delete target_rd;
+	}
 }
 
 CollectMorphs::CollectMorphs(
@@ -68,29 +96,84 @@ CollectMorphs::CollectMorphs(
     , std::shared_ptr<ExplorationTree> tree
     , bool set_ownership) 
 :
-mMorphs(morphs), 
-mTree(tree),
-mSetTreeOwnership(set_ownership)
+CollectMorphs(
+	morphs
+	, tree
+	, set_ownership
+	, nullptr
+	, DEFAULT_FP
+	, DEFAULT_SC
+)
 {
-    mCollectAttemptCount = 0;
+    // no action
+}
+
+CollectMorphs::CollectMorphs(ConcurrentMolVector &morphs)
+:
+CollectMorphs(
+	morphs
+	, nullptr
+	, false
+	, nullptr
+	, DEFAULT_FP
+	, DEFAULT_SC
+)
+{
+	// no action
 }
 
 CollectMorphs::CollectMorphs(
 		ConcurrentMolVector &morphs
-		, bool set_ownership)
-		:
-		mMorphs(morphs),
-		mTree(nullptr),
-		mSetTreeOwnership(set_ownership)
+		, std::shared_ptr<MolpherMol> target
+		, FingerprintSelector fing_sel
+		, SimCoeffSelector sim_sel)
+:
+CollectMorphs(
+	morphs
+	, nullptr
+	, false
+	, target
+	, fing_sel
+	, sim_sel
+)
 {
-	mCollectAttemptCount = 0;
+	// no action
 }
 
-void CollectMorphs::operator()(std::shared_ptr<MolpherMol> morph) {
+void CollectMorphs::operator()(
+		std::shared_ptr<MolpherMol> morph
+		, std::shared_ptr<MorphingOperator> operator_
+) {
+	if (!morph) return; // ignore empty morph
     ++mCollectAttemptCount; // atomic
     ConcurrentSmileSet::const_accessor dummy;
     if (mDuplicateChecker.insert(dummy, morph->getSMILES())) {
-        if (mTree && mSetTreeOwnership) {
+        morph->setParentSMILES(operator_->getOriginal()->getSMILES());
+		morph->setParentOper(operator_->getName());
+
+		Fingerprint* fp(nullptr);
+		RDKit::RWMol* morph_rd(nullptr);
+		if (target) {
+			try {
+				morph_rd = morph->asRDMol();
+				fp = mScCalc.GetFingerprint(morph_rd);
+				morph->setDistToTarget(mScCalc.ConvertToDistance(
+						mScCalc.GetSimCoef(mTargetFp.get(), fp)));
+				delete morph_rd;
+				delete fp;
+			} catch (const std::exception &exc) {
+				SynchCerr(
+						"Failed to calculate fingerprint due to: " + std::string(exc.what())
+						+ "\n\tParent molecule: " + operator_->getOriginal()->getSMILES()
+						+ "\n\tParent operator: " + operator_->getName()
+						+ "\n\tGenerated morph: " + morph->getSMILES()
+				);
+				if (fp) delete fp;
+				if (morph_rd) delete morph_rd;
+				return;
+			}
+		}
+		if (mTree && mSetTreeOwnership) {
             morph->setOwner(mTree);
         }
         mMorphs.push_back(morph);
@@ -109,50 +192,48 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::operator()() {
     auto tree = getTree();
     if (tree) {
         auto tree_pimpl = tree->pimpl;
-        tbb::task_group_context tbbCtx;
-        tbb::task_scheduler_init scheduler;
-        if (tree_pimpl->threadCnt > 0) {
-            scheduler.terminate();
-            scheduler.initialize(tree_pimpl->threadCnt);
-        }
 
         ConcurrentMolVector leaves;
         tree_pimpl->fetchLeaves(tree, true, leaves);
         
         tree_pimpl->candidates.clear();
-        CollectMorphs collectMorphs(tree_pimpl->candidates, tree, mSetTreeOwnershipForMorphs);
-        for (auto leaf : leaves) {
-            // TODO:  use the MolpherMol instances themselves to generate candidates
+        std::shared_ptr<CollectMorphs> collector(new CollectMorphs(
+				tree_pimpl->candidates
+				, tree
+				, mSetTreeOwnershipForMorphs
+				, tree_pimpl->target
+				, (FingerprintSelector) tree_pimpl->fingerprint
+				, (SimCoeffSelector) tree_pimpl->simCoeff
+		));
+        for (auto& leaf : leaves) {
             unsigned int morphAttempts = tree_pimpl->params.cntMorphs;
             if (leaf->getDistToTarget() < tree_pimpl->params.distToTargetDepthSwitch) {
                 morphAttempts = tree_pimpl->params.cntMorphsInDepth;
             }
 
-            tree_pimpl->candidates.reserve(tree_pimpl->candidates.size() + morphAttempts);
+			// generate morphs for the current leaf
+			try {
+				Molpher molpher(
+						leaf
+						, tree_pimpl->chemOpers
+						, tree_pimpl->threadCnt
+						, morphAttempts
+						, std::static_pointer_cast<MorphCollector>(collector)
+				);
+				tree_pimpl->candidates.reserve(tree_pimpl->candidates.size() + morphAttempts);
+				molpher();
+			} catch (std::exception exp) {
+				Cerr("Morphing failed for leaf: " + leaf->getSMILES());
+				tree->deleteSubtree(leaf->getSMILES(), false);
+				continue;
+			}
 
-            std::vector<MolpherMol> decoys_dummy;
-            std::vector<ChemOperSelector> oper_selectors;
-            for (auto oper : tree_pimpl->chemOpers) {
-                oper_selectors.push_back(static_cast<ChemOperSelector>(oper));
-            }
-            GenerateMorphs(
-                    *leaf,
-                    morphAttempts,
-                    static_cast<FingerprintSelector>(tree_pimpl->fingerprint),
-                    static_cast<SimCoeffSelector>(tree_pimpl->simCoeff),
-                    oper_selectors,
-                    tree_pimpl->target,
-                    decoys_dummy,
-                    tbbCtx,
-                    &collectMorphs,
-                    CollectMorphs::MorphCollector);
             MorphDerivationMap::accessor ac;
-
             if (tree_pimpl->morphDerivations.find(ac, leaf->getSMILES())) {
-                ac->second += collectMorphs.WithdrawCollectAttemptCount();
+                ac->second += collector->WithdrawCollectAttemptCount();
             } else {
                 tree_pimpl->morphDerivations.insert(ac, leaf->getSMILES());
-                ac->second = collectMorphs.WithdrawCollectAttemptCount();
+                ac->second = collector->WithdrawCollectAttemptCount();
             }
         }
         tree_pimpl->candidates.shrink_to_fit();

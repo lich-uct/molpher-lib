@@ -39,23 +39,23 @@ static const char *longDesc[] = {
     "Bond Contraction"
 };
 
-const char *ChemOperShortDesc(const int selector)
+std::string ChemOperShortDesc(const int selector)
 {
     bool validSelector = (selector >= 0) &&
         (selector < (int)(sizeof(shortDesc) / sizeof(shortDesc[0])));
     if (validSelector) {
-        return shortDesc[selector];
+        return std::string(shortDesc[selector]);
     } else {
         return "";
     }
 }
 
-const char *ChemOperLongDesc(const int selector)
+std::string ChemOperLongDesc(const int selector)
 {
     bool validSelector = (selector >= 0) &&
         (selector < (int)(sizeof(longDesc) / sizeof(longDesc[0])));
     if (validSelector) {
-        return longDesc[selector];
+        return std::string(longDesc[selector]);
     } else {
         return "";
     }

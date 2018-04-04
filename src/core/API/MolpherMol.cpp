@@ -27,6 +27,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <core/chem/morphing/ReturnResults.hpp>
 #include <core/misc/utils.hpp>
+#include <core/misc/SAScore.h>
 
 #include "MolpherMolImpl.hpp"
 #include "core/misc/inout.h"
@@ -35,7 +36,7 @@ MolpherMol::MolpherMol(
     const std::string& string_repr
     , const std::string& formula
     , const std::string& parentSmile
-    , const unsigned& oper
+    , const std::string& oper
     , const double& dist
     , const double& distToClosestDecoy
     , const double& weight
@@ -50,7 +51,6 @@ MolpherMol::MolpherMol(
     pimpl->data.distToTarget = dist;
     pimpl->data.molecularWeight = weight;
     pimpl->data.sascore = sascore;
-//    pimpl->fixed_atoms = fixed_atoms;
 }
 
 MolpherMol::MolpherMol(const std::string& string_repr) : pimpl(new MolpherMol::MolpherMolImpl(string_repr)) {
@@ -69,7 +69,7 @@ MolpherMol::MolpherMol(
         RDKit::ROMol* rd_mol
         , const std::string& formula
         , const std::string& parentSmile
-        , const unsigned& oper
+        , const std::string& oper
         , const double& dist
         , const double& distToClosestDecoy
         , const double& weight
@@ -146,7 +146,7 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl(
         const RDKit::ROMol &rd_mol
         , const std::string& formula
         , const std::string& parentSmile
-        , const unsigned& oper
+        , const std::string& oper
         , const double& dist
         , const double& distToClosestDecoy
         , const double& weight
@@ -159,55 +159,64 @@ MolpherMol::MolpherMolImpl::MolpherMolImpl(
     data.distToTarget = dist;
     data.molecularWeight = weight;
     data.sascore = sascore;
-//    this->fixed_atoms = fixed_atoms;
 
     std::unique_ptr<RDKit::RWMol> new_mol(new RDKit::RWMol(rd_mol));
     this->initialize(std::move(new_mol));
 }
 
 void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
+    // sanitize
+    unsigned int failed = 0;
     try {
-        if( !mol->getRingInfo()->isInitialized() ) {
-            RDKit::MolOps::findSSSR(*mol);
-        }
-        unsigned int failed = 0;
         RDKit::MolOps::sanitizeMol(
                 *mol
                 , failed
-                , RDKit::MolOps::SANITIZE_CLEANUP
+                , RDKit::MolOps::SANITIZE_KEKULIZE
                 | RDKit::MolOps::SANITIZE_PROPERTIES
                 | RDKit::MolOps::SANITIZE_SYMMRINGS
-                | RDKit::MolOps::SANITIZE_KEKULIZE
+                | RDKit::MolOps::SANITIZE_CLEANUP
                 | RDKit::MolOps::SANITIZE_FINDRADICALS
                 | RDKit::MolOps::SANITIZE_SETHYBRIDIZATION
                 | RDKit::MolOps::SANITIZE_CLEANUPCHIRALITY
                 | RDKit::MolOps::SANITIZE_ADJUSTHS
+				| RDKit::MolOps::SANITIZE_SETCONJUGATION
         );
     } catch (const RDKit::MolSanitizeException &exc) {
         SynchCerr("Molecule failed to initialize due to sanitization errors.", "ERROR:");
         throw exc;
+    } catch (const ValueErrorException &exc) {
+        SynchCerr("Cannot kekulize input molecule.");
+        throw exc;
+    } catch (const std::exception &exc) {
+        SynchCerr("Molecule failed to initialize due to an exception: " + std::string(exc.what()), "ERROR:");
+        throw exc;
     }
-//    catch (const ValueErrorException &exc) {
-//        SynchCerr("Cannot kekulize input molecule.");
-//        throw exc;
-//    }
 
     rd_mol = std::move(mol); // take ownership of the instance
 
-    RDKit::ROMol::AtomIterator iter;
+    // transfer locks and calculate valences for atoms
+	RDKit::ROMol::AtomIterator iter;
     for (iter = rd_mol->beginAtoms(); iter != rd_mol->endAtoms(); iter++) {
         RDKit::Atom* atom = *iter;
+		atom->calcExplicitValence();
+		atom->calcImplicitValence();
         atoms.push_back(std::make_shared<MolpherAtom>(atom));
     }
-
     if (!rd_mol->getPropList().empty()) {
         for (auto& item : parse_atom_locks(*rd_mol)) {
             lockAtom(item.first, item.second);
         }
     }
 
-    data.SMILES = RDKit::MolToSmiles(*rd_mol);
+    data.SMILES = RDKit::MolToSmiles(*rd_mol, false, true, -1, true, false, false);
     data.formula = RDKit::Descriptors::calcMolFormula(*rd_mol);
+    data.molecularWeight = RDKit::Descriptors::calcAMW(*rd_mol, true);
+
+	// calculate SAScore
+	// FIXME: sometimes we get scores that are too high if we use the rd_mol instance directly
+	auto rd_mol_dummy = RDKit::SmilesToMol(data.SMILES);
+    data.sascore = SAScore::getInstance()->getScore(*rd_mol_dummy);
+	delete rd_mol_dummy;
 }
 
 void MolpherMol::MolpherMolImpl::initialize(const std::string &string_repr) {
@@ -350,7 +359,7 @@ double MolpherMol::getMolecularWeight() const {
     return pimpl->data.molecularWeight;
 }
 
-int MolpherMol::getParentOper() const {
+const std::string& MolpherMol::getParentOper() const {
     return pimpl->data.parentOper;
 }
 
@@ -444,7 +453,7 @@ void MolpherMol::removeFromTree() {
 }
 
 RDKit::RWMol* MolpherMol::asRDMol() const {
-    return new RDKit::RWMol(*(pimpl->rd_mol));
+    return new RDKit::RWMol(*(pimpl->rd_mol), true, -1);
 }
 
 void MolpherMol::lockAtom(int idx, int mask) {
@@ -473,4 +482,8 @@ std::string MolpherMol::asMolBlock() const {
 
 std::shared_ptr<MolpherMol> MolpherMol::fromMolBlock(const std::string &mol_block) {
     return MolpherMolImpl::fromMolBlock(mol_block);
+}
+
+void MolpherMol::setParentOper(const std::string& description) {
+    pimpl->data.parentOper = description;
 }

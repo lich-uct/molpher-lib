@@ -21,7 +21,6 @@
 #include "operations/PruneTreeOper.hpp"
 #include "core/API/ExplorationTreeImpl.h"
 #include "PruneTreeOperImpl.hpp"
-#include "TreeOperationImpl.hpp"
 
 PruneTreeOper::PruneTreeOper(std::shared_ptr<ExplorationTree> expTree) : 
 pimpl(new PruneTreeOper::PruneTreeOperImpl(expTree))
@@ -112,7 +111,7 @@ void PruneTreeOper::PruneTreeOperImpl::operator()() {
             scheduler.initialize(tree->pimpl->threadCnt);
         }
         ConcurrentSmileVector queue;
-        queue.push_back(tree->pimpl->source.getSMILES());
+        queue.push_back(tree->pimpl->source->getSMILES());
 
         PruneTree functor(tree);
         tbb::parallel_do(queue.begin(), queue.end(), functor, tbbCtx);

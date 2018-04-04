@@ -1536,6 +1536,9 @@ class MolpherMol(_object):
     def setParentSMILES(self, arg2):
         return _core.MolpherMol_setParentSMILES(self, arg2)
 
+    def setParentOper(self, arg2):
+        return _core.MolpherMol_setParentOper(self, arg2)
+
     def setDistToTarget(self, dist):
         return _core.MolpherMol_setDistToTarget(self, dist)
 
@@ -2289,8 +2292,8 @@ class Molpher(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, Molpher, name)
     __repr__ = _swig_repr
 
-    def __init__(self, mol, operators, threads, attempts):
-        this = _core.new_Molpher(mol, operators, threads, attempts)
+    def __init__(self, *args):
+        this = _core.new_Molpher(*args)
         try:
             self.this.append(this)
         except __builtin__.Exception:
@@ -2340,6 +2343,9 @@ class MorphingOperator(_object):
 
     def morph(self):
         return _core.MorphingOperator_morph(self)
+
+    def getName(self):
+        return _core.MorphingOperator_getName(self)
     def __disown__(self):
         self.this.disown()
         _core.disown_MorphingOperator(self)
@@ -2370,6 +2376,9 @@ class AddAtom(MorphingOperator):
 
     def morph(self):
         return _core.AddAtom_morph(self)
+
+    def getName(self):
+        return _core.AddAtom_getName(self)
 
     def getOpenIndices(self):
         return _core.AddAtom_getOpenIndices(self)
@@ -2405,6 +2414,9 @@ class RemoveAtom(MorphingOperator):
     def morph(self):
         return _core.RemoveAtom_morph(self)
 
+    def getName(self):
+        return _core.RemoveAtom_getName(self)
+
     def getMarkedIndices(self):
         return _core.RemoveAtom_getMarkedIndices(self)
 
@@ -2438,6 +2450,9 @@ class MutateAtom(MorphingOperator):
 
     def morph(self):
         return _core.MutateAtom_morph(self)
+
+    def getName(self):
+        return _core.MutateAtom_getName(self)
     __swig_destroy__ = _core.delete_MutateAtom
     __del__ = lambda self: None
 MutateAtom_swigregister = _core.MutateAtom_swigregister
@@ -2466,6 +2481,9 @@ class AddBond(MorphingOperator):
 
     def morph(self):
         return _core.AddBond_morph(self)
+
+    def getName(self):
+        return _core.AddBond_getName(self)
 
     def getOpenBonds(self):
         return _core.AddBond_getOpenBonds(self)
@@ -2498,6 +2516,9 @@ class RemoveBond(MorphingOperator):
     def morph(self):
         return _core.RemoveBond_morph(self)
 
+    def getName(self):
+        return _core.RemoveBond_getName(self)
+
     def getOpenBonds(self):
         return _core.RemoveBond_getOpenBonds(self)
     __swig_destroy__ = _core.delete_RemoveBond
@@ -2529,6 +2550,9 @@ class ContractBond(MorphingOperator):
     def morph(self):
         return _core.ContractBond_morph(self)
 
+    def getName(self):
+        return _core.ContractBond_getName(self)
+
     def getOpenBonds(self):
         return _core.ContractBond_getOpenBonds(self)
     __swig_destroy__ = _core.delete_ContractBond
@@ -2559,6 +2583,9 @@ class InterlayAtom(MorphingOperator):
 
     def morph(self):
         return _core.InterlayAtom_morph(self)
+
+    def getName(self):
+        return _core.InterlayAtom_getName(self)
     __swig_destroy__ = _core.delete_InterlayAtom
     __del__ = lambda self: None
 InterlayAtom_swigregister = _core.InterlayAtom_swigregister
@@ -2587,6 +2614,9 @@ class RerouteBond(MorphingOperator):
 
     def morph(self):
         return _core.RerouteBond_morph(self)
+
+    def getName(self):
+        return _core.RerouteBond_getName(self)
     __swig_destroy__ = _core.delete_RerouteBond
     __del__ = lambda self: None
 RerouteBond_swigregister = _core.RerouteBond_swigregister

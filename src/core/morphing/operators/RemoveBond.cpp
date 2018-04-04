@@ -37,6 +37,10 @@ const std::vector<std::pair<unsigned int, unsigned int>> &RemoveBond::getOpenBon
 	return pimpl->getOpenBonds();
 }
 
+std::string RemoveBond::getName() const {
+	return ChemOperLongDesc(OP_REMOVE_BOND);
+}
+
 void RemoveBond::RemoveBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
 		original = mol_orig;
@@ -88,7 +92,7 @@ std::shared_ptr<MolpherMol> RemoveBond::RemoveBondImpl::morph() {
 
 		if (open_bonds_rd.size() == 0) {
 			delete newMol;
-			SynchCerr("No open atom pairs for bond removal.  Skipping: " + original->getSMILES());
+//			SynchCerr("No open atom pairs for bond removal.  Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 

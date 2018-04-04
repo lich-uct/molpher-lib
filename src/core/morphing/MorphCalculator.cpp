@@ -8,15 +8,31 @@
 #include "core/misc/inout.h"
 
 MorphCalculator::MorphCalculator(std::vector<std::shared_ptr<MorphingOperator> > &operators,
-								 ConcurrentMolVector& morphs,
-								 tbb::atomic<unsigned int>& failures,
-								 tbb::atomic<unsigned int>& empty_mols
-)
-:
+								 ConcurrentMolVector &morphs, tbb::atomic<unsigned int> &failures,
+								 tbb::atomic<unsigned int> &empty_mols, std::shared_ptr<MorphCollector> collector)
+		:
 operators(operators)
 , morphs(morphs)
-, mMorphEmptyCount(failures)
-, mMorphingFailureCount(empty_mols)
+, mMorphingFailureCount(failures)
+, mMorphEmptyCount(empty_mols)
+, collector(collector)
+{
+	// no action
+}
+
+MorphCalculator::MorphCalculator(
+		std::vector<std::shared_ptr<MorphingOperator> > &operators,
+		ConcurrentMolVector& morphs,
+		tbb::atomic<unsigned int>& failures,
+		tbb::atomic<unsigned int>& empty_mols
+)
+:
+MorphCalculator::MorphCalculator(
+		operators
+		, morphs
+		, failures
+		, empty_mols
+		, nullptr)
 {
 	// no action
 }
@@ -30,16 +46,35 @@ void MorphCalculator::operator()(const tbb::blocked_range<int> &r) const {
 		try {
 			new_mol = operator_->morph();
 		} catch (const std::exception &exc) {
-			SynchCerr("Morphing failure due to an error: " + std::string(exc.what()));
+			SynchCerr(
+					"Morphing failure: " + std::string(exc.what())
+					+ "\n\tParent molecule: " + operator_->getOriginal()->getSMILES()
+					+ "\n\tParent operator: " + operator_->getName()
+			);
 			++mMorphingFailureCount; // atomic
-			return;
+			continue;
 		}
 
-		if (new_mol) {
-			morphs.push_back(new_mol);
-		} else {
-			SynchCerr("Morphing failure: morphing method returned empty molecule");
+		if (!new_mol) {
+//			SynchCerr("Morphing method returned empty molecule.");
 			++mMorphEmptyCount;
+			continue;
 		}
+
+		try {
+			if (collector) {
+				(*collector)(new_mol, operator_);
+			}
+		} catch (const std::exception &exc) {
+			SynchCerr(
+					"Failed to collect morph due to: " + std::string(exc.what())
+					+ "\n\tParent molecule: " + operator_->getOriginal()->getSMILES()
+					+ "\n\tParent operator: " + operator_->getName()
+					+ "\n\tGenerated morph: " + new_mol->getSMILES()
+			);
+			continue;
+		}
+
+		morphs.push_back(new_mol);
 	}
 }

@@ -9,6 +9,7 @@
 #include <vector>
 #include "morphing/operators/MorphingOperator.hpp"
 #include "data_structs/MolpherMol.hpp"
+#include "MorphCollector.hpp"
 
 class Molpher {
 private:
@@ -21,6 +22,13 @@ public:
 			, const std::vector<std::shared_ptr<MorphingOperator> >& operators
 			, unsigned int threads
 			, unsigned int attempts
+	);
+	Molpher(
+			std::shared_ptr<MolpherMol> mol
+			, const std::vector<std::shared_ptr<MorphingOperator> >& operators
+			, unsigned int threads
+			, unsigned int attempts
+			, std::shared_ptr<MorphCollector> collector
 	);
 	~Molpher();
 

@@ -105,7 +105,7 @@ void MinimalTest::testMolpherMol() {
     MolpherMol mol("CCO");
     CPPUNIT_ASSERT_EQUAL(std::string("CCO"), mol.getSMILES());
     CPPUNIT_ASSERT_EQUAL(DBL_MAX, mol.getDistToTarget());
-    
+
     // test the copy method
     auto mol_copy = mol.copy();
     mol_copy->setDistToTarget(1.0);
@@ -113,33 +113,25 @@ void MinimalTest::testMolpherMol() {
     CPPUNIT_ASSERT_EQUAL(1.0, mol_copy->getDistToTarget());
     CPPUNIT_ASSERT_EQUAL(std::string("CCO"), mol.getSMILES());
     CPPUNIT_ASSERT_EQUAL(DBL_MAX, mol.getDistToTarget());
-    
+
     // molecules created by themselves should not belong to a tree
     CPPUNIT_ASSERT(!mol.getTree());
     CPPUNIT_ASSERT(!mol_copy->getTree());
     CPPUNIT_ASSERT(!mol.isBoundToTree());
     CPPUNIT_ASSERT(!mol_copy->isBoundToTree());
-    
+
     mol.setSMILES("C1CCC1");
     CPPUNIT_ASSERT_EQUAL(std::string("C1CCC1"), mol.getSMILES());
     CPPUNIT_ASSERT_EQUAL(std::string("CCO"), mol_copy->getSMILES());
-    
+
 //    CPPUNIT_ASSERT_THROW(mol.setSMILES("ABCDE");, RDKit::SmilesParseException); // rdkit also gives a segmentation fault for some reason...
-    
+
     // test the empty constructor (molecule with empty SMILES should not be valid and all values should be initialized to defaults)
     MolpherMol empty;
     CPPUNIT_ASSERT_EQUAL(std::string(""), empty.getSMILES());
     CPPUNIT_ASSERT(!empty.isValid());
-    CPPUNIT_ASSERT_EQUAL(OP_ADD_ATOM, static_cast<ChemOperSelector>(empty.getParentOper()));
+    CPPUNIT_ASSERT_EQUAL(std::string(""), empty.getParentOper());
     CPPUNIT_ASSERT_EQUAL((unsigned) 0, empty.getItersWithoutDistImprovement());
-    
-    // test the complete constructor
-    std::set<int> dummy;
-    MolpherMol complete("CC(=O)C", "C3O", "NC(=O)C",
-                OP_MUTATE_ATOM, 0.5, 0.0,
-                0.0, 3.1, dummy);
-    CPPUNIT_ASSERT_EQUAL(OP_MUTATE_ATOM, static_cast<ChemOperSelector>(complete.getParentOper()));
-    CPPUNIT_ASSERT_EQUAL(std::string("NC(=O)C"), complete.getParentSMILES());
 
     // test initialization from SDF
     RDKit::RWMol* mol_rdkit = new RDKit::RWMol(*(RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next()));
@@ -206,35 +198,6 @@ void MinimalTest::testMolpherMol() {
         CPPUNIT_ASSERT_EQUAL(locked_atom.second->getSymbol(), std::string("C"));
         CPPUNIT_ASSERT(locked_indices.find(locked_atom.first) != locked_indices.end());
     }
-
-	// test morphing via molecule instance
-//	std::cout << "Testing morphing a single molecule instance" << std::endl;
-//	std::vector<ChemOperSelector> opers;
-//	opers.push_back(OP_ADD_ATOM);
-//	opers.push_back(OP_REMOVE_ATOM);
-//	auto mols = stream_derived.morph(
-//			opers
-//			, 200
-//			, 2
-//			, FP_MORGAN
-//			, SC_TANIMOTO
-//			, mol
-//	);
-//	print_morphs(stream_derived, mols);
-//
-//    // test morphing with fixed atoms
-//    MolpherMol fixed_atoms(test_dir + "cymene.sdf");
-//    mols = fixed_atoms.morph(opers, 100, 2);
-//    print_morphs(fixed_atoms, mols);
-//	for (auto morph : mols) {
-//		CPPUNIT_ASSERT(match_substr(fixed_atoms.getSMILES(), "c1ccccc1"));
-//	}
-//    for (auto morph : mols) {
-//        auto generation_2 = morph->morph(opers, 100, 2);
-//		for (auto morph_ : generation_2) {
-//			CPPUNIT_ASSERT(match_substr(fixed_atoms.getSMILES(), "c1ccccc1"));
-//		}
-//    }
 }
 
 void MinimalTest::testAtomLibrary() {
@@ -686,10 +649,11 @@ void MinimalTest::testExplorationData() {
 
 void MinimalTest::testTree() {
     // tree creation
-    auto tree = ExplorationTree::create("CCO", "C1CCC1");
+    auto tree = ExplorationTree::create("CCO", "C1=COC=C1");
     CPPUNIT_ASSERT_THROW(ExplorationTree::create("CCO", "");, std::runtime_error);
     
     // retrieve the source and see if it belongs to the correct tree
+	CPPUNIT_ASSERT_THROW(tree->fetchMol("CC");, std::runtime_error);
     auto source = tree->fetchMol("CCO");
     CPPUNIT_ASSERT(source->isBoundToTree());
     auto tree_of_source = source->getTree();
@@ -800,15 +764,16 @@ void MinimalTest::testTree() {
     // create new tree from the file
     auto tree_from_file = ExplorationTree::create(test_dir + "testTree_snapshot.xml");
     
-    // make a few more generations on the loaded tree
-    for (unsigned iter_idx = 0; iter_idx != 3; iter_idx++) {
-        tree_from_file->generateMorphs();
+    // find the path
+    while (true) {
+		tree_from_file->generateMorphs();
         tree_from_file->sortMorphs();
         tree_from_file->filterMorphs();
         printCandidates(tree_from_file);
         tree_from_file->extend();
         std::cout << "Path found: " + NumberToStr(tree_from_file->isPathFound()) << std::endl;
-        tree_from_file->prune();
+		if (tree_from_file->isPathFound()) break;
+		tree_from_file->prune();
     }
 }
 

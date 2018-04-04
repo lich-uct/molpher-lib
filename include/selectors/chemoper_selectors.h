@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <string>
+
 enum ChemOperSelector {
     OP_ADD_ATOM,
     OP_REMOVE_ATOM,
@@ -29,5 +31,5 @@ enum ChemOperSelector {
     OP_BOND_CONTRACTION
 };
 
-const char *ChemOperShortDesc(const int selector);
-const char *ChemOperLongDesc(const int selector);
+std::string ChemOperShortDesc(const int selector);
+std::string ChemOperLongDesc(const int selector);

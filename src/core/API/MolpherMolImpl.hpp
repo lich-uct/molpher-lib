@@ -48,7 +48,7 @@ public:
 			const RDKit::ROMol& rd_mol
 			, const std::string& formula
 			, const std::string& parentSmile
-			, const unsigned& oper
+			, const std::string& oper
 			, const double& dist
 			, const double& distToClosestDecoy
 			, const double& weight

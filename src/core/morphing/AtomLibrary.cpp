@@ -54,6 +54,10 @@ std::vector<std::shared_ptr<MolpherAtom>> AtomLibrary::getAtoms() const {
 	return pimpl->getAtoms();
 }
 
+AtomLibrary::AtomLibrary(const MolpherMol &mol) : pimpl(new AtomLibraryImpl(mol)) {
+	// no action
+}
+
 AtomLibrary::AtomLibraryImpl::AtomLibraryImpl(const std::vector<std::shared_ptr<MolpherAtom>>& atoms) {
 	// FIXME: check for an empty atom list and raise exception
 	this->atoms.clear();
@@ -81,4 +85,10 @@ std::vector<std::shared_ptr<MolpherAtom>> AtomLibrary::AtomLibraryImpl::getAtoms
 		ret.push_back(std::make_shared<MolpherAtom>(*atom));
 	}
 	return ret;
+}
+
+AtomLibrary::AtomLibraryImpl::AtomLibraryImpl(const MolpherMol &mol)
+: AtomLibraryImpl(mol.getAtoms())
+{
+	// no action
 }

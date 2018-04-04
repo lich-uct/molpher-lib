@@ -125,7 +125,7 @@ void FilterMorphsOper::FilterMorphsOperImpl::FilterMorphs::operator()(const tbb:
             bool mightSurvive = true;
             if (mFilters & MorphFilters::PROBABILITY) {
                 double acceptProbability = 1.0;
-                bool isTarget = (morph_smiles == mTreePimpl->target.getSMILES());
+                bool isTarget = (morph_smiles == mTreePimpl->target->getSMILES());
                 if (idx >= mTreePimpl->params.cntCandidatesToKeep && !isTarget) {
                     acceptProbability =
                             0.25 - (idx - mTreePimpl->params.cntCandidatesToKeep) /

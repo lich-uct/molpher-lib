@@ -41,6 +41,10 @@ MorphingOperator()
 	setMorphingOperatorPimpl(pimpl);
 }
 
+std::string AddAtom::getName() const {
+	return ChemOperLongDesc(OP_ADD_ATOM);
+}
+
 AddAtom::AddAtomImpl::AddAtomImpl() :
 MorphingOperatorImpl()
 , original_rdkit(nullptr)
@@ -79,7 +83,7 @@ std::shared_ptr<MolpherMol> AddAtom::AddAtomImpl::morph() {
 
 		if (open_atoms.size() == 0) {
 			delete newMol;
-			SynchCerr("No open atoms for addition. Skipping: " + original->getSMILES());
+//			SynchCerr("No open atoms for addition. Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 

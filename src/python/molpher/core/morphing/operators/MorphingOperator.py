@@ -43,3 +43,7 @@ class MorphingOperator(molpher.swig_wrappers.core.MorphingOperator):
     @abstractmethod
     def morph(self):
         pass
+
+    @abstractmethod
+    def getName(self):
+        pass

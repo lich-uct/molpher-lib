@@ -86,12 +86,12 @@ std::shared_ptr<MolpherMol> InterlayAtom::InterlayAtomImpl::morph() {
 
 		if (interlay_candidates.find(idx) == interlay_candidates.end()) {
 			delete newMol;
-			SynchCerr("Given bond cannot be interlayed with the selected atom (" + atom.getSymbol() + "). Skipping: " + original->getSMILES());
+//			SynchCerr("Given bond cannot be interlayed with the selected atom (" + atom.getSymbol() + "). Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 		if (interlay_candidates[idx].size() == 0) {
 			delete newMol;
-			SynchCerr("No bond to interlay.  Skipping: " + original->getSMILES());
+//			SynchCerr("No bond to interlay.  Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 
@@ -121,4 +121,8 @@ InterlayAtom::InterlayAtomImpl::InterlayAtomImpl(const AtomLibrary &atom_library
 		InterlayAtomImpl()
 {
 	this->atom_library = atom_library;
+}
+
+std::string InterlayAtom::getName() const {
+	return ChemOperLongDesc(OP_INTERLAY_ATOM);
 }

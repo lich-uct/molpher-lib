@@ -45,14 +45,14 @@ public:
 
     MolpherMol();
     MolpherMol(const std::string& string_repr, const std::string& formula, const std::string& parentSmile,
-                const unsigned& oper, const double& dist, const double& distToClosestDecoy,
+			   const std::string& oper, const double& dist, const double& distToClosestDecoy,
                 const double& weight, const double& sascore, const std::set<int>& fixed_atoms);
     MolpherMol(const std::string& string_repr);
     MolpherMol(const MolpherMol& other);
 	MolpherMol(RDKit::ROMol* rd_mol
 			, const std::string& formula
 			, const std::string& parentSmile
-			, const unsigned& oper
+			, const std::string& oper
 			, const double& dist
 			, const double& distToClosestDecoy
 			, const double& weight
@@ -87,12 +87,13 @@ public:
     double getSAScore() const;
     double getMolecularWeight() const;
     const std::string& getFormula() const;
-    int getParentOper() const;
+	const std::string& getParentOper() const;
     
     // setters
     void setOwner(std::shared_ptr<ExplorationTree> tree);
     void setSMILES(const std::string&);
     void setParentSMILES(const std::string&);
+	void setParentOper(const std::string&);
     void setDistToTarget(double dist);
     void setSAScore(double score);
     void setItersWithoutDistImprovement(unsigned int count);

@@ -18,6 +18,15 @@
 #include <stdexcept>
 #include <iostream>
 
+#include <morphing/operators/AddAtom.hpp>
+#include <morphing/operators/RemoveAtom.hpp>
+#include <morphing/operators/RemoveBond.hpp>
+#include <morphing/operators/MutateAtom.hpp>
+#include <morphing/operators/AddBond.hpp>
+#include <morphing/operators/InterlayAtom.hpp>
+#include <morphing/operators/ContractBond.hpp>
+#include <morphing/operators/RerouteBond.hpp>
+
 #include "selectors/fingerprint_selectors.h"
 #include "selectors/chemoper_selectors.h"
 #include "selectors/simcoeff_selectors.h"
@@ -48,7 +57,13 @@ std::shared_ptr<ExplorationTree> ExplorationTree::create(const ExplorationData& 
 std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES) {
     ExplorationData data;
     data.setSource(MolpherMol(sourceMolAsSMILES));
+    if (!data.getSource()->isValid()) {
+        std::runtime_error("source molecule is invalid");
+    }
     data.setTarget(MolpherMol(targetMolAsSMILES));
+    if (!data.getTarget()->isValid()) {
+        std::runtime_error("target molecule is invalid");
+    }
     return create(data);
 }
 
@@ -209,17 +224,50 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
             morphDerivations.insert(mol_data);
         }
         
-        source = MolpherMol(*(data.getSource()));
+        source.reset(new MolpherMol(*(data.getSource())));
         
         generationCnt = data.getGenerationCount();
     }
         
     threadCnt = data.getThreadCount();
-    chemOpers = data.getChemicalOperators();
     fingerprint = data.getFingerprint();
     simCoeff = data.getSimilarityCoefficient();
 
-    target = MolpherMol(*(data.getTarget()));
+    target.reset(new MolpherMol(*(data.getTarget())));
+    AtomLibrary library(*target);
+
+    chemOperSelectors = data.getChemicalOperators();
+    for (auto val : data.getChemicalOperators()) {
+        ChemOperSelector selector = (ChemOperSelector) val;
+        switch (selector) {
+            case OP_ADD_ATOM:
+                chemOpers.push_back(std::make_shared<AddAtom>(library));
+                break;
+            case OP_REMOVE_ATOM:
+                chemOpers.push_back(std::make_shared<RemoveAtom>());
+                break;
+            case OP_ADD_BOND:
+                chemOpers.push_back(std::make_shared<AddBond>());
+                break;
+            case OP_REMOVE_BOND:
+                chemOpers.push_back(std::make_shared<RemoveBond>());
+                break;
+            case OP_MUTATE_ATOM:
+                chemOpers.push_back(std::make_shared<MutateAtom>(library));
+                break;
+            case OP_INTERLAY_ATOM:
+                chemOpers.push_back(std::make_shared<InterlayAtom>(library));
+                break;
+            case OP_BOND_REROUTE:
+                chemOpers.push_back(std::make_shared<RerouteBond>());
+                break;
+            case OP_BOND_CONTRACTION:
+                chemOpers.push_back(std::make_shared<ContractBond>());
+                break;
+            default:
+                break;
+        }
+    }
 
     params.cntCandidatesToKeep = data.getCntCandidatesToKeep();
     params.cntCandidatesToKeepMax = data.getCntCandidatesToKeepMax();
@@ -248,7 +296,7 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     }
     
     data->setCandidatesMask(candidatesMask);
-    data->setChemicalOperators(chemOpers);
+    data->setChemicalOperators(chemOperSelectors);
     data->setFingerprint(fingerprint);
     data->setGenerationCount(generationCnt);
     
@@ -267,8 +315,8 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     data->setMaxAcceptableMolecularWeight(params.maxAcceptableMolecularWeight);
     
     data->setSimilarityCoefficient(simCoeff);
-    data->setSource(source);
-    data->setTarget(target);
+    data->setSource(*source);
+    data->setTarget(*target);
     data->setThreadCount(threadCnt);
     
     for (auto& item : treeMap) {
@@ -289,7 +337,7 @@ std::shared_ptr<MolpherMol> ExplorationTree::ExplorationTreeImpl::fetchMol(const
 }
 
 bool ExplorationTree::ExplorationTreeImpl::hasMol(const std::string& canonSMILES) {
-    return static_cast<bool>(treeMap.count(canonSMILES));
+    return treeMap.count(canonSMILES) > 0;
 }
 
 bool ExplorationTree::ExplorationTreeImpl::hasMol(std::shared_ptr<MolpherMol> mol) {
@@ -421,7 +469,7 @@ unsigned ExplorationTree::ExplorationTreeImpl::getGenerationCount() {
 }
 
 bool ExplorationTree::ExplorationTreeImpl::isPathFound() {
-    return hasMol(target.getSMILES());
+    return hasMol(target);
 }
 
 void ExplorationTree::ExplorationTreeImpl::traverse(std::shared_ptr<ExplorationTree> tree, const std::string& rootSMILES, TraverseCallback& callback) {
