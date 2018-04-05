@@ -44,21 +44,15 @@ public:
 	static std::shared_ptr<MolpherMol> fromMolBlock(const std::string& mol_block);
 
     MolpherMol();
-    MolpherMol(const std::string& string_repr, const std::string& formula, const std::string& parentSmile,
-			   const std::string& oper, const double& dist, const double& distToClosestDecoy,
-                const double& weight, const double& sascore, const std::set<int>& fixed_atoms);
+    MolpherMol(
+			const std::string& string_repr
+			, const std::string& parentSmile
+			, const std::string& parentOper
+			, const double& dist
+			, const double& sascore
+	);
     MolpherMol(const std::string& string_repr);
     MolpherMol(const MolpherMol& other);
-	MolpherMol(RDKit::ROMol* rd_mol
-			, const std::string& formula
-			, const std::string& parentSmile
-			, const std::string& oper
-			, const double& dist
-			, const double& distToClosestDecoy
-			, const double& weight
-			, const double& sascore
-			, const std::set<int>& fixed_atoms
-	);
 	MolpherMol(RDKit::ROMol* rd_mol); // creates a copy
 	MolpherMol(RDKit::RWMol*& rd_mol); // takes ownership and nulls the pointer
     ~MolpherMol();

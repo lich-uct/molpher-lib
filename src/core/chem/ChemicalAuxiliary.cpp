@@ -24,44 +24,6 @@
 #include "core/misc/SynchRand.h"
 #include "ChemicalAuxiliary.h"
 
-void SetFormalCharge(int charge, RDKit::Atom &atom)
-{
-    atom.setFormalCharge(charge);
-}
-
-void SetFormalCharge(int charge, RDKit::RWMol &mol)
-{
-    RDKit::Atom *atom;
-    RDKit::ROMol::AtomIterator iter;
-    for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
-        atom = *iter;
-        atom->setFormalCharge(charge);
-    }
-}
-
-void GetAtomTypesFromMol(RDKit::ROMol &mol, std::vector<MolpherAtom> &atoms)
-{
-    RDKit::Atom *atom;
-    RDKit::ROMol::AtomIterator iter;
-    for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
-        atom = *iter;
-
-        bool found = false;
-        for (int i = 0; i < atoms.size(); ++i) {
-            if (atom->getAtomicNum() == atoms[i].getAtomicNum() &&
-                    atom->getFormalCharge() == atoms[i].getFormalCharge() &&
-                    atom->getMass() == atoms[i].getMass()) {
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            atoms.push_back(MolpherAtom(atom));
-        }
-    }
-}
-
 AtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom)
 {
     int idx = SynchRand::GetRandomNumber(atoms.size() - 1);
@@ -119,12 +81,6 @@ bool HasNonSingleBond(RDKit::Atom &atom)
     return false;
 }
 
-void SetBondOrder(RDKit::Bond &bond, int bondOrder)
-{
-    // if bond order is 0 the bond will be unspecified
-    bond.setBondType(static_cast<RDKit::Bond::BondType>(bondOrder));
-}
-
 void DecreaseBondOrder(RDKit::Bond &bond)
 {
     int bo = RDKit::queryBondOrder(&bond);
@@ -153,25 +109,6 @@ void IncreaseBondOrder(RDKit::Bond &bond)
         newBo = 2;
     }
     bond.setBondType(static_cast<RDKit::Bond::BondType>(newBo));
-}
-
-unsigned int CntFreeOxygens(RDKit::Atom &atom)
-{
-    unsigned int count = 0;
-    RDKit::Atom *otherAtom;
-    RDKit::ROMol &mol = atom.getOwningMol();
-    RDKit::ROMol::OEDGE_ITER beg, end;
-    boost::tie(beg, end) = mol.getAtomBonds(&atom);
-    while (beg != end) {
-        const RDKit::BOND_SPTR bond = (mol)[*beg++];
-        otherAtom = bond->getOtherAtom(&atom);
-        if (otherAtom->getAtomicNum() == 8 &&
-                RDKit::queryAtomHeavyAtomDegree(otherAtom) == 1) {
-            ++count;
-        }
-    }
-
-    return count;
 }
 
 int GetMaxBondsMod(unsigned int atomicNum)
@@ -241,23 +178,5 @@ void GetAtomsWithNotMaxValence(RDKit::ROMol &mol, std::vector<RDKit::Atom *> &at
         if (CntFreeBonds(*atom)) {
             atomsNMV.push_back(atom);
         }
-    }
-}
-
-void CopyMol(RDKit::ROMol &mol, RDKit::RWMol &copy)
-{
-    RDKit::Atom *atom;
-    RDKit::Bond *bond;
-    for (AtomIdx i = 0; i < mol.getNumAtoms(); ++i) {
-        atom = mol.getAtomWithIdx(i);
-        RDKit::Atom newAtom(atom->getAtomicNum());
-        newAtom.setFormalCharge(atom->getFormalCharge());
-//        newAtom.setMass(atom->getMass()); // removed from rdkit (see above)
-        copy.addAtom(&newAtom);
-    }
-
-    for (BondIdx i = 0; i < mol.getNumBonds(); ++i) {
-        bond = mol.getBondWithIdx(i);
-        copy.addBond(bond->getBeginAtomIdx(), bond->getEndAtomIdx(), bond->getBondType());
     }
 }

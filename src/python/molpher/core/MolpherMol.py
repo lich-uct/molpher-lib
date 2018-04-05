@@ -182,7 +182,7 @@ class MolpherMol(wrappers.MolpherMol):
         :rtype: `str`
         """
 
-        return wrappers.ChemOperShortDesc(self.getParentOper())
+        return self.getParentOper()
 
     @property
     def dist_to_target(self):

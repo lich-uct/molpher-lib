@@ -10,6 +10,8 @@
 #include <vector>
 #include <GraphMol/ROMol.h>
 
+#include "data_structs/MolpherAtom.hpp"
+
 std::map<int, MolpherAtom::LockingMask> parse_atom_locks(const RDKit::ROMol& mol);
 
 #endif //MOLPHER_LIB_UTILS_HPP

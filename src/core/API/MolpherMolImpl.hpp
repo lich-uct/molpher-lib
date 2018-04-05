@@ -44,17 +44,6 @@ public:
     MolpherMolImpl(const std::string& string_repr);
     MolpherMolImpl(const MolpherMolData& data);
     MolpherMolImpl(const MolpherMolImpl& other);
-	MolpherMolImpl(
-			const RDKit::ROMol& rd_mol
-			, const std::string& formula
-			, const std::string& parentSmile
-			, const std::string& oper
-			, const double& dist
-			, const double& distToClosestDecoy
-			, const double& weight
-			, const double& sascore
-			, const std::set<int>& fixed_atoms
-	);
 	MolpherMolImpl(std::unique_ptr<RDKit::RWMol> mol);
     MolpherMolImpl();
 

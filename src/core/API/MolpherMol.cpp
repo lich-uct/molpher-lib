@@ -25,7 +25,6 @@
 #include <GraphMol/MolOps.h>
 #include <RDGeneral/BadFileException.h>
 #include <boost/algorithm/string/predicate.hpp>
-#include <core/chem/morphing/ReturnResults.hpp>
 #include <core/misc/utils.hpp>
 #include <core/misc/SAScore.h>
 
@@ -33,23 +32,18 @@
 #include "core/misc/inout.h"
 
 MolpherMol::MolpherMol(
-    const std::string& string_repr
-    , const std::string& formula
-    , const std::string& parentSmile
-    , const std::string& oper
-    , const double& dist
-    , const double& distToClosestDecoy
-    , const double& weight
-    , const double& sascore
-    , const std::set<int>& fixed_atoms)
+        const std::string& string_repr
+        , const std::string& parentSmile
+        , const std::string& parentOper
+        , const double& dist
+        , const double& sascore
+)
     :
     pimpl(new MolpherMol::MolpherMolImpl(string_repr))
 {
-    pimpl->data.formula = formula;
     pimpl->data.parentSmile = parentSmile;
-    pimpl->data.parentOper = oper;
+    pimpl->data.parentOper = parentOper;
     pimpl->data.distToTarget = dist;
-    pimpl->data.molecularWeight = weight;
     pimpl->data.sascore = sascore;
 }
 
@@ -62,32 +56,6 @@ MolpherMol::MolpherMol() : pimpl(new MolpherMol::MolpherMolImpl()) {
 }
 
 MolpherMol::MolpherMol(const MolpherMol& other) : pimpl(std::move(other.pimpl->copy())) {
-    // no action
-}
-
-MolpherMol::MolpherMol(
-        RDKit::ROMol* rd_mol
-        , const std::string& formula
-        , const std::string& parentSmile
-        , const std::string& oper
-        , const double& dist
-        , const double& distToClosestDecoy
-        , const double& weight
-        , const double& sascore
-        , const std::set<int>& fixed_atoms
-)
-        : pimpl(new MolpherMol::MolpherMolImpl(
-            *rd_mol
-            , formula
-            , parentSmile
-            , oper
-            , dist
-            , distToClosestDecoy
-            , weight
-            , sascore
-            , fixed_atoms
-        ))
-{
     // no action
 }
 
@@ -142,28 +110,6 @@ data(other.data)
     // no action
 }
 
-MolpherMol::MolpherMolImpl::MolpherMolImpl(
-        const RDKit::ROMol &rd_mol
-        , const std::string& formula
-        , const std::string& parentSmile
-        , const std::string& oper
-        , const double& dist
-        , const double& distToClosestDecoy
-        , const double& weight
-        , const double& sascore
-        , const std::set<int>& fixed_atoms
-) {
-    data.formula = formula;
-    data.parentSmile = parentSmile;
-    data.parentOper = oper;
-    data.distToTarget = dist;
-    data.molecularWeight = weight;
-    data.sascore = sascore;
-
-    std::unique_ptr<RDKit::RWMol> new_mol(new RDKit::RWMol(rd_mol));
-    this->initialize(std::move(new_mol));
-}
-
 void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
     // sanitize
     unsigned int failed = 0;
@@ -211,12 +157,6 @@ void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
     data.SMILES = RDKit::MolToSmiles(*rd_mol, false, true, -1, true, false, false);
     data.formula = RDKit::Descriptors::calcMolFormula(*rd_mol);
     data.molecularWeight = RDKit::Descriptors::calcAMW(*rd_mol, true);
-
-	// calculate SAScore
-	// FIXME: sometimes we get scores that are too high if we use the rd_mol instance directly
-	auto rd_mol_dummy = RDKit::SmilesToMol(data.SMILES);
-    data.sascore = SAScore::getInstance()->getScore(*rd_mol_dummy);
-	delete rd_mol_dummy;
 }
 
 void MolpherMol::MolpherMolImpl::initialize(const std::string &string_repr) {
@@ -368,6 +308,13 @@ const std::string& MolpherMol::getParentSMILES() const {
 }
 
 double MolpherMol::getSAScore() const {
+    if (pimpl->data.sascore == 0) {
+        // calculate SAScore
+        // FIXME: sometimes we get scores that are too high if we use the rd_mol instance directly
+        auto rd_mol_dummy = RDKit::SmilesToMol(getSMILES());
+        pimpl->data.sascore = SAScore::getInstance()->getScore(*rd_mol_dummy);
+        delete rd_mol_dummy;
+    }
     return pimpl->data.sascore;
 }
 

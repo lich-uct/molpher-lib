@@ -17,6 +17,7 @@
 import os, sys
 import unittest
 from io import StringIO, BytesIO
+from pprint import pprint
 
 from pkg_resources import resource_filename
 from rdkit import Chem
@@ -33,6 +34,17 @@ from molpher.core.operations import *
 from molpher.core.selectors import *
 
 class TestPythonAPI(unittest.TestCase):
+
+    @staticmethod
+    def getPathToMol(tree, mol):
+        assert tree.hasMol(mol)
+        path = []
+        current = mol
+        while current.parent_smiles:
+            path.append(current)
+            current = tree.fetchMol(current.parent_smiles)
+        path.reverse()
+        return path
     
     def setUp(self):
         random.set_random_seed(42)
@@ -454,9 +466,14 @@ class TestPythonAPI(unittest.TestCase):
         counter = 0
         while True:
             iterate()
-            if tree.path_found:
-                break
             counter += 1
+            if tree.path_found:
+                target = tree.fetchMol(self.test_target)
+                assert target
+                print("Path found after {0} iterations:".format(counter))
+                path = self.getPathToMol(tree, target)
+                pprint([(x.smiles, x.dist_to_target, x.parent_operator) for x in path])
+                break
 
         child = tree.leaves[0]
         self.assertTrue(child.tree)

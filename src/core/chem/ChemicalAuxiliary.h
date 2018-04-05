@@ -23,12 +23,6 @@
 
 #include "core/misc/global_types.h"
 
-void SetFormalCharge(int charge, RDKit::Atom &atom);
-
-void SetFormalCharge(int charge, RDKit::RWMol &mol);
-
-void GetAtomTypesFromMol(RDKit::ROMol &mol, std::vector<MolpherAtom> &atoms);
-
 AtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom);
 
 AtomIdx GetRandomAtom(const std::vector<std::shared_ptr<MolpherAtom>> &atoms, RDKit::Atom &atom);
@@ -37,13 +31,9 @@ RDKit::Bond *GetRandomNonSingleBond(RDKit::Atom &atom);
 
 bool HasNonSingleBond(RDKit::Atom &atom);
 
-void SetBondOrder(RDKit::Bond &bond, int bondOrder);
-
 void DecreaseBondOrder(RDKit::Bond &bond);
 
 void IncreaseBondOrder(RDKit::Bond &bond);
-
-unsigned int CntFreeOxygens(RDKit::Atom &atom);
 
 int GetMaxBondsMod(unsigned int atomicNum);
 
@@ -59,5 +49,3 @@ void GetPossibleBondingAtoms(
 void GetAtomsNotInRing(RDKit::ROMol &mol, std::vector<RDKit::Atom *> &atomsNIR);
 
 void GetAtomsWithNotMaxValence(RDKit::ROMol &mol, std::vector<RDKit::Atom *> &atomsNMV);
-
-void CopyMol(RDKit::ROMol &mol, RDKit::RWMol &copy);
