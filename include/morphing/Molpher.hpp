@@ -28,7 +28,7 @@ public:
 			, const std::vector<std::shared_ptr<MorphingOperator> >& operators
 			, unsigned int threads
 			, unsigned int attempts
-			, std::shared_ptr<MorphCollector> collector
+			, const std::vector<std::shared_ptr<MorphCollector> >& collectors
 	);
 	~Molpher();
 

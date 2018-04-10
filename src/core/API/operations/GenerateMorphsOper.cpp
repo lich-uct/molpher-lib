@@ -166,11 +166,11 @@ void CollectMorphs::operator()(
 						"Failed to calculate fingerprint due to: " + std::string(exc.what())
 						+ "\n\tParent molecule: " + operator_->getOriginal()->getSMILES()
 						+ "\n\tParent operator: " + operator_->getName()
-						+ "\n\tGenerated morph: " + morph->getSMILES()
+						+ "\n\tGenerated morph (not added to candidates): " + morph->getSMILES()
 				);
 				if (fp) delete fp;
 				if (morph_rd) delete morph_rd;
-				return;
+				return; // morph is ignored (not added to mMorphs)
 			}
 		}
 		if (mTree && mSetTreeOwnership) {
@@ -205,6 +205,8 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::operator()() {
 				, (FingerprintSelector) tree_pimpl->fingerprint
 				, (SimCoeffSelector) tree_pimpl->simCoeff
 		));
+		std::vector<std::shared_ptr<MorphCollector> > collectors;
+		collectors.push_back(std::static_pointer_cast<MorphCollector>(collector));
         for (auto& leaf : leaves) {
             unsigned int morphAttempts = tree_pimpl->params.cntMorphs;
             if (leaf->getDistToTarget() < tree_pimpl->params.distToTargetDepthSwitch) {
@@ -218,7 +220,7 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::operator()() {
 						, tree_pimpl->chemOpers
 						, tree_pimpl->threadCnt
 						, morphAttempts
-						, std::static_pointer_cast<MorphCollector>(collector)
+						, collectors
 				);
 				tree_pimpl->candidates.reserve(tree_pimpl->candidates.size() + morphAttempts);
 				molpher();

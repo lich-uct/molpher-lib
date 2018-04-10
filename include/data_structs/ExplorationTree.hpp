@@ -23,6 +23,7 @@
 #include "ExplorationData.hpp"
 #include "operations/callbacks/TraverseCallback.hpp"
 #include "operations/FilterMorphsOper.hpp"
+#include "morphing/operators/MorphingOperator.hpp"
 
 class ExplorationTree 
 #ifndef SWIG
@@ -53,9 +54,13 @@ public:
     static std::shared_ptr<ExplorationTree> create(const std::string& filename);
     static std::shared_ptr<ExplorationTree> create(const std::string& sourceMolAsSMILES, const std::string& targetMolAsSMILES);
     static std::shared_ptr<ExplorationTree> create(std::shared_ptr<MolpherMol> source, std::shared_ptr<MolpherMol> target);
-    
+    static std::shared_ptr<ExplorationTree> create(std::shared_ptr<MolpherMol> source);
+
     std::shared_ptr<ExplorationData> asData() const;
     void update(const ExplorationData& data);
+    const std::vector<std::shared_ptr<MorphingOperator>>& getMorphingOperators();
+    void setMorphingOperators(const std::vector<std::shared_ptr<MorphingOperator>>& operators);
+    void addMorphingOperator(std::shared_ptr<MorphingOperator> operator_);
     
     void runOperation(TreeOperation& operation);
     

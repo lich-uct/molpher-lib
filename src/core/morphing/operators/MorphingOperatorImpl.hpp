@@ -19,6 +19,7 @@ public:
 	MorphingOperatorImpl();
 
 	std::shared_ptr<MolpherMol> getOriginal();
+	virtual void setOriginal(std::shared_ptr<MolpherMol>);
 };
 
 #endif //MOLPHER_LIB_MORPHINGOPERATORIMPL_HPP

@@ -31,9 +31,13 @@ void Molpher::reset(std::shared_ptr<MolpherMol> original) {
 	pimpl->reset(original);
 }
 
-Molpher::Molpher(std::shared_ptr<MolpherMol> mol, const std::vector<std::shared_ptr<MorphingOperator> > &operators,
-				 unsigned int threads, unsigned int attempts, std::shared_ptr<MorphCollector> collector)
-: pimpl(new MolpherImpl(mol, operators, threads, attempts, collector))
+Molpher::Molpher(
+		std::shared_ptr<MolpherMol> mol
+		, const std::vector<std::shared_ptr<MorphingOperator> > &operators
+		, unsigned int threads, unsigned int attempts
+		, const std::vector<std::shared_ptr<MorphCollector> >& collectors
+)
+: pimpl(new MolpherImpl(mol, operators, threads, attempts, collectors))
 {
 	// no action
 }
@@ -42,10 +46,13 @@ Molpher::~Molpher() = default;
 
 // implementation
 
-Molpher::MolpherImpl::MolpherImpl(std::shared_ptr<MolpherMol> mol,
-								  const std::vector<std::shared_ptr<MorphingOperator> > &operators,
-								  unsigned int threads, unsigned int attempts, std::shared_ptr<MorphCollector> collector)
-		:
+Molpher::MolpherImpl::MolpherImpl(
+		std::shared_ptr<MolpherMol> mol
+		, const std::vector<std::shared_ptr<MorphingOperator> >& operators
+		, unsigned int threads
+		, unsigned int attempts
+		, const std::vector<std::shared_ptr<MorphCollector> >& collectors
+) :
 		original(mol)
 		, operators(operators)
 		, threads(threads)
@@ -53,7 +60,7 @@ Molpher::MolpherImpl::MolpherImpl(std::shared_ptr<MolpherMol> mol,
 		, morphs()
 		, failures(0)
 		, empty_mols(0)
-		, calc(this->operators, morphs, failures, empty_mols, collector)
+		, calc(this->operators, morphs, failures, empty_mols, collectors)
 {
 	for (const auto& oper : operators) {
 		try {
@@ -75,7 +82,7 @@ Molpher::MolpherImpl::MolpherImpl(std::shared_ptr<MolpherMol> mol,
 Molpher::MolpherImpl::MolpherImpl(std::shared_ptr<MolpherMol> mol, const std::vector<std::shared_ptr<MorphingOperator> > &operators,
 								  unsigned int threads, unsigned int attempts)
 :
-MolpherImpl(mol, operators, threads, attempts, nullptr)
+MolpherImpl(mol, operators, threads, attempts, std::vector<std::shared_ptr<MorphCollector>>())
 {
 	// no action
 }

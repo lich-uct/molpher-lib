@@ -25,7 +25,7 @@ public:
 			ConcurrentMolVector& morphs,
 			tbb::atomic<unsigned int>& failures,
 			tbb::atomic<unsigned int>& empty_mols,
-			std::shared_ptr<MorphCollector> collector
+			const std::vector<std::shared_ptr<MorphCollector> >& collectors
 	);
 
 	void operator()(const tbb::blocked_range<int> &r) const;
@@ -35,7 +35,7 @@ private:
 	ConcurrentMolVector& morphs;
 	tbb::atomic<unsigned int>& mMorphingFailureCount;
 	tbb::atomic<unsigned int>& mMorphEmptyCount;
-	std::shared_ptr<MorphCollector> collector;
+	std::vector<std::shared_ptr<MorphCollector> > collectors;
 };
 
 

@@ -1786,6 +1786,15 @@ class ExplorationTree(_object):
     def update(self, data):
         return _core.ExplorationTree_update(self, data)
 
+    def getMorphingOperators(self):
+        return _core.ExplorationTree_getMorphingOperators(self)
+
+    def setMorphingOperators(self, operators):
+        return _core.ExplorationTree_setMorphingOperators(self, operators)
+
+    def addMorphingOperator(self, operator_):
+        return _core.ExplorationTree_addMorphingOperator(self, operator_)
+
     def runOperation(self, operation):
         return _core.ExplorationTree_runOperation(self, operation)
 

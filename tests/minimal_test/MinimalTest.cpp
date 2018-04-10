@@ -35,7 +35,6 @@
 #include <morphing/operators/RerouteBond.hpp>
 
 #include "MinimalTest.hpp"
-#include "io/stdout.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(MinimalTest);
 
@@ -547,9 +546,6 @@ void MinimalTest::testRerouteBondOperator() {
 }
 
 void MinimalTest::testMolpher() {
-	// TODO: complete this test
-//	AddAtom* add_atom(new AddAtom());
-//	RemoveAtom* remove_atom(new RemoveAtom());
 	std::vector<std::shared_ptr<MorphingOperator>> opers = {
 			std::make_shared<AddAtom>()
 			, std::make_shared<RemoveAtom>()
@@ -593,7 +589,27 @@ void MinimalTest::testMolpher() {
 		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt2 , res ));
 	}
 
-	// TODO: add more
+	// test use of custom operator
+	opers.push_back(std::make_shared<IdentityOperator>());
+	Molpher molpher_custom_oper(cymene, opers, 0, 200);
+	molpher_custom_oper();
+	bool found_orig(false);
+	for (auto morph : molpher_custom_oper.getMorphs()) {
+		if (morph->getSMILES() == cymene->getSMILES()) {
+			found_orig = true;
+		}
+	}
+	CPPUNIT_ASSERT(found_orig);
+
+	// test collector interface
+	std::vector<std::shared_ptr<MorphCollector> > collectors;
+	collectors.push_back(std::static_pointer_cast<MorphCollector>(std::make_shared<PrintMorphingInfo>()));
+	Molpher molpher_custom_oper_collectors(cymene, opers, 0, 200, collectors);
+	molpher_custom_oper_collectors();
+	for (auto morph : molpher_custom_oper_collectors.getMorphs()) {
+		CPPUNIT_ASSERT_EQUAL(cymene->getSMILES(), morph->getParentSMILES());
+		CPPUNIT_ASSERT_EQUAL(-1.0, morph->getDistToTarget());
+	}
 
 	delete mol1;
 	delete patt2;

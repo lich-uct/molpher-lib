@@ -24,6 +24,7 @@
 #include "core/misc/iteration_serializer.hpp"
 
 void MolpherMolToMolData(const MolpherMol& mol, MolpherMolData& data) {
+    // TODO: add atom lock support
     auto& descendants = mol.getDescendants();
     data.descendants.insert(descendants.begin(), descendants.end());
     data.historicDescendants = mol.getHistoricDescendants();
@@ -38,6 +39,7 @@ void MolpherMolToMolData(const MolpherMol& mol, MolpherMolData& data) {
 }
 
 MolpherMol* MolDataToMolpherMol(const MolpherMolData& data) {
+    // TODO: add atom lock support
     MolpherMol* mol = new MolpherMol(
             data.SMILES
             , data.parentSmile

@@ -20,6 +20,10 @@ void MorphingOperator::setMorphingOperatorPimpl(std::shared_ptr<MorphingOperator
 	this->pimpl = pimpl;
 }
 
+void MorphingOperator::setOriginal(std::shared_ptr<MolpherMol> mol) {
+	pimpl->setOriginal(mol);
+}
+
 MorphingOperator::MorphingOperatorImpl::MorphingOperatorImpl() :
 original(nullptr)
 {
@@ -57,4 +61,8 @@ void MorphingOperator::MorphingOperatorImpl::writeOriginalLockInfo(std::shared_p
 			mol->getAtom(new_mol_idx)->setLockingMask(orig_atom->getLockingMask());
 		}
 	}
+}
+
+void MorphingOperator::MorphingOperatorImpl::setOriginal(std::shared_ptr<MolpherMol> mol) {
+	original = mol;
 }

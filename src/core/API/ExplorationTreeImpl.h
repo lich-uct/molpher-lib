@@ -129,6 +129,10 @@ class ExplorationTree::ExplorationTreeImpl
         
         std::shared_ptr<ExplorationData> asData() const;
         void updateData(const ExplorationData& data, std::shared_ptr<ExplorationTree> tree);
+
+        const std::vector<std::shared_ptr<MorphingOperator>>& getMorphingOperators();
+        void setMorphingOperators(const std::vector<std::shared_ptr<MorphingOperator>>& operators);
+        void addMorphingOperator(std::shared_ptr<MorphingOperator> operator_);
         
         void runOperation(TreeOperation& operation, std::shared_ptr<ExplorationTree> tree);
         MolVector fetchLeaves(std::shared_ptr<ExplorationTree> tree, bool increase_dist_improve_counter);

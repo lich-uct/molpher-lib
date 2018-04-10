@@ -21,8 +21,19 @@ private:
 	tbb::atomic<unsigned int> failures;
 	tbb::atomic<unsigned int> empty_mols;
 public:
-	MolpherImpl(std::shared_ptr<MolpherMol> mol, const std::vector<std::shared_ptr<MorphingOperator> >& operators, unsigned int threads, unsigned int attempts);
-	MolpherImpl(std::shared_ptr<MolpherMol> mol, const std::vector<std::shared_ptr<MorphingOperator> >& operators, unsigned int threads, unsigned int attempts, std::shared_ptr<MorphCollector>);
+	MolpherImpl(
+			std::shared_ptr<MolpherMol> mol
+			, const std::vector<std::shared_ptr<MorphingOperator> >& operators
+			, unsigned int threads
+			, unsigned int attempts
+	);
+	MolpherImpl(
+			std::shared_ptr<MolpherMol> mol
+			, const std::vector<std::shared_ptr<MorphingOperator> >& operators
+			, unsigned int threads
+			, unsigned int attempts
+			, const std::vector<std::shared_ptr<MorphCollector> >& collectors
+	);
 
 	void operator()();
 	std::vector<std::shared_ptr<MolpherMol> > getMorphs();

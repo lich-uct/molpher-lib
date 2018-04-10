@@ -7,15 +7,18 @@
 #include "MorphCalculator.hpp"
 #include "core/misc/inout.h"
 
-MorphCalculator::MorphCalculator(std::vector<std::shared_ptr<MorphingOperator> > &operators,
-								 ConcurrentMolVector &morphs, tbb::atomic<unsigned int> &failures,
-								 tbb::atomic<unsigned int> &empty_mols, std::shared_ptr<MorphCollector> collector)
-		:
+MorphCalculator::MorphCalculator(
+		std::vector<std::shared_ptr<MorphingOperator> > &operators
+		, ConcurrentMolVector &morphs
+		, tbb::atomic<unsigned int> &failures
+		, tbb::atomic<unsigned int> &empty_mols
+		, const std::vector<std::shared_ptr<MorphCollector> >& collectors
+) :
 operators(operators)
 , morphs(morphs)
 , mMorphingFailureCount(failures)
 , mMorphEmptyCount(empty_mols)
-, collector(collector)
+, collectors(collectors)
 {
 	// no action
 }
@@ -32,7 +35,7 @@ MorphCalculator::MorphCalculator(
 		, morphs
 		, failures
 		, empty_mols
-		, nullptr)
+		, std::vector<std::shared_ptr<MorphCollector>>())
 {
 	// no action
 }
@@ -62,7 +65,7 @@ void MorphCalculator::operator()(const tbb::blocked_range<int> &r) const {
 		}
 
 		try {
-			if (collector) {
+			for (auto collector : collectors) {
 				(*collector)(new_mol, operator_);
 			}
 		} catch (const std::exception &exc) {

@@ -33,6 +33,8 @@
 
 #include "morphing/AtomLibrary.hpp"
 
+#include "io/stdout.hpp"
+
 template<typename Number>
 std::string NumberToStr(Number num) {
     std::stringstream ss;
@@ -78,6 +80,43 @@ public:
         // no action
     }
 
+};
+
+class IdentityOperator : public MorphingOperator {
+
+public:
+	IdentityOperator() : MorphingOperator() {
+		// no action
+	}
+
+	virtual void setOriginal(std::shared_ptr<MolpherMol> mol) {
+		MorphingOperator::setOriginal(mol);
+	};
+
+	virtual std::shared_ptr<MolpherMol> morph() {
+		return getOriginal()->copy();
+	};
+
+	virtual std::string getName() const {
+		return "Identity";
+	};
+};
+
+class PrintMorphingInfo : public MorphCollector {
+
+public:
+	PrintMorphingInfo() : MorphCollector() {
+		// no action
+	}
+
+	virtual void operator()(std::shared_ptr<MolpherMol> morph, std::shared_ptr<MorphingOperator> operator_) {
+		print("Beginning info for morph: " + morph->getSMILES());
+		print("\t" + operator_->getName());
+		print("\t" + operator_->getName());
+		print("\t" + operator_->getOriginal()->getSMILES());
+		morph->setParentSMILES(operator_->getOriginal()->getSMILES());
+		morph->setDistToTarget(-1);
+	}
 };
 
 class MinimalTest : public CPPUNIT_NS::TestFixture {

@@ -117,10 +117,10 @@ struct ExplorationData::ExplorationDataImpl
             Cerr("Source is not a valid instance.");
             return false;
         }
-        if (!target.isValid()) {
-            Cerr("Target is not a valid instance.");
-            return false;
-        }
+//        if (!target.isValid()) {
+//            Cerr("Target is not a valid instance.");
+//            return false;
+//        }
         if (treeMap.empty()) {
             Cerr("There are no molecules in the tree.");
             return false;

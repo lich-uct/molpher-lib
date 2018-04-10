@@ -58,11 +58,14 @@ std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sour
     ExplorationData data;
     data.setSource(MolpherMol(sourceMolAsSMILES));
     if (!data.getSource()->isValid()) {
-        std::runtime_error("source molecule is invalid");
+		throw std::runtime_error("source molecule is invalid");
+    }
+    if (targetMolAsSMILES.empty()) {
+        throw std::runtime_error("target molecule SMILES is empty");
     }
     data.setTarget(MolpherMol(targetMolAsSMILES));
     if (!data.getTarget()->isValid()) {
-        std::runtime_error("target molecule is invalid");
+		throw std::runtime_error("target molecule is invalid");
     }
     return create(data);
 }
@@ -70,7 +73,9 @@ std::shared_ptr<ExplorationTree> ExplorationTree::create(const std::string& sour
 std::shared_ptr<ExplorationTree> ExplorationTree::create(std::shared_ptr<MolpherMol> source, std::shared_ptr<MolpherMol> target) {
     ExplorationData data;
     data.setSource(*source);
-    data.setTarget(*target);
+    if (target) {
+        data.setTarget(*target);
+    }
     return create(data);
 }
 
@@ -175,6 +180,22 @@ int ExplorationTree::getThreadCount() {
     return pimpl->getThreadCount();
 }
 
+const std::vector<std::shared_ptr<MorphingOperator>> &ExplorationTree::getMorphingOperators() {
+    return pimpl->getMorphingOperators();
+}
+
+void ExplorationTree::setMorphingOperators(const std::vector<std::shared_ptr<MorphingOperator>> &operators) {
+    pimpl->setMorphingOperators(operators);
+}
+
+void ExplorationTree::addMorphingOperator(std::shared_ptr<MorphingOperator> operator_) {
+    pimpl->addMorphingOperator(operator_);
+}
+
+std::shared_ptr<ExplorationTree> ExplorationTree::create(std::shared_ptr<MolpherMol> source) {
+    return ExplorationTree::create(source, nullptr);
+}
+
 // pimpl
 
 ExplorationTree::ExplorationTreeImpl::ExplorationTreeImpl() :
@@ -233,8 +254,13 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
     fingerprint = data.getFingerprint();
     simCoeff = data.getSimilarityCoefficient();
 
-    target.reset(new MolpherMol(*(data.getTarget())));
-    AtomLibrary library(*target);
+    AtomLibrary library(AtomLibrary::getDefaultLibrary()); // TODO: user should be allowed to specify their own library
+    if (!data.getTarget()->getSMILES().empty()) {
+        target.reset(new MolpherMol(*(data.getTarget())));
+        library = AtomLibrary(*target);
+    } else {
+        target = nullptr;
+    }
 
     chemOperSelectors = data.getChemicalOperators();
     for (auto val : data.getChemicalOperators()) {
@@ -316,7 +342,9 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     
     data->setSimilarityCoefficient(simCoeff);
     data->setSource(*source);
-    data->setTarget(*target);
+    if (target) {
+        data->setTarget(*target);
+    }
     data->setThreadCount(threadCnt);
     
     for (auto& item : treeMap) {
@@ -469,7 +497,11 @@ unsigned ExplorationTree::ExplorationTreeImpl::getGenerationCount() {
 }
 
 bool ExplorationTree::ExplorationTreeImpl::isPathFound() {
-    return hasMol(target);
+    if (target) {
+        return hasMol(target);
+    } else {
+        return false;
+    }
 }
 
 void ExplorationTree::ExplorationTreeImpl::traverse(std::shared_ptr<ExplorationTree> tree, const std::string& rootSMILES, TraverseCallback& callback) {
@@ -497,5 +529,18 @@ void ExplorationTree::ExplorationTreeImpl::setThreadCount(int threadCnt) {
 
 int ExplorationTree::ExplorationTreeImpl::getThreadCount() {
     return threadCnt;
+}
+
+const std::vector<std::shared_ptr<MorphingOperator>> &ExplorationTree::ExplorationTreeImpl::getMorphingOperators() {
+	return chemOpers;
+}
+
+void ExplorationTree::ExplorationTreeImpl::setMorphingOperators(
+        const std::vector<std::shared_ptr<MorphingOperator>> &operators) {
+    chemOpers = operators;
+}
+
+void ExplorationTree::ExplorationTreeImpl::addMorphingOperator(std::shared_ptr<MorphingOperator> operator_) {
+    chemOpers.push_back(operator_);
 }
 
