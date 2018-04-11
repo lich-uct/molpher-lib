@@ -9,6 +9,7 @@
 #include <data_structs/MolpherMol.hpp>
 
 bool match_substr(std::string smiles_mol, std::string smiles_query);
+bool match_substr(std::vector<std::shared_ptr<MolpherMol> > mols, std::string smiles_query);
 void print_lock_info(std::shared_ptr<MolpherMol> mol);
 
 #endif //MOLPHER_LIB_MOL_HELPERS_HPP

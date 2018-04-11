@@ -255,7 +255,7 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
     simCoeff = data.getSimilarityCoefficient();
 
     AtomLibrary library(AtomLibrary::getDefaultLibrary()); // TODO: user should be allowed to specify their own library
-    if (!data.getTarget()->getSMILES().empty()) {
+    if (data.getTarget()) {
         target.reset(new MolpherMol(*(data.getTarget())));
         library = AtomLibrary(*target);
     } else {

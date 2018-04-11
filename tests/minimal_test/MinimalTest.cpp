@@ -620,14 +620,13 @@ void MinimalTest::testExplorationData() {
     ExplorationData data;
     CPPUNIT_ASSERT(!data.isValid());
     
-    // get the source molecule, should have no SMILES
-    auto source = data.getSource();
-    CPPUNIT_ASSERT_EQUAL(std::string(""), source->getSMILES());
+    // get the source molecule, should be empty
+    CPPUNIT_ASSERT(!data.getSource());
+	CPPUNIT_ASSERT(!data.getTarget());
     
     // modify the source and target molecule and save them back to tree data
-    source->setSMILES("NC(=O)C");
-    auto target = data.getTarget();
-    target->setSMILES("CC(=O)C");
+	auto source(std::make_shared<MolpherMol>("NC(=O)C"));
+	auto target(std::make_shared<MolpherMol>("CC(=O)C"));
     data.setSource(*source);
     data.setTarget(*target);
     
@@ -791,5 +790,47 @@ void MinimalTest::testTree() {
 		if (tree_from_file->isPathFound()) break;
 		tree_from_file->prune();
     }
+}
+
+void MinimalTest::testTreeOperatorsAndLocks() {
+	auto source = std::make_shared<MolpherMol>(test_dir + "gonane.sdf");
+	print(source->getSMILES());
+	auto tree = ExplorationTree::create(source);
+
+	// check if locks maintained in the tree
+	auto source_from_tree(tree->fetchMol(source->getSMILES()));
+	print_lock_info(source_from_tree);
+	auto atoms = source_from_tree->getAtoms();
+	for (int idx = 0; idx != atoms.size(); idx++) {
+		CPPUNIT_ASSERT_EQUAL(source->getAtom(idx)->getLockingMask(), atoms[idx]->getLockingMask());
+	}
+
+	// test adjusting tree operators
+	auto orig_opers = tree->getMorphingOperators();
+	std::vector<std::shared_ptr<MorphingOperator>> init_opers = {
+			std::make_shared<AddAtom>()
+	};
+	tree->setMorphingOperators(init_opers);
+
+	// run the initial phase (adding atoms only)
+	int filters = FilterMorphsOper::MorphFilters::WEIGHT
+				  | FilterMorphsOper::MorphFilters::SYNTHESIS
+				  | FilterMorphsOper::MorphFilters::DUPLICATES;
+	for (int iter_idx = 0; iter_idx != 2; iter_idx++) {
+		tree->generateMorphs();
+		tree->filterMorphs((FilterMorphsOper::MorphFilters) filters, false);
+		tree->extend();
+		CPPUNIT_ASSERT(match_substr(tree->getCandidateMorphs(), source->getSMILES()));
+	}
+
+	// add back original operators and repeat
+	tree->setMorphingOperators(orig_opers);
+	for (int iter_idx = 0; iter_idx != 2; iter_idx++) {
+		tree->generateMorphs();
+		tree->filterMorphs((FilterMorphsOper::MorphFilters) filters, false);
+		printCandidates(tree, true, true);
+		tree->extend();
+		CPPUNIT_ASSERT(match_substr(tree->getCandidateMorphs(), source->getSMILES()));
+	}
 }
 

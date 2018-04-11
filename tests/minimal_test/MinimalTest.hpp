@@ -42,18 +42,24 @@ std::string NumberToStr(Number num) {
     return ss.str();
 }
 
-void printCandidates(std::shared_ptr<ExplorationTree> tree) {
-    int counter = 1;
+void printCandidates(std::shared_ptr<ExplorationTree> tree, bool simple = false, bool use_mask = false) {
+    int counter = 0;
     auto mask = tree->getCandidateMorphsMask();
     std::shared_ptr<MolpherMol> closest;
 	for (auto candidate : tree->getCandidateMorphs()) {
+		counter++;
         bool mask_val = mask[counter - 1];
-        std::cout 
-                << NumberToStr(counter++) + ": " 
-                << candidate->getSMILES() << " -- " 
-                << NumberToStr(candidate->getDistToTarget()) 
-                << "(" + NumberToStr(mask_val) + ")"
-                << std::endl;
+        if (use_mask && !mask_val) continue;
+        if (simple) {
+			std::cout << candidate->getSMILES() << std::endl;
+        } else {
+			std::cout
+					<< NumberToStr(counter) + ": "
+					<< candidate->getSMILES() << " -- "
+					<< NumberToStr(candidate->getDistToTarget())
+					<< "(" + NumberToStr(mask_val) + ")"
+					<< std::endl;
+        }
 		if (closest) {
 			if (closest->getDistToTarget() > candidate->getDistToTarget()) {
 				closest = candidate;
@@ -62,7 +68,9 @@ void printCandidates(std::shared_ptr<ExplorationTree> tree) {
 			closest = candidate;
 		}
     }
-	std::cout << "Closest candidate: " + closest->getSMILES() + " -- " + NumberToStr(closest->getDistToTarget()) << std::endl;
+    if (!simple) {
+		std::cout << "Closest candidate: " + closest->getSMILES() + " -- " + NumberToStr(closest->getDistToTarget()) << std::endl;
+	}
 }
 
 class PrintMols : public TraverseCallback {
@@ -134,8 +142,9 @@ class MinimalTest : public CPPUNIT_NS::TestFixture {
 		CPPUNIT_TEST(testContractBondOperator);
 		CPPUNIT_TEST(testRerouteBondOperator);
 		CPPUNIT_TEST(testMolpher);
-		CPPUNIT_TEST(testTree);
 		CPPUNIT_TEST(testExplorationData);
+		CPPUNIT_TEST(testTree);
+		CPPUNIT_TEST(testTreeOperatorsAndLocks);
 
 	CPPUNIT_TEST_SUITE_END();
 
@@ -161,6 +170,7 @@ private:
 	void testRerouteBondOperator();
 	void testMolpher();
     void testTree();
+	void testTreeOperatorsAndLocks();
     void testExplorationData();
 };
 

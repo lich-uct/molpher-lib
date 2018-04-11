@@ -24,7 +24,6 @@
 #include "core/misc/iteration_serializer.hpp"
 
 void MolpherMolToMolData(const MolpherMol& mol, MolpherMolData& data) {
-    // TODO: add atom lock support
     auto& descendants = mol.getDescendants();
     data.descendants.insert(descendants.begin(), descendants.end());
     data.historicDescendants = mol.getHistoricDescendants();
@@ -36,20 +35,24 @@ void MolpherMolToMolData(const MolpherMol& mol, MolpherMolData& data) {
     data.parentOper = mol.getParentOper();
     data.parentSmile = mol.getParentSMILES();
     data.sascore = mol.getSAScore();
+    data.molBlock = mol.asMolBlock();
+    for (auto atm : mol.getAtoms()) {
+		data.atomLocks.push_back(atm->getLockingMask());
+    }
 }
 
-MolpherMol* MolDataToMolpherMol(const MolpherMolData& data) {
-    // TODO: add atom lock support
-    MolpherMol* mol = new MolpherMol(
-            data.SMILES
-            , data.parentSmile
-            , data.parentOper
-            , data.distToTarget
-            , data.sascore
-    );
+std::shared_ptr<MolpherMol> MolDataToMolpherMol(MolpherMolData& data) {
+	auto mol = MolpherMol::fromMolBlock(data.molBlock);
+	mol->setParentSMILES(data.parentSmile);
+	mol->setParentOper(data.parentOper);
+	mol->setDistToTarget(data.distToTarget);
+	mol->setSAScore(data.sascore);
     mol->setDescendants(data.historicDescendants);
     mol->setHistoricDescendants(data.historicDescendants);
     mol->setItersWithoutDistImprovement(data.gensWithoutDistImprovement);
+    for (int atm_idx = 0; atm_idx != data.atomLocks.size(); atm_idx++) {
+    	mol->getAtom(atm_idx)->setLockingMask(data.atomLocks[atm_idx]);
+    }
     return mol;
 }
 
@@ -132,8 +135,7 @@ std::shared_ptr<std::vector<std::shared_ptr<MolpherMol> > > ExplorationData::get
         new std::vector<std::shared_ptr<MolpherMol> >()
     );
     for (auto& item : pimpl->candidates) {
-        MolpherMol* mol = MolDataToMolpherMol(item);
-        ret->push_back(std::shared_ptr<MolpherMol>(mol));
+        ret->push_back(MolDataToMolpherMol(item));
     }
     return ret;
 }
@@ -199,13 +201,19 @@ int ExplorationData::getSimilarityCoefficient() const {
 }
 
 std::shared_ptr<MolpherMol> ExplorationData::getSource() const {
-    auto ret = std::shared_ptr<MolpherMol>(MolDataToMolpherMol(pimpl->source));
-    return ret;
+	if (pimpl->source.SMILES.empty()) {
+		return nullptr;
+	} else {
+		return MolDataToMolpherMol(pimpl->source);
+	}
 }
 
 std::shared_ptr<MolpherMol> ExplorationData::getTarget() const {
-    auto ret = std::shared_ptr<MolpherMol>(MolDataToMolpherMol(pimpl->target));
-    return ret;
+	if (pimpl->target.SMILES.empty()) {
+		return nullptr;
+	} else {
+		return MolDataToMolpherMol(pimpl->target);
+	}
 }
 
 unsigned ExplorationData::getThreadCount() const {
@@ -217,11 +225,11 @@ std::shared_ptr<std::map<std::string, std::shared_ptr<MolpherMol> > > Exploratio
         new std::map<std::string, std::shared_ptr<MolpherMol> >()
     );
     for (auto& item : pimpl->treeMap) {
-        MolpherMol* mol = MolDataToMolpherMol(item.second);
+        auto mol = MolDataToMolpherMol(item.second);
         ret->insert(
             std::make_pair(
                 mol->getSMILES()
-                , std::shared_ptr<MolpherMol>(mol)
+                , mol
             )
         );
     }

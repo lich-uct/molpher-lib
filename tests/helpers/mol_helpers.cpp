@@ -29,3 +29,14 @@ void print_lock_info(std::shared_ptr<MolpherMol> mol) {
 		}
 	}
 }
+
+bool match_substr(std::vector<std::shared_ptr<MolpherMol> > mols, std::string smiles_query) {
+	bool result(true);
+	for (auto mol : mols) {
+		if(!match_substr(mol->getSMILES(), smiles_query)) {
+			return false;
+		}
+	}
+
+	return result;
+}

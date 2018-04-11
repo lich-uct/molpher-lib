@@ -27,6 +27,10 @@
 #include <boost/serialization/tracking.hpp>
 #include <boost/serialization/level.hpp>
 
+#include <GraphMol/SmilesParse/SmilesParse.h>
+#include <GraphMol/FileParsers/FileParsers.h>
+#include <GraphMol/Descriptors/MolDescriptors.h>
+
 #include <iostream>
 
 struct MolpherMolData
@@ -37,6 +41,16 @@ struct MolpherMolData
     double molecularWeight;
     std::string parentOper;
     std::string parentSmile;
+
+    /**
+     * A vector of locking masks
+     */
+     std::vector<int> atomLocks;
+
+     /**
+	 * molecule as MDL mol block
+	 */
+     std::string molBlock;
     
     /**
      * Direct descendants of this molecule.
@@ -84,7 +98,13 @@ struct MolpherMolData
     sascore(0.0),
     gensWithoutDistImprovement(0)
     {
-        // no action
+		if (!SMILES.empty()) {
+			RDKit::ROMol* temp = RDKit::SmilesToMol(SMILES);
+			molBlock = RDKit::MolToMolBlock(*temp, true, -1, false, false);
+			formula = RDKit::Descriptors::calcMolFormula(*temp);
+			molecularWeight = RDKit::Descriptors::calcAMW(*temp, true);
+			delete temp;
+		}
     }
 
     bool isValid() const {
@@ -99,15 +119,18 @@ struct MolpherMolData
     void save(Archive & ar, const unsigned int version) const {
         auto& descendants_saved = descendants;
         auto& historicDescendants_saved = descendants;
+        auto& locks_saved = atomLocks;
         
         ar  & BOOST_SERIALIZATION_NVP(SMILES)
+            & BOOST_SERIALIZATION_NVP(molBlock)
             & BOOST_SERIALIZATION_NVP(formula)
             & BOOST_SERIALIZATION_NVP(sascore)
             & BOOST_SERIALIZATION_NVP(parentOper) 
             & BOOST_SERIALIZATION_NVP(parentSmile)
             & BOOST_SERIALIZATION_NVP(descendants_saved) 
-            & BOOST_SERIALIZATION_NVP(historicDescendants_saved) 
-            & BOOST_SERIALIZATION_NVP(distToTarget) 
+            & BOOST_SERIALIZATION_NVP(historicDescendants_saved)
+            & BOOST_SERIALIZATION_NVP(locks_saved)
+            & BOOST_SERIALIZATION_NVP(distToTarget)
             & BOOST_SERIALIZATION_NVP(molecularWeight) 
             & BOOST_SERIALIZATION_NVP(gensWithoutDistImprovement);
     }
@@ -117,21 +140,24 @@ struct MolpherMolData
 
         std::set<std::string> descendants_saved;
         std::set<std::string> historicDescendants_saved;
+        std::vector<int> locks_saved;
 
-        ar  & BOOST_SERIALIZATION_NVP(SMILES) 
+        ar  & BOOST_SERIALIZATION_NVP(SMILES)
+		    & BOOST_SERIALIZATION_NVP(molBlock)
             & BOOST_SERIALIZATION_NVP(formula)
             & BOOST_SERIALIZATION_NVP(sascore)
             & BOOST_SERIALIZATION_NVP(parentOper) 
             & BOOST_SERIALIZATION_NVP(parentSmile)
             & BOOST_SERIALIZATION_NVP(descendants_saved) 
-            & BOOST_SERIALIZATION_NVP(historicDescendants_saved) 
+            & BOOST_SERIALIZATION_NVP(historicDescendants_saved)
+            & BOOST_SERIALIZATION_NVP(locks_saved)
             & BOOST_SERIALIZATION_NVP(distToTarget)
             & BOOST_SERIALIZATION_NVP(molecularWeight) 
             & BOOST_SERIALIZATION_NVP(gensWithoutDistImprovement);
 
         descendants.swap(descendants_saved);
         historicDescendants.swap(historicDescendants_saved);
-
+        atomLocks.swap(locks_saved);
     }
     
     BOOST_SERIALIZATION_SPLIT_MEMBER()
