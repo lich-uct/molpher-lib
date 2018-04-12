@@ -54,6 +54,7 @@
 #include "morphing/operators/RerouteBond.hpp"
 #include "morphing/AtomLibrary.hpp"
 #include "morphing/Molpher.hpp"
+#include "morphing/MorphCollector.hpp"
 %}
 
 %template(StringSet) std::set<std::string>;
@@ -67,6 +68,7 @@
 %template(MolpherMolMap) std::map<std::string, std::shared_ptr<MolpherMol> >;
 %template(MolpherAtomVector) std::vector<std::shared_ptr<MolpherAtom> >;
 %template(MorphingOperatorVector) std::vector<std::shared_ptr<MorphingOperator> >;
+%template(MorphCollectorVector) std::vector<std::shared_ptr<MorphCollector> >;
 
 %shared_ptr(ExplorationTree);
 %shared_ptr(MolpherMol);
@@ -81,6 +83,7 @@
 %shared_ptr(ContractBond);
 %shared_ptr(InterlayAtom);
 %shared_ptr(RerouteBond);
+%shared_ptr(MorphCollector);
 %shared_ptr(std::shared_ptr<std::map<std::string, std::shared_ptr<MolpherMol> > >);
 %shared_ptr(std::shared_ptr<std::vector<std::shared_ptr<MolpherMol> > >);
 

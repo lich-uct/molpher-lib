@@ -116,6 +116,10 @@ void ExplorationTree::generateMorphs() {
     pimpl->generateMorphs(shared_from_this());
 }
 
+void ExplorationTree::generateMorphs(const std::vector<std::shared_ptr<MorphCollector> >& collectors) {
+    pimpl->generateMorphs(shared_from_this(), collectors);
+}
+
 std::vector<std::shared_ptr<MolpherMol> > ExplorationTree::getCandidateMorphs() {
     return pimpl->getCandidateMorphs();
 }
@@ -390,6 +394,11 @@ void ExplorationTree::ExplorationTreeImpl::fetchLeaves(std::shared_ptr<Explorati
 
 void ExplorationTree::ExplorationTreeImpl::generateMorphs(std::shared_ptr<ExplorationTree> tree) {
     GenerateMorphsOper generate;
+    runOperation(generate, tree);
+}
+
+void ExplorationTree::ExplorationTreeImpl::generateMorphs(std::shared_ptr<ExplorationTree> tree, const std::vector<std::shared_ptr<MorphCollector> >& collectors) {
+    GenerateMorphsOper generate(collectors);
     runOperation(generate, tree);
 }
 

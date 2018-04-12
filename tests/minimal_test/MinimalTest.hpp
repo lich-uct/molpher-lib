@@ -119,11 +119,11 @@ public:
 
 	virtual void operator()(std::shared_ptr<MolpherMol> morph, std::shared_ptr<MorphingOperator> operator_) {
 		print("Beginning info for morph: " + morph->getSMILES());
-		print("\t" + operator_->getName());
-		print("\t" + operator_->getName());
-		print("\t" + operator_->getOriginal()->getSMILES());
+		print("\tOperator: " + operator_->getName());
+		print("\tParent: " + operator_->getOriginal()->getSMILES());
+		print("\tSAScore: " + NumberToStr(morph->getSAScore()));
+		morph->setDistToTarget(morph->getSAScore());
 		morph->setParentSMILES(operator_->getOriginal()->getSMILES());
-		morph->setDistToTarget(-1);
 	}
 };
 

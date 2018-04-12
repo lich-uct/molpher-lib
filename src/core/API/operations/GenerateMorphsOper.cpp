@@ -41,6 +41,18 @@ pimpl(new GenerateMorphsOper::GenerateMorphsOperImpl(set_tree_ownership))
     setTreeOperPimpl(pimpl);
 }
 
+GenerateMorphsOper::GenerateMorphsOper(std::shared_ptr<ExplorationTree> expTree, const std::vector<std::shared_ptr<MorphCollector> >& collectors, bool set_tree_ownership) :
+		pimpl(new GenerateMorphsOper::GenerateMorphsOperImpl(expTree, collectors, set_tree_ownership))
+{
+	setTreeOperPimpl(pimpl);
+}
+
+GenerateMorphsOper::GenerateMorphsOper(const std::vector<std::shared_ptr<MorphCollector> >& collectors, bool set_tree_ownership) :
+		pimpl(new GenerateMorphsOper::GenerateMorphsOperImpl(collectors, set_tree_ownership))
+{
+	setTreeOperPimpl(pimpl);
+}
+
 void GenerateMorphsOper::operator()() {
     (*pimpl)();
 }
@@ -57,6 +69,27 @@ TreeOperation::TreeOperationImpl::TreeOperationImpl()
 , mSetTreeOwnershipForMorphs(set_tree_ownership)
 {
     // no action
+}
+
+GenerateMorphsOper::GenerateMorphsOperImpl::GenerateMorphsOperImpl(
+		std::shared_ptr<ExplorationTree> expTree,
+		const std::vector<std::shared_ptr<MorphCollector> > &collectors,
+		bool set_tree_ownership
+) :
+mSetTreeOwnershipForMorphs(set_tree_ownership)
+, collectors(collectors)
+{
+
+}
+
+GenerateMorphsOper::GenerateMorphsOperImpl::GenerateMorphsOperImpl(
+		const std::vector<std::shared_ptr<MorphCollector> > &collectors
+		, bool set_tree_ownership
+) :
+mSetTreeOwnershipForMorphs(set_tree_ownership)
+, collectors(collectors)
+{
+
 }
 
 //void CollectMorphs::MorphCollector(std::shared_ptr<MolpherMol> morph, void *functor) {
@@ -207,6 +240,7 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::operator()() {
 		));
 		std::vector<std::shared_ptr<MorphCollector> > collectors;
 		collectors.push_back(std::static_pointer_cast<MorphCollector>(collector));
+		collectors.insert(collectors.end(), this->collectors.begin(), this->collectors.end());
         for (auto& leaf : leaves) {
             unsigned int morphAttempts = tree_pimpl->params.cntMorphs;
             if (leaf->getDistToTarget() < tree_pimpl->params.distToTargetDepthSwitch) {

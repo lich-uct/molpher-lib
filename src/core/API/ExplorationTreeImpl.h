@@ -143,6 +143,7 @@ class ExplorationTree::ExplorationTreeImpl
         bool isPathFound();
         void deleteSubtree(const std::string& canonSMILES, bool descendents_only);
         void generateMorphs(std::shared_ptr<ExplorationTree>);
+        void generateMorphs(std::shared_ptr<ExplorationTree>, const std::vector<std::shared_ptr<MorphCollector> >& collectors);
         void sortMorphs(std::shared_ptr<ExplorationTree>);
         void filterMorphs(std::shared_ptr<ExplorationTree> tree, bool verbose_output);
         void filterMorphs(FilterMorphsOper::MorphFilters filters, std::shared_ptr<ExplorationTree> tree, bool verbose_output);

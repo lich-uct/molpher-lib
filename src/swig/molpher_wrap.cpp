@@ -3469,73 +3469,76 @@ namespace Swig {
 #define SWIGTYPE_p_Molpher swig_types[13]
 #define SWIGTYPE_p_MolpherAtom swig_types[14]
 #define SWIGTYPE_p_MolpherMol swig_types[15]
-#define SWIGTYPE_p_MorphingOperator swig_types[16]
-#define SWIGTYPE_p_MutateAtom swig_types[17]
-#define SWIGTYPE_p_PruneTreeOper swig_types[18]
-#define SWIGTYPE_p_RemoveAtom swig_types[19]
-#define SWIGTYPE_p_RemoveBond swig_types[20]
-#define SWIGTYPE_p_RerouteBond swig_types[21]
-#define SWIGTYPE_p_SortMorphsCallback swig_types[22]
-#define SWIGTYPE_p_SortMorphsOper swig_types[23]
-#define SWIGTYPE_p_TraverseCallback swig_types[24]
-#define SWIGTYPE_p_TraverseOper swig_types[25]
-#define SWIGTYPE_p_TreeOperation swig_types[26]
-#define SWIGTYPE_p_allocator_type swig_types[27]
-#define SWIGTYPE_p_char swig_types[28]
-#define SWIGTYPE_p_const_reference swig_types[29]
-#define SWIGTYPE_p_difference_type swig_types[30]
-#define SWIGTYPE_p_key_type swig_types[31]
-#define SWIGTYPE_p_mapped_type swig_types[32]
-#define SWIGTYPE_p_p_PyObject swig_types[33]
-#define SWIGTYPE_p_reference swig_types[34]
-#define SWIGTYPE_p_size_type swig_types[35]
-#define SWIGTYPE_p_std__allocatorT_bool_t swig_types[36]
-#define SWIGTYPE_p_std__allocatorT_int_t swig_types[37]
-#define SWIGTYPE_p_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t swig_types[38]
-#define SWIGTYPE_p_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t swig_types[39]
-#define SWIGTYPE_p_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t swig_types[40]
-#define SWIGTYPE_p_std__allocatorT_std__shared_ptrT_MolpherMol_t_t swig_types[41]
-#define SWIGTYPE_p_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t swig_types[42]
-#define SWIGTYPE_p_std__allocatorT_std__string_t swig_types[43]
-#define SWIGTYPE_p_std__allocatorT_unsigned_int_t swig_types[44]
-#define SWIGTYPE_p_std__invalid_argument swig_types[45]
-#define SWIGTYPE_p_std__lessT_int_t swig_types[46]
-#define SWIGTYPE_p_std__lessT_std__string_t swig_types[47]
-#define SWIGTYPE_p_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t swig_types[48]
-#define SWIGTYPE_p_std__mapT_std__string_unsigned_int_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_unsigned_int_t_t_t swig_types[49]
-#define SWIGTYPE_p_std__pairT_unsigned_int_unsigned_int_t swig_types[50]
-#define SWIGTYPE_p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t swig_types[51]
-#define SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t swig_types[52]
-#define SWIGTYPE_p_std__shared_ptrT_AddAtom_t swig_types[53]
-#define SWIGTYPE_p_std__shared_ptrT_AddBond_t swig_types[54]
-#define SWIGTYPE_p_std__shared_ptrT_ContractBond_t swig_types[55]
-#define SWIGTYPE_p_std__shared_ptrT_ExplorationData_t swig_types[56]
-#define SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t swig_types[57]
-#define SWIGTYPE_p_std__shared_ptrT_InterlayAtom_t swig_types[58]
-#define SWIGTYPE_p_std__shared_ptrT_MolpherAtom_t swig_types[59]
-#define SWIGTYPE_p_std__shared_ptrT_MolpherMol_t swig_types[60]
-#define SWIGTYPE_p_std__shared_ptrT_MorphingOperator_t swig_types[61]
-#define SWIGTYPE_p_std__shared_ptrT_MutateAtom_t swig_types[62]
-#define SWIGTYPE_p_std__shared_ptrT_RemoveAtom_t swig_types[63]
-#define SWIGTYPE_p_std__shared_ptrT_RemoveBond_t swig_types[64]
-#define SWIGTYPE_p_std__shared_ptrT_RerouteBond_t swig_types[65]
-#define SWIGTYPE_p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t swig_types[66]
-#define SWIGTYPE_p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t swig_types[67]
-#define SWIGTYPE_p_std__vectorT_MolpherAtom__LockingMask_std__allocatorT_MolpherAtom__LockingMask_t_t swig_types[68]
-#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[69]
-#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[70]
-#define SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t swig_types[71]
-#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t swig_types[72]
-#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t swig_types[73]
-#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t swig_types[74]
-#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t swig_types[75]
-#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphingOperator_t_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t_t swig_types[76]
-#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[77]
-#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[78]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[79]
-#define SWIGTYPE_p_value_type swig_types[80]
-static swig_type_info *swig_types[82];
-static swig_module_info swig_module = {swig_types, 81, 0, 0, 0, 0};
+#define SWIGTYPE_p_MorphCollector swig_types[16]
+#define SWIGTYPE_p_MorphingOperator swig_types[17]
+#define SWIGTYPE_p_MutateAtom swig_types[18]
+#define SWIGTYPE_p_PruneTreeOper swig_types[19]
+#define SWIGTYPE_p_RemoveAtom swig_types[20]
+#define SWIGTYPE_p_RemoveBond swig_types[21]
+#define SWIGTYPE_p_RerouteBond swig_types[22]
+#define SWIGTYPE_p_SortMorphsCallback swig_types[23]
+#define SWIGTYPE_p_SortMorphsOper swig_types[24]
+#define SWIGTYPE_p_TraverseCallback swig_types[25]
+#define SWIGTYPE_p_TraverseOper swig_types[26]
+#define SWIGTYPE_p_TreeOperation swig_types[27]
+#define SWIGTYPE_p_allocator_type swig_types[28]
+#define SWIGTYPE_p_char swig_types[29]
+#define SWIGTYPE_p_const_reference swig_types[30]
+#define SWIGTYPE_p_difference_type swig_types[31]
+#define SWIGTYPE_p_key_type swig_types[32]
+#define SWIGTYPE_p_mapped_type swig_types[33]
+#define SWIGTYPE_p_p_PyObject swig_types[34]
+#define SWIGTYPE_p_reference swig_types[35]
+#define SWIGTYPE_p_size_type swig_types[36]
+#define SWIGTYPE_p_std__allocatorT_bool_t swig_types[37]
+#define SWIGTYPE_p_std__allocatorT_int_t swig_types[38]
+#define SWIGTYPE_p_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t swig_types[39]
+#define SWIGTYPE_p_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t swig_types[40]
+#define SWIGTYPE_p_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t swig_types[41]
+#define SWIGTYPE_p_std__allocatorT_std__shared_ptrT_MolpherMol_t_t swig_types[42]
+#define SWIGTYPE_p_std__allocatorT_std__shared_ptrT_MorphCollector_t_t swig_types[43]
+#define SWIGTYPE_p_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t swig_types[44]
+#define SWIGTYPE_p_std__allocatorT_std__string_t swig_types[45]
+#define SWIGTYPE_p_std__allocatorT_unsigned_int_t swig_types[46]
+#define SWIGTYPE_p_std__invalid_argument swig_types[47]
+#define SWIGTYPE_p_std__lessT_int_t swig_types[48]
+#define SWIGTYPE_p_std__lessT_std__string_t swig_types[49]
+#define SWIGTYPE_p_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t swig_types[50]
+#define SWIGTYPE_p_std__mapT_std__string_unsigned_int_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_unsigned_int_t_t_t swig_types[51]
+#define SWIGTYPE_p_std__pairT_unsigned_int_unsigned_int_t swig_types[52]
+#define SWIGTYPE_p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t swig_types[53]
+#define SWIGTYPE_p_std__setT_std__string_std__lessT_std__string_t_std__allocatorT_std__string_t_t swig_types[54]
+#define SWIGTYPE_p_std__shared_ptrT_AddAtom_t swig_types[55]
+#define SWIGTYPE_p_std__shared_ptrT_AddBond_t swig_types[56]
+#define SWIGTYPE_p_std__shared_ptrT_ContractBond_t swig_types[57]
+#define SWIGTYPE_p_std__shared_ptrT_ExplorationData_t swig_types[58]
+#define SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t swig_types[59]
+#define SWIGTYPE_p_std__shared_ptrT_InterlayAtom_t swig_types[60]
+#define SWIGTYPE_p_std__shared_ptrT_MolpherAtom_t swig_types[61]
+#define SWIGTYPE_p_std__shared_ptrT_MolpherMol_t swig_types[62]
+#define SWIGTYPE_p_std__shared_ptrT_MorphCollector_t swig_types[63]
+#define SWIGTYPE_p_std__shared_ptrT_MorphingOperator_t swig_types[64]
+#define SWIGTYPE_p_std__shared_ptrT_MutateAtom_t swig_types[65]
+#define SWIGTYPE_p_std__shared_ptrT_RemoveAtom_t swig_types[66]
+#define SWIGTYPE_p_std__shared_ptrT_RemoveBond_t swig_types[67]
+#define SWIGTYPE_p_std__shared_ptrT_RerouteBond_t swig_types[68]
+#define SWIGTYPE_p_std__shared_ptrT_std__shared_ptrT_std__mapT_std__string_std__shared_ptrT_MolpherMol_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__shared_ptrT_MolpherMol_t_t_t_t_t_t swig_types[69]
+#define SWIGTYPE_p_std__shared_ptrT_std__shared_ptrT_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t_t_t swig_types[70]
+#define SWIGTYPE_p_std__vectorT_MolpherAtom__LockingMask_std__allocatorT_MolpherAtom__LockingMask_t_t swig_types[71]
+#define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[72]
+#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[73]
+#define SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t swig_types[74]
+#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t swig_types[75]
+#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t swig_types[76]
+#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t swig_types[77]
+#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t swig_types[78]
+#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphingOperator_t_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t_t swig_types[79]
+#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[80]
+#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[81]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[82]
+#define SWIGTYPE_p_value_type swig_types[83]
+static swig_type_info *swig_types[85];
+static swig_module_info swig_module = {swig_types, 84, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4394,6 +4397,7 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 #include "morphing/operators/RerouteBond.hpp"
 #include "morphing/AtomLibrary.hpp"
 #include "morphing/Molpher.hpp"
+#include "morphing/MorphCollector.hpp"
 
 
 namespace swig {
@@ -7054,6 +7058,115 @@ SWIGINTERN std::vector< std::shared_ptr< MorphingOperator > >::iterator std_vect
 SWIGINTERN std::vector< std::shared_ptr< MorphingOperator > >::iterator std_vector_Sl_std_shared_ptr_Sl_MorphingOperator_Sg__Sg__insert__SWIG_0(std::vector< std::shared_ptr< MorphingOperator > > *self,std::vector< std::shared_ptr< MorphingOperator > >::iterator pos,std::vector< std::shared_ptr< MorphingOperator > >::value_type const &x){ return self->insert(pos, x); }
 SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphingOperator_Sg__Sg__insert__SWIG_1(std::vector< std::shared_ptr< MorphingOperator > > *self,std::vector< std::shared_ptr< MorphingOperator > >::iterator pos,std::vector< std::shared_ptr< MorphingOperator > >::size_type n,std::vector< std::shared_ptr< MorphingOperator > >::value_type const &x){ self->insert(pos, n, x); }
 
+  namespace swig {
+    template <>  struct traits< std::shared_ptr< MorphCollector > > {
+      typedef pointer_category category;
+      static const char* type_name() { return"std::shared_ptr< MorphCollector >"; }
+    };
+  }
+
+
+      namespace swig {
+	template <>  struct traits<std::vector< std::shared_ptr< MorphCollector >, std::allocator< std::shared_ptr< MorphCollector > > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "std::shared_ptr< MorphCollector >" "," "std::allocator< std::shared_ptr< MorphCollector > >" " >";
+	  }
+	};
+      }
+    
+SWIGINTERN swig::SwigPyIterator *std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__iterator(std::vector< std::shared_ptr< MorphCollector > > *self,PyObject **PYTHON_SELF){
+      return swig::make_output_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
+    }
+SWIGINTERN bool std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____nonzero__(std::vector< std::shared_ptr< MorphCollector > > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN bool std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____bool__(std::vector< std::shared_ptr< MorphCollector > > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN std::vector< std::shared_ptr< MorphCollector > >::size_type std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____len__(std::vector< std::shared_ptr< MorphCollector > > const *self){
+      return self->size();
+    }
+SWIGINTERN std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____getslice__(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::difference_type i,std::vector< std::shared_ptr< MorphCollector > >::difference_type j){
+      return swig::getslice(self, i, j, 1);
+    }
+SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____setslice____SWIG_0(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::difference_type i,std::vector< std::shared_ptr< MorphCollector > >::difference_type j){
+      swig::setslice(self, i, j, 1, std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >());
+    }
+SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____setslice____SWIG_1(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::difference_type i,std::vector< std::shared_ptr< MorphCollector > >::difference_type j,std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &v){
+      swig::setslice(self, i, j, 1, v);
+    }
+SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____delslice__(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::difference_type i,std::vector< std::shared_ptr< MorphCollector > >::difference_type j){
+      swig::delslice(self, i, j, 1);
+    }
+SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____delitem____SWIG_0(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::difference_type i){
+      swig::erase(self, swig::getpos(self, i));
+    }
+SWIGINTERN std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____getitem____SWIG_0(std::vector< std::shared_ptr< MorphCollector > > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return NULL;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >::difference_type id = i;
+      std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >::difference_type jd = j;
+      return swig::getslice(self, id, jd, step);
+    }
+SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____setitem____SWIG_0(std::vector< std::shared_ptr< MorphCollector > > *self,PySliceObject *slice,std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &v){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >::difference_type id = i;
+      std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >::difference_type jd = j;
+      swig::setslice(self, id, jd, step, v);
+    }
+SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____setitem____SWIG_1(std::vector< std::shared_ptr< MorphCollector > > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >::difference_type id = i;
+      std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >::difference_type jd = j;
+      swig::delslice(self, id, jd, step);
+    }
+SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____delitem____SWIG_1(std::vector< std::shared_ptr< MorphCollector > > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >::difference_type id = i;
+      std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >::difference_type jd = j;
+      swig::delslice(self, id, jd, step);
+    }
+SWIGINTERN std::vector< std::shared_ptr< MorphCollector > >::value_type const &std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____getitem____SWIG_1(std::vector< std::shared_ptr< MorphCollector > > const *self,std::vector< std::shared_ptr< MorphCollector > >::difference_type i){
+      return *(swig::cgetpos(self, i));
+    }
+SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____setitem____SWIG_2(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::difference_type i,std::vector< std::shared_ptr< MorphCollector > >::value_type const &x){
+      *(swig::getpos(self,i)) = x;
+    }
+SWIGINTERN std::vector< std::shared_ptr< MorphCollector > >::value_type std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__pop(std::vector< std::shared_ptr< MorphCollector > > *self){
+      if (self->size() == 0)
+	throw std::out_of_range("pop from empty container");
+      std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >::value_type x = self->back();
+      self->pop_back();
+      return x;
+    }
+SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__append(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::value_type const &x){
+      self->push_back(x);
+    }
+SWIGINTERN std::vector< std::shared_ptr< MorphCollector > >::iterator std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__erase__SWIG_0(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::iterator pos){ return self->erase(pos); }
+SWIGINTERN std::vector< std::shared_ptr< MorphCollector > >::iterator std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__erase__SWIG_1(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::iterator first,std::vector< std::shared_ptr< MorphCollector > >::iterator last){ return self->erase(first, last); }
+SWIGINTERN std::vector< std::shared_ptr< MorphCollector > >::iterator std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__insert__SWIG_0(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::iterator pos,std::vector< std::shared_ptr< MorphCollector > >::value_type const &x){ return self->insert(pos, x); }
+SWIGINTERN void std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__insert__SWIG_1(std::vector< std::shared_ptr< MorphCollector > > *self,std::vector< std::shared_ptr< MorphCollector > >::iterator pos,std::vector< std::shared_ptr< MorphCollector > >::size_type n,std::vector< std::shared_ptr< MorphCollector > >::value_type const &x){ self->insert(pos, n, x); }
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -7213,6 +7326,47 @@ bool SwigDirector_SortMorphsCallback::operator ()(std::shared_ptr< MolpherMol > 
   }
   SWIG_PYTHON_THREAD_END_BLOCK;
   return (bool) c_result;
+}
+
+
+SwigDirector_MorphCollector::SwigDirector_MorphCollector(PyObject *self): MorphCollector(), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((MorphCollector *)this, this); 
+}
+
+
+
+
+SwigDirector_MorphCollector::~SwigDirector_MorphCollector() {
+}
+
+void SwigDirector_MorphCollector::operator ()(std::shared_ptr< MolpherMol > morph, std::shared_ptr< MorphingOperator > operator_) {
+  SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+  {
+    swig::SwigVar_PyObject obj0;
+    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(new std::shared_ptr< MolpherMol >((const std::shared_ptr< MolpherMol > &)morph)), SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, SWIG_POINTER_OWN |  0 );
+    swig::SwigVar_PyObject obj1;
+    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(new std::shared_ptr< MorphingOperator >((const std::shared_ptr< MorphingOperator > &)operator_)), SWIGTYPE_p_std__shared_ptrT_MorphingOperator_t, SWIG_POINTER_OWN |  0 );
+    if (!swig_get_self()) {
+      Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call MorphCollector.__init__.");
+    }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+    const size_t swig_method_index = 0;
+    const char * const swig_method_name = "__call__";
+    PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+    swig::SwigVar_PyObject result = PyObject_CallFunction(method, (char *)"(OO)" ,(PyObject *)obj0,(PyObject *)obj1);
+#else
+    swig::SwigVar_PyObject result = PyObject_CallMethod(swig_get_self(), (char *)"__call__", (char *)"(OO)" ,(PyObject *)obj0,(PyObject *)obj1);
+#endif
+    if (!result) {
+      PyObject *error = PyErr_Occurred();
+      {
+        if (error != NULL) {
+          throw Swig::DirectorMethodException();
+        }
+      }
+    }
+  }
+  SWIG_PYTHON_THREAD_END_BLOCK;
 }
 
 
@@ -31886,6 +32040,2394 @@ SWIGINTERN PyObject *MorphingOperatorVector_swigregister(PyObject *SWIGUNUSEDPAR
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  PyObject **arg2 = (PyObject **) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  swig::SwigPyIterator *result = 0 ;
+  
+  arg2 = &obj0;
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_iterator",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_iterator" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (swig::SwigPyIterator *)std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__iterator(arg1,arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___nonzero__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (bool)std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____nonzero__((std::vector< std::shared_ptr< MorphCollector > > const *)arg1);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector___bool__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___bool__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (bool)std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____bool__((std::vector< std::shared_ptr< MorphCollector > > const *)arg1);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector___len__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___len__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____len__((std::vector< std::shared_ptr< MorphCollector > > const *)arg1);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___getslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg2 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MorphCollectorVector___getslice__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___getslice__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector___getslice__" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MorphCollectorVector___getslice__" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val3);
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____getslice__(arg1,arg2,arg3);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___setslice____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg2 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MorphCollectorVector___setslice__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___setslice__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector___setslice__" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MorphCollectorVector___setslice__" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val3);
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____setslice____SWIG_0(arg1,arg2,arg3);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___setslice____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg2 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg3 ;
+  std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:MorphCollectorVector___setslice__",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___setslice__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector___setslice__" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MorphCollectorVector___setslice__" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val3);
+  {
+    std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *ptr = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)0;
+    res4 = swig::asptr(obj3, &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "MorphCollectorVector___setslice__" "', argument " "4"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MorphCollectorVector___setslice__" "', argument " "4"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____setslice____SWIG_1(arg1,arg2,arg3,(std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)*arg4);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___setslice__(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[5] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 4) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_ptrdiff_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_ptrdiff_t(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_MorphCollectorVector___setslice____SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_ptrdiff_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_ptrdiff_t(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          int res = swig::asptr(argv[3], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_MorphCollectorVector___setslice____SWIG_1(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MorphCollectorVector___setslice__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::__setslice__(std::vector< std::shared_ptr< MorphCollector > >::difference_type,std::vector< std::shared_ptr< MorphCollector > >::difference_type)\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::__setslice__(std::vector< std::shared_ptr< MorphCollector > >::difference_type,std::vector< std::shared_ptr< MorphCollector > >::difference_type,std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___delslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg2 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MorphCollectorVector___delslice__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___delslice__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector___delslice__" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MorphCollectorVector___delslice__" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val3);
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____delslice__(arg1,arg2,arg3);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___delitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector___delitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___delitem__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector___delitem__" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val2);
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____delitem____SWIG_0(arg1,arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___getitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector___getitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___getitem__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    if (!PySlice_Check(obj1)) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector___getitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) obj1;
+  }
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____getitem____SWIG_0(arg1,arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MorphCollectorVector___setitem__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___setitem__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    if (!PySlice_Check(obj1)) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) obj1;
+  }
+  {
+    std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *ptr = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)0;
+    res3 = swig::asptr(obj2, &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "MorphCollectorVector___setitem__" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MorphCollectorVector___setitem__" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____setitem____SWIG_0(arg1,arg2,(std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)*arg3);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector___setitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___setitem__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    if (!PySlice_Check(obj1)) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) obj1;
+  }
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____setitem____SWIG_1(arg1,arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___delitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector___delitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___delitem__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    if (!PySlice_Check(obj1)) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector___delitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) obj1;
+  }
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____delitem____SWIG_1(arg1,arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___delitem__(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+      if (_v) {
+        return _wrap_MorphCollectorVector___delitem____SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_ptrdiff_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_MorphCollectorVector___delitem____SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MorphCollectorVector___delitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::__delitem__(std::vector< std::shared_ptr< MorphCollector > >::difference_type)\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::__delitem__(PySliceObject *)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___getitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector___getitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___getitem__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector___getitem__" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val2);
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = (std::vector< std::shared_ptr< MorphCollector > >::value_type *) &std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____getitem____SWIG_1((std::vector< std::shared_ptr< MorphCollector > > const *)arg1,arg2);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___getitem__(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+      if (_v) {
+        return _wrap_MorphCollectorVector___getitem____SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_ptrdiff_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_MorphCollectorVector___getitem____SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MorphCollectorVector___getitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::__getitem__(PySliceObject *)\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::__getitem__(std::vector< std::shared_ptr< MorphCollector > >::difference_type) const\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___setitem____SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::difference_type arg2 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MorphCollectorVector___setitem__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector___setitem__" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector___setitem__" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::difference_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "MorphCollectorVector___setitem__" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MorphCollectorVector___setitem__" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > >::value_type * >(argp3);
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg____setitem____SWIG_2(arg1,arg2,(std::shared_ptr< MorphCollector > const &)*arg3);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector___setitem__(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+      if (_v) {
+        return _wrap_MorphCollectorVector___setitem____SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+      if (_v) {
+        int res = swig::asptr(argv[2], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_MorphCollectorVector___setitem____SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_ptrdiff_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_MorphCollectorVector___setitem____SWIG_2(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MorphCollectorVector___setitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::__setitem__(PySliceObject *,std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::__setitem__(PySliceObject *)\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::__setitem__(std::vector< std::shared_ptr< MorphCollector > >::difference_type,std::vector< std::shared_ptr< MorphCollector > >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_pop(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_pop",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_pop" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      try {
+        {
+          SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+          result = std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__pop(arg1);
+          SWIG_PYTHON_THREAD_END_ALLOW;
+        }
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new std::vector< std::shared_ptr< MorphCollector > >::value_type(static_cast< const std::vector< std::shared_ptr< MorphCollector > >::value_type& >(result))), SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector_append",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_append" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MorphCollectorVector_append" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MorphCollectorVector_append" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > >::value_type * >(argp2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__append(arg1,(std::shared_ptr< MorphCollector > const &)*arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MorphCollectorVector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_MorphCollectorVector")) SWIG_fail;
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (std::vector< std::shared_ptr< MorphCollector > > *)new std::vector< std::shared_ptr< MorphCollector > >();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MorphCollectorVector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_MorphCollectorVector",&obj0)) SWIG_fail;
+  {
+    std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *ptr = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)0;
+    res1 = swig::asptr(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MorphCollectorVector" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MorphCollectorVector" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (std::vector< std::shared_ptr< MorphCollector > > *)new std::vector< std::shared_ptr< MorphCollector > >((std::vector< std::shared_ptr< MorphCollector > > const &)*arg1);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_empty",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_empty" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (bool)((std::vector< std::shared_ptr< MorphCollector > > const *)arg1)->empty();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_size",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_size" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = ((std::vector< std::shared_ptr< MorphCollector > > const *)arg1)->size();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector_swap",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_swap" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MorphCollectorVector_swap" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MorphCollectorVector_swap" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->swap(*arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_begin",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_begin" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (arg1)->begin();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< std::shared_ptr< MorphCollector > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_end",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_end" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (arg1)->end();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< std::shared_ptr< MorphCollector > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::reverse_iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_rbegin",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_rbegin" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (arg1)->rbegin();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< std::shared_ptr< MorphCollector > >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::reverse_iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_rend",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_rend" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (arg1)->rend();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< std::shared_ptr< MorphCollector > >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_clear",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_clear" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->clear();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_get_allocator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  SwigValueWrapper< std::allocator< std::shared_ptr< MorphCollector > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_get_allocator",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_get_allocator" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = ((std::vector< std::shared_ptr< MorphCollector > > const *)arg1)->get_allocator();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new std::vector< std::shared_ptr< MorphCollector > >::allocator_type(static_cast< const std::vector< std::shared_ptr< MorphCollector > >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_std__shared_ptrT_MorphCollector_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MorphCollectorVector__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > >::size_type arg1 ;
+  size_t val1 ;
+  int ecode1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_MorphCollectorVector",&obj0)) SWIG_fail;
+  ecode1 = SWIG_AsVal_size_t(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_MorphCollectorVector" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::size_type""'");
+  } 
+  arg1 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::size_type >(val1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (std::vector< std::shared_ptr< MorphCollector > > *)new std::vector< std::shared_ptr< MorphCollector > >(arg1);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_pop_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_pop_back",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_pop_back" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->pop_back();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::size_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector_resize",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_resize" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector_resize" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::size_type >(val2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->resize(arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::iterator arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector_erase",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_erase" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector_erase" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector_erase" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::iterator""'");
+    }
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__erase__SWIG_0(arg1,arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< std::shared_ptr< MorphCollector > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::iterator arg2 ;
+  std::vector< std::shared_ptr< MorphCollector > >::iterator arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  swig::SwigPyIterator *iter3 = 0 ;
+  int res3 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MorphCollectorVector_erase",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_erase" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector_erase" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector_erase" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::iterator""'");
+    }
+  }
+  res3 = SWIG_ConvertPtr(obj2, SWIG_as_voidptrptr(&iter3), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res3) || !iter3) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector_erase" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *>(iter3);
+    if (iter_t) {
+      arg3 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector_erase" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::iterator""'");
+    }
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__erase__SWIG_1(arg1,arg2,arg3);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< std::shared_ptr< MorphCollector > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_erase(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *>(iter) != 0));
+      if (_v) {
+        return _wrap_MorphCollectorVector_erase__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *>(iter) != 0));
+      if (_v) {
+        swig::SwigPyIterator *iter = 0;
+        int res = SWIG_ConvertPtr(argv[2], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+        _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *>(iter) != 0));
+        if (_v) {
+          return _wrap_MorphCollectorVector_erase__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MorphCollectorVector_erase'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::erase(std::vector< std::shared_ptr< MorphCollector > >::iterator)\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::erase(std::vector< std::shared_ptr< MorphCollector > >::iterator,std::vector< std::shared_ptr< MorphCollector > >::iterator)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MorphCollectorVector__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > >::size_type arg1 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *arg2 = 0 ;
+  size_t val1 ;
+  int ecode1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_MorphCollectorVector",&obj0,&obj1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_size_t(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_MorphCollectorVector" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::size_type""'");
+  } 
+  arg1 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::size_type >(val1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_MorphCollectorVector" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MorphCollectorVector" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > >::value_type * >(argp2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (std::vector< std::shared_ptr< MorphCollector > > *)new std::vector< std::shared_ptr< MorphCollector > >(arg1,(std::vector< std::shared_ptr< MorphCollector > >::value_type const &)*arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MorphCollectorVector(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_MorphCollectorVector__SWIG_0(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      int res = SWIG_AsVal_size_t(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
+    if (_v) {
+      return _wrap_new_MorphCollectorVector__SWIG_2(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_MorphCollectorVector__SWIG_1(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    {
+      int res = SWIG_AsVal_size_t(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_new_MorphCollectorVector__SWIG_3(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_MorphCollectorVector'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::vector()\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::vector(std::vector< std::shared_ptr< MorphCollector > > const &)\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::vector(std::vector< std::shared_ptr< MorphCollector > >::size_type)\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::vector(std::vector< std::shared_ptr< MorphCollector > >::size_type,std::vector< std::shared_ptr< MorphCollector > >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_push_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector_push_back",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_push_back" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MorphCollectorVector_push_back" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MorphCollectorVector_push_back" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > >::value_type * >(argp2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->push_back((std::vector< std::shared_ptr< MorphCollector > >::value_type const &)*arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_front",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_front" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (std::vector< std::shared_ptr< MorphCollector > >::value_type *) &((std::vector< std::shared_ptr< MorphCollector > > const *)arg1)->front();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_back",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_back" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (std::vector< std::shared_ptr< MorphCollector > >::value_type *) &((std::vector< std::shared_ptr< MorphCollector > > const *)arg1)->back();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_assign(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::size_type arg2 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MorphCollectorVector_assign",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_assign" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector_assign" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::size_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "MorphCollectorVector_assign" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MorphCollectorVector_assign" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > >::value_type * >(argp3);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->assign(arg2,(std::vector< std::shared_ptr< MorphCollector > >::value_type const &)*arg3);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::size_type arg2 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MorphCollectorVector_resize",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_resize" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector_resize" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::size_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "MorphCollectorVector_resize" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MorphCollectorVector_resize" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > >::value_type * >(argp3);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->resize(arg2,(std::vector< std::shared_ptr< MorphCollector > >::value_type const &)*arg3);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_resize(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_size_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_MorphCollectorVector_resize__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_size_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_MorphCollectorVector_resize__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MorphCollectorVector_resize'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::resize(std::vector< std::shared_ptr< MorphCollector > >::size_type)\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::resize(std::vector< std::shared_ptr< MorphCollector > >::size_type,std::vector< std::shared_ptr< MorphCollector > >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::iterator arg2 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MorphCollectorVector_insert",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_insert" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector_insert" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector_insert" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::iterator""'");
+    }
+  }
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "MorphCollectorVector_insert" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MorphCollectorVector_insert" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > >::value_type * >(argp3);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__insert__SWIG_0(arg1,arg2,(std::shared_ptr< MorphCollector > const &)*arg3);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< std::shared_ptr< MorphCollector > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::iterator arg2 ;
+  std::vector< std::shared_ptr< MorphCollector > >::size_type arg3 ;
+  std::vector< std::shared_ptr< MorphCollector > >::value_type *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  size_t val3 ;
+  int ecode3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:MorphCollectorVector_insert",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_insert" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector_insert" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "MorphCollectorVector_insert" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::iterator""'");
+    }
+  }
+  ecode3 = SWIG_AsVal_size_t(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MorphCollectorVector_insert" "', argument " "3"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::size_type""'");
+  } 
+  arg3 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::size_type >(val3);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t,  0  | 0);
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "MorphCollectorVector_insert" "', argument " "4"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MorphCollectorVector_insert" "', argument " "4"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::value_type const &""'"); 
+  }
+  arg4 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > >::value_type * >(argp4);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        std_vector_Sl_std_shared_ptr_Sl_MorphCollector_Sg__Sg__insert__SWIG_1(arg1,arg2,arg3,(std::shared_ptr< MorphCollector > const &)*arg4);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_insert(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[5] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 4) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *>(iter) != 0));
+      if (_v) {
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_MorphCollectorVector_insert__SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::vector< std::shared_ptr< MorphCollector > >::iterator > *>(iter) != 0));
+      if (_v) {
+        {
+          int res = SWIG_AsVal_size_t(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_MorphCollectorVector_insert__SWIG_1(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MorphCollectorVector_insert'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::insert(std::vector< std::shared_ptr< MorphCollector > >::iterator,std::vector< std::shared_ptr< MorphCollector > >::value_type const &)\n"
+    "    std::vector< std::shared_ptr< MorphCollector > >::insert(std::vector< std::shared_ptr< MorphCollector > >::iterator,std::vector< std::shared_ptr< MorphCollector > >::size_type,std::vector< std::shared_ptr< MorphCollector > >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_reserve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::size_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MorphCollectorVector_reserve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_reserve" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MorphCollectorVector_reserve" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector > >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< std::shared_ptr< MorphCollector > >::size_type >(val2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->reserve(arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollectorVector_capacity(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::shared_ptr< MorphCollector > >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphCollectorVector_capacity",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollectorVector_capacity" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = ((std::vector< std::shared_ptr< MorphCollector > > const *)arg1)->capacity();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_MorphCollectorVector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector > > *arg1 = (std::vector< std::shared_ptr< MorphCollector > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_MorphCollectorVector",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MorphCollectorVector" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector > > * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        delete arg1;
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *MorphCollectorVector_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN int Swig_var_MolpherAtom_atom_locks_set(PyObject *) {
   SWIG_Error(SWIG_AttributeError,"Variable MolpherAtom_atom_locks is read-only.");
   return 1;
@@ -39035,7 +41577,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_ExplorationTree_generateMorphs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_ExplorationTree_generateMorphs__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationTree *arg1 = (ExplorationTree *) 0 ;
   void *argp1 = 0 ;
@@ -39076,6 +41618,108 @@ SWIGINTERN PyObject *_wrap_ExplorationTree_generateMorphs(PyObject *SWIGUNUSEDPA
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationTree_generateMorphs__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationTree *arg1 = (ExplorationTree *) 0 ;
+  std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< ExplorationTree > tempshared1 ;
+  std::shared_ptr< ExplorationTree > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationTree_generateMorphs",&obj0,&obj1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationTree_generateMorphs" "', argument " "1"" of type '" "ExplorationTree *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      arg1 = const_cast< ExplorationTree * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  ExplorationTree > * >(argp1);
+      arg1 = const_cast< ExplorationTree * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *ptr = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)0;
+    res2 = swig::asptr(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExplorationTree_generateMorphs" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExplorationTree_generateMorphs" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->generateMorphs((std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)*arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationTree_generateMorphs(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_ExplorationTree_generateMorphs__SWIG_0(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = swig::asptr(argv[1], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_ExplorationTree_generateMorphs__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'ExplorationTree_generateMorphs'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    ExplorationTree::generateMorphs()\n"
+    "    ExplorationTree::generateMorphs(std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)\n");
+  return 0;
 }
 
 
@@ -40790,6 +43434,121 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  std::shared_ptr< ExplorationTree > arg1 ;
+  std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  GenerateMorphsOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:new_GenerateMorphsOper",&obj0,&obj1,&obj2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GenerateMorphsOper" "', argument " "1"" of type '" "std::shared_ptr< ExplorationTree >""'"); 
+    }
+    if (argp1) arg1 = *(reinterpret_cast< std::shared_ptr< ExplorationTree > * >(argp1));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< std::shared_ptr< ExplorationTree > * >(argp1);
+  }
+  {
+    std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *ptr = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)0;
+    res2 = swig::asptr(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_GenerateMorphsOper" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GenerateMorphsOper" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  ecode3 = SWIG_AsVal_bool(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GenerateMorphsOper" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (GenerateMorphsOper *)new GenerateMorphsOper(arg1,(std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)*arg2,arg3);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_GenerateMorphsOper, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::shared_ptr< ExplorationTree > arg1 ;
+  std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *arg2 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  GenerateMorphsOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_GenerateMorphsOper",&obj0,&obj1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GenerateMorphsOper" "', argument " "1"" of type '" "std::shared_ptr< ExplorationTree >""'"); 
+    }
+    if (argp1) arg1 = *(reinterpret_cast< std::shared_ptr< ExplorationTree > * >(argp1));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< std::shared_ptr< ExplorationTree > * >(argp1);
+  }
+  {
+    std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *ptr = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)0;
+    res2 = swig::asptr(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_GenerateMorphsOper" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GenerateMorphsOper" "', argument " "2"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (GenerateMorphsOper *)new GenerateMorphsOper(arg1,(std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)*arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_GenerateMorphsOper, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper__SWIG_4(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
   bool arg1 ;
   bool val1 ;
   int ecode1 = 0 ;
@@ -40821,7 +43580,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper__SWIG_5(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GenerateMorphsOper *result = 0 ;
   
@@ -40845,20 +43604,109 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper__SWIG_6(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *arg1 = 0 ;
+  bool arg2 ;
+  int res1 = SWIG_OLDOBJ ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  GenerateMorphsOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_GenerateMorphsOper",&obj0,&obj1)) SWIG_fail;
+  {
+    std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *ptr = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)0;
+    res1 = swig::asptr(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GenerateMorphsOper" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GenerateMorphsOper" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_bool(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GenerateMorphsOper" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (GenerateMorphsOper *)new GenerateMorphsOper((std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)*arg1,arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_GenerateMorphsOper, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper__SWIG_7(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  GenerateMorphsOper *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_GenerateMorphsOper",&obj0)) SWIG_fail;
+  {
+    std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *ptr = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)0;
+    res1 = swig::asptr(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GenerateMorphsOper" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GenerateMorphsOper" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (GenerateMorphsOper *)new GenerateMorphsOper((std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)*arg1);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_GenerateMorphsOper, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[3] = {
+  PyObject *argv[4] = {
     0
   };
   Py_ssize_t ii;
   
   if (!PyTuple_Check(args)) SWIG_fail;
   argc = args ? PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
     argv[ii] = PyTuple_GET_ITEM(args,ii);
   }
   if (argc == 0) {
-    return _wrap_new_GenerateMorphsOper__SWIG_3(self, args);
+    return _wrap_new_GenerateMorphsOper__SWIG_5(self, args);
   }
   if (argc == 1) {
     int _v;
@@ -40875,7 +43723,15 @@ SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper(PyObject *self, PyObject *args
       _v = SWIG_CheckState(res);
     }
     if (_v) {
-      return _wrap_new_GenerateMorphsOper__SWIG_2(self, args);
+      return _wrap_new_GenerateMorphsOper__SWIG_4(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_GenerateMorphsOper__SWIG_7(self, args);
     }
   }
   if (argc == 2) {
@@ -40892,14 +43748,62 @@ SWIGINTERN PyObject *_wrap_new_GenerateMorphsOper(PyObject *self, PyObject *args
       }
     }
   }
+  if (argc == 2) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = swig::asptr(argv[1], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_new_GenerateMorphsOper__SWIG_3(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_bool(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_new_GenerateMorphsOper__SWIG_6(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__shared_ptrT_ExplorationTree_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = swig::asptr(argv[1], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        {
+          int res = SWIG_AsVal_bool(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_new_GenerateMorphsOper__SWIG_2(self, args);
+        }
+      }
+    }
+  }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_GenerateMorphsOper'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GenerateMorphsOper::GenerateMorphsOper(std::shared_ptr< ExplorationTree >,bool)\n"
     "    GenerateMorphsOper::GenerateMorphsOper(std::shared_ptr< ExplorationTree >)\n"
+    "    GenerateMorphsOper::GenerateMorphsOper(std::shared_ptr< ExplorationTree >,std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &,bool)\n"
+    "    GenerateMorphsOper::GenerateMorphsOper(std::shared_ptr< ExplorationTree >,std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)\n"
     "    GenerateMorphsOper::GenerateMorphsOper(bool)\n"
-    "    GenerateMorphsOper::GenerateMorphsOper()\n");
+    "    GenerateMorphsOper::GenerateMorphsOper()\n"
+    "    GenerateMorphsOper::GenerateMorphsOper(std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &,bool)\n"
+    "    GenerateMorphsOper::GenerateMorphsOper(std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &)\n");
   return 0;
 }
 
@@ -43643,8 +46547,7 @@ SWIGINTERN PyObject *_wrap_new_Molpher__SWIG_1(PyObject *SWIGUNUSEDPARM(self), P
   int ecode3 = 0 ;
   unsigned int val4 ;
   int ecode4 = 0 ;
-  void *argp5 = 0 ;
-  int res5 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
@@ -43683,14 +46586,17 @@ SWIGINTERN PyObject *_wrap_new_Molpher__SWIG_1(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Molpher" "', argument " "4"" of type '" "unsigned int""'");
   } 
   arg4 = static_cast< unsigned int >(val4);
-  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t,  0  | 0);
-  if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_Molpher" "', argument " "5"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+  {
+    std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *ptr = (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *)0;
+    res5 = swig::asptr(obj4, &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_Molpher" "', argument " "5"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Molpher" "', argument " "5"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
+    }
+    arg5 = ptr;
   }
-  if (!argp5) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Molpher" "', argument " "5"" of type '" "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > const &""'"); 
-  }
-  arg5 = reinterpret_cast< std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > * >(argp5);
   {
     try {
       {
@@ -43705,9 +46611,11 @@ SWIGINTERN PyObject *_wrap_new_Molpher__SWIG_1(PyObject *SWIGUNUSEDPARM(self), P
   }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Molpher, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res5)) delete arg5;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res5)) delete arg5;
   return NULL;
 }
 
@@ -43766,7 +46674,7 @@ SWIGINTERN PyObject *_wrap_new_Molpher(PyObject *self, PyObject *args) {
             _v = SWIG_CheckState(res);
           }
           if (_v) {
-            int res = SWIG_ConvertPtr(argv[4], 0, SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t, 0);
+            int res = swig::asptr(argv[4], (std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > >**)(0));
             _v = SWIG_CheckState(res);
             if (_v) {
               return _wrap_new_Molpher__SWIG_1(self, args);
@@ -43968,6 +46876,213 @@ SWIGINTERN PyObject *Molpher_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
   SWIG_TypeNewClientData(SWIGTYPE_p_Molpher, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_MorphCollector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  PyObject * obj0 = 0 ;
+  MorphCollector *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_MorphCollector",&obj0)) SWIG_fail;
+  arg1 = obj0;
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        if ( arg1 != Py_None ) {
+          /* subclassed */
+          result = (MorphCollector *)new SwigDirector_MorphCollector(arg1); 
+        } else {
+          SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+          SWIG_fail;
+        }
+        
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    std::shared_ptr<  MorphCollector > *smartresult = result ? new std::shared_ptr<  MorphCollector >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_MorphCollector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MorphCollector *arg1 = (MorphCollector *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< MorphCollector > tempshared1 ;
+  std::shared_ptr< MorphCollector > *smartarg1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_MorphCollector",&obj0)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MorphCollector" "', argument " "1"" of type '" "MorphCollector *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  MorphCollector > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  MorphCollector > * >(argp1);
+      arg1 = const_cast< MorphCollector * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  MorphCollector > * >(argp1);
+      arg1 = const_cast< MorphCollector * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (void)arg1; delete smartarg1;
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MorphCollector___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MorphCollector *arg1 = (MorphCollector *) 0 ;
+  std::shared_ptr< MolpherMol > arg2 ;
+  std::shared_ptr< MorphingOperator > arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< MorphCollector > tempshared1 ;
+  std::shared_ptr< MorphCollector > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MorphCollector___call__",&obj0,&obj1,&obj2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphCollector___call__" "', argument " "1"" of type '" "MorphCollector *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  MorphCollector > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  MorphCollector > * >(argp1);
+      arg1 = const_cast< MorphCollector * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  MorphCollector > * >(argp1);
+      arg1 = const_cast< MorphCollector * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(obj1, &argp2, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MorphCollector___call__" "', argument " "2"" of type '" "std::shared_ptr< MolpherMol >""'"); 
+    }
+    if (argp2) arg2 = *(reinterpret_cast< std::shared_ptr< MolpherMol > * >(argp2));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< std::shared_ptr< MolpherMol > * >(argp2);
+  }
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(obj2, &argp3, SWIGTYPE_p_std__shared_ptrT_MorphingOperator_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "MorphCollector___call__" "', argument " "3"" of type '" "std::shared_ptr< MorphingOperator >""'"); 
+    }
+    if (argp3) arg3 = *(reinterpret_cast< std::shared_ptr< MorphingOperator > * >(argp3));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< std::shared_ptr< MorphingOperator > * >(argp3);
+  }
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==obj0));
+  try {
+    {
+      try {
+        if (upcall) {
+          Swig::DirectorPureVirtualException::raise("MorphCollector::operator ()");
+        } else {
+          (arg1)->operator ()(arg2,arg3);
+        } 
+      }
+      catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_disown_MorphCollector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MorphCollector *arg1 = (MorphCollector *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< MorphCollector > tempshared1 ;
+  std::shared_ptr< MorphCollector > *smartarg1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:disown_MorphCollector",&obj0)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "disown_MorphCollector" "', argument " "1"" of type '" "MorphCollector *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  MorphCollector > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  MorphCollector > * >(argp1);
+      arg1 = const_cast< MorphCollector * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  MorphCollector > * >(argp1);
+      arg1 = const_cast< MorphCollector * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    {
+      Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
+      if (director) director->swig_disown();
+    }
+    
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *MorphCollector_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_std__shared_ptrT_MorphCollector_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -47138,6 +50253,40 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MorphingOperatorVector_capacity", _wrap_MorphingOperatorVector_capacity, METH_VARARGS, NULL},
 	 { (char *)"delete_MorphingOperatorVector", _wrap_delete_MorphingOperatorVector, METH_VARARGS, NULL},
 	 { (char *)"MorphingOperatorVector_swigregister", MorphingOperatorVector_swigregister, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_iterator", _wrap_MorphCollectorVector_iterator, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector___nonzero__", _wrap_MorphCollectorVector___nonzero__, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector___bool__", _wrap_MorphCollectorVector___bool__, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector___len__", _wrap_MorphCollectorVector___len__, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector___getslice__", _wrap_MorphCollectorVector___getslice__, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector___setslice__", _wrap_MorphCollectorVector___setslice__, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector___delslice__", _wrap_MorphCollectorVector___delslice__, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector___delitem__", _wrap_MorphCollectorVector___delitem__, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector___getitem__", _wrap_MorphCollectorVector___getitem__, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector___setitem__", _wrap_MorphCollectorVector___setitem__, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_pop", _wrap_MorphCollectorVector_pop, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_append", _wrap_MorphCollectorVector_append, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_empty", _wrap_MorphCollectorVector_empty, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_size", _wrap_MorphCollectorVector_size, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_swap", _wrap_MorphCollectorVector_swap, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_begin", _wrap_MorphCollectorVector_begin, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_end", _wrap_MorphCollectorVector_end, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_rbegin", _wrap_MorphCollectorVector_rbegin, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_rend", _wrap_MorphCollectorVector_rend, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_clear", _wrap_MorphCollectorVector_clear, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_get_allocator", _wrap_MorphCollectorVector_get_allocator, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_pop_back", _wrap_MorphCollectorVector_pop_back, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_erase", _wrap_MorphCollectorVector_erase, METH_VARARGS, NULL},
+	 { (char *)"new_MorphCollectorVector", _wrap_new_MorphCollectorVector, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_push_back", _wrap_MorphCollectorVector_push_back, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_front", _wrap_MorphCollectorVector_front, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_back", _wrap_MorphCollectorVector_back, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_assign", _wrap_MorphCollectorVector_assign, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_resize", _wrap_MorphCollectorVector_resize, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_insert", _wrap_MorphCollectorVector_insert, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_reserve", _wrap_MorphCollectorVector_reserve, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_capacity", _wrap_MorphCollectorVector_capacity, METH_VARARGS, NULL},
+	 { (char *)"delete_MorphCollectorVector", _wrap_delete_MorphCollectorVector, METH_VARARGS, NULL},
+	 { (char *)"MorphCollectorVector_swigregister", MorphCollectorVector_swigregister, METH_VARARGS, NULL},
 	 { (char *)"MolpherAtom_lockToString", _wrap_MolpherAtom_lockToString, METH_VARARGS, NULL},
 	 { (char *)"MolpherAtom_lockingMaskToString", _wrap_MolpherAtom_lockingMaskToString, METH_VARARGS, NULL},
 	 { (char *)"new_MolpherAtom", _wrap_new_MolpherAtom, METH_VARARGS, NULL},
@@ -47349,6 +50498,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Molpher_getOriginal", _wrap_Molpher_getOriginal, METH_VARARGS, NULL},
 	 { (char *)"Molpher_reset", _wrap_Molpher_reset, METH_VARARGS, NULL},
 	 { (char *)"Molpher_swigregister", Molpher_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_MorphCollector", _wrap_new_MorphCollector, METH_VARARGS, NULL},
+	 { (char *)"delete_MorphCollector", _wrap_delete_MorphCollector, METH_VARARGS, NULL},
+	 { (char *)"MorphCollector___call__", _wrap_MorphCollector___call__, METH_VARARGS, NULL},
+	 { (char *)"disown_MorphCollector", _wrap_disown_MorphCollector, METH_VARARGS, NULL},
+	 { (char *)"MorphCollector_swigregister", MorphCollector_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_MorphingOperator", _wrap_new_MorphingOperator, METH_VARARGS, NULL},
 	 { (char *)"delete_MorphingOperator", _wrap_delete_MorphingOperator, METH_VARARGS, NULL},
 	 { (char *)"MorphingOperator_getOriginal", _wrap_MorphingOperator_getOriginal, METH_VARARGS, NULL},
@@ -47517,6 +50671,7 @@ static swig_type_info _swigt__p_InterlayAtom = {"_p_InterlayAtom", "InterlayAtom
 static swig_type_info _swigt__p_Molpher = {"_p_Molpher", "Molpher *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_MolpherAtom = {"_p_MolpherAtom", "MolpherAtom *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_MolpherMol = {"_p_MolpherMol", "MolpherMol *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_MorphCollector = {"_p_MorphCollector", "MorphCollector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_MorphingOperator = {"_p_MorphingOperator", "MorphingOperator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_MutateAtom = {"_p_MutateAtom", "MutateAtom *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PruneTreeOper = {"_p_PruneTreeOper", "PruneTreeOper *", 0, 0, (void*)0, 0};
@@ -47543,6 +50698,7 @@ static swig_type_info _swigt__p_std__allocatorT_std__pairT_std__string_const_std
 static swig_type_info _swigt__p_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t = {"_p_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t", "std::allocator< std::pair< unsigned int,unsigned int > > *|std::vector< std::pair< unsigned int,unsigned int > >::allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t = {"_p_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t", "std::allocator< std::shared_ptr< MolpherAtom > > *|std::vector< std::shared_ptr< MolpherAtom > >::allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_std__shared_ptrT_MolpherMol_t_t = {"_p_std__allocatorT_std__shared_ptrT_MolpherMol_t_t", "std::vector< std::shared_ptr< MolpherMol > >::allocator_type *|std::allocator< std::shared_ptr< MolpherMol > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__allocatorT_std__shared_ptrT_MorphCollector_t_t = {"_p_std__allocatorT_std__shared_ptrT_MorphCollector_t_t", "std::vector< std::shared_ptr< MorphCollector > >::allocator_type *|std::allocator< std::shared_ptr< MorphCollector > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t = {"_p_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t", "std::vector< std::shared_ptr< MorphingOperator > >::allocator_type *|std::allocator< std::shared_ptr< MorphingOperator > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_std__string_t = {"_p_std__allocatorT_std__string_t", "std::vector< std::string >::allocator_type *|std::allocator< std::string > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_unsigned_int_t = {"_p_std__allocatorT_unsigned_int_t", "std::vector< unsigned int >::allocator_type *|std::allocator< unsigned int > *", 0, 0, (void*)0, 0};
@@ -47562,6 +50718,7 @@ static swig_type_info _swigt__p_std__shared_ptrT_ExplorationTree_t = {"_p_std__s
 static swig_type_info _swigt__p_std__shared_ptrT_InterlayAtom_t = {"_p_std__shared_ptrT_InterlayAtom_t", "std::shared_ptr< InterlayAtom > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_MolpherAtom_t = {"_p_std__shared_ptrT_MolpherAtom_t", "std::shared_ptr< MolpherAtom > *|std::vector< std::shared_ptr< MolpherAtom > >::value_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_MolpherMol_t = {"_p_std__shared_ptrT_MolpherMol_t", "std::shared_ptr< MolpherMol > *|std::vector< std::shared_ptr< MolpherMol > >::value_type *|std::map< std::string,std::shared_ptr< MolpherMol > >::mapped_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__shared_ptrT_MorphCollector_t = {"_p_std__shared_ptrT_MorphCollector_t", "std::shared_ptr< MorphCollector > *|std::vector< std::shared_ptr< MorphCollector > >::value_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_MorphingOperator_t = {"_p_std__shared_ptrT_MorphingOperator_t", "std::vector< std::shared_ptr< MorphingOperator > >::value_type *|std::shared_ptr< MorphingOperator > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_MutateAtom_t = {"_p_std__shared_ptrT_MutateAtom_t", "std::shared_ptr< MutateAtom > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_RemoveAtom_t = {"_p_std__shared_ptrT_RemoveAtom_t", "std::shared_ptr< RemoveAtom > *", 0, 0, (void*)0, 0};
@@ -47576,7 +50733,7 @@ static swig_type_info _swigt__p_std__vectorT_int_std__allocatorT_int_t_t = {"_p_
 static swig_type_info _swigt__p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t = {"_p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t", "std::vector< std::pair< unsigned int,unsigned int > > *|std::vector< std::pair< unsigned int,unsigned int >,std::allocator< std::pair< unsigned int,unsigned int > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t = {"_p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t", "std::vector< std::shared_ptr< MolpherAtom > > *|std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t = {"_p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t", "std::vector< std::shared_ptr< MolpherMol > > *|std::vector< std::shared_ptr< MolpherMol >,std::allocator< std::shared_ptr< MolpherMol > > > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t = {"_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t", "std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t = {"_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t", "std::vector< std::shared_ptr< MorphCollector > > *|std::vector< std::shared_ptr< MorphCollector >,std::allocator< std::shared_ptr< MorphCollector > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_std__shared_ptrT_MorphingOperator_t_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t_t = {"_p_std__vectorT_std__shared_ptrT_MorphingOperator_t_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t_t", "std::vector< std::shared_ptr< MorphingOperator > > *|std::vector< std::shared_ptr< MorphingOperator >,std::allocator< std::shared_ptr< MorphingOperator > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_std__string_std__allocatorT_std__string_t_t = {"_p_std__vectorT_std__string_std__allocatorT_std__string_t_t", "std::vector< std::string,std::allocator< std::string > > *|std::vector< std::string > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t = {"_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t", "std::vector< unsigned int,std::allocator< unsigned int > > *|std::vector< unsigned int > *", 0, 0, (void*)0, 0};
@@ -47600,6 +50757,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Molpher,
   &_swigt__p_MolpherAtom,
   &_swigt__p_MolpherMol,
+  &_swigt__p_MorphCollector,
   &_swigt__p_MorphingOperator,
   &_swigt__p_MutateAtom,
   &_swigt__p_PruneTreeOper,
@@ -47626,6 +50784,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t,
   &_swigt__p_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t,
   &_swigt__p_std__allocatorT_std__shared_ptrT_MolpherMol_t_t,
+  &_swigt__p_std__allocatorT_std__shared_ptrT_MorphCollector_t_t,
   &_swigt__p_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t,
   &_swigt__p_std__allocatorT_std__string_t,
   &_swigt__p_std__allocatorT_unsigned_int_t,
@@ -47645,6 +50804,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__shared_ptrT_InterlayAtom_t,
   &_swigt__p_std__shared_ptrT_MolpherAtom_t,
   &_swigt__p_std__shared_ptrT_MolpherMol_t,
+  &_swigt__p_std__shared_ptrT_MorphCollector_t,
   &_swigt__p_std__shared_ptrT_MorphingOperator_t,
   &_swigt__p_std__shared_ptrT_MutateAtom_t,
   &_swigt__p_std__shared_ptrT_RemoveAtom_t,
@@ -47683,6 +50843,7 @@ static swig_cast_info _swigc__p_InterlayAtom[] = {  {&_swigt__p_InterlayAtom, 0,
 static swig_cast_info _swigc__p_Molpher[] = {  {&_swigt__p_Molpher, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MolpherAtom[] = {  {&_swigt__p_MolpherAtom, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MolpherMol[] = {  {&_swigt__p_MolpherMol, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_MorphCollector[] = {  {&_swigt__p_MorphCollector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MorphingOperator[] = {  {&_swigt__p_InterlayAtom, _p_InterlayAtomTo_p_MorphingOperator, 0, 0},  {&_swigt__p_RemoveBond, _p_RemoveBondTo_p_MorphingOperator, 0, 0},  {&_swigt__p_MorphingOperator, 0, 0, 0},  {&_swigt__p_RemoveAtom, _p_RemoveAtomTo_p_MorphingOperator, 0, 0},  {&_swigt__p_ContractBond, _p_ContractBondTo_p_MorphingOperator, 0, 0},  {&_swigt__p_AddBond, _p_AddBondTo_p_MorphingOperator, 0, 0},  {&_swigt__p_AddAtom, _p_AddAtomTo_p_MorphingOperator, 0, 0},  {&_swigt__p_RerouteBond, _p_RerouteBondTo_p_MorphingOperator, 0, 0},  {&_swigt__p_MutateAtom, _p_MutateAtomTo_p_MorphingOperator, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MutateAtom[] = {  {&_swigt__p_MutateAtom, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PruneTreeOper[] = {  {&_swigt__p_PruneTreeOper, 0, 0, 0},{0, 0, 0, 0}};
@@ -47709,6 +50870,7 @@ static swig_cast_info _swigc__p_std__allocatorT_std__pairT_std__string_const_std
 static swig_cast_info _swigc__p_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t[] = {  {&_swigt__p_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t[] = {  {&_swigt__p_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_std__shared_ptrT_MolpherMol_t_t[] = {  {&_swigt__p_std__allocatorT_std__shared_ptrT_MolpherMol_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__allocatorT_std__shared_ptrT_MorphCollector_t_t[] = {  {&_swigt__p_std__allocatorT_std__shared_ptrT_MorphCollector_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t[] = {  {&_swigt__p_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_std__string_t[] = {  {&_swigt__p_std__allocatorT_std__string_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_unsigned_int_t[] = {  {&_swigt__p_std__allocatorT_unsigned_int_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -47728,6 +50890,7 @@ static swig_cast_info _swigc__p_std__shared_ptrT_ExplorationTree_t[] = {  {&_swi
 static swig_cast_info _swigc__p_std__shared_ptrT_InterlayAtom_t[] = {  {&_swigt__p_std__shared_ptrT_InterlayAtom_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_MolpherAtom_t[] = {  {&_swigt__p_std__shared_ptrT_MolpherAtom_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_MolpherMol_t[] = {  {&_swigt__p_std__shared_ptrT_MolpherMol_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__shared_ptrT_MorphCollector_t[] = {  {&_swigt__p_std__shared_ptrT_MorphCollector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_MorphingOperator_t[] = {  {&_swigt__p_std__shared_ptrT_MorphingOperator_t, 0, 0, 0},  {&_swigt__p_std__shared_ptrT_AddBond_t, _p_std__shared_ptrT_AddBond_tTo_p_std__shared_ptrT_MorphingOperator_t, 0, 0},  {&_swigt__p_std__shared_ptrT_ContractBond_t, _p_std__shared_ptrT_ContractBond_tTo_p_std__shared_ptrT_MorphingOperator_t, 0, 0},  {&_swigt__p_std__shared_ptrT_RemoveBond_t, _p_std__shared_ptrT_RemoveBond_tTo_p_std__shared_ptrT_MorphingOperator_t, 0, 0},  {&_swigt__p_std__shared_ptrT_RerouteBond_t, _p_std__shared_ptrT_RerouteBond_tTo_p_std__shared_ptrT_MorphingOperator_t, 0, 0},  {&_swigt__p_std__shared_ptrT_AddAtom_t, _p_std__shared_ptrT_AddAtom_tTo_p_std__shared_ptrT_MorphingOperator_t, 0, 0},  {&_swigt__p_std__shared_ptrT_RemoveAtom_t, _p_std__shared_ptrT_RemoveAtom_tTo_p_std__shared_ptrT_MorphingOperator_t, 0, 0},  {&_swigt__p_std__shared_ptrT_MutateAtom_t, _p_std__shared_ptrT_MutateAtom_tTo_p_std__shared_ptrT_MorphingOperator_t, 0, 0},  {&_swigt__p_std__shared_ptrT_InterlayAtom_t, _p_std__shared_ptrT_InterlayAtom_tTo_p_std__shared_ptrT_MorphingOperator_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_MutateAtom_t[] = {  {&_swigt__p_std__shared_ptrT_MutateAtom_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_RemoveAtom_t[] = {  {&_swigt__p_std__shared_ptrT_RemoveAtom_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -47766,6 +50929,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Molpher,
   _swigc__p_MolpherAtom,
   _swigc__p_MolpherMol,
+  _swigc__p_MorphCollector,
   _swigc__p_MorphingOperator,
   _swigc__p_MutateAtom,
   _swigc__p_PruneTreeOper,
@@ -47792,6 +50956,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t,
   _swigc__p_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t,
   _swigc__p_std__allocatorT_std__shared_ptrT_MolpherMol_t_t,
+  _swigc__p_std__allocatorT_std__shared_ptrT_MorphCollector_t_t,
   _swigc__p_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t,
   _swigc__p_std__allocatorT_std__string_t,
   _swigc__p_std__allocatorT_unsigned_int_t,
@@ -47811,6 +50976,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__shared_ptrT_InterlayAtom_t,
   _swigc__p_std__shared_ptrT_MolpherAtom_t,
   _swigc__p_std__shared_ptrT_MolpherMol_t,
+  _swigc__p_std__shared_ptrT_MorphCollector_t,
   _swigc__p_std__shared_ptrT_MorphingOperator_t,
   _swigc__p_std__shared_ptrT_MutateAtom_t,
   _swigc__p_std__shared_ptrT_RemoveAtom_t,

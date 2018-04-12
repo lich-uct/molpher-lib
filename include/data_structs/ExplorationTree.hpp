@@ -24,6 +24,7 @@
 #include "operations/callbacks/TraverseCallback.hpp"
 #include "operations/FilterMorphsOper.hpp"
 #include "morphing/operators/MorphingOperator.hpp"
+#include "morphing/MorphCollector.hpp"
 
 class ExplorationTree 
 #ifndef SWIG
@@ -71,6 +72,7 @@ public:
     bool isPathFound();
     void deleteSubtree(const std::string& canonSMILES, bool descendents_only = false);
     void generateMorphs();
+	void generateMorphs(const std::vector<std::shared_ptr<MorphCollector> >& collectors);
     void sortMorphs();
     void filterMorphs(bool verbose_output = false);
     void filterMorphs(FilterMorphsOper::MorphFilters filters, bool verbose_output = false);

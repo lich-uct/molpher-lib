@@ -19,3 +19,4 @@
 %ignore AtomLibrary::operator=(const AtomLibrary&);
 %include "AtomLibrary.hpp"
 %include "Molpher.hpp"
+%include "MorphCollector.hpp"

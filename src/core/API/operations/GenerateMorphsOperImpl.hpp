@@ -71,10 +71,13 @@ class GenerateMorphsOper::GenerateMorphsOperImpl : public TreeOperation::TreeOpe
 
 private:
     bool mSetTreeOwnershipForMorphs;
+	std::vector<std::shared_ptr<MorphCollector> > collectors;
     
 public:
     GenerateMorphsOperImpl(std::shared_ptr<ExplorationTree> expTree, bool set_ownership = false);
     GenerateMorphsOperImpl(bool set_ownership = false);
+	GenerateMorphsOperImpl(std::shared_ptr<ExplorationTree> expTree, const std::vector<std::shared_ptr<MorphCollector> >& collectors, bool set_tree_ownership = false);
+	GenerateMorphsOperImpl(const std::vector<std::shared_ptr<MorphCollector> >& collectors, bool set_tree_ownership = false);
     virtual void operator()();
 
 };

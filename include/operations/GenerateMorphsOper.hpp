@@ -27,7 +27,9 @@ class GenerateMorphsOper : public TreeOperation {
 public:
     class GenerateMorphsOperImpl;
     GenerateMorphsOper(std::shared_ptr<ExplorationTree> expTree, bool set_tree_ownership = false);
+	GenerateMorphsOper(std::shared_ptr<ExplorationTree> expTree, const std::vector<std::shared_ptr<MorphCollector> >& collectors, bool set_tree_ownership = false);
     GenerateMorphsOper(bool set_tree_ownership = false);
+    GenerateMorphsOper(const std::vector<std::shared_ptr<MorphCollector> >& collectors, bool set_tree_ownership = false);
     virtual void operator()();
     
 private:

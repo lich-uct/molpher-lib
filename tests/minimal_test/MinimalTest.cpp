@@ -608,7 +608,7 @@ void MinimalTest::testMolpher() {
 	molpher_custom_oper_collectors();
 	for (auto morph : molpher_custom_oper_collectors.getMorphs()) {
 		CPPUNIT_ASSERT_EQUAL(cymene->getSMILES(), morph->getParentSMILES());
-		CPPUNIT_ASSERT_EQUAL(-1.0, morph->getDistToTarget());
+		CPPUNIT_ASSERT_EQUAL(morph->getSAScore(), morph->getDistToTarget());
 	}
 
 	delete mol1;
@@ -823,12 +823,16 @@ void MinimalTest::testTreeOperatorsAndLocks() {
 		CPPUNIT_ASSERT(match_substr(tree->getCandidateMorphs(), source->getSMILES()));
 	}
 
-	// add back original operators and repeat
+	// add back original operators and repeat, use a collector too this time
 	tree->setMorphingOperators(orig_opers);
+	std::vector<std::shared_ptr<MorphCollector> > collectors;
+	collectors.push_back(std::static_pointer_cast<MorphCollector>(std::make_shared<PrintMorphingInfo>()));
 	for (int iter_idx = 0; iter_idx != 2; iter_idx++) {
-		tree->generateMorphs();
+		tree->generateMorphs(collectors);
+		for (auto morph : tree->getCandidateMorphs()) {
+			CPPUNIT_ASSERT_EQUAL(morph->getSAScore(), morph->getDistToTarget());
+		}
 		tree->filterMorphs((FilterMorphsOper::MorphFilters) filters, false);
-		printCandidates(tree, true, true);
 		tree->extend();
 		CPPUNIT_ASSERT(match_substr(tree->getCandidateMorphs(), source->getSMILES()));
 	}

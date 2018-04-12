@@ -1385,6 +1385,119 @@ class MorphingOperatorVector(_object):
 MorphingOperatorVector_swigregister = _core.MorphingOperatorVector_swigregister
 MorphingOperatorVector_swigregister(MorphingOperatorVector)
 
+class MorphCollectorVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MorphCollectorVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, MorphCollectorVector, name)
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _core.MorphCollectorVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _core.MorphCollectorVector___nonzero__(self)
+
+    def __bool__(self):
+        return _core.MorphCollectorVector___bool__(self)
+
+    def __len__(self):
+        return _core.MorphCollectorVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _core.MorphCollectorVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _core.MorphCollectorVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _core.MorphCollectorVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _core.MorphCollectorVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _core.MorphCollectorVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _core.MorphCollectorVector___setitem__(self, *args)
+
+    def pop(self):
+        return _core.MorphCollectorVector_pop(self)
+
+    def append(self, x):
+        return _core.MorphCollectorVector_append(self, x)
+
+    def empty(self):
+        return _core.MorphCollectorVector_empty(self)
+
+    def size(self):
+        return _core.MorphCollectorVector_size(self)
+
+    def swap(self, v):
+        return _core.MorphCollectorVector_swap(self, v)
+
+    def begin(self):
+        return _core.MorphCollectorVector_begin(self)
+
+    def end(self):
+        return _core.MorphCollectorVector_end(self)
+
+    def rbegin(self):
+        return _core.MorphCollectorVector_rbegin(self)
+
+    def rend(self):
+        return _core.MorphCollectorVector_rend(self)
+
+    def clear(self):
+        return _core.MorphCollectorVector_clear(self)
+
+    def get_allocator(self):
+        return _core.MorphCollectorVector_get_allocator(self)
+
+    def pop_back(self):
+        return _core.MorphCollectorVector_pop_back(self)
+
+    def erase(self, *args):
+        return _core.MorphCollectorVector_erase(self, *args)
+
+    def __init__(self, *args):
+        this = _core.new_MorphCollectorVector(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def push_back(self, x):
+        return _core.MorphCollectorVector_push_back(self, x)
+
+    def front(self):
+        return _core.MorphCollectorVector_front(self)
+
+    def back(self):
+        return _core.MorphCollectorVector_back(self)
+
+    def assign(self, n, x):
+        return _core.MorphCollectorVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _core.MorphCollectorVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _core.MorphCollectorVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _core.MorphCollectorVector_reserve(self, n)
+
+    def capacity(self):
+        return _core.MorphCollectorVector_capacity(self)
+    __swig_destroy__ = _core.delete_MorphCollectorVector
+    __del__ = lambda self: None
+MorphCollectorVector_swigregister = _core.MorphCollectorVector_swigregister
+MorphCollectorVector_swigregister(MorphCollectorVector)
+
 class MolpherAtom(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, MolpherAtom, name, value)
@@ -1813,8 +1926,8 @@ class ExplorationTree(_object):
     def deleteSubtree(self, canonSMILES, descendents_only=False):
         return _core.ExplorationTree_deleteSubtree(self, canonSMILES, descendents_only)
 
-    def generateMorphs(self):
-        return _core.ExplorationTree_generateMorphs(self)
+    def generateMorphs(self, *args):
+        return _core.ExplorationTree_generateMorphs(self, *args)
 
     def sortMorphs(self):
         return _core.ExplorationTree_sortMorphs(self)
@@ -2323,6 +2436,35 @@ class Molpher(_object):
         return _core.Molpher_reset(self, original)
 Molpher_swigregister = _core.Molpher_swigregister
 Molpher_swigregister(Molpher)
+
+class MorphCollector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MorphCollector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, MorphCollector, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        if self.__class__ == MorphCollector:
+            _self = None
+        else:
+            _self = self
+        this = _core.new_MorphCollector(_self, )
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _core.delete_MorphCollector
+    __del__ = lambda self: None
+
+    def __call__(self, morph, operator_):
+        return _core.MorphCollector___call__(self, morph, operator_)
+    def __disown__(self):
+        self.this.disown()
+        _core.disown_MorphCollector(self)
+        return weakref_proxy(self)
+MorphCollector_swigregister = _core.MorphCollector_swigregister
+MorphCollector_swigregister(MorphCollector)
 
 class MorphingOperator(_object):
     __swig_setmethods__ = {}
