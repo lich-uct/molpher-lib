@@ -92,7 +92,7 @@ class TestPythonAPI(unittest.TestCase):
     def testMolpherMol(self):
         mol = MolpherMol(self.test_target)
         mol.smiles = 'CCC'
-        self.assertTrue('CCC')
+        self.assertEqual(mol.getSMILES(), 'CCC')
         # mol.historic_descendents = ('CCC', 'CCCC')
         # self.assertEqual(('CCC', 'CCCC'), mol.historic_descendents)
 
