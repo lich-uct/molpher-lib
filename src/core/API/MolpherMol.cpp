@@ -138,9 +138,11 @@ void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
         throw exc;
     }
 
+    rd_mol.reset();
     rd_mol = std::move(mol); // take ownership of the instance
 
     // transfer locks and calculate valences for atoms
+    atoms.clear();
 	RDKit::ROMol::AtomIterator iter;
     for (iter = rd_mol->beginAtoms(); iter != rd_mol->endAtoms(); iter++) {
         RDKit::Atom* atom = *iter;
@@ -155,6 +157,7 @@ void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
     }
 
     data.SMILES = RDKit::MolToSmiles(*rd_mol, false, true, -1, true, false, false);
+    data.molBlock = RDKit::MolToMolBlock(*rd_mol, true, -1, false, false);
     data.formula = RDKit::Descriptors::calcMolFormula(*rd_mol);
     data.molecularWeight = RDKit::Descriptors::calcAMW(*rd_mol, true);
 }
@@ -259,7 +262,7 @@ std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::MolpherMolImpl::getNeighbo
 }
 
 std::string MolpherMol::MolpherMolImpl::asMolBlock() const {
-    return RDKit::MolToMolBlock(*rd_mol, true, -1, false, false);
+    return data.molBlock;
 }
 
 std::shared_ptr<MolpherMol> MolpherMol::MolpherMolImpl::fromMolBlock(const std::string &mol_block) {
