@@ -91,10 +91,10 @@ class TestPythonAPI(unittest.TestCase):
 
     def testMolpherMol(self):
         mol = MolpherMol(self.test_target)
+        self.assertTrue(mol.asRDMol())
+        self.assertTrue(mol.asMolBlock())
         mol.smiles = 'CCC'
         self.assertEqual(mol.getSMILES(), 'CCC')
-        # mol.historic_descendents = ('CCC', 'CCCC')
-        # self.assertEqual(('CCC', 'CCCC'), mol.historic_descendents)
 
         copy = mol.copy()
         copy.sascore = 0.54
@@ -425,6 +425,11 @@ class TestPythonAPI(unittest.TestCase):
         callback.morphs_in_tree = 0
         callback.closest_mol = None
 
+        all_bad_structures = []
+        def collect_syntetizable(morph, operator):
+            if morph.sascore > 6:
+                all_bad_structures.append(morph)
+
         class MorphingIteration(TreeOperation):
 
             parent = self
@@ -435,7 +440,7 @@ class TestPythonAPI(unittest.TestCase):
 
             def __call__(self):
                 print('Iteration: ', self._tree.getGenerationCount() + 1)
-                self._tree.generateMorphs()
+                self._tree.generateMorphs([collect_syntetizable])
                 for mol in self._tree.candidates:
                     self.parent.assertEqual(None, mol.tree)
                 self._tree.sortMorphs()
@@ -484,6 +489,11 @@ class TestPythonAPI(unittest.TestCase):
         self.assertFalse(tree.hasMol(child))
         self.assertEqual(None, child.tree)
         self.assertEqual(parent, child.getParentSMILES())
+
+        # check if valid molecules were extracted
+        self.assertTrue(len(all_bad_structures) > 0)
+        for mol in all_bad_structures:
+            self.assertTrue(mol.smiles)
 
         # check descendents
         def check_descs(morph):

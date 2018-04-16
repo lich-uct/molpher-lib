@@ -19,4 +19,4 @@ from molpher.core.operations.TreeOperation import TreeOperation
 
 
 class GenerateMorphsOper(core.GenerateMorphsOper, TreeOperation):
-    pass
+    pass # TODO: change body of this class so that MorphCollector is properly supported

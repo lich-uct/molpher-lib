@@ -20,6 +20,7 @@ Previous version: 0.0.0b1
     - `RerouteBond` (originally BondReroute) operator class was added that adheres to this interface
 - the `Molpher` class was created and can now be used to aggregate operators and generate random morphs of a structure (can use multiple threads)
 - `ExplorationTree` and `GenerateMorphsOper` operation now use the new `Molpher` interface to facilitate exploration
+- `ExplorationTree` and `GenerateMorphsOper` are also able to take instances of `MorphCollector`, which can be used to explore and/or modify morphs right after they are generated
 - `MolpherMol` can be used to get all neighbors of an atom with the `getNeighbors(int idx)` method
 - `MolpherMol` can be initialized from an MDL MOL block (using the `fromMolBlock()` static method) and from and RDKit molecule (using the `other` parameter in its constructor)
 - `MolpherMol` can readily be converted to an RDKit molecule with the `asRDMol()` method

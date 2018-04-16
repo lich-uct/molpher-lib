@@ -19,6 +19,7 @@ import warnings
 from molpher.core.ExplorationData import ExplorationData
 from molpher.core.MolpherMol import MolpherMol
 from molpher.core._utils import shorten_repr
+from molpher.core.morphing import MorphCollector
 from molpher.core.operations import TraverseOper
 from molpher.core.operations.TraverseOper import Callback
 
@@ -232,6 +233,15 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         else:
             cb = self.callback_class(callback)
             TraverseOper(self, cb)()
+
+    def generateMorphs(self, collectors=None):
+        if not collectors:
+            super(ExplorationTree, self).generateMorphs()
+        else:
+            _collectors = []
+            for collector in collectors:
+                _collectors.append(MorphCollector(collector))
+            super(ExplorationTree, self).generateMorphs(_collectors)
 
     def asData(self):
         """

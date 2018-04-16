@@ -182,6 +182,12 @@ void MinimalTest::testMolpherMol() {
     CPPUNIT_ASSERT(mol_mphr_rw.getAtom(6)->getLockingMask() == MolpherAtom::NO_ADDITION);
     CPPUNIT_ASSERT(mol_mphr_rw.getAtom(5)->getLockingMask() == (MolpherAtom::NO_MUTATION | MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::NO_REMOVAL));
 
+	// locks should be in the mol block
+    std::string mol_block(mol_mphr_rw.asMolBlock(true));
+    std::string expected_info_6(">  <MOLPHER_KEEP_NEIGHBORS>\n6\n");
+	std::string expected_info_7(">  <MOLPHER_NO_ADDITION>\n7\n");
+    CPPUNIT_ASSERT(mol_block.find(expected_info_6) != std::string::npos);
+	CPPUNIT_ASSERT(mol_block.find(expected_info_7) != std::string::npos);
 
     MolpherMol ethanol_no_add(test_dir + "ethanol.sdf");
     std::set<int> locked_indices{1,2};

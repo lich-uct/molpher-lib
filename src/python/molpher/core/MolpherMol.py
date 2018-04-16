@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import warnings
+from io import StringIO
 
 import molpher.swig_wrappers.core as wrappers
 import molpher.core.ExplorationTree
@@ -46,7 +47,7 @@ class MolpherMol(wrappers.MolpherMol):
         if other and isinstance(other, wrappers.MolpherMol):
             super(MolpherMol, self).__init__(other)
         elif other and isinstance(other, Chem.Mol):
-            # FIXME: probably not the best implementation of this -> should probably be handled through a SWIG typemap
+            # FIXME: this should be handled through a SWIG typemap from the C++ side or something similar (http://rdkit-discuss.narkive.com/edZG2UM5/pyobject-rdkit-romol)
             other_mmol = MolpherMol.fromMolBlock(Chem.MolToMolBlock(other))
             placed_locks = other.GetPropsAsDict()
             for key in placed_locks:
@@ -90,7 +91,7 @@ class MolpherMol(wrappers.MolpherMol):
         return copy
 
     def asRDMol(self, include_locks = True):
-        # FIXME: probably not the best implementation of this method -> should probably be handled through a SWIG typemap
+        # FIXME: this should be handled through a SWIG typemap from the C++ side or something similar (http://rdkit-discuss.narkive.com/edZG2UM5/pyobject-rdkit-romol)
         ret = Chem.MolFromMolBlock(self.asMolBlock())
         AllChem.Compute2DCoords(ret)
 

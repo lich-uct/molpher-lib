@@ -261,13 +261,62 @@ std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::MolpherMolImpl::getNeighbo
     return neighbors;
 }
 
-std::string MolpherMol::MolpherMolImpl::asMolBlock() const {
-    return data.molBlock;
+std::string MolpherMol::MolpherMolImpl::asMolBlock(bool include_locks) const {
+    RDKit::ROMol* temp = asRDMol(include_locks);
+	std::ostringstream os;
+	os << RDKit::MolToMolBlock(*temp) << std::endl;
+    if (include_locks) {
+		RDKit::STR_VECT prop_names = temp->getPropList();
+		for (MolpherAtom::LockingMask lock : MolpherAtom::atom_locks) {
+			std::string lock_prop_name("MOLPHER_" + MolpherAtom::lockToString(lock));
+			if (std::find(prop_names.begin(), prop_names.end(), lock_prop_name) != prop_names.end()) {
+				os << ">  <" << lock_prop_name << ">" << std::endl;
+				os << temp->getProp<std::string>(lock_prop_name) << std::endl;
+				os << std::endl;
+			}
+		}
+		os << "$$$$" << std::endl;
+    }
+    delete temp;
+    return os.str();
 }
 
 std::shared_ptr<MolpherMol> MolpherMol::MolpherMolImpl::fromMolBlock(const std::string &mol_block) {
     RDKit::RWMol* mol = RDKit::MolBlockToMol(mol_block, false, false, false);
     return std::shared_ptr<MolpherMol>(new MolpherMol(mol));
+}
+
+RDKit::RWMol* MolpherMol::MolpherMolImpl::asRDMol(bool include_locks) const {
+    RDKit::RWMol* ret = new RDKit::RWMol(*(rd_mol), true, -1);
+    if (include_locks) {
+        std::map<std::string, std::vector<int>> locks_map;
+        auto atoms = getAtoms();
+        for (int atm_idx = 0; atm_idx != atoms.size(); atm_idx++) {
+            auto atm = atoms[atm_idx];
+            if (atm->isLocked()) {
+                auto atm_locks(MolpherAtom::lockingMaskToString(atm->getLockingMask()));
+                for (auto lock : atm_locks) {
+                    if (locks_map.find(lock) == locks_map.end()) {
+                        locks_map[lock] = std::vector<int>();
+                    }
+                    locks_map[lock].push_back(atm_idx+1);
+                }
+            }
+        }
+
+        for (auto pair : locks_map) {
+            std::ostringstream oss;
+            std::copy(pair.second.begin(), pair.second.end()-1,
+                      std::ostream_iterator<int>(oss, ","));
+            oss << pair.second.back();
+            ret->setProp("MOLPHER_" + pair.first, oss.str());
+        }
+    }
+    return ret;
+}
+
+const std::vector<std::shared_ptr<MolpherAtom>> &MolpherMol::MolpherMolImpl::getAtoms() const {
+    return atoms;
 }
 
 void MolpherMol::addToDescendants(const std::string& smiles) {
@@ -402,8 +451,8 @@ void MolpherMol::removeFromTree() {
     }
 }
 
-RDKit::RWMol* MolpherMol::asRDMol() const {
-    return new RDKit::RWMol(*(pimpl->rd_mol), true, -1);
+RDKit::RWMol* MolpherMol::asRDMol(bool include_locks) const {
+    pimpl->asRDMol(include_locks);
 }
 
 void MolpherMol::lockAtom(int idx, int mask) {
@@ -415,7 +464,7 @@ std::shared_ptr<MolpherAtom> MolpherMol::getAtom(int idx) const {
 }
 
 const std::vector<std::shared_ptr<MolpherAtom>> &MolpherMol::getAtoms() const {
-    return pimpl->atoms;
+    return pimpl->getAtoms();
 }
 
 int MolpherMol::getAtomCount() const {
@@ -426,8 +475,8 @@ const std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::getNeighbors(int idx
     return pimpl->getNeighbors(idx);
 }
 
-std::string MolpherMol::asMolBlock() const {
-	return pimpl->asMolBlock();
+std::string MolpherMol::asMolBlock(bool include_locks) const {
+	return pimpl->asMolBlock(include_locks);
 }
 
 std::shared_ptr<MolpherMol> MolpherMol::fromMolBlock(const std::string &mol_block) {

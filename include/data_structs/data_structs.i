@@ -25,17 +25,7 @@
 %ignore MolpherMol::operator=(const MolpherMol&);
 %ignore MolpherMol::MolpherMol(RDKit::ROMol* rd_mol);
 %ignore MolpherMol::MolpherMol(RDKit::RWMol*& rd_mol);
-%ignore MolpherMol::MolpherMol(RDKit::RWMol* rd_mol
-                    			, const std::string& formula
-                    			, const std::string& parentSmile
-                    			, const unsigned& oper
-                    			, const double& dist
-                    			, const double& distToClosestDecoy
-                    			, const double& weight
-                    			, const double& sascore
-                    			, const std::set<int>& fixed_atoms
-                    	);
-%ignore MolpherMol::asRDMol() const;
+%ignore MolpherMol::asRDMol(bool include_locks = false) const;
 %catches(std::runtime_error) MolpherMol::setOwner(std::shared_ptr<ExplorationTree> tree);
 %catches(std::runtime_error) MolpherMol::setSMILES(const std::string& smiles);
 %catches(std::runtime_error) MolpherMol::setParentSMILES(const std::string& smiles);
