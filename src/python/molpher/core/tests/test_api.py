@@ -17,7 +17,6 @@
 import os, sys
 import unittest
 from io import StringIO, BytesIO
-from pprint import pprint
 
 from pkg_resources import resource_filename
 from rdkit import Chem
@@ -30,10 +29,9 @@ from molpher.core import MolpherAtom
 from molpher.core.morphing import AtomLibrary
 from molpher.core.morphing import Molpher
 from molpher.core.morphing.operators import *
-from molpher.core.operations import *
 from molpher.core.selectors import *
 
-class TestPythonAPI(unittest.TestCase):
+class TestAPI(unittest.TestCase):
 
     @staticmethod
     def getPathToMol(tree, mol):
@@ -344,172 +342,6 @@ class TestPythonAPI(unittest.TestCase):
         self.assertEqual(leaf.getDistToTarget(), 0.5)
         self.assertEqual(tree.leaves[0].getDistToTarget(), 0.5)
         self.assertEqual(leaf_copy.getDistToTarget(), 0.7)
-
-    def testOperations(self):
-        tree = ExplorationTree.create(tree_data={
-            'source' : self.test_source
-            , 'target' : self.test_target
-        })
-
-        iteration = [
-            GenerateMorphsOper()
-            , SortMorphsOper()
-            , FilterMorphsOper()
-            , ExtendTreeOper()
-            , PruneTreeOper()
-        ]
-
-        for oper in iteration:
-            self.assertRaises(RuntimeError, lambda : oper())
-
-        fl = FindLeavesOper()
-        for oper in iteration:
-            tree.runOperation(oper)
-        tree.runOperation(fl)
-        for leaf1, leaf2, leaf3 in zip(sorted(fl.leaves), sorted(fl.tree.leaves), sorted(tree.leaves)):
-            self.assertTrue(leaf1.smiles == leaf2.smiles == leaf3.smiles)
-
-        tree.generateMorphs()
-        tree.sortMorphs()
-        previous = None
-        for morph in tree.candidates:
-            if previous:
-                self.assertTrue(morph.dist_to_target >= previous)
-                previous = morph.dist_to_target
-            else:
-                previous = morph.dist_to_target
-        print([x.dist_to_target for x in tree.candidates])
-
-        my_callback = lambda a, b : a.getDistToTarget() > b.getDistToTarget()
-        my_sort = SortMorphsOper(tree, my_callback)
-        my_sort()
-
-        previous = None
-        for morph in tree.candidates:
-            if previous:
-                self.assertTrue(morph.dist_to_target <= previous)
-                previous = morph.dist_to_target
-            else:
-                previous = morph.dist_to_target
-        print([x.dist_to_target for x in tree.candidates])
-
-        tree.filterMorphs()
-        selected = sum(tree.candidates_mask)
-        clean_stuff = CleanMorphsOper()
-        tree.runOperation(clean_stuff)
-        self.assertEqual(len(tree.candidates), selected)
-
-        tree.extend()
-
-        callback = lambda x : sys.stdout.write(x.smiles + ' : ' + str(x.dist_to_target) + '\n')
-        oper = TraverseOper(callback=callback)
-        tree.runOperation(oper)
-
-    def testMorphing(self):
-        def callback(morph):
-            callback.morphs_in_tree += 1
-            self.assertTrue(morph)
-            self.assertTrue(morph.tree)
-            if morph.getItersWithoutDistImprovement() > 3:
-                print('Callback output:')
-                print(morph.getSMILES(), morph.getItersWithoutDistImprovement(), morph.getDistToTarget())
-            if not callback.closest_mol:
-                callback.closest_mol = morph
-            current_dist = morph.getDistToTarget()
-            min_dist = callback.closest_mol.getDistToTarget()
-            if min_dist > current_dist:
-                callback.closest_mol = morph
-        callback.morphs_in_tree = 0
-        callback.closest_mol = None
-
-        all_bad_structures = []
-        def collect_nonsyntetizable(morph, operator):
-            if morph.sascore > 6:
-                all_bad_structures.append(morph)
-
-        class MorphingIteration(TreeOperation):
-
-            parent = self
-
-            def __init__(self, tree):
-                super(MorphingIteration, self).__init__()
-                self._tree = tree
-
-            def __call__(self):
-                print('Iteration: ', self._tree.getGenerationCount() + 1)
-                self._tree.generateMorphs([collect_nonsyntetizable])
-                for mol in self._tree.candidates:
-                    self.parent.assertEqual(None, mol.tree)
-                self._tree.sortMorphs()
-                self._tree.filterMorphs()
-                self._tree.extend()
-                self._tree.prune()
-                callback.morphs_in_tree = 0
-                self._tree.traverse(callback)
-                print('Number of morphs in the tree: ', callback.morphs_in_tree)
-                print('Closest molecule to target: {0} -- distance: {1}'.format(
-                    callback.closest_mol.getSMILES()
-                    , callback.closest_mol.getDistToTarget()
-                ))
-
-            def getTree(self):
-                return self._tree
-
-            def setTree(self, tree):
-                self._tree = tree
-
-        tree = ExplorationTree.create(tree_data={
-            'source' : self.test_source
-            , 'target' : self.test_target
-            # , 'threads' : 1
-        })
-
-        iterate = MorphingIteration(tree)
-        counter = 0
-        while True:
-            iterate()
-            counter += 1
-            if tree.path_found:
-                target = tree.fetchMol(self.test_target)
-                assert target
-                print("Path found after {0} iterations:".format(counter))
-                path = self.getPathToMol(tree, target)
-                pprint([(x.smiles, x.dist_to_target, x.parent_operator) for x in path])
-                break
-
-        child = tree.leaves[0]
-        self.assertTrue(child.tree)
-        self.assertTrue(tree.hasMol(child))
-        parent = child.getParentSMILES()
-        tree.deleteSubtree(parent)
-        self.assertFalse(tree.hasMol(parent))
-        self.assertFalse(tree.hasMol(child))
-        self.assertEqual(None, child.tree)
-        self.assertEqual(parent, child.getParentSMILES())
-
-        # check if valid molecules were extracted
-        self.assertTrue(len(all_bad_structures) > 0)
-        for mol in all_bad_structures:
-            self.assertTrue(mol.smiles)
-
-        # check descendents
-        def check_descs(morph):
-            for desc_smiles in morph.descendents:
-                desc = tree.fetchMol(desc_smiles)
-                self.assertTrue(desc.tree)
-        tree.traverse(check_descs)
-
-    def testMorphingWithLocks(self):
-        tree = ExplorationTree.create(source=MolpherMol(self.captopril))
-
-        def some_collector(morph, operator):
-            assert  operator.name
-            assert  morph.smiles
-            print(morph.smiles, operator.name)
-
-        gen_morphs = GenerateMorphsOper(collectors=[some_collector])
-        tree.runOperation(gen_morphs)
-        # TODO: continue this (check if substructure maintained and stuff)
 
 if __name__ == "__main__":
     unittest.main()
