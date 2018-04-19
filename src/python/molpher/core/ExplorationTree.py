@@ -20,6 +20,7 @@ from molpher.core.ExplorationData import ExplorationData
 from molpher.core.MolpherMol import MolpherMol
 from molpher.core._utils import shorten_repr
 from molpher.core.morphing import MorphCollector
+from molpher.core.morphing.operators import MorphingOperator
 from molpher.core.operations import TraverseOper
 from molpher.core.operations.TraverseOper import Callback
 
@@ -50,7 +51,7 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         return ret
 
     @staticmethod
-    def create(tree_data=None, source=None, target=None, callback_class=Callback):
+    def create(tree_data=None, source=None, target=None):
         """
         Create an exploration tree.
 
@@ -62,8 +63,6 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         :type source: `str` or :class:`~molpher.core.MolpherMol.MolpherMol`
         :param target: SMILES of the target molecule
         :type target: `str` or :class:`~molpher.core.MolpherMol.MolpherMol`
-        :param callback_class: the class to use when making a callback using the :meth:`traverse` method
-        :type callback_class: any class derived from `Callback`
 
         ..  note:: When ``tree_data`` is specified, ``source`` and ``target`` are always ignored.
 
@@ -86,13 +85,15 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
             if type(target) == str:
                 target = MolpherMol(target)
             ret = super(ExplorationTree, ExplorationTree).create(source, target)
+        elif source:
+            ret = super(ExplorationTree, ExplorationTree).create(source)
         else:
             raise AttributeError('Invalid set of parameters specified.')
 
         if not ret:
             raise RuntimeError('No tree initilized.')
 
-        ret.callback_class = callback_class
+        ret.callback_class = Callback
         ret.__class__ = ExplorationTree
 
         return ret
@@ -125,6 +126,18 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
             self_data = self.asData()
             self_data.param_dict = params
             self.update(self_data)
+
+    @property
+    def morphing_operators(self):
+        ret = self.getMorphingOperators()
+        if ret:
+            for x in ret:
+                x.__class__ = MorphingOperator
+        return ret
+
+    @morphing_operators.setter
+    def morphing_operators(self, opers):
+        self.setMorphingOperators(opers)
 
     @property
     def generation_count(self):

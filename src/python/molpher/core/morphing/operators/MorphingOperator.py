@@ -17,6 +17,7 @@
 import molpher
 from abc import ABCMeta, abstractmethod
 from molpher.core._utils import shorten_repr
+from molpher.core.MolpherMol import MolpherMol
 
 
 class MorphingOperator(molpher.swig_wrappers.core.MorphingOperator):
@@ -30,20 +31,27 @@ class MorphingOperator(molpher.swig_wrappers.core.MorphingOperator):
 
     def __init__(self):
         super(MorphingOperator, self).__init__()
-        self.original = self.getOriginal()
 
     def __repr__(self):
         return shorten_repr(MorphingOperator, self)
 
-    @abstractmethod
+    @property
+    def original(self):
+        return self.getOriginal()
+
+    @original.setter
+    def original(self, mol):
+        self.setOriginal(mol)
+
+    @property
+    def name(self):
+        return self.getName()
+
+    def getOriginal(self):
+        ret = super(MorphingOperator, self).getOriginal()
+        if ret:
+            ret.__class__ = MolpherMol
+        return ret
+
     def setOriginal(self, mol):
-        self.original = mol
-        self.original.__class__ = molpher.core.MolpherMol
-
-    @abstractmethod
-    def morph(self):
-        pass
-
-    @abstractmethod
-    def getName(self):
-        pass
+        super(MorphingOperator, self).setOriginal(mol)

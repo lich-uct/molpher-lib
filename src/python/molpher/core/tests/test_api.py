@@ -60,6 +60,7 @@ class TestPythonAPI(unittest.TestCase):
         self.isopropylphenol = os.path.join(self.test_dir, 'isopropylphenol.sdf')
         self.contract_bond_test_mol = os.path.join(self.test_dir, 'contract_bond_test_mol.sdf')
         self.reroute_test_mol = os.path.join(self.test_dir, 'reroute_test_mol.sdf')
+        self.captopril = os.path.join(self.test_dir, 'captopril.sdf')
 
     def tearDown(self):
         pass
@@ -234,10 +235,6 @@ class TestPythonAPI(unittest.TestCase):
 
     def testMorphingOperator(self):
         class Identity(MorphingOperator):
-
-            def setOriginal(self, mol):
-                super(Identity, self).setOriginal(mol)
-                assert mol.smiles
 
             def morph(self):
                 return self.original.copy()
@@ -426,7 +423,7 @@ class TestPythonAPI(unittest.TestCase):
         callback.closest_mol = None
 
         all_bad_structures = []
-        def collect_syntetizable(morph, operator):
+        def collect_nonsyntetizable(morph, operator):
             if morph.sascore > 6:
                 all_bad_structures.append(morph)
 
@@ -440,7 +437,7 @@ class TestPythonAPI(unittest.TestCase):
 
             def __call__(self):
                 print('Iteration: ', self._tree.getGenerationCount() + 1)
-                self._tree.generateMorphs([collect_syntetizable])
+                self._tree.generateMorphs([collect_nonsyntetizable])
                 for mol in self._tree.candidates:
                     self.parent.assertEqual(None, mol.tree)
                 self._tree.sortMorphs()
@@ -501,6 +498,18 @@ class TestPythonAPI(unittest.TestCase):
                 desc = tree.fetchMol(desc_smiles)
                 self.assertTrue(desc.tree)
         tree.traverse(check_descs)
+
+    def testMorphingWithLocks(self):
+        tree = ExplorationTree.create(source=MolpherMol(self.captopril))
+
+        def some_collector(morph, operator):
+            assert  operator.name
+            assert  morph.smiles
+            print(morph.smiles, operator.name)
+
+        gen_morphs = GenerateMorphsOper(collectors=[some_collector])
+        tree.runOperation(gen_morphs)
+        # TODO: continue this (check if substructure maintained and stuff)
 
 if __name__ == "__main__":
     unittest.main()

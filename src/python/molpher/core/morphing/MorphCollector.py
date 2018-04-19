@@ -18,6 +18,7 @@ import molpher
 
 from molpher.core.MolpherMol import MolpherMol
 from molpher.core._utils import shorten_repr
+from molpher.core.morphing.operators import MorphingOperator
 
 
 class MorphCollector(molpher.swig_wrappers.core.MorphCollector):
@@ -36,4 +37,5 @@ class MorphCollector(molpher.swig_wrappers.core.MorphCollector):
 
     def __call__(self, morph, operator):
         morph.__class__ = MolpherMol
+        operator.__class__ = MorphingOperator
         self.function_to_call(morph, operator)

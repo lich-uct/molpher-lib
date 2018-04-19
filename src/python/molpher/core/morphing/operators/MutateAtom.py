@@ -14,8 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import molpher.swig_wrappers.core as wrappers
-from molpher.core import MolpherMol
-from molpher.core.MolpherAtom import MolpherAtom
+from molpher.core.MolpherMol import MolpherMol
 from molpher.core._utils import shorten_repr
 
 class MutateAtom(wrappers.MutateAtom):

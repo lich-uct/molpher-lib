@@ -16,7 +16,18 @@
 
 import molpher.swig_wrappers.core as core
 from molpher.core.operations.TreeOperation import TreeOperation
+from molpher.core.morphing.MorphCollector import MorphCollector
 
 
 class GenerateMorphsOper(core.GenerateMorphsOper, TreeOperation):
-    pass # TODO: change body of this class so that MorphCollector is properly supported
+
+    def __init__(self, tree = None, collectors=()):
+        self._collectors = [MorphCollector(x) for x in collectors]
+        if not self._collectors and not tree:
+            super(GenerateMorphsOper, self).__init__()
+        elif not self._collectors and tree:
+            super(GenerateMorphsOper, self).__init__(tree)
+        elif self._collectors and not tree:
+            super(GenerateMorphsOper, self).__init__(self._collectors)
+        elif self._collectors and tree:
+            super(GenerateMorphsOper, self).__init__(tree, self._collectors)
