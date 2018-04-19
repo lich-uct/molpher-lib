@@ -224,6 +224,7 @@ class TestMorphing(unittest.TestCase):
         tree.sortMorphs()
         tree.filterMorphs()
         tree.extend()
+        # TODO: check if structure locked as it should be throughout generations
 
 if __name__ == "__main__":
     unittest.main()
