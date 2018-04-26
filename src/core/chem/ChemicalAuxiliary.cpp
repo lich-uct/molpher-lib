@@ -55,7 +55,7 @@ RDKit::Bond *GetRandomNonSingleBond(RDKit::Atom &atom)
     RDKit::ROMol::OEDGE_ITER beg, end;
     boost::tie(beg, end) = mol.getAtomBonds(&atom);
     while (beg != end) {
-        bond = mol[*beg++].get();
+        bond = mol[*beg++];
         int bo = RDKit::queryBondOrder(bond);
         if (bo > 1 && bo <= 6) {
             candidates.push_back(bond);
@@ -72,7 +72,7 @@ bool HasNonSingleBond(RDKit::Atom &atom)
     RDKit::ROMol::OEDGE_ITER beg, end;
     boost::tie(beg, end) = mol.getAtomBonds(&atom);
     while (beg != end) {
-        bond = mol[*beg++].get();
+        bond = mol[*beg++];
         int bo = RDKit::queryBondOrder(bond);
         if (bo > 1 && bo <= 6) {
             return true;

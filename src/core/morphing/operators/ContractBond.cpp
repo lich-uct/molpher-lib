@@ -141,7 +141,7 @@ std::shared_ptr<MolpherMol> ContractBond::ContractBondImpl::morph() {
 		RDKit::ROMol::OEDGE_ITER beg, end;
 		boost::tie(beg, end) = newMol->getAtomBonds(atomToRemove);
 		while (beg != end) {
-			bondToChange = (*original_rdkit)[*beg++].get();
+			bondToChange = (*original_rdkit)[*beg++];
 			if (bondToChange->getIdx() == bond->getIdx()) {
 				continue;
 			}

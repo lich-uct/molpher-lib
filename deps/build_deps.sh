@@ -19,9 +19,9 @@ set -e
 # -------------------------------------- COMMENT -------------------------------------- #
 
 # Dependency links
-TBB_LINK=http://www.threadingbuildingblocks.org/sites/default/files/software_releases/linux/tbb42_20130725oss_lin.tgz
-BOOST_LINK=https://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.gz/download
-RDKIT_LINK=https://github.com/rdkit/rdkit/archive/Release_2017_09_1.tar.gz
+TBB_LINK=https://github.com/01org/tbb/releases/download/2018_U3/tbb2018_20180312oss_lin.tgz
+BOOST_LINK=https://sourceforge.net/projects/boost/files/boost/1.65.0/boost_1_65_0.tar.gz/download
+RDKIT_LINK=https://github.com/rdkit/rdkit/archive/Release_2018_03_1.tar.gz
 
 # Dependency compilation flags
 want_help=0
@@ -130,10 +130,10 @@ build_tbb()
     fi
 
     # changing the name of the package
-    count=`ls -1 tbb42_*.tgz 2>/dev/null | wc -l`
+    count=`ls -1 tbb*.tgz 2>/dev/null | wc -l`
     if [ $count -ge 1 ]
     then
-        mv tbb42_*.tgz tbb.tar.gz
+        mv tbb*.tgz tbb.tar.gz
     fi
 
     # download if doesn't exist
@@ -144,7 +144,7 @@ build_tbb()
 
     echo "Unpacking..."
     tar --extract --gzip --file=tbb.tar.gz
-    mv tbb42_*oss tbb
+    mv tbb*oss tbb
 
     # cd tbb
     # just use make - it will take care of all
@@ -238,7 +238,7 @@ build_rdkit()
     echo "LD_LIBRARY_PATH=`pwd`/lib:`pwd`/../boost/stage/lib" >> $cmd
     echo "mkdir build" >> $cmd
     echo "cd build" >> $cmd
-    echo "cmake -G \"Unix Makefiles\" -D RDK_BUILD_PYTHON_WRAPPERS= -D BOOST_ROOT=../boost -D RDK_INSTALL_STATIC_LIBS=OFF -D Boost_USE_STATIC_LIBS=OFF .." >> $cmd
+    echo "cmake -G \"Unix Makefiles\" -D RDK_BUILD_PYTHON_WRAPPERS= -D BOOST_ROOT=../boost -D RDK_INSTALL_STATIC_LIBS=OFF -D Boost_USE_STATIC_LIBS=OFF -D RDK_OPTIMIZE_NATIVE=OFF .." >> $cmd
     echo "make -j 4" >> $cmd
     echo "make install" >> $cmd
     echo "cd .." >> $cmd

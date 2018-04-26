@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # setup the project
-BUILD_DIR=$BASE_DIR/build/molpher-lib/
+BUILD_DIR=$BASE_DIR/.conda-build/
 JOBS=`grep -c ^processor /proc/cpuinfo`
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
@@ -13,9 +13,8 @@ make -j $JOBS molpher_install
 
 # build the bindings and install the Python package to the build environment
 cd $BASE_DIR
-#cp res/SAScore.dat src/python/molpher/swig_wrappers/
 $PYTHON setup.py install
 
 # clean up
 rm -rf ${BASE_DIR}/dist
-rm -rf ${BASE_DIR}/build
+rm -rf $BUILD_DIR

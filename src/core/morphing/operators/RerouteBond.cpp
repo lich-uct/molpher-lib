@@ -87,7 +87,7 @@ void RerouteBond::RerouteBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_o
 					RDKit::ROMol::ADJ_ITER beg, end;
 					boost::tie(beg, end) = mol.getAtomNeighbors(atom0);
 					while (beg != end) {
-						atom1 = mol[*beg++].get();
+						atom1 = mol[*beg++];
 						if ((atom0->getIdx() == bondAtoms[1]->getIdx()) &&
 							(atom1->getIdx() == bondAtoms[0]->getIdx())) {
 							// the same bond as we calculate with

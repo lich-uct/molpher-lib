@@ -254,7 +254,7 @@ std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::MolpherMolImpl::getNeighbo
     RDKit::ROMol::ADJ_ITER beg, end;
     boost::tie(beg, end) = mol.getAtomNeighbors(mol.getAtomWithIdx(idx));
     while (beg != end) {
-        RDKit::Atom *neighbor = mol[*beg].get();
+        RDKit::Atom *neighbor = mol[*beg];
         neighbors.push_back(getAtom(neighbor->getIdx()));
         ++beg;
     }

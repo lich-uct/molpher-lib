@@ -39,6 +39,6 @@ MorganFngpr::~MorganFngpr()
 Fingerprint *MorganFngpr::GetFingerprint(RDKit::ROMol *mol)
 {
     return RDKit::MorganFingerprints::getFingerprintAsBitVect(*mol, mRadius,
-        mNBits, mInvariants, mFromAtoms, mUseBondTypes, mOnlyNonzeroInvariants,
+        mNBits, mInvariants, mFromAtoms, mUseChirality, mUseBondTypes, mOnlyNonzeroInvariants,
         mAtomsSettingBits);
 }

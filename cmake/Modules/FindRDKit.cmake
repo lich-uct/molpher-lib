@@ -75,6 +75,12 @@ else()
             message(STATUS "Found RDKit libraries at ${RDKIT_LIBRARY_DIR}")
             unset(GRAPHMOL_LIB CACHE)
 
+#            if(RDKIT_LINK_STATIC)
+#                file(GLOB RDKIT_LIBRARIES "${RDKIT_LIBRARY_DIR}/libRDKit*${LIB_SUFFIX}}*.a")
+#            else()
+#                file(GLOB RDKIT_LIBRARIES "${RDKIT_LIBRARY_DIR}/libRDKit*.so")
+#            endif()
+
             foreach(name
                     RDKitFileParsers
                     RDKitSmilesParse
@@ -106,6 +112,8 @@ else()
                     RDKitForceFieldHelpers
                     RDKitMolTransforms
                     RDKitEigenSolvers
+                    RDKitmaeparser
+                    RDKitcoordgenlib
 
                     # other libs (not linked atm)
 #                    RDKitFMCS

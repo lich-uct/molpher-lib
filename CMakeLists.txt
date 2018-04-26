@@ -9,9 +9,10 @@ file(STRINGS "BUILD.TXT" BUILD_NUMBER LIMIT_COUNT 1)
 file(STRINGS "VERSION.TXT" VERSION_NUMBER LIMIT_COUNT 1)
 string(REGEX MATCH "^[0-9]+\\.[0-9]+" VERSION_NUMBER_SO "${VERSION_NUMBER}")
 
-# Tool Flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wno-deprecated-declarations")
-add_definitions("-D_GLIBCXX_USE_CXX11_ABI=0")
+# Tool Flags and other global settings
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
+#add_definitions("-D_GLIBCXX_USE_CXX11_ABI=0")
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib/.")
 

@@ -8,7 +8,6 @@ source:
 build:
   number: {{ build_number }}
   string: {{ build_string }}
-  preserve_egg_dir: True
   script_env:
     - BASE_DIR
 
@@ -16,17 +15,15 @@ requirements:
   build:
     - {{ python_spec }}
     - boost
-    - rdkit
+    - gxx_linux-64
+    - rdkit>=2018.03.1
     - tbb
     - cmake
   run:
     - {{ python_spec }}
     - boost
-    - rdkit
+    - rdkit>=2018.03.1
     - tbb
-#    - {{ tbb_spec }}
-#    - {{ boost_spec }}
-#    - {{ rdkit_spec }}
 
 about:
   license : GPL-3.0
