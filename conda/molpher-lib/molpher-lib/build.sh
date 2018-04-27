@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # setup the project
-BUILD_DIR=$BASE_DIR/.conda-build/
+BUILD_DIR=$BASE_DIR/build/
 JOBS=`grep -c ^processor /proc/cpuinfo`
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR

@@ -26,7 +26,7 @@ version = imp.load_source('module.name', os.path.join(BASE_DIR, 'version.py'))
 BUILD_ALL_PYTHON = False
 TARGETS = ["molpher-lib"]
 CONDA_FLAGS = {
-    "molpher-lib" : "-c rdkit -c conda-forge --croot /tmp/conda-bld/"
+    "molpher-lib" : "-c rdkit --croot /tmp/conda-bld/"
 }
 PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5', '3.6'] if BUILD_ALL_PYTHON else ['3', '2']
 VERSION = version.VERSION

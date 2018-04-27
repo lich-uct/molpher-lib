@@ -12,7 +12,6 @@ string(REGEX MATCH "^[0-9]+\\.[0-9]+" VERSION_NUMBER_SO "${VERSION_NUMBER}")
 # Tool Flags and other global settings
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
-#add_definitions("-D_GLIBCXX_USE_CXX11_ABI=0")
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib/.")
 
@@ -63,29 +62,41 @@ set(Boost_USE_MULTITHREADED ON)
 find_package(
         Boost REQUIRED
 
-#        date_time
+        COMPONENTS
         filesystem
-#        program_options
-#        regex
-#        wserialization
         serialization
-#        signals
-        thread
-#        system
 )
 if(NOT Boost_FOUND)
     message(FATAL_ERROR "Boost library not found")
 endif()
 include_directories(${Boost_INCLUDE_DIRS})
-set(LIBS ${LIBS} ${Boost_LIBRARIES})
+set(LIBS ${LIBS} ${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SERIALIZATION_LIBRARY})
 add_definitions(${Boost_DEFINITIONS})
-add_definitions("-DDBOOST_ALL_NO_LIB -DDBOOST_THREAD_USE_LIB")
 message(STATUS "Boost include directories: ${Boost_INCLUDE_DIRS}")
 message(STATUS "Boost libraries found: ${Boost_LIBRARIES}")
 
 ## RDKit
 #set(RDKIT_LINK_STATIC ON)
-find_package(RDKit REQUIRED)
+find_package(
+        RDKit REQUIRED
+
+        COMPONENTS
+        RDKitFileParsers
+        RDKitSmilesParse
+        RDKitDataStructs
+        RDKitPartialCharges
+        RDKitDescriptors
+        RDKitFingerprints
+        RDKitDepictor
+        RDKitRDGeometryLib
+        RDKitRDGeneral
+        RDKitSubstructMatch
+        RDKitSubgraphs
+        RDKitFileParsers
+        RDKitGraphMol
+        RDKitmaeparser
+        RDKitcoordgenlib
+        )
 if(NOT RDKIT_FOUND)
     message(FATAL_ERROR "RDKit library or include files not found")
 endif()
@@ -114,6 +125,9 @@ message(STATUS "Found TBB libraries at ${TBB_LIBRARIES}")
 ## CPPUNIT
 if(INCLUDE_TESTS)
     find_package(CppUnit)
+    if(NOT CPPUNIT_FOUND)
+        message(FATAL_ERROR "C++ unit tests required, but the cppunit library was not found.")
+    endif()
 endif()
 if (CPPUNIT_LIBRARIES)
     set(TEST_LIBS ${TEST_LIBS} ${CPPUNIT_LIBRARIES})
@@ -143,12 +157,17 @@ target_link_libraries(molpher ${LIBS})
 ## update the SWIG wrapping code if requested
 set(PYTHON_PACKAGE_DIR ${CMAKE_SOURCE_DIR}/src/python/molpher/swig_wrappers)
 option(RUN_SWIG "Run SWIG" OFF)
+if (SWIG_EXECUTABLE)
+    set(SWIG_COMMAND ${SWIG_EXECUTABLE})
+else()
+    set(SWIG_COMMAND swig)
+endif ()
 if(RUN_SWIG)
-    message(STATUS "SWIG wrapping code will be updated")
+    message(STATUS "SWIG wrapping code will be updated. SWIG command: ${SWIG_COMMAND}")
     add_custom_command(
             TARGET molpher
             PRE_BUILD
-            COMMAND swig3.0 -python -I${CMAKE_SOURCE_DIR}/include/ -Wall -c++ -outdir ${PYTHON_PACKAGE_DIR} -o ${CMAKE_SOURCE_DIR}/src/swig/molpher_wrap.cpp ${CMAKE_SOURCE_DIR}/include/molpher.i
+            COMMAND ${SWIG_COMMAND} -python -I${CMAKE_SOURCE_DIR}/include/ -Wall -c++ -outdir ${PYTHON_PACKAGE_DIR} -o ${CMAKE_SOURCE_DIR}/src/swig/molpher_wrap.cpp ${CMAKE_SOURCE_DIR}/include/molpher.i
     )
 else()
     message(STATUS "SWIG wrapping code will NOT be updated. Use the -DRUN_SWIG=ON to update.")
@@ -267,6 +286,7 @@ add_custom_target(
 
 if (CPPUNIT_LIBRARIES)
     ## create the unit test installation target
+    message(STATUS "Unit test binary executable will be installed to ${CMAKE_INSTALL_PREFIX}.")
     get_filename_component(TEST_LIBS_DIR ${TEST_LIBS} DIRECTORY)
     FILE(GLOB TEST_LIBS_NAMES "${TEST_LIBS_DIR}/libcppunit*")
     add_custom_command(
@@ -320,21 +340,21 @@ set(MOLPHER_INSTALL_TARGET_DEPENDS "molpher")
 # TODO: make the definition of the options below more automatic
 option(INSTALL_TBB "Install TBB with the library" ON)
 if (INSTALL_TBB)
-    message(STATUS "TBB will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_TBB=OFF to disable.")
+    message(STATUS "TBB will be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_TBB=OFF to disable.")
     set(MOLPHER_INSTALL_TARGET_DEPENDS ${MOLPHER_INSTALL_TARGET_DEPENDS} ${TBB_TARGET})
 else()
     message(STATUS "The TBB runtime dependency will NOT be installed with the library. Use -DINSTALL_TBB=ON to enable.")
 endif()
 option(INSTALL_Boost "Install Boost with the library" ON)
 if (INSTALL_Boost)
-    message(STATUS "Boost will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_Boost=OFF to disable.")
+    message(STATUS "Boost will be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_Boost=OFF to disable.")
     set(MOLPHER_INSTALL_TARGET_DEPENDS ${MOLPHER_INSTALL_TARGET_DEPENDS} ${Boost_TARGET})
 else()
     message(STATUS "The Boost runtime dependency will NOT be installed with the library. Use -DINSTALL_Boost=ON to enable.")
 endif()
 option(INSTALL_RDKit "Install RDKit with the library" ON)
 if (INSTALL_RDKit)
-    message(STATUS "RDKit will also be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_RDKit=OFF to disable.")
+    message(STATUS "RDKit will be installed to ${CMAKE_INSTALL_PREFIX}. Use -DINSTALL_RDKit=OFF to disable.")
     set(MOLPHER_INSTALL_TARGET_DEPENDS ${MOLPHER_INSTALL_TARGET_DEPENDS} ${RDKIT_TARGET})
 else()
     message(STATUS "The RDKit runtime dependency will NOT be installed with the library. Use -DINSTALL_RDKit=ON to enable.")
@@ -344,7 +364,8 @@ endif()
 add_custom_target(${MOLPHER_INSTALL_TARGET}
         make install
         DEPENDS ${MOLPHER_INSTALL_TARGET_DEPENDS}
-        COMMENT "Installing ${PROJECT_NAME} and the selected libraries...")
+        COMMENT "Installing ${PROJECT_NAME} and the selected libraries..."
+)
 
 # Add the default installation directory to clean
 set(DIST_PREFIX
@@ -356,27 +377,30 @@ set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${CMAKE_SOUR
 
 # Build the SWIG wrappers for Python
 
-## add target for the binaries and resource files
-if(NOT PYTHON_EXECUTABLE)
+if(CONDA_PREFIX)
+    set(PYTHON_EXECUTABLE "${CONDA_PREFIX}/python")
+elseif(NOT PYTHON_EXECUTABLE)
     message(STATUS "PYTHON_EXECUTABLE not set. Using system defaults.")
     set(PYTHON_EXECUTABLE "python")
 endif()
+message(STATUS "Python executable set to: ${PYTHON_EXECUTABLE}")
 execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import sys;info = sys.version_info;sys.stdout.write('{0}.{1}'.format(info.major, info.minor))" OUTPUT_VARIABLE PYTHON_VERSION)
 set(PYTHON_INSTALL_PREFIX
         "${CMAKE_INSTALL_PREFIX}/lib/python${PYTHON_VERSION}/site-packages" CACHE PATH "python package install directory" FORCE
         )
 set(ENV{PYTHONPATH} ${PYTHON_INSTALL_PREFIX} ENV{PYTHONPATH})
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(PYTHON_BUILD_OPTIONS "${PYTHON_BUILD_OPTIONS}--inplace")
+endif()
 add_custom_command(
         OUTPUT
-        ${PYTHON_PACKAGE_DIR}/SAScore.dat
-        ${PYTHON_PACKAGE_DIR}/*.so
-        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py build_ext --library-dirs=${CMAKE_INSTALL_PREFIX}/lib/ --rpath=${CMAKE_INSTALL_PREFIX}/lib/
-#        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/res/SAScore.dat ${PYTHON_PACKAGE_DIR}/SAScore.dat
+        ${PYTHON_PACKAGE_DIR}/_core*.so
+        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py build_ext --library-dirs=${CMAKE_INSTALL_PREFIX}/lib/ --rpath=${CMAKE_INSTALL_PREFIX}/lib/ ${PYTHON_BUILD_OPTIONS}
         COMMAND ${CMAKE_COMMAND} -E make_directory ${PYTHON_INSTALL_PREFIX}
         COMMAND ${CMAKE_COMMAND} -E env PYTHONPATH=$ENV{PYTHONPATH} ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py install --prefix ${CMAKE_INSTALL_PREFIX}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
 add_custom_target(molpher_install_python
-        DEPENDS ${MOLPHER_INSTALL_TARGET} ${PYTHON_PACKAGE_DIR}/*.so # this works, but the library files are not cleaned for some reason...
+        DEPENDS ${MOLPHER_INSTALL_TARGET} ${PYTHON_PACKAGE_DIR}/_core*.so # this works, but the library files are not cleaned for some reason...
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Built and installed SWIG wrapper module for Python...")

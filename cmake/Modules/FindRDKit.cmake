@@ -75,63 +75,7 @@ else()
             message(STATUS "Found RDKit libraries at ${RDKIT_LIBRARY_DIR}")
             unset(GRAPHMOL_LIB CACHE)
 
-#            if(RDKIT_LINK_STATIC)
-#                file(GLOB RDKIT_LIBRARIES "${RDKIT_LIBRARY_DIR}/libRDKit*${LIB_SUFFIX}}*.a")
-#            else()
-#                file(GLOB RDKIT_LIBRARIES "${RDKIT_LIBRARY_DIR}/libRDKit*.so")
-#            endif()
-
-            foreach(name
-                    RDKitFileParsers
-                    RDKitSmilesParse
-                    RDKitCatalogs
-                    RDKitFilterCatalog
-                    RDKitDataStructs
-                    RDKitPartialCharges
-                    RDKitDescriptors
-                    RDKitFingerprints
-                    RDKitChemTransforms
-                    RDKitChemReactions
-                    RDKitDepictor
-                    RDKitRDGeometryLib
-                    RDKitRDGeneral
-                    RDKitSubstructMatch
-                    RDKitSubgraphs
-                    RDKitMolDraw2D
-                    RDKitFileParsers
-                    RDKitGraphMol
-                    RDKitDistGeometry
-                    RDKitDistGeomHelpers
-                    RDKitMolAlign
-                    RDKitOptimizer
-                    RDKitRDGeometryLib
-                    RDKitForceField
-                    RDKitForceFieldHelpers
-                    RDKitAlignment
-                    RDKitForceField
-                    RDKitForceFieldHelpers
-                    RDKitMolTransforms
-                    RDKitEigenSolvers
-                    RDKitmaeparser
-                    RDKitcoordgenlib
-
-                    # other libs (not linked atm)
-#                    RDKitFMCS
-#                    RDKitMMPA
-#                    RDKitSLNParse
-#                    RDKitChemicalFeatures
-#                    RDKitMolCatalog
-#                    RDKitStructChecker
-#                    RDKitFragCatalog
-#                    RDKitMolChemicalFeatures
-#                    RDKitReducedGraphs
-#                    RDKithc
-#                    RDKitMolHash
-#                    RDKitShapeHelpers
-#                    RDKitTrajectory
-#                    RDKitInfoTheory
-#                    RDKitSimDivPickers
-                    )
+            foreach(name ${RDKit_FIND_COMPONENTS})
                 find_library(${name}_LIB NAMES "${name}${LIB_SUFFIX}"
                         HINTS ${RDKIT_LIBRARY_DIR})
                 set(RDKIT_LIBRARIES ${RDKIT_LIBRARIES} ${${name}_LIB})

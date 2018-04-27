@@ -13,16 +13,16 @@ build:
 
 requirements:
   build:
-    - {{ python_spec }}
-    - boost
-    - gxx_linux-64
-    - rdkit>=2018.03.1
-    - tbb
     - cmake
+    - {{ python_spec }}
+    - gxx_linux-64
+    - libboost
+    - rdkit
+    - tbb
   run:
     - {{ python_spec }}
-    - boost
-    - rdkit>=2018.03.1
+    - libboost
+    - rdkit
     - tbb
 
 about:
