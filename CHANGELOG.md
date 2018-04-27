@@ -9,6 +9,7 @@ Previous version: 0.0.0b1
 - conda environment libraries can now be searched during cmake configuration by setting the `CONDA_PREFIX` environment variable
 - conda packages now depend on tbb, rdkit and boost libraries from anaconda repositories both during build time and runtime
 - the unit tests binary is now included in the `CMakeLists.txt` file and it can also be installed with the project
+- SWIG was updated to version 3.0.12
 - other small optimizations of the build process
 - the `MorphingOperator` interface was implemented and tested in both Python and C++
     - `AddAtom` operator class was added that adheres to this interface
