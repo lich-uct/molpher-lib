@@ -29,6 +29,8 @@ TBB=
 BOOST=
 RDKIT=
 
+MAKE_JOBS=`grep -c ^processor /proc/cpuinfo`
+
 # Toggle compilation of all dependencies.
 # $1   compilation flag (1 - build all, 0 - don't build anything)
 setval_all()
@@ -193,8 +195,8 @@ build_boost()
     chmod +x bootstrap.sh
 
     # build boost
-    ./bootstrap.sh gcc --without-icu
-    ./b2 variant=release link=shared runtime-link=shared threading=multi toolset=gcc cxxflags=\"-fPIC\" --without-chrono --without-exception --without-graph --without-graph_parallel --without-iostreams --without-locale --without-math --without-mpi --without-python --without-random --without-test --without-timer --without-wave --without-date_time --without-program_options --without-signals --without-system
+    ./bootstrap.sh gcc --without-icu --with-python=python3
+    ./b2 variant=debug link=shared runtime-link=shared threading=multi toolset=gcc cxxflags=\"-fPIC\" --without-chrono --without-exception --without-graph --without-graph_parallel --without-iostreams --without-locale --without-math --without-mpi --without-random --without-test --without-timer --without-wave --without-date_time --without-program_options --without-signals --without-system
 
     rm -r -f ./bin.v2
     cd ..
@@ -238,9 +240,9 @@ build_rdkit()
     echo "LD_LIBRARY_PATH=`pwd`/lib:`pwd`/../boost/stage/lib" >> $cmd
     echo "mkdir build" >> $cmd
     echo "cd build" >> $cmd
-    echo "cmake -G \"Unix Makefiles\" -D RDK_BUILD_PYTHON_WRAPPERS= -D BOOST_ROOT=../boost -D RDK_INSTALL_STATIC_LIBS=OFF -D Boost_USE_STATIC_LIBS=OFF -D RDK_OPTIMIZE_NATIVE=OFF .." >> $cmd
-    echo "make -j 4" >> $cmd
-    echo "make install" >> $cmd
+    echo "cmake -G \"Unix Makefiles\" -D RDK_BUILD_PYTHON_WRAPPERS=ON -D Python_ADDITIONAL_VERSIONS=3 -D BOOST_ROOT=../boost -D RDK_INSTALL_STATIC_LIBS=OFF -D Boost_USE_STATIC_LIBS=OFF -D RDK_OPTIMIZE_NATIVE=OFF .." >> $cmd
+    echo "make -j ${MAKE_JOBS}" >> $cmd
+    echo "make -j ${MAKE_JOBS} install" >> $cmd
     echo "cd .." >> $cmd
     echo "rm -r -f ./build" >> $cmd
 
