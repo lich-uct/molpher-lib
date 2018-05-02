@@ -22,10 +22,6 @@ from molpher.core.morphing.operators import MorphingOperator
 
 
 class MorphCollector(molpher.swig_wrappers.core.MorphCollector):
-    """
-    TODO
-
-    """
 
     def __init__(self, function_to_call):
         super(MorphCollector, self).__init__()
