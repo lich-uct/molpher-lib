@@ -133,6 +133,3 @@ dependencies:
   - yaml=0.1.7=had09818_2
   - zeromq=4.2.5=h439df22_0
   - zlib=1.2.11=ha838bed_2
-  - pip:
-    - molpher==0.0.0b2.dev2
-prefix: /home/sichom/software/miniconda/envs/molpher-lib

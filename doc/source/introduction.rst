@@ -1,9 +1,8 @@
 Introduction
 ============
 
-This section attempts to introduce the uninformed to the main ideas behind the software
-and clarify some terminology used in the documentation. You can freely skip this section,
-if you are already familiar with :term:`Molpher` and :term:`molecular morphing`.
+This section attempts to introduce the uninformed to the main ideas behind the molecular morphing
+method and the software. It also clarifies some terminology used in the documentation.
 
 What is Molpher?
 ----------------
