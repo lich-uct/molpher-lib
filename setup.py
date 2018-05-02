@@ -32,6 +32,7 @@ if conda_prefix_include_dir:
 molpher_cpp_module = Extension('molpher.swig_wrappers._core',
                            sources=[os.path.abspath('src/swig/molpher_wrap.cpp')],
                            include_dirs = include_dirs,
+                           library_dirs = os.environ["LD_LIBRARY_PATH"].split(":") if "LD_LIBRARY_PATH" in os.environ else None,
                            libraries=['molpher'],
                            extra_compile_args=['-std=gnu++1z'],
                            language='c++'
