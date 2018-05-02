@@ -14,20 +14,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import molpher.swig_wrappers.core as wrappers
+import molpher
 from molpher.core.MolpherAtom import MolpherAtom
 from molpher.core._utils import shorten_repr
 
 
-class AtomLibrary(wrappers.AtomLibrary):
+class AtomLibrary(molpher.swig_wrappers.core.AtomLibrary):
     """
     :param atoms: A set of atoms that defines the library.
-    :type atoms: an iterable of 'molpher.swig_wrappers.core.MolpherAtom' instances, another 'AtomLibrary' instance or simply a list of atom symbols.
-
-    This a specialized version of the `molpher.swig_wrappers.core.AtomLibrary` proxy class.
-    It implements some additional functionality for ease of use from Python.
-
-    .. seealso:: `molpher.swig_wrappers.core.AtomLibrary`
+    :type atoms: an iterable of :class:`~.morphing.AtomLibrary.AtomLibrary` instances, another :class:`~.morphing.AtomLibrary.AtomLibrary` instance or simply a list of atom symbols.
     """
 
     def __init__(self, atoms):
@@ -50,7 +45,7 @@ class AtomLibrary(wrappers.AtomLibrary):
 
     @staticmethod
     def getDefaultLibrary():
-        ret = wrappers.AtomLibrary.getDefaultLibrary()
+        ret = molpher.swig_wrappers.core.AtomLibrary.getDefaultLibrary()
         ret.__class__ = AtomLibrary
         return ret
 

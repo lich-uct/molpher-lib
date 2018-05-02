@@ -30,7 +30,7 @@ There are three types of selectors:
     #. chemical operators
             Their names are prepended with 'OP\_' and an :term:`iterable`
             of them is used to
-            either set the `operators` member of the
+            either set the :attr:`~molpher.core.ExplorationData.ExplorationData.operators` member of the
             :class:`~molpher.core.ExplorationData.ExplorationData`
             class or as items of the :term:`iterable` assigned to *operators* key
             when calling :meth:`~molpher.core.ExplorationTree.ExplorationTree.create`

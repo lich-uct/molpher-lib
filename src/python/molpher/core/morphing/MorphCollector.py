@@ -23,8 +23,7 @@ from molpher.core.morphing.operators import MorphingOperator
 
 class MorphCollector(molpher.swig_wrappers.core.MorphCollector):
     """
-    Abstract base class derived from the `molpher.swig_wrappers.core.MorphCollector`
-    proxy class.
+    TODO
 
     """
 

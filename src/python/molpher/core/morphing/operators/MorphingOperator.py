@@ -21,11 +21,6 @@ from molpher.core.MolpherMol import MolpherMol
 
 
 class MorphingOperator(molpher.swig_wrappers.core.MorphingOperator):
-    """
-    Abstract base class derived from the `molpher.swig_wrappers.core.MorphingOperator`
-    proxy class.
-
-    """
 
     __metaclass__ = ABCMeta
 

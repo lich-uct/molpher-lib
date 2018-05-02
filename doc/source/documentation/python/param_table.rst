@@ -7,8 +7,8 @@
     `operators`, "a `tuple` of :term:`selectors` [1]_", "A `tuple` of identifiers of the permitted `chemical operators`.", `setChemicalOperators`, `getChemicalOperators`
     `accept_max`, 100, "Maximum number of candidates accepted at once (based on their position in `ExplorationTree.candidates`).", `setCntCandidatesToKeepMax`, `getCntCandidatesToKeepMax`
     `accept_min`, 50, "Minimum number of candidates accepted during probability filtering.", `setCntCandidatesToKeep`, `getCntCandidatesToKeep`
-    `close_produce`, 150, "Maximum number of morphs to produce with an `ExplorationTree.generateMorphs()` call when close to the :term:`target molecule`.", `setCntMorphsInDepth`, `getCntMorphsInDepth`
-    `far_produce`, 80, "Maximum number of morphs to produce with an `ExplorationTree.generateMorphs()` call.", `setCntMorphs`, `getCntMorphs`
+    `close_produce`, 150, "Maximum number of morphs to produce with an :meth:`~molpher.swig_wrappers.core.ExplorationTree.ExplorationTree.generateMorphs()` call when close to the :term:`target molecule`.", `setCntMorphsInDepth`, `getCntMorphsInDepth`
+    `far_produce`, 80, "Maximum number of morphs to produce with an :meth:`~molpher.swig_wrappers.core.ExplorationTree.ExplorationTree.generateMorphs()` call.", `setCntMorphs`, `getCntMorphs`
     `far_close_threshold`, 0.15, "Molecular distance below which the :term:`target molecule` and a :term:`morph` are considered to be close.", `setDistToTargetDepthSwitch`, `getDistToTargetDepthSwitch`
     `fingerprint`, `FP_MORGAN`, "Identification string of the current fingerprint strategy.", `setFingerprint`, `getFingerprint`
     `similarity`, `SC_TANIMOTO`, "Identification string of the current fingerprint strategy.", `setSimilarityCoefficient`, `getSimilarityCoefficient`

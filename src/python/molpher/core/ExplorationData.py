@@ -422,12 +422,12 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
     def far_produce(self):
         """
         The maximum number of morphs generated from one leaf when the leaf of the tree currently being
-        processed with `generateMorphs()` lies more than `far_close_threshold` from
+        processed with :py:meth:`molpher.core.ExplorationTree.ExplorationTree.generateMorphs` lies more than `far_close_threshold` from
         the :term:`target molecule`.
 
-        .. seealso:: `ExplorationTree.generateMorphs()`
+        .. seealso:: :py:meth:`~.core.ExplorationTree.ExplorationTree.generateMorphs`
 
-        :return: maximum number of morphs to produce with a `generateMorphs()` call
+        :return: maximum number of morphs to produce with a :py:meth:`~.core.ExplorationTree.ExplorationTree.generateMorphs` call
         :rtype: `int`
         """
 
@@ -441,12 +441,12 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
     def close_produce(self):
         """
         This is the maximum number of morphs generated from one leaf when the leaf of the tree currently being
-        processed with `generateMorphs()` lies less than `far_close_threshold` from
+        processed with :py:meth:`molpher.core.ExplorationTree.ExplorationTree.generateMorphs` lies less than `far_close_threshold` from
         the :term:`target molecule`.
 
-        .. seealso:: `ExplorationTree.generateMorphs()`
+        .. seealso:: :py:meth:`~.core.ExplorationTree.ExplorationTree.generateMorphs`
 
-        :return: maximum number of morphs to produce with an `generateMorphs()` call
+        :return: maximum number of morphs to produce with an :py:meth:`~.core.ExplorationTree.ExplorationTree.generateMorphs` call
         :rtype: `int`
         """
 
@@ -460,7 +460,7 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
     def far_close_threshold(self):
         """
         This distance threshold controls the number of :term:`morphs <morph>` generated
-        with `generateMorphs()` for molecules closer
+        with :py:meth:`molpher.core.ExplorationTree.ExplorationTree.generateMorphs` for molecules closer
         or further from the :term:`target molecule`. :term:`Morphs <morph>` that
         have distance from the :term:`target molecule` lower than `far_close_threshold`
         are considered to be close.
@@ -510,7 +510,7 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
 
         .. seealso:: `MolpherMol.getItersWithoutDistImprovement()`
 
-        :return: number of calls  to `generateMorphs()` before descendants of
+        :return: number of calls  to :py:meth:`molpher.core.ExplorationTree.ExplorationTree.generateMorphs` before descendants of
             a :term:`non-producing molecule`
             are removed from the tree
         :rtype: `int`

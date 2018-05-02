@@ -14,20 +14,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import molpher.swig_wrappers.core as wrappers
+import molpher
 from molpher.core.MolpherMol import MolpherMol
 from molpher.core._utils import shorten_repr
 
 
-class Molpher(wrappers.Molpher):
+class Molpher(molpher.swig_wrappers.core.Molpher):
     """
     :param molecule: The starting molecule.
-    :type molecule: an instance of 'molpher.swig_wrappers.core.MolpherMol' or its derived class.
-
-    This a specialized version of the `molpher.swig_wrappers.core.morphing.Molpher` proxy class.
-    It implements some additional functionality for ease of use from Python.
-
-    .. seealso:: `molpher.swig_wrappers.core.AtomLibrary`
+    :type molecule: an instance of :class:`~.core.MolpherMol` or its derived class.
     """
 
     def __repr__(self):

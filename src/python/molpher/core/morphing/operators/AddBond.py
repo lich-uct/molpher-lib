@@ -13,19 +13,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import molpher.swig_wrappers.core as wrappers
+import molpher
 from molpher.core.MolpherMol import MolpherMol
 from molpher.core._utils import shorten_repr
 
-class AddBond(wrappers.AddBond):
-    """
-
-    This a specialized version of the `molpher.swig_wrappers.core.morphing.operators.AddAtom` proxy class.
-    It implements some additional functionality for ease of use from Python.
-
-    .. seealso:: `molpher.swig_wrappers.core.AddAtom`
-
-    """
+class AddBond(molpher.swig_wrappers.core.AddBond):
 
     def __repr__(self):
         return shorten_repr(self.__class__, self)

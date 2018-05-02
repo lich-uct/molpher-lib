@@ -35,6 +35,14 @@ molpher.core.MolpherMol module
     :undoc-members:
     :show-inheritance:
 
+molpher.core.morphing module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: molpher.core.morphing
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 molpher.core.selectors module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -58,6 +66,7 @@ Subpackages
 
     molpher.core.tests
     molpher.core.operations
+    molpher.core.morphing
 
 
 Module contents

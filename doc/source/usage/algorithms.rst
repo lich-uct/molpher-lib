@@ -43,7 +43,7 @@ in this algorithm, a detailed description can be found in [1]_.
         :name: morphing
 
         Schematic depiction of the original algorithm published by Hoksza et al. [1]_.
-        New `morphs <morph>` are generated with the `chemical operators` until the target
+        New :term:`morphs <morph>` are generated with the `chemical operators` until the target
         molecule is found.
 
 The classic algorithm is available through the `molpher.algorithms.classic` package
@@ -218,7 +218,7 @@ Summary
 ~~~~~~~
 
 In this section, the implementations of various chemical space exploration algorithms
-were described. They are all based on the original algorithm implemented in `Molpher`,
+were described. They are all based on the original algorithm implemented in :term:`Molpher`,
 but the algorithms that can be implemented with the library do not have to be
 built on this basis. There are many ways to implement chemical space exploration
 using a library such as this one. For

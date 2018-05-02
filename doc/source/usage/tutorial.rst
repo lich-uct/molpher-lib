@@ -238,7 +238,7 @@ Generating and Manipulating Morphs
 Now that we know how to initialize an exploration tree and how to set morphing parameters,
 we will take a look at how the :term:`chemical space` exploration works in practice.
 
-Let us generate a few `morphs <morph>` from the current leaves of the tree first:
+Let us generate a few :term:`morphs <morph>` from the current leaves of the tree first:
 
 ..  code-block:: python
     :caption: Generating and reading morphs.
@@ -273,7 +273,7 @@ using the `smiles` attribute.
     function with your own, for example. See the documentation for the :py:class:`~MolpherMol.MolpherMol`
     class to get an overview of how you can modify the molecules in the tree or the generated candidate morphs.
 
-The `generateMorphs()` method tells the tree to generate some `morphs <morph>`
+The :meth:`~.core.ExplorationTree.ExplorationTree.generateMorphs()` method tells the tree to generate some :term:`morphs <morph>`
 from the current leaves for us. How many morphs will be generated depends
 mostly on the current state of the tree
 and parameters `far_produce`, `close_produce` and `far_close_threshold`.
