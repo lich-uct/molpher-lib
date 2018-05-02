@@ -17,6 +17,7 @@
 import os, sys
 import unittest
 from pprint import pprint
+from rdkit import Chem
 
 from pkg_resources import resource_filename
 
@@ -214,17 +215,26 @@ class TestMorphing(unittest.TestCase):
     def testMorphingWithLocks(self):
         tree = ExplorationTree.create(source=MolpherMol(self.captopril))
 
+        # generate two generations of morphs and save them all to a list
+        morphs = []
         def some_collector(morph, operator):
-            assert  operator.name
-            assert  morph.smiles
-            print(morph.smiles, operator.name)
-
+            self.assertTrue(operator.name)
+            self.assertTrue(morph.smiles)
+            morphs.append((morph, operator))
         gen_morphs = GenerateMorphsOper(collectors=[some_collector])
         tree.runOperation(gen_morphs)
         tree.sortMorphs()
         tree.filterMorphs()
         tree.extend()
-        # TODO: check if structure locked as it should be throughout generations
+        tree.runOperation(gen_morphs)
+        tree.extend()
+
+        # check if all generated morphs satisfy some conditions
+        locked_pattern = Chem.MolFromSmarts('C(=O)N1CCCC1C(=O)O')
+        for x in morphs:
+            self.assertTrue(x[0].smiles)
+            self.assertTrue(x[1].name)
+            self.assertTrue(x[0].asRDMol().HasSubstructMatch(locked_pattern))
 
 if __name__ == "__main__":
     unittest.main()
