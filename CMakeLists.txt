@@ -394,7 +394,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 add_custom_command(
         OUTPUT
-        ${PYTHON_PACKAGE_DIR}/_core*.so
+        ${PYTHON_PACKAGE_DIR}/_core*.so # FIXME: this is too general and sometimes the library is not built when another plugin for another version of Python is already in place
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py build_ext --library-dirs=${CMAKE_INSTALL_PREFIX}/lib/ --rpath=${CMAKE_INSTALL_PREFIX}/lib/ ${PYTHON_BUILD_OPTIONS}
         COMMAND ${CMAKE_COMMAND} -E make_directory ${PYTHON_INSTALL_PREFIX}
         COMMAND ${CMAKE_COMMAND} -E env PYTHONPATH=$ENV{PYTHONPATH} ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py install --prefix ${CMAKE_INSTALL_PREFIX}
