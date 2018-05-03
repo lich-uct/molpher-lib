@@ -54,14 +54,10 @@ __pycache__
 # Logfiles
 *.log
 
-# Doxygen output
-doc/doxygen/xml
-
 # DB files
 *.db
 
-# Python package data files
-/src/python/molpher/swig_wrappers/*.dat
-
-# rendered homepage templates
+# documentation
+doc/doxygen/xml
 /doc/homepage/*.html
+/doc/source/_static/

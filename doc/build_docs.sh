@@ -14,13 +14,14 @@ cd ..
 make clean
 
 # render sample notebooks
-MOLPHER_PATH=../src/python/
+mkdir -p source/_static
 cd notebooks/
 jupyter nbconvert --to html *.ipynb
 mv *.html ../source/_static/
 cd ..
 
 # configure
+MOLPHER_PATH=../src/python/
 sphinx-apidoc -o source/documentation/python/ $MOLPHER_PATH
 
 # make
