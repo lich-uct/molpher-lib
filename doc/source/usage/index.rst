@@ -2,12 +2,12 @@ Using the library
 =================
 
 This section explains most of the functionality available in the library.
-It contains notes on how to install it, an extensive tutorial and a brief description of the
-:term:`molecular morphing` algorithm.
+It contains notes on how to install it and an extensive :doc:`tutorial`.
 
-..  note:: This section only describes the Python portion of the library. However, the Python API tightly follows the C++ implementation so most of
-        the concepts described below can be easily applied to C++ as well. Additionally,
-        most of the classes discussed here implement the same methods as the corresponding C++ classes.
+..  note:: In this documentation, we currently only describe the Python portion of the library.
+        The C++ portion is in preparation.
+        However, the Python API tightly follows it so most of
+        the concepts described here can be easily applied in C++ as well.
 
 ..  toctree::
     :name: docstoc
@@ -16,4 +16,3 @@ It contains notes on how to install it, an extensive tutorial and a brief descri
 
     Installation <installation>
     Tutorial <tutorial>
-    Exploration Algorithms <algorithms>

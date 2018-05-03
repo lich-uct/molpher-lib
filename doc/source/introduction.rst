@@ -1,55 +1,68 @@
 Introduction
 ============
 
-This section attempts to introduce the uninformed to the main ideas behind the molecular morphing
-method and the software. It also clarifies some terminology used in the documentation.
+This section attempts to introduce the uninformed to the main ideas behind :term:`molecular morphing`
+and outline possible applications of this software. It also clarifies some terminology used in the documentation.
 
 What is Molpher?
 ----------------
 
-In early stages of any drug discovery endeavor a large library of compounds
-often needs to be screened
-for molecules that have the potential to become a new lead in the project. This
-is usually done in a laboratory setting using a technique called
-`high-throughput screening (HTS) <https://en.wikipedia.org/wiki/High-throughput_screening>`_.
-HTS can be a very effective method, but is still very limiting in the number
-of compounds that can be screened when we consider the incredible vastness of :term:`chemical space`.
+In early stages of a drug discovery endeavor a large library of compounds
+is often screened for molecules that show some biological activity on a given target.
+This is usually done in a laboratory setting using a technique called
+:term:`high-throughput screening` (HTS).
+HTS can be a very effective method, but is still quite limited in the number
+of compounds that can be screened when we consider the incredible vastness of :term:`chemical space`
+not to mention the costs associated with using and maintaining such sophisticated equipment
+and actual physical library of compounds. Therefore, in practice, so called
+:term:`virtual screening` (VS), is often employed prior to the actual physical experiments.
+During VS, a virtual library of compounds is searched using computational methods,
+which helps significantly in reducing the cost and time needed to find
+new interesting structures of active molecules.
 
-:term:`Molpher` is a tool developed for the purpose
-of finding  novel active compounds for synthesis/purchase and subsequent testing
-in drug discovery projects.
-It is capable of generating a library of potentially active compounds by
-connecting known active molecules
-with a :term:`chemical space path`. Just like any path, a :term:`chemical space path`
-has a start and a destination. However, in :term:`chemical space` this means
+:term:`Molpher` is a tool developed for the purpose of designing a focused
+virtual library of compounds that could be subsequently used in a virtual screening
+campaign. Since Molpher creates compounds *de novo*, the generated library will very likely contain new chemistry
+(unlike traditional VS libraries that are usually limited to known chemical space).
+In Molpher, the goal of generating new compounds is achieved by connecting known active molecules
+by a so called :term:`chemical space path`. Just like any path, a :term:`chemical space path`
+has a start and a destination. In :term:`chemical space` this means
 a :term:`source molecule` and a :term:`target molecule`. The path
-is then just a sequence of structures that connect the two (see :term:`chemical space path`
-for more details).
+is then just a sequence of structures that connect the two and is generated
+by applying small structural changes to the source molecule.
+These changes are called :term:`chemical operators` in the software and their
+application is optimized to drive the search towards the target molecule.
+The calculation ends when the target structure is generated and the path
+is, thus, complete.
 
-The main motivation to generate such a path is
-that some new interesting compounds might be discovered along the way.
-The ones in the middle of the path are usually structurally different from both
-the source and the target, but at the same time combine
-their structural features, thus, some of them may form a good basis for
-a new drug.
+The main premise of Molpher is that the generated compounds, in particular those in the middle of the path, combine
+the structural features of both the source and target. If the source and target are bioactive compounds, it is very likely
+that some combination of their features will result in a bioactive compound as well.
 
-..  note:: If you want to know more about how the algorithm works, read `morphing-algorithm`
+..  note:: If you want to know more about how the original Molpher algorithm works, read `morphing-algorithm`
         section of the :doc:`tutorial <usage/tutorial>`.
 
 What is Molpher-lib?
 --------------------
 
-:term:`Molpher` itself is aimed at users that might use it
-in their day to day practice to generate focused virtual libraries of compounds.
-However, there are many
-possible implementations of the search and many aspects of the
-exploration could be parametrized.
+:term:`Molpher` itself is a finished piece of software that efficiently implements
+the basic molecular morphing algorithm described above, but has important limitations.
+For example, there are many
+possible implementations of the search and while many aspects of the
+exploration can be parametrized, it is very hard to implement some
+custom rules to prioritize certain compounds over others or
+to provide customized operators,
+which could be an especially interesting prospect when we think about synthesis
+of compounds as well, for example.
+In Molpher, there is also no way to maintain certain pharmacophore features,
+which could dramatically increase
+yield of the whole procedure when some mutual functional group arrangement is required.
 Thus, came the motivation to develop a more flexible
 and extensible solution that would give everyone an opportunity
-to easily implement their own ideas or just easily integrate :term:`molecular morphing`
-in their existing solutions.
+to easily implement their own ideas tailored to their needs or just
+integrate :term:`molecular morphing` with already existing solutions more easily.
 
-To make it as easy as possible to get up to speed with the library,
-we have prepared a :doc:`tutorial <usage/tutorial>` in the :doc:`next section <usage/index>`
-which contains information on how to install and use the library as well as
-a few example implementations of exploration algorithms using the library.
+To make it as straightforward as possible to get up to speed with the library,
+we offer some guidance in the :doc:`next section <usage/index>`
+on how to :doc:`install <usage/installation>` and :doc:`use <usage/tutorial>` the library as well as
+an introduction into some new implementations of exploration :doc:`algorithms <usage/tutorial/algorithms>` in the library.

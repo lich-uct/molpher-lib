@@ -49,7 +49,7 @@ in this algorithm, a detailed description can be found in [1]_.
 The classic algorithm is available through the `molpher.algorithms.classic` package
 and can be used as follows:
 
-..  literalinclude:: ../../../src/python/molpher/examples/classic.py
+..  literalinclude:: ../../../../src/python/molpher/examples/classic.py
         :language: python
         :caption: Usage example of the original algorithm.
         :name: classic-example
@@ -134,7 +134,7 @@ tree and this significantly reduces the search space.
 The following script shows how this algorithm can be used to generate
 paths:
 
-..  literalinclude:: ../../../src/python/molpher/examples/bidirectional.py
+..  literalinclude:: ../../../../src/python/molpher/examples/bidirectional.py
         :language: python
         :caption: Usage example of the bidirectional pathfinding algorithm.
         :name: bidirectional-example
@@ -195,7 +195,7 @@ can be prioritized over those that were already sampled before.
 
 The antidecoys algorithm can be used as follows:
 
-..  literalinclude:: ../../../src/python/molpher/examples/antidecoys.py
+..  literalinclude:: ../../../../src/python/molpher/examples/antidecoys.py
             :language: python
             :caption: Usage example of the antidecoys algorithm.
             :name: antidecoys-example

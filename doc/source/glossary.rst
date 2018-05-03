@@ -107,5 +107,20 @@ Glossary
         various options for the morphing algorithm. See :class:`~molpher.core.ExplorationData.ExplorationData`
         for more information on how to affect the way :term:`morphs <morph>` are generated.
 
+    high-throughput screening
+        High-throughput screening (HTS) is a specialized method of chemical biology which relies on robotics
+        to conduct many experiments in a very short time (usually in the order of tens of thousands a day) with
+        the goal to find compounds that have the potential to affect a biological target and, thus, could
+        become leads in a drug discovery project.
+
+    virtual screening
+        Virtual screening (VS) can be regarded as a computational alternative to :term:`HTS <high-throughput screening>`.
+        The goal of virtual screening is the same: to find bioactive compounds, but in this case the compounds
+        are represented *in silico* and saved in a database. Various computational techniques can then be used
+        to automatically probe the database for structures that could have biological activity in the real world.
+        Therefore, the point of VS is to create plausible hypotheses about the usefulness of the compounds in the
+        database and discard all that very likely do not satisfy the requirements for a bioactive compounds in a
+        given project.
+
 .. [1] https://en.wikipedia.org/wiki/Chemical_space
-.. [2] D. Hoksza, P. Škoda, M. Voršilák, and D. Svozil, “Molpher: a software framework for systematic chemical space exploration,” Journal of Cheminformatics, vol. 6, no. 1, p. 7, Mar. 2014.
+.. [2] D. Hoksza, P. Škoda, M. Voršilák, and D. Svozil, “Molpher: a software framework for systematic chemical space exploration,” Journal of Cheminformatics, vol. 6, no. 1, p. 7, Mar. 2014. DOI: `10.1186/1758-2946-6-7 <http://dx.doi.org/10.1186/1758-2946-6-7>`_

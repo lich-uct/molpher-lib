@@ -1,5 +1,6 @@
 ## Project
 .cmake-build
+.ipynb_checkpoints
 build/
 dist/
 bin/
