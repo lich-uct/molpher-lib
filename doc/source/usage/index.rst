@@ -2,7 +2,7 @@ Using the library
 =================
 
 This section explains most of the functionality available in the library.
-It contains notes on how to install it and an extensive :doc:`tutorial`.
+It contains notes on how to :doc:`installation` it and an extensive :doc:`tutorial`.
 
 ..  note:: In this documentation, we currently only describe the Python portion of the library.
         The C++ portion is in preparation.
