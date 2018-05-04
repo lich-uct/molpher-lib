@@ -1,6 +1,6 @@
 
-Molpher-lib: a C++/Python Library For Systematic Chemical Space Exploration
-===========================================================================
+Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing
+==========================================================================
 
 This library is essentially a fork of the *de novo* drug design framework :term:`Molpher`. Molpher is
 a program developed to tackle systematic exploration of chemical space
