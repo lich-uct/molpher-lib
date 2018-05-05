@@ -16,6 +16,7 @@ Classes
 .. toctree::
 
     MolpherMol_doc
+    MolpherAtom_doc
     ExplorationTree_doc
     ExplorationData_doc
     operations/classes

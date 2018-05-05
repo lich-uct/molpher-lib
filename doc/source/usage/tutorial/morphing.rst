@@ -11,7 +11,7 @@ the `source-code-docs` where all library features are described in full.
 
 The Python examples in this tutorial are taken from a sample Jupyter Notebook which
 can be downloaded :download:`here <../../../notebooks/basics.ipynb>`. A rendered HTML version
-with all calculation results can be viewed `here </_static/basics.html>`_.
+with all calculation results can be viewed `here <../../_static/basics.html>`_.
 
 If you run into an issue with the examples or have an idea or suggestion,
 consider submitting to the `issue tracker <https://github.com/lich-uct/molpher-lib/issues>`_.
@@ -137,6 +137,10 @@ Output:
 
 ..  figure:: captopril_rerouted_1.png
 
+..  note:: All basic morphing capabilities are housed under the `molpher.core.morphing`
+    package while chemical space exploration features (featured in the
+    :doc:`follow-up tutorial <exploration>`) are located directly under `molpher.core`.
+
 We can see what happened more clearly if we view the structures
 of the original captopril and its morph side by side
 and with atom indices present:
@@ -196,9 +200,426 @@ us prioritize more viable structures over others.
 Creating Morphs in Bulk
 -----------------------
 
-In the previous chapter, we outlined how :term:`chemical operators` work
-using a very simple example and we did not really explore the full
-range of possible structural modifications available to us.
+In the previous section, we outlined how :term:`chemical operators` work
+using a very simple example and aside from :class:`~.operators.RerouteBond.RerouteBond`
+we did not really explore the full
+range of possibilities available to us.
 In this section, we will make up for that and show how to
-use Molpher-lib to easily generate thousands of compounds
+use Molpher-lib to easily generate thousands of new compounds
 from a single molecule.
+
+The :class:`~Molpher.Molpher` class serves this purpose. It aggregates
+morphing operators and randomly applies them to the specified compound structure.
+For example, we can use it to generate various structures
+derived from captopril that have some atoms replaced, removed or added like so:
+
+..  code-block:: python
+    :linenos:
+
+    from molpher.core.morphing import Molpher
+    from molpher.core.morphing.operators import AddAtom, RemoveAtom, MutateAtom
+
+    molpher = Molpher(
+        mol
+        , [
+            AddAtom()
+            , RemoveAtom()
+            , MutateAtom()
+        ]
+    )
+
+    molpher()
+
+    morphs = molpher.morphs
+    print(len(morphs))
+    print(morphs[1:3])
+    print(molpher.morphs)
+
+Output:
+
+..  code-block:: none
+
+    27
+    (<molpher.core.MolpherMol.MolpherMol at 0x7f924d8a9210>, <molpher.core.MolpherMol.MolpherMol at 0x7f924d8a96c0>)
+    ()
+
+In the first step, we created a :class:`~Molpher.Molpher` instance by specifying the molecule
+to be modified in the first argument of its constructor and the operators to use
+as a Python list in the second. :class:`~Molpher.Molpher` instances are callable
+and we need to call them in
+order to generate morphs. The generated morphs are then available by
+reading the `morphs` property of our :class:`~Molpher.Molpher` instance.
+
+We managed to generate 27 morphs in this case. By default, :class:`~Molpher.Molpher`
+tries to generate 30 compounds, but it will ignore those that failed to
+generate. This can be caused by internal errors
+that should be showed in the error output,
+but also simply because certain operators cannot be applied to
+the molecule in question. For example, if there is no ring in the
+molecule and the `RemoveBond.RemoveBond` operator is chosen,
+no molecules are generated because this operator fails if
+its application results in a disconnected structure.
+
+As you can also see in the example, reading the `morphs` property automatically
+empties it. This helps to save memory by transferring ownership to
+the caller when they retrieve generated structures.
+The :code:`molpher()` call, on the other hand, does not reset the instance
+so you can pile up morphs by subsequent :code:`molpher()` calls
+before retrieving them from `morphs`. However, a more
+efficient method would be to give :class:`~Molpher.Molpher`
+a high enough number of morphing attempts from the very beginning:
+
+..  code-block:: python
+    :linenos:
+
+    molpher = Molpher(
+        mol
+        , [
+            AddAtom()
+            , RemoveAtom()
+            , MutateAtom()
+        ]
+        , attempts = 100
+    )
+
+This approach is preferable since the subsequent :code:`molpher()`
+call is able to distribute the calculation among all CPU cores
+available on the system. You can change this behaviour by passing
+the :code:`threads` parameter to the constructor:
+
+..  code-block:: python
+    :linenos:
+
+    molpher = Molpher(
+        mol
+        , [
+            AddAtom()
+            , RemoveAtom()
+            , MutateAtom()
+        ]
+        , attempts = 100
+        , threads = 2
+    )
+
+This will ensure that no more than 2 cores are used for the calculation.
+
+Thanks to the RDKit integration, we can take a look at some
+of the compounds we generated previously:
+
+..  code-block:: python
+    :linenos:
+
+    from rdkit.Chem.Draw import MolsToGridImage
+
+    def show_mol_grid(mols):
+        return MolsToGridImage(
+            [x.asRDMol() for x in mols]
+            , subImgSize=(250,200)
+        )
+
+    show_mol_grid(morphs)
+
+Part of the output:
+
+..  figure:: morphs.png
+
+The :class:`~Molpher.Molpher` class or the operators themselves
+do not perform any advanced 'chemical sanity' checks so sometimes one
+can run into molecules that make little sense (such as the
+one in the upper right corner with a halogen atom attached directly
+to oxygen) [3]_. So while Molpher-lib should be sensible enough not to generate compounds with
+a 5-valent carbon atom and such, you still should put in place some common
+sense filters that can be specific to your use case, but also general rules
+such as removing compounds that are too large or too complex. Additionally, neither the operators
+nor :class:`~Molpher.Molpher` are able to tell if a compound has already been
+generated. Morphing operations are completely independent and
+the result is always determined by a random selection from
+all possible modifications permitted by the operators and the original compound.
+Thus, it is also up to the caller to check for duplicate compounds.
+
+We will now try to tackle these shortcoming
+by implementing a collector. A collector is a simple callback function
+which takes two arguments, the generated morph and the operator used to create it,
+but has no return value. We can supply a :class:`~Molpher.Molpher`
+instance with a collector like so:
+
+..  code-block:: python
+    :linenos:
+
+    from rdkit import Chem
+
+    strange_patterns = Chem.MolFromSmarts('[S,O,N][F,Cl,Br,I]')
+    sensible_morphs = dict()
+    def collect_sensible(morph, operator):
+        rd_morph = morph.asRDMol()
+        if not rd_morph.HasSubstructMatch(strange_patterns):
+            sensible_morphs[morph.smiles] = morph
+
+    molpher = Molpher(
+        mol
+        , [
+            AddAtom()
+            , RemoveAtom()
+            , MutateAtom()
+        ]
+        , attempts = 100
+        , collectors = [collect_sensible]
+    )
+
+    molpher()
+
+    print(len(molpher.morphs))
+    print(len(sensible_morphs))
+
+Output:
+
+..  code-block:: none
+
+    90
+    49
+
+Therefore, in this example we generated 90 morphs, but only selected 49
+that were unique and satisfied our requirements (no halogens in
+the immediate neighborhood of sulfur, oxygen or nitrogen). If we wanted to,
+we could then use these 49 structures to seed more calculations
+that could help us learn more about how the strucural changes
+could affect pharmacokinetic and pharmacodynamic properties.
+
+..  [3] This actually can have its purpose as demonstrated in:
+    Voršilák, M. and Svozil, D. (2017). Nonpher: computational method for design of hard-to-synthesize structures. Journal of Cheminformatics. 9.
+    DOI:`10.1186/s13321-017-0206-2 <https://doi.org/10.1186/s13321-017-0206-2>`_
+
+Substructure locking
+--------------------
+
+In some cases, we might want to maintain a certain substructure
+in all of our morphs. Therefore, Molpher-lib has features that
+will allow us to lock certain atoms and prevent some
+structural changes from occurring. One way to do
+that is to initialize a molecule from an SDF file
+which includes atom locking specification (:numref:`locked-sdf-file-captopril`).
+
+..  literalinclude:: captopril.sdf
+    :language: none
+    :caption: An example SDF file with defined atom locks.
+    :name: locked-sdf-file-captopril
+    :linenos:
+
+Every atom of a :class:`~MolpherMol.MolpherMol` instance has
+a so called 'locking mask' attached to it. This mask
+specifies what type of restrictions are imposed on an
+atom and when morphing operators are applied this
+information can be retrieved and used to prevent
+changes that would violate the applied locks.
+
+In :numref:`locked-sdf-file-captopril`, we see examples of
+3 atom locks:
+
+    1. `KEEP_NEIGHBORS_AND_BONDS` -- Prevents the neighbors of this atom and the bonds connecting them from being removed.
+    2. `NO_MUTATION` -- Atoms marked with this lock cannot be mutated (changed for another element)
+    3. `NO_ADDITION` -- No more atoms will be added to this atom.
+
+Let's now create a new molecule from the SDF in :numref:`locked-sdf-file-captopril`:
+
+..  code-block:: python
+
+    mol = MolpherMol("captopril.sdf")
+
+If we pass a string that ends with ".sdf", Molpher-lib will
+automatically recognize it as a path to an SDF file
+and will attempt to load the first molecule from that
+file and parse any locks that it finds in it.
+
+Every atom in a :class:`~MolpherMol.MolpherMol` instance
+is represented as :class:`~MolpherAtom.MolpherAtom`.
+This class, among other things, provides access to the locks placed
+on each atom of the molecule in question. We can retrieve the locking
+information like so:
+
+..  code-block:: python
+    :linenos:
+
+    for idx, atm in enumerate(mol.atoms):
+        print(idx)
+        print(atm.lock_info)
+
+Output for first five atoms:
+
+.. code-block:: none
+
+    0
+    {'UNLOCKED': True, 'NO_MUTATION': False, 'NO_ADDITION': False, 'NO_REMOVAL': False, 'KEEP_NEIGHBORS': False, 'KEEP_NEIGHBORS_AND_BONDS': False, 'KEEP_BONDS': False, 'FULL_LOCK': False}
+    1
+    {'UNLOCKED': False, 'NO_MUTATION': True, 'NO_ADDITION': True, 'NO_REMOVAL': True, 'KEEP_NEIGHBORS': True, 'KEEP_NEIGHBORS_AND_BONDS': True, 'KEEP_BONDS': True, 'FULL_LOCK': True}
+    2
+    {'UNLOCKED': False, 'NO_MUTATION': True, 'NO_ADDITION': True, 'NO_REMOVAL': True, 'KEEP_NEIGHBORS': True, 'KEEP_NEIGHBORS_AND_BONDS': True, 'KEEP_BONDS': True, 'FULL_LOCK': True}
+    3
+    {'UNLOCKED': False, 'NO_MUTATION': True, 'NO_ADDITION': True, 'NO_REMOVAL': True, 'KEEP_NEIGHBORS': True, 'KEEP_NEIGHBORS_AND_BONDS': True, 'KEEP_BONDS': True, 'FULL_LOCK': True}
+    4
+    {'UNLOCKED': False, 'NO_MUTATION': True, 'NO_ADDITION': True, 'NO_REMOVAL': True, 'KEEP_NEIGHBORS': True, 'KEEP_NEIGHBORS_AND_BONDS': True, 'KEEP_BONDS': True, 'FULL_LOCK': True}
+    5
+    {'UNLOCKED': False, 'NO_MUTATION': True, 'NO_ADDITION': True, 'NO_REMOVAL': True, 'KEEP_NEIGHBORS': True, 'KEEP_NEIGHBORS_AND_BONDS': True, 'KEEP_BONDS': True, 'FULL_LOCK': True}
+
+The `lock_info` attribute of :class:`~MolpherAtom.MolpherAtom`
+summarizes the locking status in a dictionary which we can
+query to see if an atom is unlocked and what type of locks
+are in place.
+
+In the `example Jupyter Notebook <../../_static/basics.html>`_, we used the following
+code to highlight locked atoms:
+
+..  code-block:: python
+    :linenos:
+
+    from rdkit.Chem.Draw import rdMolDraw2D
+    from IPython.display import SVG
+
+    def get_locked_ids(mol):
+        return [idx for idx, atm in enumerate(mol.atoms) if atm.is_locked]
+
+    def show_locked_atoms(mol):
+        rd_mol = mol.asRDMol()
+
+        drawer = rdMolDraw2D.MolDraw2DSVG(300, 300)
+
+        # include atom indices
+        opts = drawer.drawOptions()
+        for i in range(rd_mol.GetNumAtoms()):
+            opts.atomLabels[i] = str(i+1)
+
+        # draw the molecule as SVG
+        drawer.DrawMolecule(
+            rd_mol
+            , highlightAtoms=get_locked_ids(mol)
+        )
+        drawer.FinishDrawing()
+        return SVG(drawer.GetDrawingText().replace('svg:',''))
+
+    show_locked_atoms(mol)
+
+Output:
+
+..  figure:: captopril_locks.png
+
+We used the `is_locked` attribute of the :class:`~MolpherAtom.MolpherAtom`
+class to first find out the indices of locked atoms.
+We then used that information to instruct the
+RDKit drawing code to highlight the given positions.
+
+You might have noticed that atom number 11 is displayed
+as locked, but we did not specify any locks for it
+in our SDF. This is because the neighboring carbon atom (number 10)
+has the `KEEP_NEIGHBORS` lock which implies `NO_REMOVAL`
+and `NO_MUTATION` locks on all neighbors including carbon number 11.
+We can check that exactly these two locks are in place on this atom using
+the `locking_mask` attribute:
+
+..  code-block:: python
+    :linenos:
+
+    from molpher.core import MolpherAtom
+
+    mol.atoms[10].locking_mask == (MolpherAtom.NO_REMOVAL | MolpherAtom.NO_MUTATION)
+
+Output:
+
+..  code-block:: none
+
+    True
+
+This is possible because the value of the locking mask attribute is the combination
+of used locks. We can also use the attribute to set a new locking mask on an
+atom like so:
+
+..  code-block:: python
+
+    mol.atoms[10].locking_mask = MolpherAtom.NO_REMOVAL
+
+This will only prevent this atom from being removed,
+but will make it possible to replace it for another one
+that will satisfy the bonding requirements placed by the neighbors.
+
+Locked molecules can then be normally used for morphing
+and the operators should ensure that the generated molecules
+are respecting these locks. We can check that
+in our captopril example by running the morphing code
+written in the previous section. However, this time we will use all available
+morphing operators:
+
+..  code-block:: python
+    :linenos:
+
+    from rdkit import Chem
+    from molpher.core.morphing.operators import *
+
+    # new grid drawing code, will show atom locks
+    def show_mol_grid(mols):
+        locked_atoms = [get_locked_ids(x) for x in mols]
+        return MolsToGridImage(
+            [x.asRDMol() for x in mols]
+            , subImgSize=(300,300)
+            , highlightAtomLists=locked_atoms
+        )
+
+    # same as before
+    strange_patterns = Chem.MolFromSmarts('[S,O,N][F,Cl,Br,I]')
+    sensible_morphs = dict()
+    def collect_sensible(morph, operator):
+        """
+        a simple collector which identifies
+        """
+
+        rd_morph = morph.asRDMol()
+        if not rd_morph.HasSubstructMatch(strange_patterns):
+            sensible_morphs[morph.smiles] = morph
+
+    # same as before, but with all operators
+    molpher = Molpher(
+        mol
+        , [
+            AddAtom()
+            , RemoveAtom()
+            , MutateAtom()
+            , AddBond()
+            , RemoveBond()
+            , ContractBond()
+            , InterlayAtom()
+            , RerouteBond()
+        ]
+        , attempts = 100
+        , collectors = [collect_sensible]
+    )
+
+    molpher()
+
+    print(len(molpher.morphs))
+    print(len(sensible_morphs))
+    show_mol_grid(sensible_morphs.values())
+
+Part of the output:
+
+..  code-block:: none
+
+    72
+    28
+
+..  figure:: moprhs_locked.png
+
+As you can see, the generated molecules preserve the locked substructure
+and also inherit the locks from their parent molecule. This ensures
+that the typical structural pattern of this category of antihypertensives
+is preserved across all generated compounds.
+
+Summary
+-------
+
+In this tutorial, we explained the most basic features of Molpher-lib
+and hopefully managed to hint at some potentially interesting use
+cases. In the next part of the tutorial, we will introduce the :class:`ExplorationTree`
+class which is used to create paths in chemical space.
+
+..  note:: If you want to see more examples of atom locking and how custom operators work, there
+    is `one more Jupyter Notebook <../../_static/basics_advanced.html>`_ written for this purpose
+    (download :download:`here <../../../notebooks/basics_advanced.ipynb>`). This
+    more in-depth overview also highlights some shortcomings
+    of the current implementation and outlines future directions for Molpher-lib development.
