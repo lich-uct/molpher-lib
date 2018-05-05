@@ -16,6 +16,7 @@
 
 import molpher
 from molpher.core.MolpherMol import MolpherMol
+from molpher.core.morphing.MorphCollector import MorphCollector
 from molpher.core._utils import shorten_repr
 
 
@@ -28,11 +29,16 @@ class Molpher(molpher.swig_wrappers.core.Molpher):
     def __repr__(self):
         return shorten_repr(self.__class__, self)
 
-    def __init__(self, molecule, operators, threads=0, attempts=30, max_iters=None):
-        super(Molpher, self).__init__(molecule, operators, threads, attempts)
+    def __init__(self, molecule, operators, threads=0, attempts=30, max_iters=None, collectors=()):
+        self._collectors = [MorphCollector(x) for x in collectors]
+        super(Molpher, self).__init__(molecule, operators, threads, attempts, self._collectors)
         self._iter_morphs_cache = []
         self._iter_counter = 0
         self.max_iters = max_iters
+
+    @property
+    def morphs(self):
+        return self.getMorphs()
 
     def getMorphs(self):
         ret = super(Molpher, self).getMorphs()
