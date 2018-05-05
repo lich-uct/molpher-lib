@@ -185,6 +185,10 @@ class MolpherMol(wrappers.MolpherMol):
 
         return self.getParentOper()
 
+    @parent_operator.setter
+    def parent_operator(self, val):
+        self.setParentOper(val)
+
     @property
     def dist_to_target(self):
         """
