@@ -184,7 +184,7 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
 
         return {
             'source' : self._GETTERS_MAP['source']().getSMILES()
-            , 'target' : self._GETTERS_MAP['target']().getSMILES()
+            , 'target' : self._GETTERS_MAP['target']().getSMILES() if self._GETTERS_MAP['target']() else None
             , 'operators' : tuple( ChemOperShortDesc(operator) for operator in self._GETTERS_MAP['operators']() )
             , 'fingerprint' : FingerprintShortDesc(self._GETTERS_MAP['fingerprint']())
             , 'similarity' : SimCoeffShortDesc(self._GETTERS_MAP['similarity']())
