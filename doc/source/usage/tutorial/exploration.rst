@@ -3,108 +3,99 @@
 Implementing Chemical Space Exploration with Molecular Morphing
 ===============================================================
 
-TODO: some intro
-
-..  todo:: divide this doc to multiple smaller ones and use TOC to show contents
-
-..  todo:: put all experimental code to a Jupyter notebook
+..  todo:: divide this doc into multiple smaller ones and use TOC to show contents
 
 .. contents:: Table of Contents
+
+In the :doc:`previous tutorial <morphing>`, we introduced some of the low level
+Molpher-lib features that enable its user to modify molecular
+structures in a randomized manner. In this part of the usage tutorial, we focus on
+high level features that handle chemical space exploration on
+larger scale by iterative application of :term:`chemical operators`.
+
+The core data structure responsible for building and maintaining suggested
+:term:`chemical space paths <chemical space path>` is the :term:`exploration tree`.
+The exploration tree contains all generated morphs and is rooted at the :term:`source molecule`
+and is grown by iteratively applying chemical operators
+first on the source molecule, then on its descendants and so on. This way
+multiple chemical space paths can be created and evaluated.
+
+As the paths are generated, the compounds on them can be characterized by
+the value of an objective function. This function should somehow formalize
+the relationship between a chemical structure
+and its fitness for the task at hand. Therefore,
+interesting paths can be prioritized over others.
+This way, the exploration tree can hopefully lead us towards interesting new compounds
+without having to enumerate all possible chemistry.
+
+In the original Molpher algorithm, the objective function is
+simply the structural distance between morphs and a :term:`target molecule`.
+This way Molpher is able to connect pairs of molecules by iteratively generating
+morphs from the source and prioritizing those that are getting closer to the target.
+As a result, the algorithm converges to the target structure and stops
+once the target is identified among the generated morphs (:numref:`morphing-explore`). This
+algorithm is called the *classic* algorithm and is
+implemented in the `molpher.algorithms.classic` module.
+
+..  seealso:: `alg-classic`
+
+..      figure:: morphing.png
+        :scale: 100%
+        :name: morphing-explore
+
+        Schematic depiction of the original algorithm published by Hoksza et al. [1]_.
+        New :term:`morphs <morph>` are generated with `chemical operators`
+        applied to the :term:`source molecule` (M\ :sub:`S`\ ) until the :term:`target
+        molecule` (M\ :sub:`T`\) is found.
+
+.. [1] Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
+        `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/24655571>`_, `DOI <http://www.jcheminf.com/content/6/1/7>`_
 
 Creating an Exploration Tree and Setting Morphing Parameters
 ------------------------------------------------------------
 
-In order to find a path that connects the :term:`source molecule` and the :term:`target molecule`
-(see `../../introduction` if you are not familiar with these terms),
-Molpher maintains a data structure called an :term:`exploration tree` to save and
-evaluate possible :term:`paths in chemical space <chemical space path>`. It is basically a
-*directed rooted tree* (with the edges directed away from the root) where the source molecule acts as the root vertex.
-
-During :term:`molecular morphing`, the tree is grown by modifying the current leaves
-with predefined :term:`chemical operators`. These operators act on
-an input structure by producing a new molecule as output, which is structurally very close to its parent compound.
-We can also see chemical operators as the labels of the edges of the tree that
-connect two compounds between which a transformation occurred, the parent and the child.
-
-By connecting the newly created molecules to the tree as the children of their parents, we can
-iteratively generate multiple :term:`chemical space paths <chemical space path>` at once and evaluate
-them according to a certain objective function. At the moment the objective function is
-simply the structural distance between the newest molecule on a path and the target molecule, but
-the user of the library is free to define his own criteria. For example, he/she can easily implement
-a method that will only extend paths that lead to compounds satisfying a given pharmacophore or
-physicochemical properties.
-
-By continuously morphing the compounds in this way, we can effectively 'travel' through :term:`chemical space`
-towards various areas of interest. Thanks to the flexible API of the library this 'journey' can be realized
-in many ways and can accommodate almost any exploration strategy one might think of. For example,
-in this tutorial we will, among other things,
-show how to :ref:`implement our own building blocks to use with the library <operations>` or
-:ref:`make two trees cooperate with each other as they search for a single path <bidirectional>`.
-
 .. py:currentmodule:: molpher.core
 
-Using the library the tree is represented by
-an instance of the `molpher.core.ExplorationTree` class and in this tutorial
-we will use it to search for a :term:`chemical space path`
-between *cocaine* (a famous recreational drug) and *procaine* (compound that replaced cocaine
-as local anesthetic). Both of these compounds act as blockers of the sodium channels in the neuronal cell membrane
-which results in their anesthetic effects.
-
-Let us now explore the :term:`chemical space` 'between' cocaine and procaine
-by combining their structural features using the *Molpher-lib* library.
-We will initialize the exploration tree first:
+In Molpher-lib, the tree is implemented as the `molpher.core.ExplorationTree` class.
+Following the captopril example from the previous tutorial,
+the simplest way to generate an exploration tree instance is
+to call the :meth:`~.core.ExplorationTree.create` factory method:
 
 ..  code-block:: python
-    :caption: The most basic way to initialize an :term:`exploration tree` in Python.
-    :name: tree-init
     :linenos:
 
     from molpher.core import ExplorationTree as ETree
+    from molpher.core import MolpherMol
 
-    cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
-    procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
+    captopril = MolpherMol("captopril.sdf")
+    tree = ETree.create(source=captopril)
 
-    tree = ETree.create(source=cocaine, target=procaine) # initialize a tree that searches for a path from cocaine to procaine
-
-The code shown in  :numref:`tree-init` simply initializes the tree from the supplied SMILES.
-At the moment the tree is pretty simple. It only contains the root molecule (cocaine in this particular instance).
-We can manipulate this instance and read data from it in multiple ways, but let's start by printing out the
-:term:`source molecule` and :term:`target molecule` of the tree:
+This code simply initializes the tree from the supplied :class:`MolpherMol` instance.
+At the moment the tree is pretty simple. It only contains the captopril structure as its
+current leaves:
 
 ..  code-block:: python
-    :caption: Printing out the :term:`source molecule` and :term:`target molecule` of a tree.
-    :name: print-source-target
-    :linenos:
 
-    # print the smiles of the source and target
+    tree.leaves[0].asRDMol()
+
+Output:
+
+..  figure:: captopril_numbered.png
+
+We can manipulate this tree and read data from it. Let's start by printing out the
+:term:`source molecule`:
+
+..  code-block:: python
+
     print('Source: ', tree.params['source'])
-    print('Target: ', tree.params['target'])
 
-If we run the code from both :numref:`tree-init` and :numref:`print-source-target` in a script or command line, it produces
-the following output:
+Output:
 
 ..  code-block:: none
 
-    loading SAScore.dat ... done
-    Source:  COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C
-    Target:  CCN(CC)CCOC(=O)C1=CC=C(N)C=C1
+    Source:  CC(CS)C(=O)N1CCCC1C(=O)O
 
-Notice that the SMILES strings we supplied to the :py:meth:`~molpher.core.ExplorationTree.ExplorationTree.create`
-method of the :py:class:`~molpher.core.ExplorationTree.ExplorationTree` class are not the same as those
-that we supplied. That is because *Molpher-lib* automatically generates canonical SMILES for every
-molecule that is created.
-
-..  attention:: The library also discards any information about the stereocenters in the molecules,
-    because the current implementation does not account for stereochemistry and treats all enantiomers
-    as the same molecule. You might want to keep this in mind when working with the library.
-
-..  note:: In addition to the information about our source and target, we can also see that a data file was loaded successfully.
-    That means the :mod:`molpher` package was initialized and is ready for use. The data file itself is
-    used to compute the synthetic feasibility scores for the generated morphs
-    (this can be read from any molecule via the `sascore` attribute).
-
-The `ExplorationTree.params` dictionary does not just store the
-source and target, but also houses other `morphing parameters`. Let's take a look:
+The `params` member is a dictionary used to set and store `morphing parameters`:
 
 ..  code-block:: python
 
@@ -115,37 +106,41 @@ Output:
 ..  code-block:: python
 
     {
-        'max_morphs_total': 1500,
-        'far_close_threshold': 0.15,
-        'weight_max': 100000.0,
-        'close_produce': 150,
-        'fingerprint': 'MORGAN',
-        'accept_min': 50,
-        'source': 'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C',
-        'target': 'CCN(CC)CCOC(=O)C1=CC=C(N)C=C1',
-        'weight_min': 0.0,
-        'non_producing_survive': 5,
-        'accept_max': 100,
+        'source': 'CC(CS)C(=O)N1CCCC1C(=O)O',
+        'target': None,
         'operators': (
-            'ADD_ATOM',
-            'ADD_BOND',
-            'BOND_CONTRACTION',
-            'BOND_REROUTE',
-            'INTERLAY_ATOM',
-            'MUTATE_ATOM',
-            'REMOVE_ATOM',
-            'REMOVE_BOND'
+            'OP_ADD_ATOM',
+            'OP_REMOVE_ATOM',
+            'OP_ADD_BOND',
+            'OP_REMOVE_BOND',
+            'OP_MUTATE_ATOM',
+            'OP_INTERLAY_ATOM',
+            'OP_BOND_REROUTE',
+            'OP_BOND_CONTRACTION'
         ),
+        'fingerprint': 'FP_MORGAN',
+        'similarity': 'SC_TANIMOTO',
+        'weight_min': 0.0,
+        'weight_max': 100000.0,
+        'accept_min': 50,
+        'accept_max': 100,
         'far_produce': 80,
-        'similarity': 'TANIMOTO'
+        'close_produce': 150,
+        'far_close_threshold': 0.15,
+        'max_morphs_total': 1500,
+        'non_producing_survive': 5
     }
 
-As we can see there is quite a lot of parameters that we can set.
-We will explain the most important ones in this tutorial, but you can see the
+As we can see there is quite a lot of parameters that we can set,
+but most of these affect the exploration process only if
+some parts of the library are used in the context of the tree, especially tree operations
+which we will discuss :ref:`later <operations>`. The most important parameters
+will be explained in this tutorial, but you can see the
 documentation for the :py:class:`~ExplorationData.ExplorationData` class
-(especially :numref:`param-table`) for a detailed reference.
+(especially :numref:`param-table`) for a more detailed reference.
 
-We can adjust the morphing parameters during runtime as we like. All we need to do is just supply the `params` attribute
+We can adjust the morphing parameters during runtime as we like.
+All we need to overwrite the `params` attribute
 of our tree instance with a new dictionary:
 
 ..  code-block:: python
@@ -153,46 +148,48 @@ of our tree instance with a new dictionary:
     # change selected parameters using a dictionary
     tree.params = {
         'non_producing_survive' : 2
-        'weight_max' : 500.0
+        , 'weight_max' : 500.0
     }
     print(tree.params)
 
 Output:
 
 ..  code-block:: python
-    :emphasize-lines: 11, 4
-    :linenos:
 
     {
-        'max_morphs_total': 1500,
-        'far_close_threshold': 0.15,
-        'weight_max': 500.0,
-        'close_produce': 150,
-        'fingerprint': 'MORGAN',
-        'accept_min': 50,
-        'source': 'COC(=O)C1C2CCC(CC1OC(=O)C1=CC=CC=C1)N2C',
-        'target': 'CCN(CC)CCOC(=O)C1=CC=C(N)C=C1',
-        'weight_min': 0.0,
-        'non_producing_survive': 2,
-        'accept_max': 100,
+        'source': 'CC(CS)C(=O)N1CCCC1C(=O)O',
+        'target': None,
         'operators': (
-            'ADD_ATOM',
-            'ADD_BOND',
-            'BOND_CONTRACTION',
-            'BOND_REROUTE',
-            'INTERLAY_ATOM',
-            'MUTATE_ATOM',
-            'REMOVE_ATOM',
-            'REMOVE_BOND'
+            'OP_ADD_ATOM',
+            'OP_REMOVE_ATOM',
+            'OP_ADD_BOND',
+            'OP_REMOVE_BOND',
+            'OP_MUTATE_ATOM',
+            'OP_INTERLAY_ATOM',
+            'OP_BOND_REROUTE',
+            'OP_BOND_CONTRACTION'
         ),
+        'fingerprint': 'FP_MORGAN',
+        'similarity': 'SC_TANIMOTO',
+        'weight_min': 0.0,
+        'weight_max': 500.0,
+        'accept_min': 50,
+        'accept_max': 100,
         'far_produce': 80,
-        'similarity': 'TANIMOTO'
+        'close_produce': 150,
+        'far_close_threshold': 0.15,
+        'max_morphs_total': 1500,
+        'non_producing_survive': 2
     }
 
-Here we just tightened the constraints on molecular weight and decreased the number of acceptable 'non-producing'
-:term:`morph generations <morph generation>` to 2 (see :numref:`param-table` to get more information on what this parameter
-does). If we supply an incomplete set of parameters (like in the above example),
-only the parameters specified in the given dictionary will be changed.
+Here we just tightened the constraints on molecular weight of the generated morphs
+and decreased the number of acceptable 'non-producing'
+:term:`morph generations <morph generation>` to 2. Non-producing generations are
+generations of morphs that has not improved in the objective function
+(e.g. structural distance). See :numref:`param-table` for details.
+One thing to note is that if we supply an incomplete set of parameters
+(like in the example above), only the parameters specified in the
+supplied dictionary will be changed.
 
 ..  warning:: Changing individual values in the `params` dictionary will have no effect.
     You always need to store a dictionary instance in it. This is because the value
@@ -608,9 +605,6 @@ from the others, because it uses a callback function to perform actions on molec
 in the tree and is, therefore, very useful for debugging and saving exporting various data (see `tree-traversal`).
 
 For more details on the other operations, see the designated pages in the documentation.
-
-.. [1] Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
-        `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/24655571>`_, `DOI <http://www.jcheminf.com/content/6/1/7>`_
 
 ..  _tree-traversal:
 

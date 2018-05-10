@@ -8,6 +8,8 @@ the source code documentation of the :mod:`~molpher.algorithms` package,
 which contains some generally useful modules
 (such as :mod:`~molpher.algorithms.functions` and :mod:`~molpher.algorithms.operations`).
 
+..  _alg-classic:
+
 Classic (Original) Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
