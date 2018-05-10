@@ -48,6 +48,10 @@ implemented in the `molpher.algorithms.classic` module.
         applied to the :term:`source molecule` (M\ :sub:`S`\ ) until the :term:`target
         molecule` (M\ :sub:`T`\) is found.
 
+..  seealso:: Examples in this tutorial are included in a Jupyter Notebook
+    which can be downloaded :download:`here <../../../notebooks/exploration.ipynb>`
+    viewed `here <../../_static/exploration.html>`_.
+
 .. [1] Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
         `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/24655571>`_, `DOI <http://www.jcheminf.com/content/6/1/7>`_
 
