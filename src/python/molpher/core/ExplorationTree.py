@@ -86,6 +86,8 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
                 target = MolpherMol(target)
             ret = super(ExplorationTree, ExplorationTree).create(source, target)
         elif source:
+            if type(source) == str:
+                source = MolpherMol(source)
             ret = super(ExplorationTree, ExplorationTree).create(source)
         else:
             raise AttributeError('Invalid set of parameters specified.')
@@ -261,5 +263,4 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         :return: the tree as an :class:`~molpher.core.ExplorationData.ExplorationData` instance
         :rtype: :class:`~molpher.core.ExplorationData.ExplorationData`
         """
-
         return ExplorationData(other=super(ExplorationTree, self).asData())
