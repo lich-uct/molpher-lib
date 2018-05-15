@@ -305,6 +305,8 @@ void ExtendTreeOper::ExtendTreeOperImpl::acceptMorphs(ConcurrentMolVector &morph
 void ExtendTreeOper::ExtendTreeOperImpl::operator()() {
     auto tree = getTree();
     if (tree) {
+        if (tree->pimpl->candidates.size() == 0) return;
+
         auto tree_pimpl = tree->pimpl;
         tbb::task_group_context tbbCtx;
         tbb::task_scheduler_init scheduler;
