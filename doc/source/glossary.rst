@@ -14,6 +14,13 @@ Glossary
         It is represented in the API as an instance of
         the :class:`~molpher.core.ExplorationTree.ExplorationTree` class.
 
+    SAScore
+        Available from :class:`molpher.core.MolpherMol` instances via the :attr:`sascore` parameter.
+        It is the synthetic availability score according to Ertl et al. [3]_. The higher the score,
+        the more difficult the compound should be to synthesize. Compounds with SAScore of more
+        than 6 are considered synthetically inaccessible and are discarded by the :class:`~.operations.FilterMorphsOper`
+        operation and :meth:`~.core.ExplorationTree.filterMorphs` method by default.
+
     SAScore.dat
         The data file used for computation of the synthetic feasibility scores.
 
@@ -124,3 +131,4 @@ Glossary
 
 .. [1] https://en.wikipedia.org/wiki/Chemical_space
 .. [2] D. Hoksza, P. Škoda, M. Voršilák, and D. Svozil, “Molpher: a software framework for systematic chemical space exploration,” Journal of Cheminformatics, vol. 6, no. 1, p. 7, Mar. 2014. DOI: `10.1186/1758-2946-6-7 <http://dx.doi.org/10.1186/1758-2946-6-7>`_
+.. [3] Peter Ertl, P & Schuffenhauer, Ansgar. (2009). Estimation of Synthetic Accessibility Score of Drug-Like Molecules Based on Molecular Complexity and Fragment Contributions. Journal of cheminformatics. 1. 8. DOI:`10.1186/1758-2946-1-8 <http://dx.doi.org/10.1186/1758-2946-1-8>`_.

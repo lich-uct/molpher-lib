@@ -197,6 +197,8 @@ us prioritize more viable structures over others.
 
 .. [2] Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7. `DOI <http://www.jcheminf.com/content/6/1/7>`_
 
+..  _morphing-bulk:
+
 Creating Morphs in Bulk
 -----------------------
 
