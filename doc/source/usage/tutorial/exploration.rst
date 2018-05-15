@@ -453,17 +453,17 @@ that have the best `SAScore` value.
     See the method's documentation for more information
     on the available filtering options.
 
-.. _extend-prune:
+.. _extend:
 
-Extending and Pruning
-~~~~~~~~~~~~~~~~~~~~~
+Extending
+~~~~~~~~~
 
-When we have the morphs we want to attach to the tree selected, we can call `extend()`
-which will connect them to their respective parents making them the new leaves
-of our tree:
+When we have the morphs selected, we can call
+the `extend()` method. This will connect them to their respective parents
+in our tree and they will become a new set of leaves:
 
 ..  code-block:: python
-    :caption: Extending and pruning the tree.
+    :caption: Extending the exploration tree with new morphs.
     :name: extending-tree
     :linenos:
 
@@ -471,38 +471,83 @@ of our tree:
     print(tree.generation_count)
 
     tree.extend() # connect the accepted morphs to the tree as new leaves
-    print(
-        sorted( # grab the new leaves as a list sorted according to their distance from target
-        [
-            (x.getSMILES(), x.getDistToTarget())
-            for x in tree.leaves
-        ], key=lambda item : item[1]
-        )
-    )
 
     # get the number of generations after
     print(tree.generation_count)
 
-    # check if a path was found
-    print(tree.path_found)
-
-    # run the pruning operation on the updated tree
-    tree.prune()
+    # grab the new leaves as a list sorted according to their distance from target
+    sorted(
+        [
+            (x.getSMILES(), x.getDistToTarget())
+            for x in tree.leaves
+        ], key=lambda item : item[1]
+    )
 
 Output:
 
 ..  code-block:: none
 
+    WARNING: Candidate morph: CC(CS)C(=O)N1CCCC1C(=O)O already present in the tree. Skipping...
     0
-    [('COC(=O)C1C2CCC(CC1(O)OC(=O)C1=CC=CC=C1)N2C', 0.5), ('COC(=O)C1C2C3CN2C(C3)CC1OC(=O)C1=CC=CC=C1', 0.7868852459016393), ('CCC1CC(OC(=O)C2=CC=CC=C2)C(C(=O)OC)CN1C', 0.7868852459016393)]
     1
-    False
+
+    [('CC(C)C(=O)N1CCCC1C(=O)O', 3.3191105796423788),
+     ('CCC(C)C(=O)N1CCCC1C(=O)O', 3.404002369297247),
+     ('CSCCC(=O)N1CCCC1C(=O)O', 3.613205289055311),
+     ('CSC(C)C(=O)N1CCCC1C(=O)O', 3.8501001628456333),
+     ('O=C(O)C1CCCN1C(=O)CCS', 3.8871106534610247),
+     ('CCC(CS)C(=O)N1CCCC1C(=O)O', 3.8893996483733346),
+     ('CSCC(C)C(=O)N1CCCC1C(=O)O', 3.916140148729842),
+     ('O=C(O)C1CCCN1C(=O)CCCS', 3.9220880467166013),
+     ('CC(S)CC(=O)N1CCCC1C(=O)O', 3.9366697951036973)]
 
 We can see that after extending the tree, the selected morphs (see :numref:`filtering-morphs`)
 had become the new leaves and that the tree's
-:term:`morph generation` counter (`generation_count`) was increased by one.
+:term:`morph generation` counter (`generation_count`) was increased by one. We also
+got a warning about one structure not being added to the tree. It is the structure
+of captopril itself, which is already there. Thus, it is automatically skipped to prevent us from going
+in circles.
 
-Because a tree generated in this way grows exponentially, a pruning strategy is needed in order
+If we want to, we can generate an image depicting the new leaves and the operators used to create them like so:
+
+..  code-block:: python
+
+    from rdkit.Chem.Draw import MolsToGridImage
+
+    def get_locked_atoms(mol):
+        return [(idx, atm) for idx, atm in enumerate(mol.atoms) if atm.is_locked]
+
+    def show_mol_grid(mols):
+        locked_atoms = [[y[0] for y in get_locked_atoms(x)] for x in mols]
+        return MolsToGridImage(
+            [x.asRDMol() for x in mols]
+            , subImgSize=(250,200)
+            , highlightAtomLists=locked_atoms
+            , legends=[x.parent_operator for x in mols]
+        )
+
+    show_mol_grid(tree.leaves)
+
+Output:
+
+..  figure:: leaves.png
+
+Note that the generated morphs satisfy the locks placed on the signature -pril substructure
+in the original SDF file. Therefore, the tree is guaranteed to only contain structures
+that have this structural pattern.
+
+Therefore, by iterative application of the commands above, we would be able to generate
+many possible structures of novel -pril compounds. This could prove useful
+while exploring the structure-activity relationship in the development
+of new ACE inhibitors, for example.
+
+.. _prune:
+
+Pruning
+~~~~~~~
+
+However, there is also the problem that the tree will grow exponentially
+if we keep adding new morphs in this way. Thus, we will need a strategy
 to keep the number of explored putative paths to a minimum by discarding those that are not getting any
 closer to the :term:`target molecule`.
 
