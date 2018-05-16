@@ -208,8 +208,8 @@ this dictionary will remain the same as before the assignment.
 
 ..  seealso:: :py:class:`~ExplorationData.ExplorationData`
 
-Generating Morphs and Extending the Exploration Tree
-----------------------------------------------------
+Morph Generation and Exploration Tree Extension
+-----------------------------------------------
 
 This part of the tutorial outlines the steps
 involved in one iteration of a possible exploration algorithm.
@@ -219,8 +219,8 @@ extended by attaching the chosen morphs as the
 next generation of leaves. We also show how the unfavorable paths (or their parts)
 can later be removed from the growing tree.
 
-Generating and Manipulating Morphs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Morph Generation and Manipulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `Previously <tree-create>`, we showed how to initialize an exploration tree.
 Now that we have one, we can take a look at how to use it for :term:`chemical space`
@@ -276,11 +276,11 @@ These instances can be used to read and manipulate the generated morphs or
 the compounds currently present in the tree.
 
 ..  attention:: The molecules saved in the `candidates` attribute of the tree actually do not
-    belong to the tree just yet. See :ref:`extend-prune` for more information on
+    belong to the tree just yet. See :ref:`extend` for more information on
     how tree ownership is assigned to molecules.
 
-Sorting and Filtering Morphs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sorting and Filtering
+~~~~~~~~~~~~~~~~~~~~~
 
 The order of the newly generated molecules in the `candidates` list has a meaning
 for the search algorithm. The higher the position of a morph in this list,
@@ -327,6 +327,8 @@ which are special functions that can be used to intercept morphs as they are cre
 Setting the objective function value for each morph is a perfect use case for them:
 
 ..  code-block:: python
+    :caption: Using the :meth:`~.core.ExplorationTree.generateMorphs` method with a custom morph collector.
+    :name: collector-example
     :linenos:
 
     def sascore_as_obj(morph, operator):
@@ -455,8 +457,8 @@ that have the best `SAScore` value.
 
 .. _extend:
 
-Extending
-~~~~~~~~~
+Tree Extension
+~~~~~~~~~~~~~~
 
 When we have the morphs selected, we can call
 the `extend()` method. This will connect them to their respective parents
@@ -534,22 +536,201 @@ Output:
 
 Note that the generated morphs satisfy the locks placed on the signature -pril substructure
 in the original SDF file. Therefore, the tree is guaranteed to only contain structures
-that have this structural pattern.
-
-Therefore, by iterative application of the commands above, we would be able to generate
+that have this structural pattern. At this point, it is probably easy to envision an approach with
+iterative application of the commands above which would allow us to generate
 many possible structures of novel -pril compounds. This could prove useful
 while exploring the structure-activity relationship in the development
-of new ACE inhibitors, for example.
+of new ACE inhibitors, for example. Here is an example how a simple exploration
+algorithm for this purpose could look like:
+
+..  code-block:: python
+
+    class PenalizeKnown:
+
+        def __init__(self, tree, penalty):
+            self._tree = tree
+            self._penalty = penalty
+
+        def __call__(self, morph, operator):
+            if self._tree.hasMol(morph):
+                morph.dist_to_target += self._penalty
+
+    for iter_idx in range(1,10):
+        tree.generateMorphs([sascore_as_obj, PenalizeKnown(tree, 10)])
+        tree.sortMorphs()
+
+        tree.candidates_mask = [
+            True if idx < 50 and tree.candidates[idx].sascore < 6
+            else False
+            for idx, x in enumerate(tree.candidates_mask)
+        ]
+
+        tree.extend()
+
+As in previous example (:numref:`collector-example`), this code uses SAScore as the objective function,
+but this time we added one more collector to penalize morphs that we already attached to the tree.
+This way we can use a similar filtering procedure as before and run the code iteratively.
+In every iteration, we accept at most 50 structures which have synthetic accessibility
+score lower than 6. Running ten iterations
+like this gives us almost 500 new structures in a few seconds. If we chose to ran the algorithm
+for a few hours, we would get thousands of compounds like this for subsequent screening. At this
+point, it is probably obvious that we could add more collectors that could adjust the fitness
+of each morph further. For example, we could penalize morphs that have too many atoms, stereocenters
+or other unwanted structural features.
+
+As the final example in this section, we add a target molecule to the tree
+and show how to use Molpher-lib for the task Molpher was originally designed for,
+that is to search for chemical space paths. We will choose another ACE inhibitor as
+our target, enalapril:
+
+..  code-block:: python
+
+    # set enalapril as target
+    tree.params = {
+        'target' : MolpherMol("O=C(O)[CH]2N(C(=O)[CH](N[CH](C(=O)OCC)CCc1ccccc1)C)CCC2")
+    }
+    tree.params
+
+Output:
+
+..  code-block:: none
+
+    {'source': 'CC(CS)C(=O)N1CCCC1C(=O)O',
+     'target': 'CCOC(=O)C(CCC1=CC=CC=C1)NC(C)C(=O)N1CCCC1C(=O)O',
+     'operators': ('OP_ADD_ATOM',
+      'OP_REMOVE_ATOM',
+      'OP_ADD_BOND',
+      'OP_REMOVE_BOND',
+      'OP_MUTATE_ATOM',
+      'OP_INTERLAY_ATOM',
+      'OP_BOND_REROUTE',
+      'OP_BOND_CONTRACTION'),
+     'fingerprint': 'FP_MORGAN',
+     'similarity': 'SC_TANIMOTO',
+     'weight_min': 0.0,
+     'weight_max': 500.0,
+     'accept_min': 50,
+     'accept_max': 100,
+     'far_produce': 80,
+     'close_produce': 150,
+     'far_close_threshold': 0.15,
+     'max_morphs_total': 1500,
+     'non_producing_survive': 2}
+
+Now that we have a target, we can leverage the features
+Molpher-lib inherited from Molpher to find a chemical
+space path between captopril and enalapril:
+
+..  code-block:: python
+
+    class FindClosest:
+
+        def __init__(self):
+            self.closest_mol = None
+            self.closest_distance = None
+
+        def __call__(self, morph):
+            if not self.closest_mol or self.closest_distance > morph.dist_to_target:
+                self.closest_mol = morph
+                self.closest_distance = morph.dist_to_target
+
+    closest_info = FindClosest()
+    while not tree.path_found:
+        tree.generateMorphs()
+        tree.sortMorphs()
+        tree.filterMorphs()
+        tree.extend()
+        tree.prune()
+        tree.traverse(closest_info)
+        print('Generation #', tree.generation_count, sep='')
+        print('Molecules in tree:', tree.mol_count)
+        print(
+            'Closest molecule to target: {0} (Tanimoto distance: {1})'.format(
+                closest_info.closest_mol.getSMILES()
+                , closest_info.closest_distance
+            )
+        )
+
+Output (some contents omitted):
+
+..  code-block:: none
+
+    Generation #11
+    Molecules in tree: 405
+    Closest molecule to target: CCCC(C)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.47457627118644063)
+    Generation #12
+    Molecules in tree: 481
+    Closest molecule to target: CCOC(C)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.4576271186440678)
+    Generation #13
+    Molecules in tree: 555
+    Closest molecule to target: CCOC(=O)C(C)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.375)
+    ...
+    Generation #42
+    Molecules in tree: 365
+    Closest molecule to target: CCOC(=O)C(CCC1=CC=C1)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.09259259259259256)
+    Generation #43
+    Molecules in tree: 395
+    Closest molecule to target: CCOC(=O)C(CCC1=CC=C1)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.09259259259259256)
+    Generation #44
+    Molecules in tree: 424
+    Closest molecule to target: CCOC(=O)C(CCC1=CC=CC=C1)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.0)
+
+Since we have a target structure defined, the software now
+automatically calculates the distance of each morph from the target
+and inserts that into the `dist_to_target` property
+at the time of generation (call to :meth:`~.core.ExplorationTree.generateMorphs`).
+Therefore, we don't need any customized collector in this instance. We also
+chose to use the built-in filters (the :meth:`~.core.ExplorationTree.filterMorphs` method)
+to prioritize morphs in the `candidates` property. This filtering also
+includes a synthetic accessibility filter like the one we used above
+(only structures with :term:`SAScore` higher than 6 are considered).
+
+There are also a few features in this code that we haven't studied in detail, yet.
+For example, we used the :meth:`~.core.ExplorationTree.traverse` method here to find out the closest
+molecule to the target after finishing each iteration. Thanks to
+this we can watch the algorithm converge to the target structure. We also used the
+:meth:`~.core.ExplorationTree.prune` method which is used to remove
+branches in the tree that are not converging towards the target. This helps
+to curb exponential growth of the tree. How this method works is
+discussed in more detail :ref:`later <prune>`.
+
+If we want to get a hold of the molecules on the path, we can easily do so:
+
+..  code-block:: python
+
+    path = tree.fetchPathTo(tree.params['target'])
+
+    print(len(path))
+    show_mol_grid(path)
+
+Output:
+
+..  code-block:: none
+
+    42
+
+..  figure:: captopril_2_enalapril.png
+
+..  note:: We can see that what appeared to be especially challenging for
+    the algorithm was the creation of the aromatic ring at the
+    end. This is an issue often observed with the original
+    algorithm implemented in Molpher. It usually doesn't take
+    a long time to converge to a structure which is very similar
+    to the target, but more effort is needed to actually generate the target structure
+    itself. Fortunately, Molpher-lib
+    has at least some answer to that (see :ref:`bidirectional`).
 
 .. _prune:
 
-Pruning
-~~~~~~~
+Tree Pruning
+~~~~~~~~~~~~
 
-However, there is also the problem that the tree will grow exponentially
-if we keep adding new morphs in this way. Thus, we will need a strategy
-to keep the number of explored putative paths to a minimum by discarding those that are not getting any
-closer to the :term:`target molecule`.
+We cannot possibly grow the tree into all directions without soon running out
+of memory or wasting computational time on a non-prospective part of chemical space.
+Thus, we will need a strategy
+to keep the number of explored putative paths to a minimum by discarding
+such that are not improving in the value of the obective function
+(:term:`target molecule` in the simplest case).
 
 We call the molecule that have not generated any morphs closer to the target than itself
 a :term:`non-producing molecule` and we can set

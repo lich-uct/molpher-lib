@@ -152,7 +152,7 @@ ExplorationTree
         Returns a mask for the `tuple` returned by `getCandidateMorphs`. The filtered out morphs
         are denoted by `False` at the respective position in the mask.
 
-        Morphs filtered out in this way will not be attached to the tree when `extend` is called.
+        Morphs filtered out in this way will not be attached to the tree when :meth:`extend` is called.
 
         :return: `tuple` of `bool` instances which shows what :term:`candidate morphs` were filtered out
         :rtype: `tuple`
