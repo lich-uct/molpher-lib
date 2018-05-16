@@ -272,3 +272,20 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         :rtype: :class:`~molpher.core.ExplorationData.ExplorationData`
         """
         return ExplorationData(other=super(ExplorationTree, self).asData())
+
+    def fetchPathTo(self, smiles):
+        if self.hasMol(smiles):
+            target = self.fetchMol(smiles)
+
+            path = [target]
+            while True:
+                parent_smiles = path[-1].parent_smiles
+                if parent_smiles:
+                    path.append(self.fetchMol(parent_smiles))
+                else:
+                    break
+
+            path.reverse()
+            return path
+        else:
+            return None
