@@ -151,6 +151,14 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
         return self.getGenerationCount()
 
     @property
+    def mol_count(self):
+        def count_mols(mol):
+            count_mols.count += 1
+        count_mols.count = 0
+        self.traverse(count_mols)
+        return count_mols.count
+
+    @property
     def path_found(self):
         """
         :return: `True` if the :term:`target molecule` is present in the tree, `False` otherwise.
