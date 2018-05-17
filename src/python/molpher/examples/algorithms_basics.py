@@ -11,15 +11,13 @@ procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
 class MyFilterMorphs(TreeOperation):
 
-    def __init__(self):
-        super(MyFilterMorphs, self).__init__()
-
     def __call__(self):
-        mask = [False for x in self.tree.candidates_mask]
-        mask[0] = True
-        mask[1] = True
-        mask[2] = True
-        self.tree.candidates_mask = mask
+
+        self.tree.candidates_mask = [
+            True if idx < 10 and self.tree.candidates[idx].sascore < 6
+            else False
+            for idx, x in enumerate(self.tree.candidates_mask)
+        ]
 
 def main():
     iteration = [
@@ -46,16 +44,7 @@ def main():
             )
         )
 
-    path = []
-    current = tree.fetchMol(tree.params['target'])
-    path.append(current)
-    while current != '':
-        current = current.getParentSMILES()
-        if current:
-            current = tree.fetchMol(current)
-            path.append(current)
-
-    path.reverse()
+    path = tree.fetchPathTo(tree.params['target'])
     print("Path found: ")
     for mol in path:
         print(mol.getSMILES(), mol.getDistToTarget())
