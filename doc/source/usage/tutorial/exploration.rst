@@ -279,6 +279,8 @@ the compounds currently present in the tree.
     belong to the tree just yet. See :ref:`extend` for more information on
     how tree ownership is assigned to molecules.
 
+..  _sort-filter:
+
 Sorting and Filtering
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -401,7 +403,7 @@ attaching new leaves to the tree (`True`) or not (`False`).
 Here is an example implementation of a very simple filtering procedure:
 
 ..  code-block:: python
-    :caption: A simple morph filter that selects only the first three closest morphs from the list.
+    :caption: A simple morph filter that selects only the first ten closest morphs from the list.
     :name: filtering-morphs
     :linenos:
 
@@ -727,14 +729,14 @@ Tree Pruning
 
 We cannot possibly grow the tree into all directions without soon running out
 of memory or wasting computational time on a non-prospective part of chemical space.
-Thus, we will need a strategy
-to keep the number of explored putative paths to a minimum by discarding
-such that are not improving in the value of the obective function
-(:term:`target molecule` in the simplest case).
+Thus, a strategy to keep the number of explored putative paths to a minimum is needed.
+This can be achieved by discarding parts of the paths that
+are not improving in the value of the objective function
+(distance from the :term:`target molecule` in the simplest case).
 
-We call the molecule that have not generated any morphs closer to the target than itself
+We call a molecule that has not generated any morphs closer to the target than itself
 a :term:`non-producing molecule` and we can set
-the number of generations to wait before removing its descendents
+the number of generations to wait before removing its descendants
 with the `non_producing_survive` parameter.
 
 Tree pruning can be requested anytime by calling the `prune()` method. In our example, the method didn't prune
@@ -742,71 +744,81 @@ any paths, because the `non_producing_survive` parameter is set to 2 generations
 
 ..  seealso:: In addition to the `non_producing_survive` parameter, there is the `max_morphs_total` parameter,
     which imposes a restriction on the maximum number of
-    descendents of one :term:`non-producing molecule`. If the number of descendents
-    reaches this threshold, the molecule is removed along with the descendents.
+    descendants of one :term:`non-producing molecule`. If the number of all historic descendants
+    reaches this threshold, the molecule is removed along with the current descendants.
 
-..  hint:: We could now repeat the process of generating, filtering, extending and pruning
-    and have Molpher iteratively explore further in :term:`chemical space`. We could also read the `path_found` member
-    at every iteration to check for the presence of the :term:`target molecule` in the tree and terminate the process,
-    if a it is present. This would give us one complete implementation of a chemical space exploration algorithm.
-
-Now we know everything that is needed to implement a chemical space exploration algorithm with
-the *Molpher-lib* library. In the following sections, we describe more advanced topics
-and introduce some built-in features of the library that can help to make some more complex tasks
-(such as tree serialization) easier.
+Now we know the basics about the main building blocks that Molpher-lib offers and we showed
+how to implement a basic chemical space exploration algorithm. In the following sections,
+we describe more advanced topics and introduce other helpful features of the library.
 
 ..  _operations:
 
 Tree Operations
 ---------------
 
-We call every action that is performed on an :term:`exploration tree` a *tree operation*.
-This concept is represented in the library with the :class:`~molpher.core.operations.TreeOperation` abstract class and it
-becomes useful when we run into a situation where we need to build
-several exploration trees at once, want to reuse some existing code or store some interim results
-of an ongoing exploration.
+In the previous section, we introduced a few methods of the :class:`~.core.ExplorationTree`
+that we can use to generate new morphs and extend the exploration tree (such
+as :meth:`~.core.ExplorationTree.generateMorphs` or :meth:`~.core.ExplorationTree.extend`).
+These methods, however, have one thing in common. They work with a single
+exploration tree instance and change it somehow. Therefore, their functionality
+can be defined with an interface and that is what we will cover in this section,
+the *tree operation* interface and how to use it.
 
-We can run any operation on a tree simply by supplying it to the
-`runOperation()` method of the :py:class:`~molpher.swig_wrappers.core.ExplorationTree` class. Here is how to implement
-the same workflow as in the preceding sections using operations:
+We call every action that is performed on an :term:`exploration tree` a *tree operation*.
+This concept is represented in the library with the :class:`~molpher.core.operations.TreeOperation`
+abstract class and it becomes useful when we need to control
+several exploration trees at once or if we just prefer to separate the tree itself from the
+logic of our exploration algorithm.
+
+..  note:: Tree operations were mainly created to house different parts of the exploration algorithm
+    and to make them more encapsulated and configuration more intuitive. However, this transition is still
+    far from complete so most of the built-in operations take their parameters from the `params` property,
+    which is defined globally for the tree in question. Most of these parameters will eventually be
+    encapsulated by their respective operations, though.
+
+When we have defined our own operation, we can run it on a tree by supplying it to the
+`runOperation()` method. Here is an example of how to define a customized filtering
+procedure (similar to the one used :ref:`before <filtering-morphs>`) and incorporate it
+in an exploration algorithm:
 
 ..  code-block:: python
-    :caption: Using operations to implement simple chemical space exploration.
-    :emphasize-lines: 3-23,31
+    :caption: Using tree operations to define an iteration of a simple chemical space exploration algorithm.
     :name: operations-example
     :linenos:
 
+    import molpher
     from molpher.core.operations import *
+    from molpher.core import MolpherMol, ExplorationTree as ETree
 
     class MyFilterMorphs(TreeOperation):
         """
         A custom tree operation that accepts
-        only the first three morphs
-        (those with the lowest distance to target).
-
+        only the first three morphs after
+        the list of candidates is sorted.
         """
 
         def __call__(self):
             """
             This method is called automatically by the tree.
             The tree this operation is being run on is accessible
-            from `self.tree`.
+            from the 'tree' member of the class.
+            """
 
-        """
+            self.tree.candidates_mask = [
+                True if idx < 20 and self.tree.candidates[idx].sascore < 6
+                else False
+                for idx, x in enumerate(self.tree.candidates_mask)
+            ]
 
-        mask = [False for x in self.tree.candidates_mask]
-        mask[0] = True
-        mask[1] = True
-        mask[2] = True
-        self.tree.candidates_mask = mask
-
+    cocaine = MolpherMol('CN1[CH]2CC[CH]1[CH](C(OC)=O)[CH](OC(C3=CC=CC=C3)=O)C2')
+    procaine = MolpherMol('O=C(OCCN(CC)CC)c1ccc(N)cc1')
     tree = ETree.create(source=cocaine, target=procaine) # create the tree
 
-    # this list of tree operations defines one iteration
+    # list of tree operations, defines one iteration
     iteration = [
         GenerateMorphsOper()
         , SortMorphsOper()
-        , MyFilterMorphs()
+        , MyFilterMorphs() # our custom filtering procedure
         , ExtendTreeOper()
         , PruneTreeOper()
     ]
@@ -817,46 +829,47 @@ the same workflow as in the preceding sections using operations:
 
     # observe the results
     print(tree.generation_count)
-    print(tree.path_found)
-    print(
-        sorted( # grab the new leaves as a list sorted according to their distance from target
-        [
-            (x.getSMILES(), x.getDistToTarget())
-            for x in tree.leaves
-        ], key=lambda x : x[1]
-        )
-    )
+    print(len(tree.leaves))
 
 Output:
 
 ..  code-block:: none
 
-    Generated 67 morphs.
     1
-    False
-    [('COC(=O)C1C2CCC(CC1OC(=O)C1=CC=C(N)C=C1)N2C', 0.7068965517241379), ('COC(=O)CC1CCC(CCOC(=O)C2=CC=CC=C2)N1C', 0.7142857142857143), ('COC(=O)C1C(COC(=O)C2=CC=CC=C2)C2CCC1N2C', 0.7586206896551724)]
+    18
 
-..  note:: Because the morphing algorithm is not deterministic and we initilized a new tree,
-    the set of obtained morphs is different from the one in the previous examples.
+..  seealso:: This and other advanced examples are included in a Jupyter Notebook
+    which can be downloaded :download:`from here <../../../notebooks/exploration_advanced.ipynb>`
+    or `viewed directly <../../_static/exploration_advanced.html>`_.
 
-Most of the operations in :numref:`operations-example` are built-in operations (discussed below), but
-we chose to define our own operation for the filtering step
-(see the highlighted lines). We simply created a subclass of the :class:`~molpher.core.operations.TreeOperation`
+Except for the source and target molecule, this algorithm is similar to what
+we have seen before, but this time we used operations instead of calling
+the corresponding methods on the tree. We used a customized operation for the filtering step
+by creating a subclass of the :class:`~molpher.core.operations.TreeOperation`
 abstract class and we overrode its
 :py:meth:`~molpher.swig_wrappers.core.TreeOperation.__call__` method with the implementation we want.
 
-Each operation can have a tree associated with it, but it is not necessary.
+Each operation can have a tree associated with it, but it is not necessary
+(we had no problems initializing the operations without a tree in the previous example).
 We can verify if a tree is associated with an operation by calling
 its :meth:`~operations.TreeOperation.TreeOperation.getTree()`
 method or accessing the `TreeOperation.tree` attribute of the class.
 If there is no tree associated with the instance, they both return `None`.
-
-..  note:: The built-in operations will raise a `RuntimeError`, if invoked without a tree attached to them.
+We can set the tree to operate on by writing into the `TreeOperation.tree`
+attribute or calling the `TreeOperation.setTree` method. Then the operation
+becomes callable (calling it will result in a `RuntimeError`).
 
 Built-in Operations
 ~~~~~~~~~~~~~~~~~~~
 
-A few operations are already defined in the library:
+..  warning:: This section is not yet complete because
+    most of these operations will change their interface in the feature.
+    We only describe the :class:`~.operations.TraverseOper.TraverseOper`
+    class, which has more practical use than the others and its
+    interface will not undergo much change in the future. For the other operations,
+    we kindly refer the reader to their respective documentation pages.
+
+In this section, we describe the few operations the library inherited from Molpher:
 
     - :py:class:`~operations.GenerateMorphsOper.GenerateMorphsOper`
     - :py:class:`~operations.SortMorphsOper.SortMorphsOper`
@@ -867,24 +880,17 @@ A few operations are already defined in the library:
     - :py:class:`~operations.TraverseOper.TraverseOper`
     - :py:class:`~operations.CleanMorphsOper.CleanMorphsOper`
 
-They are all dervied from :class:`~molpher.swig_wrappers.core.TreeOperation` and contain
+They are all derived from :class:`~molpher.swig_wrappers.core.TreeOperation` and contain
 the full set of operations performed on a tree in
 the original Molpher algorithm as published in [1]_. Therefore, the original algorithm can be
 implemented using those operations.
-
-In the next part of the tutorial, we will pay particular attention to the
-:py:class:`~operations.TraverseOper.TraverseOper` operation. It differs
-from the others, because it uses a callback function to perform actions on molecules
-in the tree and is, therefore, very useful for debugging and saving exporting various data (see `tree-traversal`).
-
-For more details on the other operations, see the designated pages in the documentation.
 
 ..  _tree-traversal:
 
 Traversing the Tree
 ^^^^^^^^^^^^^^^^^^^
 
-A special place among the operations belongs to the :py:class:`~operations.TraverseOper.TraverseOper`
+A special place among these operations belongs to the :py:class:`~operations.TraverseOper.TraverseOper`
 class. It does not directly implement a part
 of a morphing algorithm, but serves as a means of traversing molecules in a tree and reading/modifying them
 as needed:
