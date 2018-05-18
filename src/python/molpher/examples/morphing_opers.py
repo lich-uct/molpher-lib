@@ -44,18 +44,22 @@ class AddFragment(MorphingOperator):
     def getName(self):
         return self._name
 
-if __name__ == '__main__':
-    # mol = MolpherMol("CC=O")
+def main(captopril=None):
+    mol = MolpherMol("CC=O")
     frag = Chem.MolFromSmiles('c1ccccc1')
     oper = AddFragment(frag, [1], "Add Benzyl")
-    # oper.setOriginal(mol)
-    # morph = oper.morph()
-    # print(morph.smiles)
+    oper.setOriginal(mol)
+    morph = oper.morph()
+    print(morph.smiles)
 
-    captopril = MolpherMol("src/python/molpher/examples/captopril.sdf")
+    if not captopril:
+        captopril = MolpherMol("src/python/molpher/examples/captopril.sdf")
     tree = ETree.create(source=captopril)
     tree.morphing_operators = tree.morphing_operators + (oper,)
     print(tree.morphing_operators)
 
     tree.generateMorphs()
     print([x.smiles for x in tree.candidates])
+
+if __name__ == '__main__':
+   main()

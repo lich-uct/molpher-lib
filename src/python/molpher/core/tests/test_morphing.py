@@ -22,6 +22,7 @@ from rdkit import Chem
 from pkg_resources import resource_filename
 
 from molpher import random
+from molpher.examples import morphing_opers, exploration_basics
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
 from molpher.core.operations import *
@@ -235,6 +236,10 @@ class TestMorphing(unittest.TestCase):
             self.assertTrue(x[0].smiles)
             self.assertTrue(x[1].name)
             self.assertTrue(x[0].asRDMol().HasSubstructMatch(locked_pattern))
+
+    def testExamples(self):
+        morphing_opers.main(self.captopril)
+        exploration_basics.main()
 
 if __name__ == "__main__":
     unittest.main()
