@@ -8,4 +8,4 @@ def set_random_seed(seed):
     wrappers.set_random_seed(seed)
 
 def get_random_number(floor, ceil):
-    wrappers.get_random_number(floor, ceil)
+    return wrappers.get_random_number(floor, ceil)
