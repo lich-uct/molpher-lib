@@ -260,7 +260,9 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::operator()() {
 				molpher();
 			} catch (std::exception exp) {
 				Cerr("Morphing failed for leaf: " + leaf->getSMILES());
-				tree->deleteSubtree(leaf->getSMILES(), false);
+				if (!leaf->getParentSMILES().empty()) {
+					tree->deleteSubtree(leaf->getSMILES(), false);
+				}
 				continue;
 			}
 
