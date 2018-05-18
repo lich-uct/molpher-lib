@@ -624,6 +624,9 @@ Molpher-lib inherited from Molpher to find a chemical
 space path between captopril and enalapril:
 
 ..  code-block:: python
+    :caption: Example of a simple exploration algorithm with atom locks.
+    :name: simple-exploration
+    :linenos:
 
     class FindClosest:
 
@@ -699,6 +702,7 @@ discussed in more detail :ref:`later <prune>`.
 If we want to get a hold of the molecules on the path, we can easily do so:
 
 ..  code-block:: python
+    :linenos:
 
     path = tree.fetchPathTo(tree.params['target'])
 
@@ -747,18 +751,227 @@ any paths, because the `non_producing_survive` parameter is set to 2 generations
     descendants of one :term:`non-producing molecule`. If the number of all historic descendants
     reaches this threshold, the molecule is removed along with the current descendants.
 
-Now we know the basics about the main building blocks that Molpher-lib offers and we showed
-how to implement a basic chemical space exploration algorithm. In the following sections,
-we describe more advanced topics and introduce other helpful features of the library.
+This concludes the basic introduction to the main building blocks of Molpher-lib
+that are needed to understand how the molecular morphing approach works
+and how it can be useful. In the following sections, we describe more advanced topics
+and introduce other helpful features of the library.
+
+..  _morphing-operators:
+
+Morphing Operators
+------------------
+
+Let us get back to the concept of `chemical operators` again and
+show how they work in the context of the exploration tree. We will
+also show how to implement a customized operator, as we promised
+while we discussed the `basics if molecular morphing <morphing-algorithm>`.
+
+First, we will define a new chemical operator that we would like
+to incorporate into the workflow we developed in the examples above.
+This operator will give us the ability to take 'shortcuts'
+in chemical space by adding certain fragments rather than just atoms.
+With a little help from the
+RDKit library, such operator could be defined as follows:
+
+..  code-block:: python
+    :linenos:
+
+    from rdkit import Chem
+    from molpher.core import MolpherMol, MolpherAtom
+    from molpher.core.morphing.operators import MorphingOperator
+    from molpher.random import get_random_number
+
+    class AddFragment(MorphingOperator):
+
+        def __init__(self, fragment, open_atoms_frag, oper_name):
+            super(AddFragment, self).__init__()
+            self._name = oper_name
+            self._fragment = fragment
+            self._open_atoms_frag = open_atoms_frag
+            self._orig_rdkit = None
+            self._open_atoms = []
+
+        def setOriginal(self, mol):
+            super(AddFragment, self).setOriginal(mol)
+            if self.original:
+                self._orig_rdkit = self.original.asRDMol()
+                self._open_atoms = []
+
+                for atm_rdkit, atm_molpher in zip(self._orig_rdkit.GetAtoms(), self.original.atoms):
+                    free_bonds = atm_rdkit.GetImplicitValence()
+                    if free_bonds >= 1 and not (MolpherAtom.NO_ADDITION & atm_molpher.locking_mask):
+                        self._open_atoms.append(atm_rdkit.GetIdx())
+
+        def morph(self):
+            combo_mol = Chem.EditableMol(Chem.CombineMols(
+                self._orig_rdkit
+                , self._fragment
+            ))
+            atom_orig = self._open_atoms[get_random_number(0, len(self._open_atoms)-1)]
+            atom_frag = len(self.original.atoms) + self._open_atoms_frag[get_random_number(0, len(self._open_atoms_frag)-1)]
+            combo_mol.AddBond(atom_orig, atom_frag, order=Chem.rdchem.BondType.SINGLE)
+            combo_mol = combo_mol.GetMol()
+            Chem.SanitizeMol(combo_mol)
+
+            ret = MolpherMol(other=combo_mol)
+            for atm_ret, atm_orig in zip(ret.atoms, self.original.atoms):
+                atm_ret.locking_mask = atm_orig.locking_mask
+
+            return ret
+
+        def getName(self):
+            return self._name
+
+A new chemical operator must implement the :class:`~.operators.MorphingOperator` abstract class
+and define three methods:
+
+    1. :meth:`~.operators.MorphingOperator.setOriginal` -- used to set
+    the structure that will be modified during morphing.
+    Its purpose is to figure out what atoms in the
+    molecule can be changed and what restrictions apply. In our example,
+    we just find all atoms that have at least one implicit bond to
+    a hydrogen atom. We save the indices of such atoms in the
+    :code:`_open_atoms` member of our :code:`AddFragment` class.
+    Note that we also made sure that no locked atoms were added to the list
+    as well.
+
+    2. :meth:`~.operators.MorphingOperator.morph` -- This is the method
+    where the original molecule is changed to a new one. In our example,
+    we randomly pick one atom from the original molecule and one from
+    our fragment. Then we connect them. After we are done, we make
+    sure to sanitize the result and also transfer any locks from the original
+    molecule to the new one.
+
+    3. :meth:`~.operators.MorphingOperator.getName` -- This method
+    is also required to implement and should return
+    a string with the name of the operator. This is then saved
+    to the `parent_operator` member of the `MolpherMol` instance
+    returned by the :code:`morph` method.
+
+Let's test if our new operator works as expected:
+
+..  code-block:: python
+    :linenos:
+
+    captopril = MolpherMol("captopril.sdf")
+    frag = Chem.MolFromSmiles('c1ccccc1')
+    add_frag = AddFragment(frag, [1], "Add Benzene")
+    add_frag.setOriginal(captopril)
+    depict(add_frag.morph())
+
+Output:
+
+..  figure:: captopril_benzene.png
+
+Indeed, our operator seems to be doing what we designed it to do. If you run the
+last line of this code a few times, you should see different variations of
+captopril with a benzene ring attached at random positions. The locked positions
+should always be excluded.
+
+..  seealso:: We omit the source of the :code:`depict` method, which is too long
+    and not relevant at the moment. It is defined in the example Jupyter Notebook, though (
+    available for :download:`download <../../../notebooks/exploration_advanced.ipynb>`
+    or `rendered <../../_static/exploration_operators.html>`_).
+
+The only thing that remains is to use our operator in the context of an exploration
+tree. Every tree has the `morphing_operators` property which stores
+the morphing operators currently in use. All we need to do,
+is to write a new list of operators and include the one
+we just defined:
+
+..  code-block:: python
+    :linenos:
+
+    from molpher.core import ExplorationTree as ETree
+
+    captopril = MolpherMol("captopril.sdf")
+    enalapril = MolpherMol("O=C(O)[CH]2N(C(=O)[CH](N[CH](C(=O)OCC)CCc1ccccc1)C)CCC2")
+    tree = ETree.create(source=captopril, target=enalapril)
+    tree.morphing_operators = tree.morphing_operators + (add_frag,)
+
+Then we can run the exploration as before (:numref:`simple-exploration`):
+
+..  code-block:: python
+    :linenos:
+
+    class FindClosest:
+
+        def __init__(self):
+            self.closest_mol = None
+            self.closest_distance = None
+
+        def __call__(self, morph):
+            if not self.closest_mol or self.closest_distance > morph.dist_to_target:
+                self.closest_mol = morph
+                self.closest_distance = morph.dist_to_target
+
+    closest_info = FindClosest()
+    while not tree.path_found:
+        tree.generateMorphs()
+        tree.sortMorphs()
+        tree.filterMorphs()
+        tree.extend()
+        tree.prune()
+        tree.traverse(closest_info)
+        print('Generation #', tree.generation_count, sep='')
+        print('Molecules in tree:', tree.mol_count)
+        print(
+            'Closest molecule to target: {0} (Tanimoto distance: {1})'.format(
+                closest_info.closest_mol.getSMILES()
+                , closest_info.closest_distance
+            )
+        )
+
+Output (some contents omitted):
+
+..  code-block:: none
+
+    Generation #1
+    Molecules in tree: 21
+    Closest molecule to target: CC(CSC1=CC=CC=C1)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.484375)
+    Generation #2
+    Molecules in tree: 105
+    Closest molecule to target: CC(CCC1=CC=CC=C1)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.3035714285714286)
+    Generation #3
+    Molecules in tree: 205
+    Closest molecule to target: CC(CCC1=CC=CC=C1)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.3035714285714286)
+    ...
+    Generation #10
+    Molecules in tree: 787
+    Closest molecule to target: C=C(CC)C(CCC1=CC=CC=C1)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.21666666666666667)
+    Generation #11
+    Molecules in tree: 811
+    Closest molecule to target: CC(NC(CCC1=CC=CC=C1)C(=O)OCN)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.13793103448275867)
+    Generation #12
+    Molecules in tree: 838
+    Closest molecule to target: CCOC(=O)C(CCC1=CC=CC=C1)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.0)
+
+There is literally no change to our morphing code. We only added one more operator
+to the tree prior to running it. We can see that the algorithm only needs 12
+iterations to converge this time (the original algorithm above needed 44).
+Therefore, our shortcut was successful and we managed to
+spare the algorithm the tedious aromatic ring creation we commented on before.
+
+Let's take a look at the generated path now:
+
+..  code-block:: python
+
+    show_mol_grid(tree.fetchPathTo(tree.params['target']))
+
+Output:
+
+..  figure:: captopril_2_enalapril_shortcut.png
+
+We can see that once the benzene ring is incorporated at the very beginning,
+the algorithm quickly finds the operations needed to create the target structure.
 
 ..  _operations:
 
 Tree Operations
 ---------------
 
-In the previous section, we introduced a few methods of the :class:`~.core.ExplorationTree`
-that we can use to generate new morphs and extend the exploration tree (such
-as :meth:`~.core.ExplorationTree.generateMorphs` or :meth:`~.core.ExplorationTree.extend`).
+In the previous section, we used some methods of the :class:`~.core.ExplorationTree`
+to generate new morphs and extend it, but also to prune it.
 These methods, however, have one thing in common. They work with a single
 exploration tree instance and change it somehow. Therefore, their functionality
 can be defined with an interface and that is what we will cover in this section,
@@ -779,7 +992,7 @@ logic of our exploration algorithm.
 When we have defined our own operation, we can run it on a tree by supplying it to the
 `runOperation()` method. Here is an example of how to define a customized filtering
 procedure (similar to the one used :ref:`before <filtering-morphs>`) and incorporate it
-in an exploration algorithm:
+into an exploration algorithm:
 
 ..  code-block:: python
     :caption: Using tree operations to define an iteration of a simple chemical space exploration algorithm.
@@ -1153,77 +1366,6 @@ Output:
         'similarity': 'TANIMOTO'
     }
     [('CN1C2CCC1C(C(=O)OCN)C(OC(=O)C1=CC=CC=C1)C2', 0.7777777777777778), ('CCN1C2CCC1C(C(=O)OC)C(OC(=O)C1=CC=CC=C1)C2', 0.7936507936507937), ('CN1C2CCC1C(C(=O)ON)C(OC(=O)C1=CC=CC=C1)C2', 0.8064516129032258)]
-
-Simple Algorithm Example
-------------------------
-
-Finally, an example of a full algorithm which uses the concepts above:
-
-..  code-block:: python
-    :caption: Example implementation of a pathfinding algorithm that searches
-        for a path in :term:`chemical space` between *cocaine* and *procaine*.
-    :name: complete-example
-    :linenos:
-
-    iteration = [
-        GenerateMorphsOper()
-        , SortMorphsOper()
-        , MyFilterMorphs()
-        , ExtendTreeOper()
-        , PruneTreeOper()
-    ]
-
-    tree = ETree.create(source=cocaine, target=procaine)
-    counter = 0
-    while not tree.path_found:
-        for oper in iteration:
-            tree.runOperation(oper)
-        counter+=1
-        print("Iteration", counter)
-        print(
-            sorted(
-            [
-                (x.getSMILES(), x.getDistToTarget())
-                for x in tree.leaves
-            ], key=lambda x : x[1]
-            )[0]
-        )
-
-    show_mol_grid(tree.fetchPathTo(tree.params['target']))
-
-Output:
-
-..  code-block:: none
-
-    Iteration 1
-    ('CCC(=O)C1C(OC(=O)C2=CC=CC=C2)CC2CCC1N2C', 0.7878787878787878)
-    Iteration 2
-    ('COC(=O)C(C(C)OC(=O)C1=CC=C(N)C=C1)C1CCCN1C', 0.65)
-    Iteration 3
-    ('CCN(C)C(C)C(C(=O)OC)C(C)OC(=O)C1=CC=C(N)C=C1', 0.5192307692307692)
-    Iteration 4
-    ('CCCN(CC)CC(C(=O)OC)C(C)OC(=O)C1=CC=C(N)C=C1', 0.46153846153846156)
-    Iteration 5
-    ('CCCN(CC)CC(COC(=O)C1=CC=C(N)C=C1)C(=O)O', 0.40816326530612246)
-    Iteration 6
-    ('CCCN(CC)CCOC(=O)CCOC(=O)C1=CC=C(N)C=C1', 0.25)
-    Iteration 7
-    ('CCN(CC)CCOC(=O)CCOC(=O)C1=CC=C(N)C=C1', 0.15000000000000002)
-    Iteration 8
-    ('CCN(CC)CCOC(=O)COC(=O)C1=CC=C(N)C=C1', 0.17500000000000004)
-    Iteration 9
-    ('CCN(CCOC)CCOC(=O)C1=CC=C(N)C=C1', 0.15384615384615385)
-    Iteration 10
-    ('CCN(CC)CCOOCCOC(=O)C1=CC=C(N)C=C1', 0.15384615384615385)
-    Iteration 11
-    ('CCN(CC)CCOC(=O)C1=CC=C(N)C=C1', 0.0)
-
-..  figure:: cocaine_2_procaine.png
-
-The above implementation is nothing more than just the tutorial code bits inside a loop.
-The loop checks if a path was found at each iteration.
-If it was found, we backtrack through the tree
-and print out a sequence of molecules on the path.
 
 Summary
 -------

@@ -120,7 +120,7 @@ Output:
     the input configuration of all atoms even after modification as we will see next.
 
 Let's now mobilize one of the chemical operators to generate new possible structures
-that we could assemble from this set of atoms without changing any bond order.
+that we could assemble from this set of atoms without changing their valency.
 This operator is called :class:`~.operators.RerouteBond.RerouteBond` and can be used as follows:
 
 ..  code-block:: python
@@ -158,11 +158,11 @@ Output:
 
 ..  figure:: reroute_comparison.png
 
-We can see that the operator disconnected the bond between atoms 4 and 5
+The operator disconnected the bond between atoms 4 and 5
 and created a new bond between atoms 5 and 12. Therefore, the bond coming
-from atom 5 to atom 4 was rerouted to point to atom 12.
+from atom 5 to atom 4 was 'rerouted' to 'point' to atom 12.
 
-There are obviously many reroutes for an average compound. The operator first observes
+There are obviously many possible reroutes for an average compound. The operator first observes
 the possibilities when the :meth:`~.MorphingOperator.MorphingOperator.setOriginal`
 method is called and then randomly selects one option
 when the user requests a morph with the :meth:`~.MorphingOperator.MorphingOperator.morph`
@@ -191,7 +191,8 @@ us prioritize more viable structures over others.
     :meth:`~.MorphingOperator.MorphingOperator.morph` methods are part of an
     interface defined by the :class:`~.MorphingOperator.MorphingOperator` abstract class.
     By implementing the methods of this class, the user can create their own operators and easily
-    plug them into the Molpher-lib ecosystem. We will show an example of this later.
+    plug them into the Molpher-lib ecosystem. We will show an example of this
+    in the :ref:`next tutorial <morphing-operators>` on more advanced topics.
 
 .. [1] This means of 'chemical space travel' is not entirely new and a similar program (SPACESHIP) had been developed in the `past <http://dx.doi.org/10.1002/cmdc.200700021>`_.
 
