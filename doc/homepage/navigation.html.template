@@ -1,6 +1,6 @@
 <nav>
     <div class="nav-wrapper">
-        <span class="brand-logo center">molpher-lib</span>
+        <span class="brand-logo center">Molpher-lib</span>
 
         <ul id="slide-out" class="side-nav hide-on-large-only">
             {% include 'links_side.html.template'%}
