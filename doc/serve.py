@@ -4,7 +4,8 @@ import os
 
 PORT = 8080
 
-web_dir = os.path.join(os.path.dirname(__file__), 'build/html/')
+#web_dir = os.path.join(os.path.dirname(__file__), 'build/html/')
+web_dir = os.path.join(os.path.dirname(__file__), 'homepage')
 os.chdir(web_dir)
 
 Handler = http.server.SimpleHTTPRequestHandler

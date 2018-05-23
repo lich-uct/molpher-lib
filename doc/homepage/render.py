@@ -50,6 +50,7 @@ def prepare_versions():
 
 # initialize context with version info
 context = prepare_versions()
+context['tut_root'] = 'latest/usage/tutorial'
 
 # prepare environment
 env = Environment()

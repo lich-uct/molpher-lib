@@ -569,7 +569,7 @@ morphing operators:
     sensible_morphs = dict()
     def collect_sensible(morph, operator):
         """
-        a simple collector which identifies
+        simple collector, accepts morphs without weird structural patterns
         """
 
         rd_morph = morph.asRDMol()

@@ -1,5 +1,6 @@
 {% extends "base.html.template" %}
 {% from 'code.html.template' import code %}
+{% from 'figure.html.template' import figure %}
 
 {% block append_head %}
 <title>Examples</title>
@@ -16,7 +17,62 @@
         <div class="section">
 
             <p>
-                This page features some of the use cases that one might be interested in when using the library. This is by no means a complete list and much more can be done with the library. Please, refer to the <a href="index.html#docs">documentation</a> , if you would like to know more.
+                This page features some code examples, which we hope are the main selling points of Molpher-lib. The library can generally do much more, though, and many of these examples are more thoroughly explained in the <a href="index.html#docs">documentation</a>.
+            </p>
+
+        </div>
+
+        <div class="section scrollspy" id="molpher">
+            <h3>Generating Morphs</h3>
+
+            <p>
+                The main use case for Molpher-lib is intended to be generation of new molecular structures from a given starting structure. What 'derivatives' we get depends on so called morphing operators. These operators can take any shape or form. In the original Molpher approach, they are a set of somewhat arbitrarily chosen structural modifications (add atom, add bond, remove atom, remove bond...), but they can also be elementary chemical transformations or other transformations that might be of interest.
+            </p>
+
+            <p>
+                Here is an example of how the library can be used to generate
+                new structural analogs of captopril, a famous hypertension drug:
+            </p>
+
+            {% call code('code_examples/Molpher.py')%}
+            Sample code featuring the <code class="python">Molpher</code> class.
+            It demonstrates how a set of 'derivatives' can be formed
+            from a source compound using various chemical operators implemented in Molpher-lib.
+            {% endcall %}
+
+            Generated image:
+
+            {% call figure('images/captopril_morphs.png')%}
+            Six morphs that were cropped out of the grid image depicting collected morphs. The image is generated with the <code class="python">as_mol_grid</code> function (definition not part of the example), which also highlights locked atoms (in red).
+            {% endcall %}
+
+            <p>
+                You might notice that the typical '-pril' structural pattern is preserved among all of the generated structures in this example. It is because atoms forming this substructure were locked away from certain modifications in the <code class="python">captopril.sdf</code> file. You can read how atom locking works in the introductory <a href="{{ tut_root }}/morphing.html">introductory tutorial</a> where this example is from.
+            </p>
+
+        </div>
+
+        <div class="section scrollspy" id="operators">
+            <h3>Customized Operators</h3>
+
+            <p>
+                Since the morphing operators play a crucial role in the process, the library makes implementations of new operators possible through the <code class="python">MorphingOperator</code> interface:
+            </p>
+
+            {% call code('code_examples/Molpher_frags.py')%}
+            Example code which leverages the <code class="python">MorphingOperator</code> abstract class to implement a customized operator, <code class="python">AddFragment</code>.
+            {% endcall %}
+
+            Generated image:
+
+            {% call figure('images/captopril_morphs_frags.png')%}
+            Example structures of morphs produced with the code above.
+            {% endcall %}
+
+            <p>
+                This code is essentially the same as above, but contains a few more lines that define the new operator itself and then create its instances
+                that are used in the <code class="python">Molpher</code> class.
+                When we focus on the definition of the operator itself, we can see that Molpher-lib can be easily integrated with RDKit cheminformatics library because its <code class="python">MolpherMol</code> instances can be cloned to RDKit molecules with a call to the <code class="python">asRDMol</code> method. Also note our use of the collector to set the <code class="python">parent_operator</code> attribute of the generated morphs. The value of this attribute is then used to generate labels in the image and tells us what operator was used to generate the given structure. You can learn more about implementing operators in the <a href="{{ tut_root }}/advanced.html#morphing-operators">appropriate section of the documentation</a>
             </p>
 
         </div>
@@ -25,13 +81,14 @@
             <h3>Finding a Path</h3>
 
             <p>
-                Probably the most straightforward use case is to generate a chemical space path using one of the <a href="latest/usage/algorithms.html">algorithms</a> implemented in the library. The code below will initiate a search from cocaine to procaine and write the resulting path to the output directory:
+                As was the case in the original <a href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">Molpher</a> approach, Molpher-lib is able to generate chemical space path from one molecule to another. Using the original Molpher algorithm from the <a href="{{ tut_root }}/algorithms.html">algorithms</a> package, we can perform a search from cocaine to procaine, for example:
             </p>
 
             {% call code('code_examples/path_classic.py')%}
-                This simple code example illustrates how to generate a path between two molecules (source and target) using the original implementation of molecular morphing.
+                Code example illustrating how a path between two molecules (cocaine and procaine) can be generated.
             {% endcall %}
 
+            The idea behind this approach is that structures on the chemical space path between these two molecules combine their structural features and could also be a basis of interesting pharmaceuticals.
 
         </div>
 
@@ -39,15 +96,21 @@
             <h3>Implementing a Morphing Algorithm</h3>
 
             <p>
-                If we want to have more control over what actually happens during the exploration process, we can use the exploration tree API to implement our own algorithm:
+                If we want to have more control over what actually happens during the search process, we can use the exploration tree API to implement our own algorithm:
             </p>
 
             {% call code('code_examples/custom_alg.py')%}
             Sample code using the exploration tree API to implement the original algorithm from <a href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">Molpher</a>.
             {% endcall %}
 
+            Generated path:
+
+            {% call figure('images/cocaine_to_procaine.png')%}
+            Molecular structures on a chemical space path between cocaine and procaine.
+            {% endcall %}
+
             <p>
-                This algorithm is basically an implementation of the one in the previous example. The tree is a data structure which keeps track of all possible paths that one might be interested in. We can extend the tree, remove certain molecules or paths and do many other things by performing <a href="latest/usage/tutorial.html#operations">operations</a>. In the code example above, we used the shortcut methods available on the tree instance, but the built-in operations are all defined as separate callable classes under <code class="python">molpher.core.operations</code>. Their behaviour can be adjusted using various settings, but it is also possible to define new operations end use them in a unified manner (see <a href="#custom_oper">Defining Operations</a>).
+                This algorithm is basically an implementation of the one in the previous example. The tree is a data structure which keeps track of all possible paths that one might be interested in. We can extend the tree, remove certain molecules or paths and do many other things by performing <a href="{{ tut_root }}/advanced.html#operations">operations</a>. In the code example above, we used the shortcut methods available on the tree instance, but the built-in operations are all defined as separate callable classes under <code class="python">molpher.core.operations</code>. Their behaviour can be adjusted using various settings, but it is also possible to define new operations end use them in a unified manner (see <a href="#custom_oper">Defining Operations</a>).
             </p>
 
         </div>
@@ -65,10 +128,10 @@
 
             <p>
                 Every tree contains an array that masks the list of candidates
-                that are currently evaluated (populated by GenerateMorphsOper).
+                that are currently evaluated (populated by <code>GenerateMorphsOper</code>).
                 This mask is used to mark structures that should be removed from
                 the list of candidates upon extending the tree or when
-                CleanMorphsOper is called. Tree operations can be used to manipulate this mask and affect what molecules are accepted as the next generation in the evolution. Our customized operation in the example above does not really do much. It just discards generated structures that do not contain nitrogen. However, a more elaborate filtering scheme could also be implemented in this manner.
+                <code>CleanMorphsOper</code> is called. Tree operations can be used to manipulate this mask and affect what molecules are accepted as the next generation in the evolution. Our customized operation in the example above does not really do much. It just discards generated structures that do not contain nitrogen. However, a more elaborate filtering scheme could also be implemented in this manner.
             </p>
 
         </div>
@@ -86,8 +149,10 @@
 
     <div class="col hide-on-small-only m3">
         <ul class="section table-of-contents">
-            <li><a href="#path_classic">Finding a Path</a></li>
-            <li><a href="#path_custom">Implementing&nbsp;an&nbsp;Algorithm</a></li>
+            <li><a href="#molpher">Generating Morphs</a></li>
+            <li><a href="#operators">Customized Operators</a></li>
+            <li><a href="#path_classic">Find a Chemical Space Path</a></li>
+            <li><a href="#path_custom">Implement a Pathfinding Algorithm</a></li>
             <li><a href="#custom_oper">Defining&nbsp;Operations</a></li>
             <li><a href="#misc">More&nbsp;Examples</a></li>
         </ul>

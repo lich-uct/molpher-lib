@@ -37,4 +37,4 @@ while not tree.path_found:
     for oper in iteration:
         tree.runOperation(oper)
 
-print("Path found: ", find_path(tree))
+as_mol_grid(tree.fetchPathTo(tree.params['target']))

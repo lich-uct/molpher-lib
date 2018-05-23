@@ -1,7 +1,7 @@
 from molpher.core import ExplorationTree as ETree
 from molpher.algorithms.functions import find_path
 
-cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
+cocaine = 'CN1C2CCC1C(C(=O)OC)C(OC(=O)c1ccccc1)C2'
 procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
 tree = ETree.create(source=cocaine, target=procaine) # create the tree
@@ -15,4 +15,4 @@ while not tree.path_found:
     tree.extend() # connect the remaining molecules to the exploration tree
     tree.prune() # remove branches of the tree that do not converge
 
-print("Path found: ", find_path(tree))
+as_mol_grid(tree.fetchPathTo(tree.params['target']))
