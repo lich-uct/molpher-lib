@@ -1,3 +1,7 @@
+"""
+Tests registered here should be run when the conda packages are built.
+"""
+
 import unittest
 
 TEST_MODULES = [
