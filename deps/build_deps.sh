@@ -240,7 +240,7 @@ build_rdkit()
     echo "LD_LIBRARY_PATH=`pwd`/lib:`pwd`/../boost/stage/lib" >> $cmd
     echo "mkdir build" >> $cmd
     echo "cd build" >> $cmd
-    echo "cmake -G \"Unix Makefiles\" -D RDK_BUILD_PYTHON_WRAPPERS=ON -D Python_ADDITIONAL_VERSIONS=3 -D BOOST_ROOT=../boost -D RDK_INSTALL_STATIC_LIBS=OFF -D Boost_USE_STATIC_LIBS=OFF -D RDK_OPTIMIZE_NATIVE=OFF .." >> $cmd
+    echo "cmake -G \"Unix Makefiles\" -D RDK_BUILD_PYTHON_WRAPPERS=ON -D Python_ADDITIONAL_VERSIONS=3 -D BOOST_ROOT=`pwd`/../boost -D RDK_INSTALL_STATIC_LIBS=OFF -D Boost_USE_STATIC_LIBS=OFF -D RDK_OPTIMIZE_NATIVE=OFF .." >> $cmd
     echo "make -j ${MAKE_JOBS}" >> $cmd
     echo "make -j ${MAKE_JOBS} install" >> $cmd
     echo "cd .." >> $cmd
