@@ -1,33 +1,54 @@
 Installation
 ============
 
-Below are two currently available methods of installation.
+In this section, we discuss various methods of installation. There are also instructions on how to build the library
+from source and other comments useful to library developers.
 
 ..  note:: As of yet, the library is only available for the Linux platform and will only run
-        on 64-bit systems. However, other platforms will probably be supported in the future as well.
+        on 64-bit systems. However, support for other platforms is on the roadmap as well.
 
-..  warning:: The library has only been tested on a few Debian-based systems so far. Therefore, it might not work properly
-    on other Linux distributions.
+..  warning:: So far, the library is only tested on a limited number of Debian-based systems. Therefore, it might not work properly
+    on some other Linux distributions.
 
 Installation with Anaconda
 --------------------------
 
-This is probably the easiest and preferred way to install the library and the associated Python package.
+If you want to use the library from Python environment, this is probably the best way for you to install.
 All you need to do is either get the full `Anaconda <https://www.continuum.io/downloads>`_ distribution
 or its lightweight variant, `Miniconda <http://conda.pydata.org/miniconda.html>`_.
 
 Anaconda/Miniconda is essentially a Python distribution, package manager and virtual environment in one and makes setting up
-a development environment for your project very easy.
+a development environment for your projects very easy.
 After installing Anaconda/Miniconda you need to run the following
-to install the package:
+to install the package in your environment:
 
 ..  code-block:: bash
 
-    conda install -c lich molpher-lib
+    conda install -c rdkit -c lich molpher-lib
 
 This will automatically install the latest non-development version of the library
-in the currently active environment (for more information on environments and the
-:command:`conda` command see `Conda Test Drive <http://conda.pydata.org/docs/test-drive.html>`_).
+in your currently active environment.
+If you are interested in the development snapshots, you can specify the :code:`dev` label while you install:
+
+..  code-block:: bash
+
+    conda install -c rdkit -c lich/label/dev molpher-lib
+
+..  attention:: The binaries in the :code:`molpher-lib` package are compiled against
+    the newest version of RDKit (:code:`2018.03.1` at the time of writing),
+    which has a different ABI than the previous versions.
+    Therefore, this and the following versions of Molpher-lib will not work with older versions of RDKit anymore.
+
+For more information on environments and the
+:command:`conda` command see `Conda Test Drive <http://conda.pydata.org/docs/test-drive.html>`_.
+
+You can test if the library works as it should by running the Python test suite:
+
+..  code-block:: python
+
+    from molpher.tests import run
+
+    run()
 
 Building and Installing from Source -- Linux
 --------------------------------------------
@@ -54,137 +75,172 @@ Prerequisites
 
 Before you start building, there are a few requirements that need to be satisfied:
 
+    - *cmake* -- This tool will generate the Makefiles for the project and is used to configure the build. Cmake version 3.9 and higher is supported.
     - *build-essential* -- You will need this package in order to be able to build software on most Linux platforms. It contains a compiler and other tools important for the build.
-    - *swig* -- It is used to generate the Python wrapping code (we are using version 3.0.10 at the moment).
 
-        SWIG is only required if you made changes to the interface (header files under :file:`include/`) and want to configure cmake
+        Note that you might encounter some problems if you decide to use an ancient compiler with poor
+        support for the newer C++ standards (C++11 onwards). For example, g++ 5.4 and newer should be OK,
+        but even slightly older compilers could work with no problems.
+
+    - *swig* -- It is used to generate the Python wrapping code (we are using version 3.0.12 at the moment).
+
+        SWIG is only required if you made changes to the binary interface (header files under :file:`include/`) and want to configure cmake
         with the :command:`-DRUN_SWIG=ON` option (see the description of the *molpher_build_SWIG_Python* target in the section below).
         If this option is turned on, SWIG will be invoked by make upon build with the :command:`swig3.0`
         command so make sure the SWIG executable is available in the working environment.
 
-    - *setuptools* -- This Python package is needed to install the associated Python code.
+    - *setuptools* -- This Python package is needed to build and install the Molpher-lib Python package.
     - *python{version}-dev* -- You will need this package to build Python bindings for your Python *version*.
 
         If you get 'Missing Python.h' compiler errors, you probably do not have this package installed.
 
     - *dependencies* -- Molpher-lib depends on three third-party libraries:
 
-        - *boost* (1.50.0)
-        - *rdkit* (2014.03.1)
-        - *tbb* (4.2)
+        - *tbb* (most versions should work fine, we generally build against 2018 Update 3)
+        - *boost* (most versions should work fine, we generally build against 1.65)
+        - *rdkit* (2018.03.1 and newer)
+        - *numpy* (RDKit dependency in Python, not required if you will be using the C++ interface only)
 
-        You can build the individual dependencies yourself and place them in the :file:`deps/` folder
-        in the repository root. For each dependency, there should be a folder of the same name under :file:`deps/`
-        (for example, the path to the *tbb* files would be :file:`deps/tbb/`). The cmake build script will automatically
-        identify and prioritize dependencies in this directory. However, there is a build script (:file:`deps/build_deps.sh`)
-        which can download and build the libraries automatically. Therefore, it should be sufficient to do:
+        There is a bash script (:file:`deps/build_deps.sh`)
+        which can download and build the dependencies automatically with
+        the required options. It should be sufficient to just run:
 
         ..  code-block:: bash
 
             ./build_deps.sh --all
 
-        You can also install the libraries on
-        your system using a package manager or other means. In that case, cmake will automatically try to find them and
-        link them during the build. Please, note that the build system is configured so that only static
-        libraries of *boost* and *rdkit* are recognized. If you wish to link dynamically, you will need to modify
-        the :file:`CMakeLists.txt` file accordingly.
+        If you want the dependencies yourself, you should install them in the :file:`deps/` folder
+        in the repository root. For each dependency, there should be a folder of the same name under :file:`deps/`
+        (for example, the path to the *tbb* files would be :file:`deps/tbb/`). The CMakeLists.txt is configured to automatically
+        identify and prioritize dependencies in this directory.
+
+        You can also leverage the libraries already installed on your system. In that case, cmake should automatically find them and
+        link them during the build. The :file:`CMakeLists.txt` file is configured to link against dynamic versions of
+        all libraries so make sure you have those installed.
 
 Building the Library
 ~~~~~~~~~~~~~~~~~~~~
 
-When the above requirements are met, you can start building. First, you need to initialize the cmake project
-from a build directory:
+When the above requirements are met, you can start building. First, you need to create a build directory
+and initialize the cmake project:
 
 ..  code-block:: bash
 
-    mkdir ${REPOSITORY_ROOT}/cmake_dir/ # create a subdirectory in the root of the repository
-    cd ${REPOSITORY_ROOT}/cmake_dir/
-    cmake .. # initialize the project
+    mkdir ${REPOSITORY_ROOT}/build/ # create a subdirectory in the root of the repository
+    cd ${REPOSITORY_ROOT}/build/
+    cmake ..
 
-At this point, cmake checks the dependencies and generates the main makefile which defines three important targets:
+This is the simplest configuration with default options, but most of the time we will probably
+require more customization. The cmake configuration file recognizes a few options.
+For example, the following will force debug mode and Python 3 during build:
 
-    1. *molpher* -- This is the main target. It builds the C++ source code of the library and creates all necessary binary files. All targets mentioned below depend on this target.
+..  code-block:: bash
 
-    2. *molpher_install* -- This target will install the library in the given location.
+    cmake .. -DCMAKE_BUILD_TYPE=Debug -DPYTHON_EXECUTABLE=python3
 
-        By default, this location is the :file:`dist/` folder in the repository root.
-        This can be changed when the cmake project is initialized by setting
-        `CMAKE_INSTALL_PREFIX <https://cmake.org/cmake/help/v3.5/variable/CMAKE_INSTALL_PREFIX.html>`_.
-        Also by default, the TBB library is installed along with the molpher-lib files, because it
-        is also a runtime dependency. If you do not want this behaviour you can instruct
-        cmake to omit the installation of TBB with the :command:`-DINSTALL_TBB=OFF` option.
+If you want to recreate the Python wrapping code during build, you should
+add :command:`-DRUN_SWIG=ON`. Remember, that you need to have SWIG installed in a standard
+location for this to work. Alternatively, you can add swig to your :envvar:`PATH` or use
+:command:`-DSWIG_EXECUTABLE=/path/to/swig` to tell cmake where to look for it.
 
-    3. *molpher_install_python* -- This will install the Python package and the C++ extensions using the generated SWIG wrapper code.
-
-        By default, the primary Python distribution on the system is used. You can specify a different executable
-        by specifying the path with :command:`-DPYTHON_EXECUTABLE`
-        when you run cmake.
-
-        If you want to update the SWIG wrapping code before this target is run, you can instruct cmake to do so with
-        the :command:`-DRUN_SWIG=ON` option.
-
-        When this target finishes, all required files should be in place and you should be able to
-        import the *molpher* Python package located under :file:`src/python/`. Just add this directory to your :envvar:`PYTHONPATH` variable
-        and it should work.
-
-        ..  note:: You can also use the package created under :envvar:`CMAKE_INSTALL_PREFIX`. In this case, you need to have the following variables set up:
-
-               ..  code-block:: bash
-
-                    PYTHONPATH=$CMAKE_INSTALL_PREFIX/lib/pythonX.Y/site-packages # replace X.Y with your Python version
-                    LD_LIBRARY_PATH=$CMAKE_INSTALL_PREFIX/lib
-
-The build of a given configuration is initialized from the cmake project directory as:
+When the makefile is created, you can use :command:`make` to build various targets:
 
 ..  code-block:: bash
 
     make $CONFIG # CONFIG is a configurations' name
 
-Building Conda Packages
-~~~~~~~~~~~~~~~~~~~~~~~
+There are three important targets:
 
-If you want to build your own conda packages, you can use a
-python script located in :file:`conda/` subdirectory of the repository root:
+    1. *molpher* -- Builds the binaries for the C++ part of Molpher-lib.
 
-..  code-block:: bash
+    2. *molpher_install* -- This target will install the library in a given location.
 
-    cd ${REPOSITORY_ROOT}/conda
-    python build_conda.py
+        By default, this location is the :file:`dist/` folder in the repository root.
+        This can be changed when the cmake project is initialized by setting
+        `CMAKE_INSTALL_PREFIX <https://cmake.org/cmake/help/v3.9/variable/CMAKE_INSTALL_PREFIX.html>`_.
+        By default, the required dependency libraries are not installed. If you just want to install them,
+        you can configure cmake to do so by setting the following: :command:`-DINSTALL_TBB=ON -DINSTALL_Boost=ON -DINSTALL_RDKit=ON`.
 
-..  attention:: You will need `conda-build <https://github.com/conda/conda-build>`_ and the  *jinja2* Python library to do that.
+    3. *molpher_install_python* -- This builds the C++ Python extension and installs the Python package into :envvar:`CMAKE_INSTALL_PREFIX`.
 
-You can install the built packages as follows:
+        By default, the primary Python distribution on the system is used. You can specify a different executable
+        by with :command:`-DPYTHON_EXECUTABLE`.
 
-..  code-block:: bash
+        If you want to update the SWIG wrapping code before this target is run, you can instruct cmake to do so with
+        the :command:`-DRUN_SWIG=ON` option. Do not forget to specify the swig path with :command:`-DSWIG_EXECUTABLE` if it is installed in a non-standard location.
 
-    conda install --use-local molpher-lib
+        When this target finishes, all required files should be in place and you should be able to
+        import the *molpher* Python package, provided that your :envvar:`PYTHONPATH` and :envvar:`LD_LIBRARY_PATH` are set
+        appropriately. Here is an example of how these variables can be set if standard locations are used:
+
+        ..  code-block:: bash
+
+            export CMAKE_INSTALL_PREFIX="${REPOSITORY_ROOT}/dist"
+            export DEPS_DIR=${CMAKE_INSTALL_PREFIX}/../deps
+            export PYTHONPATH=${DEPS_DIR}/rdkit/:${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages
+            export LD_LIBRARY_PATH=${DEPS_DIR}/tbb/lib/intel64/gcc4.7:${DEPS_DIR}/rdkit/lib/:${DEPS_DIR}/boost/stage/lib:${CMAKE_INSTALL_PREFIX}/lib
+
+        You should then be able to successfully run the Python test suite:
+
+        ..  code-block:: python
+
+            from molpher.tests import run
+
+            run()
 
 Building the Documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This documentation is generated using the :file:`build_docs.sh`
-script under the :file:`doc/` directory. However, in order to successfully build the documentation
-you will need a few packages in your Python environment:
-
-..  literalinclude:: ../../../environment.yml
-    :language: none
-    :caption: The conda environment file used to build the documentation and test the library.
-
-You can easily install all these packages like so:
+script under the :file:`doc` directory. However, you will need a few Python packages
+in order to successfully build it. Molpher-lib source code contains a conda :download:`environment file <../../../environment.yml>`
+which defines these requirements. You can install this environment like so:
 
 ..  code-block:: bash
 
-    conda env create -n molpher-lib-docs -f environment.yml
+    conda env create -f environment.yml
 
-Also, make sure you initialized the Python package (built the *molpher_install_python* target as described above)
-prior to generating the documentation so that Sphinx can successfully import the *molpher* package.
+The resulting environment will be called *molpher-lib* and you can activate it while setting
+important Molpher-lib variables by sourcing the :file:`source_2_activate`
+file in :envvar:`REPOSITORY_ROOT`:
 
-To update the GitHub pages with the current version of the documentation, you can simply
-run the :file:`build_docs.sh` with the ```--upload``` option:
+..  code-block:: bash
+
+    . source_2_activate
+
+This will not only allow you to build
+the documentation, but also run the code in the associated Jupyter notebooks.
+
+Once your environment is activated, you can build the Python wrappers and
+generate the documentation:
+
+..  code-block:: bash
+
+    python setup.py build_ext --inplace
+    cd doc
+    ./build_docs.sh
+
+To update the GitHub pages, it is possible to
+run the :file:`build_docs.sh` script with the ```--upload``` option:
 
 ..  code-block:: bash
 
     build_docs.sh --upload
 
-..  note:: You will need write access to the repository and an SSH key attached to your account to be able to upload
-        the documentation.
+..  note:: You will need write access to the repository and an SSH key attached to your account to be able to do this.
+
+Building Conda Packages
+~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to build your own conda packages, you can use a
+python script located in :file:`conda` subdirectory of the repository root:
+
+..  code-block:: bash
+
+    cd ${REPOSITORY_ROOT}/conda
+    python build.py
+
+..  attention:: You will need `conda-build <https://github.com/conda/conda-build>`_ and the  *jinja2* Python library to do that.
+    These are both part of the *molpher-lib* conda environment we introduced before. It is enough to just do :code:`conda activate molpher-lib`.
+
+The built packages will be located at :file:`/tmp/conda-bld`.
