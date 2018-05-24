@@ -29,6 +29,8 @@ REPOSITORY_ROOT=`pwd`/molpher-lib
 # this might take a while, but you if you are lucky, 
 # cmake might be able to find dependencies 
 # if you already have them somewhere on your system
+# so you can skip this step if you have TBB, Boost and RDKit
+# installed at standard locations on your system
 cd ${REPOSITORY_ROOT}/deps
 ./build_deps.sh --all
 
