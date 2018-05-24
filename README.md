@@ -25,8 +25,13 @@ Installing from source is a little bit more elaborate because Molpher-lib contai
 ```bash
 git clone https://github.com/lich-uct/molpher-lib.git
 REPOSITORY_ROOT=`pwd`/molpher-lib
+
+# this might take a while, but you if you are lucky, 
+# cmake might be able to find dependencies 
+# if you already have them somewhere on your system
 cd ${REPOSITORY_ROOT}/deps
-./build_deps.sh --all # this might take a while, but you if you are lucky cmake might find the dependencies you already have on your system
+./build_deps.sh --all
+
 cd ${REPOSITORY_ROOT}
 mkdir cmake-build
 cd cmake-build
