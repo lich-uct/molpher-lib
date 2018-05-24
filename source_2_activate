@@ -6,4 +6,4 @@
 
 conda activate molpher-lib
 export PYTHONPATH="`pwd`/deps/rdkit/:`pwd`/src/python/"
-export LD_LIBRARY_PATH="`pwd`/deps/rdkit/lib:`pwd`/deps/boost/stage/lib/:`pwd`/dist/lib/"
+export LD_LIBRARY_PATH="`pwd`/deps/tbb/lib/intel64/gcc4.7:`pwd`/deps/rdkit/lib:`pwd`/deps/boost/stage/lib/:`pwd`/dist/lib/"
