@@ -23,6 +23,7 @@ This will automatically download the latest version of the library and install e
 Installing from source is a little bit more elaborate because Molpher-lib contains a lot of C++ code that needs to be compiled first. This process is described [here](https://lich-uct.github.io/molpher-lib/latest/usage/installation.html#building-and-installing-from-source-linux) in detail, but in the simplest case the following should work:
 
 ```bash
+# clone the repo
 git clone https://github.com/lich-uct/molpher-lib.git
 REPOSITORY_ROOT=`pwd`/molpher-lib
 
@@ -30,10 +31,11 @@ REPOSITORY_ROOT=`pwd`/molpher-lib
 # cmake might be able to find dependencies 
 # if you already have them somewhere on your system
 # so you can skip this step if you have TBB, Boost and RDKit
-# installed at standard locations on your system
+# installed at standard locations
 cd ${REPOSITORY_ROOT}/deps
 ./build_deps.sh --all
 
+# finally, build the library itself
 cd ${REPOSITORY_ROOT}
 mkdir cmake-build
 cd cmake-build
@@ -52,10 +54,14 @@ export LD_LIBRARY_PATH=${DEPS_DIR}/tbb/lib/intel64/gcc4.7:${DEPS_DIR}/rdkit/lib/
 
 you should be good to go:
 
+```bash
+python3
+```
+
 ```python
 from molpher.tests import run
 
 run()
 ```
 
-This installation process was only tested on common Debian-based systems so experience on other Linux flavors may be different. If you run into problems, report them to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues) and hopefully someone will be able to help.
+This installation process has been tested on common Debian-based systems so experience on other Linux flavors may differ. If you run into problems, report them to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues) and hopefully someone will be able to help.
