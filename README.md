@@ -13,7 +13,7 @@ At the moment, the library is only intended for use on 64-bit Linux systems. How
 Molpher-lib is distributed as a [conda package](https://anaconda.org/lich/molpher-lib). At the moment, this is the preferred way to install and use the library. All you need to do is just either get the full [Anaconda](https://www.continuum.io/downloads) distribution or its lightweight variant, [Miniconda](http://conda.pydata.org/miniconda.html). It is essentially a Python distribution, package manager and virtual environment in one and makes setting up a development environment for your project very easy. After installing Anaconda/Miniconda you can run the following in the Linux terminal:
 
 ```bash
-conda install -c lich molpher-lib
+conda install -c rdkit -c lich molpher-lib
 ```
 
 This will automatically download the latest version of the library and install everything to the currently active environment (for more information on environments and the `conda` command see [Conda Test Drive](http://conda.pydata.org/docs/test-drive.html)).
@@ -24,33 +24,31 @@ Installing from source is a little bit more elaborate because Molpher-lib contai
 
 ```bash
 git clone https://github.com/lich-uct/molpher-lib.git
-ROOT_DIR=`pwd`/molpher-lib
-cd $ROOT_DIR/deps
-./build_deps.sh --all # this might take a while, but you can bypass this if you already have Boost and RDKit compiled somewhere (see https://lich-uct.github.io/molpher-lib/)
-cd $ROOT_DIR
-mkdir build # the name of the directory does not matter here
-cd build
-cmake ..
+REPOSITORY_ROOT=`pwd`/molpher-lib
+cd ${REPOSITORY_ROOT}/deps
+./build_deps.sh --all # this might take a while, but you if you are lucky cmake might find the dependencies you already have on your system
+cd ${REPOSITORY_ROOT}
+mkdir cmake-build
+cd cmake-build
+cmake .. -DCMAKE_BUILD_TYPE=Debug -DPYTHON_EXECUTABLE=python3
 make molpher_install_python
-
-# optionally the python package can be tested:
-cd $ROOT_DIR
-python setup.py test
 ```
 
-The make target above builds the library and installs everything  to `$ROOT_DIR/dist`. This is the default value for the `CMAKE_INSTALL_PREFIX` variable and it can be changed doing `cmake .. -DCMAKE_INSTALL_PREFIX=custom/install/directory/` instead of just plain `cmake ..`. This folder can be anywhere on the user's system provided that the following variables are set during runtime:
+After setting the appropriate variables:
 
 ```bash
-export PYTHONPATH=$CMAKE_INSTALL_PREFIX/lib/pythonX.Y/site-packages # replace X.Y with your Python version
-export LD_LIBRARY_PATH=$CMAKE_INSTALL_PREFIX/lib
+export CMAKE_INSTALL_PREFIX="${REPOSITORY_ROOT}/dist"
+export DEPS_DIR=${CMAKE_INSTALL_PREFIX}/../deps
+export PYTHONPATH=${DEPS_DIR}/rdkit/:${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages
+export LD_LIBRARY_PATH=${DEPS_DIR}/tbb/lib/intel64/gcc4.7:${DEPS_DIR}/rdkit/lib/:${DEPS_DIR}/boost/stage/lib:${CMAKE_INSTALL_PREFIX}/lib
 ```
 
-The `molpher` package should now be importable from Python.
+you should be good to go:
 
-If you want to use the Python package right after the build, you can do so by just adding the `$ROOT_DIR/src/python` folder to PYTHONPATH like so:
+```python
+from molpher.tests import run
 
-```bash
-export PYTHONPATH=$ROOT_DIR/src/python
+run()
 ```
 
-This installation process was only tested on Debian 8.5 so experience on other Linux flavors may be different. If you run into problems, report them to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues) and hopefully someone will be able to help.
+This installation process was only tested on common Debian-based systems so experience on other Linux flavors may be different. If you run into problems, report them to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues) and hopefully someone will be able to help.

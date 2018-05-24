@@ -126,8 +126,8 @@ and initialize the cmake project:
 
 ..  code-block:: bash
 
-    mkdir ${REPOSITORY_ROOT}/build/ # create a subdirectory in the root of the repository
-    cd ${REPOSITORY_ROOT}/build/
+    mkdir ${REPOSITORY_ROOT}/cmake-build/ # create a subdirectory in the root of the repository
+    cd ${REPOSITORY_ROOT}/cmake-build/
     cmake ..
 
 This is the simplest configuration with default options, but most of the time we will probably
