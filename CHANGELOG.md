@@ -4,7 +4,7 @@ Previous version: 0.0.0b1
 
 ## Changes
 - implemented a basic pathfinder for quick customized searches (`molpher.algorithms.pathfinders.BasicPathfinder`)
-- dependencies were updated (the code should work fine with RDKit 2018.03.1, Boost 1.67 and TBB 2018_20171205)
+- dependencies were updated (the code should work fine with RDKit 2018.03.1, Boost 1.65 and TBB 2018 U3)
 - all dependencies are now linked dynamically 
 - conda environment libraries can now be searched during cmake configuration by setting the `CONDA_PREFIX` environment variable
 - conda packages now depend on tbb, rdkit and boost libraries from anaconda repositories both during build time and runtime
@@ -26,6 +26,7 @@ Previous version: 0.0.0b1
 - `MolpherMol` can be used to get all neighbors of an atom with the `getNeighbors(int idx)` method
 - `MolpherMol` can be initialized from an MDL MOL block (using the `fromMolBlock()` static method) and from and RDKit molecule (using the `other` parameter in its constructor)
 - `MolpherMol` can readily be converted to an RDKit molecule with the `asRDMol()` method
+- `ExplorationTree` has a new `fetchPathTo` method, which backtracks from the given structure and returns the sequence of `MolpherMol` instances that lead to its creation, starting from the source molecule.
 
 ## Fixes
 - number of linked dependencies was reduced and unused libraries are now not linked
