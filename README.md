@@ -26,9 +26,9 @@ If you are interested in the development snapshots of the library, you can use t
 conda install -c rdkit -c lich/label/dev molpher-lib
 ```
 
-### Installation from Source
+### Compiling from Source
 
-Installing from source is a little bit more elaborate because Molpher-lib contains a lot of C++ code that needs to be compiled first. This process is described [here](https://lich-uct.github.io/molpher-lib/latest/usage/installation.html#building-and-installing-from-source-linux) in detail, but in the simplest case the following should work:
+Compiling and installing from source is a little bit more elaborate. This process is described in detail in the [documentation](https://lich-uct.github.io/molpher-lib/latest/usage/installation.html#building-and-installing-from-source-linux), but in the simplest case the following should work:
 
 ```bash
 # clone the repo
