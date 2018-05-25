@@ -1,0 +1,1121 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.1.1.3.1.1.1.4. ExplorationData &mdash; Molpher-lib 0.0.0b2.dev3-r1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.1.1.3.1.1.1.5. Tree Operation Classes" href="operations/classes.html" />
+    <link rel="prev" title="1.1.1.3.1.1.1.3. ExplorationTree" href="ExplorationTree_doc.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b2.dev3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Source Code Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">1. Python</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="molpher.html">1.1. molpher package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="molpher.html#subpackages">1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="molpher.html#module-molpher">1.1.2. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cplusplus/index.html">2. C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Source Code Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">1. Python</a> &raquo;</li>
+        
+          <li><a href="molpher.html">1.1. molpher package</a> &raquo;</li>
+        
+          <li><a href="molpher.swig_wrappers.html">1.1.1.3. molpher.swig_wrappers package</a> &raquo;</li>
+        
+          <li><a href="molpher.swig_wrappers.core.html">1.1.1.3.1.1. molpher.swig_wrappers.core module</a> &raquo;</li>
+        
+      <li>1.1.1.3.1.1.1.4. ExplorationData</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="explorationdata">
+<h1>1.1.1.3.1.1.1.4. ExplorationData<a class="headerlink" href="#explorationdata" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="molpher.swig_wrappers.core.ExplorationData">
+<em class="property">class </em><code class="descclassname">molpher.swig_wrappers.core.</code><code class="descname">ExplorationData</code><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If an instance of this class is created explicitly, all parameters are set to their default values
+(see the description of <a class="reference internal" href="molpher.core.html#module-molpher.core.ExplorationData" title="molpher.core.ExplorationData"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">molpher.core.ExplorationData</span></code></a>).</p>
+</div>
+<p>Contains data about the state of an <a class="reference internal" href="../../glossary.html#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a> and provides facilities to
+read it and change it along with the <a class="reference internal" href="../../glossary.html#term-morphing-parameters"><span class="xref std std-term">morphing parameters</span></a> set.</p>
+<p>This class uses getter and setter methods to read and modify the underlying data structure. The
+naming conventions tightly follow the wrapped C++ implementation and should be consistent
+with the parameter names published in <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
+<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">PubMed</a>, <a class="reference external" href="http://www.jcheminf.com/content/6/1/7">DOI</a></td></tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Not all methods that can manipulate the tree topology are implemented
+and exposed in the API, yet. Those few that are exposed, however, should
+still be considered as experimental.</p>
+</div>
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getSource">
+<code class="descname">getSource</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <a class="reference internal" href="../../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.source" title="molpher.core.ExplorationData.ExplorationData.source"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.source</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance representing the current <a class="reference internal" href="../../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getTarget">
+<code class="descname">getTarget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getTarget"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getTarget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <a class="reference internal" href="../../glossary.html#term-8"><span class="xref std std-term">target molecule</span></a>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.target" title="molpher.core.ExplorationData.ExplorationData.target"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.target</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance representing the current <a class="reference internal" href="../../glossary.html#term-8"><span class="xref std std-term">target molecule</span></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getChemicalOperators">
+<code class="descname">getChemicalOperators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getChemicalOperators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getChemicalOperators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#tuple" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">tuple</span></code></a> of current <a class="reference internal" href="../../glossary.html#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a> as <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a> identifiers.</p>
+<table border="1" class="docutils" id="id3">
+<caption><span class="caption-number">Table 1.6 </span><span class="caption-text">Currently supported <a class="reference internal" href="../../glossary.html#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a>.</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Identifier</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_ADD_ATOM" title="molpher.core.selectors.OP_ADD_ATOM"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_ADD_ATOM</span></code></a></td>
+<td>Add a random atom to the molecule.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_REMOVE_ATOM" title="molpher.core.selectors.OP_REMOVE_ATOM"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_REMOVE_ATOM</span></code></a></td>
+<td>Remove an atom from the molecule.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_ADD_BOND" title="molpher.core.selectors.OP_ADD_BOND"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_ADD_BOND</span></code></a></td>
+<td>Add a bond between two random atoms.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_REMOVE_BOND" title="molpher.core.selectors.OP_REMOVE_BOND"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_REMOVE_BOND</span></code></a></td>
+<td>Remove a bond between two random atoms.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_MUTATE_ATOM" title="molpher.core.selectors.OP_MUTATE_ATOM"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_MUTATE_ATOM</span></code></a></td>
+<td>Change a randomly selected atom to a different element.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_INTERLAY_ATOM" title="molpher.core.selectors.OP_INTERLAY_ATOM"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_INTERLAY_ATOM</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_BOND_REROUTE" title="molpher.core.selectors.OP_BOND_REROUTE"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_BOND_REROUTE</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_BOND_CONTRACTION" title="molpher.core.selectors.OP_BOND_CONTRACTION"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_BOND_CONTRACTION</span></code></a></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.operators" title="molpher.core.ExplorationData.ExplorationData.operators"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.operators</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">current chemical operators</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#tuple" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getFingerprint">
+<code class="descname">getFingerprint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getFingerprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getFingerprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an identifier of the currently set <a class="reference internal" href="../../glossary.html#term-molecular-fingerprint"><span class="xref std std-term">molecular fingerprint</span></a>.</p>
+<table border="1" class="docutils" id="id4">
+<caption><span class="caption-number">Table 1.7 </span><span class="caption-text">Currently supported <a class="reference internal" href="../../glossary.html#term-molecular-fingerprint"><span class="xref std std-term">molecular fingerprints</span></a>.</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Identifier</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_ATOM_PAIRS" title="molpher.core.selectors.FP_ATOM_PAIRS"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_ATOM_PAIRS</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_MORGAN" title="molpher.core.selectors.FP_MORGAN"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_MORGAN</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_TOPOLOGICAL" title="molpher.core.selectors.FP_TOPOLOGICAL"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_TOPOLOGICAL</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_TOPOLOGICAL_LAYERED_1" title="molpher.core.selectors.FP_TOPOLOGICAL_LAYERED_1"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_TOPOLOGICAL_LAYERED_1</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_TOPOLOGICAL_LAYERED_2" title="molpher.core.selectors.FP_TOPOLOGICAL_LAYERED_2"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_TOPOLOGICAL_LAYERED_2</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_VECTORFP" title="molpher.core.selectors.FP_VECTORFP"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_VECTORFP</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_TOPOLOGICAL_TORSION" title="molpher.core.selectors.FP_TOPOLOGICAL_TORSION"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_TOPOLOGICAL_TORSION</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_ATOM_PAIRS" title="molpher.core.selectors.FP_EXT_ATOM_PAIRS"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_ATOM_PAIRS</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_MORGAN" title="molpher.core.selectors.FP_EXT_MORGAN"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_MORGAN</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_TOPOLOGICAL" title="molpher.core.selectors.FP_EXT_TOPOLOGICAL"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_TOPOLOGICAL</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_TOPOLOGICAL_LAYERED_1" title="molpher.core.selectors.FP_EXT_TOPOLOGICAL_LAYERED_1"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_TOPOLOGICAL_LAYERED_1</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_TOPOLOGICAL_LAYERED_2" title="molpher.core.selectors.FP_EXT_TOPOLOGICAL_LAYERED_2"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_TOPOLOGICAL_LAYERED_2</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_TOPOLOGICAL_TORSION" title="molpher.core.selectors.FP_EXT_TOPOLOGICAL_TORSION"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_TOPOLOGICAL_TORSION</span></code></a></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.fingerprint" title="molpher.core.ExplorationData.ExplorationData.fingerprint"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.fingerprint</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="../../glossary.html#term-molecular-fingerprint"><span class="xref std std-term">molecular fingerprint</span></a> identifier</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getSimilarityCoefficient">
+<code class="descname">getSimilarityCoefficient</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getSimilarityCoefficient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getSimilarityCoefficient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an identifier of the currently set <a class="reference internal" href="../../glossary.html#term-similarity-measure"><span class="xref std std-term">similarity measure</span></a>.</p>
+<table border="1" class="docutils" id="id5">
+<caption><span class="caption-number">Table 1.8 </span><span class="caption-text">Currently supported <a class="reference internal" href="../../glossary.html#term-similarity-measure"><span class="xref std std-term">similarity measures</span></a>.</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Identifier</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_ALL_BIT" title="molpher.core.selectors.SC_ALL_BIT"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_ALL_BIT</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_ASYMMETRIC" title="molpher.core.selectors.SC_ASYMMETRIC"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_ASYMMETRIC</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_BRAUN_BLANQUET" title="molpher.core.selectors.SC_BRAUN_BLANQUET"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_BRAUN_BLANQUET</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_COSINE" title="molpher.core.selectors.SC_COSINE"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_COSINE</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_DICE" title="molpher.core.selectors.SC_DICE"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_DICE</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_KULCZYNSKI" title="molpher.core.selectors.SC_KULCZYNSKI"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_KULCZYNSKI</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_MC_CONNAUGHEY" title="molpher.core.selectors.SC_MC_CONNAUGHEY"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_MC_CONNAUGHEY</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_ON_BIT" title="molpher.core.selectors.SC_ON_BIT"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_ON_BIT</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_RUSSEL" title="molpher.core.selectors.SC_RUSSEL"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_RUSSEL</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_SOKAL" title="molpher.core.selectors.SC_SOKAL"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_SOKAL</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_TANIMOTO" title="molpher.core.selectors.SC_TANIMOTO"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_TANIMOTO</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_TVERSKY_SUBSTRUCTURE" title="molpher.core.selectors.SC_TVERSKY_SUBSTRUCTURE"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_TVERSKY_SUBSTRUCTURE</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_TVERSKY_SUPERSTRUCTURE" title="molpher.core.selectors.SC_TVERSKY_SUPERSTRUCTURE"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_TVERSKY_SUPERSTRUCTURE</span></code></a></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.similarity" title="molpher.core.ExplorationData.ExplorationData.similarity"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.similarity</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="../../glossary.html#term-similarity-measure"><span class="xref std std-term">similarity measure</span></a> identifier</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getMinAcceptableMolecularWeight">
+<code class="descname">getMinAcceptableMolecularWeight</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getMinAcceptableMolecularWeight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getMinAcceptableMolecularWeight" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.weight_min" title="molpher.core.ExplorationData.ExplorationData.weight_min"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.weight_min</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">minimum acceptable weight during filtering</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">float</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getMaxAcceptableMolecularWeight">
+<code class="descname">getMaxAcceptableMolecularWeight</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getMaxAcceptableMolecularWeight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getMaxAcceptableMolecularWeight" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.weight_max" title="molpher.core.ExplorationData.ExplorationData.weight_max"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.weight_max</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">maximum acceptable weight during filtering</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">float</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getCntCandidatesToKeep">
+<code class="descname">getCntCandidatesToKeep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getCntCandidatesToKeep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getCntCandidatesToKeep" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.accept_min" title="molpher.core.ExplorationData.ExplorationData.accept_min"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.accept_min</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">min number of candidates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getCntCandidatesToKeepMax">
+<code class="descname">getCntCandidatesToKeepMax</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getCntCandidatesToKeepMax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getCntCandidatesToKeepMax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.accept_max" title="molpher.core.ExplorationData.ExplorationData.accept_max"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.accept_max</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">max number of candidates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getCntMorphs">
+<code class="descname">getCntMorphs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getCntMorphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getCntMorphs" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.far_produce" title="molpher.core.ExplorationData.ExplorationData.far_produce"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.far_produce</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getCntMorphsInDepth">
+<code class="descname">getCntMorphsInDepth</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getCntMorphsInDepth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getCntMorphsInDepth" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.close_produce" title="molpher.core.ExplorationData.ExplorationData.close_produce"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.close_produce</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">number of morphs to generate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getDistToTargetDepthSwitch">
+<code class="descname">getDistToTargetDepthSwitch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getDistToTargetDepthSwitch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getDistToTargetDepthSwitch" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.far_close_threshold" title="molpher.core.ExplorationData.ExplorationData.far_close_threshold"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.far_close_threshold</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">distance threshold</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">float</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getCntMaxMorphs">
+<code class="descname">getCntMaxMorphs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getCntMaxMorphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getCntMaxMorphs" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.max_morphs_total" title="molpher.core.ExplorationData.ExplorationData.max_morphs_total"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.max_morphs_total</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">maximum number of non-producing morphs per molecule</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.getItThreshold">
+<code class="descname">getItThreshold</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.getItThreshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.getItThreshold" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.non_producing_survive" title="molpher.core.ExplorationData.ExplorationData.non_producing_survive"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.non_producing_survive</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">number of generations until non-producing morphs are pruned</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setSource">
+<code class="descname">setSource</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the <a class="reference internal" href="../../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.source" title="molpher.core.ExplorationData.ExplorationData.source"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.source</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> or <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a>) – <a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance or SMILES representing the current <a class="reference internal" href="../../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setTarget">
+<code class="descname">setTarget</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setTarget"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setTarget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the <a class="reference internal" href="../../glossary.html#term-8"><span class="xref std std-term">target molecule</span></a>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.target" title="molpher.core.ExplorationData.ExplorationData.target"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.target</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> or <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a>) – <a class="reference internal" href="MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref any py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance or SMILES representing the current <a class="reference internal" href="../../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setChemicalOperators">
+<code class="descname">setChemicalOperators</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setChemicalOperators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setChemicalOperators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the current <a class="reference internal" href="../../glossary.html#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a> as <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a> identifiers.</p>
+<table border="1" class="docutils" id="id6">
+<caption><span class="caption-number">Table 1.9 </span><span class="caption-text">Currently supported <a class="reference internal" href="../../glossary.html#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a>.</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Identifier</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_ADD_ATOM" title="molpher.core.selectors.OP_ADD_ATOM"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_ADD_ATOM</span></code></a></td>
+<td>Add a random atom to the molecule.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_REMOVE_ATOM" title="molpher.core.selectors.OP_REMOVE_ATOM"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_REMOVE_ATOM</span></code></a></td>
+<td>Remove an atom from the molecule.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_ADD_BOND" title="molpher.core.selectors.OP_ADD_BOND"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_ADD_BOND</span></code></a></td>
+<td>Add a bond between two random atoms.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_REMOVE_BOND" title="molpher.core.selectors.OP_REMOVE_BOND"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_REMOVE_BOND</span></code></a></td>
+<td>Remove a bond between two random atoms.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_MUTATE_ATOM" title="molpher.core.selectors.OP_MUTATE_ATOM"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_MUTATE_ATOM</span></code></a></td>
+<td>Change a randomly selected atom to a different element.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_INTERLAY_ATOM" title="molpher.core.selectors.OP_INTERLAY_ATOM"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_INTERLAY_ATOM</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_BOND_REROUTE" title="molpher.core.selectors.OP_BOND_REROUTE"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_BOND_REROUTE</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.OP_BOND_CONTRACTION" title="molpher.core.selectors.OP_BOND_CONTRACTION"><code class="xref any py py-data docutils literal notranslate"><span class="pre">OP_BOND_CONTRACTION</span></code></a></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.operators" title="molpher.core.ExplorationData.ExplorationData.operators"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.operators</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#tuple" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a>) – current <a class="reference internal" href="../../glossary.html#term-chemical-operators"><code class="xref any std std-term docutils literal notranslate"><span class="pre">chemical</span> <span class="pre">operators</span></code></a> as a <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#tuple" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a> identifiers</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setFingerprint">
+<code class="descname">setFingerprint</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setFingerprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setFingerprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the <a class="reference internal" href="../../glossary.html#term-molecular-fingerprint"><span class="xref std std-term">molecular fingerprint</span></a>.</p>
+<table border="1" class="docutils" id="id7">
+<caption><span class="caption-number">Table 1.10 </span><span class="caption-text">Currently supported <a class="reference internal" href="../../glossary.html#term-molecular-fingerprint"><span class="xref std std-term">molecular fingerprints</span></a>.</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Identifier</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_ATOM_PAIRS" title="molpher.core.selectors.FP_ATOM_PAIRS"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_ATOM_PAIRS</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_MORGAN" title="molpher.core.selectors.FP_MORGAN"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_MORGAN</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_TOPOLOGICAL" title="molpher.core.selectors.FP_TOPOLOGICAL"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_TOPOLOGICAL</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_TOPOLOGICAL_LAYERED_1" title="molpher.core.selectors.FP_TOPOLOGICAL_LAYERED_1"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_TOPOLOGICAL_LAYERED_1</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_TOPOLOGICAL_LAYERED_2" title="molpher.core.selectors.FP_TOPOLOGICAL_LAYERED_2"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_TOPOLOGICAL_LAYERED_2</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_VECTORFP" title="molpher.core.selectors.FP_VECTORFP"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_VECTORFP</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_TOPOLOGICAL_TORSION" title="molpher.core.selectors.FP_TOPOLOGICAL_TORSION"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_TOPOLOGICAL_TORSION</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_ATOM_PAIRS" title="molpher.core.selectors.FP_EXT_ATOM_PAIRS"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_ATOM_PAIRS</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_MORGAN" title="molpher.core.selectors.FP_EXT_MORGAN"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_MORGAN</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_TOPOLOGICAL" title="molpher.core.selectors.FP_EXT_TOPOLOGICAL"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_TOPOLOGICAL</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_TOPOLOGICAL_LAYERED_1" title="molpher.core.selectors.FP_EXT_TOPOLOGICAL_LAYERED_1"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_TOPOLOGICAL_LAYERED_1</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_TOPOLOGICAL_LAYERED_2" title="molpher.core.selectors.FP_EXT_TOPOLOGICAL_LAYERED_2"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_TOPOLOGICAL_LAYERED_2</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.FP_EXT_TOPOLOGICAL_TORSION" title="molpher.core.selectors.FP_EXT_TOPOLOGICAL_TORSION"><code class="xref any py py-data docutils literal notranslate"><span class="pre">FP_EXT_TOPOLOGICAL_TORSION</span></code></a></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.fingerprint" title="molpher.core.ExplorationData.ExplorationData.fingerprint"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.fingerprint</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a>) – <a class="reference internal" href="../../glossary.html#term-molecular-fingerprint"><code class="xref any std std-term docutils literal notranslate"><span class="pre">molecular</span> <span class="pre">fingerprint</span></code></a> identifier</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setSimilarityCoefficient">
+<code class="descname">setSimilarityCoefficient</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setSimilarityCoefficient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setSimilarityCoefficient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the <a class="reference internal" href="../../glossary.html#term-similarity-measure"><span class="xref std std-term">similarity measure</span></a>.</p>
+<table border="1" class="docutils" id="id8">
+<caption><span class="caption-number">Table 1.11 </span><span class="caption-text">Currently supported <a class="reference internal" href="../../glossary.html#term-similarity-measure"><span class="xref std std-term">similarity measures</span></a>.</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Identifier</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_ALL_BIT" title="molpher.core.selectors.SC_ALL_BIT"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_ALL_BIT</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_ASYMMETRIC" title="molpher.core.selectors.SC_ASYMMETRIC"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_ASYMMETRIC</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_BRAUN_BLANQUET" title="molpher.core.selectors.SC_BRAUN_BLANQUET"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_BRAUN_BLANQUET</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_COSINE" title="molpher.core.selectors.SC_COSINE"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_COSINE</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_DICE" title="molpher.core.selectors.SC_DICE"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_DICE</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_KULCZYNSKI" title="molpher.core.selectors.SC_KULCZYNSKI"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_KULCZYNSKI</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_MC_CONNAUGHEY" title="molpher.core.selectors.SC_MC_CONNAUGHEY"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_MC_CONNAUGHEY</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_ON_BIT" title="molpher.core.selectors.SC_ON_BIT"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_ON_BIT</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_RUSSEL" title="molpher.core.selectors.SC_RUSSEL"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_RUSSEL</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_SOKAL" title="molpher.core.selectors.SC_SOKAL"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_SOKAL</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_TANIMOTO" title="molpher.core.selectors.SC_TANIMOTO"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_TANIMOTO</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_TVERSKY_SUBSTRUCTURE" title="molpher.core.selectors.SC_TVERSKY_SUBSTRUCTURE"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_TVERSKY_SUBSTRUCTURE</span></code></a></td>
+<td>—</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="molpher.core.html#molpher.core.selectors.SC_TVERSKY_SUPERSTRUCTURE" title="molpher.core.selectors.SC_TVERSKY_SUPERSTRUCTURE"><code class="xref any py py-data docutils literal notranslate"><span class="pre">SC_TVERSKY_SUPERSTRUCTURE</span></code></a></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.similarity" title="molpher.core.ExplorationData.ExplorationData.similarity"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.similarity</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a>) – <a class="reference internal" href="../../glossary.html#term-similarity-measure"><span class="xref std std-term">similarity measure</span></a> identifier</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setMinAcceptableMolecularWeight">
+<code class="descname">setMinAcceptableMolecularWeight</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setMinAcceptableMolecularWeight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setMinAcceptableMolecularWeight" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.weight_min" title="molpher.core.ExplorationData.ExplorationData.weight_min"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.weight_min</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">float</span></code></a>) – minimum acceptable weight during filtering</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setMaxAcceptableMolecularWeight">
+<code class="descname">setMaxAcceptableMolecularWeight</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setMaxAcceptableMolecularWeight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setMaxAcceptableMolecularWeight" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.weight_max" title="molpher.core.ExplorationData.ExplorationData.weight_max"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.weight_max</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">float</span></code></a>) – maximum acceptable weight during filtering</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setCntCandidatesToKeep">
+<code class="descname">setCntCandidatesToKeep</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setCntCandidatesToKeep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setCntCandidatesToKeep" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.accept_min" title="molpher.core.ExplorationData.ExplorationData.accept_min"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.accept_min</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a>) – min number of candidates</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setCntCandidatesToKeepMax">
+<code class="descname">setCntCandidatesToKeepMax</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setCntCandidatesToKeepMax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setCntCandidatesToKeepMax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.accept_max" title="molpher.core.ExplorationData.ExplorationData.accept_max"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.accept_max</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a>) – max number of candidates</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setCntMorphs">
+<code class="descname">setCntMorphs</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setCntMorphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setCntMorphs" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.far_produce" title="molpher.core.ExplorationData.ExplorationData.far_produce"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.far_produce</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a>) – </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setCntMorphsInDepth">
+<code class="descname">setCntMorphsInDepth</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setCntMorphsInDepth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setCntMorphsInDepth" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.close_produce" title="molpher.core.ExplorationData.ExplorationData.close_produce"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.close_produce</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a>) – number of morphs to generate</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setDistToTargetDepthSwitch">
+<code class="descname">setDistToTargetDepthSwitch</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setDistToTargetDepthSwitch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setDistToTargetDepthSwitch" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.far_close_threshold" title="molpher.core.ExplorationData.ExplorationData.far_close_threshold"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.far_close_threshold</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">float</span></code></a>) – distance threshold</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setCntMaxMorphs">
+<code class="descname">setCntMaxMorphs</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setCntMaxMorphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setCntMaxMorphs" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.max_morphs_total" title="molpher.core.ExplorationData.ExplorationData.max_morphs_total"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.max_morphs_total</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a>) – maximum number of non-producing morphs per molecule</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.setItThreshold">
+<code class="descname">setItThreshold</code><span class="sig-paren">(</span><em>arg2</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.setItThreshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.setItThreshold" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData.non_producing_survive" title="molpher.core.ExplorationData.ExplorationData.non_producing_survive"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">molpher.core.ExplorationData.ExplorationData.non_producing_survive</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">int</span></code></a>) – number of generations until non-producing morphs are pruned</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="molpher.swig_wrappers.core.ExplorationData.load">
+<em class="property">static </em><code class="descname">load</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load data and parameters from a <a class="reference internal" href="../../glossary.html#term-tree-snapshot"><span class="xref std std-term">tree snapshot</span></a> or a <a class="reference internal" href="../../glossary.html#term-xml-template"><span class="xref std std-term">XML template</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a>) – path to the file to load from</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="molpher.swig_wrappers.core.ExplorationData.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/swig_wrappers/core.html#ExplorationData.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExplorationData.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save data and parameters from a <a class="reference internal" href="../../glossary.html#term-tree-snapshot"><span class="xref std std-term">tree snapshot</span></a> or a <a class="reference internal" href="../../glossary.html#term-xml-template"><span class="xref std std-term">XML template</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a>) – path to the file to save to</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="operations/classes.html" class="btn btn-neutral float-right" title="1.1.1.3.1.1.1.5. Tree Operation Classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ExplorationTree_doc.html" class="btn btn-neutral" title="1.1.1.3.1.1.1.3. ExplorationTree" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0.0b2.dev3-r1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

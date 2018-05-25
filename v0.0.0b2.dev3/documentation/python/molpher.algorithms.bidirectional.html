@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.1.1.2.1.2. molpher.algorithms.bidirectional package &mdash; Molpher-lib 0.0.0b2.dev3-r1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.1.1.2.1.3. molpher.algorithms.classic package" href="molpher.algorithms.classic.html" />
+    <link rel="prev" title="1.1.1.2.1.1. molpher.algorithms.antidecoys package" href="molpher.algorithms.antidecoys.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b2.dev3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Source Code Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">1. Python</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="molpher.html">1.1. molpher package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="molpher.html#subpackages">1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="molpher.html#module-molpher">1.1.2. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cplusplus/index.html">2. C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Source Code Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">1. Python</a> &raquo;</li>
+        
+          <li><a href="molpher.html">1.1. molpher package</a> &raquo;</li>
+        
+          <li><a href="molpher.algorithms.html">1.1.1.2. molpher.algorithms package</a> &raquo;</li>
+        
+      <li>1.1.1.2.1.2. molpher.algorithms.bidirectional package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="molpher-algorithms-bidirectional-package">
+<h1>1.1.1.2.1.2. molpher.algorithms.bidirectional package<a class="headerlink" href="#molpher-algorithms-bidirectional-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>1.1.1.2.1.2.1. Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-molpher.algorithms.bidirectional.pathfinder">
+<span id="molpher-algorithms-bidirectional-pathfinder-module"></span><h2>1.1.1.2.1.2.2. molpher.algorithms.bidirectional.pathfinder module<a class="headerlink" href="#module-molpher.algorithms.bidirectional.pathfinder" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder">
+<em class="property">class </em><code class="descclassname">molpher.algorithms.bidirectional.pathfinder.</code><code class="descname">BidirectionalPathFinder</code><span class="sig-paren">(</span><em>settings</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/bidirectional/pathfinder.html#BidirectionalPathFinder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>settings</strong> (<a class="reference internal" href="molpher.algorithms.html#molpher.algorithms.settings.Settings" title="molpher.algorithms.settings.Settings"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a>) – search settings</td>
+</tr>
+</tbody>
+</table>
+<p>Implements a search where two trees are used to explore against each other.
+After every iteration the targets of the trees are updated so that the closest molecule
+from one tree becomes a target in the other.</p>
+<p>This search might be quicker and the morphs on the resulting paths are more balanced
+in terms of similarity to both source and the target.</p>
+<dl class="method">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/bidirectional/pathfinder.html#BidirectionalPathFinder.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the search and return the path.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a list of SMILES strings representing the found path (defaults to an empty <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">list</span></code></a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__dict__">
+<code class="descname">__dict__</code><em class="property"> = mappingproxy({'__module__': 'molpher.algorithms.bidirectional.pathfinder', '__doc__': '\n    :param settings: search settings\n    :type settings: `Settings`\n\n    Implements a search where two trees are used to explore against each other.\n    After every iteration the targets of the trees are updated so that the closest molecule\n    from one tree becomes a target in the other.\n\n    This search might be quicker and the morphs on the resulting paths are more balanced\n    in terms of similarity to both source and the target.\n    ', '__init__': &lt;function BidirectionalPathFinder.__init__&gt;, '__call__': &lt;function BidirectionalPathFinder.__call__&gt;, '__dict__': &lt;attribute '__dict__' of 'BidirectionalPathFinder' objects&gt;, '__weakref__': &lt;attribute '__weakref__' of 'BidirectionalPathFinder' objects&gt;})</em><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__dict__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>settings</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/bidirectional/pathfinder.html#BidirectionalPathFinder.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__module__">
+<code class="descname">__module__</code><em class="property"> = 'molpher.algorithms.bidirectional.pathfinder'</em><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.path">
+<code class="descname">path</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list of SMILES strings representing the found path (defaults to an empty <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">list</span></code></a>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.source_target">
+<code class="descname">source_target</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.source_target" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree" title="molpher.core.ExplorationTree.ExplorationTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationTree</span></code></a> from source to target</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.source_target_min">
+<code class="descname">source_target_min</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.source_target_min" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="molpher.algorithms.html#molpher.algorithms.operations.FindClosest" title="molpher.algorithms.operations.FindClosest"><code class="xref any py py-class docutils literal notranslate"><span class="pre">FindClosest</span></code></a> holding the current minimum in the ‘source to target’ tree.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.target_source">
+<code class="descname">target_source</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.target_source" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree" title="molpher.core.ExplorationTree.ExplorationTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationTree</span></code></a> from target to source</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.target_source_min">
+<code class="descname">target_source_min</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.target_source_min" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="molpher.algorithms.html#molpher.algorithms.operations.FindClosest" title="molpher.algorithms.operations.FindClosest"><code class="xref any py py-class docutils literal notranslate"><span class="pre">FindClosest</span></code></a> holding the current minimum in the ‘target to source’ tree.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.verbose">
+<code class="descname">verbose</code><em class="property"> = None</em><a class="headerlink" href="#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.verbose" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3.6/library/constants.html#True" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a> if verbose output was requested</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-molpher.algorithms.bidirectional.run">
+<span id="molpher-algorithms-bidirectional-run-module"></span><h2>1.1.1.2.1.2.3. molpher.algorithms.bidirectional.run module<a class="headerlink" href="#module-molpher.algorithms.bidirectional.run" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="molpher.algorithms.bidirectional.run.run">
+<code class="descclassname">molpher.algorithms.bidirectional.run.</code><code class="descname">run</code><span class="sig-paren">(</span><em>settings</em>, <em>paths_to_find=1</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/bidirectional/run.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#molpher.algorithms.bidirectional.run.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the search.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>settings</strong> – <a class="reference internal" href="molpher.algorithms.html#molpher.algorithms.settings.Settings" title="molpher.algorithms.settings.Settings"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> instance</li>
+<li><strong>paths_to_find</strong> – number of paths to find with the algorithm</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a path as a <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">list</span></code></a> of SMILES strings</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-molpher.algorithms.bidirectional">
+<span id="module-contents"></span><h2>1.1.1.2.1.2.4. Module contents<a class="headerlink" href="#module-molpher.algorithms.bidirectional" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="molpher.algorithms.classic.html" class="btn btn-neutral float-right" title="1.1.1.2.1.3. molpher.algorithms.classic package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="molpher.algorithms.antidecoys.html" class="btn btn-neutral" title="1.1.1.2.1.1. molpher.algorithms.antidecoys package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0.0b2.dev3-r1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>
