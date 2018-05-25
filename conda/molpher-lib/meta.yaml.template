@@ -17,15 +17,15 @@ requirements:
     - {{ python_spec }}
     - gxx_linux-64
     - libboost
-    - rdkit
+    - rdkit>=2018.03.1
     - tbb
   run:
     - {{ python_spec }}
     - libboost
-    - rdkit
+    - rdkit>=2018.03.1
     - tbb
 
 about:
   license : GPL-3.0
   license_file: {{ license_file }}
-  summary: "Software library based on the program Molpher."
+  summary: "Software library for chemical space exploration."
