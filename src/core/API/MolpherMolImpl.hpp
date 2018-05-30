@@ -48,6 +48,8 @@ public:
     MolpherMolImpl();
 
 	void lockAtom(int idx, int mask);
+	std::vector<int> lockAtoms(const std::vector<int>& indices, int mask);
+	std::vector<int> lockAtoms(const std::string& SMARTS, int mask);
 	std::shared_ptr<MolpherAtom> getAtom(int idx);
 	std::vector<std::shared_ptr<MolpherAtom>> getNeighbors(int idx);
     std::unique_ptr<MolpherMolImpl> copy() const;

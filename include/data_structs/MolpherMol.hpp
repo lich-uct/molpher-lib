@@ -68,6 +68,8 @@ public:
 	const std::vector<std::shared_ptr<MolpherAtom>>& getAtoms() const;
 	const std::vector<std::shared_ptr<MolpherAtom>> getNeighbors(int idx) const;
 	int getAtomCount() const;
+	std::vector<int> lockAtoms(const std::vector<int>& indices, int mask);
+	std::vector<int> lockAtoms(const std::string& SMARTS, int mask);
 
 
     // getters

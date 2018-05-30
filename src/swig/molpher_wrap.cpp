@@ -35988,6 +35988,204 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MolpherMol_lockAtoms__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  std::vector< int,std::allocator< int > > *arg2 = 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< MolpherMol > tempshared1 ;
+  std::shared_ptr< MolpherMol > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  std::vector< int,std::allocator< int > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MolpherMol_lockAtoms",&obj0,&obj1,&obj2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_lockAtoms" "', argument " "1"" of type '" "MolpherMol *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::vector< int,std::allocator< int > > *ptr = (std::vector< int,std::allocator< int > > *)0;
+    res2 = swig::asptr(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MolpherMol_lockAtoms" "', argument " "2"" of type '" "std::vector< int,std::allocator< int > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMol_lockAtoms" "', argument " "2"" of type '" "std::vector< int,std::allocator< int > > const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MolpherMol_lockAtoms" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (arg1)->lockAtoms((std::vector< int,std::allocator< int > > const &)*arg2,arg3);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< int,std::allocator< int > > >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_lockAtoms__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MolpherMol *arg1 = (MolpherMol *) 0 ;
+  std::string *arg2 = 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< MolpherMol > tempshared1 ;
+  std::shared_ptr< MolpherMol > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  std::vector< int,std::allocator< int > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:MolpherMol_lockAtoms",&obj0,&obj1,&obj2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MolpherMol_lockAtoms" "', argument " "1"" of type '" "MolpherMol *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  MolpherMol > * >(argp1);
+      arg1 = const_cast< MolpherMol * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MolpherMol_lockAtoms" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MolpherMol_lockAtoms" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MolpherMol_lockAtoms" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (arg1)->lockAtoms((std::string const &)*arg2,arg3);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< int,std::allocator< int > > >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MolpherMol_lockAtoms(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        {
+          int res = SWIG_AsVal_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_MolpherMol_lockAtoms__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = swig::asptr(argv[1], (std::vector< int,std::allocator< int > >**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        {
+          int res = SWIG_AsVal_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_MolpherMol_lockAtoms__SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MolpherMol_lockAtoms'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    MolpherMol::lockAtoms(std::vector< int,std::allocator< int > > const &,int)\n"
+    "    MolpherMol::lockAtoms(std::string const &,int)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_MolpherMol_getSMILES(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MolpherMol *arg1 = (MolpherMol *) 0 ;
@@ -50446,6 +50644,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MolpherMol_getAtoms", _wrap_MolpherMol_getAtoms, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getNeighbors", _wrap_MolpherMol_getNeighbors, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getAtomCount", _wrap_MolpherMol_getAtomCount, METH_VARARGS, NULL},
+	 { (char *)"MolpherMol_lockAtoms", _wrap_MolpherMol_lockAtoms, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getSMILES", _wrap_MolpherMol_getSMILES, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getDistToTarget", _wrap_MolpherMol_getDistToTarget, METH_VARARGS, NULL},
 	 { (char *)"MolpherMol_getTree", _wrap_MolpherMol_getTree, METH_VARARGS, NULL},

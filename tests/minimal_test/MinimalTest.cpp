@@ -203,6 +203,17 @@ void MinimalTest::testMolpherMol() {
         CPPUNIT_ASSERT_EQUAL(locked_atom.second->getSymbol(), std::string("C"));
         CPPUNIT_ASSERT(locked_indices.find(locked_atom.first) != locked_indices.end());
     }
+
+    // test locking with smarts patterns and multiple indices
+	MolpherMol malonic_acid("OC(=O)CC(=O)O");
+    auto locked = malonic_acid.lockAtoms("OC(=O)", MolpherAtom::NO_ADDITION | MolpherAtom::NO_MUTATION);
+	CPPUNIT_ASSERT(locked.size() == 6);
+    for (auto i : locked) {
+    	CPPUNIT_ASSERT_EQUAL(MolpherAtom::NO_ADDITION | MolpherAtom::NO_MUTATION, malonic_acid.getAtom(i)->getLockingMask());
+    }
+    locked = malonic_acid.lockAtoms("[$(*C(=O)O)]", MolpherAtom::NO_REMOVAL);
+	CPPUNIT_ASSERT(locked.size() == 1);
+	CPPUNIT_ASSERT_EQUAL((int) MolpherAtom::NO_REMOVAL, malonic_acid.getAtom(locked[0])->getLockingMask());
 }
 
 void MinimalTest::testAtomLibrary() {

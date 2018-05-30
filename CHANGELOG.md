@@ -26,6 +26,7 @@ Previous version: 0.0.0b1
 - `MolpherMol` can be used to get all neighbors of an atom with the `getNeighbors(int idx)` method
 - `MolpherMol` can be initialized from an MDL MOL block (using the `fromMolBlock()` static method) and from and RDKit molecule (using the `other` parameter in its constructor)
 - `MolpherMol` can readily be converted to an RDKit molecule with the `asRDMol()` method
+- `MolpherMol` has the `lockAtoms` function to lock multiple atoms at once using either a vector of indices or a SMARTS pattern
 - `ExplorationTree` has a new `fetchPathTo` method, which backtracks from the given structure and returns the sequence of `MolpherMol` instances that lead to its creation, starting from the source molecule.
 
 ## Fixes

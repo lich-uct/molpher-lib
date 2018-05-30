@@ -27,6 +27,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <core/misc/utils.hpp>
 #include <core/misc/SAScore.h>
+#include <GraphMol/Substruct/SubstructMatch.h>
 
 #include "MolpherMolImpl.hpp"
 #include "core/misc/inout.h"
@@ -319,6 +320,31 @@ const std::vector<std::shared_ptr<MolpherAtom>> &MolpherMol::MolpherMolImpl::get
     return atoms;
 }
 
+std::vector<int> MolpherMol::MolpherMolImpl::lockAtoms(const std::vector<int> &indices, int mask) {
+    std::vector<int> ret;
+    for (auto& i : indices) {
+		getAtom(i)->setLockingMask(mask);
+        ret.push_back(i);
+    }
+    return ret;
+}
+
+std::vector<int> MolpherMol::MolpherMolImpl::lockAtoms(const std::string &SMARTS, int mask) {
+    RDKit::RWMol *patt = RDKit::SmartsToMol(SMARTS);
+    std::vector<RDKit::MatchVectType> hits_vect;
+	std::vector<int> ret;
+    if(RDKit::SubstructMatch(*rd_mol, *patt, hits_vect)) {
+        for( size_t i = 0 ; i < hits_vect.size() ; ++i ) {
+            for( size_t j = 0 ; j < hits_vect[i].size() ; ++j ) {
+				int idx = hits_vect[i][j].second;
+            	getAtom(idx)->setLockingMask(mask);
+            	ret.push_back(idx);
+            }
+        }
+    }
+    return ret;
+}
+
 void MolpherMol::addToDescendants(const std::string& smiles) {
     pimpl->data.descendants.insert(smiles);
 }
@@ -485,4 +511,12 @@ std::shared_ptr<MolpherMol> MolpherMol::fromMolBlock(const std::string &mol_bloc
 
 void MolpherMol::setParentOper(const std::string& description) {
     pimpl->data.parentOper = description;
+}
+
+std::vector<int> MolpherMol::lockAtoms(const std::vector<int> &indices, int mask) {
+    return pimpl->lockAtoms(indices, mask);
+}
+
+std::vector<int> MolpherMol::lockAtoms(const std::string &SMARTS, int mask) {
+    return pimpl->lockAtoms(SMARTS, mask);
 }

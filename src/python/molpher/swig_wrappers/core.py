@@ -1604,6 +1604,9 @@ class MolpherMol(_object):
     def getAtomCount(self):
         return _core.MolpherMol_getAtomCount(self)
 
+    def lockAtoms(self, *args):
+        return _core.MolpherMol_lockAtoms(self, *args)
+
     def getSMILES(self):
         return _core.MolpherMol_getSMILES(self)
 
