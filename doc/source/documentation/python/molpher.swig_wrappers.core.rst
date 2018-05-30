@@ -20,4 +20,5 @@ Classes
     ExplorationTree_doc
     ExplorationData_doc
     operations/classes
+    morphing/classes
     morphing/operators/classes
