@@ -39,7 +39,7 @@ else()
 
             ${DEPS_DIR}/boost/stage/lib/
             ${DEPS_DIR}/rdkit/lib/
-            ${DEPS_DIR}/tbb/lib/intel64/gcc4.4/
+            ${DEPS_DIR}/tbb/lib/intel64/gcc4.7/
     )
 endif()
 message("CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}")
