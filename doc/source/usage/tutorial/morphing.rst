@@ -211,7 +211,7 @@ In this section, we will make up for that and show how to
 use Molpher-lib to easily generate thousands of new compounds
 from a single molecule.
 
-The :class:`~Molpher.Molpher` class serves this purpose. It aggregates
+The :class:`~.core.morphing.Molpher.Molpher` class serves this purpose. It aggregates
 morphing operators and randomly applies them to the specified compound structure.
 For example, we can use it to generate various structures
 derived from captopril that have some atoms replaced, removed or added like so:
@@ -246,20 +246,20 @@ Output:
     (<molpher.core.MolpherMol.MolpherMol at 0x7f924d8a9210>, <molpher.core.MolpherMol.MolpherMol at 0x7f924d8a96c0>)
     ()
 
-In the first step, we created a :class:`~Molpher.Molpher` instance by specifying the molecule
+In the first step, we created a :class:`~.core.morphing.Molpher.Molpher` instance by specifying the molecule
 to be modified in the first argument of its constructor and the operators to use
-as a Python list in the second. :class:`~Molpher.Molpher` instances are callable
+as a Python list in the second. :class:`~.core.morphing.Molpher.Molpher` instances are callable
 and we need to call them in
 order to generate morphs. The generated morphs are then available by
-reading the `morphs` property of our :class:`~Molpher.Molpher` instance.
+reading the `morphs` property of our :class:`~.core.morphing.Molpher.Molpher` instance.
 
-We managed to generate 27 morphs in this case. By default, :class:`~Molpher.Molpher`
+We managed to generate 27 morphs in this case. By default, :class:`~.core.morphing.Molpher.Molpher`
 tries to generate 30 compounds, but it will ignore those that failed to
 generate. This can be caused by internal errors
 that should be showed in the error output,
 but also simply because certain operators cannot be applied to
 the molecule in question. For example, if there is no ring in the
-molecule and the `RemoveBond.RemoveBond` operator is chosen,
+molecule and the :class:`~.core.morphing.operators.RemoveBond.RemoveBond` operator is chosen,
 no molecules are generated because this operator fails if
 its application results in a disconnected structure.
 
@@ -269,7 +269,7 @@ the caller when they retrieve generated structures.
 The :code:`molpher()` call, on the other hand, does not reset the instance
 so you can pile up morphs by subsequent :code:`molpher()` calls
 before retrieving them from `morphs`. However, a more
-efficient method would be to give :class:`~Molpher.Molpher`
+efficient method would be to give :class:`~.core.morphing.Molpher.Molpher`
 a high enough number of morphing attempts from the very beginning:
 
 ..  code-block:: python
@@ -326,7 +326,7 @@ Part of the output:
 
 ..  figure:: morphs.png
 
-The :class:`~Molpher.Molpher` class or the operators themselves
+The :class:`~.core.morphing.Molpher.Molpher` class or the operators themselves
 do not perform any advanced 'chemical sanity' checks so sometimes one
 can run into molecules that make little sense (such as the
 one in the upper right corner with a halogen atom attached directly
@@ -334,7 +334,7 @@ to oxygen) [3]_. So while Molpher-lib should be sensible enough not to generate 
 a 5-valent carbon atom and such, you still should put in place some common
 sense filters that can be specific to your use case, but also general rules
 such as removing compounds that are too large or too complex. Additionally, neither the operators
-nor :class:`~Molpher.Molpher` are able to tell if a compound has already been
+nor :class:`~.core.morphing.Molpher.Molpher` are able to tell if a compound has already been
 generated. Morphing operations are completely independent and
 the result is always determined by a random selection from
 all possible modifications permitted by the operators and the original compound.
@@ -343,7 +343,7 @@ Thus, it is also up to the caller to check for duplicate compounds.
 We will now try to tackle these shortcoming
 by implementing a collector. A collector is a simple callback function
 which takes two arguments, the generated morph and the operator used to create it,
-but has no return value. We can supply a :class:`~Molpher.Molpher`
+but has no return value. We can supply a :class:`~.core.morphing.Molpher.Molpher`
 instance with a collector like so:
 
 ..  code-block:: python
