@@ -136,3 +136,7 @@ MolpherMol
 
         .. seealso:: :attr:`~molpher.core.ExplorationData.ExplorationData.non_producing_survive`,
                 :attr:`~molpher.core.MolpherMol.MolpherMol.gens_without_improvement`
+
+    .. automethod:: lockAtoms
+
+        Locks atoms using SMARTS or a list of atom indices.

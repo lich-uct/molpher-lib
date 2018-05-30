@@ -422,7 +422,21 @@ In :numref:`locked-sdf-file-captopril`, we see examples of
     2. `NO_MUTATION` -- Atoms marked with this lock cannot be mutated (changed for another element)
     3. `NO_ADDITION` -- No more atoms will be added to this atom.
 
-Let's now create a new molecule from the SDF in :numref:`locked-sdf-file-captopril`:
+..  seealso:: We can also use the  `lockAtoms` method of :class:`~.core.MolpherMol`. This method
+    can take a SMARTS pattern and will lock all substructures corresponding to that particular pattern.
+
+    ..  code-block:: python
+
+        malonic_acid = MolpherMol("OC(=O)CC(=O)O")
+        malonic_acid.lockAtoms("OC(=O)", MolpherAtom.NO_ADDITION | MolpherAtom.NO_MUTATION)
+
+    It returns the indices of the locked atoms:
+
+    ..  code-block:: none
+
+        (0, 1, 2, 6, 4, 5)
+
+Let us now create a new molecule from the SDF in :numref:`locked-sdf-file-captopril`:
 
 ..  code-block:: python
 
@@ -433,8 +447,8 @@ automatically recognize it as a path to an SDF file
 and will attempt to load the first molecule from that
 file and parse any locks that it finds in it.
 
-Every atom in a :class:`~MolpherMol.MolpherMol` instance
-is represented as :class:`~MolpherAtom.MolpherAtom`.
+Every atom under a :class:`~MolpherMol.MolpherMol` instance
+is represented by the :class:`~MolpherAtom.MolpherAtom` class.
 This class, among other things, provides access to the locks placed
 on each atom of the molecule in question. We can retrieve the locking
 information like so:
