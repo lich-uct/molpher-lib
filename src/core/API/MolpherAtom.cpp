@@ -30,10 +30,15 @@ const std::map<MolpherAtom::LockingMask, std::string> MolpherAtom::MolpherAtomIm
 
 MolpherAtom::MolpherAtomImpl::MolpherAtomImpl(RDKit::Atom *rd_atom)
 :
-atomic_num((unsigned int) rd_atom->getAtomicNum())
-, formal_charge(rd_atom->getFormalCharge())
-, mass(rd_atom->getMass())
-, symbol(rd_atom->getSymbol())
+atom_rd(rd_atom->copy())
+, locking_mask(0)
+{
+	// no action
+}
+
+MolpherAtom::MolpherAtomImpl::MolpherAtomImpl(const std::string& symbol)
+:
+atom_rd(new RDKit::Atom(symbol))
 , locking_mask(0)
 {
 	// no action
@@ -65,24 +70,24 @@ void MolpherAtom::setLockingMask(int mask) {
 }
 
 unsigned int MolpherAtom::getAtomicNum() const {
-	return pimpl->atomic_num;
+	return (unsigned int) pimpl->atom_rd->getAtomicNum();
 }
 
 double MolpherAtom::getMass() const {
-	return pimpl->mass;
+	return pimpl->atom_rd->getMass();
 }
 
 int MolpherAtom::getFormalCharge() const {
-	return pimpl->formal_charge;
+	return pimpl->atom_rd->getFormalCharge();
 }
 
-MolpherAtom::MolpherAtom(std::string symbol) :
-MolpherAtom(new RDKit::Atom(symbol))
+MolpherAtom::MolpherAtom(const std::string& symbol) :
+pimpl(new MolpherAtomImpl(symbol))
 {
 	// no action
 }
 
-MolpherAtom::MolpherAtom(std::string symbol, int charge) :
+MolpherAtom::MolpherAtom(const std::string& symbol, int charge) :
 MolpherAtom(symbol)
 {
 	setFormalCharge(charge);
@@ -95,16 +100,17 @@ RDKit::Atom *MolpherAtom::asRDAtom() const {
 }
 
 std::string MolpherAtom::getSymbol() const {
-	return pimpl->symbol;
+	return pimpl->atom_rd->getSymbol();
 }
 
 void MolpherAtom::setFormalCharge(int charge) {
-	pimpl->formal_charge = charge;
+	pimpl->atom_rd->setFormalCharge(charge);
 }
 
 MolpherAtom::MolpherAtom(const MolpherAtom &other)
-: pimpl(new MolpherAtomImpl(other.asRDAtom()))
+: pimpl(new MolpherAtomImpl(other.getSymbol()))
 {
+	pimpl->atom_rd.reset(other.asRDAtom()); // FIXME: this is a result of a crappy hack -> atom_rd should only be initialized once
 	this->setFormalCharge(other.getFormalCharge());
 	this->setLockingMask(other.getLockingMask());
 }

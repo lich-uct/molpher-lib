@@ -34548,25 +34548,28 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_MolpherAtom__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string arg1 ;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
   MolpherAtom *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_MolpherAtom",&obj0)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_MolpherAtom" "', argument " "1"" of type '" "std::string""'"); 
+    res1 = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MolpherAtom" "', argument " "1"" of type '" "std::string const &""'"); 
     }
-    arg1 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MolpherAtom" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
   }
   {
     try {
       {
         SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (MolpherAtom *)new MolpherAtom(arg1);
+        result = (MolpherAtom *)new MolpherAtom((std::string const &)*arg1);
         SWIG_PYTHON_THREAD_END_ALLOW;
       } 
     }
@@ -34578,16 +34581,19 @@ SWIGINTERN PyObject *_wrap_new_MolpherAtom__SWIG_0(PyObject *SWIGUNUSEDPARM(self
     std::shared_ptr<  MolpherAtom > *smartresult = result ? new std::shared_ptr<  MolpherAtom >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_std__shared_ptrT_MolpherAtom_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
+  if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
   return NULL;
 }
 
 
 SWIGINTERN PyObject *_wrap_new_MolpherAtom__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string arg1 ;
+  std::string *arg1 = 0 ;
   int arg2 ;
+  int res1 = SWIG_OLDOBJ ;
   int val2 ;
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
@@ -34597,12 +34603,14 @@ SWIGINTERN PyObject *_wrap_new_MolpherAtom__SWIG_1(PyObject *SWIGUNUSEDPARM(self
   if (!PyArg_ParseTuple(args,(char *)"OO:new_MolpherAtom",&obj0,&obj1)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_MolpherAtom" "', argument " "1"" of type '" "std::string""'"); 
+    res1 = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MolpherAtom" "', argument " "1"" of type '" "std::string const &""'"); 
     }
-    arg1 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MolpherAtom" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
   }
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
@@ -34613,7 +34621,7 @@ SWIGINTERN PyObject *_wrap_new_MolpherAtom__SWIG_1(PyObject *SWIGUNUSEDPARM(self
     try {
       {
         SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        result = (MolpherAtom *)new MolpherAtom(arg1,arg2);
+        result = (MolpherAtom *)new MolpherAtom((std::string const &)*arg1,arg2);
         SWIG_PYTHON_THREAD_END_ALLOW;
       } 
     }
@@ -34625,8 +34633,10 @@ SWIGINTERN PyObject *_wrap_new_MolpherAtom__SWIG_1(PyObject *SWIGUNUSEDPARM(self
     std::shared_ptr<  MolpherAtom > *smartresult = result ? new std::shared_ptr<  MolpherAtom >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_std__shared_ptrT_MolpherAtom_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
+  if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
   return NULL;
 }
 
@@ -34726,8 +34736,8 @@ SWIGINTERN PyObject *_wrap_new_MolpherAtom(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_MolpherAtom'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    MolpherAtom::MolpherAtom(std::string)\n"
-    "    MolpherAtom::MolpherAtom(std::string,int)\n"
+    "    MolpherAtom::MolpherAtom(std::string const &)\n"
+    "    MolpherAtom::MolpherAtom(std::string const &,int)\n"
     "    MolpherAtom::MolpherAtom(MolpherAtom const &)\n");
   return 0;
 }

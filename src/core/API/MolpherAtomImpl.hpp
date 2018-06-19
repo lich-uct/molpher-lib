@@ -13,16 +13,14 @@ class MolpherAtom::MolpherAtomImpl {
 	friend class MolpherAtom; // TODO: implementation should be completely separated -> change architecture
 
 private:
-	unsigned int atomic_num;
-	std::string symbol;
-	int formal_charge;
-	double mass;
 	int locking_mask;
+	std::unique_ptr<RDKit::Atom> atom_rd;
 
 	static const std::map<MolpherAtom::LockingMask, std::string> locks_map;
 
 public:
 	MolpherAtomImpl(RDKit::Atom* rd_atom);
+	MolpherAtomImpl(const std::string& symbol);
 
 };
 

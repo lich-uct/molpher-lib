@@ -34,8 +34,8 @@ public:
 	static std::vector<std::string> lockingMaskToString(int mask);
 
 	MolpherAtom(RDKit::Atom* atom);
-	MolpherAtom(std::string symbol);
-	MolpherAtom(std::string symbol, int formal_charge);
+	MolpherAtom(const std::string& symbol);
+	MolpherAtom(const std::string& symbol, int formal_charge);
 	MolpherAtom(const MolpherAtom& other);
 	~MolpherAtom();
 
