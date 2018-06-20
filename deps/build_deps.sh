@@ -19,7 +19,7 @@ set -e
 # -------------------------------------- COMMENT -------------------------------------- #
 
 # Dependency links
-TBB_LINK=https://github.com/01org/tbb/releases/download/2018_U3/tbb2018_20180312oss_lin.tgz
+TBB_LINK=https://github.com/01org/tbb/releases/download/2018_U5/tbb2018_20180618oss_lin.tgz
 BOOST_LINK=https://sourceforge.net/projects/boost/files/boost/1.65.0/boost_1_65_0.tar.gz/download
 RDKIT_LINK=https://github.com/rdkit/rdkit/archive/Release_2018_03_1.tar.gz
 
