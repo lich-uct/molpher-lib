@@ -1,14 +1,17 @@
 # Molpher-lib: Introduction
 
-This C++/Python library is a [chemical space](https://en.wikipedia.org/wiki/Chemical_space) exploration software. It is based on the [Molpher](https://github.com/siret/molpher) program which introduced a chemical space exploration method called [molecular morphing](http://www.ncbi.nlm.nih.gov/pubmed/24655571). This method uses stochastic optimization to traverse chemical space between two existing molecules. The main promise of this algorithm is that a virtual library enriched in compounds with improved biological activity could be generated in this way.
+This C++/Python library is a [chemical space](https://en.wikipedia.org/wiki/Chemical_space) exploration software. It is based on the [Molpher](https://github.com/siret/molpher) program which introduced a chemical space exploration method called [molecular morphing](http://www.ncbi.nlm.nih.gov/pubmed/24655571). The original Molpher method uses stochastic optimization to traverse chemical space between two existing molecules. The main promise of this algorithm is that a virtual library enriched in compounds with improved biological activity could be generated in this way.
 
-The purpose of Molpher-lib is to bring molecular morphing closer to the cheminformatics community, but also offer new features that go beyond the capabilities of the original Molpher program. Molpher-lib makes it possible to roam the chemical universe freely and with little constraints on the inputs. For example, we could just use a carbon atom as a starting point and have Molpher-lib autonomously evolve it into a complete molecular structure. To ensure that the generated molecules have required properties, we added new ways of introducing rules and constraints. If you want to know more about Molpher-lib and its usage, make sure to check out some [examples on the website](https://lich-uct.github.io/molpher-lib/examples.html).
+The purpose of Molpher-lib is to bring molecular morphing closer to the cheminformatics community, but also offer new features that go beyond the capabilities of the original Molpher program. Molpher-lib makes it possible to roam the chemical universe freely and with little constraints on the inputs. For example, we could just use a carbon atom as a starting point and have Molpher-lib autonomously evolve it into a complete molecular structure. To ensure that the generated molecules have required properties, Molpher-lib also helps with implementation of custom rules and constraints. If you want to know more about Molpher-lib and its usage, make sure to check out some [examples on the website](https://lich-uct.github.io/molpher-lib/examples.html). We also have some [Jupyter notebooks](https://github.com/lich-uct/molpher-lib/tree/master/doc/notebooks) with examples 
+that you can explore.
 
-The library is actively developed and a many new features are planned. The long-term goal is to make Molpher-lib a universal and easy-to-use *de novo* drug design framework. If this seems interesting to you, you can take a look at the [documentation](https://lich-uct.github.io/molpher-lib/latest/). Part of the documentation is dedicated to a detailed tutorial which should introduce the philosophy of Molpher-lib in more detail and give you a good idea of what it is currently capable of. Ideas, comments and feature requests are more than welcome and can be submitted to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues). You can also [subscribe](https://github.com/lich-uct/molpher-lib/commits/dev.atom) to the RSS feed of the [dev](https://github.com/lich-uct/molpher-lib/tree/dev) branch for development updates. If you want to know what is new in the current version, you can look at the [changelog](CHANGELOG.md).
+If you would like to participate in the development or just check out the current features of the library, there is extensive [documentation](https://lich-uct.github.io/molpher-lib/latest/) which can help you. A big part of the documentation is dedicated to a detailed tutorial that should introduce the philosophy of Molpher-lib in more detail and give you a good idea of what it is currently capable of. 
+
+The library is actively developed and many new features are planned to be added. The long-term goal is to make Molpher-lib a universal and easy-to-use *de novo* drug design framework. Ideas, comments and feature requests are more than welcome and can be submitted to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues). You can also [subscribe](https://github.com/lich-uct/molpher-lib/commits/dev.atom) to the RSS feed of the [dev](https://github.com/lich-uct/molpher-lib/tree/dev) branch for development updates. If you want to know what is new in the current version, you can look at the [changelog](CHANGELOG.md).
 
 ## Installation
 
-At the moment, the library is only intended for use on 64-bit Linux systems. However, development for other platforms is also a priority. If you manage to compile the library on a different platform, consider making a pull request or comment on the [issue tracker](https://github.com/lich-uct/molpher-lib/issues). Any help is much appreciated.
+At the moment, the library is only intended for use on 64-bit Linux systems. However, development for other platforms is also planned. If you manage to compile the library on a different platform, consider making a pull request or comment on the [issue tracker](https://github.com/lich-uct/molpher-lib/issues). Any help is much appreciated.
 
 ### Installation with Anaconda
 
@@ -20,11 +23,23 @@ conda install -c rdkit -c lich molpher-lib
 
 This will automatically download the latest version of the library and install everything to the currently active environment (for more information on environments and the `conda` command see [Conda Test Drive](http://conda.pydata.org/docs/test-drive.html)). The library depends on the popular cheminformatics toolkit [RDKit](http://rdkit.org) so do not forget to add the rdkit channel.
 
-If you are interested in the development snapshots of the library, you can use the `dev` channel instead:
+If you are interested in the development snapshots of the library 
+(most up to date code, but can contain bugs)
+, you can use the `dev` channel instead:
 
 ```bash
 conda install -c rdkit -c lich/label/dev molpher-lib
 ```
+
+After that the library should import in your environment and you should be able to successfully run the integrated unit tests:
+
+```python
+from molpher.tests import run
+
+run()
+```
+
+You can also check out the [Jupyter notebooks](https://github.com/lich-uct/molpher-lib/tree/master/doc/notebooks) with examples from the [documentation](https://lich-uct.github.io/molpher-lib/latest/).
 
 ### Compiling from Source
 
@@ -33,6 +48,7 @@ Compiling and installing from source is a little bit more elaborate. This proces
 ```bash
 # clone the repo
 git clone https://github.com/lich-uct/molpher-lib.git
+git checkout dev # or the branch/tag/commit you want
 REPOSITORY_ROOT=`pwd`/molpher-lib
 
 # this might take a while, but you if you are lucky, 
@@ -71,5 +87,24 @@ from molpher.tests import run
 
 run()
 ```
+
+This will run the integrated unit tests. They should all pass without problems.
+
+If you want to explore some example code from the documentations, there are
+a few Jupyter notebooks located under `doc/notebooks`. You can create 
+the needed conda environment 
+and launch your Jupyter server as follows:
+
+```bash
+cd ${REPOSITORY_ROOT}
+conda env create -f "environment.yml"
+. source_2_activate
+python setup.py build_ext --inplace
+cd doc/notebooks/
+jupyter-notebook
+```
+
+Note that you will need to have the library already compiled and installed in the standard 
+`${REPOSITORY_ROOT}/dist` directory.
 
 This installation process has been tested on common Debian-based systems so experience on other Linux flavors may differ. If you run into problems, report them to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues) and hopefully someone will be able to help.
