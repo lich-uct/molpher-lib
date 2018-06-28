@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>molpher.algorithms.bidirectional.pathfinder &mdash; Molpher-lib 0.0.0b2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../../molpher.html">molpher</a> &raquo;</li>
+        
+      <li>molpher.algorithms.bidirectional.pathfinder</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for molpher.algorithms.bidirectional.pathfinder</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">molpher.algorithms.functions</span> <span class="k">import</span> <span class="n">find_path</span><span class="p">,</span> <span class="n">timeit</span>
+<span class="kn">from</span> <span class="nn">molpher.algorithms.operations</span> <span class="k">import</span> <span class="n">FindClosest</span>
+<span class="kn">from</span> <span class="nn">molpher.core.ExplorationTree</span> <span class="k">import</span> <span class="n">ExplorationTree</span> <span class="k">as</span> <span class="n">ETree</span>
+<span class="kn">from</span> <span class="nn">molpher.core.operations</span> <span class="k">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="BidirectionalPathFinder"><a class="viewcode-back" href="../../../../documentation/python/molpher.algorithms.bidirectional.html#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder">[docs]</a><span class="k">class</span> <span class="nc">BidirectionalPathFinder</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param settings: search settings</span>
+<span class="sd">    :type settings: `Settings`</span>
+
+<span class="sd">    Implements a search where two trees are used to explore against each other.</span>
+<span class="sd">    After every iteration the targets of the trees are updated so that the closest molecule</span>
+<span class="sd">    from one tree becomes a target in the other.</span>
+
+<span class="sd">    This search might be quicker and the morphs on the resulting paths are more balanced</span>
+<span class="sd">    in terms of similarity to both source and the target.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="BidirectionalPathFinder.__init__"><a class="viewcode-back" href="../../../../documentation/python/molpher.algorithms.bidirectional.html#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">verbose</span>
+        <span class="sd">&quot;&quot;&quot;`True` if verbose output was requested&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;:class:`~molpher.core.ExplorationTree.ExplorationTree` from source to target&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;:class:`~molpher.core.ExplorationTree.ExplorationTree` from target to source&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">tree_params</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">tree_params</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">tree_params</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">thread_count</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">max_threads</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">thread_count</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">max_threads</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span> <span class="o">=</span> <span class="n">FindClosest</span><span class="p">()</span>
+        <span class="sd">&quot;&quot;&quot;`FindClosest` holding the current minimum in the &#39;source to target&#39; tree.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span> <span class="o">=</span> <span class="n">FindClosest</span><span class="p">()</span>
+        <span class="sd">&quot;&quot;&quot;`FindClosest` holding the current minimum in the &#39;target to source&#39; tree.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iteration</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">GenerateMorphsOper</span><span class="p">()</span>
+            <span class="p">,</span> <span class="n">SortMorphsOper</span><span class="p">()</span>
+            <span class="p">,</span> <span class="n">FilterMorphsOper</span><span class="p">()</span>
+            <span class="p">,</span> <span class="n">ExtendTreeOper</span><span class="p">()</span>
+            <span class="p">,</span> <span class="n">PruneTreeOper</span><span class="p">()</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="sd">&quot;&quot;&quot;a list of SMILES strings representing the found path (defaults to an empty `list`)&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="BidirectionalPathFinder.__call__"><a class="viewcode-back" href="../../../../documentation/python/molpher.algorithms.bidirectional.html#molpher.algorithms.bidirectional.pathfinder.BidirectionalPathFinder.__call__">[docs]</a>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute the search and return the path.</span>
+
+<span class="sd">        :return: a list of SMILES strings representing the found path (defaults to an empty `list`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">connecting_molecule</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iteration </span><span class="si">{0}</span><span class="s1">:&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counter</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">oper</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iteration</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution times (</span><span class="si">{0}</span><span class="s1">):&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">oper</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+                    <span class="n">source_target_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">))</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">source -&gt; target: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source_target_time</span><span class="p">))</span>
+                    <span class="n">target_source_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">))</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">target -&gt; source: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_source_time</span><span class="p">))</span>
+
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">total time: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source_target_time</span> <span class="o">+</span> <span class="n">target_source_time</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">runOperation</span><span class="p">(</span><span class="n">oper</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Traversal times:&#39;</span><span class="p">)</span>
+
+                <span class="n">source_target_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">source -&gt; target: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source_target_time</span><span class="p">))</span>
+                <span class="n">target_source_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">target -&gt; source: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_source_time</span><span class="p">))</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">total execution time: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source_target_time</span> <span class="o">+</span> <span class="n">target_source_time</span><span class="p">))</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Current Targets:&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">source to target:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">target to source:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Current Minima:&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">source to target:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">target to source:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span> <span class="o">=</span> <span class="n">FindClosest</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target_min</span><span class="o">.</span><span class="n">closest</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_source_min</span> <span class="o">=</span> <span class="n">FindClosest</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;New Targets:&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">source to target:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">target to source:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">path_found</span><span class="p">:</span>
+                <span class="n">connecting_molecule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Path Found in tree going from source to target&#39;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connecting molecule:&#39;</span><span class="p">,</span> <span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">path_found</span><span class="p">:</span>
+                <span class="n">connecting_molecule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Path Found in tree going from target to source&#39;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connecting molecule:&#39;</span><span class="p">,</span> <span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">connecting_molecule</span><span class="p">)</span>
+                <span class="k">break</span>
+
+        <span class="n">source_target_path</span> <span class="o">=</span> <span class="n">find_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_target</span><span class="p">,</span> <span class="n">connecting_molecule</span><span class="p">)</span>
+        <span class="n">target_source_path</span> <span class="o">=</span> <span class="n">find_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_source</span><span class="p">,</span> <span class="n">connecting_molecule</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">source_target_path</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">connecting_molecule</span>
+        <span class="n">target_source_path</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="n">source_target_path</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">target_source_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">source_target_path</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Path:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.0.0b2',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

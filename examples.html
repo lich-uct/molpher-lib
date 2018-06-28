@@ -61,6 +61,10 @@
                 <ul>
                     
                     <li>
+                        <a href="./v0.0.0b2/">v0.0.0b2</a>
+                    </li>
+                    
+                    <li>
                         <a href="./v0.0.0b2.dev3/">v0.0.0b2.dev3</a>
                     </li>
                     
@@ -95,6 +99,10 @@
 <li class="active"><a href="examples.html">Examples</a></li>
 <li><a class="dropdown-button" href="." data-activates="dropdown1">Documentation<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
 <ul id='dropdown1' class='dropdown-content'>
+    
+    <li>
+        <a href="./v0.0.0b2/">v0.0.0b2</a>
+    </li>
     
     <li>
         <a href="./v0.0.0b2.dev3/">v0.0.0b2.dev3</a>
@@ -148,7 +156,7 @@
             <h3>Generating Morphs</h3>
 
             <p>
-                The main use case for Molpher-lib is intended to be generation of new molecular structures from a given starting structure. What 'derivatives' we get depends on so called morphing operators. These operators can take any shape or form. In the original Molpher approach, they are a set of somewhat arbitrarily chosen structural modifications (add atom, add bond, remove atom, remove bond...), but they can also be elementary chemical transformations or other transformations that might be of interest.
+                The main use case for Molpher-lib is automatic generation of new molecular structures from a given starting point. What 'derivatives' we get depends on a set of <a href="latest/usage/tutorial/morphing.html#molecules-and-morphing-operators">morphing operators</a>. These operators can take any shape or form. In the original Molpher approach, they are a set of somewhat arbitrarily chosen structural modifications (add atom, add bond, remove atom, remove bond...), but they can also be elementary chemical transformations or other transformations that might be of interest.
             </p>
 
             <p>
@@ -228,7 +236,7 @@ as_mol_grid(sensible_morphs.values()) # draw generated structures in a grid</cod
 </div>
 
             <p>
-                You might notice that the typical '-pril' structural pattern is preserved among all of the generated structures in this example. It is because atoms forming this substructure were locked away from certain modifications in the <code class="python">captopril.sdf</code> file. You can read how atom locking works in the introductory <a href="latest/usage/tutorial/morphing.html">introductory tutorial</a> where this example is from.
+                You might notice that the typical '-pril' structural pattern is preserved among all of the generated structures in this example. It is because atoms forming this substructure were locked away from certain modifications in the <code class="python">captopril.sdf</code> file. You can read how atom locking works in the introductory <a href="latest/usage/tutorial/morphing.html#substructure-locking">introductory tutorial</a> where this example is from.
             </p>
 
         </div>
@@ -237,7 +245,7 @@ as_mol_grid(sensible_morphs.values()) # draw generated structures in a grid</cod
             <h3>Customized Operators</h3>
 
             <p>
-                Since the morphing operators play a crucial role in the process, the library makes implementations of new operators possible through the <code class="python">MorphingOperator</code> interface:
+                Since morphing operators play a crucial role in the generation process, the library makes implementations of new operators possible through the <code class="python">MorphingOperator</code> interface:
             </p>
 
             <div class="row">
@@ -338,7 +346,7 @@ as_mol_grid(sensible_morphs.values()) # draw generated structures in a grid</cod
             </div>
             <div class="card-content">
                 
-            Example code which leverages the <code class="python">MorphingOperator</code> abstract class to implement a customized operator, <code class="python">AddFragment</code>.
+            Example code using the <code class="python">MorphingOperator</code> abstract class to implement a customized operator <code class="python">AddFragment</code>.
             
             </div>
         </div>
@@ -363,9 +371,15 @@ as_mol_grid(sensible_morphs.values()) # draw generated structures in a grid</cod
 </div>
 
             <p>
-                This code is essentially the same as above, but contains a few more lines that define the new operator itself and then create its instances
-                that are used in the <code class="python">Molpher</code> class.
-                When we focus on the definition of the operator itself, we can see that Molpher-lib can be easily integrated with RDKit cheminformatics library because its <code class="python">MolpherMol</code> instances can be cloned to RDKit molecules with a call to the <code class="python">asRDMol</code> method. Also note our use of the collector to set the <code class="python">parent_operator</code> attribute of the generated morphs. The value of this attribute is then used to generate labels in the image and tells us what operator was used to generate the given structure. You can learn more about implementing operators in the <a href="latest/usage/tutorial/advanced.html#morphing-operators">appropriate section of the documentation</a>
+                This code is essentially the same as above, but contains a few more lines, which define the new operator itself. The created instances are used by the <code class="python">Molpher</code> class in the same manner as the built-in operators.
+            </p>
+
+            <p>
+                When we focus on the definition of the operator itself, we can see that Molpher-lib can be easily integrated with the RDKit cheminformatics library because its <code class="python">MolpherMol</code> instances can be cloned to RDKit molecules with a call to the <code class="python">asRDMol</code> method.
+            </p>
+
+            <p>
+                Also note the improved collector information where we now set the <code class="python">parent_operator</code> attribute of the generated morphs. The value of this attribute is then used to generate labels in the image and tells us what operator was used to generate the given structure. You can learn more about implementing operators in the <a href="latest/usage/tutorial/advanced.html#morphing-operators">appropriate section of the documentation</a>
             </p>
 
         </div>
