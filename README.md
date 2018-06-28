@@ -46,6 +46,9 @@ You can also check out the [Jupyter notebooks](https://github.com/lich-uct/molph
 Compiling and installing from source is a little bit more elaborate. This process is described in detail in the [documentation](https://lich-uct.github.io/molpher-lib/latest/usage/installation.html#building-and-installing-from-source-linux), but in the simplest case the following should work:
 
 ```bash
+# get dependencies
+sudo apt-get install git build-essential python3-dev python3-numpy cmake python3-setuptools
+
 # clone the repo
 git clone https://github.com/lich-uct/molpher-lib.git
 git checkout dev # or the branch/tag/commit you want
