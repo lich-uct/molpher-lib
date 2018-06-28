@@ -64,17 +64,12 @@ and build and link the dependencies yourself.
         please, consider making a pull request and contributing your code to the `official GitHub
         repository <https://github.com/lich-uct/molpher-lib.git>`_.
 
-You can get the source code with the following command:
-
-..  code-block:: bash
-
-    git clone https://github.com/lich-uct/molpher-lib.git
-
 Prerequisites
 ~~~~~~~~~~~~~
 
 Before you start building, there are a few requirements that need to be satisfied:
 
+    - *git* -- You can use it to check out the source code from the repository.
     - *cmake* -- This tool will generate the Makefiles for the project and is used to configure the build. Cmake version 3.9 and higher is supported.
     - *build-essential* -- You will need this package in order to be able to build software on most Linux platforms. It contains a compiler and other tools important for the build.
 
@@ -118,19 +113,32 @@ Before you start building, there are a few requirements that need to be satisfie
         link them during the build. The :file:`CMakeLists.txt` file is configured to link against dynamic versions of
         all libraries so make sure you have those installed.
 
-Building the Library
-~~~~~~~~~~~~~~~~~~~~
-
-When the above requirements are met, you can start building. First, you need to create a build directory
-and initialize the cmake project:
+The following command should get you all you need on a Debian-based system:
 
 ..  code-block:: bash
 
-    mkdir ${REPOSITORY_ROOT}/cmake-build/ # create a subdirectory in the root of the repository
+    sudo apt-get install git build-essential python3-dev python3-numpy cmake python3-setuptools
+
+Building the Library
+~~~~~~~~~~~~~~~~~~~~
+
+When the above requirements are met, you can start building. First, you need to
+check out the code and create a build directory
+
+..  code-block:: bash
+
+    git clone https://github.com/lich-uct/molpher-lib.git
+    REPOSITORY_ROOT="`pwd`/molpher-lib"
+    mkdir ${REPOSITORY_ROOT}/cmake-build/
     cd ${REPOSITORY_ROOT}/cmake-build/
+
+Then you can initialize the cmake project:
+
+..  code-block:: bash
+
     cmake ..
 
-This is the simplest configuration with default options, but most of the time we will probably
+This is the simplest configuration with default options, but sometimes you may
 require more customization. The cmake configuration file recognizes a few options.
 For example, the following will force debug mode and Python 3 during build:
 
