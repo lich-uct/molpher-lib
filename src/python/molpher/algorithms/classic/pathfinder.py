@@ -21,6 +21,3 @@ class ClassicPathFinder(BasicPathfinder):
             , ExtendTreeOper()
             , PruneTreeOper()
         ])
-
-        self.find_closest = FindClosest()
-        """instance of `FindClosest` that holds the molecule currently closest to target"""

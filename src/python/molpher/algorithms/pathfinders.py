@@ -11,6 +11,14 @@ class BasicPathfinder:
     any combination of operations.
     """
 
+    class MaxItersReachedException(Exception):
+
+        def __init__(self, tree):
+            super(BasicPathfinder.MaxItersReachedException, self).__init__(
+                "Maximum number of  iterations reached while searching "
+                "for a path\n\t source: {0}\n\t target: {1}".format(tree.source, tree.target))
+
+
     def __init__(self, settings, operations):
         self.settings = settings
         """a settings class (should be a subclass of `Settings`)"""
@@ -36,9 +44,9 @@ class BasicPathfinder:
 
         counter = 0
         while not self.tree.path_found:
-            if counter > self.settings.max_iters:
-                break
             counter+=1
+            if counter > self.settings.max_iters:
+                raise BasicPathfinder.MaxItersReachedException(self.tree)
             print('Iteration {0}'.format(counter))
             for oper in self._iteration:
                 self.tree.runOperation(oper)

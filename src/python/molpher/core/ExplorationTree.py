@@ -217,6 +217,14 @@ class ExplorationTree(molpher.swig_wrappers.core.ExplorationTree):
     def thread_count(self, val):
         self.setThreadCount(val)
 
+    @property
+    def source(self):
+        return self.params["source"]
+
+    @property
+    def target(self):
+        return self.params["target"]
+
     def fetchMol(self, canonSMILES):
         """
         Returns a molecule from the tree using a canonical
