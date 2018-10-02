@@ -11,7 +11,7 @@ from molpher.core.operations.callbacks import TraverseCallback
 
 
 def main():
-    cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
+    cocaine = 'CN1C2CCC1C(C(=O)OC)C(OC(=O)c1ccccc1)C2'
     procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
     tree = ETree.create(source=cocaine, target=procaine) # initialize a tree that searches for a path from cocaine to procaine

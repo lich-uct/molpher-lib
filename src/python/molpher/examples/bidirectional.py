@@ -7,7 +7,7 @@ from molpher.algorithms.settings import Settings
 
 
 def main(args):
-    cocaine = 'CN1[C@H]2CC[C@@H]1[C@@H](C(=O)OC)[C@@H](OC(=O)c1ccccc1)C2'
+    cocaine = 'CN1C2CCC1C(C(=O)OC)C(OC(=O)c1ccccc1)C2'
     procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
     storage_dir = None
     if len(args) == 2:
