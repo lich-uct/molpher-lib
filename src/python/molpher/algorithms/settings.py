@@ -2,6 +2,8 @@ import os
 
 import multiprocessing
 
+from molpher.core.operations import FilterMorphsOper
+
 
 class Settings:
     """
@@ -17,6 +19,7 @@ class Settings:
             , max_iters = 100
             , tree_params = None
             , verbose = False
+            , filters = FilterMorphsOper.ALL
     ):
         self.verbose = verbose
         """some algorithms can support verbose output"""
@@ -37,3 +40,5 @@ class Settings:
         """maximum number of iterations to spend on a search"""
         self.tree_params = tree_params
         """parameters of the exploration tree; either a dictionary like in `params` or an instance of :py:class:`~molpher.core.ExplorationData.ExplorationData`"""
+
+        self.filters = filters

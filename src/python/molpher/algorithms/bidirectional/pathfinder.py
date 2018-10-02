@@ -40,7 +40,7 @@ class BidirectionalPathFinder:
         self._iteration = [
             GenerateMorphsOper()
             , SortMorphsOper()
-            , FilterMorphsOper()
+            , FilterMorphsOper(settings.filters)
             , ExtendTreeOper()
             , PruneTreeOper()
         ]
