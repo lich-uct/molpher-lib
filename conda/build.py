@@ -28,7 +28,7 @@ TARGETS = ["molpher-lib"]
 CONDA_FLAGS = {
     "molpher-lib" : "-c rdkit --croot /tmp/conda-bld/"
 }
-PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5', '3.6'] if BUILD_ALL_PYTHON else ['3', '2']
+PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5', '3.6', '3.7'] if BUILD_ALL_PYTHON else ['3', '2']
 VERSION = version.VERSION
 BUILD_NUMBER = version.BUILD_NUMBER
 LICENSE_FILE_NAME = "LICENSE"
