@@ -4,11 +4,10 @@ Installation
 In this section, we discuss various methods of installation. There are also instructions on how to build the library
 from source and other comments useful to library developers.
 
-..  note:: As of yet, the library is only available for the Linux platform and will only run
-        on 64-bit systems. However, support for other platforms is on the roadmap as well.
-
-..  warning:: So far, the library is only tested on a limited number of Debian-based systems. Therefore, it might not work properly
-    on some other Linux distributions.
+..  note:: As of yet, the library is only available for **Linux** and will only run
+        on **64-bit** systems. However, support for other platforms is on the roadmap as well.
+        If you are interested in a build for different platform, feel free to express your
+        wish on the `issue tracker <https://github.com/lich-uct/molpher-lib/issues>`_.
 
 Installation with Anaconda
 --------------------------
@@ -20,7 +19,7 @@ or its lightweight variant, `Miniconda <http://conda.pydata.org/miniconda.html>`
 Anaconda/Miniconda is essentially a Python distribution, package manager and virtual environment in one and makes setting up
 a development environment for your projects very easy.
 After installing Anaconda/Miniconda you need to run the following
-to install the package in your environment:
+to install the :code:`molpher-lib` package in your environment:
 
 ..  code-block:: bash
 
@@ -35,8 +34,8 @@ If you are interested in the development snapshots, you can specify the :code:`d
     conda install -c rdkit -c lich/label/dev molpher-lib
 
 ..  attention:: The binaries in the :code:`molpher-lib` package are compiled against
-    the newest version of RDKit (:code:`2018.03.1` at the time of writing),
-    which has a different ABI than the previous versions.
+    the newest version of RDKit (:code:`2019.03.4` at the time of writing),
+    which does not support Python 2 anymore and also .
     Therefore, this and the following versions of Molpher-lib will not work with older versions of RDKit anymore.
 
 For more information on environments and the
@@ -55,22 +54,23 @@ Building and Installing from Source -- Linux
 
 If you want to build the source code yourself,
 you will have to use :command:`cmake`. This section
-describes how to do that on the Linux platform. If you want to build the library on
+describes how to do that on a Linux machine. If you want to build the library on
 a different platform, this section might provide useful information as well. However,
 you might need to make some adjustments to the underlying :file:`CMakeLists.txt` file
 and build and link the dependencies yourself.
 
 ..  note:: If you manage to successfully build the library on a platform other than Linux,
         please, consider making a pull request and contributing your code to the `official GitHub
-        repository <https://github.com/lich-uct/molpher-lib.git>`_.
+        repository <https://github.com/lich-uct/molpher-lib.git>`_. Also consider giving `this issue <https://github.com/lich-uct/molpher-lib/issues/7>`_
+        a bump up if you are interested in Windows build support.
 
 Prerequisites
 ~~~~~~~~~~~~~
 
 Before you start building, there are a few requirements that need to be satisfied:
 
-    - *git* -- You can use it to check out the source code from the repository.
-    - *cmake* -- This tool will generate the Makefiles for the project and is used to configure the build. Cmake version 3.9 and higher is supported.
+    - *git* -- You will use it to check out the source code from the repository.
+    - *cmake* -- This tool will generate the Makefiles for the project and configure the build (searches for dependencies, makes sure libraries are correctly linked, etc.). You should use version 3.9 and higher.
     - *build-essential* -- You will need this package in order to be able to build software on most Linux platforms. It contains a compiler and other tools important for the build.
 
         Note that you might encounter some problems if you decide to use an ancient compiler with poor
@@ -91,33 +91,39 @@ Before you start building, there are a few requirements that need to be satisfie
 
     - *dependencies* -- Molpher-lib depends on three third-party libraries:
 
-        - *tbb* (most versions should work fine, we generally build against 2018 Update 3)
-        - *boost* (most versions should work fine, we generally build against 1.65)
-        - *rdkit* (2018.03.1 and newer)
-        - *numpy* (RDKit dependency in Python, not required if you will be using the C++ interface only)
+        - *tbb* (most versions should work fine, but we build against 2019_U8)
+        - *boost* (most versions should work fine, but we build against 1.67.0)
+        - *rdkit* (there were some changes to the names of RDKit libraries, versions older than 2019.03.4 may have issues during build)
+        - *numpy* (RDKit dependency in Python, not required if you are only building the C++ code)
 
         There is a bash script (:file:`deps/build_deps.sh`)
-        which can download and build the dependencies automatically with
-        the required options. It should be sufficient to just run:
+        which can download and build the dependencies automatically
+        (should only download versions that were tested with this particular version of the library).
+        It should be sufficient to just run:
 
         ..  code-block:: bash
 
             ./build_deps.sh --all
 
-        If you want the dependencies yourself, you should install them in the :file:`deps/` folder
+        If you want to obtain the dependencies yourself, you should install them in the :file:`deps/` folder
         in the repository root. For each dependency, there should be a folder of the same name under :file:`deps/`
         (for example, the path to the *tbb* files would be :file:`deps/tbb/`). The CMakeLists.txt is configured to automatically
         identify and prioritize dependencies in this directory.
 
-        You can also leverage the libraries already installed on your system. In that case, cmake should automatically find them and
-        link them during the build. The :file:`CMakeLists.txt` file is configured to link against dynamic versions of
+        You can also leverage the libraries already installed on your system. In that case, cmake should automatically find them
+        on your path and link them during the build. The :file:`CMakeLists.txt` file is configured to link against dynamic versions of
         all libraries so make sure you have those installed.
 
-The following command should get you all you need on a Debian-based system:
+The following command should get you all you need for a complete build on a Debian-based system:
 
 ..  code-block:: bash
 
     sudo apt-get install git build-essential python3-dev python3-numpy cmake python3-setuptools
+
+If you want to use Anaconda to manage the build environment, you can start with the
+:code:`environment.yml` file in the root directory. You can install the required
+libraries in this environment and then point :command:`cmake` to
+the environment prefix with :command:`-DCONDA_PREFIX=/path/to/your/env/`.
 
 Building the Library
 ~~~~~~~~~~~~~~~~~~~~
@@ -155,24 +161,24 @@ When the makefile is created, you can use :command:`make` to build various targe
 
 ..  code-block:: bash
 
-    make $CONFIG # CONFIG is a configurations' name
+    make $CONFIG # $CONFIG is a configuration's name
 
-There are three important targets:
+There are three important configuration targets:
 
     1. *molpher* -- Builds the binaries for the C++ part of Molpher-lib.
 
-    2. *molpher_install* -- This target will install the library in a given location.
+    2. *molpher_install* -- Will install the library in the given location.
 
         By default, this location is the :file:`dist/` folder in the repository root.
         This can be changed when the cmake project is initialized by setting
         `CMAKE_INSTALL_PREFIX <https://cmake.org/cmake/help/v3.9/variable/CMAKE_INSTALL_PREFIX.html>`_.
-        By default, the required dependency libraries are not installed. If you just want to install them,
+        By default, the required dependency libraries are not installed. If you want to install them with the library,
         you can configure cmake to do so by setting the following: :command:`-DINSTALL_TBB=ON -DINSTALL_Boost=ON -DINSTALL_RDKit=ON`.
 
     3. *molpher_install_python* -- This builds the C++ Python extension and installs the Python package into :envvar:`CMAKE_INSTALL_PREFIX`.
 
         By default, the primary Python distribution on the system is used. You can specify a different executable
-        by with :command:`-DPYTHON_EXECUTABLE`.
+        with :command:`-DPYTHON_EXECUTABLE`.
 
         If you want to update the SWIG wrapping code before this target is run, you can instruct cmake to do so with
         the :command:`-DRUN_SWIG=ON` option. Do not forget to specify the swig path with :command:`-DSWIG_EXECUTABLE` if it is installed in a non-standard location.
@@ -199,10 +205,10 @@ There are three important targets:
 Building the Documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This documentation is generated using the :file:`build_docs.sh`
+This documentation was generated using the :file:`build_docs.sh`
 script under the :file:`doc` directory. However, you will need a few Python packages
-in order to successfully build it. Molpher-lib source code contains a conda :download:`environment file <../../../environment.yml>`
-which defines these requirements. You can install this environment like so:
+in order to successfully build it. The conda :download:`environment file <../../../environment.yml>`
+defines these requirements. You can install this environment like so:
 
 ..  code-block:: bash
 
@@ -235,12 +241,12 @@ run the :file:`build_docs.sh` script with the ```--upload``` option:
 
     build_docs.sh --upload
 
-..  note:: You will need write access to the repository and an SSH key attached to your account to be able to do this.
+..  note:: You will need write access to the repository to be able to do this.
 
 Building Conda Packages
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to build your own conda packages, you can use a
+If you want to package the build as a conda package, you can use a
 python script located in :file:`conda` subdirectory of the repository root:
 
 ..  code-block:: bash
@@ -251,4 +257,4 @@ python script located in :file:`conda` subdirectory of the repository root:
 ..  attention:: You will need `conda-build <https://github.com/conda/conda-build>`_ and the  *jinja2* Python library to do that.
     These are both part of the *molpher-lib* conda environment we introduced before. It is enough to just do :code:`conda activate molpher-lib`.
 
-The built packages will be located at :file:`/tmp/conda-bld`.
+The built packages will be located at :file:`/tmp/conda-bld` (from there they can be uploaded to Anaconda Cloud, for example).
