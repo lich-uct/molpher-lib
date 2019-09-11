@@ -11,7 +11,11 @@ The library is actively developed and many new features are planned to be added.
 
 ## Installation
 
-At the moment, the library is only intended for use on 64-bit Linux systems. However, development for other platforms is also planned. If you manage to compile the library on a different platform, consider making a pull request or comment on the [issue tracker](https://github.com/lich-uct/molpher-lib/issues). Any help is much appreciated.
+Supported platforms:
+
+  - Linux 64-bit
+
+At the moment, the library binaries are only compiled for 64-bit Linux systems. However, development for other platforms is also planned. If you manage to compile the library on a different platform, consider making a pull request or comment on the [issue tracker](https://github.com/lich-uct/molpher-lib/issues). Any help is much appreciated.
 
 ### Installation with Anaconda
 
