@@ -17,13 +17,13 @@ requirements:
     - {{ python_spec }}
     - gxx_linux-64
     - libboost
-    - rdkit >2018.03.2
-    - tbb <=2018.0.3
+    - rdkit
+    - tbb-devel
   run:
     - {{ python_spec }}
     - libboost
-    - rdkit >2018.03.2
-    - tbb <=2018.0.3
+    - rdkit
+    - tbb
 
 about:
   license : GPL-3.0

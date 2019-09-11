@@ -65,12 +65,13 @@ find_package(
         COMPONENTS
         filesystem
         serialization
+        iostreams
 )
 if(NOT Boost_FOUND)
     message(FATAL_ERROR "Boost library not found")
 endif()
 include_directories(${Boost_INCLUDE_DIRS})
-set(LIBS ${LIBS} ${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SERIALIZATION_LIBRARY})
+set(LIBS ${LIBS} ${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SERIALIZATION_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
 add_definitions(${Boost_DEFINITIONS})
 message(STATUS "Boost include directories: ${Boost_INCLUDE_DIRS}")
 message(STATUS "Boost libraries found: ${Boost_LIBRARIES}")
@@ -95,7 +96,7 @@ find_package(
         RDKitFileParsers
         RDKitGraphMol
         RDKitmaeparser
-        RDKitcoordgenlib
+        RDKitcoordgen
         )
 if(NOT RDKIT_FOUND)
     message(FATAL_ERROR "RDKit library or include files not found")
@@ -388,7 +389,7 @@ execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import sys;info = sys.version_i
 set(PYTHON_INSTALL_PREFIX
         "${CMAKE_INSTALL_PREFIX}/lib/python${PYTHON_VERSION}/site-packages" CACHE PATH "python package install directory" FORCE
         )
-set(ENV{PYTHONPATH} ${PYTHON_INSTALL_PREFIX} ENV{PYTHONPATH})
+set(ENV{PYTHONPATH} ${PYTHON_INSTALL_PREFIX})
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(PYTHON_BUILD_OPTIONS "${PYTHON_BUILD_OPTIONS}--inplace")
 endif()

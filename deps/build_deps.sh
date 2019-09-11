@@ -19,9 +19,9 @@ set -e
 # -------------------------------------- COMMENT -------------------------------------- #
 
 # Dependency links
-TBB_LINK=https://github.com/01org/tbb/releases/download/2018_U5/tbb2018_20180618oss_lin.tgz
-BOOST_LINK=https://sourceforge.net/projects/boost/files/boost/1.65.0/boost_1_65_0.tar.gz/download
-RDKIT_LINK=https://github.com/rdkit/rdkit/archive/Release_2018_03_1.tar.gz
+TBB_LINK=https://github.com/intel/tbb/releases/download/2019_U8/tbb2019_20190605oss_lin.tgz
+BOOST_LINK=https://sourceforge.net/projects/boost/files/boost/1.67.0/boost_1_67_0.tar.gz/download
+RDKIT_LINK=https://github.com/rdkit/rdkit/archive/Release_2019_03_4.tar.gz
 
 # Dependency compilation flags
 want_help=0
@@ -195,8 +195,8 @@ build_boost()
     chmod +x bootstrap.sh
 
     # build boost
-    ./bootstrap.sh gcc --without-icu --with-python=python3
-    ./b2 variant=debug link=shared runtime-link=shared threading=multi toolset=gcc cxxflags=\"-fPIC\" --without-chrono --without-exception --without-graph --without-graph_parallel --without-iostreams --without-locale --without-math --without-mpi --without-random --without-test --without-timer --without-wave --without-date_time --without-program_options --without-signals --without-system
+    ./bootstrap.sh gcc --without-icu --with-python=python3 --with-libraries=filesystem,serialization,system,iostreams,python
+    ./b2 variant=debug link=shared runtime-link=shared threading=multi toolset=gcc cxxflags=\"-fPIC\"
 
     rm -r -f ./bin.v2
     cd ..
@@ -240,7 +240,7 @@ build_rdkit()
     echo "LD_LIBRARY_PATH=`pwd`/lib:`pwd`/../boost/stage/lib" >> $cmd
     echo "mkdir build" >> $cmd
     echo "cd build" >> $cmd
-    echo "cmake -G \"Unix Makefiles\" -D RDK_BUILD_PYTHON_WRAPPERS=ON -D Python_ADDITIONAL_VERSIONS=3 -D BOOST_ROOT=`pwd`/../boost -D RDK_INSTALL_STATIC_LIBS=OFF -D Boost_USE_STATIC_LIBS=OFF -D RDK_OPTIMIZE_NATIVE=OFF .." >> $cmd
+    echo "cmake -G \"Unix Makefiles\" -D RDK_BUILD_PYTHON_WRAPPERS=ON -D Python_ADDITIONAL_VERSIONS=3 -D BOOST_ROOT=`pwd`/../boost -D RDK_INSTALL_STATIC_LIBS=OFF -D Boost_USE_STATIC_LIBS=OFF .." >> $cmd
     echo "make -j ${MAKE_JOBS}" >> $cmd
     echo "make -j ${MAKE_JOBS} install" >> $cmd
     echo "cd .." >> $cmd
