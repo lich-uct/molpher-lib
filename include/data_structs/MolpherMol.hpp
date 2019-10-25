@@ -59,7 +59,7 @@ public:
     
     MolpherMol& operator=(const MolpherMol&);
     std::shared_ptr<MolpherMol> copy() const;
-	RDKit::RWMol* asRDMol(bool include_locks = false) const; // returns a copy
+	RDKit::ROMol* asRDMol(bool include_locks = false) const;
 	std::string asMolBlock(bool include_locks = false) const;
 
 	// locking

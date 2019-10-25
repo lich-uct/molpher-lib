@@ -11,6 +11,7 @@
 class MorphingOperator::MorphingOperatorImpl {
 protected:
 	std::shared_ptr<MolpherMol> original;
+	std::unique_ptr<RDKit::ROMol> original_rdkit;
 
 	void writeOriginalLockInfo(std::shared_ptr<MolpherMol>);
 	void writeOriginalLockInfo(std::shared_ptr<MolpherMol>, AtomIdx);

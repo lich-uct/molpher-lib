@@ -17,7 +17,6 @@ public:
 	} Candidates;
 
 private:
-	std::unique_ptr<RDKit::RWMol> original_rdkit;
 	std::vector<Candidates> candidates;
 public:
 	RerouteBondImpl();

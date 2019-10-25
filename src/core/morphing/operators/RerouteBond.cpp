@@ -25,7 +25,6 @@ RerouteBond::RerouteBond() :
 
 RerouteBond::RerouteBondImpl::RerouteBondImpl() :
 		MorphingOperatorImpl()
-		, original_rdkit(nullptr)
 {
 	// no action
 }
@@ -44,8 +43,8 @@ std::string RerouteBond::getName() const {
 
 void RerouteBond::RerouteBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
-		original = mol_orig;
-		original_rdkit.reset(original->asRDMol());
+		MorphingOperatorImpl::setOriginal(mol_orig);
+
 		RDKit::ROMol& mol = *original_rdkit;
 		candidates.clear();
 
@@ -157,9 +156,9 @@ void RerouteBond::RerouteBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_o
 
 std::shared_ptr<MolpherMol> RerouteBond::RerouteBondImpl::morph() {
 	if (original_rdkit) {
-		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+		auto *newMol(new RDKit::RWMol(*original_rdkit));
 
-		if (candidates.size() == 0) {
+		if (candidates.empty()) {
 			delete newMol;
 //			SynchCerr("No candidates for bond reroute identified. Skipping: " + original->getSMILES());
 			return nullptr;

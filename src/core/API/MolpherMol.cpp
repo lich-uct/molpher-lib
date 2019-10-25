@@ -16,14 +16,13 @@
  */
 
 #include <GraphMol/FileParsers/MolSupplier.h>
-#include <GraphMol/FileParsers/MolWriters.h>
 #include <GraphMol/Descriptors/MolDescriptors.h>
 #include <GraphMol/SmilesParse/SmilesParse.h>
 #include <GraphMol/SmilesParse/SmilesWrite.h>
 #include <GraphMol/FileParsers/FileParsers.h>
 #include <GraphMol/GraphMol.h>
 #include <GraphMol/MolOps.h>
-#include <RDGeneral/BadFileException.h>
+#include <memory>
 #include <boost/algorithm/string/predicate.hpp>
 #include <core/misc/utils.hpp>
 #include <core/misc/SAScore.h>
@@ -61,7 +60,7 @@ MolpherMol::MolpherMol(const MolpherMol& other) : pimpl(std::move(other.pimpl->c
 }
 
 MolpherMol::MolpherMol(RDKit::ROMol *rd_mol)
-: pimpl(new MolpherMol::MolpherMolImpl(std::move(std::unique_ptr<RDKit::RWMol>(new RDKit::RWMol(*rd_mol)))))
+: pimpl(new MolpherMol::MolpherMolImpl(std::move(std::make_unique<RDKit::RWMol>(*rd_mol))))
 {
     // no action
 }
@@ -176,12 +175,12 @@ void MolpherMol::MolpherMolImpl::initialize(const std::string &string_repr) {
         try {
             if (boost::algorithm::ends_with(string_repr, ".sdf")) {
                 RDKit::ROMol* mol_ro = RDKit::SDMolSupplier(string_repr).next();
-                mol.reset(new RDKit::RWMol(*mol_ro));
+                mol = std::make_unique<RDKit::RWMol>(*mol_ro);
                 delete mol_ro;
-            } else if (string_repr.find("\n") != std::string::npos) {
+            } else if (string_repr.find('\n') != std::string::npos) {
                 std::istream* istr = new std::istringstream(string_repr);
                 RDKit::ROMol* mol_ro = RDKit::SDMolSupplier(istr).next();
-                mol.reset(new RDKit::RWMol(*mol_ro));
+                mol = std::make_unique<RDKit::RWMol>(*mol_ro);
                 delete mol_ro;
             } else {
                 mol.reset(RDKit::SmilesToMol(string_repr));
@@ -214,7 +213,7 @@ double MolpherMol::getDistToTarget() const {
 }
 
 std::unique_ptr<MolpherMol::MolpherMolImpl> MolpherMol::MolpherMolImpl::copy() const {
-    return std::unique_ptr<MolpherMol::MolpherMolImpl>(new MolpherMol::MolpherMolImpl(*this));
+    return std::make_unique<MolpherMol::MolpherMolImpl>(*this);
 }
 
 MolpherMol::MolpherMolImpl::MolpherMolImpl(std::unique_ptr<RDKit::RWMol> mol) {
@@ -227,7 +226,7 @@ void MolpherMol::MolpherMolImpl::lockAtom(int idx, int mask) {
     mask = atom->getLockingMask();
 
     if (mask & (MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::KEEP_BONDS)) {
-        for (auto ngh : getNeighbors(idx)) {
+        for (const auto& ngh : getNeighbors(idx)) {
             if (mask & MolpherAtom::KEEP_NEIGHBORS) {
                 ngh->setLockingMask(ngh->getLockingMask() | MolpherAtom::NO_MUTATION | MolpherAtom::NO_REMOVAL);
             }
@@ -240,14 +239,14 @@ void MolpherMol::MolpherMolImpl::lockAtom(int idx, int mask) {
 
 std::shared_ptr<MolpherAtom> MolpherMol::MolpherMolImpl::getAtom(int idx) {
     if (idx < 0 || idx >= atoms.size()) {
-        std::runtime_error("No such atom. Index out of range: " + std::to_string(idx));
+        throw std::runtime_error("No such atom. Index out of range: " + std::to_string(idx));
     }
     return atoms[idx];
 }
 
 std::vector<std::shared_ptr<MolpherAtom>> MolpherMol::MolpherMolImpl::getNeighbors(int idx) {
     if (idx < 0 || idx >= atoms.size()) {
-        std::runtime_error("No such atom. Index out of range: " + std::to_string(idx));
+        throw std::runtime_error("No such atom. Index out of range: " + std::to_string(idx));
     }
 
     RDKit::ROMol& mol = *rd_mol;
@@ -278,18 +277,19 @@ std::string MolpherMol::MolpherMolImpl::asMolBlock(bool include_locks) const {
 		}
 		os << "$$$$" << std::endl;
     }
-    delete temp;
     return os.str();
 }
 
 std::shared_ptr<MolpherMol> MolpherMol::MolpherMolImpl::fromMolBlock(const std::string &mol_block) {
     RDKit::RWMol* mol = RDKit::MolBlockToMol(mol_block, false, false, false);
-    return std::shared_ptr<MolpherMol>(new MolpherMol(mol));
+    return std::make_shared<MolpherMol>(mol);
 }
 
-RDKit::RWMol* MolpherMol::MolpherMolImpl::asRDMol(bool include_locks) const {
-    RDKit::RWMol* ret = new RDKit::RWMol(*(rd_mol), true, -1);
-    if (include_locks) {
+RDKit::ROMol* MolpherMol::MolpherMolImpl::asRDMol(bool include_locks) const {
+    // TODO: maybe it would make more sense to have this return a const reference?
+
+	if (include_locks) {
+//		RDKit::RWMol* ret = new RDKit::RWMol(*(rd_mol), true, -1);
         std::map<std::string, std::vector<int>> locks_map;
         auto atoms = getAtoms();
         for (int atm_idx = 0; atm_idx != atoms.size(); atm_idx++) {
@@ -310,10 +310,13 @@ RDKit::RWMol* MolpherMol::MolpherMolImpl::asRDMol(bool include_locks) const {
             std::copy(pair.second.begin(), pair.second.end()-1,
                       std::ostream_iterator<int>(oss, ","));
             oss << pair.second.back();
-            ret->setProp("MOLPHER_" + pair.first, oss.str());
+			rd_mol->setProp("MOLPHER_" + pair.first, oss.str());
         }
+
+		return rd_mol.get();
+    } else {
+		return rd_mol.get();
     }
-    return ret;
 }
 
 const std::vector<std::shared_ptr<MolpherAtom>> &MolpherMol::MolpherMolImpl::getAtoms() const {
@@ -477,7 +480,7 @@ void MolpherMol::removeFromTree() {
     }
 }
 
-RDKit::RWMol* MolpherMol::asRDMol(bool include_locks) const {
+RDKit::ROMol* MolpherMol::asRDMol(bool include_locks) const {
     pimpl->asRDMol(include_locks);
 }
 

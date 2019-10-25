@@ -12,7 +12,6 @@
 
 class AddAtom::AddAtomImpl : public MorphingOperator::MorphingOperatorImpl {
 private:
-	std::unique_ptr<RDKit::RWMol> original_rdkit;
 	std::vector<AtomIdx> open_atoms;
 	AtomLibrary atom_library;
 

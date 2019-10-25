@@ -55,7 +55,7 @@ public:
     std::unique_ptr<MolpherMolImpl> copy() const;
 
 	std::string asMolBlock(bool include_locks = false) const;
-	RDKit::RWMol* asRDMol(bool include_locks = false) const;
+	RDKit::ROMol* asRDMol(bool include_locks = false) const;
 	const std::vector<std::shared_ptr<MolpherAtom>>& getAtoms() const;
 };
 

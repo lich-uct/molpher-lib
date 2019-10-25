@@ -28,9 +28,8 @@ AtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom)
 {
     int idx = SynchRand::GetRandomNumber(atoms.size() - 1);
 
-    atom.setAtomicNum(atoms[idx].getAtomicNum());
+    atom.setAtomicNum((int) atoms[idx].getAtomicNum());
     atom.setFormalCharge(atoms[idx].getFormalCharge());
-//    atom.setMass(atoms[idx].mass); // removed in new version of rdkit (mass determined from atomic number)
 
     return (AtomIdx) idx;
 }

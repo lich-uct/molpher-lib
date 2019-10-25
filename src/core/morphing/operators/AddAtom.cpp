@@ -11,6 +11,8 @@
 #include <GraphMol/RDKitBase.h>
 #include <GraphMol/QueryOps.h>
 
+#include <memory>
+
 AddAtom::AddAtom() :
 MorphingOperator()
 , pimpl(new AddAtomImpl())
@@ -47,7 +49,6 @@ std::string AddAtom::getName() const {
 
 AddAtom::AddAtomImpl::AddAtomImpl() :
 MorphingOperatorImpl()
-, original_rdkit(nullptr)
 , atom_library(AtomLibrary::getDefaultLibrary())
 {
 	// no action
@@ -55,8 +56,8 @@ MorphingOperatorImpl()
 
 void AddAtom::AddAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
-		original = mol_orig;
-		original_rdkit.reset(original->asRDMol());
+		MorphingOperatorImpl::setOriginal(mol_orig);
+
 		RDKit::ROMol& mol = *original_rdkit;
 		open_atoms.clear();
 
@@ -77,11 +78,11 @@ void AddAtom::AddAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 
 std::shared_ptr<MolpherMol> AddAtom::AddAtomImpl::morph() {
 	if (original_rdkit) {
-		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+		auto *newMol(new RDKit::RWMol(*original_rdkit));
 
 		RDKit::Atom* atom = atom_library.getRandomAtom().asRDAtom();
 
-		if (open_atoms.size() == 0) {
+		if (open_atoms.empty()) {
 			delete newMol;
 //			SynchCerr("No open atoms for addition. Skipping: " + original->getSMILES());
 			return nullptr;

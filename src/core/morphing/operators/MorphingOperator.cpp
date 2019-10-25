@@ -26,6 +26,7 @@ void MorphingOperator::setOriginal(std::shared_ptr<MolpherMol> mol) {
 
 MorphingOperator::MorphingOperatorImpl::MorphingOperatorImpl() :
 original(nullptr)
+, original_rdkit(nullptr)
 {
 	// no action
 }
@@ -65,4 +66,5 @@ void MorphingOperator::MorphingOperatorImpl::writeOriginalLockInfo(std::shared_p
 
 void MorphingOperator::MorphingOperatorImpl::setOriginal(std::shared_ptr<MolpherMol> mol) {
 	original = mol;
+	original_rdkit = std::make_unique<RDKit::ROMol>(*(original->asRDMol(false)));
 }

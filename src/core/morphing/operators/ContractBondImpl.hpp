@@ -14,7 +14,6 @@
 
 class ContractBond::ContractBondImpl : public MorphingOperator::MorphingOperatorImpl {
 private:
-	std::unique_ptr<RDKit::RWMol> original_rdkit;
 	std::vector<std::pair<AtomIdx, AtomIdx>> open_bonds; // first index is the atom that stays
 	std::vector<BondIdx> open_bonds_rd;
 

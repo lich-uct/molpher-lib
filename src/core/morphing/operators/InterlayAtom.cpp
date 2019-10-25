@@ -35,7 +35,6 @@ InterlayAtom::InterlayAtom(const AtomLibrary &atom_library) :
 
 InterlayAtom::InterlayAtomImpl::InterlayAtomImpl() :
 		MorphingOperatorImpl()
-		, original_rdkit(nullptr)
 		, atom_library(AtomLibrary::getDefaultLibrary())
 {
 	// no action
@@ -43,8 +42,8 @@ InterlayAtom::InterlayAtomImpl::InterlayAtomImpl() :
 
 void InterlayAtom::InterlayAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
-		original = mol_orig;
-		original_rdkit.reset(original->asRDMol());
+		MorphingOperatorImpl::setOriginal(mol_orig);
+
 		RDKit::ROMol& mol = *original_rdkit;
 		interlay_candidates.clear();
 		atoms = atom_library.getAtoms();
@@ -79,7 +78,7 @@ void InterlayAtom::InterlayAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol
 
 std::shared_ptr<MolpherMol> InterlayAtom::InterlayAtomImpl::morph() {
 	if (original_rdkit) {
-		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+		auto *newMol(new RDKit::RWMol(*original_rdkit));
 
 		RDKit::Atom atom;
 		AtomIdx idx = GetRandomAtom(atoms, atom);
@@ -89,7 +88,7 @@ std::shared_ptr<MolpherMol> InterlayAtom::InterlayAtomImpl::morph() {
 //			SynchCerr("Given bond cannot be interlayed with the selected atom (" + atom.getSymbol() + "). Skipping: " + original->getSMILES());
 			return nullptr;
 		}
-		if (interlay_candidates[idx].size() == 0) {
+		if (interlay_candidates[idx].empty()) {
 			delete newMol;
 //			SynchCerr("No bond to interlay.  Skipping: " + original->getSMILES());
 			return nullptr;

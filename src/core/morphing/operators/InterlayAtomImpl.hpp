@@ -12,7 +12,6 @@
 
 class InterlayAtom::InterlayAtomImpl : public MorphingOperator::MorphingOperatorImpl {
 private:
-	std::unique_ptr<RDKit::RWMol> original_rdkit;
 	std::map<AtomIdx, std::vector<BondIdx> > interlay_candidates;
 	std::vector<std::shared_ptr<MolpherAtom>> atoms;
 	AtomLibrary atom_library;

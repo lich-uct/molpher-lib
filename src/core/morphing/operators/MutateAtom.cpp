@@ -39,7 +39,6 @@ std::string MutateAtom::getName() const {
 
 MutateAtom::MutateAtomImpl::MutateAtomImpl() :
 		MorphingOperatorImpl()
-		, original_rdkit(nullptr)
 		, atom_library(AtomLibrary::getDefaultLibrary())
 {
 	// no action
@@ -47,8 +46,8 @@ MutateAtom::MutateAtomImpl::MutateAtomImpl() :
 
 void MutateAtom::MutateAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
-		original = mol_orig;
-		original_rdkit.reset(original->asRDMol());
+		MorphingOperatorImpl::setOriginal(mol_orig);
+
 		RDKit::ROMol& mol = *original_rdkit;
 		replacements.clear();
 
@@ -108,11 +107,11 @@ void MutateAtom::MutateAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 
 std::shared_ptr<MolpherMol> MutateAtom::MutateAtomImpl::morph() {
 	if (original_rdkit) {
-		RDKit::RWMol *newMol = original->asRDMol();
+		auto *newMol(new RDKit::RWMol(*original_rdkit));
 
-		int randPos = SynchRand::GetRandomNumber(newMol->getNumAtoms() - 1);
+		decltype(replacements)::size_type randPos = SynchRand::GetRandomNumber((int) newMol->getNumAtoms() - 1);
 
-		if(replacements[randPos].size() == 0) {
+		if(replacements[randPos].empty()) {
 			delete newMol;
 //			SynchCerr("Given atom cannot be mutated.  Skipping: " + original->getSMILES());
 			return nullptr;
@@ -120,7 +119,7 @@ std::shared_ptr<MolpherMol> MutateAtom::MutateAtomImpl::morph() {
 
 		RDKit::Atom atom;
 		GetRandomAtom(replacements[randPos], atom);
-		newMol->replaceAtom(randPos, &atom); // atom is copied
+		newMol->replaceAtom((unsigned int) randPos, &atom); // atom is copied
 
 		std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
 		writeOriginalLockInfo(ret);

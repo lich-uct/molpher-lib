@@ -20,7 +20,6 @@ AddBond::AddBond() :
 
 AddBond::AddBondImpl::AddBondImpl() :
 		MorphingOperatorImpl()
-		, original_rdkit(nullptr)
 {
 	// no action
 }
@@ -43,8 +42,8 @@ std::string AddBond::getName() const {
 
 void AddBond::AddBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
-		original = mol_orig;
-		original_rdkit.reset(original->asRDMol());
+		MorphingOperatorImpl::setOriginal(mol_orig);
+
 		RDKit::ROMol& mol = *original_rdkit;
 		open_bonds.clear();
 
@@ -98,9 +97,9 @@ void AddBond::AddBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 
 std::shared_ptr<MolpherMol> AddBond::AddBondImpl::morph() {
 	if (original_rdkit) {
-		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+		auto *newMol(new RDKit::RWMol(*original_rdkit));
 
-		if (open_bonds.size() == 0) {
+		if (open_bonds.empty()) {
 			delete newMol;
 //			SynchCerr("No open atom pairs for bond addition. Skipping: " + original->getSMILES());
 			return nullptr;

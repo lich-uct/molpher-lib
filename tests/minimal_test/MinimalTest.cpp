@@ -133,7 +133,7 @@ void MinimalTest::testMolpherMol() {
     CPPUNIT_ASSERT_EQUAL((unsigned) 0, empty.getItersWithoutDistImprovement());
 
     // test initialization from SDF
-    RDKit::RWMol* mol_rdkit = new RDKit::RWMol(*(RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next()));
+    auto* mol_rdkit = new RDKit::RWMol(*(RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next()));
     RDKit::MolOps::Kekulize(*mol_rdkit);
     MolpherMol sdf_derived(test_dir + "Structure2D_CID_4914.sdf");
     CPPUNIT_ASSERT_EQUAL(std::string("CCN(CC)CCOC(=O)C1=CC=C(N)C=C1"), sdf_derived.getSMILES());
@@ -149,15 +149,15 @@ void MinimalTest::testMolpherMol() {
 
     // atom access and locking features
     RDKit::ROMol* mol_rdro = RDKit::SDMolSupplier(test_dir + "Structure2D_CID_4914.sdf").next();
-    RDKit::RWMol* mol_rdrw = new RDKit::RWMol(*mol_rdro);
+    auto* mol_rdrw = new RDKit::RWMol(*mol_rdro);
     MolpherMol mol_mphr_ro(mol_rdro);
     MolpherMol mol_mphr_rw(mol_rdrw);
     CPPUNIT_ASSERT(!mol_rdrw);
 
     int idx = 0;
-    RDKit::RWMol* mol_rd_copy = mol_mphr_rw.asRDMol();
-    for (auto atom : mol_mphr_rw.getAtoms()) {
-        CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), mol_rd_copy->getAtomWithIdx(idx)->getSymbol());
+    RDKit::ROMol* mol_rd = mol_mphr_rw.asRDMol();
+    for (const auto& atom : mol_mphr_rw.getAtoms()) {
+        CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), mol_rd->getAtomWithIdx(idx)->getSymbol());
         CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), mol_mphr_ro.getAtom(idx)->getSymbol());
         CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), mol_rdro->getAtomWithIdx(idx)->getSymbol());
 
@@ -170,7 +170,7 @@ void MinimalTest::testMolpherMol() {
     mol_mphr_rw.lockAtom(5, MolpherAtom::NO_MUTATION | MolpherAtom::KEEP_NEIGHBORS);
     mol_mphr_rw.getAtom(6)->setLockingMask(MolpherAtom::NO_ADDITION);
     idx = 0;
-    for (auto atom : mol_mphr_rw.getAtoms()) {
+    for (const auto& atom : mol_mphr_rw.getAtoms()) {
         if (idx == 5) {
             CPPUNIT_ASSERT(atom->getLockingMask() == (MolpherAtom::NO_MUTATION | MolpherAtom::KEEP_NEIGHBORS | MolpherAtom::NO_REMOVAL));
         }
@@ -193,13 +193,13 @@ void MinimalTest::testMolpherMol() {
     std::set<int> locked_indices{1,2};
     std::vector<std::pair<int, std::shared_ptr<MolpherAtom>>> locked_atoms;
     idx = 0;
-    for (auto atom : ethanol_no_add.getAtoms()) {
+    for (const auto& atom : ethanol_no_add.getAtoms()) {
         if (atom->isLocked()) {
             locked_atoms.push_back(std::pair<int, std::shared_ptr<MolpherAtom>>(idx, atom));
         }
         idx++;
     }
-    for (auto locked_atom : locked_atoms) {
+    for (const auto& locked_atom : locked_atoms) {
         CPPUNIT_ASSERT_EQUAL(locked_atom.second->getSymbol(), std::string("C"));
         CPPUNIT_ASSERT(locked_indices.find(locked_atom.first) != locked_indices.end());
     }
@@ -220,7 +220,7 @@ void MinimalTest::testAtomLibrary() {
     const AtomLibrary& default_lib = AtomLibrary::getDefaultLibrary();
 
     print("Default library: ");
-    for (auto atom : default_lib.getAtoms()) {
+    for (const auto& atom : default_lib.getAtoms()) {
         RDKit::Atom* rd_atom = atom->asRDAtom();
         print(atom->getSymbol() + ", formal charge: " + std::to_string(atom->getFormalCharge()));
         CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), rd_atom->getSymbol());
@@ -242,7 +242,7 @@ void MinimalTest::testAtomLibrary() {
     );
     print("New library: ");
     AtomLibrary::setDefaultLibrary(new_lib);
-    for (auto atom : default_lib.getAtoms()) {
+    for (const auto& atom : default_lib.getAtoms()) {
         RDKit::Atom* rd_atom = atom->asRDAtom();
         print(atom->getSymbol() + ", formal charge: " + std::to_string(atom->getFormalCharge()));
         CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), rd_atom->getSymbol());
@@ -288,7 +288,7 @@ void MinimalTest::testAddAtomOperator() {
     // first gen
 	auto first_morph = op_add.morph();
 	int idx = 0;
-	for (auto atom : cymene_no_add->getAtoms()) {
+	for (const auto& atom : cymene_no_add->getAtoms()) {
 		CPPUNIT_ASSERT_EQUAL(first_morph->getAtom(idx)->getLockingMask(), atom->getLockingMask());
 		idx++;
 	}
@@ -335,12 +335,13 @@ void MinimalTest::testRemoveAtomOperator() {
 
 	RemoveAtom op_remove;
 	op_remove.setOriginal(dimethylaniline);
-	print("original\n" + dimethylaniline->getSMILES() + "\n");
 	for (int i = 0; i != 10; i++) {
 		CPPUNIT_ASSERT_EQUAL(std::string("CC1=C(N)C=CC=C1"), op_remove.morph()->getSMILES());
 	}
 
 	auto morph = op_remove.morph();
+	print("morph\n" + morph->getSMILES() + "\n");
+	print_lock_info(morph);
 	op_remove.setOriginal(morph);
 	CPPUNIT_ASSERT(op_remove.getMarkedIndices().empty());
 	CPPUNIT_ASSERT(op_remove.getMarkedAtoms().empty());
@@ -399,9 +400,9 @@ void MinimalTest::testAddBondOperator() {
 				CPPUNIT_ASSERT_EQUAL(propanol_rd->getAtomWithIdx(atom_idx)->getNumImplicitHs(), morph_rd->getAtomWithIdx(atom_idx)->getNumImplicitHs());
 			}
 		}
-		delete morph_rd;
+//		delete morph_rd;
 	}
-	delete propanol_rd;
+//	delete propanol_rd;
 }
 
 void MinimalTest::testRemoveBondOperator() {
@@ -427,12 +428,12 @@ void MinimalTest::testRemoveBondOperator() {
 		RDKit::MatchVectType res;
 		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
 //		op_remove_bond.setOriginal(morph);
-		delete morph_rd;
+//		delete morph_rd;
 	}
 
 	delete mol1;
 	delete patt;
-	delete test_mol_rd;
+//	delete test_mol_rd;
 }
 
 void MinimalTest::testMutateAtomOperator() {
@@ -444,26 +445,22 @@ void MinimalTest::testMutateAtomOperator() {
 	op_mutate.setOriginal(alanine);
 	// TODO: expand this test
 
-	RDKit::ROMol* test_mol_rd = alanine->asRDMol();
 	RDKit::ROMol *mol1 = nullptr;
 	RDKit::RWMol *patt = nullptr;
 	for (int i = 0; i != 50; i++) {
 		auto morph = op_mutate.morph();
 		if (morph == nullptr) continue;
 		print(morph->getSMILES());
-		RDKit::ROMol* morph_rd = morph->asRDMol();
 
 		mol1 = RDKit::SmilesToMol(morph->getSMILES());
 		patt = RDKit::SmartsToMol("C(=O)");
 		RDKit::MatchVectType res;
 		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
 //		op_remove_bond.setOriginal(morph);
-		delete morph_rd;
 	}
 
 	delete mol1;
 	delete patt;
-	delete test_mol_rd;
 }
 
 void MinimalTest::testInterlayAtomOperator() {
@@ -489,12 +486,12 @@ void MinimalTest::testInterlayAtomOperator() {
 		RDKit::MatchVectType res;
 		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
 //		op_interlay.setOriginal(morph);
-		delete morph_rd;
+//		delete morph_rd;
 	}
 
 	delete mol1;
 	delete patt;
-	delete test_mol_rd;
+//	delete test_mol_rd;
 }
 
 void MinimalTest::testContractBondOperator() {
@@ -517,7 +514,7 @@ void MinimalTest::testContractBondOperator() {
 
 	print("lock test");
 	auto morph = op_contract.morph();
-	for (auto atm : morph->getAtoms()) {
+	for (const auto& atm : morph->getAtoms()) {
 		std::cout << atm->getSymbol() << ": " << atm->getLockingMask() << std::endl;
 	}
 	print(morph->getSMILES());
@@ -530,7 +527,7 @@ void MinimalTest::testContractBondOperator() {
 	morph = op_contract.morph();
 	CPPUNIT_ASSERT(morph == nullptr);
 
-	delete test_mol_rd;
+//	delete test_mol_rd;
 }
 
 void MinimalTest::testRerouteBondOperator() {
@@ -555,7 +552,7 @@ void MinimalTest::testRerouteBondOperator() {
 		RDKit::MatchVectType res;
 		CPPUNIT_ASSERT(RDKit::SubstructMatch( *mol1 , *patt , res ));
 		op_reroute.setOriginal(morph);
-		delete morph_rd;
+//		delete morph_rd;
 	}
 
 	delete mol1;
@@ -581,7 +578,7 @@ void MinimalTest::testMolpher() {
 	molpher();
 	RDKit::ROMol *mol1 = nullptr;
 	RDKit::RWMol *patt2 = nullptr;
-	for (auto morph : molpher.getMorphs()) {
+	for (const auto& morph : molpher.getMorphs()) {
 		print(morph->getSMILES());
 		mol1 = RDKit::SmilesToMol(morph->getSMILES());
 		patt2 = RDKit::SmartsToMol("c1ccccc1");
@@ -598,7 +595,7 @@ void MinimalTest::testMolpher() {
 	print_lock_info(cymene);
 
 	molpher();
-	for (auto morph : molpher.getMorphs()) {
+	for (const auto& morph : molpher.getMorphs()) {
 		print(morph->getSMILES());
 		mol1 = RDKit::SmilesToMol(morph->getSMILES());
 		patt2 = RDKit::SmartsToMol("c1ccccc1");
@@ -611,7 +608,7 @@ void MinimalTest::testMolpher() {
 	Molpher molpher_custom_oper(cymene, opers, 0, 200);
 	molpher_custom_oper();
 	bool found_orig(false);
-	for (auto morph : molpher_custom_oper.getMorphs()) {
+	for (const auto& morph : molpher_custom_oper.getMorphs()) {
 		if (morph->getSMILES() == cymene->getSMILES()) {
 			found_orig = true;
 		}
@@ -623,7 +620,7 @@ void MinimalTest::testMolpher() {
 	collectors.push_back(std::static_pointer_cast<MorphCollector>(std::make_shared<PrintMorphingInfo>()));
 	Molpher molpher_custom_oper_collectors(cymene, opers, 0, 200, collectors);
 	molpher_custom_oper_collectors();
-	for (auto morph : molpher_custom_oper_collectors.getMorphs()) {
+	for (const auto& morph : molpher_custom_oper_collectors.getMorphs()) {
 		CPPUNIT_ASSERT_EQUAL(cymene->getSMILES(), morph->getParentSMILES());
 		CPPUNIT_ASSERT_EQUAL(morph->getSAScore(), morph->getDistToTarget());
 	}
@@ -735,7 +732,7 @@ void MinimalTest::testTree() {
     tree->extend();
     leaves = tree->fetchLeaves();
     auto source_descendents = source->getDescendants();
-    for (auto leaf : leaves) {
+    for (const auto& leaf : leaves) {
         CPPUNIT_ASSERT(leaf->isBoundToTree());
         CPPUNIT_ASSERT_EQUAL(tree, leaf->getTree());
         
@@ -766,7 +763,7 @@ void MinimalTest::testTree() {
     
     source_descendents = source->getDescendants();
     auto source_hist_descendents = source->getHistoricDescendants();
-    for (auto leaf : leaves) {
+    for (const auto& leaf : leaves) {
         CPPUNIT_ASSERT(!tree->hasMol(leaf->getSMILES()));
         CPPUNIT_ASSERT(!leaf->getTree());
         
@@ -846,7 +843,7 @@ void MinimalTest::testTreeOperatorsAndLocks() {
 	collectors.push_back(std::static_pointer_cast<MorphCollector>(std::make_shared<PrintMorphingInfo>()));
 	for (int iter_idx = 0; iter_idx != 2; iter_idx++) {
 		tree->generateMorphs(collectors);
-		for (auto morph : tree->getCandidateMorphs()) {
+		for (const auto& morph : tree->getCandidateMorphs()) {
 			CPPUNIT_ASSERT_EQUAL(morph->getSAScore(), morph->getDistToTarget());
 		}
 		tree->filterMorphs((FilterMorphsOper::MorphFilters) filters, false);

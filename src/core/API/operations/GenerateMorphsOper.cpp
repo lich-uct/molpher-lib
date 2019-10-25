@@ -118,9 +118,9 @@ MorphCollector()
 {
 	mCollectAttemptCount = 0;
 	if (target) {
-		auto target_rd = target->asRDMol();
+		RDKit::ROMol* target_rd = target->asRDMol(false);
 		mTargetFp.reset(mScCalc.GetFingerprint(target_rd));
-		delete target_rd;
+//		delete target_rd;
 	}
 }
 
@@ -185,14 +185,14 @@ void CollectMorphs::operator()(
 		morph->setParentOper(operator_->getName());
 
 		Fingerprint* fp(nullptr);
-		RDKit::RWMol* morph_rd(nullptr);
+		RDKit::ROMol* morph_rd(nullptr);
 		if (target) {
 			try {
-				morph_rd = morph->asRDMol();
+				morph_rd = morph->asRDMol(false);
 				fp = mScCalc.GetFingerprint(morph_rd);
 				morph->setDistToTarget(mScCalc.ConvertToDistance(
 						mScCalc.GetSimCoef(mTargetFp.get(), fp)));
-				delete morph_rd;
+//				delete morph_rd;
 				delete fp;
 			} catch (const std::exception &exc) {
 				SynchCerr(
@@ -202,7 +202,7 @@ void CollectMorphs::operator()(
 						+ "\n\tGenerated morph (not added to candidates): " + morph->getSMILES()
 				);
 				if (fp) delete fp;
-				if (morph_rd) delete morph_rd;
+//				if (morph_rd) delete morph_rd;
 				return; // morph is ignored (not added to mMorphs)
 			}
 		}
@@ -258,7 +258,7 @@ void GenerateMorphsOper::GenerateMorphsOperImpl::operator()() {
 				);
 				tree_pimpl->candidates.reserve(tree_pimpl->candidates.size() + morphAttempts);
 				molpher();
-			} catch (std::exception exp) {
+			} catch (std::exception& exp) {
 				Cerr("Morphing failed for leaf: " + leaf->getSMILES());
 				if (!leaf->getParentSMILES().empty()) {
 					tree->deleteSubtree(leaf->getSMILES(), false);

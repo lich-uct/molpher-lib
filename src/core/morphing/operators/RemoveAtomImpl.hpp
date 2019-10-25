@@ -11,7 +11,6 @@
 
 class RemoveAtom::RemoveAtomImpl : public MorphingOperator::MorphingOperatorImpl {
 private:
-	std::unique_ptr<RDKit::RWMol> original_rdkit;
 	std::vector<AtomIdx> marked_atoms;
 
 public:

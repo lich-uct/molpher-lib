@@ -12,7 +12,6 @@
 
 class MutateAtom::MutateAtomImpl : public MorphingOperator::MorphingOperatorImpl {
 private:
-	std::unique_ptr<RDKit::RWMol> original_rdkit;
 	std::vector<std::vector<MolpherAtom> > replacements;
 	AtomLibrary atom_library;
 

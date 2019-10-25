@@ -11,7 +11,6 @@
 
 class AddBond::AddBondImpl : public MorphingOperator::MorphingOperatorImpl {
 private:
-	std::unique_ptr<RDKit::RWMol> original_rdkit;
 	std::vector<std::pair<AtomIdx, AtomIdx>> open_bonds;
 
 public:

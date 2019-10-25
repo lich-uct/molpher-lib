@@ -41,15 +41,14 @@ std::string RemoveAtom::getName() const {
 
 RemoveAtom::RemoveAtomImpl::RemoveAtomImpl() :
 MorphingOperatorImpl()
-, original_rdkit(nullptr)
 {
 	// no action
 }
 
 void RemoveAtom::RemoveAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
-		original = mol_orig;
-		original_rdkit.reset(original->asRDMol());
+		MorphingOperatorImpl::setOriginal(mol_orig);
+
 		RDKit::ROMol& mol = *original_rdkit;
 		marked_atoms.clear();
 
@@ -60,18 +59,18 @@ void RemoveAtom::RemoveAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 		for (iter = mol.beginAtoms(); iter != mol.endAtoms(); iter++) {
 			atom = *iter;
 
-//		bool kept_by_neighbor = false;
-//		RDKit::ROMol::ADJ_ITER beg, end;
-//		boost::tie(beg, end) = mol.getAtomNeighbors(atom);
-//		while (beg != end) {
-//			neighbor = mol[*beg].get();
-//			int locking_mask = original->getAtom(neighbor->getIdx())->getLockingMask();
-//			if (MolpherAtom::KEEP_NEIGHBORS & locking_mask) {
-//				kept_by_neighbor = true;
-//				break;
+//			bool kept_by_neighbor = false;
+//			RDKit::ROMol::ADJ_ITER beg, end;
+//			boost::tie(beg, end) = mol.getAtomNeighbors(atom);
+//			while (beg != end) {
+//				neighbor = mol[*beg].get();
+//				int locking_mask = original->getAtom(neighbor->getIdx())->getLockingMask();
+//				if (MolpherAtom::KEEP_NEIGHBORS & locking_mask) {
+//					kept_by_neighbor = true;
+//					break;
+//				}
+//				++beg;
 //			}
-//			++beg;
-//		}
 
 			if (RDKit::queryAtomHeavyAtomDegree(atom) == 1
 				//			&& !kept_by_neighbor
@@ -80,15 +79,15 @@ void RemoveAtom::RemoveAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 			}
 		}
 	} else {
-		std::runtime_error("Invalid reference for original molecule.");
+		throw std::runtime_error("Invalid reference for original molecule.");
 	}
 }
 
 std::shared_ptr<MolpherMol> RemoveAtom::RemoveAtomImpl::morph() {
 	if (original_rdkit) {
-		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+		auto *newMol(new RDKit::RWMol(*original_rdkit));
 
-		if (marked_atoms.size() == 0) {
+		if (marked_atoms.empty()) {
 			delete newMol;
 //			SynchCerr("No atoms marked for removal.  Skipping: " + original->getSMILES());
 			return nullptr;

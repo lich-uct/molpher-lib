@@ -20,7 +20,6 @@ RemoveBond::RemoveBond() :
 
 RemoveBond::RemoveBondImpl::RemoveBondImpl() :
 		MorphingOperatorImpl()
-		, original_rdkit(nullptr)
 {
 	// no action
 }
@@ -43,8 +42,8 @@ std::string RemoveBond::getName() const {
 
 void RemoveBond::RemoveBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {
 	if (mol_orig) {
-		original = mol_orig;
-		original_rdkit.reset(original->asRDMol());
+		MorphingOperatorImpl::setOriginal(mol_orig);
+
 		RDKit::ROMol& mol = *original_rdkit;
 		open_bonds.clear();
 		open_bonds_rd.clear();
@@ -88,9 +87,9 @@ void RemoveBond::RemoveBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_ori
 
 std::shared_ptr<MolpherMol> RemoveBond::RemoveBondImpl::morph() {
 	if (original_rdkit) {
-		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+		auto *newMol(new RDKit::RWMol(*original_rdkit));
 
-		if (open_bonds_rd.size() == 0) {
+		if (open_bonds_rd.empty()) {
 			delete newMol;
 //			SynchCerr("No open atom pairs for bond removal.  Skipping: " + original->getSMILES());
 			return nullptr;
