@@ -204,7 +204,7 @@ class TestMorphing(unittest.TestCase):
         # check if valid molecules were extracted
         self.assertTrue(len(all_bad_structures) > 0)
         for mol in all_bad_structures:
-            self.assertTrue(mol.smiles)
+            self.assertTrue(mol.sascore > 6)
 
         # check descendents
         def check_descs(morph):
