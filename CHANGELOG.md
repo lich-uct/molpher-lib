@@ -14,6 +14,7 @@ Previous version: 0.0.0b2
     - RDKIT 2019.03.4
     - newer or older versions of the packages above could also work, but this was not tested
 - because RDKit is dropping Python 2 support (https://www.mail-archive.com/rdkit-discuss@lists.sourceforge.net/msg08354.html), Python 2 conda packages will no longer be built for molpher-lib as well and Python 2 will also not be supported in the project anymore
+- `asRDMol` method of `MolpherMol` in C++ now returns the actual pointer of the underlying instance and not a copy anymore
 
 ## Fixes
 - fixed issue #6 (Cryptic error raised when `max_iters` is specified in algorithm settings)
