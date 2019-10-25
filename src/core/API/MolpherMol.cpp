@@ -158,7 +158,7 @@ void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
     }
 
     data.SMILES = RDKit::MolToSmiles(*rd_mol, false, true, -1, true, false, false);
-    data.molBlock = RDKit::MolToMolBlock(*rd_mol, true, -1, false, false);
+//    data.molBlock = RDKit::MolToMolBlock(*rd_mol, true, -1, false, false);
     data.formula = RDKit::Descriptors::calcMolFormula(*rd_mol);
     data.molecularWeight = RDKit::Descriptors::calcAMW(*rd_mol, true);
 }
