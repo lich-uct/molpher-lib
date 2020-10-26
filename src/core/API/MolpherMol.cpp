@@ -478,7 +478,7 @@ void MolpherMol::removeFromTree() {
 }
 
 RDKit::RWMol* MolpherMol::asRDMol(bool include_locks) const {
-    pimpl->asRDMol(include_locks);
+    return pimpl->asRDMol(include_locks);
 }
 
 void MolpherMol::lockAtom(int idx, int mask) {
