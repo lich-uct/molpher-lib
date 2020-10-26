@@ -66,6 +66,7 @@ find_package(
         filesystem
         serialization
         iostreams
+        system
 )
 if(NOT Boost_FOUND)
     message(FATAL_ERROR "Boost library not found")
@@ -153,7 +154,7 @@ set_target_properties(
             SOVERSION "${VERSION_NUMBER_SO}"
 )
 message(STATUS "Libraries linked to the target molpher: ${LIBS}")
-target_link_libraries(molpher ${LIBS})
+target_link_libraries(molpher ${LIBS} boost_system)
 
 ## update the SWIG wrapping code if requested
 set(PYTHON_PACKAGE_DIR ${CMAKE_SOURCE_DIR}/src/python/molpher/swig_wrappers)
