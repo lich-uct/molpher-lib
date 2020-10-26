@@ -6,6 +6,6 @@
 #        python setup.py build_ext --inplace
 # 3. after that the "molpher" and "rdkit" modules from the "deps" directory should both be available in Python
 
-conda activate molpher-lib
-export PYTHONPATH="`pwd`/deps/rdkit/:`pwd`/src/python/"
-export LD_LIBRARY_PATH="`pwd`/deps/tbb/lib/intel64/gcc4.7:`pwd`/deps/rdkit/lib:`pwd`/deps/boost/stage/lib/:`pwd`/dist/lib/"
+conda activate molpher-lib-build
+export PYTHONPATH="`pwd`/src/python/"
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib/:`pwd`/dist/lib/"
