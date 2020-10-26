@@ -1,0 +1,1118 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.1. Molecular Morphing Basics &mdash; Molpher-lib 0.0.0b3.dev3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'0.0.0b3.dev3',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.2. Chemical Space Exploration with Molecular Morphing by Example" href="exploration.html" />
+    <link rel="prev" title="2. Tutorial" href="../tutorial.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3.dev3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Using the library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../installation.html">1. Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorial.html">2. Tutorial</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.1. Molecular Morphing Basics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#molecules-and-morphing-operators">2.1.1. Molecules and Morphing Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-morphs-in-bulk">2.1.2. Creating Morphs in Bulk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#substructure-locking">2.1.3. Substructure locking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">2.1.4. Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="exploration.html">2.2. Implementing Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="algorithms.html">2.3. Exploration Algorithms Implemented in Molpher-lib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html">2.4. Advanced Topics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Using the library</a> &raquo;</li>
+        
+          <li><a href="../tutorial.html">2. Tutorial</a> &raquo;</li>
+        
+      <li>2.1. Molecular Morphing Basics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="molecular-morphing-basics">
+<span id="morphing-basics"></span><h1>2.1. Molecular Morphing Basics<a class="headerlink" href="#molecular-morphing-basics" title="Permalink to this headline">¶</a></h1>
+<p>This section showcases the most basic features and building blocks
+needed to successfully start modifying compounds in an automated fashion
+and, thus, initiate a chemical space journey. Not all of the features and settings of
+the presented data structures will be discussed here so we encourage the interested reader to study
+the <a class="reference internal" href="../../documentation/index.html#source-code-docs"><span class="std std-ref">Source Code Documentation</span></a> where all library features are described in full.</p>
+<p>The Python examples in this tutorial are taken from a sample Jupyter Notebook which
+can be downloaded <a class="reference download internal" href="../../_downloads/basics.ipynb" download=""><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>. A rendered HTML version
+with all calculation results can be viewed <a class="reference external" href="../../_static/basics.html">here</a>.</p>
+<p>If you run into an issue with the examples or have an idea or suggestion,
+consider submitting to the <a class="reference external" href="https://github.com/lich-uct/molpher-lib/issues">issue tracker</a>.</p>
+<div class="section" id="molecules-and-morphing-operators">
+<span id="morphing-algorithm"></span><h2>2.1.1. Molecules and Morphing Operators<a class="headerlink" href="#molecules-and-morphing-operators" title="Permalink to this headline">¶</a></h2>
+<p>At the core of <a class="reference internal" href="../../glossary.html#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a> are so called
+<a class="reference internal" href="../../glossary.html#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a> (or morphing operators). These are elemental structural modifications
+by which one can move from a given molecular structure to another. Therefore, these operators
+give us an opportunity to ‘propel’ our chemical spaceship in a certain direction <a class="footnote-reference" href="#id3" id="id1">[1]</a>.
+Molpher-lib currently implements the same 8 chemical operators featured in Molpher (<a class="reference internal" href="#fig-operators"><span class="std std-numref">Fig. 2.1</span></a>).
+Those should be sufficient to create any chemical structure even if we just specify
+a single atom as input.</p>
+<div class="figure" id="fig-operators">
+<a class="reference internal image-reference" href="../../_images/operators.png"><img alt="../../_images/operators.png" src="../../_images/operators.png" style="width: 578.25px; height: 675.0px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Morphing operators implemented in Molpher-lib by default. They are used to
+generate new structures from existing ones. Adapted from <a class="footnote-reference" href="#id4" id="id2">[2]</a>.</span></p>
+</div>
+<p>However, it should be noted that there is no reason
+why one should use exactly these 8 operators since they were chosen
+more or less arbitrarily during Molpher development. Luckily, Molpher-lib enables
+anyone to define their own operators in addition to these as we will show later.</p>
+<p>Let’s now use the Molpher-lib library to write a simple program which will use
+a chemical operator to manipulate the structure of captopril, an
+important stepping stone hypertension treatment.</p>
+<p>In order to proceed, we first need to initialize a <a class="reference internal" href="../../documentation/python/molpher.core.html#module-molpher.core.MolpherMol" title="molpher.core.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance:</p>
+<div class="literal-block-wrapper docutils container" id="list-mol-init">
+<div class="code-block-caption"><span class="caption-number">Listing 2.1 </span><span class="caption-text">Initializing a compound as a <a class="reference internal" href="../../documentation/python/molpher.core.html#module-molpher.core.MolpherMol" title="molpher.core.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance.</span><a class="headerlink" href="#list-mol-init" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">molpher</span>
+<span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">MolpherMol</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="s2">&quot;O=C(O)[C@H]1N(C(=O)[C@H](C)CS)CCC1&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Therefore, we import the <a class="reference internal" href="../../documentation/python/molpher.html#module-molpher" title="molpher"><code class="xref py py-mod docutils literal notranslate"><span class="pre">molpher</span></code></a> package first. This is the main module of Molpher-lib.
+Then we import the <a class="reference internal" href="../../documentation/python/molpher.core.html#module-molpher.core.MolpherMol" title="molpher.core.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> class from <a class="reference internal" href="../../documentation/python/molpher.core.html#module-molpher.core" title="molpher.core"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">molpher.core</span></code></a>, which is the package
+housing the main chemical space exploration capabilities and is the one we will be
+working with most of the time. <a class="reference internal" href="../../documentation/python/molpher.core.html#module-molpher.core.MolpherMol" title="molpher.core.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instances have many attributes
+and methods. One of the attributes we can access is the SMILES string associated
+with the instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">smiles</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CC(CS)C(=O)N1CCCC1C(=O)O
+</pre></div>
+</div>
+<p>As you can see, Molpher-lib discards stereochemistry from molecules. Since
+we are still quite early in the development, this is only for the sake of simplicity.
+Therefore, when working with compounds generated by the library
+one needs to take into account all possible isomers because they are not
+seen as distinct chemical species by the library, at least not just yet.
+However, we are planning to expand in this area.</p>
+<p>Since Molpher-lib is working with <a class="reference external" href="http://www.rdkit.org/">RDKit</a> behind the scenes, it is quite
+straightforward to convert between Molpher-lib molecules and RDKit molecules.
+All we need to do is just call the asRDMol method on our <a class="reference internal" href="../../documentation/python/molpher.core.html#module-molpher.core.MolpherMol" title="molpher.core.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rd_mol</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rd_mol</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;rdkit.Chem.rdchem.Mol object at 0x7f177c4bb940&gt;
+</pre></div>
+</div>
+<p>We can then use the RDKit representation to draw a 2D picture of our molecule.
+In a Jupyter Notebook we would achieve that like so:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit.Chem.Draw</span> <span class="kn">import</span> <span class="n">IPythonConsole</span>
+<span class="n">IPythonConsole</span><span class="o">.</span><span class="n">ipython_useSVG</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem.Draw.MolDrawing</span> <span class="kn">import</span> <span class="n">MolDrawing</span>
+
+<span class="n">mol</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span> <span class="c1"># embed the resulting molecule into the notebook as a PNG image</span>
+</pre></div>
+</td></tr></table></div>
+<p>Output:</p>
+<div class="figure">
+<img alt="../../_images/captopril.png" src="../../_images/captopril.png" />
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can see that stereochemistry is maintained in the picture.
+Molpher-lib remembers it from the input, but has no ability
+to work with it, yet. Therefore, all isomers are equal, but will remember
+the input configuration of all atoms even after modification as we will see next.</p>
+</div>
+<p>Let’s now mobilize one of the chemical operators to generate new possible structures
+that we could assemble from this set of atoms without changing their valency.
+This operator is called <a class="reference internal" href="../../documentation/python/molpher.core.morphing.operators.html#molpher.core.morphing.operators.RerouteBond.RerouteBond" title="molpher.core.morphing.operators.RerouteBond.RerouteBond"><code class="xref py py-class docutils literal notranslate"><span class="pre">RerouteBond</span></code></a> and can be used as follows:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">molpher.core.morphing.operators</span> <span class="kn">import</span> <span class="n">RerouteBond</span>
+
+<span class="n">rrbond</span> <span class="o">=</span> <span class="n">RerouteBond</span><span class="p">()</span>
+<span class="n">rrbond</span><span class="o">.</span><span class="n">setOriginal</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+<span class="n">morph</span> <span class="o">=</span> <span class="n">rrbond</span><span class="o">.</span><span class="n">morph</span><span class="p">()</span>
+<span class="n">morph</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Output:</p>
+<div class="figure">
+<img alt="../../_images/captopril_rerouted_1.png" src="../../_images/captopril_rerouted_1.png" />
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All basic morphing capabilities are housed under the <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#module-molpher.core.morphing" title="molpher.core.morphing"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">molpher.core.morphing</span></code></a>
+package while chemical space exploration features (featured in the
+<a class="reference internal" href="exploration.html"><span class="doc">follow-up tutorial</span></a>) are located directly under <a class="reference internal" href="../../documentation/python/molpher.core.html#module-molpher.core" title="molpher.core"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">molpher.core</span></code></a>.</p>
+</div>
+<p>We can see what happened more clearly if we view the structures
+of the original captopril and its morph side by side
+and with atom indices present:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit.Chem.Draw.MolDrawing</span> <span class="kn">import</span> <span class="n">DrawingOptions</span>
+<span class="n">DrawingOptions</span><span class="o">.</span><span class="n">includeAtomNumbers</span><span class="o">=</span><span class="kc">True</span>
+
+<span class="n">rrbond</span><span class="o">.</span><span class="n">getOriginal</span><span class="p">()</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+<span class="n">morph</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Output:</p>
+<div class="figure">
+<img alt="../../_images/reroute_comparison.png" src="../../_images/reroute_comparison.png" />
+</div>
+<p>The operator disconnected the bond between atoms 4 and 5
+and created a new bond between atoms 5 and 12. Therefore, the bond coming
+from atom 5 to atom 4 was ‘rerouted’ to ‘point’ to atom 12.</p>
+<p>There are obviously many possible reroutes for an average compound. The operator first observes
+the possibilities when the <a class="reference internal" href="../../documentation/python/molpher.core.morphing.operators.html#molpher.core.morphing.operators.MorphingOperator.MorphingOperator.setOriginal" title="molpher.core.morphing.operators.MorphingOperator.MorphingOperator.setOriginal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setOriginal()</span></code></a>
+method is called and then randomly selects one option
+when the user requests a morph with the <code class="xref py py-meth docutils literal notranslate"><span class="pre">morph()</span></code>
+method. Therefore, we could make a call to the morph method many times and each time
+we would get a different possible reroute:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">rrbond</span><span class="o">.</span><span class="n">morph</span><span class="p">()</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+<span class="n">rrbond</span><span class="o">.</span><span class="n">morph</span><span class="p">()</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+<span class="n">rrbond</span><span class="o">.</span><span class="n">morph</span><span class="p">()</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+<span class="n">rrbond</span><span class="o">.</span><span class="n">morph</span><span class="p">()</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Output:</p>
+<div class="figure">
+<img alt="../../_images/random_reroutes.png" src="../../_images/random_reroutes.png" />
+</div>
+<p>From a synthetic viewpoint, many of the structures generated like this
+might not be stable or synthetically viable. Therefore, generating
+new possible drugs like this is quite a crude approach, but as we will show in the
+next parts of our tutorial, Molpher-lib has features that can help
+us prioritize more viable structures over others.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <a class="reference internal" href="../../documentation/python/molpher.core.morphing.operators.html#molpher.core.morphing.operators.MorphingOperator.MorphingOperator.setOriginal" title="molpher.core.morphing.operators.MorphingOperator.MorphingOperator.setOriginal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setOriginal()</span></code></a> and
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">morph()</span></code> methods are part of an
+interface defined by the <a class="reference internal" href="../../documentation/python/molpher.core.morphing.operators.html#molpher.core.morphing.operators.MorphingOperator.MorphingOperator" title="molpher.core.morphing.operators.MorphingOperator.MorphingOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">MorphingOperator</span></code></a> abstract class.
+By implementing the methods of this class, the user can create their own operators and easily
+plug them into the Molpher-lib ecosystem. We will show an example of this
+in the <a class="reference internal" href="advanced.html#morphing-operators"><span class="std std-ref">next tutorial</span></a> on more advanced topics.</p>
+</div>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>This means of ‘chemical space travel’ is not entirely new and a similar program (SPACESHIP) had been developed in the <a class="reference external" href="http://dx.doi.org/10.1002/cmdc.200700021">past</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7. <a class="reference external" href="http://www.jcheminf.com/content/6/1/7">DOI</a></td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="creating-morphs-in-bulk">
+<span id="morphing-bulk"></span><h2>2.1.2. Creating Morphs in Bulk<a class="headerlink" href="#creating-morphs-in-bulk" title="Permalink to this headline">¶</a></h2>
+<p>In the previous section, we outlined how <a class="reference internal" href="../../glossary.html#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a> work
+using a very simple example and aside from <a class="reference internal" href="../../documentation/python/molpher.core.morphing.operators.html#molpher.core.morphing.operators.RerouteBond.RerouteBond" title="molpher.core.morphing.operators.RerouteBond.RerouteBond"><code class="xref py py-class docutils literal notranslate"><span class="pre">RerouteBond</span></code></a>
+we did not really explore the full
+range of possibilities available to us.
+In this section, we will make up for that and show how to
+use Molpher-lib to easily generate thousands of new compounds
+from a single molecule.</p>
+<p>The <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher" title="molpher.core.morphing.Molpher.Molpher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molpher</span></code></a> class serves this purpose. It aggregates
+morphing operators and randomly applies them to the specified compound structure.
+For example, we can use it to generate various structures
+derived from captopril that have some atoms replaced, removed or added like so:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">molpher.core.morphing</span> <span class="kn">import</span> <span class="n">Molpher</span>
+<span class="kn">from</span> <span class="nn">molpher.core.morphing.operators</span> <span class="kn">import</span> <span class="n">AddAtom</span><span class="p">,</span> <span class="n">RemoveAtom</span><span class="p">,</span> <span class="n">MutateAtom</span>
+
+<span class="n">molpher</span> <span class="o">=</span> <span class="n">Molpher</span><span class="p">(</span>
+    <span class="n">mol</span>
+    <span class="p">,</span> <span class="p">[</span>
+        <span class="n">AddAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">RemoveAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">MutateAtom</span><span class="p">()</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">molpher</span><span class="p">()</span>
+
+<span class="n">morphs</span> <span class="o">=</span> <span class="n">molpher</span><span class="o">.</span><span class="n">morphs</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">morphs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">morphs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">molpher</span><span class="o">.</span><span class="n">morphs</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>27
+(&lt;molpher.core.MolpherMol.MolpherMol at 0x7f924d8a9210&gt;, &lt;molpher.core.MolpherMol.MolpherMol at 0x7f924d8a96c0&gt;)
+()
+</pre></div>
+</div>
+<p>In the first step, we created a <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher" title="molpher.core.morphing.Molpher.Molpher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molpher</span></code></a> instance by specifying the molecule
+to be modified in the first argument of its constructor and the operators to use
+as a Python list in the second. <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher" title="molpher.core.morphing.Molpher.Molpher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molpher</span></code></a> instances are callable
+and we need to call them in
+order to generate morphs. The generated morphs are then available by
+reading the <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher.morphs" title="molpher.core.morphing.Molpher.Molpher.morphs"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">morphs</span></code></a> property of our <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher" title="molpher.core.morphing.Molpher.Molpher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molpher</span></code></a> instance.</p>
+<p>We managed to generate 27 morphs in this case. By default, <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher" title="molpher.core.morphing.Molpher.Molpher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molpher</span></code></a>
+tries to generate 30 compounds, but it will ignore those that failed to
+generate. This can be caused by internal errors
+that should be showed in the error output,
+but also simply because certain operators cannot be applied to
+the molecule in question. For example, if there is no ring in the
+molecule and the <a class="reference internal" href="../../documentation/python/molpher.core.morphing.operators.html#molpher.core.morphing.operators.RemoveBond.RemoveBond" title="molpher.core.morphing.operators.RemoveBond.RemoveBond"><code class="xref py py-class docutils literal notranslate"><span class="pre">RemoveBond</span></code></a> operator is chosen,
+no molecules are generated because this operator fails if
+its application results in a disconnected structure.</p>
+<p>As you can also see in the example, reading the <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher.morphs" title="molpher.core.morphing.Molpher.Molpher.morphs"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">morphs</span></code></a> property automatically
+empties it. This helps to save memory by transferring ownership to
+the caller when they retrieve generated structures.
+The <code class="code docutils literal notranslate"><span class="pre">molpher()</span></code> call, on the other hand, does not reset the instance
+so you can pile up morphs by subsequent <code class="code docutils literal notranslate"><span class="pre">molpher()</span></code> calls
+before retrieving them from <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher.morphs" title="molpher.core.morphing.Molpher.Molpher.morphs"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">morphs</span></code></a>. However, a more
+efficient method would be to give <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher" title="molpher.core.morphing.Molpher.Molpher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molpher</span></code></a>
+a high enough number of morphing attempts from the very beginning:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">molpher</span> <span class="o">=</span> <span class="n">Molpher</span><span class="p">(</span>
+    <span class="n">mol</span>
+    <span class="p">,</span> <span class="p">[</span>
+        <span class="n">AddAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">RemoveAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">MutateAtom</span><span class="p">()</span>
+    <span class="p">]</span>
+    <span class="p">,</span> <span class="n">attempts</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>This approach is preferable since the subsequent <code class="code docutils literal notranslate"><span class="pre">molpher()</span></code>
+call is able to distribute the calculation among all CPU cores
+available on the system. You can change this behaviour by passing
+the <code class="code docutils literal notranslate"><span class="pre">threads</span></code> parameter to the constructor:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">molpher</span> <span class="o">=</span> <span class="n">Molpher</span><span class="p">(</span>
+    <span class="n">mol</span>
+    <span class="p">,</span> <span class="p">[</span>
+        <span class="n">AddAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">RemoveAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">MutateAtom</span><span class="p">()</span>
+    <span class="p">]</span>
+    <span class="p">,</span> <span class="n">attempts</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="p">,</span> <span class="n">threads</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>This will ensure that no more than 2 cores are used for the calculation.</p>
+<p>Thanks to the RDKit integration, we can take a look at some
+of the compounds we generated previously:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit.Chem.Draw</span> <span class="kn">import</span> <span class="n">MolsToGridImage</span>
+
+<span class="k">def</span> <span class="nf">show_mol_grid</span><span class="p">(</span><span class="n">mols</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">MolsToGridImage</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+        <span class="p">,</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="n">show_mol_grid</span><span class="p">(</span><span class="n">morphs</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Part of the output:</p>
+<div class="figure">
+<img alt="../../_images/morphs.png" src="../../_images/morphs.png" />
+</div>
+<p>The <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher" title="molpher.core.morphing.Molpher.Molpher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molpher</span></code></a> class or the operators themselves
+do not perform any advanced ‘chemical sanity’ checks so sometimes one
+can run into molecules that make little sense (such as the
+one in the upper right corner with a halogen atom attached directly
+to oxygen) <a class="footnote-reference" href="#id6" id="id5">[3]</a>. So while Molpher-lib should be sensible enough not to generate compounds with
+a 5-valent carbon atom and such, you still should put in place some common
+sense filters that can be specific to your use case, but also general rules
+such as removing compounds that are too large or too complex. Additionally, neither the operators
+nor <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher" title="molpher.core.morphing.Molpher.Molpher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molpher</span></code></a> are able to tell if a compound has already been
+generated. Morphing operations are completely independent and
+the result is always determined by a random selection from
+all possible modifications permitted by the operators and the original compound.
+Thus, it is also up to the caller to check for duplicate compounds.</p>
+<p>We will now try to tackle these shortcoming
+by implementing a collector. A collector is a simple callback function
+which takes two arguments, the generated morph and the operator used to create it,
+but has no return value. We can supply a <a class="reference internal" href="../../documentation/python/molpher.core.morphing.html#molpher.core.morphing.Molpher.Molpher" title="molpher.core.morphing.Molpher.Molpher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molpher</span></code></a>
+instance with a collector like so:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="n">strange_patterns</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s1">&#39;[S,O,N][F,Cl,Br,I]&#39;</span><span class="p">)</span>
+<span class="n">sensible_morphs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">collect_sensible</span><span class="p">(</span><span class="n">morph</span><span class="p">,</span> <span class="n">operator</span><span class="p">):</span>
+    <span class="n">rd_morph</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">rd_morph</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">strange_patterns</span><span class="p">):</span>
+        <span class="n">sensible_morphs</span><span class="p">[</span><span class="n">morph</span><span class="o">.</span><span class="n">smiles</span><span class="p">]</span> <span class="o">=</span> <span class="n">morph</span>
+
+<span class="n">molpher</span> <span class="o">=</span> <span class="n">Molpher</span><span class="p">(</span>
+    <span class="n">mol</span>
+    <span class="p">,</span> <span class="p">[</span>
+        <span class="n">AddAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">RemoveAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">MutateAtom</span><span class="p">()</span>
+    <span class="p">]</span>
+    <span class="p">,</span> <span class="n">attempts</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="p">,</span> <span class="n">collectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">collect_sensible</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">molpher</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">molpher</span><span class="o">.</span><span class="n">morphs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sensible_morphs</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>90
+49
+</pre></div>
+</div>
+<p>Therefore, in this example we generated 90 morphs, but only selected 49
+that were unique and satisfied our requirements (no halogens in
+the immediate neighborhood of sulfur, oxygen or nitrogen). If we wanted to,
+we could then use these 49 structures to seed more calculations
+that could help us learn more about how the strucural changes
+could affect pharmacokinetic and pharmacodynamic properties.</p>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td>This actually can have its purpose as demonstrated in:
+Voršilák, M. and Svozil, D. (2017). Nonpher: computational method for design of hard-to-synthesize structures. Journal of Cheminformatics. 9.
+DOI:<a class="reference external" href="https://doi.org/10.1186/s13321-017-0206-2">10.1186/s13321-017-0206-2</a></td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="substructure-locking">
+<h2>2.1.3. Substructure locking<a class="headerlink" href="#substructure-locking" title="Permalink to this headline">¶</a></h2>
+<p>In some cases, we might want to maintain a certain substructure
+in all of our morphs. Therefore, Molpher-lib has features that
+will allow us to lock certain atoms and prevent some
+structural changes from occurring. One way to do
+that is to initialize a molecule from an SDF file
+which includes atom locking specification (<a class="reference internal" href="#locked-sdf-file-captopril"><span class="std std-numref">Listing 2.2</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="locked-sdf-file-captopril">
+<div class="code-block-caption"><span class="caption-number">Listing 2.2 </span><span class="caption-text">An example SDF file with defined atom locks.</span><a class="headerlink" href="#locked-sdf-file-captopril" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73</pre></div></td><td class="code"><div class="highlight"><pre><span></span>44093
+  -OEChem-04191807522D
+
+ 29 29  0     1  0  0  0  0  0999 V2000
+    2.0000   -1.9594    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5981   -0.4594    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    6.2353    1.9885    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    5.7000    0.3412    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320    1.0406    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5411    1.6284    0.0000 C   0  0  1  0  0  0  0  0  0  0  0  0
+    4.2320    2.5794    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.2320    2.5794    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.9230    1.6284    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    3.7320    0.0406    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -0.4594    0.0000 C   0  0  1  0  0  0  0  0  0  0  0  0
+    5.4921    1.3194    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660   -1.4594    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000    0.0406    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.6381    1.0160    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.8385    2.7083    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1672    3.1960    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.2969    3.1960    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.6256    2.7083    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.3566    1.8805    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.6130    1.0914    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8660    0.1606    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.0781   -2.0420    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    3.4766   -1.3518    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.3100    0.5775    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.4631    0.3506    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.6900   -0.4964    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    6.8249    1.7969    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.0000   -2.5794    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1 13  1  0  0  0  0
+  1 29  1  0  0  0  0
+  2 10  2  0  0  0  0
+  3 12  1  0  0  0  0
+  3 28  1  0  0  0  0
+  4 12  2  0  0  0  0
+  5  6  1  0  0  0  0
+  5  9  1  0  0  0  0
+  5 10  1  0  0  0  0
+  6  7  1  0  0  0  0
+  6 12  1  1  0  0  0
+  6 15  1  0  0  0  0
+  7  8  1  0  0  0  0
+  7 16  1  0  0  0  0
+  7 17  1  0  0  0  0
+  8  9  1  0  0  0  0
+  8 18  1  0  0  0  0
+  8 19  1  0  0  0  0
+  9 20  1  0  0  0  0
+  9 21  1  0  0  0  0
+ 10 11  1  0  0  0  0
+ 11 13  1  0  0  0  0
+ 11 14  1  1  0  0  0
+ 11 22  1  0  0  0  0
+ 13 23  1  0  0  0  0
+ 13 24  1  0  0  0  0
+ 14 25  1  0  0  0  0
+ 14 26  1  0  0  0  0
+ 14 27  1  0  0  0  0
+M  END
+&gt; &lt;MOLPHER_KEEP_NEIGHBORS_AND_BONDS&gt;
+2,3,4,5,6,7,8,9,10,12
+
+&gt; &lt;MOLPHER_NO_MUTATION&gt;
+2,3,4,5,6,7,8,9,10,12
+
+&gt; &lt;MOLPHER_NO_ADDITION&gt;
+2,3,4,5,6,7,8,9,10,12
+
+$$$$
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Every atom of a <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance has
+a so called ‘locking mask’ attached to it. This mask
+specifies what type of restrictions are imposed on an
+atom and when morphing operators are applied this
+information can be retrieved and used to prevent
+changes that would violate the applied locks.</p>
+<p>In <a class="reference internal" href="#locked-sdf-file-captopril"><span class="std std-numref">Listing 2.2</span></a>, we see examples of
+3 atom locks:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><a class="reference internal" href="../../documentation/python/MolpherAtom_doc.html#molpher.swig_wrappers.core.MolpherAtom.KEEP_NEIGHBORS_AND_BONDS" title="molpher.swig_wrappers.core.MolpherAtom.KEEP_NEIGHBORS_AND_BONDS"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">KEEP_NEIGHBORS_AND_BONDS</span></code></a> – Prevents the neighbors of this atom and the bonds connecting them from being removed.</li>
+<li><a class="reference internal" href="../../documentation/python/MolpherAtom_doc.html#molpher.swig_wrappers.core.MolpherAtom.NO_MUTATION" title="molpher.swig_wrappers.core.MolpherAtom.NO_MUTATION"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">NO_MUTATION</span></code></a> – Atoms marked with this lock cannot be mutated (changed for another element)</li>
+<li><a class="reference internal" href="../../documentation/python/MolpherAtom_doc.html#molpher.swig_wrappers.core.MolpherAtom.NO_ADDITION" title="molpher.swig_wrappers.core.MolpherAtom.NO_ADDITION"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">NO_ADDITION</span></code></a> – No more atoms will be added to this atom.</li>
+</ol>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>We can also use the  <a class="reference internal" href="../../documentation/python/MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol.lockAtoms" title="molpher.swig_wrappers.core.MolpherMol.lockAtoms"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">lockAtoms</span></code></a> method of <a class="reference internal" href="../../documentation/python/MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a>. This method
+can take a SMARTS pattern and will lock all substructures corresponding to that particular pattern.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">malonic_acid</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="s2">&quot;OC(=O)CC(=O)O&quot;</span><span class="p">)</span>
+<span class="n">malonic_acid</span><span class="o">.</span><span class="n">lockAtoms</span><span class="p">(</span><span class="s2">&quot;OC(=O)&quot;</span><span class="p">,</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">NO_ADDITION</span> <span class="o">|</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">NO_MUTATION</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It returns the indices of the locked atoms:</p>
+<div class="last highlight-none notranslate"><div class="highlight"><pre><span></span>(0, 1, 2, 6, 4, 5)
+</pre></div>
+</div>
+</div>
+<p>Let us now create a new molecule from the SDF in <a class="reference internal" href="#locked-sdf-file-captopril"><span class="std std-numref">Listing 2.2</span></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="s2">&quot;captopril.sdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we pass a string that ends with “.sdf”, Molpher-lib will
+automatically recognize it as a path to an SDF file
+and will attempt to load the first molecule from that
+file and parse any locks that it finds in it.</p>
+<p>Every atom under a <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance
+is represented by the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherAtom.MolpherAtom" title="molpher.core.MolpherAtom.MolpherAtom"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherAtom</span></code></a> class.
+This class, among other things, provides access to the locks placed
+on each atom of the molecule in question. We can retrieve the locking
+information like so:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">atm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atoms</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">atm</span><span class="o">.</span><span class="n">lock_info</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Output for first five atoms:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>0
+{&#39;UNLOCKED&#39;: True, &#39;NO_MUTATION&#39;: False, &#39;NO_ADDITION&#39;: False, &#39;NO_REMOVAL&#39;: False, &#39;KEEP_NEIGHBORS&#39;: False, &#39;KEEP_NEIGHBORS_AND_BONDS&#39;: False, &#39;KEEP_BONDS&#39;: False, &#39;FULL_LOCK&#39;: False}
+1
+{&#39;UNLOCKED&#39;: False, &#39;NO_MUTATION&#39;: True, &#39;NO_ADDITION&#39;: True, &#39;NO_REMOVAL&#39;: True, &#39;KEEP_NEIGHBORS&#39;: True, &#39;KEEP_NEIGHBORS_AND_BONDS&#39;: True, &#39;KEEP_BONDS&#39;: True, &#39;FULL_LOCK&#39;: True}
+2
+{&#39;UNLOCKED&#39;: False, &#39;NO_MUTATION&#39;: True, &#39;NO_ADDITION&#39;: True, &#39;NO_REMOVAL&#39;: True, &#39;KEEP_NEIGHBORS&#39;: True, &#39;KEEP_NEIGHBORS_AND_BONDS&#39;: True, &#39;KEEP_BONDS&#39;: True, &#39;FULL_LOCK&#39;: True}
+3
+{&#39;UNLOCKED&#39;: False, &#39;NO_MUTATION&#39;: True, &#39;NO_ADDITION&#39;: True, &#39;NO_REMOVAL&#39;: True, &#39;KEEP_NEIGHBORS&#39;: True, &#39;KEEP_NEIGHBORS_AND_BONDS&#39;: True, &#39;KEEP_BONDS&#39;: True, &#39;FULL_LOCK&#39;: True}
+4
+{&#39;UNLOCKED&#39;: False, &#39;NO_MUTATION&#39;: True, &#39;NO_ADDITION&#39;: True, &#39;NO_REMOVAL&#39;: True, &#39;KEEP_NEIGHBORS&#39;: True, &#39;KEEP_NEIGHBORS_AND_BONDS&#39;: True, &#39;KEEP_BONDS&#39;: True, &#39;FULL_LOCK&#39;: True}
+5
+{&#39;UNLOCKED&#39;: False, &#39;NO_MUTATION&#39;: True, &#39;NO_ADDITION&#39;: True, &#39;NO_REMOVAL&#39;: True, &#39;KEEP_NEIGHBORS&#39;: True, &#39;KEEP_NEIGHBORS_AND_BONDS&#39;: True, &#39;KEEP_BONDS&#39;: True, &#39;FULL_LOCK&#39;: True}
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherAtom.MolpherAtom.lock_info" title="molpher.core.MolpherAtom.MolpherAtom.lock_info"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">lock_info</span></code></a> attribute of <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherAtom.MolpherAtom" title="molpher.core.MolpherAtom.MolpherAtom"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherAtom</span></code></a>
+summarizes the locking status in a dictionary which we can
+query to see if an atom is unlocked and what type of locks
+are in place.</p>
+<p>In the <a class="reference external" href="../../_static/basics.html">example Jupyter Notebook</a>, we used the following
+code to highlight locked atoms:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit.Chem.Draw</span> <span class="kn">import</span> <span class="n">rdMolDraw2D</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span>
+
+<span class="k">def</span> <span class="nf">get_locked_ids</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">atm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span> <span class="k">if</span> <span class="n">atm</span><span class="o">.</span><span class="n">is_locked</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">show_locked_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+    <span class="n">rd_mol</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+
+    <span class="n">drawer</span> <span class="o">=</span> <span class="n">rdMolDraw2D</span><span class="o">.</span><span class="n">MolDraw2DSVG</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+    <span class="c1"># include atom indices</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="n">drawer</span><span class="o">.</span><span class="n">drawOptions</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rd_mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()):</span>
+        <span class="n">opts</span><span class="o">.</span><span class="n">atomLabels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># draw the molecule as SVG</span>
+    <span class="n">drawer</span><span class="o">.</span><span class="n">DrawMolecule</span><span class="p">(</span>
+        <span class="n">rd_mol</span>
+        <span class="p">,</span> <span class="n">highlightAtoms</span><span class="o">=</span><span class="n">get_locked_ids</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">drawer</span><span class="o">.</span><span class="n">FinishDrawing</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">SVG</span><span class="p">(</span><span class="n">drawer</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;svg:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+<span class="n">show_locked_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Output:</p>
+<div class="figure">
+<img alt="../../_images/captopril_locks.png" src="../../_images/captopril_locks.png" />
+</div>
+<p>We used the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherAtom.MolpherAtom.is_locked" title="molpher.core.MolpherAtom.MolpherAtom.is_locked"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">is_locked</span></code></a> attribute of the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherAtom.MolpherAtom" title="molpher.core.MolpherAtom.MolpherAtom"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherAtom</span></code></a>
+class to first find out the indices of locked atoms.
+We then used that information to instruct the
+RDKit drawing code to highlight the given positions.</p>
+<p>You might have noticed that atom number 11 is displayed
+as locked, but we did not specify any locks for it
+in our SDF. This is because the neighboring carbon atom (number 10)
+has the <a class="reference internal" href="../../documentation/python/MolpherAtom_doc.html#molpher.swig_wrappers.core.MolpherAtom.KEEP_NEIGHBORS" title="molpher.swig_wrappers.core.MolpherAtom.KEEP_NEIGHBORS"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">KEEP_NEIGHBORS</span></code></a> lock which implies <a class="reference internal" href="../../documentation/python/MolpherAtom_doc.html#molpher.swig_wrappers.core.MolpherAtom.NO_REMOVAL" title="molpher.swig_wrappers.core.MolpherAtom.NO_REMOVAL"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">NO_REMOVAL</span></code></a>
+and <a class="reference internal" href="../../documentation/python/MolpherAtom_doc.html#molpher.swig_wrappers.core.MolpherAtom.NO_MUTATION" title="molpher.swig_wrappers.core.MolpherAtom.NO_MUTATION"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">NO_MUTATION</span></code></a> locks on all neighbors including carbon number 11.
+We can check that exactly these two locks are in place on this atom using
+the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherAtom.MolpherAtom.locking_mask" title="molpher.core.MolpherAtom.MolpherAtom.locking_mask"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">locking_mask</span></code></a> attribute:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">MolpherAtom</span>
+
+<span class="n">mol</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">==</span> <span class="p">(</span><span class="n">MolpherAtom</span><span class="o">.</span><span class="n">NO_REMOVAL</span> <span class="o">|</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">NO_MUTATION</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+<p>This is possible because the value of the locking mask attribute is the combination
+of used locks. We can also use the attribute to set a new locking mask on an
+atom like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">=</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">NO_REMOVAL</span>
+</pre></div>
+</div>
+<p>This will only prevent this atom from being removed,
+but will make it possible to replace it for another one
+that will satisfy the bonding requirements placed by the neighbors.</p>
+<p>Locked molecules can then be normally used for morphing
+and the operators should ensure that the generated molecules
+are respecting these locks. We can check that
+in our captopril example by running the morphing code
+written in the previous section. However, this time we will use all available
+morphing operators:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">molpher.core.morphing.operators</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># new grid drawing code, will show atom locks</span>
+<span class="k">def</span> <span class="nf">show_mol_grid</span><span class="p">(</span><span class="n">mols</span><span class="p">):</span>
+    <span class="n">locked_atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_locked_ids</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">MolsToGridImage</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+        <span class="p">,</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span><span class="mi">300</span><span class="p">)</span>
+        <span class="p">,</span> <span class="n">highlightAtomLists</span><span class="o">=</span><span class="n">locked_atoms</span>
+    <span class="p">)</span>
+
+<span class="c1"># same as before</span>
+<span class="n">strange_patterns</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s1">&#39;[S,O,N][F,Cl,Br,I]&#39;</span><span class="p">)</span>
+<span class="n">sensible_morphs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">collect_sensible</span><span class="p">(</span><span class="n">morph</span><span class="p">,</span> <span class="n">operator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    simple collector, accepts morphs without weird structural patterns</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rd_morph</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">rd_morph</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">strange_patterns</span><span class="p">):</span>
+        <span class="n">sensible_morphs</span><span class="p">[</span><span class="n">morph</span><span class="o">.</span><span class="n">smiles</span><span class="p">]</span> <span class="o">=</span> <span class="n">morph</span>
+
+<span class="c1"># same as before, but with all operators</span>
+<span class="n">molpher</span> <span class="o">=</span> <span class="n">Molpher</span><span class="p">(</span>
+    <span class="n">mol</span>
+    <span class="p">,</span> <span class="p">[</span>
+        <span class="n">AddAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">RemoveAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">MutateAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">AddBond</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">RemoveBond</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">ContractBond</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">InterlayAtom</span><span class="p">()</span>
+        <span class="p">,</span> <span class="n">RerouteBond</span><span class="p">()</span>
+    <span class="p">]</span>
+    <span class="p">,</span> <span class="n">attempts</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="p">,</span> <span class="n">collectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">collect_sensible</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">molpher</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">molpher</span><span class="o">.</span><span class="n">morphs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sensible_morphs</span><span class="p">))</span>
+<span class="n">show_mol_grid</span><span class="p">(</span><span class="n">sensible_morphs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+</td></tr></table></div>
+<p>Part of the output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>72
+28
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../../_images/moprhs_locked.png" src="../../_images/moprhs_locked.png" />
+</div>
+<p>As you can see, the generated molecules preserve the locked substructure
+and also inherit the locks from their parent molecule. This ensures
+that the typical structural pattern of this category of antihypertensives
+is preserved across all generated compounds.</p>
+</div>
+<div class="section" id="summary">
+<h2>2.1.4. Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we explained the most basic features of Molpher-lib
+and hopefully managed to hint at some potentially interesting use
+cases. In the next part of the tutorial, we will introduce the <a class="reference internal" href="../../documentation/python/molpher.core.html#module-molpher.core.ExplorationTree" title="molpher.core.ExplorationTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationTree</span></code></a>
+class which is used to create paths in chemical space.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to see more examples of atom locking and how custom operators work, there
+is <a class="reference external" href="../../_static/basics_advanced.html">one more Jupyter Notebook</a> written for this purpose
+(download <a class="reference download internal" href="../../_downloads/basics_advanced.ipynb" download=""><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>). This
+more in-depth overview also highlights some shortcomings
+of the current implementation and outlines future directions for Molpher-lib development.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="exploration.html" class="btn btn-neutral float-right" title="2.2. Chemical Space Exploration with Molecular Morphing by Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../tutorial.html" class="btn btn-neutral float-left" title="2. Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

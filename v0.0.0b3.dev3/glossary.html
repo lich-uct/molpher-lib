@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Glossary &mdash; Molpher-lib 0.0.0b3.dev3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'0.0.0b3.dev3',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="2.3. SAScore data file loader" href="documentation/cplusplus/data_loader.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3.dev3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/index.html">Using the library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Glossary</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="glossary">
+<span id="id1"></span><h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
+<dl class="glossary docutils">
+<dt id="term-candidate-morphs">candidate morphs</dt>
+<dd>Morphs generated from the leaves of an <a class="reference internal" href="#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a>, but not yet attached to it.</dd>
+<dt id="term-chemical-operators">chemical operators</dt>
+<dd>Also called <em>morphing operators</em>, are a set of predefined structural
+modifications that a molecule can undergo during <a class="reference internal" href="#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a>.</dd>
+<dt id="term-chemical-space">chemical space</dt>
+<dd>Chemical space has many definitions, but in this documentation we define it as
+<em>space spanned by all possible (i.e. energetically stable) molecules and chemical compounds</em> <a class="footnote-reference" href="#id6" id="id3">[1]</a>.</dd>
+<dt id="term-chemical-space-path">chemical space path</dt>
+<dd>A consecutive sequence of <a class="reference internal" href="#term-morph"><span class="xref std std-term">morphs</span></a> created by iteratively applying
+a <a class="reference internal" href="#term-chemical-operators"><span class="xref std std-term">chemical operator</span></a> on leaves in the <a class="reference internal" href="#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a>.</dd>
+<dt id="term-exploration-parameters">exploration parameters</dt>
+<dd>Those define how the <a class="reference internal" href="#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a> behaves (i.e. what <a class="reference internal" href="#term-similarity-measure"><span class="xref std std-term">similarity measure</span></a> to
+use and what <a class="reference internal" href="#term-molecular-fingerprint"><span class="xref std std-term">fingerprint</span></a>, how the <a class="reference internal" href="#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> are filtered or
+how often the <a class="reference internal" href="#term-exploration-tree"><span class="xref std std-term">tree</span></a> is pruned). See
+the description of the <a class="reference internal" href="documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData" title="molpher.core.ExplorationData.ExplorationData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationData</span></code></a> class for details.</dd>
+<dt id="term-exploration-tree">exploration tree</dt>
+<dd>This is the data structure <a class="reference internal" href="#term-molpher"><span class="xref std std-term">Molpher</span></a> generates as it progresses through <a class="reference internal" href="#term-chemical-space"><span class="xref std std-term">chemical space</span></a>.
+It is represented in the API as an instance of
+the <a class="reference internal" href="documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree" title="molpher.core.ExplorationTree.ExplorationTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationTree</span></code></a> class.</dd>
+<dt id="term-high-throughput-screening">high-throughput screening</dt>
+<dd>High-throughput screening (HTS) is a specialized method of chemical biology which relies on robotics
+to conduct many experiments in a very short time (usually in the order of tens of thousands a day) with
+the goal to find compounds that have the potential to affect a biological target and, thus, could
+become leads in a drug discovery project.</dd>
+<dt id="term-molecular-fingerprint">molecular fingerprint</dt>
+<dd>Molecular fingerprints are binary strings that encode certain structural features of a molecule.</dd>
+<dt id="term-molecular-morphing">molecular morphing</dt>
+<dd>Molecular morphing is an atom-based <em>de novo</em> method of computer-aided drug design
+and it was first implemented in the
+<a class="reference internal" href="#term-molpher"><span class="xref std std-term">Molpher</span></a> program&nbsp;<a class="footnote-reference" href="#id7" id="id5">[2]</a>. It uses a set of <a class="reference internal" href="#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a> that modify
+structures of compounds to ‘travel’
+through <a class="reference internal" href="#term-chemical-space"><span class="xref std std-term">chemical space</span></a> and sample certain biologically interesting areas.</dd>
+<dt id="term-molpher">Molpher</dt>
+<dd>Software developed as a collaboration between the <a class="reference external" href="http://siret.ms.mff.cuni.cz">SIRET Research Group</a>
+(<a class="reference external" href="http://www.mff.cuni.cz">Faculty of Mathematics and Physics, Charles University in Prague,</a>),
+<a class="reference external" href="http://ich.vscht.cz">Laboratory of Informatics and Chemistry</a> (<a class="reference external" href="http://www.vscht.cz">UCT Prague</a>)
+and <a class="reference external" href="http://www.openscreen.cz">CZ-OPENSCREEN</a> <a class="footnote-reference" href="#id7" id="id4">[2]</a>. The main goal of the project
+is to implement an effective tool for <a class="reference internal" href="#term-chemical-space"><span class="xref std std-term">chemical space</span></a> exploration with <a class="reference internal" href="#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a>.
+Molpher itself is a standalone program and is available from <a class="reference external" href="https://github.com/siret/Molpher">GitHub</a>.</dd>
+<dt id="term-morph">morph</dt>
+<dd>Any molecule generated by <a class="reference internal" href="#term-molpher"><span class="xref std std-term">Molpher</span></a> or <em>Molpher-lib</em>.</dd>
+<dt id="term-morph-generation">morph generation</dt>
+<dd>The morphs attached to the tree upon committing a <a class="reference internal" href="#term-morphing-iteration"><span class="xref std std-term">morphing iteration</span></a>.</dd>
+<dt id="term-morphing-iteration">morphing iteration</dt>
+<dd>Any sequence of operations that finishes with attaching new generation of morphs to a tree.
+For example, an iteration is committed when <a class="reference internal" href="documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.extend" title="molpher.swig_wrappers.core.ExplorationTree.extend"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">ExplorationTree.extend()</span></code></a> is called.</dd>
+<dt id="term-morphing-parameters">morphing parameters</dt>
+<dd>A set of restrictions and rules the <a class="reference internal" href="#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a> follows when
+certain <a class="reference internal" href="#term-tree-operation"><span class="xref std std-term">operations</span></a> are performed.</dd>
+<dt id="term-non-producing-molecule">non-producing molecule</dt>
+<dd>A molecule that has not produced any morphs that would
+have a value of the objective function lower than itself.</dd>
+<dt id="term-sascore">SAScore</dt>
+<dd>Available from <a class="reference internal" href="documentation/python/molpher.core.html#module-molpher.core.MolpherMol" title="molpher.core.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.core.MolpherMol</span></code></a> instances via the <code class="xref py py-attr docutils literal notranslate"><span class="pre">sascore</span></code> parameter.
+It is the synthetic availability score according to Ertl et al. <a class="footnote-reference" href="#id9" id="id2">[3]</a>. The higher the score,
+the more difficult the compound should be to synthesize. Compounds with SAScore of more
+than 6 are considered synthetically inaccessible and are discarded by the <code class="xref py py-class docutils literal notranslate"><span class="pre">FilterMorphsOper</span></code>
+operation and <a class="reference internal" href="documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.filterMorphs" title="molpher.swig_wrappers.core.ExplorationTree.filterMorphs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filterMorphs()</span></code></a> method by default.</dd>
+<dt id="term-sascore-dat">SAScore.dat</dt>
+<dd>The data file used for computation of the synthetic feasibility scores.</dd>
+<dt id="term-selectors">selectors</dt>
+<dd>Located in the <a class="reference internal" href="documentation/python/molpher.core.html#module-molpher.core.selectors" title="molpher.core.selectors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">selectors</span></code></a> module, these serve the purpose of selecting
+various options for the morphing algorithm. See <a class="reference internal" href="documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData" title="molpher.core.ExplorationData.ExplorationData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationData</span></code></a>
+for more information on how to affect the way <a class="reference internal" href="#term-morph"><span class="xref std std-term">morphs</span></a> are generated.</dd>
+<dt id="term-similarity-measure">similarity measure</dt>
+<dd>A similarity measure measures similarity between two molecules using a <a class="reference internal" href="#term-molecular-fingerprint"><span class="xref std std-term">molecular fingerprint</span></a>.</dd>
+<dt id="term-source-molecule">source molecule</dt>
+<dd>The root of the exploration tree. All morphs in the tree are descendants of this molecule.</dd>
+<dt id="term-target-molecule">target molecule</dt>
+<dd>Target molecule of the whole exploration process. The algorithm attempts to generate a path
+in chemical space leading from the <a class="reference internal" href="#term-source-molecule"><span class="xref std std-term">source molecule</span></a> to this one.</dd>
+<dt id="term-8">target molecule</dt>
+<dd>A molecule the chemical space exploration is driven towards. Each morph is evaluated according
+to its distance (using a <a class="reference internal" href="#term-molecular-fingerprint"><span class="xref std std-term">molecular fingerprint</span></a> and a <a class="reference internal" href="#term-similarity-measure"><span class="xref std std-term">similarity measure</span></a>) from this molecule.</dd>
+<dt id="term-tree-operation">tree operation</dt>
+<dd>Any operation that manipulates the <a class="reference internal" href="#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a>. Can be defined
+by implementing the <a class="reference internal" href="documentation/python/molpher.core.operations.html#module-molpher.core.operations.TreeOperation" title="molpher.core.operations.TreeOperation"><code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.core.operations.TreeOperation</span></code></a> interface.</dd>
+<dt id="term-tree-snapshot">tree snapshot</dt>
+<dd>A tree snapshot is a file on disk that contains all the information needed to create
+an <a class="reference internal" href="#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a> instance.
+It can be saved and loaded using the <a class="reference internal" href="documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.save" title="molpher.swig_wrappers.core.ExplorationTree.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code></a>
+and <a class="reference internal" href="documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.create" title="molpher.core.ExplorationTree.ExplorationTree.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create()</span></code></a> methods.</dd>
+<dt id="term-virtual-screening">virtual screening</dt>
+<dd>Virtual screening (VS) can be regarded as a computational alternative to <a class="reference internal" href="#term-high-throughput-screening"><span class="xref std std-term">HTS</span></a>.
+The goal of virtual screening is the same: to find bioactive compounds, but in this case the compounds
+are represented <em>in silico</em> and saved in a database. Various computational techniques can then be used
+to automatically probe the database for structures that could have biological activity in the real world.
+Therefore, the point of VS is to create plausible hypotheses about the usefulness of the compounds in the
+database and discard all that very likely do not satisfy the requirements for a bioactive compounds in a
+given project.</dd>
+<dt id="term-xml-template">XML template</dt>
+<dd>A file in XML format that can be used as a configuration file and is loaded the same way as a tree snapshot
+(using the <a class="reference internal" href="documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.create" title="molpher.core.ExplorationTree.ExplorationTree.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create()</span></code></a> method).</dd>
+</dl>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Chemical_space">https://en.wikipedia.org/wiki/Chemical_space</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id5">2</a>)</em> <ol class="last upperalpha simple" start="4">
+<li>Hoksza, P. Škoda, M. Voršilák, and D. Svozil, “Molpher: a software framework for systematic chemical space exploration,” Journal of Cheminformatics, vol. 6, no. 1, p. 7, Mar. 2014. DOI: <a class="reference external" href="http://dx.doi.org/10.1186/1758-2946-6-7">10.1186/1758-2946-6-7</a></li>
+</ol>
+</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[3]</a></td><td>Peter Ertl, P &amp; Schuffenhauer, Ansgar. (2009). Estimation of Synthetic Accessibility Score of Drug-Like Molecules Based on Molecular Complexity and Fragment Contributions. Journal of cheminformatics. 1. 8. DOI:<a class="reference external" href="http://dx.doi.org/10.1186/1758-2946-1-8">10.1186/1758-2946-1-8</a>.</td></tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="documentation/cplusplus/data_loader.html" class="btn btn-neutral float-left" title="2.3. SAScore data file loader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

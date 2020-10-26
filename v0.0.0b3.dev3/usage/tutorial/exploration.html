@@ -1,0 +1,1025 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.2. Chemical Space Exploration with Molecular Morphing by Example &mdash; Molpher-lib 0.0.0b3.dev3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'0.0.0b3.dev3',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.3. Exploration Algorithms Implemented in Molpher-lib" href="algorithms.html" />
+    <link rel="prev" title="2.1. Molecular Morphing Basics" href="morphing.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3.dev3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Using the library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../installation.html">1. Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorial.html">2. Tutorial</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="morphing.html">2.1. Molecular Morphing Basics</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.2. Implementing Chemical Space Exploration with Molecular Morphing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-an-exploration-tree-and-setting-morphing-parameters">2.2.1. Creating an Exploration Tree and Setting Morphing Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#morph-generation-and-exploration-tree-extension">2.2.2. Morph Generation and Exploration Tree Extension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">2.2.3. Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="algorithms.html">2.3. Exploration Algorithms Implemented in Molpher-lib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html">2.4. Advanced Topics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Using the library</a> &raquo;</li>
+        
+          <li><a href="../tutorial.html">2. Tutorial</a> &raquo;</li>
+        
+      <li>2.2. Chemical Space Exploration with Molecular Morphing by Example</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="chemical-space-exploration-with-molecular-morphing-by-example">
+<span id="exploration"></span><h1><a class="toc-backref" href="#id4">2.2. Chemical Space Exploration with Molecular Morphing by Example</a><a class="headerlink" href="#chemical-space-exploration-with-molecular-morphing-by-example" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#chemical-space-exploration-with-molecular-morphing-by-example" id="id4">Chemical Space Exploration with Molecular Morphing by Example</a><ul>
+<li><a class="reference internal" href="#creating-an-exploration-tree-and-setting-morphing-parameters" id="id5">Creating an Exploration Tree and Setting Morphing Parameters</a></li>
+<li><a class="reference internal" href="#morph-generation-and-exploration-tree-extension" id="id6">Morph Generation and Exploration Tree Extension</a><ul>
+<li><a class="reference internal" href="#morph-generation-and-manipulation" id="id7">Morph Generation and Manipulation</a></li>
+<li><a class="reference internal" href="#sorting-and-filtering" id="id8">Sorting and Filtering</a></li>
+<li><a class="reference internal" href="#tree-extension" id="id9">Tree Extension</a></li>
+<li><a class="reference internal" href="#tree-pruning" id="id10">Tree Pruning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#summary" id="id11">Summary</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In the <a class="reference internal" href="morphing.html"><span class="doc">previous tutorial</span></a>, we introduced some of the low level
+Molpher-lib features that enable its user to modify molecular
+structures in a randomized manner. In this part of the usage tutorial, we focus on
+high level features that handle chemical space exploration on
+larger scale by iterative application of <a class="reference internal" href="../../glossary.html#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a>.</p>
+<p>The core data structure responsible for building and maintaining suggested
+<a class="reference internal" href="../../glossary.html#term-chemical-space-path"><span class="xref std std-term">chemical space paths</span></a> is the <a class="reference internal" href="../../glossary.html#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a>.
+The exploration tree contains all generated morphs and is rooted at the <a class="reference internal" href="../../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a>
+and is grown by iteratively applying chemical operators
+first on the source molecule, then on its descendants and so on. This way
+multiple chemical space paths can be created and evaluated.</p>
+<p>As the paths are generated, the compounds on them can be characterized by
+the value of an objective function. This function should somehow formalize
+the relationship between a chemical structure
+and its fitness for the task at hand. Therefore,
+interesting paths can be prioritized over others.
+This way, the exploration tree can hopefully lead us towards interesting new compounds
+without having to enumerate all possible chemistry.</p>
+<p>In the original Molpher algorithm, the objective function is
+simply the structural distance between morphs and a <a class="reference internal" href="../../glossary.html#term-8"><span class="xref std std-term">target molecule</span></a>.
+This way Molpher is able to connect pairs of molecules by iteratively generating
+morphs from the source and prioritizing those that are getting closer to the target.
+As a result, the algorithm converges to the target structure and stops
+once the target is identified among the generated morphs (<a class="reference internal" href="#morphing-explore"><span class="std std-numref">Fig. 2.2</span></a>). This
+algorithm is called the <em>classic</em> algorithm and is
+implemented in the <a class="reference internal" href="../../documentation/python/molpher.algorithms.classic.html#module-molpher.algorithms.classic" title="molpher.algorithms.classic"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">molpher.algorithms.classic</span></code></a> module.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="algorithms.html#alg-classic"><span class="std std-ref">Classic (Original) Algorithm</span></a></p>
+</div>
+<div class="figure" id="morphing-explore">
+<a class="reference internal image-reference" href="../../_images/morphing.png"><img alt="../../_images/morphing.png" src="../../_images/morphing.png" style="width: 600.0px; height: 510.0px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Schematic depiction of the original algorithm published by Hoksza et al. <a class="footnote-reference" href="#id2" id="id1">[1]</a>.
+New <a class="reference internal" href="../../glossary.html#term-morph"><span class="xref std std-term">morphs</span></a> are generated with <a class="reference internal" href="../../glossary.html#term-chemical-operators"><code class="xref any std std-term docutils literal notranslate"><span class="pre">chemical</span> <span class="pre">operators</span></code></a>
+applied to the <a class="reference internal" href="../../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a> (M<sub>S</sub>) until the <a class="reference internal" href="../../glossary.html#term-8"><span class="xref std std-term">target
+molecule</span></a> (M<sub>T</sub>) is found.</span></p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Examples in this tutorial are included in a Jupyter Notebook
+which can be downloaded <a class="reference download internal" href="../../_downloads/exploration.ipynb" download=""><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>
+viewed <a class="reference external" href="../../_static/exploration.html">here</a>. The example SDF can be found
+<a class="reference download internal" href="../../_downloads/captopril.sdf" download=""><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>.</p>
+</div>
+<div class="section" id="creating-an-exploration-tree-and-setting-morphing-parameters">
+<span id="tree-create"></span><h2><a class="toc-backref" href="#id5">2.2.1. Creating an Exploration Tree and Setting Morphing Parameters</a><a class="headerlink" href="#creating-an-exploration-tree-and-setting-morphing-parameters" title="Permalink to this headline">¶</a></h2>
+<p>In Molpher-lib, the tree is implemented as the <a class="reference internal" href="../../documentation/python/molpher.core.html#module-molpher.core.ExplorationTree" title="molpher.core.ExplorationTree"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">molpher.core.ExplorationTree</span></code></a> class.
+Following the captopril example from the previous tutorial,
+the simplest way to generate an exploration tree instance is
+to call the <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.create" title="molpher.swig_wrappers.core.ExplorationTree.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create()</span></code></a> factory method:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">ExplorationTree</span> <span class="k">as</span> <span class="n">ETree</span>
+<span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">MolpherMol</span>
+
+<span class="n">captopril</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="s2">&quot;captopril.sdf&quot;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">captopril</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>This code simply initializes the tree from the supplied <a class="reference internal" href="../../documentation/python/molpher.core.html#module-molpher.core.MolpherMol" title="molpher.core.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance.
+At the moment the tree is pretty simple. It only contains the captopril structure as its
+current leaves:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="figure">
+<img alt="../../_images/captopril_numbered.png" src="../../_images/captopril_numbered.png" />
+</div>
+<p>We can manipulate this tree and read data from it. Let’s start by printing out the
+<a class="reference internal" href="../../glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Source: &#39;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Source:  CC(CS)C(=O)N1CCCC1C(=O)O
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.params" title="molpher.core.ExplorationTree.ExplorationTree.params"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">params</span></code></a> member is a dictionary used to set and store <a class="reference internal" href="../../glossary.html#term-morphing-parameters"><code class="xref any std std-term docutils literal notranslate"><span class="pre">morphing</span> <span class="pre">parameters</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;CC(CS)C(=O)N1CCCC1C(=O)O&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;operators&#39;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s1">&#39;OP_ADD_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_REMOVE_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_ADD_BOND&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_REMOVE_BOND&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_MUTATE_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_INTERLAY_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_BOND_REROUTE&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_BOND_CONTRACTION&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;fingerprint&#39;</span><span class="p">:</span> <span class="s1">&#39;FP_MORGAN&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;similarity&#39;</span><span class="p">:</span> <span class="s1">&#39;SC_TANIMOTO&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;weight_min&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;weight_max&#39;</span><span class="p">:</span> <span class="mf">100000.0</span><span class="p">,</span>
+    <span class="s1">&#39;accept_min&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s1">&#39;accept_max&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;far_produce&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s1">&#39;close_produce&#39;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+    <span class="s1">&#39;far_close_threshold&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+    <span class="s1">&#39;max_morphs_total&#39;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">,</span>
+    <span class="s1">&#39;non_producing_survive&#39;</span><span class="p">:</span> <span class="mi">5</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As we can see there is quite a lot of parameters that we can set,
+but most of these affect the exploration process only if
+some parts of the library are used in the context of the tree, especially tree operations
+which we will discuss <a class="reference internal" href="advanced.html#operations"><span class="std std-ref">later</span></a>. The most important parameters
+will be explained in this tutorial, but you can see the
+documentation for the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData" title="molpher.core.ExplorationData.ExplorationData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationData</span></code></a> class
+(especially <a class="reference internal" href="../../documentation/python/molpher.core.html#param-table"><span class="std std-numref">Table 1.1</span></a>) for a more detailed reference.</p>
+<p>We can adjust the morphing parameters during runtime as we like.
+All we need to overwrite the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.params" title="molpher.core.ExplorationTree.ExplorationTree.params"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">params</span></code></a> attribute
+of our tree instance with a new dictionary:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># change selected parameters using a dictionary</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;non_producing_survive&#39;</span> <span class="p">:</span> <span class="mi">2</span>
+    <span class="p">,</span> <span class="s1">&#39;weight_max&#39;</span> <span class="p">:</span> <span class="mf">500.0</span>
+<span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;CC(CS)C(=O)N1CCCC1C(=O)O&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;operators&#39;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s1">&#39;OP_ADD_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_REMOVE_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_ADD_BOND&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_REMOVE_BOND&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_MUTATE_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_INTERLAY_ATOM&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_BOND_REROUTE&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OP_BOND_CONTRACTION&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;fingerprint&#39;</span><span class="p">:</span> <span class="s1">&#39;FP_MORGAN&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;similarity&#39;</span><span class="p">:</span> <span class="s1">&#39;SC_TANIMOTO&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;weight_min&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;weight_max&#39;</span><span class="p">:</span> <span class="mf">500.0</span><span class="p">,</span>
+    <span class="s1">&#39;accept_min&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s1">&#39;accept_max&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;far_produce&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s1">&#39;close_produce&#39;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+    <span class="s1">&#39;far_close_threshold&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+    <span class="s1">&#39;max_morphs_total&#39;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">,</span>
+    <span class="s1">&#39;non_producing_survive&#39;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here we just tightened the constraints on molecular weight
+for the morphs that we allow to be incorporated in the tree
+(applied only if the <a class="reference internal" href="../../documentation/python/molpher.core.operations.html#molpher.core.operations.FilterMorphsOper.FilterMorphsOper" title="molpher.core.operations.FilterMorphsOper.FilterMorphsOper"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterMorphsOper</span></code></a> operation or <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.filterMorphs" title="molpher.swig_wrappers.core.ExplorationTree.filterMorphs"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">filterMorphs</span></code></a> method
+are used with certain options) and we decreased the number of acceptable ‘non-producing’
+<a class="reference internal" href="../../glossary.html#term-morph-generation"><span class="xref std std-term">morph generations</span></a> to 2. Non-producing generations are
+generations of morphs that has not improved in the objective function
+(e.g. structural distance). See <a class="reference internal" href="../../documentation/python/molpher.core.html#param-table"><span class="std std-numref">Table 1.1</span></a> for details.
+One thing to note is that if we supply an incomplete set of parameters
+(like in the example above), only the parameters specified in the
+supplied dictionary will be changed. Parameters not mentioned in
+this dictionary will remain the same as before the assignment.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Changing individual values in the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.params" title="molpher.core.ExplorationTree.ExplorationTree.params"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">params</span></code></a> dictionary will have no effect.
+You always need to store a dictionary instance in it. This is because the value
+is regenerated every time the attribute is accessed to always reflect the current
+set of parameters valid for the current instance.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData" title="molpher.core.ExplorationData.ExplorationData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationData</span></code></a></p>
+</div>
+</div>
+<div class="section" id="morph-generation-and-exploration-tree-extension">
+<h2><a class="toc-backref" href="#id6">2.2.2. Morph Generation and Exploration Tree Extension</a><a class="headerlink" href="#morph-generation-and-exploration-tree-extension" title="Permalink to this headline">¶</a></h2>
+<p>This part of the tutorial outlines the steps
+involved in one iteration of a possible exploration algorithm.
+We explain how to generate new morphs from the leaves of the tree,
+how they can be filtered and how the tree is
+extended by attaching the chosen morphs as the
+next generation of leaves. We also show how the unfavorable paths (or their parts)
+can later be removed from the growing tree.</p>
+<div class="section" id="morph-generation-and-manipulation">
+<h3><a class="toc-backref" href="#id7">2.2.2.1. Morph Generation and Manipulation</a><a class="headerlink" href="#morph-generation-and-manipulation" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="#tree-create"><span class="std std-ref">Previously</span></a>, we showed how to initialize an exploration tree.
+Now that we have one, we can take a look at how to use it for <a class="reference internal" href="../../glossary.html#term-chemical-space"><span class="xref std std-term">chemical space</span></a>
+exploration.</p>
+<p>Let us generate a few <a class="reference internal" href="../../glossary.html#term-morph"><span class="xref std std-term">morphs</span></a> from the current leaves of the tree.
+Currently, the tree has just one leaf (our source molecule, captopril):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">)</span> <span class="c1"># show the current leaves of the tree (only the source so far)</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(&lt;molpher.core.MolpherMol.MolpherMol at 0x7f37a8a6d930&gt;,)
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../../_images/captopril.png" src="../../_images/captopril.png" />
+</div>
+<p>Since we already have the built-in operators available by default,
+we can generate new structures from this starting molecule like so:</p>
+<div class="literal-block-wrapper docutils container" id="gen-morphs-simple">
+<div class="code-block-caption"><span class="caption-number">Listing 2.3 </span><span class="caption-text">Generating candidate morphs with an exploration tree.</span><a class="headerlink" href="#gen-morphs-simple" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">tree</span><span class="o">.</span><span class="n">generateMorphs</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>28
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.generateMorphs" title="molpher.core.ExplorationTree.ExplorationTree.generateMorphs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generateMorphs()</span></code></a> method tells
+the tree to generate some <a class="reference internal" href="../../glossary.html#term-morph"><span class="xref std std-term">morphs</span></a>
+from the current leaves for us. The number of generated morphs
+will depend mostly on the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.far_produce" title="molpher.core.ExplorationData.ExplorationData.far_produce"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">far_produce</span></code></a>, <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.close_produce" title="molpher.core.ExplorationData.ExplorationData.close_produce"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">close_produce</span></code></a> and <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.far_close_threshold" title="molpher.core.ExplorationData.ExplorationData.far_close_threshold"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">far_close_threshold</span></code></a>
+parameters. However, it also depends on other factors. For example, some structures
+might not be parsed correctly and, thus, might not make it to the final list.
+Also, a different number of morphs can be generated each time the method is run. That si due to
+the non-deterministic character of the morphing algorithm which chooses the morphing operators to
+use and parts of the structure to modify randomly. Duplicate
+molecules (based on the canonical smiles string) are also removed.</p>
+<p>We can access the newly generated morphs from the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">candidates</span></code></a>
+member of the tree instance. It is a <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#tuple" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instances.
+These instances can be used to read and manipulate the generated morphs or
+the compounds currently present in the tree.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">The molecules saved in the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">candidates</span></code></a> attribute of the tree actually do not
+belong to the tree just yet. See <a class="reference internal" href="#extend"><span class="std std-ref">Tree Extension</span></a> for more information on
+how tree ownership is assigned to molecules.</p>
+</div>
+</div>
+<div class="section" id="sorting-and-filtering">
+<span id="sort-filter"></span><h3><a class="toc-backref" href="#id8">2.2.2.2. Sorting and Filtering</a><a class="headerlink" href="#sorting-and-filtering" title="Permalink to this headline">¶</a></h3>
+<p>The order of the newly generated molecules in the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">candidates</span></code></a> list has a meaning
+for the search algorithm. The higher the position of a morph in this list,
+the bigger the probability that we will attach it to the tree as a new leaf
+(see <a class="reference internal" href="../../documentation/python/operations/FilterMorphsOper_doc.html#molpher.swig_wrappers.core.FilterMorphsOper.PROBABILITY" title="molpher.swig_wrappers.core.FilterMorphsOper.PROBABILITY"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">PROBABILITY</span></code></a> for details). Therefore, by sorting this list according
+to a given objective function, it is possible to push the algorithm
+into convergence.</p>
+<p>As of yet, the only way to sort the
+generated morphs is by calling the <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.sortMorphs" title="molpher.swig_wrappers.core.ExplorationTree.sortMorphs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sortMorphs()</span></code></a>
+method on the tree instance or using the <a class="reference internal" href="../../documentation/python/molpher.core.operations.html#molpher.core.operations.SortMorphsOper.SortMorphsOper" title="molpher.core.operations.SortMorphsOper.SortMorphsOper"><code class="xref py py-class docutils literal notranslate"><span class="pre">SortMorphsOper</span></code></a> operation
+(see <a class="reference internal" href="advanced.html#operations"><span class="std std-ref">Tree Operations</span></a> for more). This sorts the molecules in the order of increasing value
+of the objective function. Right now, the objective function value used
+by the <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.sortMorphs" title="molpher.swig_wrappers.core.ExplorationTree.sortMorphs"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">sortMorphs</span></code></a> operation is the value of the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol.dist_to_target" title="molpher.core.MolpherMol.MolpherMol.dist_to_target"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">dist_to_target</span></code></a> property
+of the given <a class="reference internal" href="../../documentation/python/MolpherMol_doc.html#molpher.swig_wrappers.core.MolpherMol" title="molpher.swig_wrappers.core.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance. By default, the value
+of this property indicates the structural distance of the morph in question
+from the target molecule.</p>
+<p>Since in our case we did not specify a target, the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol.dist_to_target" title="molpher.core.MolpherMol.MolpherMol.dist_to_target"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">dist_to_target</span></code></a> property will
+be set to the same value for all molecules:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">x</span><span class="o">.</span><span class="n">dist_to_target</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{1.7976931348623157e+308}
+</pre></div>
+</div>
+<p>However, the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol.dist_to_target" title="molpher.core.MolpherMol.MolpherMol.dist_to_target"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">dist_to_target</span></code></a> property value can be changed to basically any float number.
+If users have a custom objective function they want to use in the search,
+it is possible to write their calculated value to this property and as long as lower value means
+better fitness of the morph, it should still make sense to use this function
+in the context of Molpher-lib and its data structures.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This part of the interface (especially the naming convention) will
+likely change in the future since a more general approach is needed in order to make sorting more
+customizable.</p>
+</div>
+<p><a class="reference internal" href="morphing.html#morphing-bulk"><span class="std std-ref">Previously</span></a>, we introduced the concept of morph collectors,
+which are special functions that can be used to intercept morphs as they are created.
+Setting the objective function value for each morph is a perfect use case for them:</p>
+<div class="literal-block-wrapper docutils container" id="collector-example">
+<div class="code-block-caption"><span class="caption-number">Listing 2.4 </span><span class="caption-text">Using the <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.generateMorphs" title="molpher.swig_wrappers.core.ExplorationTree.generateMorphs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generateMorphs()</span></code></a> method with a custom morph collector.</span><a class="headerlink" href="#collector-example" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sascore_as_obj</span><span class="p">(</span><span class="n">morph</span><span class="p">,</span> <span class="n">operator</span><span class="p">):</span>
+    <span class="n">morph</span><span class="o">.</span><span class="n">dist_to_target</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">sascore</span>
+
+<span class="n">tree</span><span class="o">.</span><span class="n">generateMorphs</span><span class="p">([</span><span class="n">sascore_as_obj</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">))</span>
+<span class="p">{</span><span class="n">x</span><span class="o">.</span><span class="n">dist_to_target</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output (some results omitted):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>28
+
+[4.304767951403637,
+ 4.161464339486345,
+ 3.8871106534610247,
+ ...
+ 4.336516757110866,
+ 4.187278867161213,
+ 3.8893996483733346]
+</pre></div>
+</div>
+<p>This code is essentially the same as in <a class="reference internal" href="#gen-morphs-simple"><span class="std std-numref">Listing 2.3</span></a>,
+but this time we chose to add a custom morph collector
+(the <code class="code docutils literal notranslate"><span class="pre">sascore_as_obj</span></code> function),
+which will set a molecule’s <a class="reference internal" href="../../glossary.html#term-sascore"><span class="xref std std-term">SAScore</span></a> as the objective
+function value for all generated morphs. Notice
+that the <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.generateMorphs" title="molpher.swig_wrappers.core.ExplorationTree.generateMorphs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generateMorphs()</span></code></a> method takes a list of collectors
+so it is possible to chain them together.
+They are applied in the order of appearance in the list.</p>
+<p>As you can see, the list of candidates is not sorted, yet.
+We need to call the <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.sortMorphs" title="molpher.swig_wrappers.core.ExplorationTree.sortMorphs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sortMorphs()</span></code></a> method to do that:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Listing 2.5 </span><span class="caption-text">Sorting morphs according to the value of the objective function.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">tree</span><span class="o">.</span><span class="n">sortMorphs</span><span class="p">()</span>
+
+<span class="p">[</span>
+    <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">)</span>
+<span class="p">]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output (some results omitted):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[(&#39;CC(C)C(=O)N1CCCC1C(=O)O&#39;, 3.3191105796423788),
+ (&#39;CC(CO)C(=O)N1CCCC1C(=O)O&#39;, 3.6043596148886445),
+ (&#39;CNC(CS)C(=O)N1CCCC1C(=O)O&#39;, 3.7075484704945465),
+...
+ (&#39;O=C(O)C1CCCN1C(=O)C(CS)CBr&#39;, 4.404706288979395),
+ (&#39;CC(CSI)C(=O)N1CCCC1C(=O)O&#39;, 4.412717102918789),
+ (&#39;O=C(O)C1CCCN1C(=O)C(CF)CS&#39;, 4.420781866555153)]
+</pre></div>
+</div>
+<p>Therefore, now the list of candidates is sorted according
+to their synthetic accessibility (compounds
+that are easier to prepare <em>in vitro</em> should have lower scores).</p>
+<p>Now, we need to choose the morphs that
+will form the next <a class="reference internal" href="../../glossary.html#term-morph-generation"><span class="xref std std-term">generation</span></a>.
+The <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates_mask" title="molpher.core.ExplorationTree.ExplorationTree.candidates_mask"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">candidates_mask</span></code></a> property of <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree" title="molpher.swig_wrappers.core.ExplorationTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationTree</span></code></a>
+serves exactly this purpose. Each position in this list corresponds to
+one molecule in <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">candidates</span></code></a> and indicates
+whether this molecule should be considered when
+attaching new leaves to the tree (<a class="reference external" href="https://docs.python.org/3.6/library/constants.html#True" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">True</span></code></a>) or not (<a class="reference external" href="https://docs.python.org/3.6/library/constants.html#False" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">False</span></code></a>).
+Here is an example implementation of a very simple filtering procedure:</p>
+<div class="literal-block-wrapper docutils container" id="filtering-morphs">
+<div class="code-block-caption"><span class="caption-number">Listing 2.6 </span><span class="caption-text">A simple morph filter that selects only the first ten closest morphs from the list.</span><a class="headerlink" href="#filtering-morphs" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># print the current candidates mask (all positions are on by default)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Old mask:&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">)</span>
+
+<span class="c1"># accept only the first ten morphs in the sorted list (those with the lowest distance to target)</span>
+<span class="n">new_mask</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">)]</span>
+
+<span class="c1"># save the new mask to the tree</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span> <span class="o">=</span> <span class="n">new_mask</span>
+
+<span class="c1"># show results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;New mask:&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Molecules that passed the filter:&quot;</span><span class="p">)</span>
+<span class="p">[</span>
+    <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="c1"># get molecules that passed the filter only</span>
+<span class="p">]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Old mask: (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
+New mask: (True, True, True, True, True, True, True, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False)
+Molecules that passed the filter:
+
+[(&#39;CC(C)C(=O)N1CCCC1C(=O)O&#39;, 3.3191105796423788),
+ (&#39;CCC(C)C(=O)N1CCCC1C(=O)O&#39;, 3.404002369297247),
+ (&#39;CSCCC(=O)N1CCCC1C(=O)O&#39;, 3.613205289055311),
+ (&#39;CC(CS)C(=O)N1CCCC1C(=O)O&#39;, 3.804751376555311),
+ (&#39;O=C(O)C1CCCN1C(=O)CCS&#39;, 3.8871106534610247),
+ (&#39;O=C(O)C1CCCN1C(=O)CCCS&#39;, 3.9220880467166013),
+ (&#39;CC(S)CC(=O)N1CCCC1C(=O)O&#39;, 3.9366697951036973),
+ (&#39;O=C(O)C1CCCN1C(=O)C1CSC1&#39;, 3.9784865729838823),
+ (&#39;CC(S)C(=O)N1CCCC1C(=O)O&#39;, 3.9938638051851627),
+ (&#39;CC(NCS)C(=O)N1CCCC1C(=O)O&#39;, 4.076862613435724)]
+</pre></div>
+</div>
+<p>In <a class="reference internal" href="#filtering-morphs"><span class="std std-numref">Listing 2.6</span></a>, <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates_mask" title="molpher.core.ExplorationTree.ExplorationTree.candidates_mask"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">candidates_mask</span></code></a> member was changed by writing
+a <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">list</span></code></a> or a <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#tuple" title="(in Python v3.6)"><code class="xref any docutils literal notranslate"><span class="pre">tuple</span></code></a> of new values into it. This way we were able to select only the first ten morphs
+that have the best <a class="reference internal" href="../../glossary.html#term-sascore"><code class="xref any std std-term docutils literal notranslate"><span class="pre">SAScore</span></code></a> value.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The mask should only be set after the morphs are sorted. If the mask is set and
+the order of morphs is changed, the mask will stay the same and will have to be updated
+to follow the new order.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The library implements a few built-in filters. You can use the
+<a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.filterMorphs" title="molpher.swig_wrappers.core.ExplorationTree.filterMorphs"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">filterMorphs()</span></code></a> method or <code class="xref py py-class docutils literal notranslate"><span class="pre">FilterMorphsOper</span></code> operation to invoke them.
+See the method’s documentation for more information
+on the available filtering options.</p>
+</div>
+</div>
+<div class="section" id="tree-extension">
+<span id="extend"></span><h3><a class="toc-backref" href="#id9">2.2.2.3. Tree Extension</a><a class="headerlink" href="#tree-extension" title="Permalink to this headline">¶</a></h3>
+<p>When we have the morphs selected, we can call
+the <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.extend" title="molpher.swig_wrappers.core.ExplorationTree.extend"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">extend()</span></code></a> method. This will connect them to their respective parents
+in our tree and they will become a new set of leaves:</p>
+<div class="literal-block-wrapper docutils container" id="extending-tree">
+<div class="code-block-caption"><span class="caption-number">Listing 2.7 </span><span class="caption-text">Extending the exploration tree with new morphs.</span><a class="headerlink" href="#extending-tree" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># get the number of generations before</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">generation_count</span><span class="p">)</span>
+
+<span class="n">tree</span><span class="o">.</span><span class="n">extend</span><span class="p">()</span> <span class="c1"># connect the accepted morphs to the tree as new leaves</span>
+
+<span class="c1"># get the number of generations after</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">generation_count</span><span class="p">)</span>
+
+<span class="c1"># grab the new leaves as a list sorted according to their distance from target</span>
+<span class="nb">sorted</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">leaves</span>
+    <span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span> <span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>WARNING: Candidate morph: CC(CS)C(=O)N1CCCC1C(=O)O already present in the tree. Skipping...
+0
+1
+
+[(&#39;CC(C)C(=O)N1CCCC1C(=O)O&#39;, 3.3191105796423788),
+ (&#39;CCC(C)C(=O)N1CCCC1C(=O)O&#39;, 3.404002369297247),
+ (&#39;CSCCC(=O)N1CCCC1C(=O)O&#39;, 3.613205289055311),
+ (&#39;CSC(C)C(=O)N1CCCC1C(=O)O&#39;, 3.8501001628456333),
+ (&#39;O=C(O)C1CCCN1C(=O)CCS&#39;, 3.8871106534610247),
+ (&#39;CCC(CS)C(=O)N1CCCC1C(=O)O&#39;, 3.8893996483733346),
+ (&#39;CSCC(C)C(=O)N1CCCC1C(=O)O&#39;, 3.916140148729842),
+ (&#39;O=C(O)C1CCCN1C(=O)CCCS&#39;, 3.9220880467166013),
+ (&#39;CC(S)CC(=O)N1CCCC1C(=O)O&#39;, 3.9366697951036973)]
+</pre></div>
+</div>
+<p>We can see that after extending the tree, the selected morphs (see <a class="reference internal" href="#filtering-morphs"><span class="std std-numref">Listing 2.6</span></a>)
+had become the new leaves and that the tree’s
+<a class="reference internal" href="../../glossary.html#term-morph-generation"><span class="xref std std-term">morph generation</span></a> counter (<a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.generation_count" title="molpher.core.ExplorationTree.ExplorationTree.generation_count"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">generation_count</span></code></a>) was increased by one. We also
+got a warning about one structure not being added to the tree. It is the structure
+of captopril itself, which is already there. Thus, it is automatically skipped to prevent us from going
+in circles.</p>
+<p>If we want to, we can generate an image depicting the new leaves and the operators used to create them like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit.Chem.Draw</span> <span class="kn">import</span> <span class="n">MolsToGridImage</span>
+
+<span class="k">def</span> <span class="nf">get_locked_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">idx</span><span class="p">,</span> <span class="n">atm</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">atm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span> <span class="k">if</span> <span class="n">atm</span><span class="o">.</span><span class="n">is_locked</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">show_mol_grid</span><span class="p">(</span><span class="n">mols</span><span class="p">):</span>
+    <span class="n">locked_atoms</span> <span class="o">=</span> <span class="p">[[</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">get_locked_atoms</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">MolsToGridImage</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+        <span class="p">,</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+        <span class="p">,</span> <span class="n">highlightAtomLists</span><span class="o">=</span><span class="n">locked_atoms</span>
+        <span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">parent_operator</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+    <span class="p">)</span>
+
+<span class="n">show_mol_grid</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="figure">
+<img alt="../../_images/leaves.png" src="../../_images/leaves.png" />
+</div>
+<p>Note that the generated morphs satisfy the locks placed on the signature -pril substructure
+in the original SDF file. Therefore, the tree is guaranteed to only contain structures
+that have this structural pattern. At this point, it is probably easy to envision an approach with
+iterative application of the commands above which would allow us to generate
+many possible structures of novel -pril compounds. This could prove useful
+while exploring the structure-activity relationship in the development
+of new ACE inhibitors, for example. Here is an example how a simple exploration
+algorithm for this purpose could look like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PenalizeKnown</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">penalty</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span> <span class="o">=</span> <span class="n">tree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_penalty</span> <span class="o">=</span> <span class="n">penalty</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">morph</span><span class="p">,</span> <span class="n">operator</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+            <span class="n">morph</span><span class="o">.</span><span class="n">dist_to_target</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_penalty</span>
+
+<span class="k">for</span> <span class="n">iter_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">generateMorphs</span><span class="p">([</span><span class="n">sascore_as_obj</span><span class="p">,</span> <span class="n">PenalizeKnown</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="mi">10</span><span class="p">)])</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">sortMorphs</span><span class="p">()</span>
+
+    <span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="kc">True</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">50</span> <span class="ow">and</span> <span class="n">tree</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">sascore</span> <span class="o">&lt;</span> <span class="mi">6</span>
+        <span class="k">else</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">candidates_mask</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">tree</span><span class="o">.</span><span class="n">extend</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As in previous example (<a class="reference internal" href="#collector-example"><span class="std std-numref">Listing 2.4</span></a>), this code uses SAScore as the objective function,
+but this time we added one more collector to penalize morphs that we already attached to the tree.
+This way we can use a similar filtering procedure as before and run the code iteratively.
+In every iteration, we accept at most 50 structures which have synthetic accessibility
+score lower than 6. Running ten iterations
+like this gives us almost 500 new structures in a few seconds. If we chose to ran the algorithm
+for a few hours, we would get thousands of compounds like this for subsequent screening. At this
+point, it is probably obvious that we could add more collectors that could adjust the fitness
+of each morph further. For example, we could penalize morphs that have too many atoms, stereocenters
+or other unwanted structural features.</p>
+<p>As the final example in this section, we add a target molecule to the tree
+and show how to use Molpher-lib for the task Molpher was originally designed for,
+that is to search for chemical space paths. We will choose another ACE inhibitor as
+our target, enalapril:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># set enalapril as target</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="s2">&quot;O=C(O)[CH]2N(C(=O)[CH](N[CH](C(=O)OCC)CCc1ccccc1)C)CCC2&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">params</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;source&#39;: &#39;CC(CS)C(=O)N1CCCC1C(=O)O&#39;,
+ &#39;target&#39;: &#39;CCOC(=O)C(CCC1=CC=CC=C1)NC(C)C(=O)N1CCCC1C(=O)O&#39;,
+ &#39;operators&#39;: (&#39;OP_ADD_ATOM&#39;,
+  &#39;OP_REMOVE_ATOM&#39;,
+  &#39;OP_ADD_BOND&#39;,
+  &#39;OP_REMOVE_BOND&#39;,
+  &#39;OP_MUTATE_ATOM&#39;,
+  &#39;OP_INTERLAY_ATOM&#39;,
+  &#39;OP_BOND_REROUTE&#39;,
+  &#39;OP_BOND_CONTRACTION&#39;),
+ &#39;fingerprint&#39;: &#39;FP_MORGAN&#39;,
+ &#39;similarity&#39;: &#39;SC_TANIMOTO&#39;,
+ &#39;weight_min&#39;: 0.0,
+ &#39;weight_max&#39;: 500.0,
+ &#39;accept_min&#39;: 50,
+ &#39;accept_max&#39;: 100,
+ &#39;far_produce&#39;: 80,
+ &#39;close_produce&#39;: 150,
+ &#39;far_close_threshold&#39;: 0.15,
+ &#39;max_morphs_total&#39;: 1500,
+ &#39;non_producing_survive&#39;: 2}
+</pre></div>
+</div>
+<p>Now that we have a target, we can leverage the features
+Molpher-lib inherited from Molpher to find a chemical
+space path between captopril and enalapril:</p>
+<div class="literal-block-wrapper docutils container" id="simple-exploration">
+<div class="code-block-caption"><span class="caption-number">Listing 2.8 </span><span class="caption-text">Example of a simple exploration algorithm with atom locks.</span><a class="headerlink" href="#simple-exploration" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FindClosest</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closest_mol</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closest_distance</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">morph</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">closest_mol</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">closest_distance</span> <span class="o">&gt;</span> <span class="n">morph</span><span class="o">.</span><span class="n">dist_to_target</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">closest_mol</span> <span class="o">=</span> <span class="n">morph</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">closest_distance</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">dist_to_target</span>
+
+<span class="n">closest_info</span> <span class="o">=</span> <span class="n">FindClosest</span><span class="p">()</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">tree</span><span class="o">.</span><span class="n">path_found</span><span class="p">:</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">generateMorphs</span><span class="p">()</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">sortMorphs</span><span class="p">()</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">filterMorphs</span><span class="p">()</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">extend</span><span class="p">()</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">closest_info</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generation #&#39;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">generation_count</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Molecules in tree:&#39;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">mol_count</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s1">&#39;Closest molecule to target: </span><span class="si">{0}</span><span class="s1"> (Tanimoto distance: </span><span class="si">{1}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">closest_info</span><span class="o">.</span><span class="n">closest_mol</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">()</span>
+            <span class="p">,</span> <span class="n">closest_info</span><span class="o">.</span><span class="n">closest_distance</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Output (some contents omitted):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Generation #11
+Molecules in tree: 405
+Closest molecule to target: CCCC(C)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.47457627118644063)
+Generation #12
+Molecules in tree: 481
+Closest molecule to target: CCOC(C)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.4576271186440678)
+Generation #13
+Molecules in tree: 555
+Closest molecule to target: CCOC(=O)C(C)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.375)
+...
+Generation #42
+Molecules in tree: 365
+Closest molecule to target: CCOC(=O)C(CCC1=CC=C1)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.09259259259259256)
+Generation #43
+Molecules in tree: 395
+Closest molecule to target: CCOC(=O)C(CCC1=CC=C1)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.09259259259259256)
+Generation #44
+Molecules in tree: 424
+Closest molecule to target: CCOC(=O)C(CCC1=CC=CC=C1)NC(C)C(=O)N1CCCC1C(=O)O (Tanimoto distance: 0.0)
+</pre></div>
+</div>
+<p>Since we have a target structure defined, the software now
+automatically calculates the distance of each morph from the target
+and inserts that into the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.MolpherMol.MolpherMol.dist_to_target" title="molpher.core.MolpherMol.MolpherMol.dist_to_target"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">dist_to_target</span></code></a> property
+at the time of generation (call to <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.generateMorphs" title="molpher.swig_wrappers.core.ExplorationTree.generateMorphs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generateMorphs()</span></code></a>).
+Therefore, we don’t need any customized collector in this instance. We also
+chose to use the built-in filters (the <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.filterMorphs" title="molpher.swig_wrappers.core.ExplorationTree.filterMorphs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filterMorphs()</span></code></a> method)
+to prioritize morphs in the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">candidates</span></code></a> property. This filtering also
+includes a synthetic accessibility filter like the one we used above
+(only structures with <a class="reference internal" href="../../glossary.html#term-sascore"><span class="xref std std-term">SAScore</span></a> higher than 6 are considered).</p>
+<p>There are also a few features in this code that we haven’t studied in detail, yet.
+For example, we used the <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.traverse" title="molpher.swig_wrappers.core.ExplorationTree.traverse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">traverse()</span></code></a> method here to find out the closest
+molecule to the target after finishing each iteration. Thanks to
+this we can watch the algorithm converge to the target structure. We also used the
+<a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.prune" title="molpher.swig_wrappers.core.ExplorationTree.prune"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prune()</span></code></a> method which is used to remove
+branches in the tree that are not converging towards the target. This helps
+to curb exponential growth of the tree. How this method works is
+discussed in more detail <a class="reference internal" href="#prune"><span class="std std-ref">later</span></a>.</p>
+<p>If we want to get a hold of the molecules on the path, we can easily do so:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fetchPathTo</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+<span class="n">show_mol_grid</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>42
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../../_images/captopril_2_enalapril.png" src="../../_images/captopril_2_enalapril.png" />
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We can see that what appeared to be especially challenging for
+the algorithm was the creation of the aromatic ring at the
+end. This is an issue often observed with the original
+algorithm implemented in Molpher. It usually doesn’t take
+a long time to converge to a structure which is very similar
+to the target, but more effort is needed to actually generate the target structure
+itself. Fortunately, Molpher-lib
+has at least some answer to that (see <a class="reference internal" href="algorithms.html#bidirectional"><span class="std std-ref">Bidirectional Algorithm</span></a>).</p>
+</div>
+</div>
+<div class="section" id="tree-pruning">
+<span id="prune"></span><h3><a class="toc-backref" href="#id10">2.2.2.4. Tree Pruning</a><a class="headerlink" href="#tree-pruning" title="Permalink to this headline">¶</a></h3>
+<p>We cannot possibly grow the tree into all directions without soon running out
+of memory or wasting computational time on a non-prospective part of chemical space.
+Thus, a strategy to keep the number of explored putative paths to a minimum is needed.
+This can be achieved by discarding parts of the paths that
+are not improving in the value of the objective function
+(distance from the <a class="reference internal" href="../../glossary.html#term-8"><span class="xref std std-term">target molecule</span></a> in the simplest case).</p>
+<p>We call a molecule that has not generated any morphs closer to the target than itself
+a <a class="reference internal" href="../../glossary.html#term-non-producing-molecule"><span class="xref std std-term">non-producing molecule</span></a> and we can set
+the number of generations to wait before removing its descendants
+with the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.non_producing_survive" title="molpher.core.ExplorationData.ExplorationData.non_producing_survive"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">non_producing_survive</span></code></a> parameter.</p>
+<p>Tree pruning can be requested anytime by calling the <a class="reference internal" href="../../documentation/python/ExplorationTree_doc.html#molpher.swig_wrappers.core.ExplorationTree.prune" title="molpher.swig_wrappers.core.ExplorationTree.prune"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">prune()</span></code></a> method. In our example, the method didn’t prune
+any paths, because the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.non_producing_survive" title="molpher.core.ExplorationData.ExplorationData.non_producing_survive"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">non_producing_survive</span></code></a> parameter is set to 2 generations in this particular instance.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">In addition to the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.non_producing_survive" title="molpher.core.ExplorationData.ExplorationData.non_producing_survive"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">non_producing_survive</span></code></a> parameter, there is the <a class="reference internal" href="../../documentation/python/molpher.core.html#molpher.core.ExplorationData.ExplorationData.max_morphs_total" title="molpher.core.ExplorationData.ExplorationData.max_morphs_total"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">max_morphs_total</span></code></a> parameter,
+which imposes a restriction on the maximum number of
+descendants of one <a class="reference internal" href="../../glossary.html#term-non-producing-molecule"><span class="xref std std-term">non-producing molecule</span></a>. If the number of all historic descendants
+reaches this threshold, the molecule is removed along with the current descendants.</p>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2><a class="toc-backref" href="#id11">2.2.3. Summary</a><a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>This concludes the introduction of the main Molpher-lib building blocks. Hopefully,
+you found these examples useful and they helped to answer your questions about
+molecular morphing in general or the library itself. If not, feel free
+to use the <a class="reference external" href="https://github.com/lich-uct/molpher-lib/issues">issue tracker</a>
+to ask questions or report bugs that you find. In the following sections,
+we describe more advanced topics such as custom chemical operators
+or tree serialization.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
+<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">PubMed</a>, <a class="reference external" href="http://www.jcheminf.com/content/6/1/7">DOI</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="algorithms.html" class="btn btn-neutral float-right" title="2.3. Exploration Algorithms Implemented in Molpher-lib" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="morphing.html" class="btn btn-neutral float-left" title="2.1. Molecular Morphing Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

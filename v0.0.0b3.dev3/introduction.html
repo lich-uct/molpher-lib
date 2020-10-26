@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; Molpher-lib 0.0.0b3.dev3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'0.0.0b3.dev3',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using the library" href="usage/index.html" />
+    <link rel="prev" title="Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing" href="index.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3.dev3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Molecular Morphing Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-molpher">What is Molpher?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-molpher-lib">What is Molpher-lib?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage/index.html">Using the library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This section attempts to introduce the uninformed to the main ideas behind <a class="reference internal" href="glossary.html#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a>
+and outline possible applications of this software. It also clarifies some terminology used in the documentation.</p>
+<div class="section" id="what-is-molpher">
+<h2>What is Molpher?<a class="headerlink" href="#what-is-molpher" title="Permalink to this headline">¶</a></h2>
+<p>In early stages of a drug discovery endeavor a large library of compounds
+is often screened for molecules that show some biological activity on a given target.
+This is usually done in a laboratory setting using a technique called
+<a class="reference internal" href="glossary.html#term-high-throughput-screening"><span class="xref std std-term">high-throughput screening</span></a> (HTS).
+HTS can be a very effective method, but is still quite limited in the number
+of compounds that can be screened when we consider the incredible vastness of <a class="reference internal" href="glossary.html#term-chemical-space"><span class="xref std std-term">chemical space</span></a>
+not to mention the costs associated with using and maintaining such sophisticated equipment
+and actual physical library of compounds. Therefore, in practice, so called
+<a class="reference internal" href="glossary.html#term-virtual-screening"><span class="xref std std-term">virtual screening</span></a> (VS), is often employed prior to the actual physical experiments.
+During VS, a virtual library of compounds is searched using computational methods,
+which helps significantly in reducing the cost and time needed to find
+new interesting structures of active molecules.</p>
+<p><a class="reference internal" href="glossary.html#term-molpher"><span class="xref std std-term">Molpher</span></a> is a tool developed for the purpose of designing a focused
+virtual library of compounds that could be subsequently used in a virtual screening
+campaign. Since Molpher creates compounds <em>de novo</em>, the generated library will very likely contain new chemistry
+(unlike traditional VS libraries that are usually limited to known chemical space).
+In Molpher, the goal of generating new compounds is achieved by connecting known active molecules
+by a so called <a class="reference internal" href="glossary.html#term-chemical-space-path"><span class="xref std std-term">chemical space path</span></a>. Just like any path, a <a class="reference internal" href="glossary.html#term-chemical-space-path"><span class="xref std std-term">chemical space path</span></a>
+has a start and a destination. In <a class="reference internal" href="glossary.html#term-chemical-space"><span class="xref std std-term">chemical space</span></a> this means
+a <a class="reference internal" href="glossary.html#term-source-molecule"><span class="xref std std-term">source molecule</span></a> and a <a class="reference internal" href="glossary.html#term-8"><span class="xref std std-term">target molecule</span></a>. The path
+is then just a sequence of structures that connect the two and is generated
+by applying small structural changes to the source molecule.
+These changes are called <a class="reference internal" href="glossary.html#term-chemical-operators"><span class="xref std std-term">chemical operators</span></a> in the software and their
+application is optimized to drive the search towards the target molecule.
+The calculation ends when the target structure is generated and the path
+is, thus, complete.</p>
+<p>The main premise of Molpher is that the generated compounds, in particular those in the middle of the path, combine
+the structural features of both the source and target. If the source and target are bioactive compounds, it is very likely
+that some combination of their features will result in a bioactive compound as well.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to know more about how the original Molpher algorithm works, read <a class="reference internal" href="usage/tutorial/morphing.html#morphing-algorithm"><span class="std std-ref">Molecules and Morphing Operators</span></a>
+section of the <a class="reference internal" href="usage/tutorial.html"><span class="doc">tutorial</span></a>.</p>
+</div>
+</div>
+<div class="section" id="what-is-molpher-lib">
+<h2>What is Molpher-lib?<a class="headerlink" href="#what-is-molpher-lib" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="glossary.html#term-molpher"><span class="xref std std-term">Molpher</span></a> itself is a finished piece of software that efficiently implements
+the basic molecular morphing algorithm described above, but has important limitations.
+For example, there are many
+possible implementations of the search and while many aspects of the
+exploration can be parametrized, it is very hard to implement some
+custom rules to prioritize certain compounds over others or
+to provide customized operators,
+which could be an especially interesting prospect when we think about synthesis
+of compounds as well, for example.
+In Molpher, there is also no way to maintain certain pharmacophore features,
+which could dramatically increase
+yield of the whole procedure when some mutual functional group arrangement is required.
+Thus, came the motivation to develop a more flexible
+and extensible solution that would give everyone an opportunity
+to easily implement their own ideas tailored to their needs or just
+integrate <a class="reference internal" href="glossary.html#term-molecular-morphing"><span class="xref std std-term">molecular morphing</span></a> with already existing solutions more easily.</p>
+<p>To make it as straightforward as possible to get up to speed with the library,
+we offer some guidance in the <a class="reference internal" href="usage/index.html"><span class="doc">next section</span></a>
+on how to <a class="reference internal" href="usage/installation.html"><span class="doc">install</span></a> and <a class="reference internal" href="usage/tutorial.html"><span class="doc">use</span></a> the library as well as
+an introduction into some new implementations of exploration <a class="reference internal" href="usage/tutorial/algorithms.html"><span class="doc">algorithms</span></a> in the library.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="usage/index.html" class="btn btn-neutral float-right" title="Using the library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

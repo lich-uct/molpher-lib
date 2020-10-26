@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Installation &mdash; Molpher-lib 0.0.0b3.dev3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'0.0.0b3.dev3',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Tutorial" href="tutorial.html" />
+    <link rel="prev" title="Using the library" href="index.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3.dev3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Using the library</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-with-anaconda">1.1. Installation with Anaconda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-and-installing-from-source-on-linux">1.2. Building and Installing from Source on Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">1.2.1. Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-conda-to-manage-build-environment">1.2.2. Using Conda to Manage Build Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-library">1.2.3. Building the Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-documentation">1.2.4. Building the Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-conda-packages">1.2.5. Building Conda Packages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">2. Tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Using the library</a> &raquo;</li>
+        
+      <li>1. Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>1. Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we discuss various methods of installation. There are also instructions on how to build the library
+from source and other comments useful to library developers.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As of yet, the library is only available for <strong>Linux</strong> and will only run
+on <strong>64-bit</strong> systems. However, support for other platforms is on the roadmap as well.
+If you are interested in a build for a different platform, feel free to express your
+wish on the <a class="reference external" href="https://github.com/lich-uct/molpher-lib/issues">issue tracker</a>.</p>
+</div>
+<div class="section" id="installation-with-anaconda">
+<h2>1.1. Installation with Anaconda<a class="headerlink" href="#installation-with-anaconda" title="Permalink to this headline">¶</a></h2>
+<p>If you want to use the library from Python environment, this is probably the best way for you to install.
+All you need to do is either get the full <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a> distribution
+or its lightweight variant, <a class="reference external" href="http://conda.pydata.org/miniconda.html">Miniconda</a>.</p>
+<p>Anaconda/Miniconda is essentially a Python distribution, package manager and virtual environment in one and makes setting up
+a development environment for your projects very easy.
+After installing Anaconda/Miniconda you need to run the following
+to install the <code class="code docutils literal notranslate"><span class="pre">molpher-lib</span></code> package in your environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c rdkit -c lich molpher-lib
+</pre></div>
+</div>
+<p>This will automatically install the latest non-development version of the library
+in your currently active environment.
+If you are interested in the development snapshots, you can specify the <code class="code docutils literal notranslate"><span class="pre">dev</span></code> label while you install:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c rdkit -c lich/label/dev molpher-lib
+</pre></div>
+</div>
+<p>Development snapshots often have the newest functionality, but may be unstable due to some experimental
+features.</p>
+<p>You can test if the library works as it should by running the Molpher-lib test suite:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">molpher.tests</span> <span class="kn">import</span> <span class="n">run</span>
+
+<span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-and-installing-from-source-on-linux">
+<h2>1.2. Building and Installing from Source on Linux<a class="headerlink" href="#building-and-installing-from-source-on-linux" title="Permalink to this headline">¶</a></h2>
+<p>If you want to build the source code yourself,
+you will have to use <strong class="command">cmake</strong>. This section
+describes how to do that on a Linux machine. If you want to build the library on
+a different platform, this section might provide useful information as well. However,
+you might need to make some adjustments to the underlying <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you manage to successfully build the library on a platform other than Linux,
+please, consider making a pull request and contributing your code to the <a class="reference external" href="https://github.com/lich-uct/molpher-lib.git">official GitHub
+repository</a>. Also consider giving <a class="reference external" href="https://github.com/lich-uct/molpher-lib/issues/7">this issue</a>
+a bump up if you are interested in Windows build support.</p>
+</div>
+<div class="section" id="prerequisites">
+<h3>1.2.1. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>In order to build the library, you will need to have some tools and libraries setup on your system.
+You can learn about them here (if you want to get started quickly, just see the
+<a class="reference internal" href="#conda-build-env"><span class="std std-ref">following section</span></a>):</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>git</em> – You will use it to check out the source code from the repository.</p>
+</li>
+<li><p class="first"><em>cmake</em> – This tool will generate the Makefiles for the project and configure the build (searches for dependencies, makes sure libraries are correctly linked, etc.). You should use version 3.9 and higher.</p>
+</li>
+<li><p class="first"><em>build-essential</em> – You will need this package in order to be able to build software on most Linux platforms. It contains a compiler and other tools important for the build.</p>
+<blockquote>
+<div><p>Note that you might encounter some problems if you decide to use an ancient compiler with poor
+support for the newer C++ standards (C++11 onwards). For example, g++ 5.4 and newer should be OK,
+but even slightly older compilers could work with no problems.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>swig</em> – It is used to generate the Python wrapping code (we are using version 3.0.12 at the moment).</p>
+<blockquote>
+<div><p>SWIG is only required if you made changes to the binary interface (header files under <code class="file docutils literal notranslate"><span class="pre">include/</span></code>) and want to configure cmake
+with the <strong class="command">-DRUN_SWIG=ON</strong> option (see the description of the <em>molpher_install_python</em> target in the section below).
+If this option is turned on, SWIG will be invoked by make upon build with the <strong class="command">swig</strong>
+command so make sure the SWIG executable is available in the working environment or that you have
+correctly specified the <strong class="command">-DCONDA_PREFIX</strong> directive, in that case <strong class="command">cmake</strong> will look
+for <strong class="command">swig</strong> in your conda environment.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>setuptools</em> – This Python package is needed to build and install the Molpher-lib Python package.</p>
+</li>
+<li><p class="first"><em>python{version}-dev</em> – You will need this package to build Python bindings for your Python <em>version</em>.</p>
+<blockquote>
+<div><p>If you get ‘Missing Python.h’ compiler errors, you probably do not have this package installed.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>dependencies</em> – Molpher-lib depends on three third-party libraries:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>tbb</em> (most versions should work fine, 2019 onwards)</li>
+<li><em>boost</em> (most reasonably new versions should work fine, but we build against 1.73.0)</li>
+<li><em>rdkit</em> (there were some changes to the names of RDKit libraries, versions older than <strong class="command">2019.03.4</strong> may have issues during build)</li>
+<li><em>numpy</em> (RDKit dependency in Python, not required if you are only building the C++ code)</li>
+</ul>
+<p>You can install these dependencies in a conda environment (see <em>Using Conda to
+Manage Build Environment</em> below) you want to use for building the
+library or you can build them separately in the <code class="file docutils literal notranslate"><span class="pre">deps</span></code> subdirectory of
+the project repository. There is a bash script (<code class="file docutils literal notranslate"><span class="pre">deps/build_deps.sh</span></code>)
+which can download and build the dependencies automatically
+(should only download versions that were tested with the newest version of the library).
+It should then be sufficient to just run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build_deps.sh --all
+</pre></div>
+</div>
+<p>If you want to obtain the dependencies yourself, you should install them in the <code class="file docutils literal notranslate"><span class="pre">deps/</span></code> folder
+in the repository root. For each dependency, there should be a folder of the same name under <code class="file docutils literal notranslate"><span class="pre">deps/</span></code>
+(for example, the path to the <em>tbb</em> files would be <code class="file docutils literal notranslate"><span class="pre">deps/tbb/</span></code>). The CMakeLists.txt is configured to automatically
+identify and prioritize dependencies in this directory.</p>
+<p>You can also leverage the libraries already installed on your system. In that case, cmake should automatically find them
+on your path and link them during the build. The <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file is configured to link against dynamic versions of
+all libraries so make sure you have those installed.</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="using-conda-to-manage-build-environment">
+<span id="conda-build-env"></span><h3>1.2.2. Using Conda to Manage Build Environment<a class="headerlink" href="#using-conda-to-manage-build-environment" title="Permalink to this headline">¶</a></h3>
+<p>If you want to use conda to manage your build environment, you can start with the
+<code class="code docutils literal notranslate"><span class="pre">environment.yml</span></code> file in the root directory of the project repository
+(download it <a class="reference external" href="https://github.com/lich-uct/molpher-lib/blob/master/environment.yml">here</a>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create -f environment.yml
+</pre></div>
+</div>
+<p>This will create a working build environment with all libraries and tools installed.
+You can then point <strong class="command">cmake</strong> to
+the environment prefix with <strong class="command">-DCONDA_PREFIX=/path/to/your/env/</strong> or
+set this as an environment variable. It will instruct the build system to search
+for <strong class="command">python</strong> and <strong class="command">swig</strong> commands and the required dependencies in this environment.</p>
+</div>
+<div class="section" id="building-the-library">
+<h3>1.2.3. Building the Library<a class="headerlink" href="#building-the-library" title="Permalink to this headline">¶</a></h3>
+<p>When your environment is set, you can start building. If you have not done so already, you need to
+check out the code and create a build directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/lich-uct/molpher-lib.git
+<span class="nv">REPOSITORY_ROOT</span><span class="o">=</span><span class="s2">&quot;`pwd`/molpher-lib&quot;</span>
+mkdir <span class="si">${</span><span class="nv">REPOSITORY_ROOT</span><span class="si">}</span>/cmake-build/
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">REPOSITORY_ROOT</span><span class="si">}</span>/cmake-build/
+</pre></div>
+</div>
+<p>Then you can initialize the cmake project:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">CONDA_PREFIX</span><span class="o">=</span>/path/to/your/env/ <span class="c1"># if you are using a conda build environment</span>
+cmake ..
+</pre></div>
+</div>
+<p>This is the simplest configuration with default options, but sometimes you may
+require more customization. The cmake configuration file recognizes a few options.
+For example, the following will force debug mode and Python 3 during build:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake .. -DCMAKE_BUILD_TYPE<span class="o">=</span>Debug -DPYTHON_EXECUTABLE<span class="o">=</span>python3
+</pre></div>
+</div>
+<p>If you want to recreate the Python wrapping code during build, you should
+add <strong class="command">-DRUN_SWIG=ON</strong>. Remember, that you need to have SWIG installed in a standard
+location for this to work. Alternatively, you can add swig to your <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> or use
+<strong class="command">-DSWIG_EXECUTABLE=/path/to/swig</strong> to tell cmake where to look for it.</p>
+<p>When the makefile is created, you can use <strong class="command">make</strong> to build the Molpher-lib targets:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make <span class="nv">$CONFIG</span> <span class="c1"># $CONFIG is a configuration target&#39;s name</span>
+</pre></div>
+</div>
+<p>There are three important configuration targets:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first"><em>molpher</em> – Builds the binaries for the C++ part of Molpher-lib.</p>
+</li>
+<li><p class="first"><em>molpher_install</em> – Will install the library in the given location.</p>
+<blockquote>
+<div><p>By default, this location is the <code class="file docutils literal notranslate"><span class="pre">dist/</span></code> folder in the repository root.
+This can be changed when the cmake project is initialized by setting
+<a class="reference external" href="https://cmake.org/cmake/help/v3.9/variable/CMAKE_INSTALL_PREFIX.html">CMAKE_INSTALL_PREFIX</a>.
+By default, the required dependency libraries are not installed. If you want to install them with the library,
+you can configure cmake to do so by setting the following: <strong class="command">-DINSTALL_TBB=ON -DINSTALL_Boost=ON -DINSTALL_RDKit=ON</strong>.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>molpher_install_python</em> – This builds the C++ Python extension and installs the Python package into <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CMAKE_INSTALL_PREFIX</span></code>.</p>
+<blockquote>
+<div><p>By default, the primary Python distribution on the system is used. You can specify a different executable
+with <strong class="command">-DPYTHON_EXECUTABLE</strong>.</p>
+<p>If you want to update the SWIG wrapping code before this target is run, you can instruct cmake to do so with
+the <strong class="command">-DRUN_SWIG=ON</strong> option. Do not forget to specify the swig path with <strong class="command">-DSWIG_EXECUTABLE</strong> if it is installed in a non-standard location.</p>
+<p>When this target finishes, all required files should be in place and you should be able to
+import the <em>molpher</em> Python package, provided that your <span class="target" id="index-2"></span><a class="reference external" href="https://docs.python.org/3.6/using/cmdline.html#envvar-PYTHONPATH" title="(in Python v3.6)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> and <span class="target" id="index-3"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> are set
+appropriately. Here is an example of how these variables can be set if standard locations are used:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">CMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REPOSITORY_ROOT</span><span class="si">}</span><span class="s2">/dist&quot;</span>
+<span class="nb">export</span> <span class="nv">DEPS_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">CMAKE_INSTALL_PREFIX</span><span class="si">}</span>/../deps
+<span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="si">${</span><span class="nv">DEPS_DIR</span><span class="si">}</span>/rdkit/:<span class="si">${</span><span class="nv">CMAKE_INSTALL_PREFIX</span><span class="si">}</span>/lib/python3.5/site-packages
+<span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">DEPS_DIR</span><span class="si">}</span>/tbb/lib/intel64/gcc4.7:<span class="si">${</span><span class="nv">DEPS_DIR</span><span class="si">}</span>/rdkit/lib/:<span class="si">${</span><span class="nv">DEPS_DIR</span><span class="si">}</span>/boost/stage/lib:<span class="si">${</span><span class="nv">CMAKE_INSTALL_PREFIX</span><span class="si">}</span>/lib
+</pre></div>
+</div>
+<p>You should then be able to successfully run the Python test suite:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">molpher.tests</span> <span class="kn">import</span> <span class="n">run</span>
+
+<span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="building-the-documentation">
+<h3>1.2.4. Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h3>
+<p>This documentation was generated using the <code class="file docutils literal notranslate"><span class="pre">build_docs.sh</span></code>
+script under the <code class="file docutils literal notranslate"><span class="pre">doc</span></code> directory. However, you will need a few Python packages
+in order to successfully build it. The build <a class="reference download internal" href="../_downloads/environment.yml" download=""><code class="xref download docutils literal notranslate"><span class="pre">environment</span> <span class="pre">file</span></code></a>
+defines these requirements. You can install this environment like so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create -f environment.yml
+</pre></div>
+</div>
+<p>The resulting environment will be called <em>molpher-lib-build</em> and you can activate it
+by sourcing the <code class="file docutils literal notranslate"><span class="pre">source_2_activate</span></code> file in <span class="target" id="index-4"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">REPOSITORY_ROOT</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>. source_2_activate
+</pre></div>
+</div>
+<p>This will make sure that all paths are correctly set so that you can use the version
+of Molpher-lib built from the current source code (using the <em>molpher_install_python</em> target).</p>
+<p>Once your environment is activated, you can
+generate the documentation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> doc
+./build_docs.sh
+</pre></div>
+</div>
+<p>To update the GitHub pages, it is possible to
+run the <code class="file docutils literal notranslate"><span class="pre">build_docs.sh</span></code> script with the <code class="docutils literal notranslate"><span class="pre">`--upload`</span></code> option:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>build_docs.sh --upload
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need write access to the repository to be able to do this.</p>
+</div>
+</div>
+<div class="section" id="building-conda-packages">
+<h3>1.2.5. Building Conda Packages<a class="headerlink" href="#building-conda-packages" title="Permalink to this headline">¶</a></h3>
+<p>If you want to package the build as a conda package, you can use a
+python script located in <code class="file docutils literal notranslate"><span class="pre">conda</span></code> subdirectory of the repository root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="si">${</span><span class="nv">REPOSITORY_ROOT</span><span class="si">}</span>/conda
+python build.py
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">You will need <a class="reference external" href="https://github.com/conda/conda-build">conda-build</a> and the  <em>jinja2</em> Python library to do that.
+These are both part of the <em>molpher-lib-build</em> conda environment we introduced before. It is enough to just do <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">molpher-lib-build</span></code>.</p>
+</div>
+<p>The built packages will be located at <code class="file docutils literal notranslate"><span class="pre">/tmp/conda-bld</span></code> (from there they can be uploaded to Anaconda Cloud, for example).</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="2. Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Using the library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Martin Šícho (sichom@vscht.cz)
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
