@@ -165,10 +165,12 @@ SAScore::~SAScore()
 
 SAScore* SAScore::destroyInstance()
 {    
-    if (instance != NULL) 
+    if (instance != nullptr)
     {
         delete instance;
     }
-    instance = NULL;
+    instance = nullptr;
+
+    return instance;
 }
 
