@@ -674,6 +674,7 @@ void MinimalTest::testExplorationData() {
     
     data_from_template->setTarget(*target);
     data_from_template->save(test_dir + "template_snapshot.xml");
+    CPPUNIT_ASSERT_THROW(ExplorationData::load("./does/not/exist"), std::runtime_error);
     auto data_from_snapshot = ExplorationData::load(test_dir + "template_snapshot.xml");
     CPPUNIT_ASSERT_EQUAL(target->getSMILES(), data_from_snapshot->getTarget()->getSMILES());
 }
