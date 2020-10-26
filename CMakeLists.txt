@@ -161,6 +161,8 @@ set(PYTHON_PACKAGE_DIR ${CMAKE_SOURCE_DIR}/src/python/molpher/swig_wrappers)
 option(RUN_SWIG "Run SWIG" OFF)
 if (SWIG_EXECUTABLE)
     set(SWIG_COMMAND ${SWIG_EXECUTABLE})
+elseif(CONDA_PREFIX)
+    set(SWIG_COMMAND "${CONDA_PREFIX}/bin/swig")
 else()
     set(SWIG_COMMAND swig)
 endif ()
@@ -380,7 +382,7 @@ set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${CMAKE_SOUR
 # Build the SWIG wrappers for Python
 
 if(CONDA_PREFIX)
-    set(PYTHON_EXECUTABLE "${CONDA_PREFIX}/python")
+    set(PYTHON_EXECUTABLE "${CONDA_PREFIX}/bin/python")
 elseif(NOT PYTHON_EXECUTABLE)
     message(STATUS "PYTHON_EXECUTABLE not set. Using system defaults.")
     set(PYTHON_EXECUTABLE "python")
