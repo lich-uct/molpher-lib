@@ -47,7 +47,8 @@ setup (name = 'molpher',
        ext_modules = [molpher_cpp_module,],
        package_data = {
             'molpher.core.tests' : ['test_files/*'],
-            'molpher.examples' : ['*.xml', '*.sdf']
+            'molpher.examples' : ['*.xml', '*.sdf'],
+            'molpher' : ['SAScore.dat']
         },
        test_suite="molpher.core.tests"
        )

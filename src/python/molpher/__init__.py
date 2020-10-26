@@ -26,15 +26,9 @@ import molpher.swig_wrappers.core as wrappers
 
 import os
 
-_SHARED_FOLDER = os.path.join(
-   os.path.abspath(os.path.dirname(__file__)) # this module directory
-   , '../../../../../share/molpher-lib' # path to the share directory with resources
-)
-
 _SA_SEARCH_PATHS = [
-   os.path.join(_SHARED_FOLDER, 'SAScore.dat')
+   os.path.join(os.path.abspath(os.path.dirname(__file__)), 'SAScore.dat') # this module directory
    , resource_filename('molpher.swig_wrappers', 'SAScore.dat')
-   , os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../../res/SAScore.dat')
 ]
 
 def load_SAScore(path):
