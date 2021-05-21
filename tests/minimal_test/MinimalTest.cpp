@@ -49,7 +49,7 @@ MinimalTest::~MinimalTest() {
 }
 
 void MinimalTest::setUp() {
-    load_data_from("res/SAScore.dat");
+    load_data_from("src/python/molpher/SAScore.dat");
     set_random_seed(42);
 }
 
