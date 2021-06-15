@@ -23,10 +23,9 @@ from importlib.machinery import SourceFileLoader
 JOBS = 6
 BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
 PYTHONS = [f'3.{x}' for x in range(6, 10)]
-
 version_module = SourceFileLoader('version', os.path.join(BASE_DIR, 'src/python/molpher/version.py')).load_module()
-version = version_module.VERSION
-build = version_module.BUILD_NUMBER
+VERSION = version_module.VERSION
+BUILD_NUMBER = version_module.BUILD_NUMBER
 
 def generate_config_file(template, output, python_version):
     with open(template, "r", encoding="utf-8") as metafile_template:
@@ -35,8 +34,8 @@ def generate_config_file(template, output, python_version):
     with open(output, "w", encoding='utf-8') as metafile:
         print('Generating configuration file:', os.path.abspath(output))
         metafile.write(template.render(
-            version=version
-            , build_number=build
+            version=VERSION
+            , build_number=BUILD_NUMBER
             , python_version=python_version
         ))
         print('Done.')
