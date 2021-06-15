@@ -1,5 +1,5 @@
 package:
-  name: {{ target }}
+  name: molpher-lib
   version: {{ version }}
 
 source:
@@ -7,25 +7,29 @@ source:
 
 build:
   number: {{ build_number }}
-  string: {{ build_string }}
+  string: py{{ python_version }}_{{ build_number }}
   script_env:
     - BASE_DIR
+    - JOBS
 
 requirements:
+  host:
+    - python {{ python_version }}.*
   build:
     - cmake
-    - {{ python_spec }}
+    - python {{ python_version }}.*
     - gxx_linux-64
-    - libboost
+    - boost-cpp
     - rdkit
-    - tbb-devel
+    - tbb-devel 2020*
+    - swig 3.0.*
   run:
-    - {{ python_spec }}
-    - libboost
+    - python {{ python_version }}.*
+    - boost-cpp
     - rdkit
-    - tbb
+    - tbb 2020*
 
 about:
   license : GPL-3.0
-  license_file: {{ license_file }}
+  license_file: LICENSE.md
   summary: "Software library for chemical space exploration."

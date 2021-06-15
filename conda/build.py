@@ -14,66 +14,48 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from shutil import copyfile
 import subprocess
+from shutil import copyfile
 
-import shutil
 from jinja2 import Template
-import imp
+from importlib.machinery import SourceFileLoader
 
+JOBS = 6
 BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
-version = imp.load_source('module.name', os.path.join(BASE_DIR, 'version.py'))
-BUILD_ALL_PYTHON = False
-TARGETS = ["molpher-lib"]
-CONDA_FLAGS = {
-    "molpher-lib" : "-c rdkit --croot /tmp/conda-bld/"
-}
-PYTHON_VERSIONS = ['2.6', '2.7',  '3.3',  '3.4', '3.5', '3.6', '3.7'] if BUILD_ALL_PYTHON else ['3']
-VERSION = version.VERSION
-BUILD_NUMBER = version.BUILD_NUMBER
-LICENSE_FILE_NAME = "LICENSE"
+pythons = [f'3.{x}' for x in range(6,10)]
 
-# remove previously generated files
-shutil.rmtree(os.path.join(BASE_DIR, 'build'), ignore_errors=True)
-shutil.rmtree(os.path.join(BASE_DIR, 'dist'), ignore_errors=True)
+version_module = SourceFileLoader('version', os.path.join(BASE_DIR, 'src/python/molpher/version.py')).load_module()
+version = version_module.VERSION
+build = version_module.BUILD_NUMBER
 
-for target in TARGETS:
-    os.chdir(BASE_DIR)
-    for python_version in PYTHON_VERSIONS:
-        PACKAGE_DIR = os.path.join(BASE_DIR, "conda/{0}/{0}/".format(target))
-        METAFILE_TEMPLATE_PATH = os.path.join(PACKAGE_DIR, "../meta.yaml.template")
-        METAFILE_PATH = os.path.join(PACKAGE_DIR, "meta.yaml")
+def generate_config_file(template, output, python_version):
+    with open(template, "r", encoding="utf-8") as metafile_template:
+        print('Using template:', os.path.abspath(template))
+        template = Template(metafile_template.read())
+    with open(output, "w", encoding='utf-8') as metafile:
+        print('Generating configuration file:', os.path.abspath(output))
+        metafile.write(template.render(
+            version=version
+            , build_number=build
+            , python_version=python_version
+        ))
+        print('Done.')
 
-        template = None
-        with open(METAFILE_TEMPLATE_PATH, "r", encoding="utf-8") as metafile_template:
-            template = Template(metafile_template.read())
+for python_version in pythons:
+    print(f'Preparing Python version: {python_version}')
+    generate_config_file(
+        "./molpher-lib/meta.yaml.template",
+        "./molpher-lib/meta.yaml",
+        python_version=python_version
+    )
+    os.environ['PYTHON_VERSION'] = python_version
+    os.environ['JOBS'] = str(JOBS)
+    os.environ['BASE_DIR'] = str(BASE_DIR)
+    copyfile(os.path.join(BASE_DIR, "LICENSE.md"), os.path.join('./molpher-lib/', "LICENSE.md"))
 
-        with open(METAFILE_PATH, "w", encoding='utf-8') as metafile:
-            metafile.write(template.render(
-                target=target
-                , version=VERSION
-                , build_number=BUILD_NUMBER
-                , license_file=LICENSE_FILE_NAME
-                , build_string="py{0}_{1}".format(python_version.replace('.', ''), BUILD_NUMBER)
-                , python_spec="python {0}*".format(python_version)
-            ))
+    ret = subprocess.call("./build.sh", env=os.environ, shell=True)
+    if ret != 0:
+        print("An error has occured during conda build...")
+        exit(1)
 
-        os.chdir(os.path.join(PACKAGE_DIR, "../"))
-        os.environ['BASE_DIR'] = BASE_DIR
-        print(os.environ['PATH'])
-        copyfile(os.path.join(BASE_DIR, "LICENSE.md"), os.path.join(PACKAGE_DIR, LICENSE_FILE_NAME))
-        ret = subprocess.call("conda build {0} --python {1} {2}".format(target, python_version, CONDA_FLAGS[target]), env=os.environ, shell=True)
-
-        # return non-zero if something went wrong
-        if ret != 0:
-            print("An error has occured during conda build...")
-            exit(1)
-
-        # remove the generated and copied files and go back to BASE_DIR
-        os.remove(METAFILE_PATH)
-        os.remove(os.path.join(PACKAGE_DIR, LICENSE_FILE_NAME))
-        os.chdir(BASE_DIR)
-
-        # the dependencies are only built once
-        if target in TARGETS[:-1]:
-            break
+    print('Done.')

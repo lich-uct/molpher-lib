@@ -1,7 +1,8 @@
 ## Project
-.cmake-build
+cmake-build
 .ipynb_checkpoints
 build/
+conda-build/
 dist/
 bin/
 /deps/*
@@ -9,6 +10,8 @@ bin/
 .idea/
 cmake-build-debug/
 cmake-build-release/
+/conda/molpher-lib/meta.yaml
+/conda/molpher-lib/LICENSE.md
 
 ## C++
 
