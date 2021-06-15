@@ -28,7 +28,7 @@ prefix_include_dir = os.path.join(os.environ.get('PREFIX'), 'include/molpher-lib
 conda_prefix_include_dir = os.path.join(os.environ.get('CONDA_PREFIX'), 'include/molpher-lib/') if os.environ.get('CONDA_PREFIX') else None
 
 include_dirs = [
-    'include/molpher-lib/'
+    'include/'
 ]
 if prefix_include_dir:
     include_dirs += [prefix_include_dir]
