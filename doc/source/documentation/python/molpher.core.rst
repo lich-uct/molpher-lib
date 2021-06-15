@@ -43,26 +43,10 @@ molpher.core.MolpherAtom module
     :undoc-members:
     :show-inheritance:
 
-molpher.core.morphing module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: molpher.core.morphing
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 molpher.core.selectors module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: molpher.core.selectors
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-molpher.core.operations module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: molpher.core.operations
     :members:
     :undoc-members:
     :show-inheritance:

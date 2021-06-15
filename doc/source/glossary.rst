@@ -37,12 +37,8 @@ Glossary
         The root of the exploration tree. All morphs in the tree are descendants of this molecule.
 
     target molecule
-        Target molecule of the whole exploration process. The algorithm attempts to generate a path
+        Target molecule of the exploration process. The algorithm attempts to generate a path
         in chemical space leading from the :term:`source molecule` to this one.
-
-    target molecule
-        A molecule the chemical space exploration is driven towards. Each morph is evaluated according
-        to its distance (using a :term:`molecular fingerprint` and a :term:`similarity measure`) from this molecule.
 
     exploration parameters
         Those define how the :term:`exploration tree` behaves (i.e. what :term:`similarity measure` to
