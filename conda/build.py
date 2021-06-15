@@ -22,7 +22,7 @@ from importlib.machinery import SourceFileLoader
 
 JOBS = 6
 BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
-pythons = [f'3.{x}' for x in range(6,10)]
+PYTHONS = [f'3.{x}' for x in range(6, 10)]
 
 version_module = SourceFileLoader('version', os.path.join(BASE_DIR, 'src/python/molpher/version.py')).load_module()
 version = version_module.VERSION
@@ -41,7 +41,7 @@ def generate_config_file(template, output, python_version):
         ))
         print('Done.')
 
-for python_version in pythons:
+for python_version in PYTHONS:
     print(f'Preparing Python version: {python_version}')
     generate_config_file(
         "./molpher-lib/meta.yaml.template",
