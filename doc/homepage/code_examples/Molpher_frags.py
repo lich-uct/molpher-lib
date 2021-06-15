@@ -2,7 +2,7 @@ from rdkit import Chem
 from molpher.core import MolpherMol, MolpherAtom
 from molpher.core.morphing import Molpher
 from molpher.core.morphing.operators import *
-from molpher.random import get_random_number
+from molpher.random_numbers import get_random_number
 
 class AddFragment(MorphingOperator):
     """
