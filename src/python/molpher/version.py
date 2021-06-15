@@ -16,22 +16,28 @@
 
 import os
 import sys
+from pkg_resources import resource_filename
 
-VERSION = None
-BUILD_NUMBER = None
 PYTHON_VERSION_MAJOR = sys.version_info.major
 PYTHON_VERSION_MINOR = sys.version_info.minor
 PYTHON_VERSION = '{0}.{1}'.format(PYTHON_VERSION_MAJOR, PYTHON_VERSION_MINOR)
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+def get_info():
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+    version_path = os.path.join(base_dir, "VERSION.TXT")
+    build_path = os.path.join(base_dir, "BUILD.TXT")
+    if not os.path.exists(version_path):
+        version_path = resource_filename('molpher', 'VERSION.TXT')
+        build_path = resource_filename('molpher', 'BUILD.TXT')
 
-def load_versionfile(path):
-    with open(path, 'r') as versionfile:
-        return versionfile.read().strip()
+    version = None
+    with open(version_path, 'r') as versionfile:
+        version = versionfile.read().strip()
 
-VERSION = load_versionfile(os.path.join(BASE_DIR, "VERSION.TXT"))
-BUILD_NUMBER = load_versionfile(os.path.join(BASE_DIR, "BUILD.TXT"))
+    build = None
+    with open(build_path, 'r') as buildfile:
+        build = buildfile.read().strip()
 
-print('Version: ', VERSION)
-print('Build: ', BUILD_NUMBER)
-print('Python Version: ', BUILD_NUMBER)
+    return version, build
+
+VERSION, BUILD_NUMBER = get_info()
