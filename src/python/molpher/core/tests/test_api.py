@@ -21,7 +21,7 @@ from io import StringIO, BytesIO
 from pkg_resources import resource_filename
 from rdkit import Chem
 
-from molpher import random
+from molpher import random_numbers
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
 from molpher.core import ExplorationData
@@ -45,7 +45,7 @@ class TestAPI(unittest.TestCase):
         return path
     
     def setUp(self):
-        random.set_random_seed(42)
+        random_numbers.set_random_seed(42)
         self.test_source = 'CCO'
         self.test_target = 'C1=COC=C1'
         self.test_dir = os.path.abspath(resource_filename('molpher.core.tests', 'test_files/'))

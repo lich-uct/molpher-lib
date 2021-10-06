@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 # stop if anything goes wrong
 set -e
@@ -21,8 +21,9 @@ mv *.html ../source/_static/
 cd ..
 
 # configure
-MOLPHER_PATH=../src/python/
-sphinx-apidoc -o source/documentation/python/ $MOLPHER_PATH
+export PYTHONPATH="../src/python/"
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib/"
+sphinx-apidoc -o source/documentation/python/ ../src/python/
 
 # make
 make html

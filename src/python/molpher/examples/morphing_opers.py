@@ -1,7 +1,7 @@
 from rdkit import Chem
 from molpher.core import MolpherMol, MolpherAtom, ExplorationTree as ETree
 from molpher.core.morphing.operators import MorphingOperator
-from molpher.random import get_random_number
+from molpher.random_numbers import get_random_number
 
 class AddFragment(MorphingOperator):
 

@@ -20,6 +20,9 @@ performed (see below).
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from .version import VERSION
+__version__ = VERSION
+
 from pkg_resources import resource_filename
 
 import molpher.swig_wrappers.core as wrappers
@@ -28,7 +31,7 @@ import os
 
 _SA_SEARCH_PATHS = [
    os.path.join(os.path.abspath(os.path.dirname(__file__)), 'SAScore.dat') # this module directory
-   , resource_filename('molpher.swig_wrappers', 'SAScore.dat')
+   , resource_filename('molpher', 'SAScore.dat')
 ]
 
 def load_SAScore(path):
@@ -37,7 +40,7 @@ def load_SAScore(path):
    This is performed automatically when the :py:mod:`molpher` package is imported.
    Use it only if you want to use a data file different from the dafault one.
 
-   :param path: path to the `SAScore.dat` file
+   :param path: path to the *SAScore.dat* file
    :type path: :py:class:`str`
    :return: :py:obj:`None`
    """

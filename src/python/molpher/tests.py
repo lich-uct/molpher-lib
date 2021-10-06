@@ -26,3 +26,6 @@ def run(module_list=TEST_MODULES):
     result = unittest.TextTestRunner().run(suite)
     if result.errors:
         exit(1)
+
+if __name__ == "__main__":
+    run()

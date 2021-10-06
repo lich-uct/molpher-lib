@@ -443,7 +443,7 @@ Output:
 
 In :numref:`filtering-morphs`, `candidates_mask` member was changed by writing
 a `list` or a `tuple` of new values into it. This way we were able to select only the first ten morphs
-that have the best `SAScore` value.
+that have the best *SAScore* value.
 
 ..  warning:: The mask should only be set after the morphs are sorted. If the mask is set and
     the order of morphs is changed, the mask will stay the same and will have to be updated

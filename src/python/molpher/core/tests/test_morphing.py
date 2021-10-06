@@ -21,7 +21,7 @@ from rdkit import Chem
 
 from pkg_resources import resource_filename
 
-from molpher import random
+from molpher import random_numbers
 from molpher.examples import morphing_opers, exploration_basics
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
@@ -41,7 +41,7 @@ class TestMorphing(unittest.TestCase):
         return path
 
     def setUp(self):
-        random.set_random_seed(42)
+        random_numbers.set_random_seed(42)
         self.test_source = 'CCO'
         self.test_target = 'C1=COC=C1'
         self.test_dir = os.path.abspath(resource_filename('molpher.core.tests', 'test_files/'))

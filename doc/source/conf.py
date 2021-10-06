@@ -40,7 +40,7 @@ extensions = [
     'breathe'
 ]
 
-intersphinx_mapping = {'python': ('https://docs.python.org/3.6', None)} # TODO: get version automatically
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -74,7 +74,7 @@ breathe_default_project = project
 # built documents.
 
 import imp
-version_module = imp.load_source('version', os.path.abspath('../../version.py'))
+version_module = imp.load_source('version', os.path.abspath('../../src/python/molpher/version.py'))
 
 # The short X.Y version.
 version = version_module.VERSION
