@@ -8,6 +8,7 @@
 #include "data_structs/MolpherMol.hpp"
 #include <vector>
 
+
 class AtomLibrary {
 
 private:
@@ -16,7 +17,9 @@ private:
 
 public:
 	AtomLibrary(const std::vector<std::shared_ptr<MolpherAtom>>& atoms);
-	AtomLibrary(const MolpherMol& mol);
+    AtomLibrary(const std::vector<std::shared_ptr<MolpherAtom>>& atoms, const std::vector<double>& atom_probabilities);
+
+    AtomLibrary(const MolpherMol& mol);
 	AtomLibrary(const AtomLibrary& other);
 	~AtomLibrary();
 
@@ -24,9 +27,11 @@ public:
 
 	static const AtomLibrary& getDefaultLibrary();
 	static void setDefaultLibrary(const AtomLibrary& new_default);
+    static void setDefaultLibraryWithProbabilities(const AtomLibrary& new_default, const std::vector<double>& new_default_probabilities);
 
-	const MolpherAtom& getRandomAtom() const;
+    const MolpherAtom& getRandomAtom() const;
 	std::vector<std::shared_ptr<MolpherAtom>> getAtoms() const;
+    std::vector<double> getAtomProbabilities() const;
 
 };
 

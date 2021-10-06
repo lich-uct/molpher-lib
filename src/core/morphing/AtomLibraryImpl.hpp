@@ -7,22 +7,26 @@
 
 #include "morphing/AtomLibrary.hpp"
 
+
 class AtomLibrary::AtomLibraryImpl {
 
 private:
 	std::vector<std::shared_ptr<const MolpherAtom>> atoms;
+    std::vector<double> atom_probabilities;
 	static std::unique_ptr<AtomLibrary> default_lib;
 
 public:
 	AtomLibraryImpl(const std::vector<std::shared_ptr<MolpherAtom>>& atoms);
-	AtomLibraryImpl(const MolpherMol& mol);
+    AtomLibraryImpl(const std::vector<std::shared_ptr<MolpherAtom>>& atoms, const std::vector<double>& atom_probabilities);
+    AtomLibraryImpl(const MolpherMol& mol);
 
 	static const AtomLibrary& getDefaultLibrary();
 	static void setDefaultLibrary(const AtomLibrary& new_default);
+    static void setDefaultLibraryWithProbabilities(const AtomLibrary& new_default, const std::vector<double>& new_default_probabilities);
 
-	const MolpherAtom& getRandomAtom() const;
+    const MolpherAtom& getRandomAtom() const;
 	std::vector<std::shared_ptr<MolpherAtom>> getAtoms() const;
-
+    std::vector<double> getAtomProbabilities() const;
 };
 
 #endif //MOLPHER_LIB_ATOMLIBRARYIMPL_HPP
