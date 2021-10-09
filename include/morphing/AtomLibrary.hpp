@@ -17,6 +17,7 @@ private:
 
 public:
 	AtomLibrary(const std::vector<std::shared_ptr<MolpherAtom>>& atoms);
+
     AtomLibrary(const std::vector<std::shared_ptr<MolpherAtom>>& atoms, const std::vector<double>& atom_probabilities);
 
     AtomLibrary(const MolpherMol& mol);

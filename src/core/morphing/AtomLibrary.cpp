@@ -120,12 +120,9 @@ const MolpherAtom &AtomLibrary::AtomLibraryImpl::getRandomAtom() const {
         for (int i = 0; i < atom_probabilities.size(); i++) {
             sum += atom_probabilities[i];
         }
-        //srand(time(0));
         double rnd = (double) rand() / RAND_MAX * sum;
-        std::cout << "RND " << rnd << std::endl;
         for (int idx = 0; idx < atom_probabilities.size(); idx++) {
             if (rnd < atom_probabilities[idx]) {
-                std::cout << idx << std::endl;
                 return *atoms[idx];
             }
             rnd -= atom_probabilities[idx];
