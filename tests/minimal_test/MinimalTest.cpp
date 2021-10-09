@@ -292,7 +292,6 @@ void MinimalTest::testAtomLibrary() {
 
 
     print("Choosing random atoms: ");
-    //srand(time(0));
     MolpherAtom rand_atom = default_lib.getRandomAtom();
 
     while (!rand_atom.isLocked()) {
