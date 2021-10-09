@@ -3526,18 +3526,19 @@ namespace Swig {
 #define SWIGTYPE_p_std__vectorT_MolpherAtom__LockingMask_std__allocatorT_MolpherAtom__LockingMask_t_t swig_types[71]
 #define SWIGTYPE_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t swig_types[72]
 #define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[73]
-#define SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t swig_types[74]
-#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t swig_types[75]
-#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t swig_types[76]
-#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t swig_types[77]
-#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t swig_types[78]
-#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphingOperator_t_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t_t swig_types[79]
-#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[80]
-#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[81]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[82]
-#define SWIGTYPE_p_value_type swig_types[83]
-static swig_type_info *swig_types[85];
-static swig_module_info swig_module = {swig_types, 84, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[74]
+#define SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t swig_types[75]
+#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t swig_types[76]
+#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t swig_types[77]
+#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MolpherMol_t_std__allocatorT_std__shared_ptrT_MolpherMol_t_t_t swig_types[78]
+#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphCollector_t_std__allocatorT_std__shared_ptrT_MorphCollector_t_t_t swig_types[79]
+#define SWIGTYPE_p_std__vectorT_std__shared_ptrT_MorphingOperator_t_std__allocatorT_std__shared_ptrT_MorphingOperator_t_t_t swig_types[80]
+#define SWIGTYPE_p_std__vectorT_std__string_std__allocatorT_std__string_t_t swig_types[81]
+#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[82]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[83]
+#define SWIGTYPE_p_value_type swig_types[84]
+static swig_type_info *swig_types[86];
+static swig_module_info swig_module = {swig_types, 85, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -46512,6 +46513,58 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_AtomLibrary__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > *arg1 = 0 ;
+  std::vector< double,std::allocator< double > > *arg2 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  AtomLibrary *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_AtomLibrary",&obj0,&obj1)) SWIG_fail;
+  {
+    std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > *ptr = (std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > *)0;
+    res1 = swig::asptr(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AtomLibrary" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AtomLibrary" "', argument " "1"" of type '" "std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AtomLibrary" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AtomLibrary" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< double,std::allocator< double > > * >(argp2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (AtomLibrary *)new AtomLibrary((std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > const &)*arg1,(std::vector< double,std::allocator< double > > const &)*arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_AtomLibrary, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AtomLibrary__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
   MolpherMol *arg1 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -46556,7 +46609,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AtomLibrary__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_AtomLibrary__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   AtomLibrary *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -46594,14 +46647,14 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_AtomLibrary(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[2] = {
+  PyObject *argv[3] = {
     0
   };
   Py_ssize_t ii;
   
   if (!PyTuple_Check(args)) SWIG_fail;
   argc = args ? PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
     argv[ii] = PyTuple_GET_ITEM(args,ii);
   }
   if (argc == 1) {
@@ -46609,7 +46662,7 @@ SWIGINTERN PyObject *_wrap_new_AtomLibrary(PyObject *self, PyObject *args) {
     int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__shared_ptrT_MolpherMol_t, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      return _wrap_new_AtomLibrary__SWIG_1(self, args);
+      return _wrap_new_AtomLibrary__SWIG_2(self, args);
     }
   }
   if (argc == 1) {
@@ -46617,7 +46670,7 @@ SWIGINTERN PyObject *_wrap_new_AtomLibrary(PyObject *self, PyObject *args) {
     int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_AtomLibrary, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      return _wrap_new_AtomLibrary__SWIG_2(self, args);
+      return _wrap_new_AtomLibrary__SWIG_3(self, args);
     }
   }
   if (argc == 1) {
@@ -46628,11 +46681,24 @@ SWIGINTERN PyObject *_wrap_new_AtomLibrary(PyObject *self, PyObject *args) {
       return _wrap_new_AtomLibrary__SWIG_0(self, args);
     }
   }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_new_AtomLibrary__SWIG_1(self, args);
+      }
+    }
+  }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_AtomLibrary'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    AtomLibrary::AtomLibrary(std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > const &)\n"
+    "    AtomLibrary::AtomLibrary(std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > const &,std::vector< double,std::allocator< double > > const &)\n"
     "    AtomLibrary::AtomLibrary(MolpherMol const &)\n"
     "    AtomLibrary::AtomLibrary(AtomLibrary const &)\n");
   return 0;
@@ -46730,6 +46796,53 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_AtomLibrary_setDefaultLibraryWithProbabilities(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  AtomLibrary *arg1 = 0 ;
+  std::vector< double,std::allocator< double > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:AtomLibrary_setDefaultLibraryWithProbabilities",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_AtomLibrary,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AtomLibrary_setDefaultLibraryWithProbabilities" "', argument " "1"" of type '" "AtomLibrary const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AtomLibrary_setDefaultLibraryWithProbabilities" "', argument " "1"" of type '" "AtomLibrary const &""'"); 
+  }
+  arg1 = reinterpret_cast< AtomLibrary * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AtomLibrary_setDefaultLibraryWithProbabilities" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AtomLibrary_setDefaultLibraryWithProbabilities" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< double,std::allocator< double > > * >(argp2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        AtomLibrary::setDefaultLibraryWithProbabilities((AtomLibrary const &)*arg1,(std::vector< double,std::allocator< double > > const &)*arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_AtomLibrary_getRandomAtom(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   AtomLibrary *arg1 = (AtomLibrary *) 0 ;
@@ -46793,6 +46906,39 @@ SWIGINTERN PyObject *_wrap_AtomLibrary_getAtoms(PyObject *SWIGUNUSEDPARM(self), 
     }
   }
   resultobj = swig::from(static_cast< std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AtomLibrary_getAtomProbabilities(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  AtomLibrary *arg1 = (AtomLibrary *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  SwigValueWrapper< std::vector< double,std::allocator< double > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:AtomLibrary_getAtomProbabilities",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_AtomLibrary, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AtomLibrary_getAtomProbabilities" "', argument " "1"" of type '" "AtomLibrary const *""'"); 
+  }
+  arg1 = reinterpret_cast< AtomLibrary * >(argp1);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = ((AtomLibrary const *)arg1)->getAtomProbabilities();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new std::vector< double,std::allocator< double > >(static_cast< const std::vector< double,std::allocator< double > >& >(result))), SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -50833,8 +50979,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_AtomLibrary", _wrap_delete_AtomLibrary, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_getDefaultLibrary", _wrap_AtomLibrary_getDefaultLibrary, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_setDefaultLibrary", _wrap_AtomLibrary_setDefaultLibrary, METH_VARARGS, NULL},
+	 { (char *)"AtomLibrary_setDefaultLibraryWithProbabilities", _wrap_AtomLibrary_setDefaultLibraryWithProbabilities, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_getRandomAtom", _wrap_AtomLibrary_getRandomAtom, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_getAtoms", _wrap_AtomLibrary_getAtoms, METH_VARARGS, NULL},
+	 { (char *)"AtomLibrary_getAtomProbabilities", _wrap_AtomLibrary_getAtomProbabilities, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_swigregister", AtomLibrary_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Molpher", _wrap_new_Molpher, METH_VARARGS, NULL},
 	 { (char *)"delete_Molpher", _wrap_delete_Molpher, METH_VARARGS, NULL},
@@ -51074,6 +51222,7 @@ static swig_type_info _swigt__p_std__shared_ptrT_std__shared_ptrT_std__vectorT_s
 static swig_type_info _swigt__p_std__vectorT_MolpherAtom__LockingMask_std__allocatorT_MolpherAtom__LockingMask_t_t = {"_p_std__vectorT_MolpherAtom__LockingMask_std__allocatorT_MolpherAtom__LockingMask_t_t", "std::vector< MolpherAtom::LockingMask,std::allocator< MolpherAtom::LockingMask > > *|std::vector< enum MolpherAtom::LockingMask,std::allocator< enum MolpherAtom::LockingMask > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t = {"_p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t", "std::vector< MolpherMol,std::allocator< MolpherMol > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t = {"_p_std__vectorT_bool_std__allocatorT_bool_t_t", "std::vector< bool,std::allocator< bool > > *|std::vector< bool > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_double_std__allocatorT_double_t_t = {"_p_std__vectorT_double_std__allocatorT_double_t_t", "std::vector< double,std::allocator< double > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_int_std__allocatorT_int_t_t = {"_p_std__vectorT_int_std__allocatorT_int_t_t", "std::vector< int,std::allocator< int > > *|std::vector< int > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t = {"_p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t", "std::vector< std::pair< unsigned int,unsigned int > > *|std::vector< std::pair< unsigned int,unsigned int >,std::allocator< std::pair< unsigned int,unsigned int > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t = {"_p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t", "std::vector< std::shared_ptr< MolpherAtom > > *|std::vector< std::shared_ptr< MolpherAtom >,std::allocator< std::shared_ptr< MolpherAtom > > > *", 0, 0, (void*)0, 0};
@@ -51160,6 +51309,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__vectorT_MolpherAtom__LockingMask_std__allocatorT_MolpherAtom__LockingMask_t_t,
   &_swigt__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t,
   &_swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t,
+  &_swigt__p_std__vectorT_double_std__allocatorT_double_t_t,
   &_swigt__p_std__vectorT_int_std__allocatorT_int_t_t,
   &_swigt__p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t,
   &_swigt__p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t,
@@ -51246,6 +51396,7 @@ static swig_cast_info _swigc__p_std__shared_ptrT_std__shared_ptrT_std__vectorT_s
 static swig_cast_info _swigc__p_std__vectorT_MolpherAtom__LockingMask_std__allocatorT_MolpherAtom__LockingMask_t_t[] = {  {&_swigt__p_std__vectorT_MolpherAtom__LockingMask_std__allocatorT_MolpherAtom__LockingMask_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t[] = {  {&_swigt__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_bool_std__allocatorT_bool_t_t[] = {  {&_swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_double_std__allocatorT_double_t_t[] = {  {&_swigt__p_std__vectorT_double_std__allocatorT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_int_std__allocatorT_int_t_t[] = {  {&_swigt__p_std__vectorT_int_std__allocatorT_int_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t[] = {  {&_swigt__p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t[] = {  {&_swigt__p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -51332,6 +51483,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__vectorT_MolpherAtom__LockingMask_std__allocatorT_MolpherAtom__LockingMask_t_t,
   _swigc__p_std__vectorT_MolpherMol_std__allocatorT_MolpherMol_t_t,
   _swigc__p_std__vectorT_bool_std__allocatorT_bool_t_t,
+  _swigc__p_std__vectorT_double_std__allocatorT_double_t_t,
   _swigc__p_std__vectorT_int_std__allocatorT_int_t_t,
   _swigc__p_std__vectorT_std__pairT_unsigned_int_unsigned_int_t_std__allocatorT_std__pairT_unsigned_int_unsigned_int_t_t_t,
   _swigc__p_std__vectorT_std__shared_ptrT_MolpherAtom_t_std__allocatorT_std__shared_ptrT_MolpherAtom_t_t_t,
