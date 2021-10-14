@@ -36,7 +36,6 @@ std::unique_ptr<AtomLibrary> AtomLibrary::AtomLibraryImpl::default_lib(
 AtomLibrary::AtomLibrary(const std::vector<std::shared_ptr<MolpherAtom>>& atoms) :
 pimpl(new AtomLibraryImpl(atoms))
 {
-    srand(time(0));
 	// no action
 }
 
@@ -114,7 +113,7 @@ const MolpherAtom &AtomLibrary::AtomLibraryImpl::getRandomAtom() const {
         for (int i = 0; i < atom_probabilities.size(); i++) {
             sum += atom_probabilities[i];
         }
-        double rnd = (double) rand() / RAND_MAX * sum;
+        double rnd = (double) SynchRand::GetRandomNumber(RAND_MAX) / RAND_MAX * sum;
         for (int idx = 0; idx < atom_probabilities.size(); idx++) {
             if (rnd < atom_probabilities[idx]) {
                 return *atoms[idx];
