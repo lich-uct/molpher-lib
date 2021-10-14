@@ -3,34 +3,33 @@
 //
 
 #include <core/misc/SynchRand.h>
-#include <morphing/AtomLibrary.hpp>
 
 #include "AtomLibraryImpl.hpp"
 
 std::unique_ptr<AtomLibrary> AtomLibrary::AtomLibraryImpl::default_lib(
-        new AtomLibrary(std::vector<std::shared_ptr<MolpherAtom>>(
-                {
-                        std::make_shared<MolpherAtom>(MolpherAtom("C"))
-                        , std::make_shared<MolpherAtom>(MolpherAtom("O"))
-                        , std::make_shared<MolpherAtom>(MolpherAtom("N"))
-                        , std::make_shared<MolpherAtom>(MolpherAtom("F"))
-                        , std::make_shared<MolpherAtom>(MolpherAtom("S"))
-                        , std::make_shared<MolpherAtom>(MolpherAtom("Cl"))
-                        , std::make_shared<MolpherAtom>(MolpherAtom("Br"))
-                        , std::make_shared<MolpherAtom>(MolpherAtom("I"))
-                }),
-
-                        std::vector<double>(
-                                {
-                                        73.12,
-                                        11.741,
-                                        11.318,
-                                        1.379,
-                                        1.295,
-                                        0.8195,
-                                        0.1703,
-                                        0.01632
-                                })
+        new AtomLibrary(
+        		std::vector<std::shared_ptr<MolpherAtom>>(
+						{
+								std::make_shared<MolpherAtom>(MolpherAtom("C"))
+								, std::make_shared<MolpherAtom>(MolpherAtom("O"))
+								, std::make_shared<MolpherAtom>(MolpherAtom("N"))
+								, std::make_shared<MolpherAtom>(MolpherAtom("F"))
+								, std::make_shared<MolpherAtom>(MolpherAtom("S"))
+								, std::make_shared<MolpherAtom>(MolpherAtom("Cl"))
+								, std::make_shared<MolpherAtom>(MolpherAtom("Br"))
+								, std::make_shared<MolpherAtom>(MolpherAtom("I"))
+						}),
+				std::vector<double>(
+						{
+								73.12,
+								11.741,
+								11.318,
+								1.379,
+								1.295,
+								0.8195,
+								0.1703,
+								0.01632
+						})
         )
 );
 
@@ -47,17 +46,6 @@ const AtomLibrary &AtomLibrary::getDefaultLibrary() {
 
 void AtomLibrary::setDefaultLibrary(const AtomLibrary &new_default) {
 	AtomLibraryImpl::setDefaultLibrary(new_default);
-}
-
-void AtomLibrary::setDefaultLibraryWithProbabilities(const AtomLibrary &new_default,
-                                                     const std::vector<double> &new_default_probabilities) {
-    AtomLibraryImpl::setDefaultLibraryWithProbabilities(new_default,new_default_probabilities);
-}
-
-void AtomLibrary::AtomLibraryImpl::setDefaultLibraryWithProbabilities(const AtomLibrary &new_default,
-                                                                      const std::vector<double> &new_default_probabilities) {
-    *default_lib = new_default;
-    default_lib->pimpl->atom_probabilities = new_default_probabilities;
 }
 
 const MolpherAtom &AtomLibrary::getRandomAtom() const {
@@ -79,7 +67,7 @@ AtomLibrary::AtomLibrary(const std::vector<std::shared_ptr<MolpherAtom>>& atoms,
 AtomLibrary::~AtomLibrary() = default;
 
 AtomLibrary &AtomLibrary::operator=(const AtomLibrary &other) {
-	pimpl = std::move(std::unique_ptr<AtomLibraryImpl>(new AtomLibraryImpl(other.getAtoms())));
+	pimpl = std::move(std::unique_ptr<AtomLibraryImpl>(new AtomLibraryImpl(other.getAtoms(), other.getAtomProbabilities())));
 	return *this;
 }
 
@@ -91,9 +79,15 @@ AtomLibrary::AtomLibrary(const MolpherMol &mol) : pimpl(new AtomLibraryImpl(mol)
 	// no action
 }
 
+std::vector<double> AtomLibrary::getAtomProbabilities() const {
+	return pimpl->getAtomProbabilities();
+}
 
+void AtomLibrary::setAtomProbabilities(const std::vector<double> &atom_probabilities) {
+	return pimpl->setAtomProbabilities(atom_probabilities);
+}
 
-
+// impl stuff:
 
 AtomLibrary::AtomLibraryImpl::AtomLibraryImpl(const std::vector<std::shared_ptr<MolpherAtom>>& atoms) {
 	// FIXME: check for an empty atom list and raise exception
@@ -154,15 +148,16 @@ AtomLibrary::AtomLibraryImpl::AtomLibraryImpl(const std::vector<std::shared_ptr<
     }
 }
 
-std::vector<double> AtomLibrary::getAtomProbabilities() const {
-    return pimpl->getAtomProbabilities();
-}
-
 std::vector<double> AtomLibrary::AtomLibraryImpl::getAtomProbabilities() const {
     std::vector<double> probabilities;
     for (auto prob : atom_probabilities){
         probabilities.push_back(prob);
     }
     return probabilities;
+}
+
+void
+AtomLibrary::AtomLibraryImpl::setAtomProbabilities(const std::vector<double> &atom_probabilities) {
+	this->atom_probabilities = atom_probabilities;
 }
 

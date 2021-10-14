@@ -218,14 +218,15 @@ void MinimalTest::testMolpherMol() {
 
 void MinimalTest::testAtomLibrary() {
     const AtomLibrary& default_lib = AtomLibrary::getDefaultLibrary();
-    std::vector<double> probabilitis = default_lib.getAtomProbabilities();
+	CPPUNIT_ASSERT_EQUAL(default_lib.getAtoms().size(), default_lib.getAtomProbabilities().size());
+    std::vector<double> probabilities = default_lib.getAtomProbabilities();
 
     print("Default library: ");
     int idx = 0;
     for (auto atom : default_lib.getAtoms()) {
         RDKit::Atom* rd_atom = atom->asRDAtom();
         print(atom->getSymbol() + ", formal charge: " + std::to_string(atom->getFormalCharge())
-              + ", atom probabilities: " + std::to_string(probabilitis[idx]));
+              + ", probability: " + std::to_string(probabilities[idx]));
         idx += 1;
         CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), rd_atom->getSymbol());
         CPPUNIT_ASSERT_EQUAL(atom->getMass(), rd_atom->getMass());
@@ -234,73 +235,60 @@ void MinimalTest::testAtomLibrary() {
     }
 
     // changing the default library
-//    auto locked_nitrogen = std::make_shared<MolpherAtom>(MolpherAtom("N"));
-//    locked_nitrogen->setLockingMask(MolpherAtom::NO_ADDITION);
+	print("Modifying defaults... ");
+    auto locked_nitrogen = std::make_shared<MolpherAtom>(MolpherAtom("N"));
+    locked_nitrogen->setLockingMask(MolpherAtom::NO_ADDITION);
+	AtomLibrary new_lib((std::vector<std::shared_ptr<MolpherAtom>>(
+			{
+					std::make_shared<MolpherAtom>(MolpherAtom("C"))
+					, std::make_shared<MolpherAtom>(MolpherAtom("O"))
+					, locked_nitrogen
+					, std::make_shared<MolpherAtom>(MolpherAtom("F"))
+					, std::make_shared<MolpherAtom>(MolpherAtom("S"))
+			})), std::vector<double>(
+			{
+					73.12,
+					11.741,
+					11.318,
+					1.379,
+					1.295,
+			})
+	);
+	AtomLibrary::setDefaultLibrary(new_lib);
+	CPPUNIT_ASSERT_EQUAL(5, (int) default_lib.getAtomProbabilities().size());
+	CPPUNIT_ASSERT_EQUAL(default_lib.getAtoms().size(), default_lib.getAtomProbabilities().size());
 
-//    AtomLibrary new_lib((std::vector<std::shared_ptr<MolpherAtom>>(
-//            {
-//                    std::make_shared<MolpherAtom>(MolpherAtom("C"))
-//                    , std::make_shared<MolpherAtom>(MolpherAtom("O"))
-//                    , std::make_shared<MolpherAtom>(MolpherAtom("S"))
-//                    , locked_nitrogen
-//            }))
-//    );
-//    AtomLibrary new_lib((std::vector<std::shared_ptr<MolpherAtom>>(
-//            {
-//                    std::make_shared<MolpherAtom>(MolpherAtom("C"))
-//                    , std::make_shared<MolpherAtom>(MolpherAtom("O"))
-//                    , std::make_shared<MolpherAtom>(MolpherAtom("S"))
-//                    , locked_nitrogen
-//            })), std::vector<double>(
-//                    {
-//                        73.12,
-//                        11.741,
-//                        11.318,
-//                        1.379,})
-//    );
-//
-//    if (new_lib.getAtomProbabilities().empty()){
-//        std::cout<<"EMPTY"<<std::endl;
-//        AtomLibrary::setDefaultLibrary(new_lib);
-//    }else {
-//        AtomLibrary::setDefaultLibraryWithProbabilities(new_lib.getAtoms(), new_lib.getAtomProbabilities());
-//        probabilitis = default_lib.getAtomProbabilities();
-//        idx = 0;
-//    }
-//
-//    print("New library: ");
-//    for (auto atom : default_lib.getAtoms()) {
-//        RDKit::Atom* rd_atom = atom->asRDAtom();
-//        if (default_lib.getAtomProbabilities().empty()) {
-//            print(atom->getSymbol() + ", formal charge: " + std::to_string(atom->getFormalCharge()));
-//        }else{
-//            print(atom->getSymbol() + ", formal charge: " + std::to_string(atom->getFormalCharge())
-//            + ", atom probabilities: " + std::to_string(probabilitis[idx]));
-//            idx += 1;
-//        }
-//        CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), rd_atom->getSymbol());
-//        CPPUNIT_ASSERT_EQUAL(atom->getMass(), rd_atom->getMass());
-//        CPPUNIT_ASSERT_EQUAL(atom->getAtomicNum(), (unsigned) rd_atom->getAtomicNum());
-//        CPPUNIT_ASSERT_EQUAL(atom->getFormalCharge(), rd_atom->getFormalCharge());
-//        if (atom->getSymbol() == "N") {
-//            CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & atom->getLockingMask());
-//            CPPUNIT_ASSERT(atom->isLocked());
-//        }
-//    }
+    print("New library: ");
+	probabilities = default_lib.getAtomProbabilities();
+    for (auto atom : default_lib.getAtoms()) {
+        RDKit::Atom* rd_atom = atom->asRDAtom();
+        if (default_lib.getAtomProbabilities().empty()) {
+            print(atom->getSymbol() + ", formal charge: " + std::to_string(atom->getFormalCharge()));
+        }else{
+            print(atom->getSymbol() + ", formal charge: " + std::to_string(atom->getFormalCharge())
+            + ", atom probabilities: " + std::to_string(probabilities[idx]));
+            idx += 1;
+        }
+        CPPUNIT_ASSERT_EQUAL(atom->getSymbol(), rd_atom->getSymbol());
+        CPPUNIT_ASSERT_EQUAL(atom->getMass(), rd_atom->getMass());
+        CPPUNIT_ASSERT_EQUAL(atom->getAtomicNum(), (unsigned) rd_atom->getAtomicNum());
+        CPPUNIT_ASSERT_EQUAL(atom->getFormalCharge(), rd_atom->getFormalCharge());
+        if (atom->getSymbol() == "N") {
+            CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & atom->getLockingMask());
+            CPPUNIT_ASSERT(atom->isLocked());
+        }
+    }
 
     // getting a random atom
-
-
-    print("Choosing random atoms: ");
+    print("Choosing random atoms until we generate the expected locked nitrogen: ");
     MolpherAtom rand_atom = default_lib.getRandomAtom();
-
     while (!rand_atom.isLocked()) {
         print(rand_atom.getSymbol());
         rand_atom = default_lib.getRandomAtom();
     }
-    print("Locked atom found: " + rand_atom.getSymbol());
-//    CPPUNIT_ASSERT_EQUAL(rand_atom.getSymbol(), locked_nitrogen->getSymbol());
-//    CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & locked_nitrogen->getLockingMask());
+    print("Locked nitrogen generated: " + rand_atom.getSymbol());
+    CPPUNIT_ASSERT_EQUAL(rand_atom.getSymbol(), locked_nitrogen->getSymbol());
+    CPPUNIT_ASSERT(MolpherAtom::NO_ADDITION & locked_nitrogen->getLockingMask());
     CPPUNIT_ASSERT(rand_atom.isLocked());
 }
 

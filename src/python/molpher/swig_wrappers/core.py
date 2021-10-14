@@ -2390,10 +2390,6 @@ class AtomLibrary(_object):
         setDefaultLibrary = staticmethod(_core.AtomLibrary_setDefaultLibrary)
     else:
         setDefaultLibrary = _core.AtomLibrary_setDefaultLibrary
-    if _newclass:
-        setDefaultLibraryWithProbabilities = staticmethod(_core.AtomLibrary_setDefaultLibraryWithProbabilities)
-    else:
-        setDefaultLibraryWithProbabilities = _core.AtomLibrary_setDefaultLibraryWithProbabilities
 
     def getRandomAtom(self):
         return _core.AtomLibrary_getRandomAtom(self)
@@ -2403,6 +2399,9 @@ class AtomLibrary(_object):
 
     def getAtomProbabilities(self):
         return _core.AtomLibrary_getAtomProbabilities(self)
+
+    def setAtomProbabilities(self, atom_probabilities):
+        return _core.AtomLibrary_setAtomProbabilities(self, atom_probabilities)
 AtomLibrary_swigregister = _core.AtomLibrary_swigregister
 AtomLibrary_swigregister(AtomLibrary)
 
@@ -2413,10 +2412,6 @@ AtomLibrary_getDefaultLibrary = _core.AtomLibrary_getDefaultLibrary
 def AtomLibrary_setDefaultLibrary(new_default):
     return _core.AtomLibrary_setDefaultLibrary(new_default)
 AtomLibrary_setDefaultLibrary = _core.AtomLibrary_setDefaultLibrary
-
-def AtomLibrary_setDefaultLibraryWithProbabilities(new_default, new_default_probabilities):
-    return _core.AtomLibrary_setDefaultLibraryWithProbabilities(new_default, new_default_probabilities)
-AtomLibrary_setDefaultLibraryWithProbabilities = _core.AtomLibrary_setDefaultLibraryWithProbabilities
 
 class Molpher(_object):
     __swig_setmethods__ = {}

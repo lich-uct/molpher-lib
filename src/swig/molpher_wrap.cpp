@@ -46796,53 +46796,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_AtomLibrary_setDefaultLibraryWithProbabilities(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  AtomLibrary *arg1 = 0 ;
-  std::vector< double,std::allocator< double > > *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:AtomLibrary_setDefaultLibraryWithProbabilities",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_AtomLibrary,  0  | 0);
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AtomLibrary_setDefaultLibraryWithProbabilities" "', argument " "1"" of type '" "AtomLibrary const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AtomLibrary_setDefaultLibraryWithProbabilities" "', argument " "1"" of type '" "AtomLibrary const &""'"); 
-  }
-  arg1 = reinterpret_cast< AtomLibrary * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AtomLibrary_setDefaultLibraryWithProbabilities" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AtomLibrary_setDefaultLibraryWithProbabilities" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > const &""'"); 
-  }
-  arg2 = reinterpret_cast< std::vector< double,std::allocator< double > > * >(argp2);
-  {
-    try {
-      {
-        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-        AtomLibrary::setDefaultLibraryWithProbabilities((AtomLibrary const &)*arg1,(std::vector< double,std::allocator< double > > const &)*arg2);
-        SWIG_PYTHON_THREAD_END_ALLOW;
-      } 
-    }
-    catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_AtomLibrary_getRandomAtom(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   AtomLibrary *arg1 = (AtomLibrary *) 0 ;
@@ -46939,6 +46892,50 @@ SWIGINTERN PyObject *_wrap_AtomLibrary_getAtomProbabilities(PyObject *SWIGUNUSED
     }
   }
   resultobj = SWIG_NewPointerObj((new std::vector< double,std::allocator< double > >(static_cast< const std::vector< double,std::allocator< double > >& >(result))), SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AtomLibrary_setAtomProbabilities(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  AtomLibrary *arg1 = (AtomLibrary *) 0 ;
+  std::vector< double,std::allocator< double > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:AtomLibrary_setAtomProbabilities",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_AtomLibrary, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AtomLibrary_setAtomProbabilities" "', argument " "1"" of type '" "AtomLibrary *""'"); 
+  }
+  arg1 = reinterpret_cast< AtomLibrary * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AtomLibrary_setAtomProbabilities" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AtomLibrary_setAtomProbabilities" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< double,std::allocator< double > > * >(argp2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->setAtomProbabilities((std::vector< double,std::allocator< double > > const &)*arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -50979,10 +50976,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_AtomLibrary", _wrap_delete_AtomLibrary, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_getDefaultLibrary", _wrap_AtomLibrary_getDefaultLibrary, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_setDefaultLibrary", _wrap_AtomLibrary_setDefaultLibrary, METH_VARARGS, NULL},
-	 { (char *)"AtomLibrary_setDefaultLibraryWithProbabilities", _wrap_AtomLibrary_setDefaultLibraryWithProbabilities, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_getRandomAtom", _wrap_AtomLibrary_getRandomAtom, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_getAtoms", _wrap_AtomLibrary_getAtoms, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_getAtomProbabilities", _wrap_AtomLibrary_getAtomProbabilities, METH_VARARGS, NULL},
+	 { (char *)"AtomLibrary_setAtomProbabilities", _wrap_AtomLibrary_setAtomProbabilities, METH_VARARGS, NULL},
 	 { (char *)"AtomLibrary_swigregister", AtomLibrary_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Molpher", _wrap_new_Molpher, METH_VARARGS, NULL},
 	 { (char *)"delete_Molpher", _wrap_delete_Molpher, METH_VARARGS, NULL},

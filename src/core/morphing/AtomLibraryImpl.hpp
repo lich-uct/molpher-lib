@@ -23,11 +23,11 @@ public:
 
 	static const AtomLibrary& getDefaultLibrary();
 	static void setDefaultLibrary(const AtomLibrary& new_default);
-    static void setDefaultLibraryWithProbabilities(const AtomLibrary& new_default, const std::vector<double>& new_default_probabilities);
 
     const MolpherAtom& getRandomAtom() const;
 	std::vector<std::shared_ptr<MolpherAtom>> getAtoms() const;
     std::vector<double> getAtomProbabilities() const;
+	void setAtomProbabilities(const std::vector<double>& atom_probabilities);
 };
 
 #endif //MOLPHER_LIB_ATOMLIBRARYIMPL_HPP
