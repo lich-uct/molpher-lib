@@ -150,6 +150,9 @@ class TestAPI(unittest.TestCase):
         default_lib = AtomLibrary.getDefaultLibrary()
         old_atoms = default_lib.atoms
         self.assertIn("C", [x.symbol for x in default_lib.atoms])
+        print("Default library atoms:")
+        for atom, proba in zip(default_lib.atoms, default_lib.atom_probabilities):
+            print("Atom:", atom.symbol, "Probability", proba)
 
         AtomLibrary.setDefaultLibrary(my_lib)
         for x in default_lib.atoms:

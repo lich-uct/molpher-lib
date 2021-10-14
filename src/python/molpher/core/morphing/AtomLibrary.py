@@ -59,6 +59,10 @@ class AtomLibrary(molpher.swig_wrappers.core.AtomLibrary):
     def atoms(self):
         return self.getAtoms()
 
+    @property
+    def atom_probabilities(self):
+        return super(AtomLibrary, self).getAtomProbabilities()
+
     def getRandomAtom(self):
         ret = super(AtomLibrary, self).getRandomAtom()
         ret.__class__ = MolpherAtom

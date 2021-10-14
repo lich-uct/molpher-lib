@@ -61,6 +61,7 @@
 %template(IntSet) std::set<int>;
 %template(StringVector) std::vector<std::string>;
 %template(IntVector) std::vector<int>;
+%template(DoubleVector) std::vector<double>;
 %template(UIntVector) std::vector<unsigned int>;
 %template(UIntVectorPairVector) std::vector<std::pair<unsigned int, unsigned int> >;
 %template(BoolVector) std::vector<bool>;

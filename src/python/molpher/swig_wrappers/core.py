@@ -589,6 +589,119 @@ class IntVector(_object):
 IntVector_swigregister = _core.IntVector_swigregister
 IntVector_swigregister(IntVector)
 
+class DoubleVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, DoubleVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, DoubleVector, name)
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _core.DoubleVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _core.DoubleVector___nonzero__(self)
+
+    def __bool__(self):
+        return _core.DoubleVector___bool__(self)
+
+    def __len__(self):
+        return _core.DoubleVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _core.DoubleVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _core.DoubleVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _core.DoubleVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _core.DoubleVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _core.DoubleVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _core.DoubleVector___setitem__(self, *args)
+
+    def pop(self):
+        return _core.DoubleVector_pop(self)
+
+    def append(self, x):
+        return _core.DoubleVector_append(self, x)
+
+    def empty(self):
+        return _core.DoubleVector_empty(self)
+
+    def size(self):
+        return _core.DoubleVector_size(self)
+
+    def swap(self, v):
+        return _core.DoubleVector_swap(self, v)
+
+    def begin(self):
+        return _core.DoubleVector_begin(self)
+
+    def end(self):
+        return _core.DoubleVector_end(self)
+
+    def rbegin(self):
+        return _core.DoubleVector_rbegin(self)
+
+    def rend(self):
+        return _core.DoubleVector_rend(self)
+
+    def clear(self):
+        return _core.DoubleVector_clear(self)
+
+    def get_allocator(self):
+        return _core.DoubleVector_get_allocator(self)
+
+    def pop_back(self):
+        return _core.DoubleVector_pop_back(self)
+
+    def erase(self, *args):
+        return _core.DoubleVector_erase(self, *args)
+
+    def __init__(self, *args):
+        this = _core.new_DoubleVector(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def push_back(self, x):
+        return _core.DoubleVector_push_back(self, x)
+
+    def front(self):
+        return _core.DoubleVector_front(self)
+
+    def back(self):
+        return _core.DoubleVector_back(self)
+
+    def assign(self, n, x):
+        return _core.DoubleVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _core.DoubleVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _core.DoubleVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _core.DoubleVector_reserve(self, n)
+
+    def capacity(self):
+        return _core.DoubleVector_capacity(self)
+    __swig_destroy__ = _core.delete_DoubleVector
+    __del__ = lambda self: None
+DoubleVector_swigregister = _core.DoubleVector_swigregister
+DoubleVector_swigregister(DoubleVector)
+
 class UIntVector(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, UIntVector, name, value)
