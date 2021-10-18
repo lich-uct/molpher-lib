@@ -22,20 +22,20 @@ At the moment, the library binaries are only compiled for 64-bit Linux systems. 
 Molpher-lib is distributed as a [conda package](https://anaconda.org/lich/molpher-lib). At the moment, this is the preferred way to install and use the library. All you need to do is get the full [Anaconda](https://www.continuum.io/downloads) distribution or its lightweight variant, [Miniconda](http://conda.pydata.org/miniconda.html). It is essentially a Python distribution, package manager and virtual environment in one and makes setting up a development environment for any project very easy. After installing Anaconda/Miniconda you can run the following in the Linux terminal:
 
 ```bash
-conda install -c rdkit -c lich molpher-lib
+conda install -c conda-forge -c lich molpher-lib
 ```
 
 This will automatically download the latest version of the library and install everything to the currently active environment (for more information on environments and the `conda` command see [Conda Test Drive](http://conda.pydata.org/docs/test-drive.html)). The library depends on the popular cheminformatics toolkit [RDKit](http://rdkit.org) so do not forget to add the rdkit channel.
 
 If you are interested in the development snapshots of the library 
 (most up to date code, but can contain bugs)
-, you can use the `dev` channel instead:
+, use the `dev` channel instead:
 
 ```bash
-conda install -c rdkit -c lich/label/dev molpher-lib
+conda install -c conda-forge -c lich/label/dev molpher-lib
 ```
 
-After that the library should import in your environment and you should be able to successfully run the integrated unit tests:
+After that the library should be importable in Python and you should be able to successfully run the integrated unit tests:
 
 ```python
 from molpher.tests import run
@@ -43,51 +43,48 @@ from molpher.tests import run
 run()
 ```
 
-You can also check out the [Jupyter notebooks](https://github.com/lich-uct/molpher-lib/tree/master/doc/notebooks) with examples from the [documentation](https://lich-uct.github.io/molpher-lib/latest/).
+For a quick start, you can check out the [Jupyter notebooks](https://github.com/lich-uct/molpher-lib/tree/master/doc/notebooks) 
+that contain examples from the [documentation](https://lich-uct.github.io/molpher-lib/latest/).
 
 ### Compiling from Source
 
-Compiling and installing from source is a little bit more elaborate. This process is described in detail in the [documentation](https://lich-uct.github.io/molpher-lib/latest/usage/installation.html#building-and-installing-from-source-linux), but in the simplest case the following should work:
+Compiling and installing from source is a little bit more elaborate. This process is described in detail in the [documentation](https://lich-uct.github.io/molpher-lib/latest/usage/installation.html#building-and-installing-from-source-linux), 
+but in the simplest case you can use the attached conda build environment 
+to get all the dependencies and tools you will need for compilation:
 
 ```bash
-# get dependencies
-sudo apt-get install git build-essential python3-dev python3-numpy cmake python3-setuptools
-
-# clone the repo
+# clone the repository
 git clone https://github.com/lich-uct/molpher-lib.git
 git checkout dev # or the branch/tag/commit you want
 REPOSITORY_ROOT=`pwd`/molpher-lib
 
-# this might take a while, but you if you are lucky, 
-# cmake might be able to find dependencies 
-# if you already have them somewhere on your system
-# so you can skip this step if you have TBB, Boost and RDKit
-# installed at standard locations
-cd ${REPOSITORY_ROOT}/deps
-./build_deps.sh --all
-
-# finally, build the library itself
+# create the build environment from the attached file and activate it
 cd ${REPOSITORY_ROOT}
+conda env create -n {name} -f environment.yml # replace {name} with the name of your environment, i.e. molpher-lib-build
+conda activate {name}
+
+# build the library itself
 mkdir cmake-build
 cd cmake-build
-cmake .. -DCMAKE_BUILD_TYPE=Debug -DPYTHON_EXECUTABLE=python3
-make molpher_install_python
+cmake .. -DCMAKE_BUILD_TYPE=Debug -DPYTHON_EXECUTABLE=python3 -DRUN_SWIG=ON # you can specify other options (see the documentation link above for more info)
+make molpher_install_python # compile the library and Python wrappers, will also install to ${REPOSITORY_ROOT}/dist
 ```
 
 After setting the appropriate variables:
 
 ```bash
-export CMAKE_INSTALL_PREFIX="${REPOSITORY_ROOT}/dist"
-export DEPS_DIR=${CMAKE_INSTALL_PREFIX}/../deps
-export PYTHONPATH=${DEPS_DIR}/rdkit/:${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages
-export LD_LIBRARY_PATH=${DEPS_DIR}/tbb/lib/intel64/gcc4.7:${DEPS_DIR}/rdkit/lib/:${DEPS_DIR}/boost/stage/lib:${CMAKE_INSTALL_PREFIX}/lib
+cd ${REPOSITORY_ROOT}
+export PYTHONPATH=${REPOSITORY_ROOT}/dist/lib/python3.9/site-packages/molpher-0.0.0b3-py3.9-linux-x86_64.egg/ # change according to your Python and Molpher-lib version
+export LD_LIBRARY_PATH=${REPOSITORY_ROOT}/dist/lib/
 ```
 
-you should be good to go:
+you should be able to import the library from Python. You can verify the installation by running unit tests:
 
 ```bash
 python3
 ```
+
+Inside the interpreter:
 
 ```python
 from molpher.tests import run
@@ -95,23 +92,13 @@ from molpher.tests import run
 run()
 ```
 
-This will run the integrated unit tests. They should all pass without problems.
-
 If you want to explore some example code from the documentations, there are
-a few Jupyter notebooks located under `doc/notebooks`. You can create 
-the needed conda environment 
-and launch your Jupyter server as follows:
+a few Jupyter notebooks located under `doc/notebooks`. Just install Jupyter to your
+build environment and set the variables as above and you can simply run the notebookes like so:
 
 ```bash
-cd ${REPOSITORY_ROOT}
-conda env create -f "environment.yml"
-. source_2_activate
-python setup.py build_ext --inplace
-cd doc/notebooks/
+cd ${REPOSITORY_ROOT}/doc/notebooks/
 jupyter-notebook
 ```
-
-Note that you will need to have the library already compiled and installed in the standard 
-`${REPOSITORY_ROOT}/dist` directory.
 
 This installation process has been tested on common Debian-based systems so experience on other Linux flavors may differ. If you run into problems, report them to the [issue tracker](https://github.com/lich-uct/molpher-lib/issues) and hopefully someone will be able to help.
