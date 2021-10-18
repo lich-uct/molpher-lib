@@ -52,7 +52,7 @@ for python_version in PYTHONS:
     os.environ['BASE_DIR'] = str(BASE_DIR)
     copyfile(os.path.join(BASE_DIR, "LICENSE.md"), os.path.join('./molpher-lib/', "LICENSE.md"))
 
-    ret = subprocess.call("./build.sh", env=os.environ, shell=True)
+    ret = subprocess.call("./build_step.sh", env=os.environ, shell=True)
     if ret != 0:
         print("An error has occured during conda build...")
         exit(1)
