@@ -112,15 +112,29 @@ std::shared_ptr<MolpherMol> MutateAtom::MutateAtomImpl::morph() {
 
 		int randPos = SynchRand::GetRandomNumber(newMol->getNumAtoms() - 1);
 
-		if(replacements[randPos].size() == 0) {
+		if(replacements[randPos].empty()) {
 			delete newMol;
 //			SynchCerr("Given atom cannot be mutated.  Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 
-		RDKit::Atom atom;
-		GetRandomAtom(replacements[randPos], atom);
-		newMol->replaceAtom(randPos, &atom); // atom is copied
+		RDKit::Atom* atom = GetRandomAtom(atom_library);
+		bool validReplacement = false;
+		for (auto& atm : replacements[randPos]) {
+			if ((atm.getAtomicNum() == atom->getAtomicNum()) && (atm.getFormalCharge() == atom->getFormalCharge())) {
+				validReplacement = true;
+				break;
+			}
+		}
+		if (!validReplacement) {
+			delete newMol;
+			delete atom;
+//			SynchCerr("Generated replacement cannot be applied.  Skipping: " + original->getSMILES());
+			return nullptr;
+		}
+
+		newMol->replaceAtom(randPos, atom); // atom is copied
+		delete atom;
 
 		std::shared_ptr<MolpherMol> ret(new MolpherMol(newMol));
 		writeOriginalLockInfo(ret);

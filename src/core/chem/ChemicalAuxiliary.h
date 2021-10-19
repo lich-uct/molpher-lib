@@ -21,11 +21,10 @@
 
 #include <GraphMol/GraphMol.h>
 
+#include <morphing/AtomLibrary.hpp>
 #include "core/misc/global_types.h"
 
-AtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom);
-
-AtomIdx GetRandomAtom(const std::vector<std::shared_ptr<MolpherAtom>> &atoms, RDKit::Atom &atom);
+RDKit::Atom* GetRandomAtom(const AtomLibrary &atoms);
 
 RDKit::Bond *GetRandomNonSingleBond(RDKit::Atom &atom);
 

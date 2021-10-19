@@ -79,31 +79,39 @@ void InterlayAtom::InterlayAtomImpl::setOriginal(std::shared_ptr<MolpherMol> mol
 
 std::shared_ptr<MolpherMol> InterlayAtom::InterlayAtomImpl::morph() {
 	if (original_rdkit) {
-		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
+		auto *newMol = new RDKit::RWMol(*original_rdkit);
 
-		RDKit::Atom atom;
-		AtomIdx idx = GetRandomAtom(atoms, atom);
+		RDKit::Atom* atom = GetRandomAtom(atom_library);
+		AtomIdx idx = 0;
+		for(auto& atm : atoms) {
+			if ((atm->getAtomicNum() == atom->getAtomicNum()) && (atm->getFormalCharge() == atom->getFormalCharge())) {
+				break;
+			}
+			idx++;
+		}
 
 		if (interlay_candidates.find(idx) == interlay_candidates.end()) {
 			delete newMol;
+			delete atom;
 //			SynchCerr("Given bond cannot be interlayed with the selected atom (" + atom.getSymbol() + "). Skipping: " + original->getSMILES());
 			return nullptr;
 		}
-		if (interlay_candidates[idx].size() == 0) {
+		if (interlay_candidates[idx].empty()) {
 			delete newMol;
+			delete atom;
 //			SynchCerr("No bond to interlay.  Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 
 
-		int randPos = SynchRand::GetRandomNumber(interlay_candidates[idx].size() - 1);
+		int randPos = SynchRand::GetRandomNumber((int) interlay_candidates[idx].size() - 1);
 		RDKit::Bond *bond = newMol->getBondWithIdx(interlay_candidates[idx][randPos]);
 
 		AtomIdx beg = bond->getBeginAtomIdx();
 		AtomIdx end = bond->getEndAtomIdx();
 		RDKit::Bond::BondType bt = bond->getBondType(); // FIXME: this could be a problem in rings (two double bonds next to each other for example)
 
-		AtomIdx newAtomIdx = newMol->addAtom(&atom); // atom is copied
+		AtomIdx newAtomIdx = newMol->addAtom(atom, true, true);
 
 		newMol->removeBond(beg, end);
 		newMol->addBond(beg, newAtomIdx, bt);

@@ -24,26 +24,13 @@
 #include "core/misc/SynchRand.h"
 #include "ChemicalAuxiliary.h"
 
-AtomIdx GetRandomAtom(const std::vector<MolpherAtom> &atoms, RDKit::Atom &atom)
+RDKit::Atom* GetRandomAtom(const AtomLibrary& atoms)
 {
-    int idx = SynchRand::GetRandomNumber(atoms.size() - 1);
-
-    atom.setAtomicNum(atoms[idx].getAtomicNum());
-    atom.setFormalCharge(atoms[idx].getFormalCharge());
-//    atom.setMass(atoms[idx].mass); // removed in new version of rdkit (mass determined from atomic number)
-
-    return (AtomIdx) idx;
-}
-
-AtomIdx GetRandomAtom(const std::vector<std::shared_ptr<MolpherAtom>> &atoms, RDKit::Atom &atom)
-{
-    int idx = SynchRand::GetRandomNumber(atoms.size() - 1);
-
-    atom.setAtomicNum(atoms[idx]->getAtomicNum());
-    atom.setFormalCharge(atoms[idx]->getFormalCharge());
-//    atom.setMass(atoms[idx].mass); // removed in new version of rdkit (mass determined from atomic number)
-
-    return (AtomIdx) idx;
+    const MolpherAtom& random_atm = atoms.getRandomAtom();
+	auto* atom = new RDKit::Atom();
+    atom->setAtomicNum((int) random_atm.getAtomicNum());
+    atom->setFormalCharge((int) random_atm.getFormalCharge());
+  	return atom;
 }
 
 RDKit::Bond *GetRandomNonSingleBond(RDKit::Atom &atom)
