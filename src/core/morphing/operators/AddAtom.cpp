@@ -79,7 +79,7 @@ std::shared_ptr<MolpherMol> AddAtom::AddAtomImpl::morph() {
 	if (original_rdkit) {
 		RDKit::RWMol *newMol = new RDKit::RWMol(*original_rdkit);
 
-		RDKit::Atom* atom = atom_library.getRandomAtom().asRDAtom();
+		RDKit::Atom* atom = GetRandomAtom(atom_library);
 
 		if (open_atoms.size() == 0) {
 			delete newMol;

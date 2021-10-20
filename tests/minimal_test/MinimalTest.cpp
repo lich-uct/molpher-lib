@@ -335,7 +335,11 @@ void MinimalTest::testAddAtomOperator() {
 			{
 					std::make_shared<MolpherAtom>(MolpherAtom("O"))
 					, std::make_shared<MolpherAtom>(MolpherAtom("S"))
-			}))
+			})), std::vector<double>(
+			{
+					73.12,
+					11.741
+			})
 	);
 	op_add = AddAtom(custom_lib);
 	op_add.setOriginal(cymene_no_add);

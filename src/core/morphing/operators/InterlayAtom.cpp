@@ -82,6 +82,7 @@ std::shared_ptr<MolpherMol> InterlayAtom::InterlayAtomImpl::morph() {
 		auto *newMol = new RDKit::RWMol(*original_rdkit);
 
 		RDKit::Atom* atom = GetRandomAtom(atom_library);
+//		SynchCout("Trying to add atom: " + atom->getSymbol());
 		AtomIdx idx = 0;
 		for(auto& atm : atoms) {
 			if ((atm->getAtomicNum() == atom->getAtomicNum()) && (atm->getFormalCharge() == atom->getFormalCharge())) {

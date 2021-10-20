@@ -123,13 +123,14 @@ std::shared_ptr<MolpherMol> MutateAtom::MutateAtomImpl::morph() {
 		for (auto& atm : replacements[randPos]) {
 			if ((atm.getAtomicNum() == atom->getAtomicNum()) && (atm.getFormalCharge() == atom->getFormalCharge())) {
 				validReplacement = true;
+//				SynchCout("Found valid replacement: " + atm.getSymbol());
 				break;
 			}
 		}
 		if (!validReplacement) {
+//			SynchCerr("Generated replacement (" + atom->getSymbol() + ") cannot be applied.  Skipping: " + original->getSMILES());
 			delete newMol;
 			delete atom;
-//			SynchCerr("Generated replacement cannot be applied.  Skipping: " + original->getSMILES());
 			return nullptr;
 		}
 

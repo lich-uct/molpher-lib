@@ -26,11 +26,7 @@
 
 RDKit::Atom* GetRandomAtom(const AtomLibrary& atoms)
 {
-    const MolpherAtom& random_atm = atoms.getRandomAtom();
-	auto* atom = new RDKit::Atom();
-    atom->setAtomicNum((int) random_atm.getAtomicNum());
-    atom->setFormalCharge((int) random_atm.getFormalCharge());
-  	return atom;
+  	return atoms.getRandomAtom().asRDAtom();
 }
 
 RDKit::Bond *GetRandomNonSingleBond(RDKit::Atom &atom)

@@ -52,7 +52,7 @@ const MolpherAtom &AtomLibrary::getRandomAtom() const {
 }
 
 AtomLibrary::AtomLibrary(const AtomLibrary &other)
-: pimpl(new AtomLibraryImpl(other.getAtoms()))
+: pimpl(new AtomLibraryImpl(other.getAtoms(), other.getAtomProbabilities()))
 {
 	// no action
 }
@@ -66,7 +66,7 @@ AtomLibrary::AtomLibrary(const std::vector<std::shared_ptr<MolpherAtom>>& atoms,
 AtomLibrary::~AtomLibrary() = default;
 
 AtomLibrary &AtomLibrary::operator=(const AtomLibrary &other) {
-	pimpl = std::move(std::unique_ptr<AtomLibraryImpl>(new AtomLibraryImpl(other.getAtoms(), other.getAtomProbabilities())));
+	pimpl = std::move(std::make_unique<AtomLibraryImpl>(other.getAtoms(), other.getAtomProbabilities()));
 	return *this;
 }
 
@@ -145,6 +145,7 @@ AtomLibrary::AtomLibraryImpl::AtomLibraryImpl(const std::vector<std::shared_ptr<
     for (auto prob : atom_probabilities) {
         this->atom_probabilities.push_back(prob);
     }
+	assert((atoms.size() == this->atom_probabilities.size()) || this->atom_probabilities.empty());
 }
 
 std::vector<double> AtomLibrary::AtomLibraryImpl::getAtomProbabilities() const {
@@ -158,5 +159,6 @@ std::vector<double> AtomLibrary::AtomLibraryImpl::getAtomProbabilities() const {
 void
 AtomLibrary::AtomLibraryImpl::setAtomProbabilities(const std::vector<double> &atom_probabilities) {
 	this->atom_probabilities = atom_probabilities;
+	assert((atoms.size() == this->atom_probabilities.size()) || this->atom_probabilities.empty());
 }
 
