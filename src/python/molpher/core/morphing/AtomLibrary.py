@@ -23,9 +23,10 @@ class AtomLibrary(molpher.swig_wrappers.core.AtomLibrary):
     """
     :param atoms: A set of atoms that defines the library.
     :type atoms: an iterable of :class:`~.morphing.AtomLibrary.AtomLibrary` instances, another :class:`~.morphing.AtomLibrary.AtomLibrary` instance or simply a list of atom symbols.
+    :type atom_probabilities: an iterable of numbers specifying the probability of each atom being incorporated in the generated structures. Needs to be the same length as :command:`atoms` or empty (equal probability for each atom).
     """
 
-    def __init__(self, atoms):
+    def __init__(self, atoms, atom_probabilities=tuple()):
         atoms_ = []
         try:
             iter(atoms)
@@ -38,7 +39,9 @@ class AtomLibrary(molpher.swig_wrappers.core.AtomLibrary):
                 raise RuntimeError("Atom list must not be empty.")
         except TypeError:
             pass
-        super(AtomLibrary, self).__init__(atoms_ if atoms_ else atoms)
+        if (len(atoms) != len(atom_probabilities)) and not (len(atom_probabilities) == 0):
+            raise RuntimeError("The length of the atom list does not match the length of the probability list.")
+        super(AtomLibrary, self).__init__(atoms_ if atoms_ else atoms, atom_probabilities)
 
     def __repr__(self):
         return shorten_repr(self.__class__, self)

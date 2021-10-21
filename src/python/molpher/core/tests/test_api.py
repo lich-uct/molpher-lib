@@ -142,26 +142,38 @@ class TestAPI(unittest.TestCase):
             self.assertTrue(atm_old.locking_mask == atm_new.locking_mask)
 
     def testAtomLibrary(self):
-        smbls = ["O", "S"]
-        my_lib = AtomLibrary(smbls)
-        for x in my_lib.atoms:
-            self.assertIn(x.symbol, smbls)
-
         default_lib = AtomLibrary.getDefaultLibrary()
         old_atoms = default_lib.atoms
+        old_probas = default_lib.atom_probabilities
         self.assertIn("C", [x.symbol for x in default_lib.atoms])
         print("Default library atoms:")
         for atom, proba in zip(default_lib.atoms, default_lib.atom_probabilities):
             print("Atom:", atom.symbol, "Probability", proba)
 
+        smbls = ["O", "S"]
+        my_lib = AtomLibrary(smbls)
+        for x in my_lib.atoms:
+            self.assertIn(x.symbol, smbls)
         AtomLibrary.setDefaultLibrary(my_lib)
         for x in default_lib.atoms:
             self.assertIn(x.symbol, smbls)
 
+        probas = [0.75, 0.25]
+        self.assertRaises(RuntimeError, lambda : AtomLibrary(["C"], probas))
+        my_lib = AtomLibrary(smbls, probas)
+        AtomLibrary.setDefaultLibrary(my_lib)
+        for idx, atom_info in enumerate(zip(default_lib.atoms, default_lib.atom_probabilities)):
+            self.assertEquals(atom_info[0].symbol, smbls[idx])
+            self.assertEquals(atom_info[1], probas[idx])
+
         for x in range(200):
             self.assertIn(default_lib.getRandomAtom().symbol, smbls)
 
-        AtomLibrary.setDefaultLibrary(AtomLibrary(old_atoms)) # put everything back to default
+        AtomLibrary.setDefaultLibrary(AtomLibrary(old_atoms, old_probas)) # put everything back to default
+        old_symbols = [x.symbol for x in old_atoms]
+        for idx, atom_info in enumerate(zip(default_lib.atoms, default_lib.atom_probabilities)):
+            self.assertEquals(atom_info[0].symbol, old_symbols[idx])
+            self.assertEquals(atom_info[1], old_probas[idx])
 
     def assertOperatorValid(self, operator, test_mol, gens = 10):
         print("Testing operator:", operator)
