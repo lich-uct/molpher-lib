@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>2.3. Exploration Algorithms Implemented in Molpher-lib &mdash; Molpher-lib 0.0.0b3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.4. Advanced Topics" href="advanced.html" />
+    <link rel="prev" title="2.2. Chemical Space Exploration with Molecular Morphing by Example" href="exploration.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Using the library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../installation.html">1. Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorial.html">2. Tutorial</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="morphing.html">2.1. Molecular Morphing Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exploration.html">2.2. Implementing Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.3. Exploration Algorithms Implemented in Molpher-lib</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#classic-original-algorithm">2.3.1. Classic (Original) Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bidirectional-algorithm">2.3.2. Bidirectional Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#anti-decoys-algorithm">2.3.3. Anti-decoys Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">2.3.4. Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html">2.4. Advanced Topics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Using the library</a> &raquo;</li>
+        
+          <li><a href="../tutorial.html"><span class="section-number">2. </span>Tutorial</a> &raquo;</li>
+        
+      <li><span class="section-number">2.3. </span>Exploration Algorithms Implemented in Molpher-lib</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="exploration-algorithms-implemented-in-molpher-lib">
+<h1><span class="section-number">2.3. </span>Exploration Algorithms Implemented in Molpher-lib<a class="headerlink" href="#exploration-algorithms-implemented-in-molpher-lib" title="Permalink to this headline">¶</a></h1>
+<p>The library also provides complete implementations of a few
+exploration algorithms (located in <a class="reference internal" href="../../documentation/python/molpher.algorithms.html#module-molpher.algorithms" title="molpher.algorithms"><code class="xref py py-mod docutils literal notranslate"><span class="pre">molpher.algorithms</span></code></a>). This section briefly describes these algorithms
+and shows how to use them. It is also recommended to look at
+the source code documentation of the <a class="reference internal" href="../../documentation/python/molpher.algorithms.html#module-molpher.algorithms" title="molpher.algorithms"><code class="xref py py-mod docutils literal notranslate"><span class="pre">algorithms</span></code></a> package,
+which contains some generally useful modules
+(such as <a class="reference internal" href="../../documentation/python/molpher.algorithms.html#module-molpher.algorithms.functions" title="molpher.algorithms.functions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">functions</span></code></a> and <a class="reference internal" href="../../documentation/python/molpher.algorithms.html#module-molpher.algorithms.operations" title="molpher.algorithms.operations"><code class="xref py py-mod docutils literal notranslate"><span class="pre">operations</span></code></a>).</p>
+<section id="classic-original-algorithm">
+<span id="alg-classic"></span><h2><span class="section-number">2.3.1. </span>Classic (Original) Algorithm<a class="headerlink" href="#classic-original-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>This is the algorithm published with the <a class="reference internal" href="../../glossary.html#term-Molpher"><span class="xref std std-term">Molpher</span></a>
+program <a class="footnote-reference brackets" href="#id4" id="id1">1</a>. It is the most basic algorithm
+that can be implemented and a lot of fundamental concepts of
+Molpher-lib are based on it. The other algorithms presented in this part of the documentation
+are modifications or extensions of the original. It is, therefore,
+recommended to read this section before moving on to the following ones.</p>
+<p>The classic algorithm uses a single tree rooted at the <a class="reference internal" href="../../glossary.html#term-source-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">source</span> <span class="pre">molecule</span></code></a> (M<sub>S</sub>).
+Using predefined <a class="reference internal" href="../../glossary.html#term-chemical-operators"><code class="xref any std std-term docutils literal notranslate"><span class="pre">chemical</span> <span class="pre">operators</span></code></a>, it generates a new generation of structures from the leaves of this tree
+at every iteration (see <a class="reference internal" href="#morphing"><span class="std std-numref">Fig. 2.3</span></a>).
+The new list of candidates is then sorted (using the
+<a class="reference internal" href="../../documentation/python/molpher.core.operations.html#molpher.core.operations.SortMorphsOper.SortMorphsOper" title="molpher.core.operations.SortMorphsOper.SortMorphsOper"><code class="xref py py-class docutils literal notranslate"><span class="pre">SortMorphsOper</span></code></a> operation)
+in ascending order according to their structural distance
+from the <a class="reference internal" href="../../glossary.html#term-target-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">target</span> <span class="pre">molecule</span></code></a> (M<sub>T</sub>).
+Finally, the new structures are filtered with the
+<a class="reference internal" href="../../documentation/python/molpher.core.operations.html#molpher.core.operations.FilterMorphsOper.FilterMorphsOper" title="molpher.core.operations.FilterMorphsOper.FilterMorphsOper"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterMorphsOper</span></code></a>
+operation and survivors are attached to their parents in the tree.
+This is repeated until the target molecule is generated and appended to the tree.</p>
+<p>As the computation proceeds, some tree branches are also pruned
+(see <a class="reference internal" href="../../documentation/python/molpher.core.operations.html#molpher.core.operations.PruneTreeOper.PruneTreeOper" title="molpher.core.operations.PruneTreeOper.PruneTreeOper"><code class="xref py py-class docutils literal notranslate"><span class="pre">PruneTreeOper</span></code></a>). This is
+necessary to prevent exponential growth of the tree by removing paths
+that are not getting closer to the <a class="reference internal" href="../../glossary.html#term-target-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">target</span> <span class="pre">molecule</span></code></a>.</p>
+<p>If you wish to know more about the steps involved
+in this algorithm, a detailed description can be found in <a class="footnote-reference brackets" href="#id4" id="id2">1</a>.</p>
+<figure class="align-default" id="morphing">
+<a class="reference internal image-reference" href="../../_images/morphing.png"><img alt="../../_images/morphing.png" src="../../_images/morphing.png" style="width: 600.0px; height: 510.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Schematic depiction of the original algorithm published by Hoksza et al. <a class="footnote-reference brackets" href="#id4" id="id3">1</a>.
+New <a class="reference internal" href="../../glossary.html#term-morph"><span class="xref std std-term">morphs</span></a> are generated with the <a class="reference internal" href="../../glossary.html#term-chemical-operators"><code class="xref any std std-term docutils literal notranslate"><span class="pre">chemical</span> <span class="pre">operators</span></code></a> until the target
+molecule is found.</span><a class="headerlink" href="#morphing" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The classic algorithm is available through the <a class="reference internal" href="../../documentation/python/molpher.algorithms.classic.html#module-molpher.algorithms.classic" title="molpher.algorithms.classic"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">molpher.algorithms.classic</span></code></a> package
+and can be used as follows:</p>
+<div class="literal-block-wrapper docutils container" id="classic-example">
+<div class="code-block-caption"><span class="caption-number">Listing 2.9 </span><span class="caption-text">Usage example of the original algorithm.</span><a class="headerlink" href="#classic-example" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">os</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">molpher.algorithms.classic.run</span> <span class="kn">import</span> <span class="n">run</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">molpher.algorithms.settings</span> <span class="kn">import</span> <span class="n">Settings</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="linenos"> 9</span>    <span class="c1"># our source and target molecules</span>
+<span class="linenos">10</span>    <span class="n">cocaine</span> <span class="o">=</span> <span class="s1">&#39;CN1C2CCC1C(C(=O)OC)C(OC(=O)c1ccccc1)C2&#39;</span>
+<span class="linenos">11</span>    <span class="n">procaine</span> <span class="o">=</span> <span class="s1">&#39;O=C(OCCN(CC)CC)c1ccc(N)cc1&#39;</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="c1"># path to a directory where results will be stored (read from command line if possible)</span>
+<span class="linenos">14</span>    <span class="n">storage_dir</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">15</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">16</span>        <span class="n">storage_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">17</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">18</span>        <span class="n">storage_dir</span> <span class="o">=</span> <span class="s1">&#39;classic_data&#39;</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>    <span class="c1"># initialize the exploration settings</span>
+<span class="linenos">21</span>    <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span>
+<span class="linenos">22</span>        <span class="n">cocaine</span>
+<span class="linenos">23</span>        <span class="p">,</span> <span class="n">procaine</span>
+<span class="linenos">24</span>        <span class="p">,</span> <span class="n">storage_dir</span>
+<span class="linenos">25</span>        <span class="p">,</span> <span class="n">max_threads</span><span class="o">=</span><span class="mi">4</span>
+<span class="linenos">26</span>    <span class="p">)</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>    <span class="n">run</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">31</span>    <span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>The most essential ingredients in the example above are the <code class="samp docutils literal notranslate"><span class="pre">run()</span></code>
+function and the appropriate <code class="samp docutils literal notranslate"><span class="pre">Settings</span></code> class.</p>
+<p>Every algorithm in the library has a <code class="samp docutils literal notranslate"><span class="pre">run()</span></code> function
+which calls the appropriate algorithm and saves
+the output of the computation. The <code class="samp docutils literal notranslate"><span class="pre">run()</span></code> function
+also supplies parameters to the tree and manages some ‘global’
+aspects when a path is generated (such as the maximum number of threads to use).</p>
+<p>The behaviour of <code class="samp docutils literal notranslate"><span class="pre">run()</span></code> is configured using a <code class="samp docutils literal notranslate"><span class="pre">Settings</span></code>
+class which is nothing more than a set of parameters wrapped into
+a class object. Some algorithms might define their own <code class="samp docutils literal notranslate"><span class="pre">Settings</span></code>
+classes with parameters specific to that algorithm. In this implementation, however,
+the most general <a class="reference internal" href="../../documentation/python/molpher.algorithms.html#molpher.algorithms.settings.Settings" title="molpher.algorithms.settings.Settings"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> class is used.</p>
+<p>In this instance, <a class="reference internal" href="../../documentation/python/molpher.algorithms.classic.html#module-molpher.algorithms.classic.run" title="molpher.algorithms.classic.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a>
+outputs a pickled <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">list</span></code></a> of SMILES strings
+which represents the resulting path into <a class="reference internal" href="../../documentation/python/molpher.algorithms.html#molpher.algorithms.settings.Settings.storage_dir" title="molpher.algorithms.settings.Settings.storage_dir"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">storage_dir</span></code></a>.</p>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>)</span></dt>
+<dd><p>Hoksza D., Škoda P., Voršilák M., Svozil D. (2014) Molpher: a software framework for systematic chemical space exploration. J Cheminform. 6:7.
+<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24655571">PubMed</a>, <a class="reference external" href="http://www.jcheminf.com/content/6/1/7">DOI</a></p>
+</dd>
+</dl>
+</section>
+<section id="bidirectional-algorithm">
+<span id="bidirectional"></span><h2><span class="section-number">2.3.2. </span>Bidirectional Algorithm<a class="headerlink" href="#bidirectional-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>The second algorithm included in the library is the bidirectional algorithm.
+The goal is the same as in the classic approach – to find
+a path from the <a class="reference internal" href="../../glossary.html#term-source-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">source</span> <span class="pre">molecule</span></code></a> to the <a class="reference internal" href="../../glossary.html#term-target-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">target</span> <span class="pre">molecule</span></code></a>. However,
+in this approach we use two trees (<strong>A</strong> and <strong>B</strong>) at once to get from M<sub>S</sub> to M<sub>T</sub>
+(see <a class="reference internal" href="#bidirectional-fig"><span class="std std-numref">Fig. 2.4</span></a>). One is set up to search for a path from
+M<sub>S</sub> to M<sub>T</sub> while the other searches in the opposite direction,
+that is from M<sub>T</sub> to M<sub>S</sub>.</p>
+<p>After every complete iteration of the original algorithm in both trees
+(after the new structures are connected)
+the <a class="reference internal" href="../../glossary.html#term-target-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">target</span> <span class="pre">molecule</span></code></a> in each tree is replaced by the closest
+molecule to the current target from the opposite tree. This process is depicted
+in <a class="reference internal" href="#bidirectional-fig"><span class="std std-numref">Fig. 2.4</span></a> where m<sub>TA</sub> is found to be
+the closest molecule in tree <strong>B</strong> and, thus, becomes the new target of <strong>A</strong>.
+Similarly, molecule m<sub>TB</sub> is the closest molecule to the current target
+of <strong>A</strong> and, therefore, becomes the new target of <strong>B</strong>. This causes that
+with each iteration the target of each tree becomes closer and closer.
+The algorithm ends when any of the two trees finds its target
+(the <a class="reference internal" href="../../documentation/python/molpher.algorithms.antidecoys.html#molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.connecting_molecule" title="molpher.algorithms.antidecoys.pathfinder.AntidecoysPathFinder.connecting_molecule"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">connecting_molecule</span></code></a>).
+This structure is guaranteed to exist in both trees and is used
+to backtrack through them and generate the final path from M<sub>S</sub> to M<sub>T</sub>.</p>
+<figure class="align-default" id="bidirectional-fig">
+<a class="reference internal image-reference" href="../../_images/bidirectional.png"><img alt="../../_images/bidirectional.png" src="../../_images/bidirectional.png" style="width: 1000.0px; height: 750.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Schematic depiction of the bidirectional algorithm. Two trees (<strong>A</strong> and <strong>B</strong>) are built
+at the same time with the <a class="reference internal" href="../../glossary.html#term-target-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">target</span></code></a>
+for each tree (m<sub>TA</sub> for <strong>A</strong> and m<sub>TB</sub> for <strong>B</strong>) being adjusted dynamically during runtime.</span><a class="headerlink" href="#bidirectional-fig" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>This algorithm should have some advantages over the classic one.
+The biggest is probably the fact that the space
+between M<sub>S</sub> and M<sub>T</sub> is explored in a more
+uniform way. The classic algorithm can often converge
+quickly to an area very close to M<sub>T</sub>, but
+it usually takes a few more iterations before it finds the actual
+structure of M<sub>T</sub>. This results in a disproportionate
+number of molecules on the path being highly similar to M<sub>T</sub>.
+This is not the case for the bidirectional search where
+by the time the two trees get very close there
+is already a lot of similar molecules between them
+and it is much easier to find a connecting structure.</p>
+<p>The bidirectional
+approach might also be able to converge quicker,
+because with each iteration the target gets closer and closer for each
+tree and this significantly reduces the search space.</p>
+<p>The following script shows how this algorithm can be used to generate
+paths:</p>
+<div class="literal-block-wrapper docutils container" id="bidirectional-example">
+<div class="code-block-caption"><span class="caption-number">Listing 2.10 </span><span class="caption-text">Usage example of the bidirectional pathfinding algorithm.</span><a class="headerlink" href="#bidirectional-example" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">os</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">molpher.algorithms.bidirectional.run</span> <span class="kn">import</span> <span class="n">run</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">molpher.algorithms.settings</span> <span class="kn">import</span> <span class="n">Settings</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="linenos">10</span>    <span class="n">cocaine</span> <span class="o">=</span> <span class="s1">&#39;CN1C2CCC1C(C(=O)OC)C(OC(=O)c1ccccc1)C2&#39;</span>
+<span class="linenos">11</span>    <span class="n">procaine</span> <span class="o">=</span> <span class="s1">&#39;O=C(OCCN(CC)CC)c1ccc(N)cc1&#39;</span>
+<span class="linenos">12</span>    <span class="n">storage_dir</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">13</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">14</span>        <span class="n">storage_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">15</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">16</span>        <span class="n">storage_dir</span> <span class="o">=</span> <span class="s1">&#39;bidirectional_data&#39;</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span>
+<span class="linenos">19</span>        <span class="n">cocaine</span>
+<span class="linenos">20</span>        <span class="p">,</span> <span class="n">procaine</span>
+<span class="linenos">21</span>        <span class="p">,</span> <span class="n">storage_dir</span>
+<span class="linenos">22</span>        <span class="p">,</span> <span class="n">max_threads</span><span class="o">=</span><span class="mi">4</span>
+<span class="linenos">23</span>    <span class="p">)</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>    <span class="n">run</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">28</span>    <span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>The code above is almost identical to the example above (see <a class="reference internal" href="#classic-example"><span class="std std-numref">Listing 2.9</span></a>).
+It follows the same principles and the <a class="reference internal" href="../../documentation/python/molpher.algorithms.html#molpher.algorithms.settings.Settings" title="molpher.algorithms.settings.Settings"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a> class is also the same. The only difference
+is that the run method is imported from <a class="reference internal" href="../../documentation/python/molpher.algorithms.bidirectional.html#module-molpher.algorithms.bidirectional" title="molpher.algorithms.bidirectional"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">molpher.algorithms.bidirectional</span></code></a>
+rather than <a class="reference internal" href="../../documentation/python/molpher.algorithms.classic.html#module-molpher.algorithms.classic" title="molpher.algorithms.classic"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">molpher.algorithms.classic</span></code></a>.</p>
+</section>
+<section id="anti-decoys-algorithm">
+<h2><span class="section-number">2.3.3. </span>Anti-decoys Algorithm<a class="headerlink" href="#anti-decoys-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>The ‘anti-decoys algorithm’ is an extension of the bidirectional one
+and it tries to solve a problem that the algorithms above have in common.
+This problem is obvious when Molpher-lib is used to generate a focused library
+of compounds by pooling together structures from multiple exploration runs.</p>
+<p>Even though the algorithms above are not deterministic, there is
+still a significant amount of overlap between the structures from
+multiple runs. This is due to the fact that in the cases above the algorithm
+is minimizing the distance between the <a class="reference internal" href="../../glossary.html#term-source-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">source</span> <span class="pre">molecule</span></code></a> and the <a class="reference internal" href="../../glossary.html#term-target-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">target</span> <span class="pre">molecule</span></code></a>
+which is important to actually be able to find a path, but is a problem
+when our aim is to generate a diverse library of structures because
+shorter paths will be preferred and, thus,
+contain highly similar compounds.</p>
+<p>This unwanted behaviour is illustrated in <a class="reference internal" href="#antidecoys-fig"><span class="std std-numref">Fig. 2.5</span></a>
+where the generated paths (dashed lines) between multiple compounds (shown in red)
+are seen to traverse a very limited area of chemical space (compounds
+marked with blue dots). However, it might still be possible to discover
+interesting structures if the algorithm took a little ‘detour’
+and generated a path that is a bit longer, but contains some
+previously ‘unseen’ structures (shown as blue circles with question marks).</p>
+<p>In the anti-decoys approach, this problem is eliminated by generating an ‘anti-fingerprint’.
+It is a 2D phramacophore fingerprint
+(<a class="reference external" href="http://www.rdkit.org/docs/GettingStartedInPython.html#d-pharmacophore-fingerprints">implemented in RDKit</a>)
+that contains information about all known and previously generated compounds. Because each
+bit in a pharmacophore fingerprint encodes information about geometric relationship of certain pharmacophore
+features in the structure, it is possible to cumulatively construct the anti-fingerprint by doing logical
+<code class="samp docutils literal notranslate"><span class="pre">or</span></code> over the fingerprints of previously discovered structures (see <a class="reference internal" href="#antidecoys-fig"><span class="std std-numref">Fig. 2.5</span></a>). Therefore,
+by minimizing the similarity to the anti-fingerprint and at the same time
+minimizing the structural distance from the target, the unexplored areas
+can be prioritized over those that were already sampled before.</p>
+<figure class="align-default" id="antidecoys-fig">
+<a class="reference internal image-reference" href="../../_images/antidecoys.png"><img alt="../../_images/antidecoys.png" src="../../_images/antidecoys.png" style="width: 1000.0px; height: 1000.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Schematic depiction of the problem the anti-decoys algorithm tries to solve. The
+paths generated between active molecules (dashed lines connecting the red circles)
+are limited to an area of chemical space occupied by highly similar
+structures, the decoys (shown in blue). The algorithm analyses the
+decoys and uses this information to avoid them in future explorations
+using an anti-fingerprint that is computed as a logical <code class="samp docutils literal notranslate"><span class="pre">or</span></code>
+over all known fingerprints.</span><a class="headerlink" href="#antidecoys-fig" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The antidecoys algorithm can be used as follows:</p>
+<div class="literal-block-wrapper docutils container" id="antidecoys-example">
+<div class="code-block-caption"><span class="caption-number">Listing 2.11 </span><span class="caption-text">Usage example of the antidecoys algorithm.</span><a class="headerlink" href="#antidecoys-example" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">molpher.algorithms.antidecoys.run</span> <span class="kn">import</span> <span class="n">run</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">molpher.algorithms.antidecoys.settings</span> <span class="kn">import</span> <span class="n">AntidecoysSettings</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="linenos"> 7</span>    <span class="n">cocaine</span> <span class="o">=</span> <span class="s1">&#39;CN1C2CCC1C(C(=O)OC)C(OC(=O)c1ccccc1)C2&#39;</span>
+<span class="linenos"> 8</span>    <span class="n">procaine</span> <span class="o">=</span> <span class="s1">&#39;O=C(OCCN(CC)CC)c1ccc(N)cc1&#39;</span>
+<span class="linenos"> 9</span>    <span class="n">storage_dir</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">10</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">storage_dir</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">12</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">13</span>        <span class="n">storage_dir</span> <span class="o">=</span> <span class="s1">&#39;antidecoys_data&#39;</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="n">settings</span> <span class="o">=</span> <span class="n">AntidecoysSettings</span><span class="p">(</span>
+<span class="linenos">16</span>        <span class="n">source</span><span class="o">=</span><span class="n">cocaine</span>
+<span class="linenos">17</span>        <span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">procaine</span>
+<span class="linenos">18</span>        <span class="p">,</span> <span class="n">storage_dir</span><span class="o">=</span><span class="n">storage_dir</span>
+<span class="linenos">19</span>        <span class="p">,</span> <span class="n">max_threads</span><span class="o">=</span><span class="mi">4</span>
+<span class="linenos">20</span>        <span class="p">,</span> <span class="n">common_bits_max_thrs</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="linenos">21</span>        <span class="p">,</span> <span class="n">min_accepted</span><span class="o">=</span><span class="mi">500</span>
+<span class="linenos">22</span>        <span class="p">,</span> <span class="n">antidecoys_max_iters</span><span class="o">=</span><span class="mi">30</span>
+<span class="linenos">23</span>        <span class="p">,</span> <span class="n">distance_thrs</span><span class="o">=</span><span class="mf">0.3</span>
+<span class="linenos">24</span>    <span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="n">run</span><span class="p">(</span>
+<span class="linenos">27</span>        <span class="n">settings</span>
+<span class="linenos">28</span>        <span class="p">,</span> <span class="n">paths_count</span><span class="o">=</span><span class="mi">50</span>
+<span class="linenos">29</span>    <span class="p">)</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">32</span>    <span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>This example is a little different from the ones before
+and there is a little bit more customization involved.</p>
+<p>The antidecoys algorithm uses a customized settings class called <a class="reference internal" href="../../documentation/python/molpher.algorithms.antidecoys.html#molpher.algorithms.antidecoys.settings.AntidecoysSettings" title="molpher.algorithms.antidecoys.settings.AntidecoysSettings"><code class="xref any py py-class docutils literal notranslate"><span class="pre">AntidecoysSettings</span></code></a>.
+In general, this class specifies important thresholds for the anti-fingerprint similarity
+and how strict the algorithm will be when filtering morphs. See the
+documentation of <a class="reference internal" href="../../documentation/python/molpher.algorithms.antidecoys.html#molpher.algorithms.antidecoys.settings.AntidecoysSettings" title="molpher.algorithms.antidecoys.settings.AntidecoysSettings"><code class="xref any py py-class docutils literal notranslate"><span class="pre">AntidecoysSettings</span></code></a> to know more about this class and
+the additional parameters.</p>
+<p>The <code class="samp docutils literal notranslate"><span class="pre">run()</span></code> function is also a bit different here. Because it is
+assumed that multiple paths will be generated, we also need to specify
+how many of them to find.</p>
+</section>
+<section id="summary">
+<h2><span class="section-number">2.3.4. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this section, the implementations of various chemical space exploration algorithms
+were described. They are all based on the original algorithm implemented in <a class="reference internal" href="../../glossary.html#term-Molpher"><span class="xref std std-term">Molpher</span></a>,
+but the algorithms that can be implemented with the library do not have to be
+built on this basis. There are many ways to implement chemical space exploration
+using a library such as this one. For
+example, we are currently working on an implementation that will be independent
+of the <a class="reference internal" href="../../glossary.html#term-target-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">target</span> <span class="pre">molecule</span></code></a> and could be used to evolve compounds more freely
+with constraints imposed only by the user. Soon, we will also implement
+a way of preventing parts of the <a class="reference internal" href="../../glossary.html#term-source-molecule"><code class="xref any std std-term docutils literal notranslate"><span class="pre">source</span> <span class="pre">molecule</span></code></a> from being modified,
+which could be very useful in lead optimization. We are also planning to give users
+the option to define their own chemical operators, which will give an entirely new
+meaning to the generated paths. There are many ways in which this library could
+be useful in drug discovery, so if you have any
+suggestions or would like to actively participate on the project, it
+would be much appreciated. Make sure to visit the official
+<a class="reference external" href="https://github.com/lich-uct/molpher-lib">GitHub</a> repository
+for more information.</p>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="advanced.html" class="btn btn-neutral float-right" title="2.4. Advanced Topics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="exploration.html" class="btn btn-neutral float-left" title="2.2. Chemical Space Exploration with Molecular Morphing by Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

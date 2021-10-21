@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>1.1.1.1.2.3.1.1. molpher.core.morphing.operators package &mdash; Molpher-lib 0.0.0b3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.1.1.2. molpher.algorithms package" href="molpher.algorithms.html" />
+    <link rel="prev" title="1.1.1.1.2.3. molpher.core.morphing package" href="molpher.core.morphing.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Source Code Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">1. Python</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="molpher.html">1.1. molpher package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="molpher.html#subpackages">1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="molpher.html#module-molpher">1.1.2. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cplusplus/index.html">2. C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Source Code Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html"><span class="section-number">1. </span>Python</a> &raquo;</li>
+        
+          <li><a href="molpher.html"><span class="section-number">1.1. </span>molpher package</a> &raquo;</li>
+        
+          <li><a href="molpher.core.html"><span class="section-number">1.1.1.1. </span>molpher.core package</a> &raquo;</li>
+        
+          <li><a href="molpher.core.morphing.html"><span class="section-number">1.1.1.1.2.3. </span>molpher.core.morphing package</a> &raquo;</li>
+        
+      <li><span class="section-number">1.1.1.1.2.3.1.1. </span>molpher.core.morphing.operators package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="molpher-core-morphing-operators-package">
+<h1><span class="section-number">1.1.1.1.2.3.1.1. </span>molpher.core.morphing.operators package<a class="headerlink" href="#molpher-core-morphing-operators-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2><span class="section-number">1.1.1.1.2.3.1.1.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-molpher.core.morphing.operators.AddAtom">
+<span id="molpher-core-morphing-operators-addatom-module"></span><h2><span class="section-number">1.1.1.1.2.3.1.1.2. </span>molpher.core.morphing.operators.AddAtom module<a class="headerlink" href="#module-molpher.core.morphing.operators.AddAtom" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.AddAtom.AddAtom">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.core.morphing.operators.AddAtom.</span></span><span class="sig-name descname"><span class="pre">AddAtom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/AddAtom.html#AddAtom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.AddAtom.AddAtom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.swig_wrappers.core.AddAtom</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.AddAtom.AddAtom.getOpenAtoms">
+<span class="sig-name descname"><span class="pre">getOpenAtoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/AddAtom.html#AddAtom.getOpenAtoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.AddAtom.AddAtom.getOpenAtoms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.AddAtom.AddAtom.getOriginal">
+<span class="sig-name descname"><span class="pre">getOriginal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/AddAtom.html#AddAtom.getOriginal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.AddAtom.AddAtom.getOriginal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.AddAtom.AddAtom.morph">
+<span class="sig-name descname"><span class="pre">morph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/AddAtom.html#AddAtom.morph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.AddAtom.AddAtom.morph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.core.morphing.operators.AddBond">
+<span id="molpher-core-morphing-operators-addbond-module"></span><h2><span class="section-number">1.1.1.1.2.3.1.1.3. </span>molpher.core.morphing.operators.AddBond module<a class="headerlink" href="#module-molpher.core.morphing.operators.AddBond" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.AddBond.AddBond">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.core.morphing.operators.AddBond.</span></span><span class="sig-name descname"><span class="pre">AddBond</span></span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/AddBond.html#AddBond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.AddBond.AddBond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.swig_wrappers.core.AddBond</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.AddBond.AddBond.getOpenBonds">
+<span class="sig-name descname"><span class="pre">getOpenBonds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/AddBond.html#AddBond.getOpenBonds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.AddBond.AddBond.getOpenBonds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.AddBond.AddBond.getOriginal">
+<span class="sig-name descname"><span class="pre">getOriginal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/AddBond.html#AddBond.getOriginal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.AddBond.AddBond.getOriginal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.AddBond.AddBond.morph">
+<span class="sig-name descname"><span class="pre">morph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/AddBond.html#AddBond.morph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.AddBond.AddBond.morph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.core.morphing.operators.ContractBond">
+<span id="molpher-core-morphing-operators-contractbond-module"></span><h2><span class="section-number">1.1.1.1.2.3.1.1.4. </span>molpher.core.morphing.operators.ContractBond module<a class="headerlink" href="#module-molpher.core.morphing.operators.ContractBond" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.ContractBond.ContractBond">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.core.morphing.operators.ContractBond.</span></span><span class="sig-name descname"><span class="pre">ContractBond</span></span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/ContractBond.html#ContractBond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.ContractBond.ContractBond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.swig_wrappers.core.ContractBond</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.ContractBond.ContractBond.getOriginal">
+<span class="sig-name descname"><span class="pre">getOriginal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/ContractBond.html#ContractBond.getOriginal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.ContractBond.ContractBond.getOriginal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.ContractBond.ContractBond.morph">
+<span class="sig-name descname"><span class="pre">morph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/ContractBond.html#ContractBond.morph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.ContractBond.ContractBond.morph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.core.morphing.operators.InterlayAtom">
+<span id="molpher-core-morphing-operators-interlayatom-module"></span><h2><span class="section-number">1.1.1.1.2.3.1.1.5. </span>molpher.core.morphing.operators.InterlayAtom module<a class="headerlink" href="#module-molpher.core.morphing.operators.InterlayAtom" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.InterlayAtom.InterlayAtom">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.core.morphing.operators.InterlayAtom.</span></span><span class="sig-name descname"><span class="pre">InterlayAtom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/InterlayAtom.html#InterlayAtom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.InterlayAtom.InterlayAtom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.swig_wrappers.core.InterlayAtom</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.InterlayAtom.InterlayAtom.getOriginal">
+<span class="sig-name descname"><span class="pre">getOriginal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/InterlayAtom.html#InterlayAtom.getOriginal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.InterlayAtom.InterlayAtom.getOriginal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.InterlayAtom.InterlayAtom.morph">
+<span class="sig-name descname"><span class="pre">morph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/InterlayAtom.html#InterlayAtom.morph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.InterlayAtom.InterlayAtom.morph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.core.morphing.operators.MorphingOperator">
+<span id="molpher-core-morphing-operators-morphingoperator-module"></span><h2><span class="section-number">1.1.1.1.2.3.1.1.6. </span>molpher.core.morphing.operators.MorphingOperator module<a class="headerlink" href="#module-molpher.core.morphing.operators.MorphingOperator" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.MorphingOperator.MorphingOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.core.morphing.operators.MorphingOperator.</span></span><span class="sig-name descname"><span class="pre">MorphingOperator</span></span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/MorphingOperator.html#MorphingOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.MorphingOperator.MorphingOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="morphing/operators/MorphingOperator_doc.html#molpher.swig_wrappers.core.MorphingOperator" title="molpher.swig_wrappers.core.MorphingOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.swig_wrappers.core.MorphingOperator</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.MorphingOperator.MorphingOperator.getOriginal">
+<span class="sig-name descname"><span class="pre">getOriginal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/MorphingOperator.html#MorphingOperator.getOriginal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.MorphingOperator.MorphingOperator.getOriginal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.MorphingOperator.MorphingOperator.name">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#molpher.core.morphing.operators.MorphingOperator.MorphingOperator.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.MorphingOperator.MorphingOperator.original">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">original</span></span><a class="headerlink" href="#molpher.core.morphing.operators.MorphingOperator.MorphingOperator.original" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.MorphingOperator.MorphingOperator.setOriginal">
+<span class="sig-name descname"><span class="pre">setOriginal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/MorphingOperator.html#MorphingOperator.setOriginal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.MorphingOperator.MorphingOperator.setOriginal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.core.morphing.operators.MutateAtom">
+<span id="molpher-core-morphing-operators-mutateatom-module"></span><h2><span class="section-number">1.1.1.1.2.3.1.1.7. </span>molpher.core.morphing.operators.MutateAtom module<a class="headerlink" href="#module-molpher.core.morphing.operators.MutateAtom" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.MutateAtom.MutateAtom">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.core.morphing.operators.MutateAtom.</span></span><span class="sig-name descname"><span class="pre">MutateAtom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/MutateAtom.html#MutateAtom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.MutateAtom.MutateAtom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.swig_wrappers.core.MutateAtom</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.MutateAtom.MutateAtom.getOriginal">
+<span class="sig-name descname"><span class="pre">getOriginal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/MutateAtom.html#MutateAtom.getOriginal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.MutateAtom.MutateAtom.getOriginal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.MutateAtom.MutateAtom.morph">
+<span class="sig-name descname"><span class="pre">morph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/MutateAtom.html#MutateAtom.morph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.MutateAtom.MutateAtom.morph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.core.morphing.operators.RemoveAtom">
+<span id="molpher-core-morphing-operators-removeatom-module"></span><h2><span class="section-number">1.1.1.1.2.3.1.1.8. </span>molpher.core.morphing.operators.RemoveAtom module<a class="headerlink" href="#module-molpher.core.morphing.operators.RemoveAtom" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RemoveAtom.RemoveAtom">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.core.morphing.operators.RemoveAtom.</span></span><span class="sig-name descname"><span class="pre">RemoveAtom</span></span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RemoveAtom.html#RemoveAtom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RemoveAtom.RemoveAtom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.swig_wrappers.core.RemoveAtom</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RemoveAtom.RemoveAtom.getMarkedAtoms">
+<span class="sig-name descname"><span class="pre">getMarkedAtoms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RemoveAtom.html#RemoveAtom.getMarkedAtoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RemoveAtom.RemoveAtom.getMarkedAtoms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RemoveAtom.RemoveAtom.getOriginal">
+<span class="sig-name descname"><span class="pre">getOriginal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RemoveAtom.html#RemoveAtom.getOriginal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RemoveAtom.RemoveAtom.getOriginal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RemoveAtom.RemoveAtom.morph">
+<span class="sig-name descname"><span class="pre">morph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RemoveAtom.html#RemoveAtom.morph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RemoveAtom.RemoveAtom.morph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.core.morphing.operators.RemoveBond">
+<span id="molpher-core-morphing-operators-removebond-module"></span><h2><span class="section-number">1.1.1.1.2.3.1.1.9. </span>molpher.core.morphing.operators.RemoveBond module<a class="headerlink" href="#module-molpher.core.morphing.operators.RemoveBond" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RemoveBond.RemoveBond">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.core.morphing.operators.RemoveBond.</span></span><span class="sig-name descname"><span class="pre">RemoveBond</span></span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RemoveBond.html#RemoveBond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RemoveBond.RemoveBond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.swig_wrappers.core.RemoveBond</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RemoveBond.RemoveBond.getOpenBonds">
+<span class="sig-name descname"><span class="pre">getOpenBonds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RemoveBond.html#RemoveBond.getOpenBonds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RemoveBond.RemoveBond.getOpenBonds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RemoveBond.RemoveBond.getOriginal">
+<span class="sig-name descname"><span class="pre">getOriginal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RemoveBond.html#RemoveBond.getOriginal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RemoveBond.RemoveBond.getOriginal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RemoveBond.RemoveBond.morph">
+<span class="sig-name descname"><span class="pre">morph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RemoveBond.html#RemoveBond.morph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RemoveBond.RemoveBond.morph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.core.morphing.operators.RerouteBond">
+<span id="molpher-core-morphing-operators-reroutebond-module"></span><h2><span class="section-number">1.1.1.1.2.3.1.1.10. </span>molpher.core.morphing.operators.RerouteBond module<a class="headerlink" href="#module-molpher.core.morphing.operators.RerouteBond" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RerouteBond.RerouteBond">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.core.morphing.operators.RerouteBond.</span></span><span class="sig-name descname"><span class="pre">RerouteBond</span></span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RerouteBond.html#RerouteBond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RerouteBond.RerouteBond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.swig_wrappers.core.RerouteBond</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RerouteBond.RerouteBond.getOriginal">
+<span class="sig-name descname"><span class="pre">getOriginal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RerouteBond.html#RerouteBond.getOriginal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RerouteBond.RerouteBond.getOriginal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.core.morphing.operators.RerouteBond.RerouteBond.morph">
+<span class="sig-name descname"><span class="pre">morph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/core/morphing/operators/RerouteBond.html#RerouteBond.morph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.core.morphing.operators.RerouteBond.RerouteBond.morph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.core.morphing.operators">
+<span id="module-contents"></span><h2><span class="section-number">1.1.1.1.2.3.1.1.11. </span>Module contents<a class="headerlink" href="#module-molpher.core.morphing.operators" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="molpher.algorithms.html" class="btn btn-neutral float-right" title="1.1.1.2. molpher.algorithms package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="molpher.core.morphing.html" class="btn btn-neutral float-left" title="1.1.1.1.2.3. molpher.core.morphing package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

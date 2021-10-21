@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>molpher.core.ExplorationTree &mdash; Molpher-lib 0.0.0b3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../molpher.html">molpher</a> &raquo;</li>
+        
+      <li>molpher.core.ExplorationTree</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for molpher.core.ExplorationTree</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2016 Martin Sicho</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">import</span> <span class="nn">molpher</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">molpher.core.ExplorationData</span> <span class="kn">import</span> <span class="n">ExplorationData</span>
+<span class="kn">from</span> <span class="nn">molpher.core.MolpherMol</span> <span class="kn">import</span> <span class="n">MolpherMol</span>
+<span class="kn">from</span> <span class="nn">molpher.core._utils</span> <span class="kn">import</span> <span class="n">shorten_repr</span>
+<span class="kn">from</span> <span class="nn">molpher.core.morphing</span> <span class="kn">import</span> <span class="n">MorphCollector</span>
+<span class="kn">from</span> <span class="nn">molpher.core.morphing.operators</span> <span class="kn">import</span> <span class="n">MorphingOperator</span>
+<span class="kn">from</span> <span class="nn">molpher.core.operations</span> <span class="kn">import</span> <span class="n">TraverseOper</span>
+<span class="kn">from</span> <span class="nn">molpher.core.operations.TraverseOper</span> <span class="kn">import</span> <span class="n">Callback</span>
+
+
+<div class="viewcode-block" id="ExplorationTree"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree">[docs]</a><span class="k">class</span> <span class="nc">ExplorationTree</span><span class="p">(</span><span class="n">molpher</span><span class="o">.</span><span class="n">swig_wrappers</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">ExplorationTree</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This a specialized version of the `molpher.swig_wrappers.core.ExplorationTree` proxy class.</span>
+<span class="sd">    It implements some additional functionality for ease of use from Python.</span>
+
+<span class="sd">    ..  attention:: This class has no constructor defined. Use the :meth:`create`</span>
+<span class="sd">            factory method to obtain instances of this class.</span>
+
+<span class="sd">    .. seealso:: `molpher.swig_wrappers.core.ExplorationTree`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">shorten_repr</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_cast_mols</span><span class="p">(</span><span class="n">mols</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">morph</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">:</span>
+            <span class="n">morph</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">MolpherMol</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ExplorationTree.create"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.create">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">tree_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an exploration tree.</span>
+
+<span class="sd">        :param tree_data: the morphing parameters (optional if ``source`` and ``target`` are specified)</span>
+<span class="sd">        :type tree_data: `molpher.swig_wrappers.core.ExplorationData` (or its derived class),</span>
+<span class="sd">            a `dict` of parameters (in the same format as in :class:`~molpher.core.ExplorationData.ExplorationData`&#39;s constructor)</span>
+<span class="sd">            or a path to a :term:`XML template` or a :term:`tree snapshot`</span>
+<span class="sd">        :param source: SMILES of the source molecule or a molecule directly (uses a copy not the instance itself)</span>
+<span class="sd">        :type source: `str` or :class:`~molpher.core.MolpherMol.MolpherMol`</span>
+<span class="sd">        :param target: SMILES of the target molecule</span>
+<span class="sd">        :type target: `str` or :class:`~molpher.core.MolpherMol.MolpherMol`</span>
+
+<span class="sd">        ..  note:: When ``tree_data`` is specified, ``source`` and ``target`` are always ignored.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">tree_data</span> <span class="ow">and</span> <span class="n">source</span> <span class="ow">and</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Both tree_data and source and target specified. Using the values in parameters...&quot;</span>
+                <span class="p">,</span> <span class="ne">RuntimeWarning</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">tree_data</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">tree_data</span><span class="p">,</span> <span class="n">molpher</span><span class="o">.</span><span class="n">wrappers</span><span class="o">.</span><span class="n">ExplorationData</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">tree_data</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="n">ExplorationTree</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">tree_data</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">tree_data</span><span class="p">:</span>
+            <span class="n">_params</span> <span class="o">=</span> <span class="n">ExplorationData</span><span class="p">(</span><span class="o">**</span><span class="n">tree_data</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="n">ExplorationTree</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">_params</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">source</span> <span class="ow">and</span> <span class="n">target</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">source</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">source</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="n">ExplorationTree</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">source</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">source</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">source</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="n">ExplorationTree</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;Invalid set of parameters specified.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ret</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;No tree initilized.&#39;</span><span class="p">)</span>
+
+        <span class="n">ret</span><span class="o">.</span><span class="n">callback_class</span> <span class="o">=</span> <span class="n">Callback</span>
+        <span class="n">ret</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">ExplorationTree</span>
+
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A dictionary representing the current :term:`exploration parameters`.</span>
+
+<span class="sd">        It is possible to assign a new dictionary (or an instance of</span>
+<span class="sd">        the `molpher.swig_wrappers.core.ExplorationData` class)</span>
+<span class="sd">        to update the current parameters.</span>
+
+<span class="sd">        .. note:: Only parameters defined in the supplied dictionary are changed</span>
+<span class="sd">            and if an instance of `molpher.swig_wrappers.core.ExplorationData`</span>
+<span class="sd">            is supplied only the parameters are read from it (the tree structure</span>
+<span class="sd">            remains the same).</span>
+
+<span class="sd">        :return: current parameters</span>
+<span class="sd">        :rtype: `dict`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">ExplorationData</span><span class="p">(</span><span class="n">other</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">asData</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">param_dict</span>
+
+    <span class="nd">@params</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">molpher</span><span class="o">.</span><span class="n">wrappers</span><span class="o">.</span><span class="n">ExplorationData</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">self_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">asData</span><span class="p">()</span>
+            <span class="n">self_data</span><span class="o">.</span><span class="n">param_dict</span> <span class="o">=</span> <span class="n">params</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">self_data</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">morphing_operators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getMorphingOperators</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ret</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">MorphingOperator</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="nd">@morphing_operators</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">morphing_operators</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opers</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMorphingOperators</span><span class="p">(</span><span class="n">opers</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">generation_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: Number of :term:`morph generations &lt;morph generation&gt;` connected to the tree so far.</span>
+<span class="sd">        :rtype: `int`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getGenerationCount</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mol_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">count_mols</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+            <span class="n">count_mols</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">count_mols</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">count_mols</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">count_mols</span><span class="o">.</span><span class="n">count</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">path_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: `True` if the :term:`target molecule` is present in the tree, `False` otherwise.</span>
+<span class="sd">        :rtype: `bool`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isPathFound</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">leaves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the current leaves of the tree</span>
+<span class="sd">        :rtype: `tuple` of :class:`~molpher.core.MolpherMol.MolpherMol` instances</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cast_mols</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fetchLeaves</span><span class="p">()))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">candidates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the :term:`candidate morphs` (:term:`morphs &lt;morph&gt;` generated by a single call to `generateMorphs()`.)</span>
+<span class="sd">        :rtype: `tuple` of :class:`~molpher.core.MolpherMol.MolpherMol` instances</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cast_mols</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getCandidateMorphs</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">candidates_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A `tuple` of `bool` objects that serve as means of filtering the :term:`candidate morphs`.</span>
+<span class="sd">        Each :term:`morph` in `candidates` has a `bool` variable assigned to it in this `tuple`</span>
+<span class="sd">        -- only morphs with `True` at the appropriate position are added to the tree when :meth:`extend`</span>
+<span class="sd">        is called.</span>
+
+<span class="sd">        It can be changed by assigning a new `tuple` or a call to `setCandidateMorphsMask()`.</span>
+
+<span class="sd">        :return: currently selected :term:`candidate morphs` represented as a `tuple` of `bool` objects</span>
+<span class="sd">        :rtype: `tuple`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCandidateMorphsMask</span><span class="p">()</span>
+
+    <span class="nd">@candidates_mask</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">candidates_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCandidateMorphsMask</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">thread_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: maximum number of threads this instance will use</span>
+<span class="sd">        :rtype: `int`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getThreadCount</span><span class="p">()</span>
+
+    <span class="nd">@thread_count</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">thread_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setThreadCount</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="ExplorationTree.fetchMol"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.fetchMol">[docs]</a>    <span class="k">def</span> <span class="nf">fetchMol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">canonSMILES</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a molecule from the tree using a canonical</span>
+<span class="sd">        SMILES string.</span>
+
+<span class="sd">        Raises a `RuntimeError` if the molecule is not found.</span>
+
+<span class="sd">        :param canonSMILES: SMILES string of the molecule to fetch</span>
+<span class="sd">        :type canonSMILES: `str`</span>
+<span class="sd">        :return: molecule from a tree</span>
+<span class="sd">        :rtype: :class:`~molpher.core.MolpherMol.MolpherMol`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">fetchMol</span><span class="p">(</span><span class="n">canonSMILES</span><span class="p">)</span>
+        <span class="n">ret</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">MolpherMol</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="ExplorationTree.traverse"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.traverse">[docs]</a>    <span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">start_mol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method can be used to traverse the whole tree structure (or just a subtree)</span>
+<span class="sd">        starting from the root to leaves. It takes a callback function that accepts a single required argument</span>
+<span class="sd">        and traverses the whole tree starting from its root (or root of a specified subtree -- see ``start_mol``) and</span>
+<span class="sd">        calls the supplied callback with with encountered morph as its parameter.</span>
+
+<span class="sd">        :param callback: the callback to call</span>
+<span class="sd">        :type callback: a callable object that takes a single argument</span>
+<span class="sd">        :param start_mol: the root of a subtree to explore as canonical SMILES</span>
+<span class="sd">            or :py:class:`~molpher.core.MolpherMol.MolpherMol` instance</span>
+<span class="sd">        :type start_mol: `str` or :py:class:`~molpher.core.MolpherMol.MolpherMol`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">start_mol</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">start_mol</span><span class="p">)</span> <span class="o">==</span> <span class="n">MolpherMol</span><span class="p">:</span>
+            <span class="n">TraverseOper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback_class</span><span class="p">(</span><span class="n">callback</span><span class="p">),</span> <span class="n">start_mol</span><span class="p">)()</span>
+        <span class="k">elif</span> <span class="n">start_mol</span><span class="p">:</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetchMol</span><span class="p">(</span><span class="n">start_mol</span><span class="p">)</span>
+            <span class="n">TraverseOper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback_class</span><span class="p">(</span><span class="n">callback</span><span class="p">),</span> <span class="n">mol</span><span class="p">)()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback_class</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+            <span class="n">TraverseOper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">)()</span></div>
+
+<div class="viewcode-block" id="ExplorationTree.generateMorphs"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.generateMorphs">[docs]</a>    <span class="k">def</span> <span class="nf">generateMorphs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collectors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">collectors</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">generateMorphs</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_collectors</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">collector</span> <span class="ow">in</span> <span class="n">collectors</span><span class="p">:</span>
+                <span class="n">_collectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MorphCollector</span><span class="p">(</span><span class="n">collector</span><span class="p">))</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">generateMorphs</span><span class="p">(</span><span class="n">_collectors</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ExplorationTree.asData"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.asData">[docs]</a>    <span class="k">def</span> <span class="nf">asData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the tree as an :class:`~molpher.core.ExplorationData.ExplorationData` instance</span>
+<span class="sd">        :rtype: :class:`~molpher.core.ExplorationData.ExplorationData`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ExplorationData</span><span class="p">(</span><span class="n">other</span><span class="o">=</span><span class="nb">super</span><span class="p">(</span><span class="n">ExplorationTree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">asData</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="ExplorationTree.fetchPathTo"><a class="viewcode-back" href="../../../documentation/python/molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.fetchPathTo">[docs]</a>    <span class="k">def</span> <span class="nf">fetchPathTo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smiles</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">smiles</span><span class="p">):</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetchMol</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+
+            <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">target</span><span class="p">]</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">parent_smiles</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parent_smiles</span>
+                <span class="k">if</span> <span class="n">parent_smiles</span><span class="p">:</span>
+                    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fetchMol</span><span class="p">(</span><span class="n">parent_smiles</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">break</span>
+
+            <span class="n">path</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">path</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

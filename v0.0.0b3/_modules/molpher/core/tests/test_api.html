@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>molpher.core.tests.test_api &mdash; Molpher-lib 0.0.0b3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation/index.html">Source Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../../molpher.html">molpher</a> &raquo;</li>
+        
+      <li>molpher.core.tests.test_api</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for molpher.core.tests.test_api</h1><div class="highlight"><pre>
+<span></span>
+<span class="c1"># Copyright (c) 2016 Martin Sicho</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span><span class="p">,</span> <span class="n">BytesIO</span>
+
+<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span>
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="kn">from</span> <span class="nn">molpher</span> <span class="kn">import</span> <span class="n">random_numbers</span>
+<span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">ExplorationTree</span>
+<span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">MolpherMol</span>
+<span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">ExplorationData</span>
+<span class="kn">from</span> <span class="nn">molpher.core</span> <span class="kn">import</span> <span class="n">MolpherAtom</span>
+<span class="kn">from</span> <span class="nn">molpher.core.morphing</span> <span class="kn">import</span> <span class="n">AtomLibrary</span>
+<span class="kn">from</span> <span class="nn">molpher.core.morphing</span> <span class="kn">import</span> <span class="n">Molpher</span>
+<span class="kn">from</span> <span class="nn">molpher.core.morphing.operators</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">molpher.core.selectors</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="TestAPI"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI">[docs]</a><span class="k">class</span> <span class="nc">TestAPI</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestAPI.getPathToMol"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.getPathToMol">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">getPathToMol</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">mol</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">tree</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">mol</span>
+        <span class="k">while</span> <span class="n">current</span><span class="o">.</span><span class="n">parent_smiles</span><span class="p">:</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fetchMol</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">parent_smiles</span><span class="p">)</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">path</span></div>
+    
+<div class="viewcode-block" id="TestAPI.setUp"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">random_numbers</span><span class="o">.</span><span class="n">set_random_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_source</span> <span class="o">=</span> <span class="s1">&#39;CCO&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_target</span> <span class="o">=</span> <span class="s1">&#39;C1=COC=C1&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;molpher.core.tests&#39;</span><span class="p">,</span> <span class="s1">&#39;test_files/&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_template_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span><span class="p">,</span> <span class="s1">&#39;test-template.xml&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cymene_locked</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span><span class="p">,</span> <span class="s1">&#39;cymene.sdf&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ethanol_locked</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span><span class="p">,</span> <span class="s1">&#39;ethanol.sdf&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">propanol</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span><span class="p">,</span> <span class="s1">&#39;propanol.sdf&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remove_bond_test_mol</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span><span class="p">,</span> <span class="s1">&#39;remove_bond_test_mol.sdf&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alanine</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span><span class="p">,</span> <span class="s1">&#39;alanine.sdf&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isopropylphenol</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span><span class="p">,</span> <span class="s1">&#39;isopropylphenol.sdf&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contract_bond_test_mol</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span><span class="p">,</span> <span class="s1">&#39;contract_bond_test_mol.sdf&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reroute_test_mol</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span><span class="p">,</span> <span class="s1">&#39;reroute_test_mol.sdf&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">captopril</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span><span class="p">,</span> <span class="s1">&#39;captopril.sdf&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestAPI.tearDown"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAPI.testMolpherAtom"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testMolpherAtom">[docs]</a>    <span class="k">def</span> <span class="nf">testMolpherAtom</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">carbon</span> <span class="o">=</span> <span class="n">MolpherAtom</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+        <span class="n">oxygen</span> <span class="o">=</span> <span class="n">MolpherAtom</span><span class="p">(</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">carbon</span><span class="o">.</span><span class="n">formal_charge</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">carbon</span><span class="o">.</span><span class="n">formal_charge</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">carbon</span><span class="o">.</span><span class="n">formal_charge</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">oxygen</span><span class="o">.</span><span class="n">is_locked</span> <span class="ow">or</span> <span class="n">carbon</span><span class="o">.</span><span class="n">is_locked</span><span class="p">)</span>
+
+        <span class="n">oxygen</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">=</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">FULL_LOCK</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">oxygen</span><span class="o">.</span><span class="n">is_locked</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">oxygen</span><span class="o">.</span><span class="n">lock_info</span><span class="p">[</span><span class="s1">&#39;FULL_LOCK&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">oxygen</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">&amp;</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">NO_ADDITION</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">oxygen</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">&amp;</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">KEEP_NEIGHBORS</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">oxygen</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">&amp;</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">NO_MUTATION</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">oxygen</span><span class="o">.</span><span class="n">lock_info</span><span class="p">[</span><span class="s1">&#39;UNLOCKED&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">carbon</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">=</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">NO_MUTATION</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">carbon</span><span class="o">.</span><span class="n">is_locked</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">carbon</span><span class="o">.</span><span class="n">lock_info</span><span class="p">[</span><span class="s1">&#39;FULL_LOCK&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">carbon</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">&amp;</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">NO_ADDITION</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">carbon</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">&amp;</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">KEEP_NEIGHBORS</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">carbon</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">&amp;</span> <span class="n">MolpherAtom</span><span class="o">.</span><span class="n">NO_MUTATION</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">carbon</span><span class="o">.</span><span class="n">lock_info</span><span class="p">[</span><span class="s1">&#39;UNLOCKED&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestAPI.testMolpherMol"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testMolpherMol">[docs]</a>    <span class="k">def</span> <span class="nf">testMolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_target</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">asMolBlock</span><span class="p">())</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">smiles</span> <span class="o">=</span> <span class="s1">&#39;CCC&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="s1">&#39;CCC&#39;</span><span class="p">)</span>
+
+        <span class="n">copy</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">copy</span><span class="o">.</span><span class="n">sascore</span> <span class="o">=</span> <span class="mf">0.54</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mf">0.54</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">sascore</span><span class="p">)</span>
+
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">ExplorationTree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">mol</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;CCCNCCC&#39;</span><span class="p">)</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">ExplorationTree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;CCCNCCC&#39;</span><span class="p">)</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">ExplorationTree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">MolpherMol</span><span class="p">(</span><span class="s1">&#39;CCCNCCC&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">mol</span><span class="p">))</span>
+        <span class="k">def</span> <span class="nf">assign</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="n">tree</span><span class="o">.</span><span class="n">fetchMol</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">smiles</span><span class="p">)</span><span class="o">.</span><span class="n">smiles</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="n">assign</span><span class="p">,</span> <span class="s1">&#39;CCO&#39;</span><span class="p">)</span>
+
+        <span class="c1"># atom locking stuff</span>
+        <span class="n">mol_locked</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cymene_locked</span><span class="p">)</span>
+        <span class="n">open_positions</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol_locked</span><span class="o">.</span><span class="n">atoms</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">atom</span><span class="o">.</span><span class="n">is_locked</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">open_positions</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">lock_info</span><span class="p">[</span><span class="s1">&#39;NO_ADDITION&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">lock_info</span><span class="p">[</span><span class="s1">&#39;UNLOCKED&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">lock_info</span><span class="p">[</span><span class="s1">&#39;FULL_LOCK&#39;</span><span class="p">])</span>
+
+        <span class="c1"># test RDKit conversion and locking information transfer</span>
+        <span class="n">rd_mol</span> <span class="o">=</span> <span class="n">mol_locked</span><span class="o">.</span><span class="n">asRDMol</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SDWriter</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">rd_mol</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">temp_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_dir</span> <span class="o">+</span> <span class="s2">&quot;/cymene_tmp.sdf&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tempfile</span><span class="p">:</span>
+            <span class="n">tempfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+        <span class="n">new_cymene</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">atm_old</span><span class="p">,</span> <span class="n">atm_new</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mol_locked</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">new_cymene</span><span class="o">.</span><span class="n">atoms</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">atm_old</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">==</span> <span class="n">atm_new</span><span class="o">.</span><span class="n">locking_mask</span><span class="p">)</span>
+
+        <span class="c1"># test init from RDKit</span>
+        <span class="n">mol_from_rdkit</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="n">other</span><span class="o">=</span><span class="n">rd_mol</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">atm_old</span><span class="p">,</span> <span class="n">atm_new</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mol_locked</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">mol_from_rdkit</span><span class="o">.</span><span class="n">atoms</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">atm_old</span><span class="o">.</span><span class="n">locking_mask</span> <span class="o">==</span> <span class="n">atm_new</span><span class="o">.</span><span class="n">locking_mask</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestAPI.testAtomLibrary"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testAtomLibrary">[docs]</a>    <span class="k">def</span> <span class="nf">testAtomLibrary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">default_lib</span> <span class="o">=</span> <span class="n">AtomLibrary</span><span class="o">.</span><span class="n">getDefaultLibrary</span><span class="p">()</span>
+        <span class="n">old_atoms</span> <span class="o">=</span> <span class="n">default_lib</span><span class="o">.</span><span class="n">atoms</span>
+        <span class="n">old_probas</span> <span class="o">=</span> <span class="n">default_lib</span><span class="o">.</span><span class="n">atom_probabilities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">symbol</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">default_lib</span><span class="o">.</span><span class="n">atoms</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Default library atoms:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">atom</span><span class="p">,</span> <span class="n">proba</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">default_lib</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">default_lib</span><span class="o">.</span><span class="n">atom_probabilities</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atom:&quot;</span><span class="p">,</span> <span class="n">atom</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="s2">&quot;Probability&quot;</span><span class="p">,</span> <span class="n">proba</span><span class="p">)</span>
+
+        <span class="n">smbls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">]</span>
+        <span class="n">my_lib</span> <span class="o">=</span> <span class="n">AtomLibrary</span><span class="p">(</span><span class="n">smbls</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">my_lib</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">smbls</span><span class="p">)</span>
+        <span class="n">AtomLibrary</span><span class="o">.</span><span class="n">setDefaultLibrary</span><span class="p">(</span><span class="n">my_lib</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">default_lib</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">smbls</span><span class="p">)</span>
+
+        <span class="n">probas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="k">lambda</span> <span class="p">:</span> <span class="n">AtomLibrary</span><span class="p">([</span><span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="n">probas</span><span class="p">))</span>
+        <span class="n">my_lib</span> <span class="o">=</span> <span class="n">AtomLibrary</span><span class="p">(</span><span class="n">smbls</span><span class="p">,</span> <span class="n">probas</span><span class="p">)</span>
+        <span class="n">AtomLibrary</span><span class="o">.</span><span class="n">setDefaultLibrary</span><span class="p">(</span><span class="n">my_lib</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">atom_info</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">default_lib</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">default_lib</span><span class="o">.</span><span class="n">atom_probabilities</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">atom_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">smbls</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">atom_info</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">probas</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">default_lib</span><span class="o">.</span><span class="n">getRandomAtom</span><span class="p">()</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">smbls</span><span class="p">)</span>
+
+        <span class="n">AtomLibrary</span><span class="o">.</span><span class="n">setDefaultLibrary</span><span class="p">(</span><span class="n">AtomLibrary</span><span class="p">(</span><span class="n">old_atoms</span><span class="p">,</span> <span class="n">old_probas</span><span class="p">))</span> <span class="c1"># put everything back to default</span>
+        <span class="n">old_symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">symbol</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">old_atoms</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">atom_info</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">default_lib</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">default_lib</span><span class="o">.</span><span class="n">atom_probabilities</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">atom_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">old_symbols</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">atom_info</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">old_probas</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="TestAPI.assertOperatorValid"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.assertOperatorValid">[docs]</a>    <span class="k">def</span> <span class="nf">assertOperatorValid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">test_mol</span><span class="p">,</span> <span class="n">gens</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing operator:&quot;</span><span class="p">,</span> <span class="n">operator</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">operator</span><span class="o">.</span><span class="n">getOriginal</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">setOriginal</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">morph</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propanol</span><span class="p">)</span>
+        <span class="n">operator</span><span class="o">.</span><span class="n">setOriginal</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">orig</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">getOriginal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">orig</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">MolpherMol</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">orig</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">(),</span> <span class="n">mol</span><span class="o">.</span><span class="n">getSMILES</span><span class="p">())</span>
+
+        <span class="n">operator</span><span class="o">.</span><span class="n">setOriginal</span><span class="p">(</span><span class="n">test_mol</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">gens</span><span class="p">):</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">morph</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">mol</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">MolpherMol</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">smiles</span><span class="p">)</span>
+                <span class="n">operator</span><span class="o">.</span><span class="n">setOriginal</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestAPI.testAddAtomOperator"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testAddAtomOperator">[docs]</a>    <span class="k">def</span> <span class="nf">testAddAtomOperator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cymene_no_add</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cymene_locked</span><span class="p">)</span>
+        <span class="n">add_atom</span> <span class="o">=</span> <span class="n">AddAtom</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertOperatorValid</span><span class="p">(</span><span class="n">add_atom</span><span class="p">,</span> <span class="n">cymene_no_add</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestAPI.testAddBondOperator"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testAddBondOperator">[docs]</a>    <span class="k">def</span> <span class="nf">testAddBondOperator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">propanol</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">propanol</span><span class="p">)</span>
+        <span class="n">add_bond</span> <span class="o">=</span> <span class="n">AddBond</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertOperatorValid</span><span class="p">(</span><span class="n">add_bond</span><span class="p">,</span> <span class="n">propanol</span><span class="p">)</span>
+
+        <span class="n">add_bond</span><span class="o">.</span><span class="n">setOriginal</span><span class="p">(</span><span class="n">propanol</span><span class="p">)</span>
+        <span class="n">open_bonds</span> <span class="o">=</span> <span class="n">add_bond</span><span class="o">.</span><span class="n">getOpenBonds</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">open_bonds</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestAPI.testRemoveBondOperator"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testRemoveBondOperator">[docs]</a>    <span class="k">def</span> <span class="nf">testRemoveBondOperator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">test_mol</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remove_bond_test_mol</span><span class="p">)</span>
+        <span class="n">remove_bond</span> <span class="o">=</span> <span class="n">RemoveBond</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertOperatorValid</span><span class="p">(</span><span class="n">remove_bond</span><span class="p">,</span> <span class="n">test_mol</span><span class="p">)</span>
+
+        <span class="n">remove_bond</span><span class="o">.</span><span class="n">setOriginal</span><span class="p">(</span><span class="n">test_mol</span><span class="p">)</span>
+        <span class="n">open_bonds</span> <span class="o">=</span> <span class="n">remove_bond</span><span class="o">.</span><span class="n">getOpenBonds</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">open_bonds</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestAPI.testMutateAtomOperator"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testMutateAtomOperator">[docs]</a>    <span class="k">def</span> <span class="nf">testMutateAtomOperator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertOperatorValid</span><span class="p">(</span><span class="n">MutateAtom</span><span class="p">(),</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isopropylphenol</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestAPI.testInterlayAtomOperator"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testInterlayAtomOperator">[docs]</a>    <span class="k">def</span> <span class="nf">testInterlayAtomOperator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertOperatorValid</span><span class="p">(</span><span class="n">InterlayAtom</span><span class="p">(),</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isopropylphenol</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestAPI.testRerouteBondOperator"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testRerouteBondOperator">[docs]</a>    <span class="k">def</span> <span class="nf">testRerouteBondOperator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertOperatorValid</span><span class="p">(</span><span class="n">ContractBond</span><span class="p">(),</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contract_bond_test_mol</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestAPI.testContractBondOperator"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testContractBondOperator">[docs]</a>    <span class="k">def</span> <span class="nf">testContractBondOperator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertOperatorValid</span><span class="p">(</span><span class="n">RerouteBond</span><span class="p">(),</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reroute_test_mol</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestAPI.testMolpher"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testMolpher">[docs]</a>    <span class="k">def</span> <span class="nf">testMolpher</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cymene</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cymene_locked</span><span class="p">)</span>
+
+        <span class="n">operators</span> <span class="o">=</span> <span class="p">[</span><span class="n">AddAtom</span><span class="p">(),</span> <span class="n">RemoveAtom</span><span class="p">()]</span>
+        <span class="n">molpher</span> <span class="o">=</span> <span class="n">Molpher</span><span class="p">(</span><span class="n">cymene</span><span class="p">,</span> <span class="n">operators</span><span class="p">)</span>
+        <span class="n">molpher</span><span class="p">()</span>
+        <span class="n">morphs</span> <span class="o">=</span> <span class="n">molpher</span><span class="o">.</span><span class="n">getMorphs</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">morphs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">molpher</span><span class="o">.</span><span class="n">getMorphs</span><span class="p">())</span>
+
+        <span class="n">morphs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">morphs</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span>
+            <span class="n">morphs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">molpher</span><span class="o">.</span><span class="n">next</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">morphs</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestAPI.testMorphingOperator"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testMorphingOperator">[docs]</a>    <span class="k">def</span> <span class="nf">testMorphingOperator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">class</span> <span class="nc">Identity</span><span class="p">(</span><span class="n">MorphingOperator</span><span class="p">):</span>
+
+            <span class="k">def</span> <span class="nf">morph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">original</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="k">def</span> <span class="nf">getName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s2">&quot;Identity&quot;</span>
+
+        <span class="n">cymene</span> <span class="o">=</span> <span class="n">MolpherMol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cymene_locked</span><span class="p">)</span>
+
+        <span class="n">operators</span> <span class="o">=</span> <span class="p">[</span><span class="n">Identity</span><span class="p">()]</span>
+        <span class="n">molpher</span> <span class="o">=</span> <span class="n">Molpher</span><span class="p">(</span><span class="n">cymene</span><span class="p">,</span> <span class="n">operators</span><span class="p">)</span>
+        <span class="n">molpher</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">morph</span> <span class="ow">in</span> <span class="n">molpher</span><span class="o">.</span><span class="n">getMorphs</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">morph</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="n">cymene</span><span class="o">.</span><span class="n">smiles</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestAPI.testExplorationData"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testExplorationData">[docs]</a>    <span class="k">def</span> <span class="nf">testExplorationData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">ExplorationData</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">test_source</span>
+            <span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">test_target</span>
+        <span class="p">)</span>
+
+        <span class="n">params</span><span class="o">.</span><span class="n">operators</span> <span class="o">=</span> <span class="p">(</span><span class="n">OP_ADD_BOND</span><span class="p">,</span> <span class="s1">&#39;OP_REMOVE_BOND&#39;</span><span class="p">,)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">operators</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;OP_ADD_BOND&#39;</span><span class="p">,</span> <span class="s1">&#39;OP_REMOVE_BOND&#39;</span><span class="p">))</span>
+
+        <span class="n">params</span><span class="o">.</span><span class="n">fingerprint</span> <span class="o">=</span> <span class="n">FP_EXT_ATOM_PAIRS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">,</span> <span class="s1">&#39;FP_EXT_ATOM_PAIRS&#39;</span><span class="p">)</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">fingerprint</span> <span class="o">=</span> <span class="s1">&#39;FP_TOPOLOGICAL_LAYERED_2&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">,</span> <span class="s1">&#39;FP_TOPOLOGICAL_LAYERED_2&#39;</span><span class="p">)</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">similarity</span> <span class="o">=</span> <span class="s1">&#39;SC_COSINE&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">similarity</span><span class="p">,</span> <span class="s1">&#39;SC_COSINE&#39;</span><span class="p">)</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">similarity</span> <span class="o">=</span> <span class="n">SC_KULCZYNSKI</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">similarity</span><span class="p">,</span> <span class="s1">&#39;SC_KULCZYNSKI&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_source</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_target</span><span class="p">)</span>
+
+        <span class="n">params</span><span class="o">.</span><span class="n">param_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_source</span>
+            <span class="p">,</span> <span class="s1">&#39;operators&#39;</span> <span class="p">:</span> <span class="n">params</span><span class="o">.</span><span class="n">param_dict</span><span class="p">[</span><span class="s1">&#39;operators&#39;</span><span class="p">][:</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">smiles</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_source</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">operators</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;OP_ADD_BOND&#39;</span><span class="p">,))</span>
+
+        <span class="n">params_from_temp</span> <span class="o">=</span> <span class="n">ExplorationData</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_template_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="k">lambda</span> <span class="p">:</span> <span class="n">ExplorationData</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;not/a/valid/path&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">777</span><span class="p">,</span> <span class="n">params_from_temp</span><span class="o">.</span><span class="n">far_produce</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestAPI.testTree"><a class="viewcode-back" href="../../../../documentation/python/molpher.core.tests.html#molpher.core.tests.test_api.TestAPI.testTree">[docs]</a>    <span class="k">def</span> <span class="nf">testTree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">mol1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_source</span>
+        <span class="n">mol2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_target</span>
+        <span class="n">params_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;source&#39;</span> <span class="p">:</span> <span class="n">mol1</span>
+            <span class="p">,</span> <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="n">mol2</span>
+            <span class="p">,</span> <span class="s1">&#39;operators&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="n">OP_ADD_BOND</span><span class="p">,</span> <span class="n">OP_REMOVE_BOND</span><span class="p">,</span> <span class="n">OP_MUTATE_ATOM</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">ExplorationData</span><span class="p">(</span><span class="o">**</span><span class="n">params_dict</span><span class="p">)</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="k">lambda</span> <span class="p">:</span> <span class="n">ExplorationTree</span><span class="p">())</span>
+        <span class="n">tree_from_dict</span> <span class="o">=</span> <span class="n">ExplorationTree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">tree_data</span><span class="o">=</span><span class="n">params_dict</span><span class="p">)</span>
+        <span class="n">tree_from_params</span> <span class="o">=</span> <span class="n">ExplorationTree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">tree_data</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">tree_from_SMILES</span> <span class="o">=</span> <span class="n">ExplorationTree</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">mol1</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">mol2</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">test_tree</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">],</span> <span class="n">mol1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="n">mol2</span><span class="p">)</span>
+
+        <span class="n">test_tree</span><span class="p">(</span><span class="n">tree_from_dict</span><span class="p">)</span>
+        <span class="n">test_tree</span><span class="p">(</span><span class="n">tree_from_params</span><span class="p">)</span>
+        <span class="n">test_tree</span><span class="p">(</span><span class="n">tree_from_SMILES</span><span class="p">)</span>
+
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">tree_from_params</span>
+
+        <span class="c1"># if we try to set source for non-empty tree, exception should be raised</span>
+        <span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+            <span class="n">tree</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;source&#39;</span> <span class="p">:</span> <span class="n">mol2</span>
+                <span class="p">,</span> <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="s1">&#39;C&#39;</span>
+            <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
+
+        <span class="n">tree</span><span class="o">.</span><span class="n">thread_count</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;target&#39;</span> <span class="p">:</span> <span class="s1">&#39;C&#39;</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">thread_count</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">],</span> <span class="n">mol1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;operators&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">.</span><span class="n">param_dict</span><span class="p">[</span><span class="s1">&#39;operators&#39;</span><span class="p">])</span> <span class="c1"># we should still have the same opers set</span>
+
+        <span class="n">tree</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="p">;</span> <span class="n">tree</span><span class="o">.</span><span class="n">thread_count</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># assign the original parameters back</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">thread_count</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">],</span> <span class="n">mol1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="n">mol2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;operators&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">.</span><span class="n">param_dict</span><span class="p">[</span><span class="s1">&#39;operators&#39;</span><span class="p">])</span>
+
+        <span class="n">leaf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="k">lambda</span> <span class="p">:</span> <span class="n">leaf</span><span class="o">.</span><span class="n">setSMILES</span><span class="p">(</span><span class="s1">&#39;CCCC&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">hasMol</span><span class="p">(</span><span class="n">leaf</span><span class="p">))</span>
+        <span class="c1"># self.assertEqual(tree, leaf.tree) # FIXME: add a reliable operator for comparison between trees</span>
+        <span class="n">leaf</span><span class="o">.</span><span class="n">setDistToTarget</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">(),</span> <span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="n">leaf_copy</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># self.assertFalse(tree.hasMol(leaf_copy)) # FIXME: add a reliable operator for comparison between trees (this should check both the SMILES and the tree ownership)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">leaf_copy</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">(),</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">leaf_copy</span><span class="o">.</span><span class="n">setDistToTarget</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">leaf</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">(),</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">leaves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">(),</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">leaf_copy</span><span class="o">.</span><span class="n">getDistToTarget</span><span class="p">(),</span> <span class="mf">0.7</span><span class="p">)</span></div></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

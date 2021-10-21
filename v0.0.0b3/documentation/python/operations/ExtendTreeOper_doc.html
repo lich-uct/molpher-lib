@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>1.1.1.3.1.1.1.5.6. ExtendTreeOper &mdash; Molpher-lib 0.0.0b3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="1.1.1.3.1.1.1.5.7. PruneTreeOper" href="PruneTreeOper_doc.html" />
+    <link rel="prev" title="1.1.1.3.1.1.1.5.5. FilterMorphsOper" href="FilterMorphsOper_doc.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Source Code Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">1. Python</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../molpher.html">1.1. molpher package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../molpher.html#subpackages">1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../molpher.html#module-molpher">1.1.2. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cplusplus/index.html">2. C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Source Code Documentation</a> &raquo;</li>
+        
+          <li><a href="../modules.html"><span class="section-number">1. </span>Python</a> &raquo;</li>
+        
+          <li><a href="../molpher.html"><span class="section-number">1.1. </span>molpher package</a> &raquo;</li>
+        
+          <li><a href="../molpher.swig_wrappers.html"><span class="section-number">1.1.1.3. </span>molpher.swig_wrappers package</a> &raquo;</li>
+        
+          <li><a href="../molpher.swig_wrappers.core.html"><span class="section-number">1.1.1.3.1.1. </span>molpher.swig_wrappers.core module</a> &raquo;</li>
+        
+          <li><a href="classes.html"><span class="section-number">1.1.1.3.1.1.1.5. </span>Tree Operation Classes</a> &raquo;</li>
+        
+      <li><span class="section-number">1.1.1.3.1.1.1.5.6. </span>ExtendTreeOper</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="extendtreeoper">
+<h1><span class="section-number">1.1.1.3.1.1.1.5.6. </span>ExtendTreeOper<a class="headerlink" href="#extendtreeoper" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.swig_wrappers.core.ExtendTreeOper">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.swig_wrappers.core.</span></span><span class="sig-name descname"><span class="pre">ExtendTreeOper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/molpher/swig_wrappers/core.html#ExtendTreeOper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExtendTreeOper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="TreeOperation_doc.html#molpher.swig_wrappers.core.TreeOperation" title="molpher.swig_wrappers.core.TreeOperation"><code class="xref py py-class docutils literal notranslate"><span class="pre">molpher.swig_wrappers.core.TreeOperation</span></code></a></p>
+<p>A <a class="reference internal" href="../../../glossary.html#term-tree-operation"><span class="xref std std-term">tree operation</span></a> that commits a <a class="reference internal" href="../../../glossary.html#term-morphing-iteration"><span class="xref std std-term">morphing iteration</span></a> of the associated <a class="reference internal" href="../../../glossary.html#term-exploration-tree"><span class="xref std std-term">exploration tree</span></a> by attaching
+the <a class="reference internal" href="../../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> that survived the filtering to the tree so that they can become the new
+leaves and can be used to create the next generation of morphs.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="molpher.swig_wrappers.core.ExtendTreeOper.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/molpher/swig_wrappers/core.html#ExtendTreeOper.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.swig_wrappers.core.ExtendTreeOper.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call self as a function.</p>
+<p>Attach the <a class="reference internal" href="../../../glossary.html#term-candidate-morphs"><span class="xref std std-term">candidate morphs</span></a> in <a class="reference internal" href="../molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates" title="molpher.core.ExplorationTree.ExplorationTree.candidates"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">ExplorationTree.candidates</span></code></a>
+(not masked in <a class="reference internal" href="../molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.candidates_mask" title="molpher.core.ExplorationTree.ExplorationTree.candidates_mask"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">ExplorationTree.candidates_mask</span></code></a>) as the new leaves of the tree.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="PruneTreeOper_doc.html" class="btn btn-neutral float-right" title="1.1.1.3.1.1.1.5.7. PruneTreeOper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="FilterMorphsOper_doc.html" class="btn btn-neutral float-left" title="1.1.1.3.1.1.1.5.5. FilterMorphsOper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

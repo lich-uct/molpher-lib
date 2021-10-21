@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>1.1.1.2. molpher.algorithms package &mdash; Molpher-lib 0.0.0b3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.1.1.2.1.1. molpher.algorithms.antidecoys package" href="molpher.algorithms.antidecoys.html" />
+    <link rel="prev" title="1.1.1.1.2.3.1.1. molpher.core.morphing.operators package" href="molpher.core.morphing.operators.html" />
+ 
+    <!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-42887541-2', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Molpher-lib
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0b3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Molpher-lib: Systematic Chemical Space Exploration with Molecular Morphing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Molecular Morphing Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/index.html">Using the library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Source Code Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">1. Python</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="molpher.html">1.1. molpher package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="molpher.html#subpackages">1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="molpher.html#module-molpher">1.1.2. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cplusplus/index.html">2. C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Molpher-lib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Source Code Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html"><span class="section-number">1. </span>Python</a> &raquo;</li>
+        
+          <li><a href="molpher.html"><span class="section-number">1.1. </span>molpher package</a> &raquo;</li>
+        
+      <li><span class="section-number">1.1.1.2. </span>molpher.algorithms package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="molpher-algorithms-package">
+<h1><span class="section-number">1.1.1.2. </span>molpher.algorithms package<a class="headerlink" href="#molpher-algorithms-package" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-molpher.algorithms" title="molpher.algorithms"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">algorithms</span></code></a> package contains implementations of
+complete exploration algorithms. Each algorithm is
+implemented within its own subpackage. All subpackages
+contain a <code class="samp docutils literal notranslate"><span class="pre">run</span></code> module that contains the <code class="samp docutils literal notranslate"><span class="pre">run()</span></code>
+function which can be used to set up and initiate a search
+(or multiple searches).</p>
+<section id="subpackages">
+<h2><span class="section-number">1.1.1.2.1. </span>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="molpher.algorithms.antidecoys.html">1.1.1.2.1.1. molpher.algorithms.antidecoys package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.antidecoys.html#submodules">1.1.1.2.1.1.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.antidecoys.html#module-molpher.algorithms.antidecoys.custom_opers">1.1.1.2.1.1.2. molpher.algorithms.antidecoys.custom_opers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.antidecoys.html#module-molpher.algorithms.antidecoys.pathfinder">1.1.1.2.1.1.3. molpher.algorithms.antidecoys.pathfinder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.antidecoys.html#module-molpher.algorithms.antidecoys.run">1.1.1.2.1.1.4. molpher.algorithms.antidecoys.run module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.antidecoys.html#module-molpher.algorithms.antidecoys.settings">1.1.1.2.1.1.5. molpher.algorithms.antidecoys.settings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.antidecoys.html#module-molpher.algorithms.antidecoys.utils">1.1.1.2.1.1.6. molpher.algorithms.antidecoys.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.antidecoys.html#module-molpher.algorithms.antidecoys">1.1.1.2.1.1.7. Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="molpher.algorithms.bidirectional.html">1.1.1.2.1.2. molpher.algorithms.bidirectional package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.bidirectional.html#submodules">1.1.1.2.1.2.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.bidirectional.html#module-molpher.algorithms.bidirectional.pathfinder">1.1.1.2.1.2.2. molpher.algorithms.bidirectional.pathfinder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.bidirectional.html#module-molpher.algorithms.bidirectional.run">1.1.1.2.1.2.3. molpher.algorithms.bidirectional.run module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.bidirectional.html#module-molpher.algorithms.bidirectional">1.1.1.2.1.2.4. Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="molpher.algorithms.classic.html">1.1.1.2.1.3. molpher.algorithms.classic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.classic.html#submodules">1.1.1.2.1.3.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.classic.html#module-molpher.algorithms.classic.pathfinder">1.1.1.2.1.3.2. molpher.algorithms.classic.pathfinder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.classic.html#module-molpher.algorithms.classic.run">1.1.1.2.1.3.3. molpher.algorithms.classic.run module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="molpher.algorithms.classic.html#module-molpher.algorithms.classic">1.1.1.2.1.3.4. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2><span class="section-number">1.1.1.2.2. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-molpher.algorithms.functions">
+<span id="molpher-algorithms-functions-module"></span><h2><span class="section-number">1.1.1.2.3. </span>molpher.algorithms.functions module<a class="headerlink" href="#module-molpher.algorithms.functions" title="Permalink to this headline">¶</a></h2>
+<p>General utility functions for the algorithms.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="molpher.algorithms.functions.find_path">
+<span class="sig-prename descclassname"><span class="pre">molpher.algorithms.functions.</span></span><span class="sig-name descname"><span class="pre">find_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_mol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/functions.html#find_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.algorithms.functions.find_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Backtracks the tree starting from <code class="samp docutils literal notranslate"><span class="pre">end_mol</span></code>
+and returns a list of SMILES strings representing
+the path from the root of the tree to <code class="samp docutils literal notranslate"><span class="pre">end_mol</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tree</strong> (instance of <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree" title="molpher.core.ExplorationTree.ExplorationTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationTree</span></code></a>) – a tree to backtrack through</p></li>
+<li><p><strong>end_mol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a>) – SMILES of the last molecule in the requested path (target molecule by default)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of SMILES of molecules on the path</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="molpher.algorithms.functions.timeit">
+<span class="sig-prename descclassname"><span class="pre">molpher.algorithms.functions.</span></span><span class="sig-name descname"><span class="pre">timeit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/functions.html#timeit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.algorithms.functions.timeit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes <code class="samp docutils literal notranslate"><span class="pre">func</span></code> and
+returns its runtime.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>any callable</em>) – function to time</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>runtime of <code class="samp docutils literal notranslate"><span class="pre">func</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-molpher.algorithms.operations">
+<span id="molpher-algorithms-operations-module"></span><h2><span class="section-number">1.1.1.2.4. </span>molpher.algorithms.operations module<a class="headerlink" href="#module-molpher.algorithms.operations" title="Permalink to this headline">¶</a></h2>
+<p>Custom operations and callbacks shared between algorithms.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.algorithms.operations.FindClosest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.algorithms.operations.</span></span><span class="sig-name descname"><span class="pre">FindClosest</span></span><a class="reference internal" href="../../_modules/molpher/algorithms/operations.html#FindClosest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.algorithms.operations.FindClosest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Callback that will search for a molecule closest to the target and
+saves it as a copy to the self.closest</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="molpher.core.operations.html#module-molpher.core.operations.TraverseOper" title="molpher.core.operations.TraverseOper"><code class="xref py py-class docutils literal notranslate"><span class="pre">TraverseOper</span></code></a>, <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.traverse" title="molpher.core.ExplorationTree.ExplorationTree.traverse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">traverse()</span></code></a></p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="molpher.algorithms.operations.FindClosest.closest">
+<span class="sig-name descname"><span class="pre">closest</span></span><a class="headerlink" href="#molpher.algorithms.operations.FindClosest.closest" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="molpher.core.html#molpher.core.MolpherMol.MolpherMol" title="molpher.core.MolpherMol.MolpherMol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MolpherMol</span></code></a> instance (copy of the closest molecule)
+after the callback was executed, initialized to <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.algorithms.settings">
+<span id="molpher-algorithms-settings-module"></span><h2><span class="section-number">1.1.1.2.5. </span>molpher.algorithms.settings module<a class="headerlink" href="#module-molpher.algorithms.settings" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="molpher.algorithms.settings.Settings">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">molpher.algorithms.settings.</span></span><span class="sig-name descname"><span class="pre">Settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">63</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/molpher/algorithms/settings.html#Settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#molpher.algorithms.settings.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Holds basic settings and parameters shared among the exploration algorithms.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="molpher.algorithms.settings.Settings.max_iters">
+<span class="sig-name descname"><span class="pre">max_iters</span></span><a class="headerlink" href="#molpher.algorithms.settings.Settings.max_iters" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum number of iterations to spend on a search</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="molpher.algorithms.settings.Settings.max_threads">
+<span class="sig-name descname"><span class="pre">max_threads</span></span><a class="headerlink" href="#molpher.algorithms.settings.Settings.max_threads" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum number of threads to use in computations (uses all available CPUs by default)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="molpher.algorithms.settings.Settings.source">
+<span class="sig-name descname"><span class="pre">source</span></span><a class="headerlink" href="#molpher.algorithms.settings.Settings.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>SMILES string of the source molecule</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="molpher.algorithms.settings.Settings.storage_dir">
+<span class="sig-name descname"><span class="pre">storage_dir</span></span><a class="headerlink" href="#molpher.algorithms.settings.Settings.storage_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>path to a directory where results will be stored</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="molpher.algorithms.settings.Settings.target">
+<span class="sig-name descname"><span class="pre">target</span></span><a class="headerlink" href="#molpher.algorithms.settings.Settings.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>SMILES string of the target molecule</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="molpher.algorithms.settings.Settings.tree_params">
+<span class="sig-name descname"><span class="pre">tree_params</span></span><a class="headerlink" href="#molpher.algorithms.settings.Settings.tree_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>parameters of the exploration tree; either a dictionary like in <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationTree.ExplorationTree.params" title="molpher.core.ExplorationTree.ExplorationTree.params"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">params</span></code></a> or an instance of <a class="reference internal" href="molpher.core.html#molpher.core.ExplorationData.ExplorationData" title="molpher.core.ExplorationData.ExplorationData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExplorationData</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="molpher.algorithms.settings.Settings.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#molpher.algorithms.settings.Settings.verbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>some algorithms can support verbose output</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-molpher.algorithms">
+<span id="module-contents"></span><h2><span class="section-number">1.1.1.2.6. </span>Module contents<a class="headerlink" href="#module-molpher.algorithms" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="molpher.algorithms.antidecoys.html" class="btn btn-neutral float-right" title="1.1.1.2.1.1. molpher.algorithms.antidecoys package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="molpher.core.morphing.operators.html" class="btn btn-neutral float-left" title="1.1.1.1.2.3.1.1. molpher.core.morphing.operators package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2016, Martin Šícho (sichom@vscht.cz).
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
