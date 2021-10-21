@@ -15,17 +15,17 @@ build:
 
 requirements:
   host:
-    - python {{ python_version }}.*
+    - python {{ python_version }}
   build:
     - cmake
-    - python {{ python_version }}.*
+    - python {{ python_version }}
     - gxx_linux-64
     - boost-cpp
     - rdkit
     - tbb-devel 2020*
-    - swig 3.0.*
+    - swig 3.0
   run:
-    - python {{ python_version }}.*
+    - python {{ python_version }}
     - boost-cpp
     - rdkit
     - tbb 2020*
