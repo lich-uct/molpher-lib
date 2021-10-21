@@ -50,6 +50,7 @@ for python_version in PYTHONS:
     os.environ['PYTHON_VERSION'] = python_version
     os.environ['JOBS'] = str(JOBS)
     os.environ['BASE_DIR'] = str(BASE_DIR)
+    os.environ['BUILD_DIR'] = str(os.path.join(BASE_DIR, 'conda-build'))
     copyfile(os.path.join(BASE_DIR, "LICENSE.md"), os.path.join('./molpher-lib/', "LICENSE.md"))
 
     ret = subprocess.call("./build_step.sh", env=os.environ, shell=True)
