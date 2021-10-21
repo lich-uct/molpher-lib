@@ -10,6 +10,7 @@ build:
   string: py{{ python_version }}_{{ build_number }}
   script_env:
     - BASE_DIR
+    - BUILD_DIR
     - JOBS
 
 requirements:

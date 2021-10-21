@@ -3,7 +3,7 @@
 set -e -x
 
 # setup the project
-BUILD_DIR=$BASE_DIR/conda-build/cmake/
+BUILD_DIR=$BUILD_DIR/cmake/
 JOBS=${JOBS:-"$(grep -c ^processor /proc/cpuinfo)"}
 
 mkdir -p $BUILD_DIR
@@ -28,3 +28,7 @@ cd $BASE_DIR
 echo "Done."
 
 echo "Installation finished."
+
+echo "Cleaning up..."
+rm -rvf $BUILD_DIR
+echo "All done."

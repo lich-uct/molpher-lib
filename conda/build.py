@@ -22,7 +22,7 @@ from importlib.machinery import SourceFileLoader
 
 JOBS = 6
 BASE_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, '..')))
-PYTHONS = [f'3.{x}' for x in range(6, 10)]
+PYTHONS = [f'3.{x}' for x in range(6, 11)]
 version_module = SourceFileLoader('version', os.path.join(BASE_DIR, 'src/python/molpher/version.py')).load_module()
 VERSION = version_module.VERSION
 BUILD_NUMBER = version_module.BUILD_NUMBER
@@ -50,6 +50,7 @@ for python_version in PYTHONS:
     os.environ['PYTHON_VERSION'] = python_version
     os.environ['JOBS'] = str(JOBS)
     os.environ['BASE_DIR'] = str(BASE_DIR)
+    os.environ['BUILD_DIR'] = str(os.path.join(BASE_DIR, 'conda-build'))
     copyfile(os.path.join(BASE_DIR, "LICENSE.md"), os.path.join('./molpher-lib/', "LICENSE.md"))
 
     ret = subprocess.call("./build_step.sh", env=os.environ, shell=True)

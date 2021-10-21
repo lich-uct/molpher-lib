@@ -55,11 +55,11 @@ to get all the dependencies and tools you will need for compilation:
 ```bash
 # clone the repository
 git clone https://github.com/lich-uct/molpher-lib.git
-git checkout dev # or the branch/tag/commit you want
-REPOSITORY_ROOT=`pwd`/molpher-lib
+export REPOSITORY_ROOT=`pwd`/molpher-lib
 
 # create the build environment from the attached file and activate it
 cd ${REPOSITORY_ROOT}
+git checkout dev # or the branch/tag/commit you want
 conda env create -n {name} -f environment.yml # replace {name} with the name of your environment, i.e. molpher-lib-build
 conda activate {name}
 
@@ -70,15 +70,17 @@ cmake .. -DCMAKE_BUILD_TYPE=Debug -DPYTHON_EXECUTABLE=python3 -DRUN_SWIG=ON # yo
 make molpher_install_python # compile the library and Python wrappers, will also install to ${REPOSITORY_ROOT}/dist
 ```
 
-After setting the appropriate variables:
+#### Testing the Compiled Code
+
+With the build environment still active, set the appropriate variables:
 
 ```bash
 cd ${REPOSITORY_ROOT}
 export PYTHONPATH=${REPOSITORY_ROOT}/dist/lib/python3.9/site-packages/molpher-0.0.0b3-py3.9-linux-x86_64.egg/ # change according to your Python and Molpher-lib version
-export LD_LIBRARY_PATH=${REPOSITORY_ROOT}/dist/lib/
+export LD_LIBRARY_PATH=${REPOSITORY_ROOT}/dist/lib/:${CONDA_PREFIX}/lib/
 ```
 
-you should be able to import the library from Python. You can verify the installation by running unit tests:
+and you should be able to import the built library from Python. You can verify the installation by running unit tests:
 
 ```bash
 python3
