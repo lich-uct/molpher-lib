@@ -1,6 +1,6 @@
 # Molpher-lib: Introduction
 
-This C++/Python library is a [chemical space](https://en.wikipedia.org/wiki/Chemical_space) exploration software. It is based on the [Molpher](https://github.com/siret/molpher) program which introduced a chemical space exploration method called [molecular morphing](http://www.ncbi.nlm.nih.gov/pubmed/24655571). The original Molpher method uses stochastic optimization to traverse chemical space between two existing molecules. The main promise of this algorithm is that a virtual library enriched in compounds with improved biological activity could be generated in this way.
+This C++/Python library is a [chemical space](https://en.wikipedia.org/wiki/Chemical_space) exploration software. It is based on the [Molpher](https://github.com/siret/molpher) program which introduced a chemical space exploration method called [molecular morphing](http://www.ncbi.nlm.nih.gov/pubmed/24655571). The original Molpher method uses stochastic optimization to traverse chemical space between two existing molecules. The main promise of this algorithm is that a virtual library enriched in compounds with improved biological activity could be generated in this way. The library is based on the popular [RDKit](http://www.rdkit.org/) cheminformatics framework, which makes work with the generated structures very easy.
 
 The purpose of Molpher-lib is to bring molecular morphing closer to the cheminformatics community, but also offer new features that go beyond the capabilities of the original Molpher program. Molpher-lib makes it possible to roam the chemical universe freely and with little constraints on the inputs. For example, we could just use a carbon atom as a starting point and have Molpher-lib autonomously evolve it into a complete molecular structure. To ensure that the generated molecules have required properties, Molpher-lib also helps with implementation of custom rules and constraints. If you want to know more about Molpher-lib and its usage, make sure to check out some [examples on the website](https://lich-uct.github.io/molpher-lib/examples.html). We also have some [Jupyter notebooks](https://github.com/lich-uct/molpher-lib/tree/master/doc/notebooks) with examples 
 that you can explore.
@@ -25,7 +25,7 @@ Molpher-lib is distributed as a [conda package](https://anaconda.org/lich/molphe
 conda install -c conda-forge -c lich molpher-lib
 ```
 
-This will automatically download the latest version of the library and install everything to the currently active environment (for more information on environments and the `conda` command see [Conda Test Drive](http://conda.pydata.org/docs/test-drive.html)). The library depends on the popular cheminformatics toolkit [RDKit](http://rdkit.org) so do not forget to add the rdkit channel.
+This will automatically download the latest version of the library and install everything to the currently active environment (for more information on environments and the `conda` command see [Conda Test Drive](http://conda.pydata.org/docs/test-drive.html)). The library depends on a few other packages so do not forget to add the `conda-forge` channel.
 
 If you are interested in the development snapshots of the library 
 (most up to date code, but can contain bugs)
