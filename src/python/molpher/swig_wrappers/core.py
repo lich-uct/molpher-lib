@@ -1871,6 +1871,9 @@ class ExplorationData(_object):
     def getItThreshold(self):
         return _core.ExplorationData_getItThreshold(self)
 
+    def getSAScoreMax(self):
+        return _core.ExplorationData_getSAScoreMax(self)
+
     def getSource(self):
         return _core.ExplorationData_getSource(self)
 
@@ -1936,6 +1939,9 @@ class ExplorationData(_object):
 
     def setItThreshold(self, arg2):
         return _core.ExplorationData_setItThreshold(self, arg2)
+
+    def setSAScoreMax(self, arg2):
+        return _core.ExplorationData_setSAScoreMax(self, arg2)
 
     def setSource(self, arg2):
         return _core.ExplorationData_setSource(self, arg2)

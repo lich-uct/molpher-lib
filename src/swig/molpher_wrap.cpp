@@ -40908,6 +40908,51 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ExplorationData_getSAScoreMax(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationData *arg1 = (ExplorationData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< ExplorationData const > tempshared1 ;
+  std::shared_ptr< ExplorationData const > *smartarg1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ExplorationData_getSAScoreMax",&obj0)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_ExplorationData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationData_getSAScoreMax" "', argument " "1"" of type '" "ExplorationData const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr< const ExplorationData > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr< const ExplorationData > * >(argp1);
+      arg1 = const_cast< ExplorationData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr< const ExplorationData > * >(argp1);
+      arg1 = const_cast< ExplorationData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        result = (double)((ExplorationData const *)arg1)->getSAScoreMax();
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ExplorationData_getSource(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ExplorationData *arg1 = (ExplorationData *) 0 ;
@@ -42031,6 +42076,59 @@ SWIGINTERN PyObject *_wrap_ExplorationData_setItThreshold(PyObject *SWIGUNUSEDPA
       {
         SWIG_PYTHON_THREAD_BEGIN_ALLOW;
         (arg1)->setItThreshold(arg2);
+        SWIG_PYTHON_THREAD_END_ALLOW;
+      } 
+    }
+    catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ExplorationData_setSAScoreMax(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ExplorationData *arg1 = (ExplorationData *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< ExplorationData > tempshared1 ;
+  std::shared_ptr< ExplorationData > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ExplorationData_setSAScoreMax",&obj0,&obj1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_ExplorationData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExplorationData_setSAScoreMax" "', argument " "1"" of type '" "ExplorationData *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  ExplorationData > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  ExplorationData > * >(argp1);
+      arg1 = const_cast< ExplorationData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  ExplorationData > * >(argp1);
+      arg1 = const_cast< ExplorationData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExplorationData_setSAScoreMax" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    try {
+      {
+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+        (arg1)->setSAScoreMax(arg2);
         SWIG_PYTHON_THREAD_END_ALLOW;
       } 
     }
@@ -53398,6 +53496,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExplorationData_getDistToTargetDepthSwitch", _wrap_ExplorationData_getDistToTargetDepthSwitch, METH_VARARGS, NULL},
 	 { (char *)"ExplorationData_getCntMaxMorphs", _wrap_ExplorationData_getCntMaxMorphs, METH_VARARGS, NULL},
 	 { (char *)"ExplorationData_getItThreshold", _wrap_ExplorationData_getItThreshold, METH_VARARGS, NULL},
+	 { (char *)"ExplorationData_getSAScoreMax", _wrap_ExplorationData_getSAScoreMax, METH_VARARGS, NULL},
 	 { (char *)"ExplorationData_getSource", _wrap_ExplorationData_getSource, METH_VARARGS, NULL},
 	 { (char *)"ExplorationData_getTarget", _wrap_ExplorationData_getTarget, METH_VARARGS, NULL},
 	 { (char *)"ExplorationData_getCandidates", _wrap_ExplorationData_getCandidates, METH_VARARGS, NULL},
@@ -53420,6 +53519,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExplorationData_setDistToTargetDepthSwitch", _wrap_ExplorationData_setDistToTargetDepthSwitch, METH_VARARGS, NULL},
 	 { (char *)"ExplorationData_setCntMaxMorphs", _wrap_ExplorationData_setCntMaxMorphs, METH_VARARGS, NULL},
 	 { (char *)"ExplorationData_setItThreshold", _wrap_ExplorationData_setItThreshold, METH_VARARGS, NULL},
+	 { (char *)"ExplorationData_setSAScoreMax", _wrap_ExplorationData_setSAScoreMax, METH_VARARGS, NULL},
 	 { (char *)"ExplorationData_setSource", _wrap_ExplorationData_setSource, METH_VARARGS, NULL},
 	 { (char *)"ExplorationData_setTarget", _wrap_ExplorationData_setTarget, METH_VARARGS, NULL},
 	 { (char *)"ExplorationData_setCandidates", _wrap_ExplorationData_setCandidates, METH_VARARGS, NULL},

@@ -40,7 +40,8 @@ struct MolpherParam
         maxAcceptableMolecularWeight(100000.0),
         useSyntetizedFeasibility(true),
         useSubstructureRestriction(false),
-        decoyRange(0.2)
+        decoyRange(0.2),
+		sascoreMax(6.0)
     {
     }
 
@@ -65,6 +66,7 @@ struct MolpherParam
         //if (version > 0) {
             ar & BOOST_SERIALIZATION_NVP(useSubstructureRestriction);
             ar & BOOST_SERIALIZATION_NVP(decoyRange);
+		ar & BOOST_SERIALIZATION_NVP(sascoreMax);
         //}
     }
 
@@ -83,7 +85,8 @@ struct MolpherParam
             (minAcceptableMolecularWeight >= 0.0) &&
             (minAcceptableMolecularWeight <= maxAcceptableMolecularWeight) &&
             (maxAcceptableMolecularWeight > 0.0) &&
-            (decoyRange >= 0) && (decoyRange <= 1.0);
+            (decoyRange >= 0) && (decoyRange <= 1.0) &&
+			(sascoreMax > 0);
     }
 
     // Molpher BIBE2011 parameters (do not rename)
@@ -112,10 +115,15 @@ struct MolpherParam
     bool useSubstructureRestriction;
     
     /**
-     * Decoy range. Ie. how close muse candidate be to the 
+     * Decoy range. Ie. how close must candidate be to the
      * decoy to get over it. Must be from interval (1,0).
      */
     double decoyRange;
+
+	/**
+	 * Maximum allowed value of SAScore (synthetic accessibility score)
+	 */
+	double sascoreMax;
 };
 
 // add information about version to archive

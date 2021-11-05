@@ -218,7 +218,7 @@ void FilterMorphsOper::FilterMorphsOperImpl::FilterMorphs::operator()(const tbb:
                               alreadyTriedByParent || tooManyProducedMorphs);
                     if (!isDead) {
                         double sascore = mMorphs[idx]->getSAScore();
-                        badSascore = sascore > 6.0; // questionable, it is recommended value from Ertl
+                        badSascore = sascore > mTreePimpl->params.sascoreMax;
                         // in case of badSascore print message
                         if (badSascore && mVerboseOutput) {
                             std::stringstream ss;

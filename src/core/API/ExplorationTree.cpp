@@ -308,6 +308,7 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
     params.cntMorphs = data.getCntMorphs();
     params.minAcceptableMolecularWeight = data.getMinAcceptableMolecularWeight();
     params.maxAcceptableMolecularWeight = data.getMaxAcceptableMolecularWeight();
+	params.sascoreMax = data.getSAScoreMax();
     
     auto new_data = this->asData();
     if (!new_data->isValid()) {
@@ -343,6 +344,7 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     data->setCntMorphs(params.cntMorphs);
     data->setMinAcceptableMolecularWeight(params.minAcceptableMolecularWeight);
     data->setMaxAcceptableMolecularWeight(params.maxAcceptableMolecularWeight);
+	data->setSAScoreMax(params.sascoreMax);
     
     data->setSimilarityCoefficient(simCoeff);
     data->setSource(*source);

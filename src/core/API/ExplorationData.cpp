@@ -188,6 +188,10 @@ int ExplorationData::getItThreshold() const {
     return pimpl->params.itThreshold;
 }
 
+double ExplorationData::getSAScoreMax() const {
+	return pimpl->params.sascoreMax;
+}
+
 double ExplorationData::getMaxAcceptableMolecularWeight() const {
     return pimpl->params.maxAcceptableMolecularWeight;
 }
@@ -355,6 +359,10 @@ void ExplorationData::setGenerationCount(unsigned val) {
 
 void ExplorationData::setItThreshold(int val) {
     pimpl->params.itThreshold = val;
+}
+
+void ExplorationData::setSAScoreMax(double val) {
+	pimpl->params.sascoreMax = val;
 }
 
 void ExplorationData::setMaxAcceptableMolecularWeight(double val) {

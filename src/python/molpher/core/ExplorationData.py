@@ -99,6 +99,7 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
             , 'non_producing_survive' : self.setItThreshold
             , 'threads' : self.setThreadCount
             , 'generations' : self.setGenerationCount
+            , 'sascoreMax' : self.setSAScoreMax
         }
         self._GETTERS_MAP = {
             'source' : self.getSource
@@ -115,6 +116,7 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
             , 'far_close_threshold' : self.getDistToTargetDepthSwitch
             , 'max_morphs_total' : self.getCntMaxMorphs
             , 'non_producing_survive' : self.getItThreshold
+            , 'sascoreMax' : self.getSAScoreMax
         }
 
         if other:
@@ -197,6 +199,7 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
             , 'far_close_threshold' : self._GETTERS_MAP['far_close_threshold']()
             , 'max_morphs_total' : self._GETTERS_MAP['max_morphs_total']()
             , 'non_producing_survive' : self._GETTERS_MAP['non_producing_survive']()
+            , 'sascoreMax' : self._GETTERS_MAP['sascoreMax']()
         }
 
     @param_dict.setter
@@ -521,6 +524,21 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
     @non_producing_survive.setter
     def non_producing_survive(self, value):
         self._SETTERS_MAP['non_producing_survive'](value)
+
+    @property
+    def sascoreMax(self):
+        """
+        The maximum allowed SAScore value for the generated compounds. All generated compounds above the threshold are discarded.
+
+        :return: maximum SAScore allowed in generated molecules
+        :rtype: `float`
+        """
+
+        return self._GETTERS_MAP['sascoreMax']()
+
+    @sascoreMax.setter
+    def sascoreMax(self, value):
+        self._SETTERS_MAP['sascoreMax'](value)
 
     @staticmethod
     def load(snapshot):

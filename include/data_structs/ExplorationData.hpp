@@ -58,6 +58,7 @@ public:
     double getDistToTargetDepthSwitch() const; // farCloseThreshold (if below this threshold, generate closeProduce morphs)
     int getCntMaxMorphs() const; // maxMorhpsTotal (prune this and all descendents if no distance improvement among children for this many iters)
     int getItThreshold() const; // nonProducingSurvive (prune descendents if no distance improvement among children after this many iters)
+	double getSAScoreMax() const;
     
     std::shared_ptr<MolpherMol> getSource() const;
     std::shared_ptr<MolpherMol> getTarget() const;
@@ -87,7 +88,8 @@ public:
     void setDistToTargetDepthSwitch(double); // farCloseThreshold (if below this threshold, generate closeProduce morphs)
     void setCntMaxMorphs(int); // maxMorhpsTotal (prune this and all descendents if no distance improvement among children for this many iters)
     void setItThreshold(int); // nonProducingSurvive (prune descendents if no distance improvement among children after this many iters)
-    
+	void setSAScoreMax(double);
+
     void setSource(const MolpherMol&);
     void setTarget(const MolpherMol&);
 

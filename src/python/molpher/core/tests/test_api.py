@@ -295,6 +295,10 @@ class TestAPI(unittest.TestCase):
         self.assertRaises(RuntimeError, lambda : ExplorationData.load('not/a/valid/path'))
         self.assertEqual(777, params_from_temp.far_produce)
 
+    def checkTreeParams(self, tree, params):
+        for key in params:
+            self.assertEqual(tree.params[key], params[key])
+
     def testTree(self):
         mol1 = self.test_source
         mol2 = self.test_target
@@ -302,6 +306,10 @@ class TestAPI(unittest.TestCase):
             'source' : mol1
             , 'target' : mol2
             , 'operators' : (OP_ADD_BOND, OP_REMOVE_BOND, OP_MUTATE_ATOM)
+            , 'sascoreMax' : 3.0
+            , 'accept_min' : 100
+            , 'accept_max' : 200
+            , 'far_close_threshold' : 0.4
         }
         params = ExplorationData(**params_dict)
 
@@ -310,13 +318,10 @@ class TestAPI(unittest.TestCase):
         tree_from_dict = ExplorationTree.create(tree_data=params_dict)
         tree_from_params = ExplorationTree.create(tree_data=params)
         tree_from_SMILES = ExplorationTree.create(source=mol1, target=mol2)
-        def test_tree(tree):
-            self.assertEqual(tree.params['source'], mol1)
-            self.assertEqual(tree.params['target'], mol2)
-
-        test_tree(tree_from_dict)
-        test_tree(tree_from_params)
-        test_tree(tree_from_SMILES)
+        del params_dict['operators'] # FIXME: an issue with comparison (these turn into numbers, but represented as string in the tree)
+        self.checkTreeParams(tree_from_dict, params_dict)
+        self.checkTreeParams(tree_from_params, params_dict)
+        self.checkTreeParams(tree_from_SMILES, {'source' : mol1, 'target' : mol2})
 
         tree = tree_from_params
 
@@ -357,6 +362,16 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(leaf.getDistToTarget(), 0.5)
         self.assertEqual(tree.leaves[0].getDistToTarget(), 0.5)
         self.assertEqual(leaf_copy.getDistToTarget(), 0.7)
+
+        # generate new molecules and test if SAScore under threshold
+        tree.generateMorphs()
+        tree.sortMorphs()
+        tree.filterMorphs()
+        for candidate, accepted in zip(tree.candidates, tree.candidates_mask):
+            print(candidate.smiles, candidate.sascore, accepted)
+        tree.extend()
+        for leaf in tree.leaves:
+            self.assertTrue(leaf.sascore <= params_dict['sascoreMax'])
 
 if __name__ == "__main__":
     unittest.main()
