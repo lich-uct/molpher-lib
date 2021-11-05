@@ -6,7 +6,7 @@ Custom operations and callbacks shared between algorithms.
 class FindClosest:
     """
     Callback that will search for a molecule closest to the target and
-    saves it as a copy to the self.closest
+    save it as a copy to the self.closest
 
     .. seealso:: :class:`~molpher.core.operations.TraverseOper`, :meth:`~molpher.core.ExplorationTree.ExplorationTree.traverse`
 

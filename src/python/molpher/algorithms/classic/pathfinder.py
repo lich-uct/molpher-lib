@@ -1,4 +1,3 @@
-from molpher.algorithms.operations import FindClosest
 from molpher.algorithms.pathfinders import BasicPathfinder
 from molpher.core.operations import *
 
@@ -13,11 +12,11 @@ class ClassicPathFinder(BasicPathfinder):
         `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/24655571>`_, `DOI <http://www.jcheminf.com/content/6/1/7>`_
     """
 
-    def __init__(self, settings):
+    def __init__(self, settings, iter_callabck = None):
         super(ClassicPathFinder, self).__init__(settings, [
             GenerateMorphsOper()
             , SortMorphsOper()
             , FilterMorphsOper(settings.verbose)
             , ExtendTreeOper()
             , PruneTreeOper()
-        ])
+        ], iter_callback=iter_callabck)

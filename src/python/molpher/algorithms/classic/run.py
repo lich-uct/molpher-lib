@@ -4,15 +4,16 @@ import pickle
 from molpher.algorithms.classic.pathfinder import ClassicPathFinder
 
 
-def run(settings):
+def run(settings, iter_callback=None):
     """
     Run a search with the given settings and return the path found.
 
+    :param iter_callback: callable that is run after each iteration, the exploration tree is supplied as its sole parameter
     :param settings: `Settings` instance
     :return: path as a `list` of `str`
     """
 
-    pathfinder = ClassicPathFinder(settings)
+    pathfinder = ClassicPathFinder(settings, iter_callabck=iter_callback)
     pathfinder()
 
     # pickle the resulting path

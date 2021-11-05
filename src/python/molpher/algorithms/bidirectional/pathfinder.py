@@ -16,9 +16,12 @@ class BidirectionalPathFinder:
     in terms of similarity to both source and the target.
     """
 
-    def __init__(self, settings):
+    def __init__(self, settings, iter_callback=None):
         self.verbose = settings.verbose
         """`True` if verbose output was requested"""
+
+        self.iter_callback = iter_callback
+        """callback to call after each iteration, exploration trees are supplied as a tuple with source to target as the first"""
 
         self.source_target = ETree.create(source=settings.source, target=settings.target)
         """:class:`~molpher.core.ExplorationTree.ExplorationTree` from source to target"""
@@ -32,11 +35,6 @@ class BidirectionalPathFinder:
         self.source_target.thread_count = settings.max_threads
         self.target_source.thread_count = settings.max_threads
 
-        self.source_target_min = FindClosest()
-        """`FindClosest` holding the current minimum in the 'source to target' tree."""
-        self.target_source_min = FindClosest()
-        """`FindClosest` holding the current minimum in the 'target to source' tree."""
-
         self._iteration = [
             GenerateMorphsOper()
             , SortMorphsOper()
@@ -47,6 +45,29 @@ class BidirectionalPathFinder:
 
         self.path = []
         """a list of SMILES strings representing the found path (defaults to an empty `list`)"""
+
+
+    def find_minima(self):
+        source_target_min = FindClosest()
+        target_source_min = FindClosest()
+        if self.verbose:
+            print('Traversal times:')
+
+            source_target_time = timeit(lambda : self.source_target.traverse(source_target_min))
+            print('\tsource -> target: {0}'.format(source_target_time))
+            target_source_time = timeit(lambda : self.target_source.traverse(target_source_min))
+            print('\ttarget -> source: {0}'.format(target_source_time))
+
+            print('\ttotal execution time: {0}'.format(source_target_time + target_source_time))
+
+            print('Current Targets:')
+            print('\tsource to target:', self.source_target.params['target'])
+            print('\ttarget to source:', self.target_source.params['target'])
+        else:
+            self.source_target.traverse(source_target_min)
+            self.target_source.traverse(target_source_min)
+
+        return source_target_min.closest, target_source_min.closest
 
     def __call__(self):
         """
@@ -74,35 +95,21 @@ class BidirectionalPathFinder:
                     self.source_target.runOperation(oper)
                     self.target_source.runOperation(oper)
 
-            if self.verbose:
-                print('Traversal times:')
+            if self.iter_callback:
+                self.iter_callback((self.source_target, self.target_source,))
 
-                source_target_time = timeit(lambda : self.source_target.traverse(self.source_target_min))
-                print('\tsource -> target: {0}'.format(source_target_time))
-                target_source_time = timeit(lambda : self.target_source.traverse(self.target_source_min))
-                print('\ttarget -> source: {0}'.format(target_source_time))
-
-                print('\ttotal execution time: {0}'.format(source_target_time + target_source_time))
-
-                print('Current Targets:')
-                print('\tsource to target:', self.source_target.params['target'])
-                print('\ttarget to source:', self.target_source.params['target'])
-            else:
-                self.source_target.traverse(self.source_target_min)
-                self.target_source.traverse(self.target_source_min)
+            source_target_min, target_source_min = self.find_minima()
 
             print('Current Minima:')
-            print('\tsource to target:', self.source_target_min.closest.getSMILES(), self.source_target_min.closest.getDistToTarget())
-            print('\ttarget to source:', self.target_source_min.closest.getSMILES(), self.target_source_min.closest.getDistToTarget())
+            print('\tsource to target:', source_target_min.getSMILES(), source_target_min.getDistToTarget())
+            print('\ttarget to source:', target_source_min.getSMILES(), target_source_min.getDistToTarget())
 
             self.source_target.params = {
-                'target' : self.target_source_min.closest.getSMILES()
+                'target' : target_source_min.getSMILES()
             }
-            self.target_source_min = FindClosest()
             self.target_source.params = {
-                'target' : self.source_target_min.closest.getSMILES()
+                'target' : source_target_min.getSMILES()
             }
-            self.target_source_min = FindClosest()
 
             if self.verbose:
                 print('New Targets:')

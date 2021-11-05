@@ -19,9 +19,12 @@ class BasicPathfinder:
                 "for a path\n\t source: {0}\n\t target: {1}".format(tree.source, tree.target))
 
 
-    def __init__(self, settings, operations):
+    def __init__(self, settings, operations, iter_callback = None):
         self.settings = settings
         """a settings class (should be a subclass of `Settings`)"""
+
+        self._iter_callback = iter_callback
+        """a callable to run after finishing one iteration, it receives the exploration tree as its parameter"""
 
         self.tree = ETree.create(source=self.settings.source, target=self.settings.target)
         """:class:`~molpher.core.ExplorationTree.ExplorationTree` used in the search"""
@@ -50,6 +53,9 @@ class BasicPathfinder:
             print('Iteration {0}'.format(counter))
             for oper in self._iteration:
                 self.tree.runOperation(oper)
+
+            if self._iter_callback:
+                self._iter_callback(self.tree)
 
         self.path = find_path(self.tree, self.tree.params['target'])
         print('Path found:', self.path)
