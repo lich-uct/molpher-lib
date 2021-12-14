@@ -2622,6 +2622,9 @@ class MorphingOperator(_object):
 
     def getName(self):
         return _core.MorphingOperator_getName(self)
+
+    def supportsMultiple(self):
+        return _core.MorphingOperator_supportsMultiple(self)
     def __disown__(self):
         self.this.disown()
         _core.disown_MorphingOperator(self)

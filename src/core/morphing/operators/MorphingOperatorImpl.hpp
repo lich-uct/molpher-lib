@@ -20,6 +20,7 @@ public:
 
 	std::shared_ptr<MolpherMol> getOriginal();
 	virtual void setOriginal(std::shared_ptr<MolpherMol>);
+	virtual bool supportsMultiple();
 };
 
 #endif //MOLPHER_LIB_MORPHINGOPERATORIMPL_HPP

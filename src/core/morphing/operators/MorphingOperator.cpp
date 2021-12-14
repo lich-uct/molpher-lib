@@ -24,6 +24,10 @@ void MorphingOperator::setOriginal(std::shared_ptr<MolpherMol> mol) {
 	pimpl->setOriginal(mol);
 }
 
+bool MorphingOperator::supportsMultiple() {
+	return pimpl->supportsMultiple();
+}
+
 MorphingOperator::MorphingOperatorImpl::MorphingOperatorImpl() :
 original(nullptr)
 {
@@ -65,4 +69,8 @@ void MorphingOperator::MorphingOperatorImpl::writeOriginalLockInfo(std::shared_p
 
 void MorphingOperator::MorphingOperatorImpl::setOriginal(std::shared_ptr<MolpherMol> mol) {
 	original = mol;
+}
+
+bool MorphingOperator::MorphingOperatorImpl::supportsMultiple() {
+	return false;
 }

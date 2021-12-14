@@ -7644,6 +7644,41 @@ std::string SwigDirector_MorphingOperator::getName() const {
 }
 
 
+bool SwigDirector_MorphingOperator::supportsMultiple() {
+  bool c_result;
+  SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+  {
+    if (!swig_get_self()) {
+      Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call MorphingOperator.__init__.");
+    }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+    const size_t swig_method_index = 3;
+    const char *const swig_method_name = "supportsMultiple";
+    PyObject *method = swig_get_method(swig_method_index, swig_method_name);
+    swig::SwigVar_PyObject result = PyObject_CallFunction(method, NULL, NULL);
+#else
+    swig::SwigVar_PyObject result = PyObject_CallMethod(swig_get_self(), (char *) "supportsMultiple", NULL);
+#endif
+    if (!result) {
+      PyObject *error = PyErr_Occurred();
+      {
+        if (error != NULL) {
+          throw Swig::DirectorMethodException();
+        }
+      }
+    }
+    bool swig_val;
+    int swig_res = SWIG_AsVal_bool(result, &swig_val);
+    if (!SWIG_IsOK(swig_res)) {
+      Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""bool""'");
+    }
+    c_result = static_cast< bool >(swig_val);
+  }
+  SWIG_PYTHON_THREAD_END_BLOCK;
+  return (bool) c_result;
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -50494,6 +50529,59 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MorphingOperator_supportsMultiple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  MorphingOperator *arg1 = (MorphingOperator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::shared_ptr< MorphingOperator > tempshared1 ;
+  std::shared_ptr< MorphingOperator > *smartarg1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MorphingOperator_supportsMultiple",&obj0)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(obj0, &argp1, SWIGTYPE_p_std__shared_ptrT_MorphingOperator_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MorphingOperator_supportsMultiple" "', argument " "1"" of type '" "MorphingOperator *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< std::shared_ptr<  MorphingOperator > * >(argp1);
+      delete reinterpret_cast< std::shared_ptr<  MorphingOperator > * >(argp1);
+      arg1 = const_cast< MorphingOperator * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< std::shared_ptr<  MorphingOperator > * >(argp1);
+      arg1 = const_cast< MorphingOperator * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==obj0));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = (bool)(arg1)->MorphingOperator::supportsMultiple();
+        } else {
+          result = (bool)(arg1)->supportsMultiple();
+        } 
+      }
+      catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_disown_MorphingOperator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   MorphingOperator *arg1 = (MorphingOperator *) 0 ;
@@ -53653,6 +53741,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MorphingOperator_setOriginal", _wrap_MorphingOperator_setOriginal, METH_VARARGS, NULL},
 	 { (char *)"MorphingOperator_morph", _wrap_MorphingOperator_morph, METH_VARARGS, NULL},
 	 { (char *)"MorphingOperator_getName", _wrap_MorphingOperator_getName, METH_VARARGS, NULL},
+	 { (char *)"MorphingOperator_supportsMultiple", _wrap_MorphingOperator_supportsMultiple, METH_VARARGS, NULL},
 	 { (char *)"disown_MorphingOperator", _wrap_disown_MorphingOperator, METH_VARARGS, NULL},
 	 { (char *)"MorphingOperator_swigregister", MorphingOperator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_AddAtom", _wrap_new_AddAtom, METH_VARARGS, NULL},

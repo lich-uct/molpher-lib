@@ -18,7 +18,7 @@
 #include <stdexcept>
 #include <GraphMol/RWMol.h>
 #include <GraphMol/FileParsers/MolSupplier.h>
-#include <GraphMol/SmilesParse/SmilesWrite.h>
+//#include <GraphMol/SmilesParse/SmilesWrite.h>
 #include <GraphMol/SmilesParse/SmilesParse.h>
 #include <GraphMol/MolOps.h>
 #include <random_seed.hpp>
@@ -27,12 +27,15 @@
 #include <mol_helpers.hpp>
 #include <morphing/operators/RemoveAtom.hpp>
 #include <GraphMol/Substruct/SubstructMatch.h>
+//#include <GraphMol/ChemReactions/Reaction.h>
+//#include <GraphMol/ChemReactions/ReactionParser.h>
 #include <morphing/operators/AddBond.hpp>
 #include <morphing/operators/RemoveBond.hpp>
 #include <morphing/operators/MutateAtom.hpp>
 #include <morphing/operators/InterlayAtom.hpp>
 #include <morphing/operators/ContractBond.hpp>
 #include <morphing/operators/RerouteBond.hpp>
+#include <morphing/operators/ReactionOperator.hpp>
 
 #include "MinimalTest.hpp"
 
@@ -882,5 +885,102 @@ void MinimalTest::testTreeOperatorsAndLocks() {
 		tree->extend();
 		CPPUNIT_ASSERT(match_substr(tree->getCandidateMorphs(), source->getSMILES()));
 	}
+}
+
+void MinimalTest::testReactionOperators() {
+	MolpherMol startmol = MolpherMol("c1c(OCO2)c2ccc1CC(C)NC");
+//	RDKit::ROMol* rd_startmol = startmol.asRDMol();
+//	boost::shared_ptr<RDKit::ROMol> rd_shared(rd_startmol);
+	std::string add_C = "[*;H1,H2,H3:1]>>[*:1]-[C:2]";
+	std::string addN = "[*;H1,H2,H3:1]>>[*:1]-[N:2]";
+//	RDKit::ChemicalReaction* res = RDKit::RxnSmartsToChemicalReaction(add_C);
+//	if (res) {
+//		res->initReactantMatchers();
+//	} else {
+//		std:std::runtime_error("Reaction matchers failed to initialize");
+//	}
+//	std::vector<boost::shared_ptr<RDKit::ROMol>> reactant{rd_shared};
+//	std::vector<std::vector<boost::shared_ptr<RDKit::ROMol>>> products = res->runReactants(reactant);
+//	for (auto& product : products) {
+//		auto mol = product[0].get();
+//		const RDKit::SmilesWriteParams params;
+//		print(RDKit::MolToSmiles(*mol, params));
+//	}
+
+	auto source = std::make_shared<MolpherMol>("CN1C2CCC1C(C(C2)OC(=O)C3=CC=CC=C3)C(=O)OC");
+	auto target = std::make_shared<MolpherMol>("O=C(OCCN(CC)CC)c1ccc(N)cc1");
+	print(source->getSMILES());
+	auto tree = ExplorationTree::create(source, target);
+//	tree->setThreadCount(4);
+
+	std::vector<std::string> reactions{
+		"[*;H1,H2,H3:1]>>[*:1]-[C:2]",
+		"[*;H1,H2,H3:1]>>[*:1]-[N:2]",
+		"[*;H1,H2,H3:1]>>[*:1]-[O:2]",
+		"[A;H2,H3:1]>>[A:1]=[C:2]",
+		"[A;H2,H3:1]>>[A:1]#[C:2]",
+		"[A;H2,H3:1]>>[A:1]=[N:2]",
+		"[A;H2,H3:1]>>[A:1]=[O:2]",
+		"[A;H2,H3:1]>>[A:1]=[S:2]",
+		"[*;H1,H2,H3:1]>>[*:1]-[F:2]",
+		"[*;H1,H2,H3:1]>>[*:1]-[S:2]",
+		"[*;H1,H2,H3:1]>>[*:1]-[Cl:2]",
+		"[*;H1,H2,H3:1]>>[*:1]-[Br:2]",
+		"[*;H1,H2,H3:1]>>[*:1]-[I:2]",
+		"[*;H1,H2,H3:1]>>[*:1]-[O][P:2](=[O])(=[O])[O]",
+		"[N:1]1[C:2][C:3]1>>[N:1]1[C:2][C][N]([C])[C][C:3]1",
+		"[A:1]1=[A:2][A:3]=[A:4]1>>[A:1]1=[A:2][C:5]=[C:6][A:3]=[A:4]1",
+		"[a:1]1[a:2][a:3][a:4][a:5][a:6][a:7][a:8][a:9][a:10]1>>[a:1]1[a:2][a:3][a:4][a:5][a:6]1.[a:7]1[a:8][a:9][a:10][c][c]1",
+		"[*:0][*:1]1[*:2][*:3]1[*:4]>>[*:0][*:2][*:4].[*:2][*:3]",
+		"[!#6:1]>>[#6:1].[!#6:2]", // think about this
+		"[!#7:1]>>[#7:1].[!#7:2]",
+		"[!#8:1]>>[#8:1].[!#8:2]",
+		"[*:1]-[*:2]>>[*:1]-[C:3]-[*:2]",
+		"[*:1]-[*:2]>>[*:1]-[N:3]-[*:2]",
+		"[*:1]-[*:2]>>[*:1]-[O:3]-[*:2]",
+		"[*:1]-[*:2]>>[*:1]-[C:3](=[O:4])-[*:2]",
+		"[*:1]=[*:2]-[*:3]>>[*:1]-[*:2]=[*:3]",
+		"[*:1]=[*:2]>>[*:1]-[*:2]",
+		"[*:1]-[*:2]>>[*:1]=[*:2]",
+		"[*:1][*:2][*:3]>>[*:1]-[*:3].[*:2]",
+		"[*:1]-[*:2]>>[*:1].[*:2]",
+		"[*:1]=[*:2]>>[*:1]=[O].[*:2]=[O]",
+		"[*:1]~[A:2]~[A:3]~[*:4]>>[*:1]-[*:4].[A:2]~[A:3]",
+//		"([*:1][A:2].[A:3][*:4])>>([*:1][A:3].[A:2][*:4])", // these take a lot of time
+//		"([*:1][*:2].[*:3][*:4])>>[*:1][*:3].[*:2].[*:4]", // these take a lot of time
+//		"([*:1].[A:2])>>([*:1]-[A:2])", // this one takes a lot of time?
+		"[a:1]1[a:2][a:3][a:4][a:5][a:6]1>>[a:1]1[a:2][a:3][a:4][O:7]1.[a:5]2[a:6]cccc2",
+		"[a:1]1[a:2][a:3][a:4][a:5][a:6]1>>[a:1]1[a:2][a:3][a:4][N:7]1(C).[a:5]2[a:6]cccc2",
+		"[a:1]1[a:2][a:3][a:4][*:5]1>>[a:1]1[a:2][a:3][a:4][*:5]c1",
+		"[*:1][*:2][*:3][*:4]>>[*:1][*:3][*:2][*:4]",
+//		"([*:1]~[*:2].[*:3]~[*:4])>>([*:1].[*:2].[*3].[*4])" // not sure if this one is needed
+	};
+
+//	std::vector<std::shared_ptr<MorphingOperator>> opers{
+//			std::make_shared<ReactionOperator>(add_C),
+//			std::make_shared<ReactionOperator>(addN)
+//	};
+	std::vector<std::shared_ptr<MorphingOperator>> opers;
+	opers.reserve(reactions.size());
+	for (auto& reaction :  reactions) {
+		opers.push_back(std::make_shared<ReactionOperator>(reaction));
+	}
+	tree->setMorphingOperators(opers);
+//	tree->generateMorphs();
+//	for (auto& candidate : tree->getCandidateMorphs()) {
+//		print(candidate->getSMILES());
+//	}
+
+	while (true) {
+		tree->generateMorphs();
+		tree->sortMorphs();
+		tree->filterMorphs();
+//		printCandidates(tree, false, true);
+		tree->extend();
+		std::cout << "Path found: " + NumberToStr(tree->isPathFound()) << std::endl;
+		if (tree->isPathFound()) break;
+		tree->prune();
+	}
+
 }
 

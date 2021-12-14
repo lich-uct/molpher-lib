@@ -16,6 +16,7 @@ public:
 	virtual void setOriginal(std::shared_ptr<MolpherMol>);
 	virtual std::shared_ptr<MolpherMol> morph() = 0; // FIXME: make this a const method to guarantee thread safety
 	virtual std::string getName() const = 0;
+	virtual bool supportsMultiple();
 
 protected:
 	class MorphingOperatorImpl;
