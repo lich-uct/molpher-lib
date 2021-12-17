@@ -16,6 +16,8 @@ public:
 	virtual std::shared_ptr<MolpherMol> morph();
 	virtual std::string getName() const;
 
+	static std::vector<std::shared_ptr<MorphingOperator>> getDefaultOperators();
+
 private:
 	class ReactionOperatorImpl;
 	std::shared_ptr<ReactionOperatorImpl> pimpl;

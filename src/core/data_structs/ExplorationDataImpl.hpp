@@ -29,13 +29,21 @@
 
 #include "selectors/fingerprint_selectors.h"
 #include "selectors/simcoeff_selectors.h"
-#include "selectors/chemoper_selectors.h"
 
 #include "core/misc/global_types.h"
 
 #include "MolpherParam.h"
 #include "data_structs/ExplorationData.hpp"
 #include "MolpherMolData.hpp"
+
+#include <morphing/operators/AddAtom.hpp>
+#include <morphing/operators/RemoveAtom.hpp>
+#include <morphing/operators/RemoveBond.hpp>
+#include <morphing/operators/MutateAtom.hpp>
+#include <morphing/operators/AddBond.hpp>
+#include <morphing/operators/InterlayAtom.hpp>
+#include <morphing/operators/ContractBond.hpp>
+#include <morphing/operators/RerouteBond.hpp>
 
 struct ExplorationData::ExplorationDataImpl
 {
@@ -66,7 +74,7 @@ struct ExplorationData::ExplorationDataImpl
      * new morphs.
      * @see ChemOperSelector
      */
-    std::set<int> chemOpers;
+    std::set<std::string> chemOpers;
 
     /**
      * Parameters for morphing algorithm.
@@ -139,15 +147,15 @@ struct ExplorationData::ExplorationDataImpl
             fingerprint = DEFAULT_FP;
             simCoeff = DEFAULT_SC;
 
-            // add all operators by default
-            chemOpers.insert(OP_ADD_ATOM);
-            chemOpers.insert(OP_REMOVE_ATOM);
-            chemOpers.insert(OP_ADD_BOND);
-            chemOpers.insert(OP_REMOVE_BOND);
-            chemOpers.insert(OP_MUTATE_ATOM);
-            chemOpers.insert(OP_INTERLAY_ATOM);
-            chemOpers.insert(OP_BOND_REROUTE);
-            chemOpers.insert(OP_BOND_CONTRACTION);
+            // add all default operators
+            chemOpers.insert(AddAtom().getName());
+            chemOpers.insert(RemoveAtom().getName());
+            chemOpers.insert(AddBond().getName());
+            chemOpers.insert(RemoveBond().getName());
+            chemOpers.insert(MutateAtom().getName());
+            chemOpers.insert(InterlayAtom().getName());
+            chemOpers.insert(RerouteBond().getName());
+            chemOpers.insert(ContractBond().getName());
         }
 
     template <class Archive>

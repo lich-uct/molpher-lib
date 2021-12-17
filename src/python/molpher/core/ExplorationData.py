@@ -22,7 +22,7 @@ import molpher
 from molpher.core import selectors
 from molpher.core.MolpherMol import MolpherMol
 from molpher.core._utils import shorten_repr
-from molpher.swig_wrappers.core import FingerprintShortDesc, SimCoeffShortDesc, ChemOperShortDesc
+from molpher.swig_wrappers.core import FingerprintShortDesc, SimCoeffShortDesc
 
 
 class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
@@ -149,7 +149,7 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
             if check('target'):
                 options['target'] = MolpherMol(options['target'])
             if check_iterable('operators'):
-                options['operators'] = tuple( getattr(selectors, operator) for operator in options['operators'] )
+                options['operators'] = tuple( operator for operator in options['operators'] )
             if check('fingerprint'):
                 options['fingerprint'] = getattr(selectors, options['fingerprint'])
             if check('similarity'):
@@ -187,7 +187,7 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
         return {
             'source' : self._GETTERS_MAP['source']().getSMILES()
             , 'target' : self._GETTERS_MAP['target']().getSMILES() if self._GETTERS_MAP['target']() else None
-            , 'operators' : tuple( ChemOperShortDesc(operator) for operator in self._GETTERS_MAP['operators']() )
+            , 'operators' : tuple( operator for operator in self._GETTERS_MAP['operators']() )
             , 'fingerprint' : FingerprintShortDesc(self._GETTERS_MAP['fingerprint']())
             , 'similarity' : SimCoeffShortDesc(self._GETTERS_MAP['similarity']())
             , 'weight_min' : self._GETTERS_MAP['weight_min']()
@@ -292,18 +292,11 @@ class ExplorationData(molpher.swig_wrappers.core.ExplorationData):
         :rtype: `tuple` of `str`
         """
 
-        return tuple( ChemOperShortDesc(operator) for operator in self._GETTERS_MAP['operators']() )
+        return tuple( operator for operator in self._GETTERS_MAP['operators']() )
 
     @operators.setter
     def operators(self, value):
-        chosen_selectors = set()
-        for selector in value:
-            if type(selector) == str:
-                chosen_selectors.add(getattr(selectors, selector))
-            else:
-                # FIXME: check if the correct selectors were supplied
-                chosen_selectors.add(selector)
-        self._SETTERS_MAP['operators'](tuple(chosen_selectors))
+        self._SETTERS_MAP['operators'](value)
 
     @property
     def fingerprint(self):

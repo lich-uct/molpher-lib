@@ -38,7 +38,7 @@ const std::vector<std::pair<unsigned int, unsigned int>> &AddBond::getOpenBonds(
 }
 
 std::string AddBond::getName() const {
-	return ChemOperLongDesc(OP_ADD_BOND);
+	return "Add Bond";
 }
 
 void AddBond::AddBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {

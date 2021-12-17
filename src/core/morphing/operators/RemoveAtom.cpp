@@ -34,7 +34,7 @@ std::vector<std::shared_ptr<MolpherAtom>> RemoveAtom::getMarkedAtoms() {
 }
 
 std::string RemoveAtom::getName() const {
-	return ChemOperLongDesc(OP_REMOVE_ATOM);
+	return "Remove Atom";
 }
 
 // implementation

@@ -15,6 +15,7 @@ private:
 	std::unique_ptr<RDKit::RWMol> original_rdkit;
 	std::unique_ptr<RDKit::ChemicalReaction> reaction;
 	std::string rxnSMARTS;
+	static const std::vector<std::string> reactions;
 
 public:
 	ReactionOperatorImpl();
@@ -23,6 +24,8 @@ public:
 	void setOriginal(std::shared_ptr<MolpherMol> mol);
 	std::shared_ptr<MolpherMol> morph();
 	std::string getName() const;
+
+	static std::vector<std::shared_ptr<MorphingOperator>> getDefaultOperators();
 };
 
 #endif //MOLPHER_LIB_REACTIONOPERATORIMPL_HPP

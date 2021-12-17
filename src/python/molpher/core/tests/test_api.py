@@ -269,8 +269,8 @@ class TestAPI(unittest.TestCase):
             , target=self.test_target
         )
 
-        params.operators = (OP_ADD_BOND, 'OP_REMOVE_BOND',)
-        self.assertEqual(params.operators, ('OP_ADD_BOND', 'OP_REMOVE_BOND'))
+        params.operators = ('Add Bond', 'Remove Bond',)
+        self.assertEqual(params.operators, ('Add Bond', 'Remove Bond',))
 
         params.fingerprint = FP_EXT_ATOM_PAIRS
         self.assertEqual(params.fingerprint, 'FP_EXT_ATOM_PAIRS')
@@ -289,7 +289,7 @@ class TestAPI(unittest.TestCase):
             , 'operators' : params.param_dict['operators'][:1]
         }
         self.assertEqual(params.target.smiles, self.test_source)
-        self.assertEqual(params.operators, ('OP_ADD_BOND',))
+        self.assertEqual(params.operators, ('Add Bond',))
 
         params_from_temp = ExplorationData.load(self.test_template_path)
         self.assertRaises(RuntimeError, lambda : ExplorationData.load('not/a/valid/path'))
@@ -305,7 +305,7 @@ class TestAPI(unittest.TestCase):
         params_dict = {
             'source' : mol1
             , 'target' : mol2
-            , 'operators' : (OP_ADD_BOND, OP_REMOVE_BOND, OP_MUTATE_ATOM)
+            , 'operators' : ('Add Bond', 'Remove Bond', 'Mutate Atom')
             , 'sascoreMax' : 3.0
             , 'accept_min' : 100
             , 'accept_max' : 200
@@ -371,6 +371,7 @@ class TestAPI(unittest.TestCase):
             print(candidate.smiles, candidate.sascore, accepted)
         tree.extend()
         for leaf in tree.leaves:
+            print('testing SAScore', leaf.sascore, 'against', params_dict['sascoreMax'])
             self.assertTrue(leaf.sascore <= params_dict['sascoreMax'])
 
 if __name__ == "__main__":

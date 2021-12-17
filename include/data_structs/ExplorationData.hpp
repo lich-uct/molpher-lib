@@ -46,7 +46,7 @@ public:
     unsigned getThreadCount() const;
     int getFingerprint() const;
     int getSimilarityCoefficient() const;
-    std::set<int> getChemicalOperators() const;
+    std::set<std::string> getChemicalOperators() const;
     
     // params
     double getMinAcceptableMolecularWeight() const; // weightMin
@@ -74,9 +74,9 @@ public:
     void setThreadCount(unsigned);
     void setFingerprint(int);
     void setSimilarityCoefficient(int);
-    void setChemicalOperators(const std::set<int>&);
-    void addChemicalOperator(int);
-    void removeChemicalOperator(int);
+    void setChemicalOperators(const std::set<std::string>&);
+    void addChemicalOperator(std::string);
+    void removeChemicalOperator(std::string);
     
     // params
     void setMinAcceptableMolecularWeight(double); // weightMin

@@ -192,7 +192,6 @@ public:
     virtual void setOriginal(std::shared_ptr< MolpherMol > arg0);
     virtual std::shared_ptr< MolpherMol > morph();
     virtual std::string getName() const;
-    virtual bool supportsMultiple();
 
 /* Internal director utilities */
 public:
@@ -223,7 +222,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[4];
+    mutable swig::SwigVar_PyObject vtable[3];
 #endif
 
 };

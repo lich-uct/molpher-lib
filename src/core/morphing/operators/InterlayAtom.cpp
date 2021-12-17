@@ -133,5 +133,5 @@ InterlayAtom::InterlayAtomImpl::InterlayAtomImpl(const AtomLibrary &atom_library
 }
 
 std::string InterlayAtom::getName() const {
-	return ChemOperLongDesc(OP_INTERLAY_ATOM);
+	return "Interlay Atom";
 }

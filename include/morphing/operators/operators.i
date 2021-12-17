@@ -57,3 +57,8 @@
 %catches(std::runtime_error) RerouteBond::setOriginal(std::shared_ptr<MolpherMol> mol);
 %catches(std::runtime_error) RerouteBond::morph();
 %include "RerouteBond.hpp";
+
+%ignore ReactionOperator::ReactionOperatorImpl;
+%catches(std::runtime_error) ReactionOperator::setOriginal(std::shared_ptr<MolpherMol> mol);
+%catches(std::runtime_error) ReactionOperator::morph();
+%include "ReactionOperator.hpp";

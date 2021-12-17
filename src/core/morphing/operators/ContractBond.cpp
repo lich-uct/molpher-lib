@@ -35,7 +35,7 @@ const std::vector<std::pair<unsigned int, unsigned int>> &ContractBond::getOpenB
 }
 
 std::string ContractBond::getName() const {
-	return ChemOperLongDesc(OP_BOND_CONTRACTION);
+	return "Bond Contraction";
 }
 
 void ContractBond::ContractBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {

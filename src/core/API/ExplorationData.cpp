@@ -90,12 +90,12 @@ void ExplorationData::addCandidate(const MolpherMol& mol, unsigned index) {
     }
 }
 
-void ExplorationData::addChemicalOperator(int oper) {
+void ExplorationData::addChemicalOperator(std::string oper) {
     auto& opers = pimpl->chemOpers;
     if (opers.find(oper) == opers.end()) {
         pimpl->chemOpers.insert(oper);
     } else {
-        SynchCerr("Operator " + std::string(ChemOperLongDesc(oper)) + " already assigned.");
+        SynchCerr("Operator " + oper + " already assigned.");
     }
 }
 
@@ -144,7 +144,7 @@ const std::vector<bool>& ExplorationData::getCandidatesMask() const {
     return pimpl->candidatesMask;
 }
 
-std::set<int> ExplorationData::getChemicalOperators() const {
+std::set<std::string> ExplorationData::getChemicalOperators() const {
     return pimpl->chemOpers;
 }
 
@@ -297,7 +297,7 @@ void ExplorationData::setCandidatesMaskAt(bool val, unsigned index) {
     }
 }
 
-void ExplorationData::removeChemicalOperator(int oper) {
+void ExplorationData::removeChemicalOperator(std::string oper) {
     pimpl->chemOpers.erase(oper);
 }
 
@@ -321,7 +321,7 @@ void ExplorationData::setCandidatesMask(const std::vector<bool>& mask) {
     }
 }
 
-void ExplorationData::setChemicalOperators(const std::set<int>& opers) {
+void ExplorationData::setChemicalOperators(const std::set<std::string>& opers) {
     pimpl->chemOpers = opers;
 }
 

@@ -39,7 +39,7 @@ std::shared_ptr<MolpherMol> RerouteBond::morph() {
 }
 
 std::string RerouteBond::getName() const {
-	return ChemOperLongDesc(OP_BOND_REROUTE);
+	return "Bond Reroute";
 }
 
 void RerouteBond::RerouteBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {

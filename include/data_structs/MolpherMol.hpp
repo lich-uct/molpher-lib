@@ -25,7 +25,6 @@
 
 #include "selectors/fingerprint_selectors.h"
 #include "selectors/simcoeff_selectors.h"
-#include "selectors/chemoper_selectors.h"
 #include "data_structs/MolpherAtom.hpp"
 
 class ExplorationTree; // forward declaration to resolve circular dependency

@@ -36,7 +36,6 @@
 #include <GraphMol/MolOps.h>
 #include <RDGeneral/BadFileException.h>
 
-#include "selectors/chemoper_selectors.h"
 #include "core/misc/inout.h"
 
 boost::mutex gIoMutex;

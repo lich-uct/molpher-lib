@@ -28,7 +28,6 @@
 #include <morphing/operators/RerouteBond.hpp>
 
 #include "selectors/fingerprint_selectors.h"
-#include "selectors/chemoper_selectors.h"
 #include "selectors/simcoeff_selectors.h"
 
 #include "data_structs/ExplorationTree.hpp"
@@ -258,45 +257,35 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
     fingerprint = data.getFingerprint();
     simCoeff = data.getSimilarityCoefficient();
 
-    AtomLibrary library(AtomLibrary::getDefaultLibrary()); // TODO: user should be allowed to specify their own library
     if (data.getTarget()) {
         target.reset(new MolpherMol(*(data.getTarget())));
-        library = AtomLibrary(*target);
     } else {
         target = nullptr;
     }
 
-    chemOperSelectors = data.getChemicalOperators();
-    for (auto val : data.getChemicalOperators()) {
-        ChemOperSelector selector = (ChemOperSelector) val;
-        switch (selector) {
-            case OP_ADD_ATOM:
-                chemOpers.push_back(std::make_shared<AddAtom>(library));
-                break;
-            case OP_REMOVE_ATOM:
-                chemOpers.push_back(std::make_shared<RemoveAtom>());
-                break;
-            case OP_ADD_BOND:
-                chemOpers.push_back(std::make_shared<AddBond>());
-                break;
-            case OP_REMOVE_BOND:
-                chemOpers.push_back(std::make_shared<RemoveBond>());
-                break;
-            case OP_MUTATE_ATOM:
-                chemOpers.push_back(std::make_shared<MutateAtom>(library));
-                break;
-            case OP_INTERLAY_ATOM:
-                chemOpers.push_back(std::make_shared<InterlayAtom>(library));
-                break;
-            case OP_BOND_REROUTE:
-                chemOpers.push_back(std::make_shared<RerouteBond>());
-                break;
-            case OP_BOND_CONTRACTION:
-                chemOpers.push_back(std::make_shared<ContractBond>());
-                break;
-            default:
-                break;
-        }
+	// FIXME: this code basically breaks operator serialization (we cannot deserialize other operators than the default ones)
+	// we can have all sorts of operators that each have some settings of their own
+	// we should implement a factory class that can create operators from a string or something like that
+	// each operator should also have a deserialization mechanism from string
+
+    for (auto& val : data.getChemicalOperators()) {
+		if (val == AddAtom().getName()) {
+			chemOpers.push_back(std::make_shared<AddAtom>(AtomLibrary::getDefaultLibrary()));
+		} else if (val == RemoveAtom().getName()) {
+			chemOpers.push_back(std::make_shared<RemoveAtom>());
+		} else if (val == AddBond().getName()) {
+			chemOpers.push_back(std::make_shared<AddBond>());
+		} else if (val == RemoveBond().getName()) {
+			chemOpers.push_back(std::make_shared<RemoveBond>());
+		} else if (val == MutateAtom().getName()) {
+			chemOpers.push_back(std::make_shared<MutateAtom>(AtomLibrary::getDefaultLibrary()));
+		} else if (val == InterlayAtom().getName()) {
+			chemOpers.push_back(std::make_shared<InterlayAtom>(AtomLibrary::getDefaultLibrary()));
+		} else if (val == RerouteBond().getName()) {
+			chemOpers.push_back(std::make_shared<RerouteBond>());
+		} else if (val == ContractBond().getName()) {
+			chemOpers.push_back(std::make_shared<ContractBond>());
+		}
     }
 
     params.cntCandidatesToKeep = data.getCntCandidatesToKeep();
@@ -327,7 +316,11 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
     }
     
     data->setCandidatesMask(candidatesMask);
-    data->setChemicalOperators(chemOperSelectors);
+	std::set<std::string> operator_names;
+    for (auto& chem_oper : chemOpers) {
+		operator_names.insert(chem_oper->getName());
+	}
+	data->setChemicalOperators(operator_names);
     data->setFingerprint(fingerprint);
     data->setGenerationCount(generationCnt);
     

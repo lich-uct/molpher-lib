@@ -22,6 +22,7 @@ from rdkit import Chem
 from pkg_resources import resource_filename
 
 from molpher import random_numbers
+from molpher.core.morphing.operators.ReactionOperator import ReactionOperator
 from molpher.examples import morphing_opers, exploration_basics
 from molpher.core import ExplorationTree
 from molpher.core import MolpherMol
@@ -55,6 +56,8 @@ class TestMorphing(unittest.TestCase):
         self.contract_bond_test_mol = os.path.join(self.test_dir, 'contract_bond_test_mol.sdf')
         self.reroute_test_mol = os.path.join(self.test_dir, 'reroute_test_mol.sdf')
         self.captopril = os.path.join(self.test_dir, 'captopril.sdf')
+        self.cocaine = 'CN1C2CCC1C(C(C2)OC(=O)C3=CC=CC=C3)C(=O)OC'
+        self.procaine = 'O=C(OCCN(CC)CC)c1ccc(N)cc1'
 
     def tearDown(self):
         pass
@@ -240,6 +243,21 @@ class TestMorphing(unittest.TestCase):
     def testExamples(self):
         morphing_opers.main(self.captopril)
         exploration_basics.main()
+
+    def testReactionOperators(self):
+        reaction_operators = ReactionOperator.getDefaultOperators()
+        tree = ExplorationTree.create(source=self.cocaine, target=self.procaine)
+        tree.morphing_operators = reaction_operators
+        while not tree.path_found:
+            tree.generateMorphs()
+            tree.sortMorphs()
+            tree.filterMorphs()
+            tree.extend()
+            tree.prune()
+
+        path = tree.fetchPathTo(tree.target)
+        for mol in path:
+            print(mol.smiles, mol.parent_operator)
 
 if __name__ == "__main__":
     unittest.main()

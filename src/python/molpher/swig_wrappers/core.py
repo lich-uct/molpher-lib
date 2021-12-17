@@ -2420,22 +2420,6 @@ class DefaultSortCallback(SortMorphsCallback):
 DefaultSortCallback_swigregister = _core.DefaultSortCallback_swigregister
 DefaultSortCallback_swigregister(DefaultSortCallback)
 
-OP_ADD_ATOM = _core.OP_ADD_ATOM
-OP_REMOVE_ATOM = _core.OP_REMOVE_ATOM
-OP_ADD_BOND = _core.OP_ADD_BOND
-OP_REMOVE_BOND = _core.OP_REMOVE_BOND
-OP_MUTATE_ATOM = _core.OP_MUTATE_ATOM
-OP_INTERLAY_ATOM = _core.OP_INTERLAY_ATOM
-OP_BOND_REROUTE = _core.OP_BOND_REROUTE
-OP_BOND_CONTRACTION = _core.OP_BOND_CONTRACTION
-
-def ChemOperShortDesc(selector):
-    return _core.ChemOperShortDesc(selector)
-ChemOperShortDesc = _core.ChemOperShortDesc
-
-def ChemOperLongDesc(selector):
-    return _core.ChemOperLongDesc(selector)
-ChemOperLongDesc = _core.ChemOperLongDesc
 FP_ATOM_PAIRS = _core.FP_ATOM_PAIRS
 FP_MORGAN = _core.FP_MORGAN
 FP_TOPOLOGICAL = _core.FP_TOPOLOGICAL
@@ -2622,9 +2606,6 @@ class MorphingOperator(_object):
 
     def getName(self):
         return _core.MorphingOperator_getName(self)
-
-    def supportsMultiple(self):
-        return _core.MorphingOperator_supportsMultiple(self)
     def __disown__(self):
         self.this.disown()
         _core.disown_MorphingOperator(self)
@@ -2900,6 +2881,45 @@ class RerouteBond(MorphingOperator):
     __del__ = lambda self: None
 RerouteBond_swigregister = _core.RerouteBond_swigregister
 RerouteBond_swigregister(RerouteBond)
+
+class ReactionOperator(MorphingOperator):
+    __swig_setmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, ReactionOperator, name, value)
+    __swig_getmethods__ = {}
+    for _s in [MorphingOperator]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, ReactionOperator, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        this = _core.new_ReactionOperator(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def setOriginal(self, mol):
+        return _core.ReactionOperator_setOriginal(self, mol)
+
+    def morph(self):
+        return _core.ReactionOperator_morph(self)
+
+    def getName(self):
+        return _core.ReactionOperator_getName(self)
+    if _newclass:
+        getDefaultOperators = staticmethod(_core.ReactionOperator_getDefaultOperators)
+    else:
+        getDefaultOperators = _core.ReactionOperator_getDefaultOperators
+    __swig_destroy__ = _core.delete_ReactionOperator
+    __del__ = lambda self: None
+ReactionOperator_swigregister = _core.ReactionOperator_swigregister
+ReactionOperator_swigregister(ReactionOperator)
+
+def ReactionOperator_getDefaultOperators():
+    return _core.ReactionOperator_getDefaultOperators()
+ReactionOperator_getDefaultOperators = _core.ReactionOperator_getDefaultOperators
 
 # This file is compatible with both classic and new-style classes.
 

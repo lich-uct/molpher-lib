@@ -27,18 +27,6 @@ There are three types of selectors:
 
             `SC_TANIMOTO` is the default option.
 
-    #. chemical operators
-            Their names are prepended with 'OP\_' and an :term:`iterable`
-            of them is used to
-            either set the :attr:`~molpher.core.ExplorationData.ExplorationData.operators` member of the
-            :class:`~molpher.core.ExplorationData.ExplorationData`
-            class or as items of the :term:`iterable` assigned to *operators* key
-            when calling :meth:`~molpher.core.ExplorationTree.ExplorationTree.create`
-            with the ``params`` parameter or writing into the `params`
-            member of the :class:`~molpher.core.ExplorationTree.ExplorationTree`.
-
-            All of the available selectors are used by default.
-
 """
 
 
@@ -215,56 +203,6 @@ SC_TVERSKY_SUBSTRUCTURE = SC_TVERSKY_SUBSTRUCTURE
 """
 
 SC_TVERSKY_SUPERSTRUCTURE = SC_TVERSKY_SUPERSTRUCTURE
-"""
-..  todo:: document this
-"""
-
-from molpher.swig_wrappers.core import \
-    OP_ADD_ATOM\
-    , OP_ADD_BOND\
-    , OP_BOND_CONTRACTION\
-    , OP_BOND_REROUTE\
-    , OP_INTERLAY_ATOM\
-    , OP_MUTATE_ATOM\
-    , OP_REMOVE_ATOM\
-    , OP_REMOVE_BOND
-
-OP_ADD_ATOM = OP_ADD_ATOM
-"""
-..  todo:: document this
-"""
-
-OP_ADD_BOND = OP_ADD_BOND
-"""
-..  todo:: document this
-"""
-
-OP_BOND_CONTRACTION = OP_BOND_CONTRACTION
-"""
-..  todo:: document this
-"""
-
-OP_BOND_REROUTE = OP_BOND_REROUTE
-"""
-..  todo:: document this
-"""
-
-OP_INTERLAY_ATOM = OP_INTERLAY_ATOM
-"""
-..  todo:: document this
-"""
-
-OP_MUTATE_ATOM = OP_MUTATE_ATOM
-"""
-..  todo:: document this
-"""
-
-OP_REMOVE_ATOM = OP_REMOVE_ATOM
-"""
-..  todo:: document this
-"""
-
-OP_REMOVE_BOND = OP_REMOVE_BOND
 """
 ..  todo:: document this
 """

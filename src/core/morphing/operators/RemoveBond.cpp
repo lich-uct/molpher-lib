@@ -38,7 +38,7 @@ const std::vector<std::pair<unsigned int, unsigned int>> &RemoveBond::getOpenBon
 }
 
 std::string RemoveBond::getName() const {
-	return ChemOperLongDesc(OP_REMOVE_BOND);
+	return "Remove Bond";
 }
 
 void RemoveBond::RemoveBondImpl::setOriginal(std::shared_ptr<MolpherMol> mol_orig) {

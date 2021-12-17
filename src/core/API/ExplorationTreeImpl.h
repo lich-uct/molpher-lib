@@ -78,12 +78,11 @@ class ExplorationTree::ExplorationTreeImpl
         int simCoeff;
 
         /**
-         * Vector or used morphing operator. Determine
-         * possible morphing operation applied during generating
-         * new morphs.
-         * @see ChemOperSelector
+         * Vector with used morphing operators. Determines
+         * possible morphing operation applied during generation
+         * of new morphs.
+         * @see MorphingOperator
          */
-        std::set<int> chemOperSelectors; // TODO: this should not be necessary in the future (all operators should be handled directly as instances)
         std::vector<std::shared_ptr<MorphingOperator>> chemOpers;
 
         /**

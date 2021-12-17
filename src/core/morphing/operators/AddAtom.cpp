@@ -42,7 +42,7 @@ MorphingOperator()
 }
 
 std::string AddAtom::getName() const {
-	return ChemOperLongDesc(OP_ADD_ATOM);
+	return "Add Atom";
 }
 
 AddAtom::AddAtomImpl::AddAtomImpl() :

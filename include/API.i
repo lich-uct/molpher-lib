@@ -38,7 +38,6 @@
 #include "operations/callbacks/SortMorphsCallback.hpp"
 
 // selectors
-#include "selectors/chemoper_selectors.h"
 #include "selectors/fingerprint_selectors.h"
 #include "selectors/simcoeff_selectors.h"
 
@@ -52,6 +51,7 @@
 #include "morphing/operators/ContractBond.hpp"
 #include "morphing/operators/InterlayAtom.hpp"
 #include "morphing/operators/RerouteBond.hpp"
+#include "morphing/operators/ReactionOperator.hpp"
 #include "morphing/AtomLibrary.hpp"
 #include "morphing/Molpher.hpp"
 #include "morphing/MorphCollector.hpp"
@@ -84,6 +84,7 @@
 %shared_ptr(ContractBond);
 %shared_ptr(InterlayAtom);
 %shared_ptr(RerouteBond);
+%shared_ptr(ReactionOperator);
 %shared_ptr(MorphCollector);
 %shared_ptr(std::shared_ptr<std::map<std::string, std::shared_ptr<MolpherMol> > >);
 %shared_ptr(std::shared_ptr<std::vector<std::shared_ptr<MolpherMol> > >);

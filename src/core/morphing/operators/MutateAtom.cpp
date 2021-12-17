@@ -34,7 +34,7 @@ MutateAtom::MutateAtom(const AtomLibrary &atom_library) :
 }
 
 std::string MutateAtom::getName() const {
-	return ChemOperLongDesc(OP_MUTATE_ATOM);
+	return "Mutate Atom";
 }
 
 MutateAtom::MutateAtomImpl::MutateAtomImpl() :
