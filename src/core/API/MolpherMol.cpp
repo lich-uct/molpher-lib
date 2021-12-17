@@ -129,13 +129,13 @@ void MolpherMol::MolpherMolImpl::initialize(std::unique_ptr<RDKit::RWMol> mol) {
 				| RDKit::MolOps::SANITIZE_SETCONJUGATION
         );
     } catch (const RDKit::MolSanitizeException &exc) {
-        SynchCerr("Molecule failed to initialize due to sanitization errors.", "ERROR:");
+//        SynchCerr("Molecule failed to initialize due to sanitization errors.", "ERROR:");
         throw exc;
     } catch (const ValueErrorException &exc) {
-        SynchCerr("Cannot kekulize input molecule.");
+//        SynchCerr("Cannot kekulize input molecule.");
         throw exc;
     } catch (const std::exception &exc) {
-        SynchCerr("Molecule failed to initialize due to an exception: " + std::string(exc.what()), "ERROR:");
+//        SynchCerr("Molecule failed to initialize due to an exception: " + std::string(exc.what()), "ERROR:");
         throw exc;
     }
 
