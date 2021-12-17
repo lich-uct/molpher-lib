@@ -33,10 +33,6 @@ std::string ReactionOperator::getName() const {
 	return pimpl->getName();
 }
 
-std::shared_ptr<ReactionOperator> ReactionOperator::create(const std::string &rxnSmarts) {
-	return std::make_shared<ReactionOperator>(rxnSmarts);
-}
-
 // impl
 
 ReactionOperator::ReactionOperatorImpl::ReactionOperatorImpl() :
