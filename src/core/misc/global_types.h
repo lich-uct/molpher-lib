@@ -37,6 +37,7 @@ typedef tbb::concurrent_hash_map<std::string, std::shared_ptr<MolpherMol>> TreeM
 typedef tbb::concurrent_hash_map<std::string, unsigned int> MorphDerivationMap;
 typedef tbb::concurrent_hash_map<std::string, bool /*dummy*/> ConcurrentSmileSet;
 typedef tbb::concurrent_vector<std::string> ConcurrentSmileVector;
+typedef tbb::concurrent_vector<bool> ConcurrentMaskVector;
 typedef tbb::concurrent_vector<std::shared_ptr<MolpherMol>> ConcurrentMolVector;
 typedef std::vector<std::shared_ptr<MolpherMol>> MolVector;
 
@@ -47,14 +48,18 @@ typedef std::map<std::string, unsigned> MorphDerivationMapData;
 
 template<typename Content>
 void concurrent_vector_to_vector(const tbb::concurrent_vector<Content>& in, std::vector<Content>& out) {
-    for (auto& item : in) {
+    out.clear();
+	out.reserve(in.size());
+	for (Content item : in) {
         out.push_back(item);
     }
 }
 
 template<typename Content>
 void vector_to_concurrent_vector(const std::vector<Content>& in, tbb::concurrent_vector<Content>& out) {
-    for (auto& item : in) {
+	out.clear();
+	out.reserve(in.size());
+	for (Content item : in) {
         out.push_back(item);
     }
 }

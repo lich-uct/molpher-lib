@@ -58,7 +58,7 @@ TreeOperation::TreeOperationImpl::TreeOperationImpl()
 }
 
 ExtendTreeOper::ExtendTreeOperImpl::AcceptMorphs::AcceptMorphs(
-        ConcurrentMolVector &morphs, std::vector<bool> &survivors
+        ConcurrentMolVector &morphs, ConcurrentMaskVector &survivors
         , std::shared_ptr<ExplorationTree> tree
         , ConcurrentSmileSet &modifiedParents
         ) :
@@ -225,11 +225,13 @@ void ExtendTreeOper::ExtendTreeOperImpl::UpdateTree::operator()(
  * @param modifiedParents
  * @param decoySize Number of decoy used during exploration.
  */
-void ExtendTreeOper::ExtendTreeOperImpl::acceptMorphs(ConcurrentMolVector &morphs,
-        std::vector<bool> &survivors,
-        std::shared_ptr<ExplorationTree> tree,
-        ConcurrentSmileSet &modifiedParents,
-        int decoySize) {
+void ExtendTreeOper::ExtendTreeOperImpl::acceptMorphs(
+	ConcurrentMolVector &morphs,
+	ConcurrentMaskVector &survivors,
+	std::shared_ptr<ExplorationTree> tree,
+	ConcurrentSmileSet &modifiedParents,
+	int decoySize
+) {
 
     // no decoy .. we can use old parallel approach        
     ExtendTreeOper::ExtendTreeOperImpl::AcceptMorphs acceptMorphs(morphs, survivors, tree, modifiedParents);

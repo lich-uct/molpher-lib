@@ -241,7 +241,7 @@ void ExplorationTree::ExplorationTreeImpl::updateData(const ExplorationData& dat
         for (auto& mol : (*cndts)) {
             candidates.push_back(std::make_shared<MolpherMol>(*mol)); // TODO: a simple move should be more efficient and safe here (http://stackoverflow.com/questions/11711034/stdshared-ptr-of-this)
         }
-        candidatesMask = data.getCandidatesMask();
+		vector_to_concurrent_vector(data.getCandidatesMask(), candidatesMask);
                 
         morphDerivations.clear();
         for (auto& mol_data : data.getDerivationMap()) {
@@ -315,7 +315,9 @@ std::shared_ptr<ExplorationData> ExplorationTree::ExplorationTreeImpl::asData() 
         data->addCandidate(*mol);
     }
     
-    data->setCandidatesMask(candidatesMask);
+    std::vector<bool> mask;
+	concurrent_vector_to_vector<bool>(candidatesMask, mask);
+	data->setCandidatesMask(mask);
 	std::set<std::string> operator_names;
     for (auto& chem_oper : chemOpers) {
 		operator_names.insert(chem_oper->getName());
@@ -406,7 +408,9 @@ MolVector ExplorationTree::ExplorationTreeImpl::getCandidateMorphs() {
 }
 
 std::vector<bool> ExplorationTree::ExplorationTreeImpl::getCandidateMorphsMask() {
-    return candidatesMask;
+	std::vector<bool> ret;
+	concurrent_vector_to_vector<bool>(candidatesMask, ret);
+	return ret;
 }
 
 void ExplorationTree::ExplorationTreeImpl::sortMorphs(std::shared_ptr<ExplorationTree> tree) {
@@ -524,7 +528,7 @@ void ExplorationTree::ExplorationTreeImpl::save(const std::string& filename) {
 }
 
 void ExplorationTree::ExplorationTreeImpl::setCandidateMorphsMask(const std::vector<bool>& new_mask) {
-    candidatesMask = new_mask;
+	vector_to_concurrent_vector<bool>(new_mask, candidatesMask);
 }
 
 void ExplorationTree::ExplorationTreeImpl::setThreadCount(int threadCnt) {

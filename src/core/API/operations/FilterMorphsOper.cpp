@@ -103,7 +103,7 @@ TreeOperation::TreeOperationImpl::TreeOperationImpl(expTree)
 }
 
 FilterMorphsOper::FilterMorphsOperImpl::FilterMorphs::FilterMorphs(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree_impl,
-        size_t globalMorphCount, ConcurrentMolVector &morphs, std::vector<bool> &survivors, int filters, bool verbose
+        size_t globalMorphCount, ConcurrentMolVector &morphs, ConcurrentMaskVector &survivors, int filters, bool verbose
         ) :
 mTreePimpl(tree_impl),
 mGlobalMorphCount(globalMorphCount),

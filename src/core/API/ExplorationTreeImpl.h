@@ -110,7 +110,7 @@ class ExplorationTree::ExplorationTreeImpl
         /**
          * Candidates mask.
          */
-        std::vector<bool> candidatesMask;
+		ConcurrentMaskVector candidatesMask;
 
         /**
          * Molecules in the tree.

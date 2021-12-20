@@ -61,7 +61,7 @@ CleanMorphsOper::CleanMorphsOperImpl::CleanMorphsOperImpl()
 }
 
 CleanMorphsOper::CleanMorphsOperImpl::CleanMorphs::CleanMorphs(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree_impl,
-																   size_t globalMorphCount, ConcurrentMolVector &morphs, std::vector<bool> &survivors, ConcurrentMolVector &new_candidates
+																   size_t globalMorphCount, ConcurrentMolVector &morphs, ConcurrentMaskVector &survivors, ConcurrentMolVector &new_candidates
 ) :
 		mTreePimpl(tree_impl),
 		mGlobalMorphCount(globalMorphCount),

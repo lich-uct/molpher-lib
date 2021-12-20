@@ -30,14 +30,14 @@ private:
 	public:
 
 		CleanMorphs(std::shared_ptr<ExplorationTree::ExplorationTreeImpl> tree_pimpl, size_t globalMorphCount,
-					 ConcurrentMolVector &morphs, std::vector<bool> &survivors, ConcurrentMolVector &new_candidates);
+					 ConcurrentMolVector &morphs, ConcurrentMaskVector &survivors, ConcurrentMolVector &new_candidates);
 		void operator()(const tbb::blocked_range<size_t> &r) const;
 
 	private:
 		std::shared_ptr<ExplorationTree::ExplorationTreeImpl> mTreePimpl;
 		size_t mGlobalMorphCount;
 		ConcurrentMolVector &mMorphs;
-		std::vector<bool> &mSurvivors;
+		ConcurrentMaskVector &mSurvivors;
 		ConcurrentMolVector &mNewCandidates;
 	};
 

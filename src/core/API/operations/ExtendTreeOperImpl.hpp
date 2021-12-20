@@ -31,7 +31,7 @@ private:
     class AcceptMorphs
     {
     public:
-        AcceptMorphs(ConcurrentMolVector &morphs, std::vector<bool> &survivors,
+        AcceptMorphs(ConcurrentMolVector &morphs, ConcurrentMaskVector &survivors,
             std::shared_ptr<ExplorationTree> tree, ConcurrentSmileSet &modifiedParents);
         AcceptMorphs(AcceptMorphs &toSplit, tbb::split);
         void operator()(const tbb::blocked_range<size_t> &r, tbb::pre_scan_tag);
@@ -41,7 +41,7 @@ private:
 
     private:
         ConcurrentMolVector &mMorphs;
-        std::vector<bool> &mSurvivors;
+		ConcurrentMaskVector &mSurvivors;
         std::shared_ptr<ExplorationTree> mTree;
         std::shared_ptr<ExplorationTree::ExplorationTreeImpl> mTreePimpl;
         ConcurrentSmileSet &mModifiedParents;
@@ -66,7 +66,7 @@ private:
 //        ConcurrentSmileSet &modifiedParents);
     
     static void acceptMorphs(ConcurrentMolVector &morphs,
-        std::vector<bool> &survivors,
+		ConcurrentMaskVector &survivors,
         std::shared_ptr<ExplorationTree> tree,
         ConcurrentSmileSet &modifiedParents,
         int decoySize);
